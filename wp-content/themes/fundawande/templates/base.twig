@@ -1,0 +1,9 @@
+{# Add the native WordPress header.php #}
+{{ function('get_header') }}
+
+	 {# Include the .twig template extended off base.twig #}
+	 {% block content %}
+	 {% endblock %}
+
+{# Add the native WordPress footer.php #}
+{{ function('get_footer') }}

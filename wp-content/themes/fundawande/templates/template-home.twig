@@ -1,0 +1,23 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper home-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        {# Testing the asset inclusion #}
+        <div class="row">
+            <div class="col-md-6">
+                <i class="fa fa-user"></i>
+                <i class="fal fa-user"></i>
+            </div>
+            <div class="col-md-6">
+                <i class="red far fa-user"></i>
+                <i class="fa fa-not-a-real-icon"></i>
+                <div class="special-1">after</div>
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}
