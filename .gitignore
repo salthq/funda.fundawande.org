@@ -5,7 +5,6 @@
 wp-content/*
 !wp-content/plugins/
 !wp-content/themes/
-!wp-content/mu-plugins/
 # ignore all files starting with . or ~
 .*
 ~*
