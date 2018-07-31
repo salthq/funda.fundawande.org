@@ -1,0 +1,30 @@
+/* ========================================================================== Theme SASS variables Define all variables used in theme ========================================================================== */
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Navbar
+# Colour palette
+# Typography
+--------------------------------------------------------------*/
+/* ========================================================================== Utilities Functions, Macros ========================================================================== */
+/********************* Responsive BREAKPOINTS To use: @include breakpoint(breakpointname) { Styles* } */
+/* ========================================================================== Theme Global styling Define all global styling classes used in theme ========================================================================== */
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Backgrounds
+--------------------------------------------------------------*/
+.background-white { background-color: #ffffff; }
+
+.special-1:before { display: none; content: "\f001"; font-family: "Font Awesome 5 Light"; color: orange; }
+
+.special-1 svg { color: blue; }
+
+.red { color: red; }
+
+/* ========================================================================== Theme areas Import the various ares defined for theme ========================================================================== */
+/* ========================================================================== Home area Styling specific to home page template template-home.twig ========================================================================== */
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUtc3R5bGVzLmNzcyIsInNvdXJjZXMiOlsidGhlbWUtc3R5bGVzLnNjc3MiLCJ0aGVtZS9fdmFyaWFibGVzLnNjc3MiLCJ0aGVtZS9fdXRpbGl0aWVzLnNjc3MiLCJ0aGVtZS9fZ2xvYmFscy5zY3NzIiwidGhlbWUvX3RoZW1lX2FyZWFzLnNjc3MiLCJ0aGVtZS9hcmVhcy9faG9tZS5zY3NzIl0sIm1hcHBpbmdzIjoiQUNBQSxtTkFLOEU7QUFDOUU7Ozs7OztnRUFNZ0U7QUNaaEUsdUxBSzhFO0FBUzlFLHdHQU9zQjtBQ3JCdEIsZ09BSzhFO0FBQzlFOzs7O2dFQUlnRTtBQUdoRSxBQUFBLGlCQUFpQixDQUFDLEVBQUcsZ0JBQWdCLEVGZTVCLE9BQU8sR0VmaUM7O0FBR2pELEFBQVUsVUFBQSxBQUFBLE9BQU8sQ0FBQyxFQUNoQixPQUFPLEVBQUUsSUFBSyxFQUNkLE9BQU8sRUFBRSxPQUFRLEVBQ2pCLFdBQVcsRUFBRSxzQkFBdUIsRUFDcEMsS0FBSyxFQUFFLE1BQU8sR0FDZjs7QUFFRCxBQUNFLFVBRFEsQ0FDUixHQUFHLENBQUMsRUFDRixLQUFLLEVBQUUsSUFBSyxHQUNiOztBQUdILEFBQUEsSUFBSSxDQUFDLEVBQ0gsS0FBSyxFQUFFLEdBQUksR0FDWjs7QUMvQkQsaU5BSzhFO0FDTDlFLCtOQUs4RSIsIm5hbWVzIjpbXX0= */
+
+/*# sourceMappingURL=theme-styles.css.map */
