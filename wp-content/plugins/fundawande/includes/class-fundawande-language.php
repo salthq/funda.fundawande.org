@@ -47,18 +47,18 @@ class FundaWande_Language {
         // Add language identifier to $language_obj
         switch ($language) {
             case 'xho':
-                $language_obj->prefix = 'xho-' ;
+                $language_obj->prefix = 'xho_' ;
                 $language_obj->url_param = 'lang=xho';
                 $language_obj->id = 'xho';
                 break;
             case 'eng':
-                $language_obj->prefix = 'eng-' ;
+                $language_obj->prefix = 'eng_' ;
                 $language_obj->url_param = 'lang=eng';
                 $language_obj->id = 'eng';
                 break;
             // Add default just as a catch all
             default:
-                $language_obj->prefix = 'xho-' ;
+                $language_obj->prefix = 'xho_' ;
                 $language_obj->url_param = 'lang=xho';
                 $language_obj->id = 'xho';
         }
