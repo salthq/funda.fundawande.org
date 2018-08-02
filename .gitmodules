@@ -1,3 +1,0 @@
-[submodule "wp-content/plugins/sensei"]
-	path = wp-content/plugins/sensei
-	url = https://github.com/Automattic/sensei.git
