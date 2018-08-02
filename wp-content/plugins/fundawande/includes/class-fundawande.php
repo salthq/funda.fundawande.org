@@ -144,6 +144,9 @@ class FundaWande_Main {
         // Setup post types - COMMENTED OUT FOR NOW
         // $this->post_types = new FundaWande_PostTypes();
 
+        // Setup quiz
+        $this->quiz = new FundaWande_Quiz();
+
 	}
 
 	/**

@@ -10,7 +10,7 @@
         {# Testing the asset inclusion #}
         <div class="row">
             <div class="col-12">
-                <h1>Single Quiz</h1>
+                {# Hook FundaWande_Quiz action to include quiz template #}
                 {% do action('fundawande_single_quiz_content',post.id) %}
             </div>
         </div>
