@@ -4,3 +4,23 @@
 * Styling specific to login page template template-login.twig
 *
  ========================================================================== */
+
+@media only screen and (min-width: 768px) {
+  .sidebar {
+    border-right: 1px solid #202632;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.login {
+  &-form {
+    margin: 0 auto;
+    max-width: 500px;
+    padding-top: 30px;
+  }
+}

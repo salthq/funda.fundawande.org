@@ -2,3 +2,6 @@
 .special-1:before{display:none;content:"\f001";font-family:"Font Awesome 5 Light";color:orange}
 .special-1 svg{color:blue}
 .red{color:red}
+@media only screen and (min-width:768px){.sidebar{border-right:1px solid #202632}
+}@media only screen and (max-width:768px){.sidebar{display:none}
+}.login-form{margin:0 auto;max-width:500px;padding-top:30px}
