@@ -1,0 +1,17 @@
+{#
+	A useful set of functions you can import into twig templates
+	Example:
+
+	{% import "mixins.twig" as mixin %}
+
+	{{ mixin.image( url, alt, link ) }}
+	===========================================================
+#}
+
+{# Add post block for Events, Blog, Forums #}
+{% macro mixinName(data) %}
+    {% import _self as mixins %}
+    {#
+        Add your macro code here using the optional data parameter
+    #}
+{% endmacro %}

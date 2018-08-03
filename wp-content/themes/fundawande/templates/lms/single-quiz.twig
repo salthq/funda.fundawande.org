@@ -1,0 +1,18 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper single-quiz-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        {# Testing the asset inclusion #}
+        <div class="row">
+            <div class="col-12">
+                {# Hook FundaWande_Quiz action to include quiz template #}
+                {% do action('fundawande_single_quiz_content',post.id) %}
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}

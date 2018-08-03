@@ -1,0 +1,34 @@
+/* ==========================================================================
+* Theme SASS variables
+*
+* Define all variables used in theme
+*
+ ========================================================================== */
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Navbar
+# Colour palette
+# Typography
+--------------------------------------------------------------*/
+
+
+// Navbar
+$navbar-height:                    60px;
+$adminbar-height:                   32px;
+
+// Hamburger Nav
+$button-width: 50px;                    // The width of the button area
+$button-height: 50px;                   // The height of the button area
+$bar-thickness: 6px;                    // The thickness of the button bars
+$button-pad: 8px;                      // The left/right padding between button area and bars.
+$button-bar-space: 10px;                // The spacing between button bars
+$button-transistion-duration: 0.1s;     // The transition duration
+
+// Colour palette
+$white : #ffffff;
+
+// Typography
+$base__font-size: 16px;
+$base__font-family : 'Arial', sans-serif;
+

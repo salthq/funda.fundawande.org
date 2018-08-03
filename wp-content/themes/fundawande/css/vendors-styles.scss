@@ -1,0 +1,6 @@
+/*
+ * The main Vendor styles file
+ * Import the vendor styles here
+ */
+@import "theme/_variables";// <--------- Add your variables into this file. Also add variables to overwrite Bootstrap variables here
+@import "vendors/bootstrap4/bootstrap";// <--------- Loads Bootstrap 4 Styles
