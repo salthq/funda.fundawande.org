@@ -29,3 +29,11 @@ add_action( 'wp_enqueue_scripts', 'pango_scripts' );
  */
 require get_template_directory() . '/includes/functions-timber.php';
 
+
+/*
+ * Set up the function to display the login form, so it can be added to the login page template.
+ */
+function get_login_form() {
+    FundaWande()->login->setup_login_form();
+}
+add_action('show_login_form', 'get_login_form');

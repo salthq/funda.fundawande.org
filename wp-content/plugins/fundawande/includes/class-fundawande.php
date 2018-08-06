@@ -148,6 +148,9 @@ class FundaWande_Main {
         // Setup quiz
         $this->quiz = new FundaWande_Quiz();
 
+        //Setup login class
+        $this->login = new FundaWande_Login();
+
 	}
 
 	/**

@@ -30,7 +30,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "login-form">
+                    <div class = "login-form text-center">
+                        <!--
                         <form>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ID Address</label>
@@ -43,6 +44,8 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+                        -->
+                        {% do action('show_login_form') %}
                         <div class="alert alert-danger my-3" role="alert">
                             The ID address you have entered is incorrect, please try again!
                         </div>

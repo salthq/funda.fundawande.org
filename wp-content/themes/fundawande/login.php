@@ -12,5 +12,4 @@ if ( class_exists( 'Timber' ) ) {
     $context['post'] = $post;
 
     Timber::render(array('template-login.twig', 'page.twig'), $context);
-
 }
