@@ -6,6 +6,15 @@
     {% block head_content %}
 		<title>{{ post.title }} | {{ site.name }}</title>
         {{ function('wp_head') }}
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="languageButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Change Language
+			</button>
+			<div class="dropdown-menu" aria-labelledby="languageButton">
+				<a class="dropdown-item" href="{% do action('change_lang', 'eng') %}">English</a>
+				<a class="dropdown-item" href="{% do action('change_lang', 'xho') %}">Xhosa</a>
+			</div>
+		</div>
     {% endblock %}
 {% endembed %}
 
