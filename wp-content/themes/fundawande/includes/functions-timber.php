@@ -35,6 +35,13 @@ class StarterSite extends TimberSite {
         $context['notes'] = 'These values are available everytime you call Timber::get_context();';
         $context['menu'] = new TimberMenu();
         $context['site'] = $this;
+        // Set up language object to determine page language
+        if ( isset($_GET['lang']) ) {
+            $context['lang'] = FundaWande()->language->get_language($_GET['lang']);
+        }
+        else {
+            $context['lang'] = FundaWande()->language->get_language(null);
+        }
         return $context;
     }
 
