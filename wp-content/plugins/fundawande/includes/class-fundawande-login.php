@@ -23,8 +23,10 @@ class FundaWande_Login {
      */
     public function __construct() {
 
-        //Add action to output custom error logic if the login fails
+        //Add action to check for wrong login information and add 'login=failed' to URL
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
+        //Add action to check for blank fields and add 'login=failed' to URL
+        add_action('authenticate', array($this, 'custom_login_blank_field'));
 
     }
     //Set up login form options
@@ -49,7 +51,7 @@ class FundaWande_Login {
     } // end setup_login_form();
 
     /**
-     * Refreshes the page and adds 'login=failed' to the URL in order to trigger custom error messages
+     * Refreshes the page and adds 'login=failed' if the info added failed to authenticate the user
      *
      * @param $user
      *
@@ -79,6 +81,39 @@ class FundaWande_Login {
 
             exit;
         }
-    }
+    } // end custom_login_failed();
+
+    /**
+     * Refreshes the page and adds 'login=failed' to the URL if either login field is blank
+     *
+     * @author jtame
+     */
+    public function custom_login_blank_field( ) {
+        $referrer = '';
+        if( !empty( $_SERVER['HTTP_REFERER'] ) )
+        {
+            $referrer = $_SERVER['HTTP_REFERER'];
+        }
+
+        $error = false;
+        if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
+        {
+            $error = true;
+        }
+
+        if (!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error)
+        {
+            if (!strstr($referrer, '?login=failed') )
+            {
+                wp_redirect( $referrer . '?login=failed' );
+            }
+            else
+            {
+                wp_redirect( $referrer );
+            }
+
+            exit;
+        }
+    } // end custom_login_blank_field();
 
 } // end FundaWande_Login
