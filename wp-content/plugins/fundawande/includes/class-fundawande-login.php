@@ -106,9 +106,9 @@ class FundaWande_Login {
 
         if (!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error)
         {
-            if (!strstr($referrer, '?login=failed') )
+            if (!strstr($referrer, '?login=blank-field') )
             {
-                wp_redirect( $referrer . '?login=failed' );
+                wp_redirect( $referrer . '?login=blank-field' );
             }
             else
             {
@@ -127,7 +127,10 @@ class FundaWande_Login {
     public function check_for_failed_login() {
         if( isset( $_GET['login'] )  && $_GET['login'] == 'failed' )
         {
-            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">Log In Failed!</div>";
+            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">Log In Failed! Please check your username and password</div>";
+        }
+        elseif( isset( $_GET['login'] )  && $_GET['login'] == 'blank-field') {
+            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">You need to enter both your username and password to log in.</div>";
         }
     } // end check_for_failed_login();
 
