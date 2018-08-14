@@ -22,11 +22,14 @@ class FundaWande_Login {
      * Constructor
      */
     public function __construct() {
-
-        //Add action to check for wrong login information and add 'login=failed' to URL
+        //Display the login form, so it can be added to the login page template.
+        add_action('show_login_form', array($this,'setup_login_form'));
+        //Check for wrong login information and add 'login=failed' to URL
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
-        //Add action to check for blank fields and add 'login=failed' to URL
+        //Check for blank fields and add 'login=failed' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
+        //Check for failed login and output alert div
+        add_action ('show_login_form', array($this, 'check_for_failed_login'));
 
     }
     //Set up login form options
@@ -115,5 +118,17 @@ class FundaWande_Login {
             exit;
         }
     } // end custom_login_blank_field();
+
+    /**
+     * Echo alert div if login has failed
+     *
+     * @author jtame
+     */
+    public function check_for_failed_login() {
+        if( isset( $_GET['login'] )  && $_GET['login'] == 'failed' )
+        {
+            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">Log In Failed!</div>";
+        }
+    } // end check_for_failed_login();
 
 } // end FundaWande_Login

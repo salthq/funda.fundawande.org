@@ -29,9 +29,7 @@
                     </div>
                     <div class = "login-form text-center">
                         {% do action('show_login_form') %}
-                        <div class="alert alert-danger my-3" role="alert">
-                            The ID address you have entered is incorrect, please try again!
-                        </div>
+                        {% do action('check_for_failed_login') %}
                     </div>
                 </div>
             </div>
