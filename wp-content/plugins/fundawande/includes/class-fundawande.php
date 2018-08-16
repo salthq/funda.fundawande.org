@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // End if().
 
 /**
- * Responsible for loading Funda Wande and setting up the Main WordPress hooks.
+ * Responsible for loading FundaWande and setting up the Main WordPress hooks.
  *
  * @package Core
  * @author Pango
@@ -20,7 +20,7 @@ class FundaWande_Main {
 
 	/**
 	 * @var FundaWande_Main $_instance to the the main and only instance of the FundaWande class.
-	 * @since 1.8.0
+	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
@@ -79,7 +79,7 @@ class FundaWande_Main {
 	/**
 	 * Load the foundations of FundaWande.
 	 *
-	 * @since 1.9.0
+	 * @since 1.0.0
 	 */
 	protected function init() {
 
@@ -93,7 +93,7 @@ class FundaWande_Main {
 	 *
 	 * Ensure that only one instance of the main FundaWande class can be loaded.
 	 *
-	 * @since 1.8.0
+	 * @since 1.0.0
 	 * @static
 	 * @see WC()
 	 * @return FundaWande Instance.
@@ -118,7 +118,7 @@ class FundaWande_Main {
 	 * This function is linked into the activation
 	 * hook to reset flush the urls to ensure FundaWande post types show up.
 	 *
-	 * @since 1.9.0
+	 * @since 1.0.0
 	 *
 	 * @param $plugin
 	 */
@@ -133,9 +133,9 @@ class FundaWande_Main {
 	}
 
 	/**
-	 * Load the properties for the main Funda Wande object
+	 * Load the properties for the main FundaWande object
 	 *
-	 * @since 1.9.0
+	 * @since 1.0.0
 	 */
 	public function initialize_global_objects() {
 
@@ -145,15 +145,22 @@ class FundaWande_Main {
         // Setup post types - COMMENTED OUT FOR NOW
         // $this->post_types = new FundaWande_PostTypes();
 
-        // Setup quiz
+        // Setup quiz functionality class
         $this->quiz = new FundaWande_Quiz();
+
+        // Setup question functionality class
+        $this->question = new FundaWande_Question();
+
+        // Setup grading functionality class
+        $this->grading = new FundaWande_Grading();
+
 
 	}
 
 	/**
-	 * Initialize all A+ hooks
+	 * Initialize all FundaWande hooks
 	 *
-	 * @since 1.9.0
+	 * @since 1.0.0
 	 */
 	public function load_hooks() {
 
@@ -190,4 +197,4 @@ class FundaWande_Main {
 
 
 
-} // End Class
+} // End FundaWande_Main Class
