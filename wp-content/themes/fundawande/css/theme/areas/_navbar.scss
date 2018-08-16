@@ -1,9 +1,10 @@
 /* ==========================================================================
-* Theme areas
+* Navbar
 *
-* Import the various ares defined for theme
+* Styling specific to navbar template: header-navbar.twig
 *
  ========================================================================== */
 
-@import "areas/home";
-@import "areas/navbar";
+.avatar {
+  border-radius: 50px;
+}
