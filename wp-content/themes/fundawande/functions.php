@@ -29,3 +29,14 @@ add_action( 'wp_enqueue_scripts', 'pango_scripts' );
  */
 require get_template_directory() . '/includes/functions-timber.php';
 
+/*
+ * Remember user language choice
+ */
+add_action('init', 'set_user_language_preference');
+function set_user_language_preference() {
+    if ( is_user_logged_in() && isset($_GET['lang'])) {
+        $user_id = get_current_user_id();
+        $lang = $_GET['lang'];
+        update_user_meta($user_id, 'language_preference', $lang );
+    }
+}
