@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * FundaWande Quiz Class
  *
- * All functionality pertaining to the quiz functionality of Funda Wande.
+ * All functionality pertaining to the custom quiz functionality of Funda Wande.
  *
  * @package Core
  * @author Pango
