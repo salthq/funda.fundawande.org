@@ -153,6 +153,11 @@ class FundaWande_Main {
         // Setup grading functionality class
         $this->grading = new FundaWande_Grading();
 
+        //Setup login class
+        $this->login = new FundaWande_Login();
+
+        // Setup language class
+        $this->language = new FundaWande_Language();
 
     }
 

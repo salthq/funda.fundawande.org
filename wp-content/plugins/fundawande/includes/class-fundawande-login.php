@@ -127,10 +127,10 @@ class FundaWande_Login {
     public function check_for_failed_login() {
         if( isset( $_GET['login'] )  && $_GET['login'] == 'failed' )
         {
-            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">Log In Failed! Please check your username and password</div>";
+            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">" . get_field('eng_incorrect_credentials') . "</div>";
         }
         elseif( isset( $_GET['login'] )  && $_GET['login'] == 'blank-field') {
-            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">You need to enter both your username and password to log in.</div>";
+            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">" . get_field('eng_blank_fields') . "</div>";
         }
     } // end check_for_failed_login();
 
