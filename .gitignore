@@ -50,4 +50,3 @@ wp-content/plugins/what-the-file/*
 wp-content/plugins/debug-bar/*
 wp-content/plugins/debug-bar-timber/*
 !/.gitignore
->>>>>>> track localhost root gitignore before data and file migrations to local
