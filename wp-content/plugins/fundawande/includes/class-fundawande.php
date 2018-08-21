@@ -161,7 +161,7 @@ class FundaWande_Main {
         } else {
 
             // Load Frontend Class
-            $this->frontend = new FundaWande__Frontend();
+            $this->frontend = new FundaWande_Frontend();
 
 
         }
