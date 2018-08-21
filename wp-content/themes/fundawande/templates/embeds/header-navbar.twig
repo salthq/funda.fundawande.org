@@ -6,18 +6,29 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class = "fas fa-home"></i> Menu
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><i class = "fas fa-arrow-right mr-2"></i> Continue Learning</a>
-                    <a class="dropdown-item" href="#"><i class = "fas fa-graduation-cap mr-2"></i> Go to modules</a>
-                    <a class="dropdown-item" href="#"><i class = "fas fa-users mr-2"></i> View Contacts</a>
-                    <a class="dropdown-item" href="#"><i class = "fas fa-comments mr-2"></i> View Messages</a>
-                    <a class="dropdown-item" href="#"><i class = "fas fa-bullhorn mr-2"></i> View Feedback</a>
-                    <a class="dropdown-item" href="#"><i class = "fas fa-bookmark mr-2"></i> View Bookmarks</a>
-                </div>
+                <!-- TODO: create context for user role in functions.timber.php and add logic for assigning role in class-fundawande-login.php -->
+                {% if role == 'coach' %}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class = "fas fa-arrow-right mr-2"></i> Go to Dashboard</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-graduation-cap mr-2"></i> Go to Modules</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-users mr-2"></i> View Contacts</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-comments mr-2"></i> View Messages</a>
+                    </div>
+                {% endif %}
+                {% if role == 'learner' %}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#"><i class = "fas fa-arrow-right mr-2"></i> Go to Dashboard</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-graduation-cap mr-2"></i> Go to Modules</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-users mr-2"></i> View Contacts</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-comments mr-2"></i> View Messages</a>
+                        <a class="dropdown-item" href="#"><i class = "fas fa-bookmark mr-2"></i> View Bookmarks</a>
+                    </div>
+                {% endif %}
             </li>
         </ul>
 
-        <button class="btn btn-info ml-3"> <i class = "fas fa-question-circle"></i> View Tooltips</button>
+        <!--TODO: add JS scripts and data-target for viewing information modals-->
+        <button class="btn btn-info ml-3" data-toggle="modal" data-target="#"> <i class = "fas fa-question-circle"></i> View Tooltips</button>
 
         <div class = "mx-auto">
             <img class = "img avatar" src = "http://via.placeholder.com/75x75?text=User+Avatar">
