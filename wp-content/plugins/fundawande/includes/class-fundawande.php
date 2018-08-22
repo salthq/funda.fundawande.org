@@ -153,14 +153,19 @@ class FundaWande_Main {
         // Setup grading functionality class
         $this->grading = new FundaWande_Grading();
 
-        //Setup login class
-        $this->login = new FundaWande_Login();
+        // Differentiate between administration and frontend logic.
+        if ( is_admin() ) {
 
-        // Setup language class
-        $this->language = new FundaWande_Language();
+            // Set up admin specific classes
 
-    }
+        } else {
 
+            // Load Frontend Class
+            $this->frontend = new FundaWande_Frontend();
+
+
+        }
+	}
     /**
      * Initialize all FundaWande hooks
      *
