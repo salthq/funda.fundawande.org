@@ -26,17 +26,17 @@ class FundaWande_Login {
         add_action('show_login_form', array($this,'setup_login_form'));
         //Check for wrong login information and add 'login=failed' to URL
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
-        //Check for blank fields and add 'login=failed' to URL
+        //Check for blank fields and add 'login=blank-field' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
         //Check for failed login and output alert div
         add_action ('show_login_form', array($this, 'check_for_failed_login'));
-
     }
     //Set up login form options
     public function setup_login_form() {
         $args = array(
             'echo'           => true,
-            'redirect'       => site_url($_SERVER['REQUEST_URI']),
+            //TODO: redirect to either the dashboard or modules page on login
+            'redirect'       => site_url('login'),
             'form_id'        => 'form-login',
             'label_username' => __( 'ID Number' ),
             'label_password' => __( 'Password' ),
