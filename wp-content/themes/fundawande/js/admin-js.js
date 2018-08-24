@@ -69,8 +69,8 @@ jQuery(document).ready(function () {
         answer_count++;
         var html =
             '<label class="answer" for="question_' + question_counter + '_right_answer_' + answer_count + '">' +
-            '<div><button data-part="0" type="button" class="button question-upload-image-button">Add option image</button></div>' +
-            '<div><button data-part="1" type="button" class="button question-upload-image-button">Add destination image</button></div>' +
+            '<div class="_float-left"><button data-part="0" type="button" class="button question-upload-image-button">Add option image</button></div>' +
+            '<div class="_float-right"><button data-part="1" type="button" class="button question-upload-image-button">Add destination image</button></div>' +
             '<input type="text" id="question_' + question_counter + '_right_answer_' + answer_count + '" name="question_right_answers[]" value="" size="25" class="question_answer widefat" />' +
             ' <a class="remove_answer_option"></a>' +
             '</label>';
@@ -81,7 +81,7 @@ jQuery(document).ready(function () {
         var question_counter = jQuery(this).attr('rel');
         var answer_count = jQuery('input[name="question_right_answers[]"]').length - 1;
         answer_count++;
-        var html = '<label class="answer" for="question_' + question_counter + '_right_answer_' + answer_count + '"><span></span><div><button type="button" class="button question-upload-image-button">Upload option image</button></div> <input type="text" id="question_' + question_counter + '_right_answer_' + answer_count + '" name="question_right_answers[]" value="" size="25" class="question_answer widefat" /> <a class="remove_answer_option"></a></label>';
+        var html = '<label class="answer" for="question_' + question_counter + '_right_answer_' + answer_count + '"><span></span><div class="_float-left"><button type="button" class="button question-upload-image-button">Upload option image</button></div> <input type="text" id="question_' + question_counter + '_right_answer_' + answer_count + '" name="question_right_answers[]" value="" size="25" class="question_answer widefat" /> <a class="remove_answer_option"></a></label>';
         jQuery(this).closest('div').before(html);
     });
 });

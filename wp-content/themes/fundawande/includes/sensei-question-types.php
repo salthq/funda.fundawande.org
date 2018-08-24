@@ -55,7 +55,7 @@ class SenseiQuestionTypes
                     $right_answer = '
                         <label class="answer" for="question_' . esc_attr($question_counter) . '_right_answer_' . $i . '">
                         <span>' . esc_html__('Right:', 'woothemes-sensei') . '</span>
-                        <div>' . self::getUploadImageButton(null, 'Upload option image', $right_answers[$i]) . '</div>
+                        <div class="_float-left">' . self::getUploadImageButton(null, 'Upload option image', $right_answers[$i]) . '</div>
                         <input rel="' . esc_attr($right_answer_id) . '" type="text" id="question_' . esc_attr($question_counter) . '_right_answer_' . esc_attr($i) . '" name="question_right_answers[]" value="' . esc_attr($right_answers[$i]) . '" size="25" class="question_answer widefat" />
                         <a class="remove_answer_option"></a>
                         </label>
@@ -126,7 +126,7 @@ class SenseiQuestionTypes
                 $html .= '<a class="add_wrong_multiple_choice_with_images_answer_option add_answer_option button" rel="' . esc_attr($question_counter) . '">' . esc_html__('Add wrong answer', 'woothemes-sensei') . '</a>';
                 $html .= '</div>';
 
-                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, '');
+                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, 'multiple-choice');
 
                 $html .= '</div>';
                 break;
@@ -152,8 +152,8 @@ class SenseiQuestionTypes
                     // Right Answer
                     $right_answer = '
                         <label class="answer" for="question_' . esc_attr($question_counter) . '_right_answer_' . $i . '">
-                            <div>' . self::getUploadImageButton(0, 'Add option image', $right_answers[$i]) . '</div>
-                            <div>' . self::getUploadImageButton(1, 'Add destination image', $right_answers[$i]) . '</div>
+                            <div class="_float-left">' . self::getUploadImageButton(0, 'Add option image', $right_answers[$i]) . '</div>
+                            <div class="_float-right">' . self::getUploadImageButton(1, 'Add destination image', $right_answers[$i]) . '</div>
                             <input rel="' . esc_attr($right_answer_id) . '" type="text" id="question_' . esc_attr($question_counter) . '_right_answer_' . esc_attr($i) . '" name="question_right_answers[]" value="' . esc_attr($right_answers[$i]) . '" size="25" class="question_answer widefat" /> 
                             <a class="remove_answer_option"></a>
                         </label>
@@ -203,7 +203,7 @@ class SenseiQuestionTypes
                 $html .= '<a class="add_drag_and_drop_non_sequential_answer_option add_answer_option button" rel="' . esc_attr($question_counter) . '">' . esc_html__('Add another option', 'woothemes-sensei') . '</a>';
                 $html .= '</div>';
 
-                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, '');
+                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, 'multiple-choice');
 
                 $html .= '</div>';
                 break;
@@ -230,7 +230,7 @@ class SenseiQuestionTypes
                     $right_answer = '
                         <label class="answer" for="question_' . esc_attr($question_counter) . '_right_answer_' . $i . '">
                         <span></span>
-                        <div>' . self::getUploadImageButton(null, 'Upload option image', $right_answers[$i]) . '</div> 
+                        <div class="_float-left">' . self::getUploadImageButton(null, 'Upload option image', $right_answers[$i]) . '</div> 
                         <input rel="' . esc_attr($right_answer_id) . '" type="text" id="question_' . esc_attr($question_counter) . '_right_answer_' . esc_attr($i) . '" name="question_right_answers[]" value="' . esc_attr($right_answers[$i]) . '" size="25" class="question_answer widefat" /> 
                         <a class="remove_answer_option"></a>
                         </label>
@@ -280,7 +280,7 @@ class SenseiQuestionTypes
                 $html .= '<a class="add_drag_and_drop_sequential_answer_option add_answer_option button" rel="' . esc_attr($question_counter) . '">' . esc_html__('Add another option', 'woothemes-sensei') . '</a>';
                 $html .= '</div>';
 
-                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, '');
+                $html .= $that->quiz_panel_question_feedback($question_counter, $question_id, 'multiple-choice');
 
                 $html .= '</div>';
                 break;
@@ -312,5 +312,15 @@ class SenseiQuestionTypes
         <?= $img ?>
         <?php
         return ob_get_clean();
+    }
+
+    // https://stackoverflow.com/a/3110033
+    public static function ordinal($number)
+    {
+        $ends = array('th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th');
+        if ((($number % 100) >= 11) && (($number % 100) <= 13))
+            return $number . 'th';
+        else
+            return $number . $ends[$number % 10];
     }
 }

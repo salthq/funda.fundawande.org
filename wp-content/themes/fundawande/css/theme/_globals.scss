@@ -30,3 +30,202 @@
 .red {
   color: red;
 }
+.single-quiz {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.drag-and-drop-sequential {
+
+    ._top-mobile-title {
+        display: none;
+    }
+
+    ._answer-container {
+        padding: 0 30px;
+
+        ._box-image-container{
+            height: 300px;
+            border: 1px solid #ccc;
+        }
+        ._image-container {
+            svg {
+                font-size: 30px;
+            }
+
+            ._arrow-down svg {
+                display: none;
+            }
+
+            ._arrow-right {
+                position: absolute;
+                top: 50%;
+                left: -42px;
+                transform: translateY(-50%);
+            }
+        }
+
+        &:first-child svg {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        ._top-column-images {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        ._top-mobile-title {
+            display: block;
+        }
+
+        ._arrow-right svg {
+            display: none;
+        }
+
+        ._box-image-container {
+            width: 50%;
+            margin-right: 20px !important;
+        }
+
+        ._arrow-down {
+            position: absolute;
+            left: 50%;
+            bottom: -50px;
+            transform: translateX(-50%);
+
+            svg {
+                display: block !important;
+            }
+        }
+    }
+
+
+    @media (max-width: 425px) {
+        ._arrow-down {
+            bottom: -48px !important;
+        }
+    }
+
+    @media (max-width: 400px) {
+       ._box-image-container ._arrow-down {
+            bottom: -34px !important;
+        }
+    }
+}
+
+li.drag-and-drop-non-sequential,
+.drag-and-drop-sequential {
+    ._image-container {
+        text-align: center;
+    }
+
+    ._top-column-images {
+        ._image-letters {
+            display: none;
+        }
+    }
+
+    .answers {
+        padding: 0;
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+
+    ._top-row-image {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+
+    ._mobile-images-answers {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        ._top-column-images {
+            ._image-letters {
+                display: block !important;
+            }
+        }
+
+        ._mobile-images-answers {
+            display: block !important;
+        }
+
+        ._images-answers {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            ._answer-container {
+                padding-bottom: 60px;
+                display: flex;
+                align-items: center;
+                max-width: 100%;
+
+                &:last-child ._arrow-down {
+                    display: none !important;
+                }
+
+                ._image-container {
+                    input[type='checkbox'] {
+                        display: none;
+                    }
+                }
+
+                img {
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        .container-fluid {
+            padding-left: 0;
+        }
+    }
+
+    @media (max-width: 575px) {
+        ._top-column-images {
+            width: 50%;
+
+            &:nth-child(1),
+            &:nth-child(3) {
+                border-right: 1px solid #ccc;
+            }
+
+            &:nth-child(1),
+            &:nth-child(2) {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 5px;
+            }
+
+            &:nth-child(3),
+            &:nth-child(4) {
+                padding-top: 10px;
+            }
+        }
+    }
+
+    @media (max-width: 400px) {
+        ._answer-container {
+            padding-bottom: 30px !important;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .single-quiz-wrapper .quiz-questions #sensei-quiz-list {
+        .answers {
+            padding: 0 !important;
+        }
+    }
+}
+
+
