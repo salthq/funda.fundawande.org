@@ -1,0 +1,17 @@
+.question_multiple_choice_with_images_fields,
+.question_drag_and_drop_non_sequential_fields,
+.question_drag_and_drop_sequential_fields {
+    float: right;
+    width: 60%;
+}
+
+.question-upload-image-button {
+    &:before {
+        content: "\f128";
+        font-family: dashicons;
+        margin: 0 5px 3px 0;
+        vertical-align: middle;
+        font-size: 18px;
+        display: inline-block;
+    }
+}

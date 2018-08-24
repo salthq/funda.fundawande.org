@@ -1597,6 +1597,10 @@ class Sensei_Lesson {
 			}
 		}
 
+		// BEGIN CUSTOM CODE
+		$html = apply_filters('quiz_panel_question_field', $html, $this, $question_type, $question_id, $question_counter);
+		// END CUSTOM CODE
+
 		return $html;
 	}
 
@@ -1625,7 +1629,19 @@ class Sensei_Lesson {
 
 		$html = '<p title="' . esc_attr__( 'This feedback will be automatically displayed to the student once they have completed the quiz.', 'woothemes-sensei' ) . '">';
 		$html .= '<label for="' . esc_attr( $field_name ) . '">' . esc_html__( 'Answer Feedback' , 'woothemes-sensei' ) . ':</label>';
-		$html .= '<textarea id="' . esc_attr( $field_name ) . '" name="' . esc_attr( $field_name ) . '" rows="4" cols="40" class="answer_feedback widefat">' . esc_textarea( $feedback ) . '</textarea>';
+
+		// BEGIN CUSTOM CODE
+		ob_start();
+		wp_editor($feedback, 'feedback_editor_' . wp_generate_password(12, false), [
+			'teeny' => true,
+			'textarea_rows' => 15,
+			'tabindex' => 1,
+			'textarea_name' => $field_name,
+			'editor_class' => 'answer_feedback'
+		]);
+		$html .= ob_get_clean();
+		// END CUSTOM CODE
+
 		$html .= '</p>';
 
 		return $html;
@@ -1818,7 +1834,7 @@ class Sensei_Lesson {
 
 			// Load the lessons script
 			wp_enqueue_media();
-			wp_enqueue_script( 'sensei-lesson-metadata', Sensei()->plugin_url . 'assets/js/lesson-metadata' . $suffix . '.js', array( 'jquery', 'sensei-core-select2' ,'jquery-ui-sortable' ), Sensei()->version, true );
+			wp_enqueue_script( 'sensei-lesson-metadata', Sensei()->plugin_url . 'assets/js/lesson-metadata.js', array( 'jquery', 'sensei-core-select2' ,'jquery-ui-sortable' ), Sensei()->version, true );
 			wp_enqueue_script( 'sensei-lesson-chosen', Sensei()->plugin_url . 'assets/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), Sensei()->version, true );
 			wp_enqueue_script( 'sensei-chosen-ajax', Sensei()->plugin_url . 'assets/chosen/ajax-chosen.jquery' . $suffix . '.js', array( 'jquery', 'sensei-lesson-chosen' ), Sensei()->version, true );
 
@@ -2357,13 +2373,13 @@ class Sensei_Lesson {
 		} // End If Statement
 		$post_title = $question_text;
 		// Handle Default Fields (multiple choice)
-		if ( 'multiple-choice' == $question_type && isset( $data[ 'question_right_answers' ] ) && ( '' != $data[ 'question_right_answers' ] ) ) {
+		if ( in_array($question_type, ['multiple-choice', 'multiple-choice-with-images', 'drag-and-drop-sequential', 'drag-and-drop-non-sequential']) && isset( $data[ 'question_right_answers' ] ) && ( '' != $data[ 'question_right_answers' ] ) ) {
 			$question_right_answers = $data[ 'question_right_answers' ];
 		} // End If Statement
-		elseif ( 'multiple-choice' == $question_type && isset( $data[ 'question_right_answer' ] ) && ( '' != $data[ 'question_right_answer' ] ) ) {
+		elseif ( in_array($question_type, ['multiple-choice', 'multiple-choice-with-images', 'drag-and-drop-sequential', 'drag-and-drop-non-sequential']) && isset( $data[ 'question_right_answer' ] ) && ( '' != $data[ 'question_right_answer' ] ) ) {
 			$question_right_answer = $data[ 'question_right_answer' ];
 		} // End If Statement
-		if ( 'multiple-choice' == $question_type && isset( $data[ 'question_wrong_answers' ] ) && ( '' != $data[ 'question_wrong_answers' ] ) ) {
+		if ( in_array($question_type, ['multiple-choice', 'multiple-choice-with-images', 'drag-and-drop-sequential', 'drag-and-drop-non-sequential']) && isset( $data[ 'question_wrong_answers' ] ) && ( '' != $data[ 'question_wrong_answers' ] ) ) {
 			$question_wrong_answers = $data[ 'question_wrong_answers' ];
 		} // End If Statement
 		// Handle Boolean Fields - Edit
