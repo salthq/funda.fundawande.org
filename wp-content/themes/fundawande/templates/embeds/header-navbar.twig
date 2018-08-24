@@ -6,22 +6,18 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class = "fas fa-home"></i> Menu
                 </a>
-                <!-- TODO: create context for user role in functions.timber.php and add logic for assigning role in class-fundawande-login.php -->
-                {% if role == 'coach' %}
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class = "fas fa-arrow-right mr-2"></i> Go to Dashboard</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-graduation-cap mr-2"></i> Go to Modules</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-users mr-2"></i> View Contacts</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-comments mr-2"></i> View Messages</a>
-                    </div>
-                {% endif %}
+                <!-- TODO: create context for user role in functions.timber.php and add logic for assigning role in class-fundawande-login.php-->
                 {% if role == 'learner' %}
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class = "fas fa-arrow-right mr-2"></i> Go to Dashboard</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-graduation-cap mr-2"></i> Go to Modules</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-users mr-2"></i> View Contacts</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-comments mr-2"></i> View Messages</a>
-                        <a class="dropdown-item" href="#"><i class = "fas fa-bookmark mr-2"></i> View Bookmarks</a>
+                        {% for item in learner_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                {% elseif role == 'coach'%}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in coach_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
                     </div>
                 {% endif %}
             </li>
