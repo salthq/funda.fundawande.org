@@ -61,7 +61,9 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_failed ($user) {
-        $referrer = $_SERVER['HTTP_REFERER'];
+        //Remove all GET variables from the URL, so they don't get chained upon repeated unsuccessful logins
+        $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+
         if (!empty($referrer) && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin') && $user!=null )
         {
             if (!strstr($referrer, '?login=failed'))
@@ -92,11 +94,8 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_blank_field( ) {
-        $referrer = '';
-        if( !empty( $_SERVER['HTTP_REFERER'] ) )
-        {
-            $referrer = $_SERVER['HTTP_REFERER'];
-        }
+        //Remove all GET variables from the URL, so they don't get chained upon repeated unsuccessful logins
+        $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
 
         $error = false;
         if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
