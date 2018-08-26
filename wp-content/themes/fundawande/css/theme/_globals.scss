@@ -41,33 +41,23 @@
 }
 
 .drag-and-drop-sequential {
-    ._text-mobile {
-        display: none;
-    }
-
     ._top-mobile-title {
         display: none;
     }
 
     ._answer-container {
-        padding: 0 30px;
-
         ._box-image-container {
+            width: 100%;
             height: 300px;
             border: 1px solid #ccc;
         }
-        ._image-container {
-            position: relative;
 
+        ._image-container {
             ._sortable-spot {
-                position: absolute;
                 width: 100%;
                 height: 100%;
                 left: 0;
                 top: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             svg {
@@ -81,7 +71,7 @@
             ._arrow-right {
                 position: absolute;
                 top: 50%;
-                left: -42px;
+                left: -29px;
                 transform: translateY(-50%);
             }
         }
@@ -92,14 +82,6 @@
     }
 
     @media (max-width: 768px) {
-        ._text-desktop {
-            display: none;
-        }
-
-        ._text-mobile {
-            display: block;
-        }
-
         ._option-image {
             display: flex;
             flex-direction: column;
@@ -144,10 +126,51 @@
     }
 }
 
-li.drag-and-drop-non-sequential,
+.drag-and-drop-non-sequential {
+    ._answer-container {
+        ._image-container {
+            ._sortable-spot {
+                width: 50%;
+                height: 50%;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-left: 1px solid white;
+                border-top: 1px solid white;
+                background: rgba(#fff, 0.333);
+                overflow: hidden;
+
+                img {
+                    width: auto;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+.drag-and-drop-non-sequential,
 .drag-and-drop-sequential {
+    ._text-mobile {
+        display: none;
+    }
+
+    ._answer-container {
+        display: flex;
+    }
+
     ._image-container {
+        position: relative;
         text-align: center;
+
+        ._sortable-spot {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     ._option-image {
@@ -175,6 +198,14 @@ li.drag-and-drop-non-sequential,
     }
 
     @media (max-width: 768px) {
+        ._text-desktop {
+            display: none;
+        }
+
+        ._text-mobile {
+            display: block;
+        }
+
         ._option-image {
             ._image-letters {
                 display: block !important;
@@ -192,18 +223,11 @@ li.drag-and-drop-non-sequential,
 
             ._answer-container {
                 padding-bottom: 60px;
-                display: flex;
                 align-items: center;
                 max-width: 100%;
 
                 &:last-child ._arrow-down {
                     display: none !important;
-                }
-
-                ._image-container {
-                    input[type='checkbox'] {
-                        display: none;
-                    }
                 }
 
                 img {

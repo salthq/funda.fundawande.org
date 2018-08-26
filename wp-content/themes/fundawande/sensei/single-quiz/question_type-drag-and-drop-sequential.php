@@ -22,7 +22,7 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
 $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
 
 ?>
-<ul class="answers" id="<?= $uniqueId ?>">
+<div class="answers" id="<?= $uniqueId ?>">
     <div class="container-fluid">
         <div>
             <p class="_text-desktop">
@@ -105,7 +105,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             ?>
         </div>
     </div>
-</ul>
+</div>
 
 <script>
     jQuery(document).ready(function ($) {
@@ -127,7 +127,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                     sortableSpots.find('img').css('display', '');
 
                     // If we're dragging an option inside an answer, hide any other identical answers (i.e. we can't use same image in two different answers).
-                    if (!$(evt.to).hasClass('_image-container ')) {
+                    if (!$(evt.to).hasClass('_image-container')) {
                         var answer = $(evt.dragged).attr('data-option');
                         sortableSpots.find('img[data-option=' + answer + ']').hide();
                     }
@@ -170,7 +170,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             // Remove any previous image.
             sortableSpot.find('img').remove();
             sortableSpot.append(image.clone());
-            
+
             // Sync input tags.
             syncInputTags();
         });

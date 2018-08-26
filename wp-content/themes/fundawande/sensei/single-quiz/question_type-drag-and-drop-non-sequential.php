@@ -18,11 +18,19 @@ if (!defined('ABSPATH')) exit;
  */
 $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_question_id(), get_the_ID());
 
+// Ensqure that each question has its own unique ID.
+$uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
+
 ?>
-<ul class="answers">
+<div class="answers" id="<?= $uniqueId ?>">
     <div class="container-fluid">
         <div>
-            <p>Match the following pages with the correct option given below:</p>
+            <p class="_text-desktop">
+                Match the following pages with the correct option given below:
+            </p>
+            <p class="_text-mobile">
+                View the following images and match them below (click image to enlarge)
+            </p>
         </div>
 
         <div class="row _option-images">
@@ -38,20 +46,9 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
                         Image <?= chr(ord('A') + $count - 1) ?>
                     </div>
 
-                    <li class=" _image-container <?php echo esc_attr($option['option_class']); ?>">
-                        <input type="<?php echo $option['type']; ?>"
-                               id="<?php echo esc_attr('question_' . $question_data['ID']) . '-option-' . $count; ?>"
-                               name="<?php echo esc_attr('sensei_question[' . $question_data['ID'] . ']'); ?>[]"
-                               value="<?php echo esc_attr($option['answer']); ?>" <?php echo $option['checked']; ?>
-                            <?php echo is_user_logged_in() ? '' : ' disabled'; ?>
-                        />
-
-                        <label for="<?php echo esc_attr('question_' . $question_data['ID']) . '-option-' . $count; ?>">
-                            <?php echo wp_get_attachment_image($parts[0], array('390', '300'), "", array("class" => "img-responsive")); ?>
-                        </label>
-
-                    </li>
-
+                    <div class="_image-container <?php echo esc_attr($option['option_class']); ?>">
+                        <?php echo wp_get_attachment_image($parts[0], ['390', '300'], '', ['class' => 'img-responsive', 'data-option' => $count]); ?>
+                    </div>
                 </div>
                 <?php
             }
@@ -59,7 +56,9 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
         </div>
 
         <div class="_top-mobile-title">
-            <p>Which image best relates to the following</p>
+            <p class="_text-mobile">
+                Which image best relates to the following
+            </p>
         </div>
 
         <div class="row _images-answers">
@@ -72,19 +71,11 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
                 ?>
 
                 <div class="col-sm-3 _answer-container">
-                    <li class="<?php echo esc_attr($option['option_class']); ?> _image-container">
-                        <input type="<?php echo $option['type']; ?>"
-                               id="<?php echo esc_attr('question_' . $question_data['ID']) . '-option-' . $count; ?>"
-                               name="<?php echo esc_attr('sensei_question[' . $question_data['ID'] . ']'); ?>[]"
-                               value="<?php echo esc_attr($option['answer']); ?>" <?php echo $option['checked']; ?>
-                            <?php echo is_user_logged_in() ? '' : ' disabled'; ?>
-                        />
+                    <div class="<?php echo esc_attr($option['option_class']); ?> _image-container">
+                        <?php echo wp_get_attachment_image($parts[1], ['390', '300'], '', ['class' => 'img-responsive']); ?>
 
-                        <label for="<?php echo esc_attr('question_' . $question_data['ID']) . '-option-' . $count; ?>">
-                            <?php echo wp_get_attachment_image($parts[1], array('390', '300'), "", array("class" => "img-responsive")); ?>
-                        </label>
-
-                    </li>
+                        <div class="_sortable-spot"></div>
+                    </div>
 
                     <div class="_mobile-images-answers">
                         <?php
@@ -94,7 +85,9 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
                             ?>
                             <div>
                                 <label>
-                                    <input type="radio">
+                                    <input type="radio"
+                                           name="<?= 'question_' . $question_data['ID'] . '-option-' . $count ?>"
+                                           value="<?= $count2 ?>">
                                     Image <?= chr(ord('A') + $count2 - 1) ?>
                                 </label>
                             </div>
@@ -108,7 +101,82 @@ $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_que
             ?>
         </div>
     </div>
-</ul>
+</div>
 
+<script>
+    jQuery(document).ready(function ($) {
+        var groupName = '<?=$uniqueId?>';
+        var groupElement = $('#' + groupName);
+        var optionImages = groupElement.find('._option-images ._image-container');
+        var sortableSpots = groupElement.find('._images-answers ._sortable-spot');
+        var radioInputs = groupElement.find('input[type=radio]');
 
+        optionImages.each(function () {
+            Sortable.create(this, {
+                group: {
+                    name: groupName,
+                    pull: 'clone',
+                    put: 'false'
+                },
+                onMove: function (evt, originalEvent) {
+                    // Show answer images, i.e. undo any previous changes.
+                    sortableSpots.find('img').css('display', '');
 
+                    // If we're dragging an option inside an answer, hide any other identical answers (i.e. we can't use same image in two different answers).
+                    if (!$(evt.to).hasClass('_image-container')) {
+                        var answer = $(evt.dragged).attr('data-option');
+                        sortableSpots.find('img[data-option=' + answer + ']').hide();
+                    }
+
+                    // Hide all other image options from inside the "to" element, e.g. when we're dragging over an existing image.
+                    $(evt.to).find('img').css('display', 'none');
+                    $(evt.dragged).css('display', '');
+                }
+            });
+        });
+
+        // Create "drop-zone" for each answer box.
+        sortableSpots.each(function () {
+            Sortable.create(this, {
+                group: groupName,
+                onAdd: function (evt) {
+                    // Remove all other hidden answers.
+                    sortableSpots.find('img:not(:visible)').remove();
+
+                    // Sync input tags.
+                    syncInputTags();
+                },
+            });
+        });
+
+        radioInputs.on('change', function () {
+            if (!$(this).is(':checked')) {
+                return;
+            }
+
+            var dataOption = $(this).attr('value');
+            var sortableSpot = $(this).closest('._answer-container').find('._sortable-spot');
+
+            // Remove duplicate answers.
+            sortableSpots.find('img[data-option=' + dataOption + ']').remove();
+
+            // Find image.
+            var image = optionImages.find('[data-option=' + dataOption + ']');
+
+            // Remove any previous image.
+            sortableSpot.find('img').remove();
+            sortableSpot.append(image.clone());
+
+            // Sync input tags.
+            syncInputTags();
+        });
+
+        function syncInputTags() {
+            radioInputs.each(function () {
+                var sortableSpot = $(this).closest('._answer-container').find('._sortable-spot');
+                var dataOption = sortableSpot.find('img').attr('data-option');
+                $(this).prop('checked', dataOption === $(this).attr('value'));
+            });
+        }
+    });
+</script>
