@@ -18,11 +18,22 @@ if (!defined('ABSPATH')) exit;
  */
 $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_question_id(), get_the_ID());
 
+// Get user answers.
+try {
+    $userAnswers = json_decode($question_data['user_answer_entry'], true);
+} catch (Exception $e) {
+}
+if (!is_array($userAnswers)) {
+    $userAnswers = [];
+}
+
 // Ensqure that each question has its own unique ID.
 $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
 
 ?>
 <div class="answers" id="<?= $uniqueId ?>">
+    <input type="hidden" name="sensei_question[<?= $question_data['ID'] ?>]">
+
     <div class="container-fluid">
         <div>
             <p class="_text-desktop">
@@ -38,7 +49,6 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $parts = explode('-', $option['answer']);
-                $count++;
                 ?>
 
                 <div class="col-sm-3 _option-image">
@@ -51,6 +61,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                     </div>
                 </div>
                 <?php
+                $count++;
             }
             ?>
         </div>
@@ -66,8 +77,6 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $parts = explode('-', $option['answer']);
-
-                $count++;
                 ?>
 
                 <div class="col-sm-3 _answer-container">
@@ -81,102 +90,33 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                         <?php
                         $count2 = 0;
                         foreach ($question_data['answer_options'] as $id2 => $option2) {
-                            $count2++;
+                            $checked = array_key_exists($count, $userAnswers) ? (int)$userAnswers[$count] === $count2 : false;
                             ?>
                             <div>
                                 <label>
-                                    <input type="radio"
+                                    <input type="radio" <?= $checked ? 'checked' : '' ?>
+                                           data-index="<?= $count ?>"
                                            name="<?= 'question_' . $question_data['ID'] . '-option-' . $count ?>"
                                            value="<?= $count2 ?>">
-                                    Image <?= chr(ord('A') + $count2 - 1) ?>
+                                    Image <?= chr(ord('A') + $count2) ?>
                                 </label>
                             </div>
                             <?php
+                            $count2++;
                         }
                         ?>
                     </div>
                 </div>
+
                 <?php
+                $count++;
             }
             ?>
         </div>
     </div>
 </div>
 
-<script>
-    jQuery(document).ready(function ($) {
-        var groupName = '<?=$uniqueId?>';
-        var groupElement = $('#' + groupName);
-        var optionImages = groupElement.find('._option-images ._image-container');
-        var sortableSpots = groupElement.find('._images-answers ._sortable-spot');
-        var radioInputs = groupElement.find('input[type=radio]');
+<?php
+\FundaWande\SenseiDragAndDropJavaScript::echoJavascript($uniqueId);
+?>
 
-        optionImages.each(function () {
-            Sortable.create(this, {
-                group: {
-                    name: groupName,
-                    pull: 'clone',
-                    put: 'false'
-                },
-                onMove: function (evt, originalEvent) {
-                    // Show answer images, i.e. undo any previous changes.
-                    sortableSpots.find('img').css('display', '');
-
-                    // If we're dragging an option inside an answer, hide any other identical answers (i.e. we can't use same image in two different answers).
-                    if (!$(evt.to).hasClass('_image-container')) {
-                        var answer = $(evt.dragged).attr('data-option');
-                        sortableSpots.find('img[data-option=' + answer + ']').hide();
-                    }
-
-                    // Hide all other image options from inside the "to" element, e.g. when we're dragging over an existing image.
-                    $(evt.to).find('img').css('display', 'none');
-                    $(evt.dragged).css('display', '');
-                }
-            });
-        });
-
-        // Create "drop-zone" for each answer box.
-        sortableSpots.each(function () {
-            Sortable.create(this, {
-                group: groupName,
-                onAdd: function (evt) {
-                    // Remove all other hidden answers.
-                    sortableSpots.find('img:not(:visible)').remove();
-
-                    // Sync input tags.
-                    syncInputTags();
-                },
-            });
-        });
-
-        radioInputs.on('change', function () {
-            if (!$(this).is(':checked')) {
-                return;
-            }
-
-            var dataOption = $(this).attr('value');
-            var sortableSpot = $(this).closest('._answer-container').find('._sortable-spot');
-
-            // Remove duplicate answers.
-            sortableSpots.find('img[data-option=' + dataOption + ']').remove();
-
-            // Find image.
-            var image = optionImages.find('[data-option=' + dataOption + ']');
-
-            // Remove any previous image.
-            sortableSpot.find('img').remove();
-            sortableSpot.append(image.clone());
-
-            // Sync input tags.
-            syncInputTags();
-        });
-
-        function syncInputTags() {
-            radioInputs.each(function () {
-                var sortableSpot = $(this).closest('._answer-container').find('._sortable-spot');
-                var dataOption = sortableSpot.find('img').attr('data-option');
-                $(this).prop('checked', dataOption === $(this).attr('value'));
-            });
-        }
-    });
-</script>

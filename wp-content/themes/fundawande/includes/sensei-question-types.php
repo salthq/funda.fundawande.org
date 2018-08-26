@@ -3,6 +3,8 @@
 namespace FundaWande;
 
 add_filter('sensei_question_types', __NAMESPACE__ . '\\SenseiQuestionTypes::sensei_question_types', 10, 1);
+add_filter('sensei_autogradable_question_types', __NAMESPACE__ . '\\SenseiQuestionTypes::sensei_autogradable_question_types', 10, 1);
+add_filter('sensei_grade_question_auto', __NAMESPACE__ . '\\SenseiQuestionTypes::sensei_grade_question_auto', 10, 4);
 add_filter('quiz_panel_question_field', __NAMESPACE__ . '\\SenseiQuestionTypes::quiz_panel_question_field', 10, 5);
 
 class SenseiQuestionTypes
@@ -14,6 +16,28 @@ class SenseiQuestionTypes
         $types['drag-and-drop-sequential'] = 'Drag-and-drop Sequential';
 
         return $types;
+    }
+
+    public static function sensei_autogradable_question_types($types)
+    {
+        $types[] = 'multiple-choice-with-images';
+        $types[] = 'drag-and-drop-non-sequential';
+        $types[] = 'drag-and-drop-sequential';
+
+        return $types;
+    }
+
+    public static function sensei_grade_question_auto($question_grade, $question_id, $question_type, $answer)
+    {
+        switch ($question_type) {
+            case 'drag-and-drop-non-sequential':
+                break;
+
+            case 'drag-and-drop-sequential':
+                break;
+        }
+
+        return $question_grade;
     }
 
     public static function quiz_panel_question_field($html, $that, $question_type, $question_id, $question_counter)
