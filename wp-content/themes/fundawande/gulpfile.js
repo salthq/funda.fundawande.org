@@ -338,12 +338,21 @@ gulp.task( 'customJS', function() {
         .pipe( gulp.dest( jsCustomDestination ) )
 });
 
+/**
+ * Task: `nodeModules`
+ */
+gulp.task( 'nodeModules', function() {
+    gulp.src( './node_modules/sortablejs/Sortable.min.js' )
+        .pipe( gulp.dest( jsCustomDestination ) )
+
+});
+
  /**
   * Watch Tasks.
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'adminJS', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
+ gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'adminJS', 'vendorsJs', 'customGlobalJS', 'customJS', 'nodeModules'], function () {
   gulp.watch( styleWatchFiles, [ 'adminStyles', 'customStyles' ] ); // Reload on SCSS file changes.
   gulp.watch( adminJSWatchFiles, [ 'adminJS', reload ] ); // Reload on vendorsJs file changes.
   gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.

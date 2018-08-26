@@ -323,4 +323,11 @@ class SenseiQuestionTypes
         else
             return $number . $ends[$number % 10];
     }
+
+    // Get a unique ID on subsequent calls.
+    public static function getUniqueId()
+    {
+        static $id = 0;
+        return 'unique_id_' . $id++;
+    }
 }

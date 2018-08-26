@@ -19,24 +19,21 @@ if (!defined('ABSPATH')) exit;
 $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_question_id(), get_the_ID());
 
 ?>
-NON SEQUENTIAL:
 <ul class="answers">
     <div class="container-fluid">
-        <div class="_test-text">
-            <p> Arrange the following in the correct order by  dragging them into the correct order:</p>
+        <div>
+            <p>Match the following pages with the correct option given below:</p>
         </div>
 
-        <div class="row _top-row-image">
+        <div class="row _option-images">
             <?php
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $parts = explode('-', $option['answer']);
-
                 $count++;
-
                 ?>
 
-                <div class="col-sm-3 _top-column-images">
+                <div class="col-sm-3 _option-image">
                     <div class="_image-letters">
                         Image <?= chr(ord('A') + $count - 1) ?>
                     </div>
@@ -56,7 +53,13 @@ NON SEQUENTIAL:
                     </li>
 
                 </div>
-            <?php } // End For Loop ?>
+                <?php
+            }
+            ?>
+        </div>
+
+        <div class="_top-mobile-title">
+            <p>Which image best relates to the following</p>
         </div>
 
         <div class="row _images-answers">
@@ -84,8 +87,6 @@ NON SEQUENTIAL:
                     </li>
 
                     <div class="_mobile-images-answers">
-                        <div>Which image goes <?= \FundaWande\SenseiQuestionTypes::ordinal($count) ?></div>
-
                         <?php
                         $count2 = 0;
                         foreach ($question_data['answer_options'] as $id2 => $option2) {

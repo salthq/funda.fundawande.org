@@ -11,33 +11,39 @@
 --------------------------------------------------------------*/
 
 // Backgrounds
-.background-white {  background-color: $white; }
-
+.background-white {
+    background-color: $white;
+}
 
 .special-1:before {
-  display: none;
-  content: "\f001";
-  font-family: "Font Awesome 5 Light";
-  color: orange;
+    display: none;
+    content: "\f001";
+    font-family: "Font Awesome 5 Light";
+    color: orange;
 }
 
 .special-1 {
-  svg {
-    color: blue;
-  }
+    svg {
+        color: blue;
+    }
 }
 
 .red {
-  color: red;
+    color: red;
 }
+
+// Sensei Questions
 .single-quiz {
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 .drag-and-drop-sequential {
+    ._text-mobile {
+        display: none;
+    }
 
     ._top-mobile-title {
         display: none;
@@ -46,11 +52,24 @@
     ._answer-container {
         padding: 0 30px;
 
-        ._box-image-container{
+        ._box-image-container {
             height: 300px;
             border: 1px solid #ccc;
         }
         ._image-container {
+            position: relative;
+
+            ._sortable-spot {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             svg {
                 font-size: 30px;
             }
@@ -73,7 +92,15 @@
     }
 
     @media (max-width: 768px) {
-        ._top-column-images {
+        ._text-desktop {
+            display: none;
+        }
+
+        ._text-mobile {
+            display: block;
+        }
+
+        ._option-image {
             display: flex;
             flex-direction: column;
             align-items: center
@@ -104,7 +131,6 @@
         }
     }
 
-
     @media (max-width: 425px) {
         ._arrow-down {
             bottom: -48px !important;
@@ -112,7 +138,7 @@
     }
 
     @media (max-width: 400px) {
-       ._box-image-container ._arrow-down {
+        ._box-image-container ._arrow-down {
             bottom: -34px !important;
         }
     }
@@ -124,7 +150,7 @@ li.drag-and-drop-non-sequential,
         text-align: center;
     }
 
-    ._top-column-images {
+    ._option-image {
         ._image-letters {
             display: none;
         }
@@ -138,7 +164,7 @@ li.drag-and-drop-non-sequential,
         }
     }
 
-    ._top-row-image {
+    ._option-images {
         border-bottom: 1px solid #ccc;
         margin-bottom: 30px;
         padding-bottom: 20px;
@@ -149,7 +175,7 @@ li.drag-and-drop-non-sequential,
     }
 
     @media (max-width: 768px) {
-        ._top-column-images {
+        ._option-image {
             ._image-letters {
                 display: block !important;
             }
@@ -192,7 +218,7 @@ li.drag-and-drop-non-sequential,
     }
 
     @media (max-width: 575px) {
-        ._top-column-images {
+        ._option-image {
             width: 50%;
 
             &:nth-child(1),
