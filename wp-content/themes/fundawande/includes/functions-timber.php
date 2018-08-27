@@ -30,6 +30,7 @@ class StarterSite extends TimberSite {
 
 
     function add_to_context( $context ) {
+        $context['user_logged_in'] = is_user_logged_in();
         $context['foo'] = 'bar';
         $context['stuff'] = 'I am a value set in your functions.php file';
         $context['notes'] = 'These values are available everytime you call Timber::get_context();';
