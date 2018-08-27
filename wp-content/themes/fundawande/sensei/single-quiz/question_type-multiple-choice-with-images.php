@@ -39,11 +39,7 @@ foreach( $question_data[ 'answer_options' ] as $id => $option ) {
             />
 
         <label for="<?php echo esc_attr( 'question_' . $question_data['ID'] ) . '-option-' . $count; ?>">
-
-            <?php echo apply_filters( 'sensei_answer_text', $option['answer'] ); ?>
-
-            RALUCA IMAGINE
-
+            <?php echo wp_get_attachment_image($option['answer'], array('390', '300'), "", array("class" => "img-responsive")); ?>
         </label>
 
     </li>

@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
             // Set image ID.
             var input = answerElement.find('input');
             var dataPart = button.attr('data-part');
-            if (typeof dataPart === 'undefined') {
+            if (typeof dataPart === 'undefined' || dataPart === '') {
                 // Save ID directly.
                 input.val(attachment.id);
             }

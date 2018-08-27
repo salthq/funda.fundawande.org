@@ -982,7 +982,7 @@ class Sensei_Lesson {
 								$html .= '</div>';
 
 								// Random order
-								if( $question_type == 'multiple-choice' ) {
+								if( $question_type == 'multiple-choice' || $question_type == 'multiple-choice-with-images' ) {
 									$html .= '<div>';
 										$html .= '<label for="' . esc_attr( $question_counter ) . '_random_order"><input type="checkbox" name="random_order" class="random_order" id="' . esc_attr( $question_counter ) . '_random_order" value="yes" ' . checked( $random_order, 'yes', false ) . ' /> ' . esc_html__( 'Randomise answer order', 'woothemes-sensei' ) . '</label>';
 									$html .= '</div>';

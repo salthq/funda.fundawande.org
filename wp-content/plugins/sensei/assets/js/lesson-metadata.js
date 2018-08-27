@@ -705,6 +705,7 @@ jQuery(document).ready( function() {
 		// BEGIN CUSTOM CODE
 		case 'multiple-choice-with-images':
 			jQuery( '#add-new-question' ).find( 'div.question_multiple_choice_with_images_fields' ).show();
+			jQuery( '.add_question_random_order' ).show();
 			break;
 		case 'drag-and-drop-sequential':
 			jQuery( '#add-new-question' ).find( 'div.question_drag_and_drop_sequential_fields' ).show();

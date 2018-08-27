@@ -31,9 +31,69 @@ class SenseiQuestionTypes
     {
         switch ($question_type) {
             case 'drag-and-drop-non-sequential':
+                // Get right answers.
+                $right_answer = (array)get_post_meta($question_id, '_question_right_answer', true);
+
+                // Get user's answers, strip slashes, and then decode as an array.
+                try {
+                    $answer = json_decode(stripslashes($answer), true);
+                } catch (\Exception $e) {
+                    $answer = '';
+                }
+
+                // Check each answer.
+                if (!is_array($answer) || count($answer) !== count($right_answer)) {
+                    $correct = false;
+                } else {
+                    $correct = true;
+                    foreach ($right_answer as $index => $parts) {
+                        $parts = explode('-', $parts);
+                        $hash0 = self::getImageHash($parts[0]);
+                        $hash1 = self::getImageHash($parts[1]);
+
+                        if (!array_key_exists($hash1, $answer) || $hash0 !== $answer[$hash1]) {
+                            $correct = false;
+                            break;
+                        }
+                    }
+                }
+
+                // Apply grade.
+                if ($correct) {
+                    $question_grade = Sensei()->question->get_question_grade($question_id);
+                }
                 break;
 
             case 'drag-and-drop-sequential':
+                // Get right answers.
+                $right_answer = (array)get_post_meta($question_id, '_question_right_answer', true);
+
+                // Get user's answers, strip slashes, and then decode as an array.
+                try {
+                    $answer = json_decode(stripslashes($answer), true);
+                } catch (\Exception $e) {
+                    $answer = '';
+                }
+
+                // Check each answer.
+                if (!is_array($answer) || count($answer) !== count($right_answer)) {
+                    $correct = false;
+                } else {
+                    $correct = true;
+                    foreach ($right_answer as $index => $imageId) {
+                        $hash = self::getImageHash($imageId);
+
+                        if ($hash !== $answer[$index]) {
+                            $correct = false;
+                            break;
+                        }
+                    }
+                }
+
+                // Apply grade.
+                if ($correct) {
+                    $question_grade = Sensei()->question->get_question_grade($question_id);
+                }
                 break;
         }
 
@@ -353,5 +413,11 @@ class SenseiQuestionTypes
     {
         static $id = 0;
         return 'unique_id_' . $id++;
+    }
+
+    // Get a unique hash based on the image's URL. We use this to check if the user answered corectly or not.
+    public static function getImageHash($imageId)
+    {
+        return md5(wp_get_attachment_url($imageId));
     }
 }

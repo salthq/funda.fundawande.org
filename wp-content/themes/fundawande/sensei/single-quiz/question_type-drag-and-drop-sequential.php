@@ -17,6 +17,7 @@ if (!defined('ABSPATH')) exit;
  * All data is loaded in this array to keep the template clean.
  */
 $question_data = WooThemes_Sensei_Question::get_template_data(sensei_get_the_question_id(), get_the_ID());
+shuffle($question_data['answer_options']);
 
 // Get user answers.
 try {
@@ -48,7 +49,9 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             <?php
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
-                $parts = explode('-', $option['answer']);
+                $imageId = $option['answer'];
+                $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($imageId);
+
                 ?>
 
                 <div class="col-sm-3 _option-image">
@@ -57,7 +60,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                     </div>
 
                     <div class="_image-container <?php echo esc_attr($option['option_class']); ?>">
-                        <?php echo wp_get_attachment_image($parts[0], ['390', '300'], '', ['class' => 'img-responsive', 'data-option' => $count]); ?>
+                        <?php echo wp_get_attachment_image($imageId, ['390', '300'], '', ['class' => 'img-responsive', 'data-option' => $imageHash]); ?>
                     </div>
                 </div>
 
@@ -94,14 +97,16 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                         <?php
                         $count2 = 0;
                         foreach ($question_data['answer_options'] as $id2 => $option2) {
-                            $checked = array_key_exists($count, $userAnswers) ? (int)$userAnswers[$count] === $count2 : false;
+                            $imageId = $option2['answer'];
+                            $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($imageId);
+                            $checked = array_key_exists($count, $userAnswers) ? $userAnswers[$count] === $imageHash : false;
                             ?>
                             <div>
                                 <label>
                                     <input type="radio" <?= $checked ? 'checked' : '' ?>
                                            data-index="<?= $count ?>"
                                            name="<?= 'question_' . $question_data['ID'] . '-option-' . $count ?>"
-                                           value="<?= $count2 ?>">
+                                           value="<?= $imageHash ?>">
                                     Image <?= chr(ord('A') + $count2) ?>
                                 </label>
                             </div>

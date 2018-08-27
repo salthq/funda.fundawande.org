@@ -931,6 +931,7 @@ class Sensei_Question {
 
         if (in_array(Sensei()->question->get_question_type($question_id), [
             'multiple-choice',
+            'multiple-choice-with-images',
             'drag-and-drop-sequential',
             'drag-and-drop-non-sequential'
         ])) {
