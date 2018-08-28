@@ -1,6 +1,6 @@
 <?php
 /**
- * Single module page to show the children modules (sub-modules)
+ * Single module page to show the children modules (units)
  *
  * @package Pango
  */
@@ -19,10 +19,11 @@ if (class_exists('Timber')) {
     $context['term'] = $term;
 
     // Get the term data
-    $context['term']->meta = get_term_meta( $term->ID);
+    $context['term'] = get_term_children( $term->ID, 'module' );
 
-    // Get the module children paths
-    $context['term_children'] = get_term_children( $term->ID, 'module' );
+    // Get the modules units to visualise on the module page
+    // TODO: Remove the 9 and replace with the actual course ID, possibly saved in the user as their current course.
+    $context['units'] = FundaWande()->modules->get_module_units($term->ID,9);
 
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);

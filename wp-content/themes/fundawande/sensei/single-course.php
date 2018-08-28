@@ -1,13 +1,11 @@
 <?php
 /**
- * The Template for displaying all single courses.
+ * The Template for displaying all single courses pages to show the modules
  *
- * Override this template by copying it to yourtheme/sensei/single-course.php
  *
- * @author 		Automattic
- * @package 	Sensei
- * @category    Templates
- * @version     1.9.0
+ * @author 		Pango
+ * @package 	FundaWande
+ * @version     1.0.0
  */
 
 // if user is not logged in direct to login page

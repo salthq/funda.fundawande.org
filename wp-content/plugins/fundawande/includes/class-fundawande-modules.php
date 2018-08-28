@@ -55,4 +55,34 @@ class FundaWande_Modules {
 
     } // end get_course_modules
 
+    /**
+     * Get module units and their lessons based on the parent module ID
+     *
+     * @param integer $module_id. The module ID to fetch the units for
+     *
+     * @return object $module_units
+     *
+     */
+    public function get_module_units($module_id,$course_id) {
+
+        // Get the module children units
+        $module_units = get_term_children( $module_id, 'module' );
+
+        foreach($module_units  as $key => $unit) {
+
+            $module_units[$key] = new TimberTerm($unit);
+
+            // Get the term data in case there are custom fields
+            $module_units[$key]->meta = get_term_meta($unit);
+
+            // Get the unit lessons for display within the module
+            $module_units[$key]->lessons = Sensei()->modules->get_lessons($course_id, $unit);
+
+
+        }
+
+        return $module_units;
+
+    } // end get_course_modules
+
 } // end FundaWande_Modules
