@@ -27,6 +27,9 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
+    // Get the course modules to visualise on the course page
+    $context['modules'] = FundaWande()->modules->get_course_modules($post->ID);
+
 
     Timber::render(array('lms/single-course.twig', 'page.twig'), $context);
 }
