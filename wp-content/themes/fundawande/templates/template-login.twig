@@ -35,7 +35,10 @@
                         </div>
                         <div class = "login-form text-center">
                             {% do action('show_login_form') %}
-                            {% do action('check_for_failed_login') %}
+                            {% if error_message %}
+                                <div class="alert alert-danger my-3" role="alert"> {{ post.get_field(lang.prefix~error_message) }}</div>
+                            {% endif %}
+                            {# do action('check_for_failed_login') #}
                         </div>
                     </div>
                     <!-- Desktop sidebar -->

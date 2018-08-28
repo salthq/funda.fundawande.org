@@ -28,8 +28,6 @@ class FundaWande_Login {
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
         //Check for blank fields and add 'login=blank-field' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
-        //Check for failed login and output alert div
-        add_action ('show_login_form', array($this, 'check_for_failed_login'));
     }
     //Set up login form options
     public function setup_login_form() {
@@ -118,9 +116,18 @@ class FundaWande_Login {
 
         if (!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error)
         {
-            if (!strstr($referrer, '?login=blank-field') )
+            if (!strstr($referrer, '?login=blank') )
             {
-                wp_redirect( $referrer . '?login=blank-field' );
+                if(!strstr($referrer, '?'))
+                {
+                    $referrer .= '?';
+                }
+                else
+                {
+                    $referrer .= '&';
+                }
+
+                wp_redirect( $referrer . 'login=blank' );
             }
             else
             {
@@ -130,20 +137,5 @@ class FundaWande_Login {
             exit;
         }
     } // end custom_login_blank_field();
-
-    /**
-     * Echo alert div if login has failed
-     *
-     * @author jtame
-     */
-    public function check_for_failed_login() {
-        if( isset( $_GET['login'] )  && $_GET['login'] == 'failed' )
-        {
-            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">" . get_field('eng_incorrect_credentials') . "</div>";
-        }
-        elseif( isset( $_GET['login'] )  && $_GET['login'] == 'blank-field') {
-            echo "<div class=\"alert alert-danger my-3\" role=\"alert\">" . get_field('eng_blank_fields') . "</div>";
-        }
-    } // end check_for_failed_login();
 
 } // end FundaWande_Login
