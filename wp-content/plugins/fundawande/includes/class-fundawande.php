@@ -145,6 +145,9 @@ class FundaWande_Main {
         // $this->post_types = new FundaWande_PostTypes();
 
         //Setup login functionality class
+        $this->language = new FundaWande_Language();
+
+        //Setup login functionality class
         $this->login = new FundaWande_Login();
 
         // Setup quiz functionality class
