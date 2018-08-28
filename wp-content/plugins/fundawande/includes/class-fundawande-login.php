@@ -61,9 +61,15 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_failed ($user) {
-        //Remove all GET variables from the URL, so they don't get chained upon repeated unsuccessful logins
-        $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-
+        //If the login language is set to english, add it to the URL after stripping out other GET variables
+        if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+            $referrer .= '?login-lang=eng';
+        }
+        else {
+            //No need to check for Xhosa, as that is the default language
+            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+        }
         if (!empty($referrer) && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin') && $user!=null )
         {
             if (!strstr($referrer, '?login=failed'))
@@ -94,8 +100,15 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_blank_field( ) {
-        //Remove all GET variables from the URL, so they don't get chained upon repeated unsuccessful logins
-        $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+        //If the login language is set to english, add it to the URL after stripping out other GET variables
+        if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+            $referrer .= '?login-lang=eng';
+        }
+        else {
+            //No need to check for Xhosa, as that is the default language
+            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+        }
 
         $error = false;
         if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
