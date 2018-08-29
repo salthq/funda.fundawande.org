@@ -1,0 +1,22 @@
+.card {
+    &-enabled {
+       background-color: #202632; 
+    }
+    &-disabled {
+      background-color: #c3cccf;
+      a {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+    
+    
+    
+    p {
+      color: #fff; 
+      margin-bottom: 0;
+    }
+    margin: 20px;
+    padding: 20px 0;
+    text-align: center;
+  }
