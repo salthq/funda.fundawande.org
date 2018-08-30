@@ -30,11 +30,18 @@ class StarterSite extends TimberSite {
 
 
     function add_to_context( $context ) {
-        $context['foo'] = 'bar';
-        $context['stuff'] = 'I am a value set in your functions.php file';
-        $context['notes'] = 'These values are available everytime you call Timber::get_context();';
+
+        $context['current_user'] = new Timber\User();
         $context['menu'] = new TimberMenu();
         $context['site'] = $this;
+        // Set up language context to determine page language
+        if ( isset($context['current_user']->language_preference)) {
+            $context['lang'] = FundaWande()->language->get_language($context['current_user']->language_preference);
+        }
+        else {
+            $context['lang'] = FundaWande()->language->get_language(null);
+        }
+
         return $context;
     }
 

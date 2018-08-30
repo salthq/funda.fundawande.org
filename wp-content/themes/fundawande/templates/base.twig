@@ -6,6 +6,13 @@
     {% block head_content %}
 		<title>{{ post.title }} | {{ site.name }}</title>
         {{ function('wp_head') }}
+		<!--TODO: these buttons need to be removed when the navbar branch is merged with master-->
+		<form class = "d-inline" method="GET">
+			<button class = "btn btn-primary m-3" type = "submit" name = "lang" value = "eng">Change Language</button>
+		</form>
+		<form class = "d-inline" method="GET">
+			<button class = "btn btn-primary m-3" type = "submit" name = "lang" value = "xho">Tshintsha ulwimi</button>
+		</form>
     {% endblock %}
 {% endembed %}
 
