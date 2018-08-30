@@ -2,3 +2,46 @@
 .special-1:before{display:none;content:"\f001";font-family:"Font Awesome 5 Light";color:orange}
 .special-1 svg{color:blue}
 .red{color:red}
+.single-quiz img{max-width:100%;height:auto}
+.drag-and-drop-sequential ._top-mobile-title{display:none}
+.drag-and-drop-sequential ._answer-container ._box-image-container{width:100%;height:300px;border:1px solid #ccc}
+.drag-and-drop-sequential ._answer-container ._image-container ._sortable-spot{width:100%;height:100%;left:0;top:0}
+.drag-and-drop-sequential ._answer-container ._image-container svg{font-size:30px}
+.drag-and-drop-sequential ._answer-container ._image-container ._arrow-down svg{display:none}
+.drag-and-drop-sequential ._answer-container ._image-container ._arrow-right{position:absolute;top:50%;left:-29px;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
+.drag-and-drop-sequential ._answer-container:first-child svg{display:none}
+@media(max-width:768px){.drag-and-drop-sequential ._option-image{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.drag-and-drop-sequential ._top-mobile-title{display:block}
+.drag-and-drop-sequential ._arrow-right svg{display:none}
+.drag-and-drop-sequential ._box-image-container{width:50%;margin-right:20px !important}
+.drag-and-drop-sequential ._arrow-down{position:absolute;left:50%;bottom:-50px;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}
+.drag-and-drop-sequential ._arrow-down svg{display:block !important}
+}@media(max-width:425px){.drag-and-drop-sequential ._arrow-down{bottom:-48px !important}
+}@media(max-width:400px){.drag-and-drop-sequential ._box-image-container ._arrow-down{bottom:-34px !important}
+}.drag-and-drop-non-sequential ._answer-container ._image-container ._sortable-spot{width:50%;height:50%;right:0;bottom:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;border-left:1px solid white;border-top:1px solid white;background:rgba(255,255,255,0.333);overflow:hidden}
+.drag-and-drop-non-sequential ._answer-container ._image-container ._sortable-spot img{width:auto;height:auto}
+.drag-and-drop-non-sequential ._text-mobile,.drag-and-drop-sequential ._text-mobile{display:none}
+.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}
+.drag-and-drop-non-sequential ._image-container,.drag-and-drop-sequential ._image-container{position:relative;text-align:center}
+.drag-and-drop-non-sequential ._image-container ._sortable-spot,.drag-and-drop-sequential ._image-container ._sortable-spot{position:absolute;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.drag-and-drop-non-sequential ._option-image ._image-letters,.drag-and-drop-sequential ._option-image ._image-letters{display:none}
+.drag-and-drop-non-sequential .answers,.drag-and-drop-sequential .answers{padding:0}
+.drag-and-drop-non-sequential .answers input[type="checkbox"],.drag-and-drop-sequential .answers input[type="checkbox"]{display:none}
+.drag-and-drop-non-sequential ._option-images,.drag-and-drop-sequential ._option-images{border-bottom:1px solid #ccc;margin-bottom:30px;padding-bottom:20px}
+.drag-and-drop-non-sequential ._mobile-images-answers,.drag-and-drop-sequential ._mobile-images-answers{display:none}
+@media(max-width:768px){.drag-and-drop-non-sequential ._text-desktop,.drag-and-drop-sequential ._text-desktop{display:none}
+.drag-and-drop-non-sequential ._text-mobile,.drag-and-drop-sequential ._text-mobile{display:block}
+.drag-and-drop-non-sequential ._option-image ._image-letters,.drag-and-drop-sequential ._option-image ._image-letters{display:block !important}
+.drag-and-drop-non-sequential ._mobile-images-answers,.drag-and-drop-sequential ._mobile-images-answers{display:block !important}
+.drag-and-drop-non-sequential ._images-answers,.drag-and-drop-sequential ._images-answers{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.drag-and-drop-non-sequential ._images-answers ._answer-container,.drag-and-drop-sequential ._images-answers ._answer-container{padding-bottom:60px;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;max-width:100%}
+.drag-and-drop-non-sequential ._images-answers ._answer-container:last-child ._arrow-down,.drag-and-drop-sequential ._images-answers ._answer-container:last-child ._arrow-down{display:none !important}
+.drag-and-drop-non-sequential ._images-answers ._answer-container img,.drag-and-drop-sequential ._images-answers ._answer-container img{padding-right:10px}
+.drag-and-drop-non-sequential .container-fluid,.drag-and-drop-sequential .container-fluid{padding-left:0}
+}@media(max-width:575px){.drag-and-drop-non-sequential ._option-image,.drag-and-drop-sequential ._option-image{width:50%}
+.drag-and-drop-non-sequential ._option-image:nth-child(1),.drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(1),.drag-and-drop-sequential ._option-image:nth-child(3){border-right:1px solid #ccc}
+.drag-and-drop-non-sequential ._option-image:nth-child(1),.drag-and-drop-non-sequential ._option-image:nth-child(2),.drag-and-drop-sequential ._option-image:nth-child(1),.drag-and-drop-sequential ._option-image:nth-child(2){border-bottom:1px solid #ccc;padding-bottom:5px}
+.drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-non-sequential ._option-image:nth-child(4),.drag-and-drop-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(4){padding-top:10px}
+}@media(max-width:400px){.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{padding-bottom:30px !important}
+}@media(max-width:768px){.single-quiz-wrapper .quiz-questions #sensei-quiz-list .answers{padding:0 !important}
+}

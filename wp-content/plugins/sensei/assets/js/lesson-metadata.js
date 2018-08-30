@@ -81,6 +81,13 @@ jQuery(document).ready( function() {
 	 */
 	jQuery.fn.resetAddQuestionForm = function() {
 		jQuery( '#add-new-question' ).find('div').find('input').each( function() {
+			// BEGIN CUSTOM CODE
+			// Skip inputs from the WP Editor.
+			if ($(this).closest('.wp-editor-wrap').length > 0) {
+				return;
+			}
+			// END CUSTOM CODE
+
 			if ( jQuery( this ).attr( 'type' ) != 'radio' ) {
 				jQuery(this).attr( 'value', '' );
 			} // End If Statement
@@ -667,6 +674,11 @@ jQuery(document).ready( function() {
 		jQuery( '#add-new-question' ).find( 'div.question_multiline_fields' ).hide();
 		jQuery( '#add-new-question' ).find( 'div.question_singleline_fields' ).hide();
 		jQuery( '#add-new-question' ).find( 'div.question_fileupload_fields' ).hide();
+		// BEGIN CUSTOM CODE
+		jQuery( '#add-new-question' ).find( 'div.question_multiple_choice_with_images_fields' ).hide();
+		jQuery( '#add-new-question' ).find( 'div.question_drag_and_drop_sequential_fields' ).hide();
+		jQuery( '#add-new-question' ).find( 'div.question_drag_and_drop_non_sequential_fields' ).hide();
+		// END CUSTOM CODE
 
 		jQuery( '.add_question_random_order' ).hide();
 
@@ -690,6 +702,18 @@ jQuery(document).ready( function() {
 		case 'file-upload':
 			jQuery( '#add-new-question' ).find( 'div.question_fileupload_fields' ).show();
 			break;
+		// BEGIN CUSTOM CODE
+		case 'multiple-choice-with-images':
+			jQuery( '#add-new-question' ).find( 'div.question_multiple_choice_with_images_fields' ).show();
+			jQuery( '.add_question_random_order' ).show();
+			break;
+		case 'drag-and-drop-sequential':
+			jQuery( '#add-new-question' ).find( 'div.question_drag_and_drop_sequential_fields' ).show();
+			break;
+		case 'drag-and-drop-non-sequential':
+			jQuery( '#add-new-question' ).find( 'div.question_drag_and_drop_non_sequential_fields' ).show();
+			break;
+		// END CUSTOM CODE
 		} // End Switch Statement
 	});
 
@@ -768,6 +792,17 @@ jQuery(document).ready( function() {
 			case 'file-upload':
 				divFieldsClass = 'question_fileupload_fields';
 				break;
+			// BEGIN CUSTOM CODE
+			case 'multiple-choice-with-images':
+				divFieldsClass = 'question_multiple_choice_with_images_fields';
+				break;
+			case 'drag-and-drop-sequential':
+				divFieldsClass = 'question_drag_and_drop_sequential_fields';
+				break;
+			case 'drag-and-drop-non-sequential':
+				divFieldsClass = 'question_drag_and_drop_non_sequential_fields';
+				break;
+			// END CUSTOM CODE
 			} // End Switch Statement
 
 			// Handle Required Fields
@@ -818,6 +853,12 @@ jQuery(document).ready( function() {
 			dataToPost += '&' + 'question_media' + '=' + question_media;
 
 			if ( '' != jQuery( 'div#add-new-question' ).find( 'div.' + divFieldsClass ).find( '.answer_feedback' ).exists() ) {
+				// BEGIN CUSTOM CODE
+				if (tinyMCE) {
+					tinyMCE.triggerSave();
+				}
+				// END CUSTOM CODE
+
 				var answer_feedback = jQuery( '#add-new-question' ).find( 'div.' + divFieldsClass ).find( '.answer_feedback' ).attr( 'value' );
 				dataToPost += '&' + 'answer_feedback' + '=' + encodeURIComponent( answer_feedback );
 			}
@@ -974,6 +1015,17 @@ jQuery(document).ready( function() {
 			case 'file-upload':
 				divFieldsClass = 'question_fileupload_fields';
 				break;
+			// BEGIN CUSTOM CODE
+			case 'multiple-choice-with-images':
+				divFieldsClass = 'question_multiple_choice_with_images_fields';
+				break;
+			case 'drag-and-drop-sequential':
+				divFieldsClass = 'question_drag_and_drop_sequential_fields';
+				break;
+			case 'drag-and-drop-non-sequential':
+				divFieldsClass = 'question_drag_and_drop_non_sequential_fields';
+				break;
+			// END CUSTOM CODE
 			} // End Switch Statement
 			// Handle Required Fields
 			jQuery( this ).closest('td').find( 'div.question_required_fields' ).find( 'input' ).each( function() {
@@ -1025,6 +1077,12 @@ jQuery(document).ready( function() {
 			dataToPost += '&' + 'question_media' + '=' + question_media;
 
 			if ( '' != jQuery( this ).closest('td').find( '.answer_feedback' ).exists() ) {
+				// BEGIN CUSTOM CODE
+				if (tinyMCE) {
+					tinyMCE.triggerSave();
+				}
+				// END CUSTOM CODE
+
 				var answer_feedback = jQuery( this ).closest('td').find( '.answer_feedback' ).attr( 'value' );
 				dataToPost += '&' + 'answer_feedback' + '=' + encodeURIComponent( answer_feedback );
 			}

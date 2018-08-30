@@ -1,0 +1,113 @@
+.question_multiple_choice_with_images_fields,
+.question_drag_and_drop_non_sequential_fields,
+.question_drag_and_drop_sequential_fields {
+    float: right;
+    width: 60%;
+}
+
+.question-upload-image-button {
+    &:before {
+        content: "\f128";
+        font-family: dashicons;
+        margin: 0 5px 3px 0;
+        vertical-align: middle;
+        font-size: 18px;
+        display: inline-block;
+    }
+}
+
+.question_drag_and_drop_sequential_fields,
+.question_drag_and_drop_non_sequential_fields,
+.question_multiple_choice_with_images_fields {
+    .answer {
+        position: relative;
+
+        input.question_answer {
+            display: none;
+        }
+
+        .remove_answer_option {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .remove_answer_option {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        img {
+            padding: 10px 8px;
+        }
+
+        .question-upload-image-button {
+            display: block;
+        }
+    }
+
+
+
+}
+
+.question_drag_and_drop_sequential_fields,
+.question_drag_and_drop_non_sequential_fields {
+    .answer {
+        border-bottom: 1px solid #ccc;
+        display: inline-block !important;
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 7px !important;
+    }
+
+    .add_answer_options {
+        text-align: right;
+        margin-top: 10px;
+    }
+}
+
+.question_drag_and_drop_non_sequential_fields {
+    .answer {
+        div {
+            width: 50%;
+            text-align: center;
+        }
+
+        ._float-right {
+            float: right;
+        }
+
+        ._float-left {
+            float: left;
+            display: inline-block;
+        }
+    }
+
+    .question-upload-image-button {
+        margin: 0 auto;
+    }
+}
+
+.question_multiple_choice_with_images_fields {
+    .answer {
+        display: flex !important;
+        padding-bottom: 10px;
+        align-items: center;
+
+        ._float-right {
+            float: right;
+        }
+
+        ._float-left {
+            float: left;
+            display: inline-block;
+        }
+    }
+
+    .add_answer_options {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+    }
+}
