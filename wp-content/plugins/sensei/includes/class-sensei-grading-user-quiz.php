@@ -118,7 +118,7 @@ class Sensei_Grading_User_Quiz {
 
 					// Compute right answers.
 					$right_answer = array_map(function ($image_id) {
-						return '<div>' . wp_get_attachment_image($image_id) . '</div>';
+						return '<span>' . wp_get_attachment_image($image_id) . '</span>';
 					}, $right_answer);
 				break;
 				case 'drag-and-drop-non-sequential':
@@ -140,13 +140,13 @@ class Sensei_Grading_User_Quiz {
 						$user_answer_content = [];
 					}
 					$user_answer_content = array_map(function ($hash0, $hash1) use ($image_hashes_to_ids) {
-						return '<div><span>' . wp_get_attachment_image($image_hashes_to_ids[$hash0]) . '</span> --- <span>' . wp_get_attachment_image($image_hashes_to_ids[$hash1]) . '</span></div>';
+						return '<div class="_arrow-container"><span>' . wp_get_attachment_image($image_hashes_to_ids[$hash0]) . '</span> <span class="dashicons dashicons-arrow-right-alt"></span> <span>' . wp_get_attachment_image($image_hashes_to_ids[$hash1]) . '</span></div>';
 					}, $user_answer_content, array_keys($user_answer_content));
 
 					// Compute right answers.
 					$right_answer = array_map(function ($parts) {
 						$parts = explode('-', $parts);
-						return '<div><span>' . wp_get_attachment_image($parts[0]) . '</span> --- <span>' . wp_get_attachment_image($parts[1]) . '</span></div>';
+						return '<div class="_arrow-container"><span>' . wp_get_attachment_image($parts[0]) . '</span> <span class="dashicons dashicons-arrow-right-alt"></span> <span>' . wp_get_attachment_image($parts[1]) . '</span></div>';
 					}, $right_answer);
 				break;
 				case 'drag-and-drop-sequential':
