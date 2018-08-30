@@ -178,6 +178,7 @@ class FundaWande_Main {
         if ( is_admin() ) {
 
             // Set up admin specific classes
+            $this->admin = new FundaWande_Admin();
 
         } else {
 
