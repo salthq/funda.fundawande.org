@@ -29,7 +29,7 @@ if (!is_array($userAnswers)) {
 }
 
 // Ensqure that each question has its own unique ID.
-$uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
+$uniqueId = FundaWande()->question->getUniqueId();
 
 ?>
 <div class="answers" id="<?= $uniqueId ?>">
@@ -50,7 +50,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $imageId = $option['answer'];
-                $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($imageId);
+                $imageHash = FundaWande()->question->getImageHash($imageId);
 
                 ?>
 
@@ -92,13 +92,13 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                     </div>
 
                     <div class="_mobile-images-answers">
-                        <div>Which image goes <?= \FundaWande\SenseiQuestionTypes::ordinal($count + 1) ?>:</div>
+                        <div>Which image goes <?= FundaWande()->question->ordinal($count + 1) ?>:</div>
 
                         <?php
                         $count2 = 0;
                         foreach ($question_data['answer_options'] as $id2 => $option2) {
                             $imageId = $option2['answer'];
-                            $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($imageId);
+                            $imageHash = FundaWande()->question->getImageHash($imageId);
                             $checked = array_key_exists($count, $userAnswers) ? $userAnswers[$count] === $imageHash : false;
                             ?>
                             <div>
@@ -126,5 +126,5 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
 </div>
 
 <?php
-\FundaWande\SenseiDragAndDropJavaScript::echoJavascript($uniqueId);
+FundaWande()->question_dnd_js->echoJavascript($uniqueId);
 ?>

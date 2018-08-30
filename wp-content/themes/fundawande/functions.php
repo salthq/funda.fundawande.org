@@ -41,6 +41,3 @@ add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
  * Load Timber compatibility file.
  */
 require get_template_directory() . '/includes/functions-timber.php';
-
-require get_template_directory() . '/includes/sensei-drag-and-drop-javascript.php';
-require get_template_directory() . '/includes/sensei-question-types.php';

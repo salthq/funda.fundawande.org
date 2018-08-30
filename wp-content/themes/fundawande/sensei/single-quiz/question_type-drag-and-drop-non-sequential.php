@@ -29,7 +29,7 @@ if (!is_array($userAnswers)) {
 }
 
 // Ensqure that each question has its own unique ID.
-$uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
+$uniqueId = FundaWande()->question->getUniqueId();
 
 ?>
 <div class="answers" id="<?= $uniqueId ?>">
@@ -50,7 +50,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $parts = explode('-', $option['answer']);
-                $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($parts[0]);
+                $imageHash = FundaWande()->question->getImageHash($parts[0]);
                 ?>
 
                 <div class="col-sm-3 _option-image">
@@ -81,7 +81,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 $parts = explode('-', $option['answer']);
-                $imageHash = \FundaWande\SenseiQuestionTypes::getImageHash($parts[1]);
+                $imageHash = FundaWande()->question->getImageHash($parts[1]);
                 ?>
 
                 <div class="col-sm-3 _answer-container">
@@ -96,7 +96,7 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
                         $count2 = 0;
                         foreach ($question_data['answer_options'] as $id2 => $option2) {
                             $parts2 = explode('-', $option2['answer']);
-                            $imageHash2 = \FundaWande\SenseiQuestionTypes::getImageHash($parts2[0]);
+                            $imageHash2 = FundaWande()->question->getImageHash($parts2[0]);
                             $checked = array_key_exists($imageHash, $userAnswers) ? $userAnswers[$imageHash] === $imageHash2 : false;
                             ?>
                             <div>
@@ -124,6 +124,6 @@ $uniqueId = \FundaWande\SenseiQuestionTypes::getUniqueId();
 </div>
 
 <?php
-\FundaWande\SenseiDragAndDropJavaScript::echoJavascript($uniqueId);
+FundaWande()->question_dnd_js->echoJavascript($uniqueId);
 ?>
 
