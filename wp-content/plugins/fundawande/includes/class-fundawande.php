@@ -144,6 +144,12 @@ class FundaWande_Main {
         // Setup post types - COMMENTED OUT FOR NOW
         // $this->post_types = new FundaWande_PostTypes();
 
+        //Setup login functionality class
+        $this->language = new FundaWande_Language();
+
+        //Setup login functionality class
+        $this->login = new FundaWande_Login();
+
         // Setup quiz functionality class
         $this->quiz = new FundaWande_Quiz();
 
@@ -153,9 +159,19 @@ class FundaWande_Main {
         // Setup grading functionality class
         $this->grading = new FundaWande_Grading();
 
+        // Differentiate between administration and frontend logic.
+        if ( is_admin() ) {
 
-    }
+            // Set up admin specific classes
 
+        } else {
+
+            // Load Frontend Class
+            $this->frontend = new FundaWande_Frontend();
+
+
+        }
+	}
     /**
      * Initialize all FundaWande hooks
      *

@@ -30,6 +30,16 @@ class StarterSite extends TimberSite {
 
 
     function add_to_context( $context ) {
+        if (isset($_GET['login'])) {
+         if ( $_GET['login'] == 'failed') {
+             $context['error_message'] = "incorrect_credentials";
+         }
+         else if ( $_GET['login'] == 'blank') {
+             $context['error_message'] = "blank_field";
+         }
+        }
+        $context['user_logged_in'] = is_user_logged_in();
+        $context['log_out_link'] = wp_logout_url();
         $context['foo'] = 'bar';
         $context['stuff'] = 'I am a value set in your functions.php file';
         $context['notes'] = 'These values are available everytime you call Timber::get_context();';
