@@ -28,4 +28,3 @@ add_action( 'wp_enqueue_scripts', 'pango_scripts' );
  * Load Timber compatibility file.
  */
 require get_template_directory() . '/includes/functions-timber.php';
-

@@ -1,0 +1,53 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper login-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class="container-fluid login-page">
+            <div class="row ">
+                {% if user_logged_in %}
+                    <div class = "row">
+                        <div class = "col">
+                            <div class = "text-center">
+                                <h2>{{ post.get_field(lang.prefix~'logout_message') }}</h2>
+                                <a class = "btn btn-info" href = "{{ log_out_link }}">{{ post.get_field(lang.prefix~'logout_button') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Login Form -->
+                    <div class="col-sm-12 col-md-8 login py-3">
+                        <div class="text-center login-header">
+                            <img class="mx-auto img img-fluid" src="http://fundawande.org/wp-content/uploads/2017/09/cropped-cropped-logo-long-transparent-background.png">
+                            <h4 class = "mt-4">Change language/Tshintsha ulwimi</h4>
+                            <div class = "btn-group" role = "group" aria-label="Change Language buttons">
+                                <form  class = "d-inline" method="GET">
+                                    <button class = "btn btn-info" type = "submit" name = "login-lang" value ="eng">English</button>
+                                </form>
+                                <form  class = "d-inline" method="GET">
+                                    <button class = "btn btn-info" type = "submit" name = "login-lang" value ="xho">Xhosa</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class = "login-form text-center">
+                            {% do action('show_login_form') %}
+                            {% if error_message %}
+                                <div class="alert alert-danger my-3" role="alert"> {{ post.get_field(lang.prefix~error_message) }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Desktop sidebar -->
+                    <div class="col-sm-12 col-md-4 sidebar py-3">
+                        <div class="text-center sidebar-img"><img class="img img-fluid" src="http://fundawande.org/wp-content/uploads/2017/09/cropped-cropped-logo-long-transparent-background.png"></div>
+                        <h2 class="my-3 text-center">{{ post.get_field(lang.prefix~'sidebar_title') }}</h2>
+                        {{ post.get_field(lang.prefix~'sidebar_text') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}
