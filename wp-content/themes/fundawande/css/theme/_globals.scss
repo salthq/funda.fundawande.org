@@ -15,13 +15,13 @@
  * Backgrounds
  */
 
-.background-primary {  background-color: #FFFFFF; }
+.background-primary {  background-color: $white; }
 .background-primary-light { }
 
 .background-secondary {
 
-    //I grabbed this background colour off the module navigation page using the inkdropper. Change if necessary and delete comment.
-    background-color: #F5F5F5;
+    background-color: $grey-secondary;
+
 }
 
 .background-secondary-light {}
@@ -33,124 +33,68 @@
  * Typography
  */
 
-h1 {
-
-    font-family: $base-header__font-family;
-    font-size: 32px;
-    weight: normal;
-    line-height: 1.25; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
-    color: #4A4A4A;
-    opacity: 100%;
-}
-
-h2 {
-
-    font-family: $base-header__font-family;
-    font-size: 21px;
-    weight: 500;
-    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
-    color: #444444;
-    opacity: 100%;
-
-}
-
-h3 {
-
-    // This was not set in the mockups - copied h2 styles - if you change then delete this message
-    font-family: $base-header__font-family;
-    font-size: 21px;
-    weight: 500;
-    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
-    color: #444444;
-    opacity: 100%;
-
-}
-
-h4 {
-
-    // This was not set in the mockups - copied h2 styles - if you change then delete this message
-    font-family: $base-header__font-family;
-    font-size: 21px;
-    weight: 500;
-    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
-    color: #444444;
-    opacity: 100%;
-
-}
-
-h5 {
-
-    // This was not set in the mockups - copied h2 styles - if you change then delete this message
-    font-family: $base-header__font-family;
-    font-size: 21px;
-    weight: 500;
-    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
-    color: #444444;
-    opacity: 100%;
-
-}
-
-p {
+body {
 
     font-family: $base__font-family;
     font-size: 21px;
     weight: normal;
-    line-height: 30px;
-    color: #444444;
-    opacity: 100%;
-
-}
-
-
-ul {
-
-    // This was not set in the mockups - copied <p> styles - if you change then delete this message
-    font-family: $base__font-family;
-    font-size: 21px;
-    weight: normal;
-    line-height: 30px;
-    color: #444444;
+    line-height: 28px;
+    color: $text-primary__colour;
     opacity: 100%;
 
 
+    h1 {
 
-}
+        font-family: $base-header__font-family;
+        font-size: 32px;
+        weight: normal;
+        line-height: 1.25; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+        color: #4A4A4A;
+        opacity: 100%;
+    }
 
-li {
+    h2, h3, h4, h5  {
 
-    // This was not set in the mockups - copied <p> styles - if you change then delete this message
-    font-family: $base__font-family;
-    font-size: 21px;
-    weight: normal;
-    line-height: 30px;
-    color: #444444;
-    opacity: 100%;
-}
+        font-family: $base-header__font-family;
+        font-size: 21px;
+        weight: 500;
+        line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+        color: $text-primary__colour;
+        opacity: 100%;
+
+    }
+
+
+    p {
+
+    }
+
+
+    ul {
 
 
 
-/*
-* TODO: DELETE - keeping for reference to see if something doesn't work
-.special-1:before {
-    display: none;
-    content: "\f001";
-    font-family: "Font Awesome 5 Light";
-    color: orange;
-}
+    }
 
-.special-1 {
-    svg {
-        color: blue;
+    li {
+
+    }
+
+    hr {
+        //below styles taking
+        height: 2px;
+        color: #cccccc;
+        opacity: 0.5;
     }
 }
 
-.red {
-    color: red;
+    #page-wrapper {
+
+        //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
+        padding-top: $navbar-height;
+
+        @include breakpoint(phone) {
+            padding-top: $navbar-height-mobile;
+        }
+
 }
-
-
-.background-white {
-    background-color: $white;
-}
-
-*/
