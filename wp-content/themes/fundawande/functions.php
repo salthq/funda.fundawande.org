@@ -20,9 +20,6 @@ function pango_scripts() {
     wp_enqueue_style( 'theme-style',  get_template_directory_uri().'/css/theme-styles.min.css' ,array(),'1' );
     wp_enqueue_script( 'theme-script', get_template_directory_uri().'/js/theme-js.min.js' ,array('jquery'),'1',true);
 
-	// Include sortable.js
-    wp_enqueue_script( 'sortable-js-script', get_template_directory_uri().'/js/Sortable.min.js' ,array('jquery'),'1',true);
-
 }
 add_action( 'wp_enqueue_scripts', 'pango_scripts' );
 
@@ -31,7 +28,6 @@ add_action( 'wp_enqueue_scripts', 'pango_scripts' );
  */
 function pango_admin_scripts() {
     wp_enqueue_style( 'theme-admin-style',  get_template_directory_uri().'/css/admin-styles.min.css' ,array(),'1' );
-    wp_enqueue_script( 'theme-admin-script', get_template_directory_uri().'/js/admin-js.min.js' ,array('jquery'),'1',true);
 
 }
 add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
@@ -41,6 +37,3 @@ add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
  * Load Timber compatibility file.
  */
 require get_template_directory() . '/includes/functions-timber.php';
-
-require get_template_directory() . '/includes/sensei-drag-and-drop-javascript.php';
-require get_template_directory() . '/includes/sensei-question-types.php';

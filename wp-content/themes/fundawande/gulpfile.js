@@ -44,10 +44,6 @@ var styleCustomDestination        = './css/'; // Path to place the compiled CSS 
 var styleCustomMapDestination        = './'; // Path to place the compiled CSS file.
 // Default set to root folder.
 
-// JS Admin related.
-var jsAdminSRC             = './js/admin-js.js'; // Path to JS admin scripts folder.
-var jsAdminDestination     = './js/'; // Path to place the compiled JS admin scripts file.
-
 // JS Vendor related.
 var jsVendorSRC             = './js/vendors/*.js'; // Path to JS vendor folder.
 var jsVendorDestination     = './js/'; // Path to place the compiled JS vendors file.
@@ -64,7 +60,6 @@ var jsCustomFile            = 'theme-js'; // Compiled JS custom file name.
 
 // Watch files paths.
 var styleWatchFiles         = './css/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
-var adminJSWatchFiles       = './js/admin-js.js'; // Path to all vendor JS files.
 var vendorJSWatchFiles      = './js/vendor/*.js'; // Path to all vendor JS files.
 var customJSWatchFiles      = './js/theme/**/*.js'; // Path to all custom JS files.
 
@@ -253,19 +248,6 @@ gulp.task('customStyles', function () {
 });
 
 
-/**
- * Task: `adminJS`.
- */
-gulp.task( 'adminJS', function() {
-    gulp.src( jsAdminSRC )
-        .pipe( rename( {
-            suffix: '.min'
-        }))
-        .pipe( uglify() )
-        .pipe( gulp.dest( jsAdminDestination ) )
-});
-
-
  /**
   * Task: `vendorJS`.
   *
@@ -338,23 +320,13 @@ gulp.task( 'customJS', function() {
         .pipe( gulp.dest( jsCustomDestination ) )
 });
 
-/**
- * Task: `nodeModules`
- */
-gulp.task( 'nodeModules', function() {
-    gulp.src( './node_modules/sortablejs/Sortable.min.js' )
-        .pipe( gulp.dest( jsCustomDestination ) )
-
-});
-
  /**
   * Watch Tasks.
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'adminJS', 'vendorsJs', 'customGlobalJS', 'customJS', 'nodeModules'], function () {
+ gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
   gulp.watch( styleWatchFiles, [ 'adminStyles', 'customStyles' ] ); // Reload on SCSS file changes.
-  gulp.watch( adminJSWatchFiles, [ 'adminJS', reload ] ); // Reload on vendorsJs file changes.
   gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.
   gulp.watch( customJSWatchFiles, [ 'customGlobalJS','customJS', reload ] ); // Reload on customJS file changes.
  });

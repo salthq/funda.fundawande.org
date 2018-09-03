@@ -52,6 +52,26 @@ class FundaWande_Main {
 	 */
 	public $settings;
 
+    /**
+     * @var FundaWande_Quiz
+     */
+	public $quiz;
+
+    /**
+     * @var FundaWande_Question
+     */
+	public $question;
+
+    /**
+     * @var FundaWande_Question_Dnd_Js
+     */
+	public $question_dnd_js;
+
+    /**
+     * @var FundaWande_Grading
+     */
+	public $grading;
+
 	/**
 	 * Constructor method.
 	 *
@@ -96,7 +116,7 @@ class FundaWande_Main {
 	 * @since 1.0.0
 	 * @static
 	 * @see WC()
-	 * @return FundaWande Instance.
+	 * @return FundaWande_Main Instance.
 	 */
 	public static function instance( $args ) {
 
@@ -150,6 +170,7 @@ class FundaWande_Main {
 
         // Setup question functionality class
         $this->question = new FundaWande_Question();
+        $this->question_dnd_js = new FundaWande_Question_Dnd_Js();
 
         // Setup grading functionality class
         $this->grading = new FundaWande_Grading();
@@ -158,6 +179,7 @@ class FundaWande_Main {
         if ( is_admin() ) {
 
             // Set up admin specific classes
+            $this->admin = new FundaWande_Admin();
 
         } else {
 

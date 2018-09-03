@@ -106,6 +106,74 @@ class Sensei_Grading_User_Quiz {
 					$type_name = __( 'Multiple Choice', 'woothemes-sensei' );
 					$grade_type = 'auto-grade';
 				break;
+				// BEGIN CUSTOM CODE
+				case 'multiple-choice-with-images':
+					$type_name = __( 'Multiple Choice with Images', 'woothemes-sensei' );
+					$grade_type = 'auto-grade';
+
+					// Compute user answers.
+					$user_answer_content = array_map(function ($image_id) {
+						return '<div>' . wp_get_attachment_image($image_id) . '</div>';
+					}, $user_answer_content);
+
+					// Compute right answers.
+					$right_answer = array_map(function ($image_id) {
+						return '<span>' . wp_get_attachment_image($image_id) . '</span>';
+					}, $right_answer);
+				break;
+				case 'drag-and-drop-non-sequential':
+					$type_name = __( 'Drag and Drop Non-Sequential', 'woothemes-sensei' );
+					$grade_type = 'auto-grade';
+
+					// Compute user answers.
+					$image_hashes_to_ids = [];
+					foreach ($right_answer as $parts) {
+						$parts = explode('-', $parts);
+						$hash0 = FundaWande()->question->getImageHash($parts[0]);
+						$hash1 = FundaWande()->question->getImageHash($parts[1]);
+						$image_hashes_to_ids [$hash0] = $parts[0];
+						$image_hashes_to_ids [$hash1] = $parts[1];
+					}
+					try {
+						$user_answer_content = json_decode($user_answer_content, true);
+					} catch (Exception $e) {
+						$user_answer_content = [];
+					}
+					$user_answer_content = array_map(function ($hash0, $hash1) use ($image_hashes_to_ids) {
+						return '<div class="_arrow-container"><span>' . wp_get_attachment_image($image_hashes_to_ids[$hash0]) . '</span> <span class="dashicons dashicons-arrow-right-alt"></span> <span>' . wp_get_attachment_image($image_hashes_to_ids[$hash1]) . '</span></div>';
+					}, $user_answer_content, array_keys($user_answer_content));
+
+					// Compute right answers.
+					$right_answer = array_map(function ($parts) {
+						$parts = explode('-', $parts);
+						return '<div class="_arrow-container"><span>' . wp_get_attachment_image($parts[0]) . '</span> <span class="dashicons dashicons-arrow-right-alt"></span> <span>' . wp_get_attachment_image($parts[1]) . '</span></div>';
+					}, $right_answer);
+				break;
+				case 'drag-and-drop-sequential':
+					$type_name = __( 'Drag and Drop Sequential', 'woothemes-sensei' );
+					$grade_type = 'auto-grade';
+
+					// Compute user answers.
+					$image_hashes_to_ids = [];
+					foreach ($right_answer as $image_id) {
+						$hash = FundaWande()->question->getImageHash($image_id);
+						$image_hashes_to_ids [$hash] = $image_id;
+					}
+					try {
+						$user_answer_content = json_decode($user_answer_content, true);
+					} catch (Exception $e) {
+						$user_answer_content = [];
+					}
+					$user_answer_content = array_map(function ($image_hash) use ($image_hashes_to_ids) {
+						return '<span>' . wp_get_attachment_image($image_hashes_to_ids[$image_hash]) . '</span>';
+					}, $user_answer_content);
+
+					// Compute right answers.
+					$right_answer = array_map(function ($image_id) {
+						return '<span>' . wp_get_attachment_image($image_id) . '</span>';
+					}, $right_answer);
+				break;
+				// END CUSTOM CODE
 				case 'gap-fill':
 					$type_name = __( 'Gap Fill', 'woothemes-sensei' );
 

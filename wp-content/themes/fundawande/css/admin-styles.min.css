@@ -11,8 +11,12 @@
 .question_drag_and_drop_non_sequential_fields .answer div{width:50%;text-align:center}
 .question_drag_and_drop_non_sequential_fields .answer ._float-right{float:right}
 .question_drag_and_drop_non_sequential_fields .answer ._float-left{float:left;display:inline-block}
-.question_drag_and_drop_non_sequential_fields .question-upload-image-button{margin:0 auto}
+.question_drag_and_drop_non_sequential_fields .question-upload-image-button{margin:15px auto 0 auto}
 .question_multiple_choice_with_images_fields .answer{display:-webkit-box !important;display:-webkit-flex !important;display:-ms-flexbox !important;display:flex !important;padding-bottom:10px;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .question_multiple_choice_with_images_fields .answer ._float-right{float:right}
 .question_multiple_choice_with_images_fields .answer ._float-left{float:left;display:inline-block}
 .question_multiple_choice_with_images_fields .add_answer_options{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding-top:10px}
+body.sensei_page_sensei_grading ._arrow-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+body.sensei_page_sensei_grading .drag-and-drop-non-sequential .sensei-grading-answer br,body.sensei_page_sensei_grading .drag-and-drop-sequential .sensei-grading-answer br,body.sensei_page_sensei_grading .multiple-choice-with-images .sensei-grading-answer br{display:none}
+body.sensei_page_sensei_grading .drag-and-drop-non-sequential .sensei-grading-answer img,body.sensei_page_sensei_grading .drag-and-drop-sequential .sensei-grading-answer img,body.sensei_page_sensei_grading .multiple-choice-with-images .sensei-grading-answer img{margin:5px;height:auto}
+body.sensei_page_sensei_grading .drag-and-drop-sequential .correct-answer img,body.sensei_page_sensei_grading .multiple-choice-with-images .correct-answer img{width:calc(25% - 10px)}

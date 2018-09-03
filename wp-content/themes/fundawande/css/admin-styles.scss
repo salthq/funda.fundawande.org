@@ -85,7 +85,7 @@
     }
 
     .question-upload-image-button {
-        margin: 0 auto;
+        margin: 15px auto 0 auto;
     }
 }
 
@@ -109,5 +109,35 @@
         display: flex;
         justify-content: space-between;
         padding-top: 10px;
+    }
+}
+
+body.sensei_page_sensei_grading {
+   ._arrow-container {
+        display: flex;
+        align-items: center;
+    }
+
+    
+    .drag-and-drop-non-sequential,
+    .drag-and-drop-sequential,
+    .multiple-choice-with-images {
+        .sensei-grading-answer {
+            br {
+                display: none;
+            }
+
+            img {
+                margin: 5px;
+                height: auto;
+            }
+        }
+    }
+
+    .drag-and-drop-sequential,
+    .multiple-choice-with-images {
+        .correct-answer img {
+            width: calc(25% - 10px);
+        }
     }
 }

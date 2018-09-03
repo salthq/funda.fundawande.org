@@ -7,9 +7,7 @@
     "type": "git",
     "url": "https://github.com/ahmadawais/WPGulp"
   },
-  "dependencies": {
-    "sortablejs": "^1.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.11.1",
     "gulp": "^3.9.1",

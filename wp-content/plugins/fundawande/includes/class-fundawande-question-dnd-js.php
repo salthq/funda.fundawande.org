@@ -1,10 +1,21 @@
 <?php
 
-namespace FundaWande;
+if (!defined('ABSPATH')) {
+    exit; // security check, don't load file outside WP
+}
 
-class SenseiDragAndDropJavaScript
+
+/**
+ * FundaWande Question Drag-and-Drop JavaScript Class
+ *
+ * @package Core
+ * @author Pango
+ *
+ * @since 1.0.00
+ */
+class FundaWande_Question_Dnd_Js
 {
-    public static function echoJavascript($uniqueId)
+    public function echoJavascript($uniqueId)
     {
         ?>
         <script>
