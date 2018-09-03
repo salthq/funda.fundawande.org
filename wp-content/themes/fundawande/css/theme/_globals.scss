@@ -15,10 +15,17 @@
  * Backgrounds
  */
 
+.background-primary {  background-color: #FFFFFF; }
+.background-primary-light { }
 
-.background-white {
-    background-color: $white;
+.background-secondary {
+
+    //I grabbed this background colour off the module navigation page using the inkdropper. Change if necessary and delete comment.
+    background-color: #F5F5F5;
 }
+
+.background-secondary-light {}
+
 
 
 
@@ -26,7 +33,99 @@
  * Typography
  */
 
+h1 {
 
+    font-family: Rubik, Verdana, Geneva, sans-serif;
+    font-size: 32px;
+    weight: normal;
+    line-height: 1.25; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+    color: #4A4A4A;
+    opacity: 100%;
+}
+
+h2 {
+
+    font-family: Rubik, Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: 500;
+    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+    color: #444444;
+    opacity: 100%;
+
+}
+
+h3 {
+
+    // This was not set in the mockups - copied h2 styles - if you change then delete this message
+    font-family: Rubik, Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: 500;
+    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+    color: #444444;
+    opacity: 100%;
+
+}
+
+h4 {
+
+    // This was not set in the mockups - copied h2 styles - if you change then delete this message
+    font-family: Rubik, Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: 500;
+    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+    color: #444444;
+    opacity: 100%;
+
+}
+
+h5 {
+
+    // This was not set in the mockups - copied h2 styles - if you change then delete this message
+    font-family: Rubik, Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: 500;
+    line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
+    color: #444444;
+    opacity: 100%;
+
+}
+
+p {
+
+    font-family: "Roboto Condensed", Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: normal;
+    line-height: 30px;
+    color: #444444;
+    opacity: 100%;
+
+}
+
+
+ul {
+
+    // This was not set in the mockups - copied <p> styles - if you change then delete this message
+    font-family: "Roboto Condensed", Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: normal;
+    line-height: 30px;
+    color: #444444;
+    opacity: 100%;
+
+
+
+}
+
+li {
+
+    // This was not set in the mockups - copied <p> styles - if you change then delete this message
+    font-family: "Roboto Condensed", Verdana, Geneva, sans-serif;
+    font-size: 21px;
+    weight: normal;
+    line-height: 30px;
+    color: #444444;
+    opacity: 100%;
+}
 
 
 
@@ -47,6 +146,11 @@
 
 .red {
     color: red;
+}
+
+
+.background-white {
+    background-color: $white;
 }
 
 */
