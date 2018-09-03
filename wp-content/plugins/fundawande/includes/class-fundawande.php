@@ -138,8 +138,9 @@ class FundaWande_Main {
 	 * @since 1.0.0
 	 */
 	public function initialize_global_objects() {
-		// Setup settings - COMMENTED OUT FOR NOW
-        // $this->settings = new FundaWande_Settings();
+
+		// Setup language class
+        $this->language = new FundaWande_Language();
 
         // Setup post types - COMMENTED OUT FOR NOW
         // $this->post_types = new FundaWande_PostTypes();
