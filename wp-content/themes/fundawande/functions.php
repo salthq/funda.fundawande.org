@@ -23,6 +23,15 @@ function pango_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'pango_scripts' );
 
+/**
+ * Enqueue admin scripts and styles.
+ */
+function pango_admin_scripts() {
+    wp_enqueue_style( 'theme-admin-style',  get_template_directory_uri().'/css/admin-styles.min.css' ,array(),'1' );
+
+}
+add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
+
 
 /**
  * Load Timber compatibility file.
