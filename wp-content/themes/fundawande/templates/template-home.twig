@@ -10,8 +10,7 @@
         {# Testing the asset inclusion #}
         <div class="row">
             <div class="col-12">
-                <h1>Home Page</h1>
-                <pre>{{ dump(lang) }}</pre>
+                <h1>{{ post.get_field(lang.prefix~'title') }}</h1>
             </div>
         </div>
     </div><!-- #wrapper -->

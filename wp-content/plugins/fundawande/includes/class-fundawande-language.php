@@ -21,7 +21,8 @@ class FundaWande_Language {
      * Constructor
      */
     public function __construct() {
-
+        //Add action to remember user language choice
+        add_action('init', array($this,'set_user_language_preference'));
     }
     /**
      *  Add a notice to the array of pastpapers for display at a later stage.
@@ -68,5 +69,16 @@ class FundaWande_Language {
 
 
     } // end get_language()
+
+    /**
+     * If the user is logged in and a get variable for the language is set, add to the user object
+     */
+    public function set_user_language_preference() {
+        if ( is_user_logged_in() && isset($_GET['lang'])) {
+            $user_id = get_current_user_id();
+            $lang = $_GET['lang'];
+            update_user_meta($user_id, 'language_preference', $lang );
+        }
+    }// end set_user_language_preference()
 
 } // end FundaWande_Language

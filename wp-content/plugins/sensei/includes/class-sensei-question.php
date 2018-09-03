@@ -929,8 +929,12 @@ class Sensei_Question {
      */
     public static function multiple_choice_load_question_data( $question_data, $question_id, $quiz_id ){
 
-        if( 'multiple-choice' == Sensei()->question->get_question_type( $question_id ) ) {
-
+        if (in_array(Sensei()->question->get_question_type($question_id), [
+            'multiple-choice',
+            'multiple-choice-with-images',
+            'drag-and-drop-sequential',
+            'drag-and-drop-non-sequential'
+        ])) {
 
             $answer_type = 'radio';
             if ( is_array( $question_data[ 'question_right_answer' ] ) && ( 1 < count( $question_data[ 'question_right_answer' ] ) ) ) {

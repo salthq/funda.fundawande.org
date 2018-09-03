@@ -1,12 +1,14 @@
 /* ==========================================================================
-* Theme areas
+* Navbar
 *
-* Import the various ares defined for theme
+* Styling specific to navbar template: header-navbar.twig
 *
  ========================================================================== */
 
+.avatar {
+  border-radius: 50px;
+}
 
-@import "areas/home";
-@import "areas/login";
-@import "areas/navbar";
-@import "areas/assessments";
+.language-button {
+  margin-right: 5px;
+}
