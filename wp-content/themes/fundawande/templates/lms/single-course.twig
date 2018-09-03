@@ -8,23 +8,35 @@
 {% block content %}
     <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         {# Testing the asset inclusion #}
-        <div class="row">
-            <div class="col-12">
-                <h1>Single Course</h1>
-                {% for module in modules %}
-                    <div class = "card card-enabled">
-                        <a target = "_blank" href = "http://www.fundawande.org">
-                            <div class = "container">
-                                <div class = "row">
-                                    <div class = "col"><p>{{module.name}}</p></div>
-                                    <div class = "col"><p>{{module.description}}</p></div>
-                                    <div class = "col"><p>Unit Progress: {{completed_units}}/{{total_units}}</p></div>
+        <h1>Single Course</h1>
+            {% for module in modules %}
+                <div class = "card m-2"> 
+                    <div class = "card-body">
+                       <div class = "row">
+                            <!-- Module Info -->
+                            <div class = "col-sm-12 col-md-10">
+                                <div class = "header d-flex">
+                                    <div class = "header-counter mr-2 p-4">
+                                        <h3 class= "m-0">{{loop.index - 1}}</h3>
+                                    </div>
+                                    <div class = "header-text">
+                                        <h2>{{module.name}}</h2>
+                                        <h4 class = "module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p>{{module.description}}</p>
+                            </div>
+                            <!-- Module Navigation Button -->
+                            <div class = "col-sm-12 col-md-2 module-nav d-flex">
+                                <h4 class = "module-progress d-sm-none">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                <div class = "module-nav-button d-flex">
+                                    <h3>View Module</h3>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+                        </div>
+                    </div>   
+                </div>
+            {% endfor %}
     </div><!-- #wrapper -->
 {% endblock %}

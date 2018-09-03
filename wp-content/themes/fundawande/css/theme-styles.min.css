@@ -49,8 +49,8 @@
 }.login-form{margin:0 auto;max-width:500px;padding-top:30px}
 .avatar{border-radius:50px}
 .language-button{margin-right:5px}
-.card{margin:20px;padding:20px 0;text-align:center}
-.card-enabled{background-color:#202632}
-.card-disabled{background-color:#c3cccf}
-.card-disabled a{pointer-events:none;cursor:default}
-.card p{color:#fff;margin-bottom:0}
+.card .header{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.card .header-counter{background-color:red;border-radius:5px;color:#fff;padding:20px}
+.card .module-progress{color:red}
+.card .module-nav{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.card .module-nav-button{background-color:red;border-radius:5px;color:#fff;height:100%;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;padding:10px}

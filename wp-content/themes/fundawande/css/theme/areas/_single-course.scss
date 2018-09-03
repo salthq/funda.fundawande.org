@@ -1,22 +1,29 @@
 .card {
-    &-enabled {
-       background-color: #202632; 
+  .header {
+    align-items: center;
+    &-counter {
+      background-color: red;
+      border-radius:  5px;
+      color: #fff;
+      padding: 20px;
     }
-    &-disabled {
-      background-color: #c3cccf;
-      a {
-        pointer-events: none;
-        cursor: default;
-      }
-    }
-    
-    
-    
-    p {
-      color: #fff; 
-      margin-bottom: 0;
-    }
-    margin: 20px;
-    padding: 20px 0;
-    text-align: center;
   }
+  .module {
+    &-progress {
+      color: red;
+    }
+    &-nav {
+      align-items: center;
+      justify-content: center;
+      &-button {
+        background-color:  red;
+        border-radius: 5px;
+        color: #fff;
+        height: 100%;
+        flex-direction:  column;
+        justify-content:  center;
+        padding: 10px;
+      }  
+    }
+  }
+}
