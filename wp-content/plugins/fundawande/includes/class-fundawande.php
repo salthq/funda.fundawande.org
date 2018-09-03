@@ -162,11 +162,16 @@ class FundaWande_Main {
 		// Setup language class
         $this->language = new FundaWande_Language();
 
+        // Setup login functionality class
+        $this->login = new FundaWande_Login();
+
         // Setup post types - COMMENTED OUT FOR NOW
         // $this->post_types = new FundaWande_PostTypes();
 
         // Setup quiz functionality class
         $this->quiz = new FundaWande_Quiz();
+
+
 
         // Setup question functionality class
         $this->question = new FundaWande_Question();

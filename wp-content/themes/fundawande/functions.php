@@ -7,6 +7,12 @@
  * @package boilerplate
  */
 
+
+// Set up constant variable to control JS & CSS versioning
+// This version number must be changed whenever pushing to stable branch
+const FW_VER = 0.01;
+
+
 /**
  * Enqueue scripts and styles.
  */
