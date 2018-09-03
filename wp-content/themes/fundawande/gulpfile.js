@@ -28,6 +28,11 @@
  */
 
 // START Editing Project Variables.
+// Admin Style related.
+var styleAdminSRC                = './css/admin-styles.scss'; // Path to main .scss file.
+var styleAdminDestination        = './css/'; // Path to place the compiled CSS file.
+var styleAdminMapDestination        = './'; // Path to place the compiled CSS file.
+
 // Vendor Style related.
 var styleVendorSRC                = './css/vendors-styles.scss'; // Path to main .scss file.
 var styleVendorDestination        = './css/'; // Path to place the compiled CSS file.
@@ -106,6 +111,43 @@ var wpPot        = require('gulp-wp-pot'); // For generating the .pot file.
 var sort         = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
 
 
+/**
+ * Task: `adminStyles`.
+ */
+ gulp.task('adminStyles', function () {
+    gulp.src( styleAdminSRC )
+    .pipe( sourcemaps.init() )
+    .pipe( sass( {
+      errLogToConsole: true,
+      outputStyle: 'compact',
+      // outputStyle: 'compressed',
+      // outputStyle: 'nested',
+      // outputStyle: 'expanded',
+      precision: 10
+    } ) )
+    .on('error', console.error.bind(console))
+    .pipe( sourcemaps.write( { includeContent: false } ) )
+    .pipe( sourcemaps.init( { loadMaps: true } ) )
+    .pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
+
+    .pipe( sourcemaps.write ( styleAdminMapDestination ) )
+    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+    .pipe( gulp.dest( styleAdminDestination ) )
+
+    .pipe( filter( '**/*.css' ) ) // Filtering stream to only css files
+
+    .pipe( browserSync.stream() ) // Reloads style.css if that is enqueued.
+
+    .pipe( rename( { suffix: '.min' } ) )
+    .pipe( minifycss( {
+      maxLineLen: 10
+    }))
+    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+    .pipe( gulp.dest( styleAdminDestination ) )
+
+    .pipe( filter( '**/*.css' ) ) // Filtering stream to only css files
+    .pipe( browserSync.stream() )// Reloads style.min.css if that is enqueued.
+ });
 
 /**
  * Task: `vendorStyles`.
@@ -283,8 +325,8 @@ gulp.task( 'customJS', function() {
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['vendorStyles', 'customStyles', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
-  gulp.watch( styleWatchFiles, [ 'customStyles' ] ); // Reload on SCSS file changes.
+ gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
+  gulp.watch( styleWatchFiles, [ 'adminStyles', 'customStyles' ] ); // Reload on SCSS file changes.
   gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.
   gulp.watch( customJSWatchFiles, [ 'customGlobalJS','customJS', reload ] ); // Reload on customJS file changes.
  });

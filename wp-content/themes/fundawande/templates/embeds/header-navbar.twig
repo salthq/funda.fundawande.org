@@ -1,8 +1,50 @@
 <!-- ******************* The Navbar Area ******************* -->
 <div class="wrapper-fluid wrapper-navbar " id="wrapper-navbar">
-    <p>Navbar</p>
-    {% block navbar_modals %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class = "fas fa-home"></i> Menu
+                </a>
+                <!-- TODO: create context for user role in functions.timber.php and add logic for assigning role in class-fundawande-login.php-->
+                {% if user_role == 'learner' %}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in learner_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                {% elseif user_role == 'coach'%}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in coach_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                <!-- catch-all in case a user isn't a coach or a learner -->    
+                {% else %}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in learner_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </li>
+        </ul>
 
-    {% endblock %}
+        <!--TODO: add JS scripts and data-target for viewing information modals-->
+        <button class="btn btn-info ml-3" data-toggle="modal" data-target="#"> <i class = "fas fa-question-circle"></i> View Tooltips</button>
 
+        <div class = "mx-auto">
+
+        </div>
+        <div>
+            <div class = "btn-group" role = "group" aria-label = "language buttons">
+                <form method="GET">
+                    <button class="btn btn-info language-button" type="submit" name="lang" value="eng">Change Language</button>
+                </form>
+                <form method="GET">
+                    <button class="btn btn-info language-button" type="submit" name="lang" value="xho">Tshintsha ulwimi</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 </div><!-- .wrapper-navbar end -->

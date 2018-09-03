@@ -36,6 +36,9 @@ gulp.task( 'default', [ 'JS' ] );
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
 gulp.task( 'JS',['clean'], function() {
+    gulp.src( './node_modules/sortablejs/Sortable.min.js' )
+        .pipe( gulp.dest( scriptsDestination ) );
+
     gulp.src( scripts )
         .pipe( rename( {
             suffix: '.min'

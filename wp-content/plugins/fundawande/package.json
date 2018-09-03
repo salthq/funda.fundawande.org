@@ -10,7 +10,8 @@
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.2"
+    "gulp-uglify": "^2.1.2",
+    "sortablejs": "^1.7.0"
   },
   "devDependencies": {
     "del": "^3.0.0",
