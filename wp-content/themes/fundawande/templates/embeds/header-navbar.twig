@@ -19,6 +19,13 @@
                             <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
                         {% endfor %}
                     </div>
+                <!-- catch-all in case a user isn't a coach or a learner -->    
+                {% else %}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in learner_menu.get_items %}
+                            <a class="dropdown-item" href="{{ item.link }}"><i class = "{{ item.class }}"></i> {{ item.title }}</a>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </li>
         </ul>
