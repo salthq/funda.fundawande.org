@@ -49,3 +49,8 @@
 }.login-form{margin:0 auto;max-width:500px;padding-top:30px}
 .avatar{border-radius:50px}
 .language-button{margin-right:5px}
+.card{margin:20px;padding:20px 0;text-align:center}
+.card-enabled{background-color:#202632}
+.card-disabled{background-color:#c3cccf}
+.card-disabled a{pointer-events:none;cursor:default}
+.card p{color:#fff;margin-bottom:0}
