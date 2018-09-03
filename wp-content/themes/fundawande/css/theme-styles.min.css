@@ -1,7 +1,23 @@
+<<<<<<< HEAD
 .background-white{background-color:#fff}
 .special-1:before{display:none;content:"\f001";font-family:"Font Awesome 5 Light";color:orange}
 .special-1 svg{color:blue}
 .red{color:red}
+=======
+.background-primary{background-color:#fff}
+.background-secondary{background-color:#f5f5f5}
+body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-size:21px;weight:normal;line-height:28px;color:#444;opacity:100%}
+body h1{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:32px;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
+body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;weight:500;line-height:25px;color:#444;opacity:100%}
+body hr{height:2px;color:#ccc;opacity:.5}
+#page-wrapper{padding-top:60px}
+@media(max-width:767px){#page-wrapper{padding-top:60px}
+}@media only screen and (min-width:768px){.sidebar{border-left:1px solid #202632}
+}@media only screen and (max-width:768px){.sidebar{display:none}
+}.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+.avatar{border-radius:50px}
+.language-button{margin-right:5px}
+>>>>>>> master
 .single-quiz img{max-width:100%;height:auto}
 .drag-and-drop-sequential ._top-mobile-title{display:none}
 .drag-and-drop-sequential ._answer-container ._box-image-container{width:100%;height:300px;border:1px solid #ccc}
@@ -44,6 +60,7 @@
 .drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-non-sequential ._option-image:nth-child(4),.drag-and-drop-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(4){padding-top:10px}
 }@media(max-width:400px){.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{padding-bottom:30px !important}
 }@media(max-width:768px){.single-quiz-wrapper .quiz-questions #sensei-quiz-list .answers{padding:0 !important}
+<<<<<<< HEAD
 }@media only screen and (min-width:768px){.sidebar{border-left:1px solid #202632}
 }@media only screen and (max-width:768px){.sidebar{display:none}
 }.login-form{margin:0 auto;max-width:500px;padding-top:30px}
@@ -54,3 +71,6 @@
 .card .module-progress{color:red}
 .card .module-nav{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .card .module-nav-button{background-color:red;border-radius:5px;color:#fff;height:100%;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;padding:10px}
+=======
+}
+>>>>>>> master
