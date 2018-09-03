@@ -5,3 +5,5 @@
 @media only screen and (min-width:768px){.sidebar{border-left:1px solid #202632}
 }@media only screen and (max-width:768px){.sidebar{display:none}
 }.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+.avatar{border-radius:50px}
+.language-button{margin-right:5px}
