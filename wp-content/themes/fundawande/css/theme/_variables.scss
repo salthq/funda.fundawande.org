@@ -7,13 +7,17 @@
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
+# Useful Micro efficiency Variables
 # Navbar
 # Colour palette
 # Typography
 --------------------------------------------------------------*/
 
+// # Useful Micro efficiency Variables
 
-// Navbar
+$assets_directory-path : "/wp-content/themes/fundawande/assets/";
+
+// # Navbar
 $navbar-height:                    60px;
 $adminbar-height:                   32px;
 
@@ -25,10 +29,11 @@ $ham-button-pad: 8px;                      // The left/right padding between but
 $ham-button-bar-space: 10px;                // The spacing between button bars
 $ham-button-transistion-duration: 0.1s;     // The transition duration
 
-// Colour palette
+// # Colour palette
 $white : #ffffff;
 $brand-primary__colour: #EF9D19;
 $brand-secondary__colour: #231F20;
+
 $module0-primary__colour: #327DA6;
 $module1-primary__colour: #2B8933;
 $module2-primary__colour: #61C436;
@@ -44,8 +49,34 @@ $module11-primary__colour: #FF7C43;
 $coaching-primary__colour: #FED044;
 
 
-// Typography
-$base__font-size: 21px;
-$base__header__font-family : Rubik, Verdana, Geneva, sans-serif;
-$base__font-family : "Roboto Condensed", Verdana, Geneva, sans-serif;
+// #  Typography
 
+/* Preamble:
+The typography variable config has been been laid out according to the logical levels that exist. This is mostly categorised by area or taxonomy
+and we have tried to be as logical as possible to keep the variables modular and helpful.
+*/
+
+//// Base typography
+$base__font-family : "Roboto Condensed", Verdana, Geneva, sans-serif;
+$base__font-size: 21px; //same as mockups as at 03/09/2018
+$base__letter-spacing : normal; //same as mockups as at 03/09/2018
+$base__line-height : 28px; //same as mockups as at 03/09/2018
+
+////Header base
+$base-header__font-family : Rubik, Verdana, Geneva, sans-serif;
+
+//// Navbar typography
+$navbar__font-size: 18px;
+
+//// Call-to-actions (CTAs) typography
+
+//// Line breakers below headers typography
+
+/* lbreaker = line breaker which is the short notation for the lines placed below the section headers in lessons */
+/* hm = headermain - this is for the hero band line breaks - the area that kind of looks like a sub nav */
+
+//TODO: these line breaks need to be set.
+$lbreaker__margin-top : 20px;
+$lbreaker__width: 100px;
+$lbreaker-hm__margin-top : 20px;
+$lbreaker-hm__width : 169px;
