@@ -1,28 +1,45 @@
-.card {
+/* ==========================================================================
+* Single Course Area
+*
+* Styling specific to the course page, single-course.twig
+*
+ ========================================================================== */
+
+//Remove a tag styling from cards
+.module-link {
+  color: $text-primary__colour;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: $text-primary__colour;
+  }
+}
+
+ .card {
+   &:hover {
+     background-color: $grey-secondary;
+   }
   .header {
     align-items: center;
     &-counter {
-      background-color: red;
       border-radius:  5px;
-      color: #fff;
-      padding: 20px;
+      h3 {
+        color: $white;
+      }
     }
   }
   .module {
-    &-progress {
-      color: red;
-    }
     &-nav {
       align-items: center;
       justify-content: center;
       &-button {
-        background-color:  red;
         border-radius: 5px;
-        color: #fff;
         height: 100%;
         flex-direction:  column;
         justify-content:  center;
-        padding: 10px;
+        h3 {
+          color: $white;
+        }
       }  
     }
   }
