@@ -26,9 +26,9 @@
                             <h5 class = "mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
                             <form method="GET">
                                 <div class = "btn-group" role = "group" aria-label="Change Language buttons">
-                                        <button class = "btn login-language-button {% if lang == 'eng_'%} active {% endif %}" type = "submit" name = "login-lang" value ="eng">English</button>
-                                        <button class = "btn login-language-button {% if lang == 'xho_'%} active {% endif %}" type = "submit" name = "login-lang" value ="xho">Xhosa</button>
-                                </div>
+                                        <button class = "btn login-language-button {% if lang.id == 'eng'%} active {% endif %}" type = "submit" name = "login_lang" value ="eng">English</button>
+                                        <button class = "btn login-language-button {% if lang.id == 'xho'%} active {% endif %}" type = "submit" name = "login_lang" value ="xho">Xhosa</button>
+                               </div>
                             </form>
                         </div>
                         <div class = "login-form">

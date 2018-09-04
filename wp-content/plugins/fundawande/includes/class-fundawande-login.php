@@ -38,7 +38,7 @@ class FundaWande_Login {
         //Handle bi-lingual username and password labels
         $username_label = "Inombolo yesazisi";
         $password_label = "Inombolo yokuvula";
-        if (isset($_GET['login-lang']) && $_GET['login-lang'] == 'eng') {
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
             $username_label = "ID Number";
             $password_label = "Password";
         }
@@ -74,7 +74,7 @@ class FundaWande_Login {
         //If the login language is set to english, add it to the URL after stripping out other GET variables
         if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login-lang=eng';
+            $referrer .= '?login_lang=eng';
         }
         else {
             //No need to check for Xhosa, as that is the default language
@@ -113,7 +113,7 @@ class FundaWande_Login {
         //If the login language is set to english, add it to the URL after stripping out other GET variables
         if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login-lang=eng';
+            $referrer .= '?login_lang=eng';
         }
         else {
             //No need to check for Xhosa, as that is the default language
@@ -151,7 +151,7 @@ class FundaWande_Login {
     } // end custom_login_blank_field();
 
     public function check_if_active_language() {
-        if (isset($_GET['login-lang']) && $_GET['login-lang'] == 'eng') {
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
             return "eng";
         }
         else {

@@ -12,8 +12,8 @@ if ( class_exists( 'Timber' ) ) {
     $context['post'] = $post;
 
     // Set up language object to determine login page language
-    if ( isset($_GET['login-lang']) ) {
-        $context['lang'] = FundaWande()->language->get_language($_GET['login-lang']);
+    if ( isset($_GET['login_lang']) ) {
+        $context['lang'] = FundaWande()->language->get_language($_GET['login_lang']);
     }
     else {
         $context['lang'] = FundaWande()->language->get_language(null);

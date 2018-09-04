@@ -28,13 +28,10 @@
     border: 1px solid $grey-tertiary;
     border-radius: 5px;
     color: #787878;
-    &:hover {
-      background-color:$grey-tertiary;
-      color: $white;
-    }
   }
   .active {
     background-color: $grey-tertiary;
+    color: $white;
   }
   &-language-label {
     color: $grey-tertiary;
