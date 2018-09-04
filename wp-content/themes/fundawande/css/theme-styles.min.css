@@ -77,7 +77,9 @@ body hr{height:2px;color:#ccc;opacity:.5}
 .drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-non-sequential ._option-image:nth-child(4),.drag-and-drop-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(4){padding-top:10px}
 }@media(max-width:400px){.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{padding-bottom:30px !important}
 }@media(max-width:768px){.single-quiz-wrapper .quiz-questions #sensei-quiz-list .answers{padding:0 !important}
-}.module-link{color:#444}
+}.single-course-wrapper{background-color:#f5f5f5}
+.course-title{background-color:#fff}
+.module-link{color:#444}
 .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
 .card:hover{background-color:#f5f5f5}
 .card .header{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}

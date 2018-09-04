@@ -4,6 +4,14 @@
 * Styling specific to the course page, single-course.twig
 *
  ========================================================================== */
+.single-course-wrapper {
+  background-color: $grey-secondary;
+}
+
+ .course-title {
+  background-color: $white;
+}
+
 
 //Remove a tag styling from cards
 .module-link {
