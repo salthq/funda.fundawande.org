@@ -52,13 +52,47 @@
   display: none;
 }
 
-/*Custom styling for the login in button
-#fw-submit {
-  background-color: $brand-primary__colour;
-  display: inline-block;
-  color: #fff;
-  font-family: $base-header__font-family;
-  font-size: 21px;
-  padding: 10px;
-  width: 90%;
-}*/
+/*
+ * Custom form styling - due to pulling in the form with wp_login_form, we have to target IDs and use flexbox to display items correctly
+ */
+
+#fw-form-login {
+
+  %login-inputs {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    label {
+      font-weight: bold;
+    }
+    input {
+      border: 1px solid $brand-primary__colour;
+      color: $grey-tertiary;
+      padding: 10px;
+    }
+  }
+
+  .login-username {
+    @extend %login-inputs;
+  }
+  .login-password {
+    @extend %login-inputs;
+  }
+  //Custom styling for the login in button
+  .login-submit {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 50px;
+
+    #fw-submit {
+      background-color: $brand-primary__colour;
+      border-radius: 5px;
+      color: #fff;
+      font-family: $base-header__font-family;
+      font-size: 21px;
+      padding: 10px;
+      width: 100%;
+    }
+  }
+}
+

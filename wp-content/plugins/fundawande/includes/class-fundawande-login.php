@@ -47,7 +47,7 @@ class FundaWande_Login {
             'echo'           => true,
             //TODO: redirect to either the dashboard or modules page on login
             'redirect'       => site_url('login'),
-            'form_id'        => 'form-login',
+            'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,
             'label_remember' => __( 'Remember Me' ),
