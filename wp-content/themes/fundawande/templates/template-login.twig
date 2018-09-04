@@ -8,7 +8,7 @@
 {% block content %}
     <div class="wrapper login-wrapper background-secondary d-flex" xmlns="http://www.w3.org/1999/html">
         <div class="container card login-card m-5">
-            <div class="row login-row">
+            <div class="row login-row my-5">
                 {% if user_logged_in %}
                     <div class = "row">
                         <div class = "col">
@@ -31,10 +31,15 @@
                                 </div>
                             </form>
                         </div>
-                        <div class = "text-center login-form">
+                        <div class = "login-form">
                             {% do action('show_login_form') %}
                             {% if error_message %}
-                                <div class="alert alert-danger my-3" role="alert"> {{ post.get_field(lang.prefix~error_message) }}</div>
+                                <div class="login-alert p-3" role="alert"> 
+                                    <p>{{ post.get_field(lang.prefix~error_message) }}</p>
+                                    <div class = "my-3 text-center"><a class = "login-help login-error text-center" href = "#">Get help logging in</a> </div>   
+                                </div>
+                            {% else %}
+                                <div class = "my-3 text-center"><a class = "login-help login-noerror " href = "#">Get help logging in</a> </div>   
                             {% endif %}
                         </div>
                     </div>
