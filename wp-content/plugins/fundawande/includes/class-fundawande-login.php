@@ -29,15 +29,25 @@ class FundaWande_Login {
         //Check for blank fields and add 'login=blank-field' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
     }
+
     //Set up login form options
     public function setup_login_form() {
+
+        //Handle bi-lingual username and password labels
+        $username_label = "Inombolo yesazisi";
+        $password_label = "Inombolo yokuvula";
+        if (isset($_GET['login-lang']) && $_GET['login-lang'] == 'eng') {
+            $username_label = "ID Number";
+            $password_label = "Password";
+        }
+
         $args = array(
             'echo'           => true,
             //TODO: redirect to either the dashboard or modules page on login
             'redirect'       => site_url('login'),
             'form_id'        => 'form-login',
-            'label_username' => __( 'ID Number' ),
-            'label_password' => __( 'Password' ),
+            'label_username' => $username_label,
+            'label_password' => $password_label,
             'label_remember' => __( 'Remember Me' ),
             'label_log_in'   => __( 'Sign In' ),
             'id_username'    => 'user_login',
