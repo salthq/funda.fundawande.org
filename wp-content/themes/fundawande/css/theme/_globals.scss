@@ -38,7 +38,6 @@ body {
     font-family: $base__font-family;
     font-size: 21px;
     weight: normal;
-    line-height: 28px;
     color: $text-primary__colour;
     opacity: 100%;
 
@@ -48,7 +47,6 @@ body {
         font-family: $base-header__font-family;
         font-size: 32px;
         weight: normal;
-        line-height: 1.25; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
         color: #4A4A4A;
         opacity: 100%;
     }
@@ -58,7 +56,6 @@ body {
         font-family: $base-header__font-family;
         font-size: 21px;
         weight: 500;
-        line-height: 25px; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
         color: $text-primary__colour;
         opacity: 100%;
 
