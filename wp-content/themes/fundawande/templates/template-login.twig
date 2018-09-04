@@ -24,14 +24,12 @@
                         <div class="text-center login-header">
                             <img class="mx-auto img img-fluid" src="http://fundawande.org/wp-content/uploads/2017/09/cropped-cropped-logo-long-transparent-background.png">
                             <h5 class = "mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
-                            <div class = "btn-group" role = "group" aria-label="Change Language buttons">
-                                <form  class = "d-inline" method="GET">
-                                    <button class = "btn btn-info" type = "submit" name = "login-lang" value ="eng">English</button>
+                                <form method="GET">
+                                    <div class = "btn-group" role = "group" aria-label="Change Language buttons">
+                                            <button class = "btn btn-info" type = "submit" name = "login-lang" value ="eng">English</button>
+                                            <button class = "btn btn-info" type = "submit" name = "login-lang" value ="xho">Xhosa</button>
+                                    </div>
                                 </form>
-                                <form  class = "d-inline" method="GET">
-                                    <button class = "btn btn-info" type = "submit" name = "login-lang" value ="xho">Xhosa</button>
-                                </form>
-                            </div>
                         </div>
                         <div class = "login-form text-center">
                             {% do action('show_login_form') %}
