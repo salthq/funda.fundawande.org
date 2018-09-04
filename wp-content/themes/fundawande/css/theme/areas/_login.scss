@@ -18,9 +18,21 @@
 }
 
 .login {
+  &-wrapper {
+    justify-content: center;
+  }
+  &-language-label {
+    color: #918f8f;
+    font-size: 16px;
+  }
   &-form {
     margin: 0 auto;
     max-width: 500px;
     padding-top: 30px;
   }
+}
+
+//User is remembered by default, so we hide the 'remember me' checkbox
+.login-remember {
+  display: none;
 }

@@ -3,12 +3,16 @@
 body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-size:21px;weight:normal;line-height:28px;color:#444;opacity:100%}
 body h1{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:32px;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
 body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;weight:500;line-height:25px;color:#444;opacity:100%}
+body p{font-size:16px}
 body hr{height:2px;color:#ccc;opacity:.5}
 #page-wrapper{padding-top:60px}
 @media(max-width:767px){#page-wrapper{padding-top:60px}
 }@media only screen and (min-width:768px){.sidebar{border-left:1px solid #202632}
 }@media only screen and (max-width:768px){.sidebar{display:none}
-}.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+}.login-wrapper{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.login-language-label{color:#918f8f;font-size:16px}
+.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+.login-remember{display:none}
 .avatar{border-radius:50px}
 .language-button{margin-right:5px}
 .single-quiz img{max-width:100%;height:auto}
