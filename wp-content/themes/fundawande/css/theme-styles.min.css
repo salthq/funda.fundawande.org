@@ -14,17 +14,16 @@ body hr{height:2px;color:#ccc;opacity:.5}
 .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
 .login .active{background-color:#918f8f;color:#fff}
 .login-language-label{color:#918f8f;font-size:16px}
-.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+.login-form{margin:0 auto;max-width:315px;padding-top:30px}
 .login-help{text-decoration:underline}
 .login-help:hover{color:#231f20}
 .login-error{color:#ef9d19}
 .login-noerror{color:#918f8f}
 .login-alert{background-color:#f5f5f5;border:1px solid #918f8f;border-radius:5px}
-.login-remember{display:none}
-.login-form{max-width:315px}
 #fw-form-login .login-username,#fw-form-login .login-password{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;text-align:left}
 #fw-form-login .login-username label,#fw-form-login .login-password label{font-weight:bold}
 #fw-form-login .login-username input,#fw-form-login .login-password input{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px}
+#fw-form-login .login-remember{display:none}
 #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
 #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
 .avatar{border-radius:50px}

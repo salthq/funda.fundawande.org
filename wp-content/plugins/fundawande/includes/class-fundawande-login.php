@@ -38,9 +38,11 @@ class FundaWande_Login {
         //Handle bi-lingual username and password labels
         $username_label = "Inombolo yesazisi";
         $password_label = "Inombolo yokuvula";
+        $login_label = "Ngema";
         if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
             $username_label = "ID Number";
             $password_label = "Password";
+            $login_label = "Log In";
         }
 
         $args = array(
@@ -51,7 +53,7 @@ class FundaWande_Login {
             'label_username' => $username_label,
             'label_password' => $password_label,
             'label_remember' => __( 'Remember Me' ),
-            'label_log_in'   => __( 'Sign In' ),
+            'label_log_in'   => $login_label,
             'id_username'    => 'user_login',
             'id_password'    => 'user_pass',
             'id_remember'    => 'rememberme',

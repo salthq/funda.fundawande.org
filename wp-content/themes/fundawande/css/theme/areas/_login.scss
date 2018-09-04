@@ -5,6 +5,7 @@
 *
  ========================================================================== */
 
+//Media queries which control the sidebar content view 
 @media only screen and (min-width: 768px) {
   .sidebar {
     border-left: 2px solid $grey-secondary;
@@ -17,6 +18,7 @@
   }
 }
 
+//General login page styling
 .login {
   &-wrapper {
     justify-content: center;
@@ -39,7 +41,7 @@
   }
   &-form {
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 315px; //On the mockups the form width is 315px
     padding-top: 30px;
   }
   &-help {
@@ -61,21 +63,11 @@
   }
 }
 
-//User is remembered by default, so we hide the 'remember me' checkbox
-.login-remember {
-  display: none;
-}
 
 /*
  * Custom form styling - due to pulling in the form with wp_login_form, we have to target IDs and use flexbox to display items correctly
  */
-
- .login-form {
-  max-width: 315px; //On the mockups the form width is 315px
-}
-
 #fw-form-login {
-
   %login-inputs {
     display: flex;
     flex-direction: column;
@@ -90,14 +82,16 @@
       padding: 10px;
     }
   }
-
   .login-username {
     @extend %login-inputs;
   }
   .login-password {
     @extend %login-inputs;
   }
-  //Custom styling for the login in button
+  //User is remembered by default, so we hide the 'remember me' checkbox
+  .login-remember {
+    display: none;
+  }
   .login-submit {
     display: flex;
     justify-content: stretch;

@@ -8,7 +8,7 @@
 {% block content %}
     <div class="wrapper login-wrapper background-secondary d-flex" xmlns="http://www.w3.org/1999/html">
         <div class="container card login-card m-5">
-            <div class="row login-row my-5">
+            <div class="row login-row my-1">
                 {% if user_logged_in %}
                     <div class = "row">
                         <div class = "col">
@@ -36,10 +36,10 @@
                             {% if error_message %}
                                 <div class="login-alert p-3" role="alert"> 
                                     <p>{{ post.get_field(lang.prefix~error_message) }}</p>
-                                    <div class = "my-3 text-center"><a class = "login-help login-error text-center" href = "#">Get help logging in</a> </div>   
+                                    <div class = "my-3 text-center"><a class = "login-help login-error text-center" href = "#">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>   
                                 </div>
                             {% else %}
-                                <div class = "my-3 text-center"><a class = "login-help login-noerror " href = "#">Get help logging in</a> </div>   
+                                <div class = "my-3 text-center"><a class = "login-help login-noerror " href = "#">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>   
                             {% endif %}
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="col-sm-12 col-md-6 sidebar p-5">
                         <div class="text-center sidebar-img"><img class="img img-fluid" src="http://fundawande.org/wp-content/uploads/2017/09/cropped-cropped-logo-long-transparent-background.png"></div>
                         <h2 class="my-3 text-center">{{ post.get_field(lang.prefix~'sidebar_title') }}</h2>
-                        {{ post.get_field(lang.prefix~'sidebar_content') }}
+                        <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
                     </div>
                 {% endif %}
             </div>
