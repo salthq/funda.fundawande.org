@@ -47,7 +47,9 @@ class FundaWande_Modules {
 
             } else {
                 // Get the term data in case there are custom fields
-                $course_modules[$key]->meta = get_term_meta($module->ID);
+                $course_modules[$key]->meta = get_term_meta($module->term_id);
+                $course_modules[$key]->link = get_term_link($module->term_id);
+
             }
         }
 

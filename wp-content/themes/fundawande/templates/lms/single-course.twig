@@ -8,11 +8,12 @@
 {% block content %}
     <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         {# Testing the asset inclusion #}
-        <h1>Single Course</h1>
+        <h1 class = "text-center">Course Modules</h1>
             {% for module in modules %}
-                <div class = "card m-2"> 
-                    <div class = "card-body">
-                       <div class = "row">
+                <a href = "{{module.link}}">
+                    <div class = "card m-2"> 
+                        <div class = "card-body">
+                        <div class = "row">
                             <!-- Module Info -->
                             <div class = "col-sm-12 col-md-10">
                                 <div class = "header d-flex">
@@ -34,9 +35,10 @@
                                     <h3 class = "text-center">View Module</h3>
                                 </div>
                             </div>
-                        </div>
-                    </div>   
-                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </a>
             {% endfor %}
     </div><!-- #wrapper -->
 {% endblock %}
