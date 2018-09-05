@@ -45,7 +45,7 @@
                     </div>
                     <!-- Desktop sidebar -->
                     <div class="col-sm-12 col-md-6 sidebar p-5">
-                        <div class="text-center sidebar-img"><img class="img img-fluid" src="http://fundawande:7888/wp-content/uploads/2018/09/Screen-Shot-2018-09-05-at-09.30.33.png"></div>
+                        <div class="text-center sidebar-img"><img class="img img-fluid" src="{{post.get_field('sidebar_image')}}"></div>
                         <hr>
                         <h2 class="my-3 text-center">{{ post.get_field(lang.prefix~'sidebar_title') }}</h2>
                         <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
