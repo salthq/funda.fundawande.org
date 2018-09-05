@@ -35,11 +35,13 @@ class FundaWande_Login {
     //Set up login form options
     public function setup_login_form() {
 
-        //Handle bi-lingual username and password labels
+        //Bilingual display and re-direct options
+        $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
         $username_label = "Inombolo yesazisi";
         $password_label = "Inombolo yokuvula";
         $login_label = "Ngema";
         if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
+            $redirect_url = "/course/reading-for-meaning-eng/";
             $username_label = "ID Number";
             $password_label = "Password";
             $login_label = "Log In";
@@ -47,8 +49,8 @@ class FundaWande_Login {
 
         $args = array(
             'echo'           => true,
-            //TODO: redirect to either the dashboard or modules page on login
-            'redirect'       => site_url('login'),
+            //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
+            'redirect'       => site_url($redirect_url),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,

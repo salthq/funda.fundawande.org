@@ -11,9 +11,9 @@ ob_start();
  * @version     1.9.0
  */
 
-// if user is not logged in direct to login page
+// if user is not logged in direct to the custom FW login page
 if (!is_user_logged_in()) {
-    wp_redirect(wp_login_url(get_permalink()));
+    wp_redirect(get_site_url(null, '/login'));
     exit();
 }
 
