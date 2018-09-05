@@ -6,25 +6,52 @@
 
 {# Twig block to be included in Base.twig #}
 {% block content %}
-    <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {# Testing the asset inclusion #}
-        <div class="row">
-            <div class="col-12">
+    <div class = "container-fluid">
+        <div class = "row module-title">
+            <div class = "col-sm-12 text-center">
                 <h1 class = "text-center m-4">{{function('single_term_title')}}</h1>
-                {% for unit in units %}
-                    {% set module_colour = unit.parent - 1%}
-                    <div class = "card card-enabled module-bg-{{module_colour}}">
-                        <a target = "_blank" href = "http://www.fundawande.org">
-                            <div class = "container">
-                                <div class = "row">
-                                    <div class = "col"><p>{{unit.name}}</p></div>
-                                    <div class = "col"><p>{{unit.description}}</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container">
+            {% for unit in units %}
+                {% set module_colour = unit.parent - 2%}
+                <div class = "card my-3">
+                    <div class = "card-body">
+                        <div class = "row">
+                            <div class = "col-sm-12">
+                                <!-- Unit Card Header -->    
+                                <div class = "row unit-header">
+                                    <div class = "col-sm-12 col-md-8">
+                                        <div class = "unit-header-content d-flex">
+                                            <div class = "unit-header-counter d-flex p-2">
+                                                <h3>{{unit.parent}}.{{loop.index}}</h3>
+                                            </div>
+                                            <div class = "unit-header-text">
+                                                <h2><strong>{{unit.name}}</strong></h2>
+                                                <h4 class = "module-text-{{module_colour}} module-progress d-none d-sm-block">5/7 Lessons Complete</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-sm-12 col-md-4 text-right">
+                                        <a class = "btn module-bg-{{module_colour}}" href "#">
+                                            Resume Unit
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <!-- Unit Card Content -->
+                            <div class = "row unit-content">
+                                <div class = "col-sm-12">
+                                    <p class = "p-3">{{unit.description}}</p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div><!-- #wrapper -->
 {% endblock %}
