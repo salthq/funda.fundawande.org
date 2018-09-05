@@ -57,7 +57,7 @@ class FundaWande_Modules {
 
                 if (!isset($module_number_meta) || $module_number_meta !== $course_module_number) {
                     update_term_meta($module->term_id,'module_number',$course_module_number);
-                    //$course_modules[$key]->meta->module_number = $course_module_number;
+                    $course_modules[$key]->module_number = $course_module_number;
                 }
                 $course_modules[$key]->link = get_term_link($module->term_id);
 
