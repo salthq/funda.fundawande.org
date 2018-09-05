@@ -86,6 +86,9 @@ class FundaWande_Modules {
 
             $module_units[$key] = new TimberTerm($unit);
 
+            // Get the module number for the parent module so that module-specfic styling works
+            $module_units[$key]->module_number = implode("", get_term_meta($module_id, 'module_number'));
+
             // Get the term data in case there are custom fields
             $module_units[$key]->meta = get_term_meta($unit);
 

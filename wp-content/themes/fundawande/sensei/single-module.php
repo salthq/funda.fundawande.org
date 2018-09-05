@@ -24,7 +24,7 @@ if (class_exists('Timber')) {
     // Assign current user to context
     $user = new TimberUser();
     $context['user'] = $user;
-
+    $context['parent_id'] = wp_get_post_parent_id($post->$id);
     // Get the units to visualise on the module page
     $context['units'] = FundaWande()->modules->get_module_units($post->$id, wp_get_post_parent_id($post->$id) );
 

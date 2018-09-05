@@ -16,7 +16,7 @@
     <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "container">
             {% for unit in units %}
-                {% set module_colour = unit.parent - 2%}
+                {% set module_colour = unit.module_number %}
                 <div class = "card my-3">
                     <div class = "card-body">
                         <div class = "row">
