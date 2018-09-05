@@ -23,12 +23,12 @@
                                 <!-- Module Info -->
                                 <div class = "col-sm-12 col-md-10">
                                     <div class = "header d-flex">
-                                        <div class = "module-bg-{{loop.index - 1}} header-counter mr-2 p-4">
-                                            <h3 class= "m-0">{{loop.index - 1}}</h3>
+                                        <div class = "module-bg-{{module.module_number}} header-counter mr-2 p-4">
+                                            <h3 class= "m-0">{{module.module_number}}</h3>
                                         </div>
                                         <div class = "header-text">
                                             <h2><strong>{{module.name}}</strong></h2>
-                                            <h4 class = "module-text-{{loop.index - 1}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                            <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} Units Complete</h4>
                                         </div>
                                     </div>
                                     <hr>
@@ -36,8 +36,8 @@
                                 </div>
                                 <!-- Module Navigation Button -->
                                 <div class = "col-sm-12 col-md-2 module-nav d-flex">
-                                    <h4 class = "module-text-{{loop.index - 1}} module-progress d-sm-none">{{completed_units}}/{{total_units}} Units Complete</h4>
-                                    <div class = "module-bg-{{loop.index - 1}} module-nav-button p-3 d-flex">
+                                    <h4 class = "module-text-{{module.module_number}} module-progress d-sm-none">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                    <div class = "module-bg-{{module.module_number}} module-nav-button p-3 d-flex">
                                         <h3 class = "text-center">View Module</h3>
                                     </div>
                                 </div>

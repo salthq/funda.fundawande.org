@@ -36,6 +36,9 @@ class FundaWande_Modules {
     public function get_course_modules($course_id) {
 
         $course_modules = Sensei()->modules->get_course_modules($course_id);
+        
+        //Module numbering starts at 0 in the FW courses
+        $course_module_number = 0;
 
         foreach($course_modules  as $key => $module) {
 
@@ -48,8 +51,15 @@ class FundaWande_Modules {
             } else {
                 // Get the term data in case there are custom fields
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
+                // If the module number meta does not exist or is different to  
+                //  $course_module_number, change the module number meta to be the same as course_module_number 
+                if ($course_modules[$key]->meta->module_number !== $course_module_number) {
+                    update_term_meta($module->term_id,'module_number',$course_module_number);
+                    $course_modules[$key]->meta->module_number = $course_module_number;
+                }
                 $course_modules[$key]->link = get_term_link($module->term_id);
 
+                $course_module_number++;
             }
         }
 
