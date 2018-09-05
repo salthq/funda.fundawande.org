@@ -7,7 +7,7 @@ body p{font-size:16px}
 body hr{height:2px;color:#ccc;opacity:.5}
 #page-wrapper{padding-top:60px}
 @media(max-width:767px){#page-wrapper{padding-top:60px}
-}@media only screen and (min-width:768px){.sidebar{border-left:2px solid #ccc}
+}@media only screen and (min-width:769px){.login{border-right:2px solid #ccc}
 }@media only screen and (max-width:768px){.sidebar{display:none}
 }.login-wrapper{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
