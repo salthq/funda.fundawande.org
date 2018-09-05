@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="wrapper single-course-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper single-module-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "container">
             {% for unit in units %}
                 {% set module_colour = unit.module_number %}
@@ -42,13 +42,21 @@
                                 </div>
                                 <hr>
                             </div>
-                            <!-- Unit Card Content -->
-                            <div class = "row unit-content">
+                        </div>
+                        <!-- Unit Card Content -->
+                        <div class = "row unit-content">
                                 <div class = "col-sm-12">
                                     <p class = "p-3">{{unit.description}}</p>
+                                    <div class = "sub-units d-flex">
+                                        {% for lesson in unit.lessons %}
+                                            <div class = "m-3 p-3 text-center">
+                                                <img class = "img img-rounded" src = "https://via.placeholder.com/50">
+                                                <p class = "py-2">{{lesson.post_title}}</p>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             {% endfor %}
