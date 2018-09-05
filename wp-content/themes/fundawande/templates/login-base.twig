@@ -13,10 +13,6 @@
 
 
 <div id="page" class="hfeed site">
-    {% embed "embeds/header-navbar.twig" %}
-
-    {% endembed %}
-
 
 	 {# Include the .twig template extended off base.twig #}
 	 {% block content %}
@@ -24,7 +20,6 @@
 
 </div>
 </div><!-- #page -->
-
 
 {# Add the native WordPress footer function #}
 {{ function('wp_footer') }}
