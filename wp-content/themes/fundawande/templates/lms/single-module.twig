@@ -25,17 +25,17 @@
                                 <div class = "row unit-header">
                                     <div class = "col-sm-12 col-md-8">
                                         <div class = "unit-header-content d-flex">
-                                            <div class = "unit-header-counter d-flex p-2">
-                                                <h3>{{module_number}}.{{loop.index}}</h3>
+                                            <div class = "unit-header-counter d-flex mr-2 px-2">
+                                                <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
                                             </div>
                                             <div class = "unit-header-text">
                                                 <h2><strong>{{unit.name}}</strong></h2>
-                                                <h4 class = "module-text-{{module_number}} module-progress d-none d-sm-block">5/7 Lessons Complete</h4>
+                                                <p class = "module-text-{{module_number}} module-progress d-none d-sm-block">5/7 Lessons Complete</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class = "col-sm-12 col-md-4 text-right">
-                                        <a class = "btn module-bg-{{module_number}}" href "#">
+                                        <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
                                             Resume Unit
                                         </a>
                                     </div>
@@ -46,10 +46,10 @@
                         <!-- Unit Card Content -->
                         <div class = "row unit-content">
                                 <div class = "col-sm-12">
-                                    <p class = "p-3">{{unit.description}}</p>
+                                    <p>{{unit.description}}</p>
                                     <div class = "sub-units d-flex">
                                         {% for lesson in unit.lessons %}
-                                            <div class = "m-3 p-3 text-center">
+                                            <div class = "text-center">
                                                 <img class = "img img-rounded" src = "https://via.placeholder.com/50">
                                                 <p class = "py-2">{{lesson.post_title}}</p>
                                             </div>

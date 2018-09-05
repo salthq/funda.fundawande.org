@@ -4,3 +4,20 @@
 * Styling specific to the module page, single-module.twig
 *
  ========================================================================== */
+
+ .single-module-wrapper {
+    .unit {
+        &-header {
+            align-items: center;
+            &-counter {
+                background-color: $grey-secondary;
+                border-radius: 5px;
+                align-items: center;
+            }
+
+        }
+    }
+    .sub-units {
+        justify-content: space-around;
+    } 
+ }
