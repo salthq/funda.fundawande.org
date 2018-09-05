@@ -18,8 +18,7 @@ if (class_exists('Timber')) {
     $context['user'] = new TimberUser();
     $context['term'] = $term;
 
-    // Get the term data
-    $context['term'] = get_term_children( $term->ID, 'module' );
+    $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
 
     // Get the modules units to visualise on the module page
     // TODO: Remove the 9 and replace with the actual course ID, possibly saved in the user as their current course.

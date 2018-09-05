@@ -53,7 +53,7 @@ class FundaWande_Modules {
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
                 // If the module number meta does not exist or is different to  
                 //  $course_module_number, change the module number meta to be the same as course_module_number 
-                $module_number_meta = get_term_meta($module->term_id, 'module_number');
+                $module_number_meta = get_term_meta($module->term_id, 'module_number', true);
 
                 if (!isset($module_number_meta) || $module_number_meta !== $course_module_number) {
                     update_term_meta($module->term_id,'module_number',$course_module_number);
@@ -85,9 +85,6 @@ class FundaWande_Modules {
         foreach($module_units  as $key => $unit) {
 
             $module_units[$key] = new TimberTerm($unit);
-
-            // Get the module number for the parent module so that module-specfic styling works
-            $module_units[$key]->module_number = implode("", get_term_meta($module_id, 'module_number'));
 
             // Get the term data in case there are custom fields
             $module_units[$key]->meta = get_term_meta($unit);

@@ -9,14 +9,14 @@
     <div class = "container-fluid">
         <div class = "row module-title">
             <div class = "col-sm-12 text-center">
-                <h1 class = "text-center m-4">{{function('single_term_title')}}</h1>
+                <h1 class = "mt-4"><strong>Module {{module_number}}</strong></h1>
+                <h1 class = "text-center mb-4">{{function('single_term_title')}}</h1>
             </div>
         </div>
     </div>
-    <div class="wrapper single-module-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper single-module-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "container">
             {% for unit in units %}
-                {% set module_colour = unit.module_number %}
                 <div class = "card my-3">
                     <div class = "card-body">
                         <div class = "row">
@@ -26,16 +26,16 @@
                                     <div class = "col-sm-12 col-md-8">
                                         <div class = "unit-header-content d-flex">
                                             <div class = "unit-header-counter d-flex p-2">
-                                                <h3>{{unit.module_number + 1}}.{{loop.index}}</h3>
+                                                <h3>{{module_number}}.{{loop.index}}</h3>
                                             </div>
                                             <div class = "unit-header-text">
                                                 <h2><strong>{{unit.name}}</strong></h2>
-                                                <h4 class = "module-text-{{module_colour}} module-progress d-none d-sm-block">5/7 Lessons Complete</h4>
+                                                <h4 class = "module-text-{{module_number}} module-progress d-none d-sm-block">5/7 Lessons Complete</h4>
                                             </div>
                                         </div>
                                     </div>
                                     <div class = "col-sm-12 col-md-4 text-right">
-                                        <a class = "btn module-bg-{{module_colour}}" href "#">
+                                        <a class = "btn module-bg-{{module_number}}" href "#">
                                             Resume Unit
                                         </a>
                                     </div>
