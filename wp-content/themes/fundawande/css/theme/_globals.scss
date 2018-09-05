@@ -65,7 +65,7 @@ body {
 
 
     p {
-
+        font-size: 16px;
     }
 
 
@@ -99,100 +99,15 @@ body {
 }
 
 
-//Module Background Classes
-.module-bg-0 {
-    background-color: $module0-primary__colour;
-}
-
-.module-bg-1 {
-    background-color: $module1-primary__colour;
-}
-
-.module-bg-2 {
-    background-color: $module2-primary__colour;
-}
-
-.module-bg-3 {
-    background-color: $module3-primary__colour;
-}
-
-.module-bg-4 {
-    background-color: $module4-primary__colour;
-}
-
-.module-bg-5 {
-    background-color: $module5-primary__colour;
-}
-
-.module-bg-6 {
-    background-color: $module6-primary__colour;
-}
-
-.module-bg-7 {
-    background-color: $module7-primary__colour;
-}
-
-.module-bg-8 {
-    background-color: $module8-primary__colour;
-}
-
-.module-bg-9 {
-    background-color: $module9-primary__colour;
-}
-
-.module-bg-10 {
-    background-color: $module10-primary__colour;
-}
-
-.module-bg-11 {
-    background-color: $module11-primary__colour;
-}
-
-//Module Text Classes
-.module-text-0 {
-    color: $module0-primary__colour;
-}
-
-.module-text-1 {
-    color: $module1-primary__colour;
-}
-
-.module-text-2 {
-    color: $module2-primary__colour;
-}
-
-.module-text-3 {
-    color: $module3-primary__colour;
-}
-
-.module-text-4 {
-    color: $module4-primary__colour;
-}
-
-.module-text-5 {
-    color: $module5-primary__colour;
-}
-
-.module-text-6 {
-    color: $module6-primary__colour;
-}
-
-.module-text-7 {
-    color: $module7-primary__colour;
-}
-
-.module-text-8 {
-    color: $module8-primary__colour;
-}
-
-.module-text-9 {
-    color: $module9-primary__colour;
-}
-
-.module-text-10 {
-    color: $module10-primary__colour;
-}
-
-.module-text-11 {
-    color: $module11-primary__colour;
+//Loop through the $module_colours array found in variables.scss and assign the colours to border, text and backgrounds.
+@each $colour_key, $colour_var in $module_colours {
+    .module-bg-#{$colour_key} {
+        background-color: $colour_var;
+    }
+    .module-text-#{$colour_key} {
+        color: $colour_var;
+    }
+    .module-border-#{$colour_key} {
+        border-color: $colour_var;
+    }
 }

@@ -38,10 +38,13 @@ $ham-button-transistion-duration:   0.1s; // The transition duration
 // # Colour palette
 $white : #ffffff;
 $black : #000000;
-$grey-primary : #D8D8D8;
-$grey-secondary : #F5F5F5; //I grabbed this background colour off the module navigation page using the inkdropper. Change if necessary and delete comment.
-$grey-tertiary : #CCCCCC;
+$grey-primary : #F5F5F5; //I grabbed this background colour off the module navigation page using the inkdropper. Change if necessary and delete comment.
+$grey-secondary : #CCCCCC;
+$grey-tertiary : #918F8F; //This shade of grey is used numerous times on the login page.  
+
 $text-primary__colour : #444444;
+
+
 
 $brand-primary__colour: #EF9D19;
 $brand-secondary__colour: #231F20;
@@ -58,7 +61,26 @@ $module8-primary__colour: #3BA9DC;
 $module9-primary__colour: #FF5943;
 $module10-primary__colour: #CB384A;
 $module11-primary__colour: #FF7C43;
+
+//Array of colours used in global.scss to create module-specific styles
+$module-colours: (
+    0: $module0-primary__colour,
+    1: $module1-primary__colour,
+    2: $module2-primary__colour,
+    3: $module3-primary__colour,
+    4: $module4-primary__colour,
+    5: $module5-primary__colour,
+    6: $module6-primary__colour,
+    7: $module7-primary__colour,
+    8: $module8-primary__colour,
+    9: $module9-primary__colour,
+    10: $module10-primary__colour,
+    11: $module11-primary__colour
+);
+
+
 $coaching-primary__colour: #FED044;
+
 
 
 // #  Typography

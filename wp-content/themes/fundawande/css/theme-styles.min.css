@@ -1,38 +1,67 @@
 .background-primary{background-color:#fff}
-.background-secondary{background-color:#f5f5f5}
+.background-secondary{background-color:#ccc}
 body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-size:21px;weight:normal;line-height:28px;color:#444;opacity:100%}
 body h1{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:32px;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
 body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;weight:500;line-height:25px;color:#444;opacity:100%}
+body p{font-size:16px}
 body hr{height:2px;color:#ccc;opacity:.5}
 #page-wrapper{padding-top:60px}
 @media(max-width:767px){#page-wrapper{padding-top:60px}
 }.module-bg-0{background-color:#327da6}
-.module-bg-1{background-color:#2b8933}
-.module-bg-2{background-color:#61c436}
-.module-bg-3{background-color:#e73e53}
-.module-bg-4{background-color:#49a631}
-.module-bg-5{background-color:#3dc4e4}
-.module-bg-6{background-color:#ff9d45}
-.module-bg-7{background-color:#f7b446}
-.module-bg-8{background-color:#3ba9dc}
-.module-bg-9{background-color:#ff5943}
-.module-bg-10{background-color:#cb384a}
-.module-bg-11{background-color:#ff7c43}
 .module-text-0{color:#327da6}
+.module-border-0{border-color:#327da6}
+.module-bg-1{background-color:#2b8933}
 .module-text-1{color:#2b8933}
+.module-border-1{border-color:#2b8933}
+.module-bg-2{background-color:#61c436}
 .module-text-2{color:#61c436}
+.module-border-2{border-color:#61c436}
+.module-bg-3{background-color:#e73e53}
 .module-text-3{color:#e73e53}
+.module-border-3{border-color:#e73e53}
+.module-bg-4{background-color:#49a631}
 .module-text-4{color:#49a631}
+.module-border-4{border-color:#49a631}
+.module-bg-5{background-color:#3dc4e4}
 .module-text-5{color:#3dc4e4}
+.module-border-5{border-color:#3dc4e4}
+.module-bg-6{background-color:#ff9d45}
 .module-text-6{color:#ff9d45}
+.module-border-6{border-color:#ff9d45}
+.module-bg-7{background-color:#f7b446}
 .module-text-7{color:#f7b446}
+.module-border-7{border-color:#f7b446}
+.module-bg-8{background-color:#3ba9dc}
 .module-text-8{color:#3ba9dc}
+.module-border-8{border-color:#3ba9dc}
+.module-bg-9{background-color:#ff5943}
 .module-text-9{color:#ff5943}
+.module-border-9{border-color:#ff5943}
+.module-bg-10{background-color:#cb384a}
 .module-text-10{color:#cb384a}
+.module-border-10{border-color:#cb384a}
+.module-bg-11{background-color:#ff7c43}
 .module-text-11{color:#ff7c43}
-@media only screen and (min-width:768px){.sidebar{border-left:1px solid #202632}
+.module-border-11{border-color:#ff7c43}
+@media only screen and (min-width:769px){.login{border-right:2px solid #ccc}
 }@media only screen and (max-width:768px){.sidebar{display:none}
-}.login-form{margin:0 auto;max-width:500px;padding-top:30px}
+}.login-wrapper{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
+.login .active{background-color:#918f8f;color:#fff}
+.login-language-label{color:#918f8f;font-size:16px}
+.login-form{margin:0 auto;max-width:315px;padding-top:30px}
+.login-help{text-decoration:underline}
+.login-help:hover{color:#231f20}
+.login-error{color:#ef9d19}
+.login-noerror{color:#918f8f}
+.login-alert{background-color:#f5f5f5;border:1px solid #918f8f;border-radius:5px}
+#fw-form-login .login-username,#fw-form-login .login-password{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;text-align:left}
+#fw-form-login .login-username label,#fw-form-login .login-password label{font-weight:bold}
+#fw-form-login .login-username input,#fw-form-login .login-password input{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px}
+#fw-form-login .login-remember{display:none}
+#fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
+#fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
 .avatar{border-radius:50px}
 .language-button{margin-right:5px}
 .single-quiz img{max-width:100%;height:auto}
@@ -77,11 +106,11 @@ body hr{height:2px;color:#ccc;opacity:.5}
 .drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-non-sequential ._option-image:nth-child(4),.drag-and-drop-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(4){padding-top:10px}
 }@media(max-width:400px){.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{padding-bottom:30px !important}
 }@media(max-width:768px){.single-quiz-wrapper .quiz-questions #sensei-quiz-list .answers{padding:0 !important}
-}.single-course-wrapper{background-color:#f5f5f5}
+}.single-course-wrapper{background-color:#ccc}
 .course-title{background-color:#fff}
 .module-link{color:#444}
 .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
-.card:hover{background-color:#f5f5f5}
+.card:hover{background-color:#ccc}
 .card .header{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .card .header-counter{border-radius:5px}
 .card .header-counter h3{color:#fff}
