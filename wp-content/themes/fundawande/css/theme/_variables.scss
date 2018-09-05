@@ -61,6 +61,24 @@ $module8-primary__colour: #3BA9DC;
 $module9-primary__colour: #FF5943;
 $module10-primary__colour: #CB384A;
 $module11-primary__colour: #FF7C43;
+
+//Array of colours used in global.scss to create module-specific styles
+$module-colours: (
+    0: $module0-primary__colour,
+    1: $module1-primary__colour,
+    2: $module2-primary__colour,
+    3: $module3-primary__colour,
+    4: $module4-primary__colour,
+    5: $module5-primary__colour,
+    6: $module6-primary__colour,
+    7: $module7-primary__colour,
+    8: $module8-primary__colour,
+    9: $module9-primary__colour,
+    10: $module10-primary__colour,
+    11: $module11-primary__colour
+);
+
+
 $coaching-primary__colour: #FED044;
 
 
