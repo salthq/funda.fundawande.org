@@ -6,14 +6,21 @@
 
 {# Twig block to be included in Base.twig #}
 {% block content %}
-    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {# Testing the asset inclusion #}
-        <div class="row">
-            <div class="col-12">
-                <h1>Single Lesson</h1>
-                <pre>
-                    {{ dump(post) }}
-                </pre>
+    <div class = "container-fluid">
+        <div class = "row lesson-title">
+            <div class = "col-sm-12 text-center">
+                <!-- TODO: change lesson number to be dynamic-->
+                <h1 class = "mt-4"><strong>Lesson 2/6</strong></h1>
+                <h1 class = "text-center mb-4">{{function('get_the_title')}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper single-lesson-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container">
+            <div class="row">
+                <div class="col-12">
+                    {{post.content}}
+                </div>
             </div>
         </div>
     </div><!-- #wrapper -->
