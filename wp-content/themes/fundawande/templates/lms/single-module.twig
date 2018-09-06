@@ -30,12 +30,13 @@
                                             </div>
                                             <div class = "unit-header-text">
                                                 <h2><strong>{{unit.name}}</strong></h2>
-                                                <p class = "module-text-{{module_number}} module-progress m-0 d-none d-sm-block">5/7 Lessons Complete</p>
+                                                <p class = "module-text-{{module_number}} module-progress m-0">5/7 Lessons Complete</p>
                                             </div>
                                         </doiv>
                                     </div>
-                                    <div class = "col-sm-12 col-md-4 text-right">
-                                        <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
+                                    <!--Unit navigation buttons tablet and desktop-->
+                                    <div class = "col-sm-12 col-md-4 text-right d-none d-md-block">
+                                        <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
                                             Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
                                         </a>
                                     </div>
@@ -45,18 +46,27 @@
                         </div>
                         <!-- Unit Card Content -->
                         <div class = "row unit-content">
-                                <div class = "col-sm-12">
-                                    <p>{{unit.description}}</p>
-                                    <div class = "sub-units d-flex">
-                                        {% for lesson in unit.lessons %}
-                                            <div class = "sub-units-icon text-center p-3">
-                                                <img class = "img img-rounded" src = "https://via.placeholder.com/50">
-                                                <p class = "py-2">{{lesson.post_title}}</p>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
+                            <div class = "col-sm-12">
+                                <p>{{unit.description}}</p>
+                                <div class = "sub-units d-flex">
+                                    {% for lesson in unit.lessons %}
+                                        <div class = "sub-units-icon text-center">
+                                            <img class = "img img-rounded" src = "https://via.placeholder.com/50">
+                                            <p class = "py-2">{{lesson.post_title}}</p>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+                        </div>
+                        <div class = "row">
+                            <!--Unit navigation buttons mobile-->
+                            <div class = "col-sm-12 text-right d-md-none">
+                                <hr>
+                                <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
+                                    Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

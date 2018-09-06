@@ -19,16 +19,22 @@
     }
     .sub-units {
         flex-flow: wrap;
-        // Display 7 items per row on tablet and above
-        @include breakpoint(tablet) {
+        // Display 7 items per row on desktop
+        @include breakpoint(desktop) {
             &-icon {
                 flex: 0 0 14%;
+            }
+        }
+        // Display 5 item per row on tablet
+        @include breakpoint(tablet) {
+            &-icon {
+                flex: 0 0 20%;
             }
         }
         // Display 3 items per row on mobile
         @include breakpoint(phone) {
             &-icon {
-                flex: 0 0 33%;
+                flex: 0 0 31%;
             }
         }
     } 
