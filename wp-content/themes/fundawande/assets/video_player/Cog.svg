@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>357C2F5C-C910-4DE3-BDA4-DBDDBE8E9820</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M536.434607,22.7986179 L538.455447,20.7777778 L540.419633,22.7419633 L538.370453,24.7911433 C539.277748,26.0398164 539.895139,27.5127587 540.123765,29.1111111 L543,29.1111111 L543,31.8888889 L540.123765,31.8888889 C539.888167,33.5359816 539.239733,35.0498991 538.286645,36.3224599 L540.419633,38.4554473 L538.455447,40.4196328 L536.32246,38.2866454 C535.049899,39.2397334 533.535982,39.8881673 531.888889,40.1237655 L531.888889,43 L529.111111,43 L529.111111,40.1237655 C527.512759,39.8951391 526.039816,39.2777485 524.791143,38.3704528 L522.741963,40.4196328 L520.777778,38.4554473 L522.798618,36.4346072 C521.798939,35.1392313 521.118793,33.5846401 520.876235,31.8888889 L518,31.8888889 L518,29.1111111 L520.876235,29.1111111 C521.111833,27.4640184 521.760267,25.9501009 522.713355,24.6775401 L520.777778,22.7419633 L522.741963,20.7777778 L524.67754,22.7133546 C525.950101,21.7602666 527.464018,21.1118327 529.111111,20.8762345 L529.111111,18 L531.888889,18 L531.888889,20.8762345 C533.58464,21.1187927 535.139231,21.798939 536.434607,22.7986179 Z M530.5,36.0555556 C533.568249,36.0555556 536.055556,33.5682486 536.055556,30.5 C536.055556,27.4317514 533.568249,24.9444444 530.5,24.9444444 C527.431751,24.9444444 524.944444,27.4317514 524.944444,30.5 C524.944444,33.5682486 527.431751,36.0555556 530.5,36.0555556 Z" id="path-1"></path>
+        <filter x="-6.0%" y="-6.0%" width="112.0%" height="112.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="6.-Video-Player" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.9">
+        <g id="Video-Player-[FWVIDEO001---Tablet]" transform="translate(-717.000000, -521.000000)">
+            <g id="Lesson-Content" transform="translate(50.000000, -196.000000)">
+                <g id="Video" transform="translate(150.000000, 404.000000)">
+                    <g id="Controls" transform="translate(0.000000, 296.000000)">
+                        <g id="Cog">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
