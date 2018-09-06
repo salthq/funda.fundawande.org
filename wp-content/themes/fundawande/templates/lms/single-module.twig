@@ -30,13 +30,13 @@
                                             </div>
                                             <div class = "unit-header-text">
                                                 <h2><strong>{{unit.name}}</strong></h2>
-                                                <p class = "module-text-{{module_number}} module-progress d-none d-sm-block">5/7 Lessons Complete</p>
+                                                <p class = "module-text-{{module_number}} module-progress m-0 d-none d-sm-block">5/7 Lessons Complete</p>
                                             </div>
                                         </doiv>
                                     </div>
                                     <div class = "col-sm-12 col-md-4 text-right">
                                         <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
-                                            Resume Unit
+                                            Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
                                         </a>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     <p>{{unit.description}}</p>
                                     <div class = "sub-units d-flex">
                                         {% for lesson in unit.lessons %}
-                                            <div class = "text-center">
+                                            <div class = "sub-units-icon text-center p-3">
                                                 <img class = "img img-rounded" src = "https://via.placeholder.com/50">
                                                 <p class = "py-2">{{lesson.post_title}}</p>
                                             </div>
