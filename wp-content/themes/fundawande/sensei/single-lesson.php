@@ -38,6 +38,20 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
+
+    // Get previous and next lesson URLs
+    $nav_links = sensei_get_prev_next_lessons( $post->ID );
+    if ( isset( $nav_links['previous']) || isset( $nav_links['previous'])) {
+        //If a previous lesson exists, add the previous lesson URL to context
+        if(isset( $nav_links['previous'])) {
+            $context['prev_url'] = $nav_links['previous']['url'];
+        }
+        //If a next lesson exists, add the next lesson URL to context
+        if(isset( $nav_links['next'])) {
+            $context['next_url'] = $nav_links['next']['url'];
+        }
+    }
+
     Timber::render(array('lms/single-lesson.twig', 'page.twig'), $context);
 
 }

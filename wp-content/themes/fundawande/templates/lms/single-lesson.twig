@@ -22,7 +22,12 @@
         <div class = "container">
             <div class="row">
                 <div class="col-12">
-                
+                    {% if prev_url %}
+                        <a href = "{{prev_url}}">Previous Lesson Test</a>
+                    {% endif %}
+                    {% if next_url %}
+                        <a href = "{{next_url}}">Next Lesson Test</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
