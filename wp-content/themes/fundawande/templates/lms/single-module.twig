@@ -51,8 +51,10 @@
                                 <div class = "sub-units d-flex">
                                     {% for lesson in unit.lessons %}
                                         <div class = "sub-units-icon text-center">
-                                            <img class = "img img-rounded" src = "https://via.placeholder.com/50">
-                                            <p class = "py-2">{{lesson.post_title}}</p>
+                                            <a href = "{{function('get_post_permalink', lesson.ID)}}">
+                                                <img class = "img img-rounded" src = "https://via.placeholder.com/50">
+                                                <p class = "py-2">{{lesson.post_title}}</p>
+                                            </a>
                                         </div>
                                     {% endfor %}
                                 </div>

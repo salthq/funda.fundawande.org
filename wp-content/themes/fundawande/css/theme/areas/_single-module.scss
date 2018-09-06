@@ -19,6 +19,12 @@
     }
     .sub-units {
         flex-flow: wrap;
+        &-icon {
+            a { 
+                color: $text-primary__colour;
+                text-decoration: none;
+            }
+        }
         // Display 7 items per row on desktop
         @include breakpoint(desktop) {
             &-icon {

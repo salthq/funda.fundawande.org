@@ -92,7 +92,6 @@ class FundaWande_Modules {
             // Get the unit lessons for display within the module
             $module_units[$key]->lessons = Sensei()->modules->get_lessons($course_id, $unit);
 
-
         }
 
         return $module_units;
