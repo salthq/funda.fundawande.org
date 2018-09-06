@@ -4,3 +4,15 @@
 * Styling specific to the lesson page, single-lesson.twig
 *
  ========================================================================== */
+
+ .single-lesson-wrapper {
+     .lesson {
+         &-progress-sidebar {
+             background-color: $white;
+             max-width: 150px;
+             position: sticky;
+             top: 100px;
+             z-index: 5;
+         }
+     }
+ }
