@@ -93,6 +93,9 @@ var mmq          = require('gulp-merge-media-queries'); // Combine matching medi
 // JS related plugins.
 var concat       = require('gulp-concat'); // Concatenates JS files
 var uglify       = require('gulp-uglify'); // Minifies JS files
+var babel       = require('gulp-babel'); // Minifies JS files
+var jsx = require('gulp-jsx');
+var streamify = require('gulp-streamify');
 
 // Utility related plugins.
 var rename       = require('gulp-rename'); // Renames files E.g. style.css -> style.min.css
@@ -245,6 +248,7 @@ gulp.task('customStyles', function () {
   */
  gulp.task( 'customGlobalJS', function() {
     gulp.src( jsCustomGlobalSRC )
+
     .pipe( concat( jsCustomFile + '.js' ) )
     .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
     .pipe( gulp.dest( jsCustomDestination ) )
@@ -252,7 +256,12 @@ gulp.task('customStyles', function () {
       basename: jsCustomFile,
       suffix: '.min'
     }))
-    .pipe( uglify() )
+    // .pipe(babel({
+    //     presets: ['es2015', 'react']
+    // }))
+    .pipe( streamify(uglify()).on('error', function(e){
+        console.log(e);
+    }) )
     .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
     .pipe( gulp.dest( jsCustomDestination ) )
  });
@@ -274,7 +283,7 @@ gulp.task( 'customJS', function() {
         .pipe( rename( {
             suffix: '.min'
         }))
-        .pipe( uglify() )
+        .pipe( streamify(uglify()))
         .pipe( gulp.dest( jsCustomDestination ) )
 });
 
