@@ -23,12 +23,16 @@
         <div class = "container-fluid">
             <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
             {% for content in post.get_field('content_types') %}
+                <!-- Full width video -->
                 {% if content.acf_fc_layout == 'full_width_video' %}
                     {% include '/lms/content-types/full-width-video.twig' %}
+                <!-- Medium video -->    
                 {% elseif content.acf_fc_layout == 'medium_video' %}
                     {% include '/lms/content-types/medium-video.twig' %}
+                <!-- Pulled left smaller video -->      
                 {% elseif content.acf_fc_layout == 'pulled_left_smaller_video' %}
                     {% include '/lms/content-types/pulled-left-smaller-video.twig' %}
+                <!-- Pulled right smaller video -->      
                 {% elseif content.acf_fc_layout == 'pulled_right_smaller_video' %}
                     {% include '/lms/content-types/pulled-right-smaller-video.twig' %}
                 {% endif %}
