@@ -55,6 +55,11 @@
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if next_url %}
                         <a href = "{{next_url}}" class = "btn btn-outline-info">Next Lesson {{source ('/assets/arrow_right.svg')}}</a>
+                    {% else %}
+                        {% include '/lms/modals/modal-end-unit.twig' %}
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#end-unit-modal">
+                            Complete Lesson {{source ('/assets/arrow_right.svg')}}
+                        </button>
                     {% endif %}
                 </div>                    
             </div>
