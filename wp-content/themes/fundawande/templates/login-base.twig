@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html {{ fn('language_attributes') }}>
+{# Add the native WordPress header.php #}
+
+{% embed "embeds/header-head.twig" %}
+    {% block head_content %}
+		<title>{{ post.title }} | {{ site.name }}</title>
+        {{ function('wp_head') }}
+    {% endblock %}
+{% endembed %}
+
+<body {{ fn('body_class') }}>
+
+
+<div id="page" class="hfeed site">
+
+	 {# Include the .twig template extended off base.twig #}
+	 {% block content %}
+	 {% endblock %}
+
+</div>
+</div><!-- #page -->
+
+{# Add the native WordPress footer function #}
+{{ function('wp_footer') }}
+
+
+<!--GOOGLE ANALYTICS SCRIPT-->
+<script>
+
+</script>
+
+<!-- Intercom Script -->
+<script>
+    window.intercomSettings = {
+        app_id: "ssnb6s98"
+    };
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ssnb6s98';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+</body>
+
+</html>

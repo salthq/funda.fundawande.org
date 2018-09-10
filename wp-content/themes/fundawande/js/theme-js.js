@@ -40,12 +40,7 @@ players.forEach(function (player) {
     const ranges = player.querySelectorAll('.player__slider');
     const speeds = player.querySelectorAll('.speed');
     const fullscreen = player.querySelector('.fullscreen');
-
     const modal = player.closest(".modal");
-
-
-
-
 
     /* Build out functions */
 

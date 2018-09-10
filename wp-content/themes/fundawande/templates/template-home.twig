@@ -10,12 +10,7 @@
         {# Testing the asset inclusion #}
         <div class="row">
             <div class="col-12">
-                <h1>Home Page</h1>
-                {{ mixin.fullWidthVideo('https://www.w3schools.com/html/mov_bbb.mp4') }}
-            </div>
-            <div class="col-6">
-                <h1>Seondary</h1>
-                {{ mixin.videoPlayer('https://www.w3schools.com/html/mov_bbb.mp4') }}
+                <h1>{{ post.get_field(lang.prefix~'title') }}</h1>
             </div>
         </div>
     </div><!-- #wrapper -->

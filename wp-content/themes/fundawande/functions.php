@@ -7,6 +7,12 @@
  * @package boilerplate
  */
 
+
+// Set up constant variable to control JS & CSS versioning
+// This version number must be changed whenever pushing to stable branch
+const FW_VER = 0.01;
+
+
 /**
  * Enqueue scripts and styles.
  */
@@ -23,9 +29,17 @@ function pango_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'pango_scripts' );
 
+/**
+ * Enqueue admin scripts and styles.
+ */
+function pango_admin_scripts() {
+    wp_enqueue_style( 'theme-admin-style',  get_template_directory_uri().'/css/admin-styles.min.css' ,array(),'1' );
+
+}
+add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
+
 
 /**
  * Load Timber compatibility file.
  */
 require get_template_directory() . '/includes/functions-timber.php';
-

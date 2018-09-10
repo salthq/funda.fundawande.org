@@ -1,0 +1,110 @@
+/* ==========================================================================
+* Login area
+*
+* Styling specific to login page template template-login.twig
+*
+ ========================================================================== */
+.login-wrapper {
+  justify-content: center;
+  //Media queries which control the sidebar content view 
+  @media only screen and (min-width: 769px) {
+    .login {
+      border-right: 2px solid $grey-secondary;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+  }
+
+  //General login page styling
+  .login {
+    &-row {
+      align-items: center;
+    }
+    &-language-button {
+      border: 1px solid $grey-tertiary;
+      border-radius: 5px;
+      color: #787878;
+    }
+    .active {
+      background-color: $grey-tertiary;
+      color: $white;
+    }
+    &-language-label {
+      color: $grey-tertiary;
+      font-size: 16px;
+    }
+    &-form {
+      margin: 0 auto;
+      max-width: 315px; //On the mockups the form width is 315px
+      padding-top: 30px;
+    }
+    &-help {
+      text-decoration: underline;
+      &:hover {
+        color: $brand-secondary__colour;
+      }
+    }
+    &-error {
+      color: $brand-primary__colour
+    }
+    &-noerror {
+      color: $grey-tertiary;
+    }
+    &-alert {
+      background-color: $grey-primary;
+      border: 1px solid $grey-tertiary;
+      border-radius: 5px;
+    }
+  }
+
+
+  /*
+  * Custom form styling - due to pulling in the form with wp_login_form, we have to target IDs and use flexbox to display items correctly
+  */
+  #fw-form-login {
+    %login-inputs {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      label {
+        font-weight: bold;
+      }
+      input {
+        border: 1px solid $brand-primary__colour;
+        border-radius: 5px;
+        color: $grey-tertiary;
+        padding: 10px;
+      }
+    }
+    .login-username {
+      @extend %login-inputs;
+    }
+    .login-password {
+      @extend %login-inputs;
+    }
+    //User is remembered by default, so we hide the 'remember me' checkbox
+    .login-remember {
+      display: none;
+    }
+    .login-submit {
+      display: flex;
+      justify-content: stretch;
+      margin-top: 50px;
+      #fw-submit {
+        background-color: $brand-primary__colour;
+        border-radius: 5px;
+        color: #fff;
+        font-family: $base-header__font-family;
+        font-size: 21px;
+        padding: 10px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+

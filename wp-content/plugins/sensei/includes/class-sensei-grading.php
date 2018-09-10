@@ -837,7 +837,7 @@ class Sensei_Grading {
         }
 
         // auto grading core
-        if( in_array( $question_type ,  array( 'multiple-choice'  , 'boolean'  ) )   ){
+        if( in_array( $question_type ,  array( 'multiple-choice', 'multiple-choice-with-images', 'boolean' ) )   ){
 
             $right_answer = (array) get_post_meta( $question_id, '_question_right_answer', true );
 
