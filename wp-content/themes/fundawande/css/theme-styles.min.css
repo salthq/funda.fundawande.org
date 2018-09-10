@@ -74,6 +74,7 @@ body hr{height:2px;color:#ccc;opacity:.5}
 .player .player__button{background:0;border:0;line-height:1;color:white;text-align:center;outline:0;cursor:pointer;max-width:52px;padding:.75rem}
 .player .player__button:hover{cursor:pointer;opacity:.8}
 .player .player__button svg{vertical-align:initial}
+.player .player__button.toggle{letter-spacing:3px}
 .player .player__slider{width:10px;height:25px}
 .player .player__start{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;position:absolute;bottom:0;width:100%;height:100%}
 .player .player__start:hover{cursor:pointer}

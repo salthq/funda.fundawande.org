@@ -69,7 +69,7 @@ players.forEach(function (player) {
 
     // Handle the play/pause update button
     function updateButton() {
-        const icon = this.paused ? '►' : '❚ ❚';
+        const icon = this.paused ? '►' : '❚❚';
         toggle.textContent = icon;
     }
 
