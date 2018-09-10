@@ -32,9 +32,9 @@
 {# Add full screen video player #}
 {% macro fullWidthVideo(src) %}
     {% import _self as mixins %}
-
+    <div class="full-width-video-container">
         <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 80vh;{{ mixins.bgImg('http://fundawande.org/wp-content/uploads/2018/02/fundawande-home-slider1.jpg','0,0,0',0.0) }}" data-toggle="modal" data-target="#videoModal" >
-                <span class="svg-green" style="fill:#28a745">{{ source('/assets/Play_button.svg') }}</span>
+                <span class="svg-green play-button" style="fill:#28a745">{{ source('/assets/Play_button.svg') }}</span>
 
         </div>
         <div id="videoModal" class="modal" tabindex="-1" role="dialog">
@@ -45,6 +45,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 {% endmacro %}
 
