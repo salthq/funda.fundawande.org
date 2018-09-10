@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if prev_url %}
-                        <a href = "{{prev_url}}" class = "btn btn-outline-info"><img class = "mx-2" src = "/wp-content/themes/fundawande/assets/arrow_left.svg"> Previous Lesson</a>
+                        <a href = "{{prev_url}}" class = "btn btn-outline-info"> {{source ('/assets/arrow_left.svg')}} Previous Lesson</a>
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if next_url %}
-                        <a href = "{{next_url}}" class = "btn btn-outline-info">Next Lesson <img class = "mx-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></a>
+                        <a href = "{{next_url}}" class = "btn btn-outline-info">Next Lesson {{source ('/assets/arrow_right.svg')}}</a>
                     {% endif %}
                 </div>                    
             </div>
