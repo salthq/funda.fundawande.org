@@ -16,53 +16,96 @@
     #}
 {% endmacro %}
 
+{# Add cover background image with given opacity #}
+{% macro bgImg(src,overlay,opacity=0) %}
+    {% import _self as mixins %}
+    background-position : 50% 50%;
+    background-size:cover;
+    background-image: linear-gradient(to bottom, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
+    background-image: -moz-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
+    background-image: -o-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
+    background-image: -ms-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba({{ overlay}}, {{ opacity }})), to(rgba({{ overlay}}, {{ opacity }}))), url('{{src}}');
+    background-image: -webkit-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
+{% endmacro %}
+
+{# Add full screen video player #}
+{% macro fullWidthVideo(src) %}
+    {% import _self as mixins %}
+
+        <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 80vh;{{ mixins.bgImg('http://fundawande.org/wp-content/uploads/2018/02/fundawande-home-slider1.jpg','0,0,0',0.0) }}" data-toggle="modal" data-target="#videoModal" >
+                <span class="svg-green" style="fill:#28a745">{{ source('/assets/Play_button.svg') }}</span>
+
+        </div>
+        <div id="videoModal" class="modal" tabindex="-1" role="dialog">
+
+            <div class=" modal-dialog d-flex"  role="document">
+                <div class="modal-content">
+                    {{ mixins.videoPlayer(src) }}
+                </div>
+            </div>
+        </div>
+
+{% endmacro %}
+
 {# Add video player #}
 {% macro videoPlayer(src) %}
     {% import _self as mixins %}
     <div class="player">
+
         <video class="player__video viewer" >
             <source src="{{ src }}" type="video/mp4">
         </video>
 
-        <div class="player__start  align-items-center justify-content-center">
+        <div class="player__start  align-items-center justify-content-center" style="{{ mixins.bgImg('http://fundawande.org/wp-content/uploads/2018/02/fundawande-home-slider1.jpg','0,0,0',0.0) }}">
             <span class="svg-green">{{ source('/assets/Play_button.svg') }}</span>
         </div>
+        <div class="player__end flex-column align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.3)">
+            <span class="">{{ source('/assets/Replay_video_icon.svg') }}</span>
+            <h3 class="mt-2">Replay video</h3>
+        </div>
 
-        <div class="player__controls d-flex">
+        <div class="player__controls ">
             <div class="col-12">
                 <div class="progress ">
+
+                    <div class="progress__loaded"></div>
                     <div class="progress__filled"></div>
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-between">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center ">
                     <div class="d-flex align-items-center">
 
                         <button class="player__button toggle" title="Toggle Play">►</button>
                     </div>
 
-                    <div class="d-flex align-items-center sound-box"><span class="sound d-flex">{{ source('/assets/Sound_icon.svg') }}</span> <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+                    <div class="d-flex align-items-center sound-box">
+                        <span class="sound d-flex player__button">{{ source('/assets/Sound_icon.svg') }}</span> <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
                     </div>
-
+                    <div class="d-flex align-items-center">
                     <button data-skip="-30" class="player__button">{{ source('/assets/Back_30_icon.svg') }}</button>
+
+
+                    </div>
                 </div>
 
-                <div class="player__text">
+                <div class="player__text ">
                     <span class="current-time">0:00</span> / <span class="duration-time">0:00</span>
                 </div>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center  justify-content-end ">
                 {#<input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">#}
-                    <button class='player__button download' title='' accesskey="" ]>{{ source('/assets/Download_video_icon.svg') }}</button>
+                    <a  class='player__button download' href="{{ src }}" target="_blank" title="Right click and 'Save link as..'" download>{{ source('/assets/Download_video_icon.svg') }}</a>
                     <div class="settings-block">
-                        <button class='player__button settings-toggle' title='toggle full screen' onclick='toggleSettings();'>{{ source('/assets/Cog_icon.svg') }}</button>
+                       <button class='player__button settings-toggle' title='toggle full screen' >{{ source('/assets/Cog_icon.svg') }}</button>
                         <div class="settings">
-                            <button name="playbackRate" class="player__button speed" value="0.5">0.5</button>
-                            <button name="playbackRate" class="player__button speed" value="1">1</button>
-                            <button name="playbackRate" class="player__button speed" value="1.5">1.5</button>
+                            <button name="playbackRate" class="speed" value="0.5">0.5x</button>
+                            <button name="playbackRate" class="speed" value="1">1x</button>
+                            <button name="playbackRate" class="speed" value="1.5">1.5x</button>
                         </div>
                     </div>
 
-                    <button class='player__button fullscreen' title='toggle full screen' accesskey="T" onclick='toggleFullScreen();'>{{ source('/assets/Fullscreen_icon.svg') }}</button>
+                    <button class='player__button fullscreen' title='toggle full screen' accesskey="T" >{{ source('/assets/Fullscreen_icon.svg') }}</button>
 
                 </div>
             </div>

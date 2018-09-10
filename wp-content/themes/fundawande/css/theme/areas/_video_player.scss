@@ -4,11 +4,19 @@
 * Styling specific to video player
 *
  ========================================================================== */
+.video-container {
 
+  iframe {
+
+  }
+
+}
 
 .player {
-  max-width:750px;
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 55.25%;
   font-size: 0;
   overflow: hidden;
   color: white;
@@ -17,7 +25,11 @@
     width: 100%;
   }
   .player__video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
   }
   .player__button {
     background:none;
@@ -26,11 +38,15 @@
     color:white;
     text-align: center;
     outline:0;
-    padding: 0;
     cursor:pointer;
-    max-width:50px;
-    &:focus {
-      border-color: red;
+    max-width:52px;
+    padding: 0.75rem;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    svg {
+      vertical-align: initial;
     }
   }
   .player__slider {
@@ -44,16 +60,31 @@
     width: 100%;
     height: 100%;
     &:hover {
-      opacity: 0.7;
       cursor: pointer;
+      span {
+        opacity: 0.8;
+      }
     }
     .svg-green svg {
       fill:green;
     }
   }
+  .player__end {
+    display:none;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      cursor: pointer;
+      span {
+        opacity: 0.8;
+      }
+    }
+  }
 
     .player__controls {
-    display:flex;
+    display:none;
     position: absolute;
     bottom:0;
     width: 100%;
@@ -65,9 +96,27 @@
       .settings {
         display: none;
         position: absolute;
-        top:-7rem;
+        top:-8rem;
+        background-color: rgba(0,0,0,0.9);
+        width: 50px;
+        button {
+          width: 100%;
+          text-align: left;
+          background-color: transparent;
+          padding: 0.5rem;
+          font-size: 1rem;
+          color: white;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+          }
+        }
 
       }
+    }
+    .player__text {
+      opacity:0.7;
+      padding: 0.75rem;
     }
 
 
@@ -96,7 +145,7 @@
     display:flex;
     flex-basis:100%;
     height:5px;
-    background:rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0.2);
     cursor:ew-resize;
   }
 
@@ -106,6 +155,15 @@
     background:red;
     flex:0;
     flex-basis:0%;
+    position: absolute;
+  }
+  .progress__loaded {
+    width:0%;
+    height: 5px;
+    background-color: rgba(255,255,255,0.5);
+    flex:0;
+    flex-basis:0%;
+    position: absolute;
   }
 
   /* unholy css to style input type="range" */
@@ -128,7 +186,7 @@
     height: 8.4px;
     cursor: pointer;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
-    background: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.2);
     border-radius: 1.3px;
     border: 0.2px solid rgba(1, 1, 1, 0);
   }
@@ -143,14 +201,14 @@
     box-shadow:0 0 2px rgba(0,0,0,0.2);
   }
   input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #bada55;
+    background-color: rgba(255,255,255,0.5);
   }
   input[type=range]::-moz-range-track {
     width: 100%;
     height: 8.4px;
     cursor: pointer;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
-    background: #ffffff;
+    background-color: rgba(255,255,255,0.2);
     border-radius: 1.3px;
     border: 0.2px solid rgba(1, 1, 1, 0);
   }
@@ -164,8 +222,6 @@
   }
 
 }
-
-
 
 
 
