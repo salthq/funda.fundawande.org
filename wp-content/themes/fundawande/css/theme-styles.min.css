@@ -147,4 +147,5 @@ body hr{height:2px;color:#ccc;opacity:.5}
 @media(min-width:992px){.single-module-wrapper .sub-units-icon{-webkit-box-flex:0;-webkit-flex:0 0 14%;-ms-flex:0 0 14%;flex:0 0 14%}
 }@media(min-width:768px){.single-module-wrapper .sub-units-icon{-webkit-box-flex:0;-webkit-flex:0 0 20%;-ms-flex:0 0 20%;flex:0 0 20%}
 }@media(max-width:767px){.single-module-wrapper .sub-units-icon{-webkit-box-flex:0;-webkit-flex:0 0 31%;-ms-flex:0 0 31%;flex:0 0 31%}
-}.single-lesson-wrapper .lesson-progress-sidebar{background-color:#fff;max-width:150px;position:-webkit-sticky;position:sticky;top:100px;z-index:5}
+}.lesson-navigation-top{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.lesson-progress-sidebar{background-color:#fff;max-width:150px;position:-webkit-sticky;position:sticky;top:100px;z-index:5}
