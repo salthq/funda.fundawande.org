@@ -35,6 +35,9 @@
                 <!-- Pulled right smaller video -->      
                 {% elseif content.acf_fc_layout == 'pulled_right_smaller_video' %}
                     {% include '/lms/content-types/pulled-right-smaller-video.twig' %}
+                <!-- Image carousel -->      
+                {% elseif content.acf_fc_layout == 'carousel' %}
+                    {% include '/lms/content-types/image-carousel.twig' %}
                 {% endif %}
             {% endfor %}
         </div>
