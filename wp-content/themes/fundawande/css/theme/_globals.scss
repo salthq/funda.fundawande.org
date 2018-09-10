@@ -9,6 +9,7 @@
 ----------------------------------------------------------------
 # Backgrounds
 # Typography
+# Module Styling
 --------------------------------------------------------------*/
 
 /*
@@ -100,7 +101,12 @@ body {
 }
 
 
-//Loop through the $module_colours array found in variables.scss and assign the colours to border, text and backgrounds.
+/*
+ * Module Styling
+ */
+
+
+//Loop through the $module_colours array found in variables.scss and assign the colours to border, text, backgrounds and SVGs.
 @each $colour_key, $colour_var in $module_colours {
     .module-bg-#{$colour_key} {
         background-color: $colour_var;
@@ -110,5 +116,15 @@ body {
     }
     .module-border-#{$colour_key} {
         border-color: $colour_var;
+    }
+    .module-svg-fill-#{$colour_key} {
+        svg {
+            fill: $colour_var;
+        }
+    }
+    .module-svg-stroke-#{$colour_key} {
+        svg {
+            stroke: $colour_var;
+        }
     }
 }
