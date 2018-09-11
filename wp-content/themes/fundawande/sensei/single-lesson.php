@@ -40,6 +40,11 @@ if (class_exists('Timber')) {
 
     //Get the unit info for the current lesson
     $unit = Sensei()->modules->get_lesson_module( $post->ID );
+
+    //Get the module number for the parent module, to enable module-specific styling
+    $context['module_number'] = get_term_meta($unit->parent, 'module_number', true);
+
+    //Get the name of the current unit
     $context['unit_name'] = $unit->name;
 
     // Get previous and next lesson URLs

@@ -88,7 +88,7 @@ class FundaWande_Modules {
 
             // Get the term data in case there are custom fields
             $module_units[$key]->meta = get_term_meta($unit);
-
+            
             // Get the unit lessons for display within the module
             $module_units[$key]->lessons = Sensei()->modules->get_lessons($course_id, $unit);
 

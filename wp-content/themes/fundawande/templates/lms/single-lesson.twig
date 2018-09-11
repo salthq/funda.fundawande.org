@@ -6,14 +6,14 @@
 
 {# Twig block to be included in Base.twig #}
 {% block content %}
-    <div class = "container-fluid">
+    <div class = "container-fluid lesson-header">
         <div class = "container">
             <div class = "row lesson-navigation-top">
                 <div class = "col-sm-2 col-md-4">
-                    <a class = "btn btn-outline-info" href "#">
-                        {{source('/assets/arrow_left.svg')}}
+                    <a class = "btn btn-outline-info module-border-{{module_number}}" href "#">
+                        <span class = "module-svg-fill-{{module_number}}">{{source('/assets/arrow_left.svg')}}</span>
                         <br>
-                        <span class = "d-none d-md-block">Back to Units</span> 
+                        <span class = "d-none d-md-block module-text-{{module_number}}">Back to Units</span> 
                     </a>
                 </div>
                 <div class = "col-sm-10 col-md-4 text-center my-4">
@@ -24,13 +24,10 @@
             </div>
         </div>
     </div>
-    <div class="wrapper single-lesson-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "lesson-progress-sidebar">
             <p>Unit Progress will go here</p>
         </div>
-        <pre>
-            {{ dump(unit) }}
-        </pre>
         <!-- Lesson Content-->
         <div class = "container-fluid">
             <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
@@ -58,23 +55,24 @@
         </div>
         <!-- Bottom navigation-->
         <div class = "container">
+            <hr>
             <div class="row my-4">
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if prev_url %}
-                        <a href = "{{prev_url}}" class = "btn btn-outline-info"> {{source ('/assets/arrow_left.svg')}} Previous Lesson</a>
+                        <a href = "{{prev_url}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                   ID = {{unit}}
+                   Progress Component
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if next_url %}
-                        <a href = "{{next_url}}" class = "btn btn-outline-info">Next Lesson {{source ('/assets/arrow_right.svg')}}</a>
+                        <a href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                     {% else %}
                         <!-- If there is no next_url, then this lesson is the end of a unit, so the unit completion modal needs to fire -->
                         {% include '/lms/modals/modal-end-unit.twig' %}
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#end-unit-modal">
-                            Complete Lesson {{source ('/assets/arrow_right.svg')}}
+                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                            Complete Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </button>
                     {% endif %}
                 </div>                    
