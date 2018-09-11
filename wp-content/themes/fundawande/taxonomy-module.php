@@ -18,6 +18,7 @@ if (class_exists('Timber')) {
     $context['user'] = new TimberUser();
     $context['term'] = $term;
 
+    //Get module number to enable module-specific styling
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
 
     // Get the modules units to visualise on the module page

@@ -38,6 +38,9 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
+    //Get the unit info for the current lesson
+    $unit = Sensei()->modules->get_lesson_module( $post->ID );
+    $context['unit_name'] = $unit->name;
 
     // Get previous and next lesson URLs
     $nav_links = sensei_get_prev_next_lessons( $post->ID );

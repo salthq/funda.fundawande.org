@@ -42,7 +42,7 @@ class FundaWande_Modules {
 
         foreach($course_modules  as $key => $module) {
 
-            // if there is a module parent then it's a child module (unit(_
+            // if there is a module parent then it's a child module (unit)
             if ($module->parent) {
 
                 // Unset the child module from array
