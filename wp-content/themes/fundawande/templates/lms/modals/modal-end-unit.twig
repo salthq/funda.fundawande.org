@@ -8,13 +8,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>You have successfully completed the <strong>{{unit_name}}</strong> unit</p>
+        <p>You have successfully completed the <strong>{{current_unit_name}}</strong> unit</p>
         <!-- TODO: dynamically pull in the name of the next unit in the module-->
-        <p>Next unit up: <strong>Oral Reading Fluency</strong>
+        <p>Next unit up: <strong>{{next_unit_title}}</strong>
       </div>
       <div class="modal-footer">
             <p>Module progress component to go here</p>
-            <a href = "#" class = "btn btn-outline-info">Continue {{source ('/assets/arrow_right.svg')}}</a>
+            <a href = "{{next_unit_link}}" class = "btn btn-outline-info module-border-{{module_number}} module-text-{{module_number}}">Continue <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
       </div>
     </div>
   </div>
