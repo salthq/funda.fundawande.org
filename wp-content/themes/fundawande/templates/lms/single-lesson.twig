@@ -12,6 +12,10 @@
             <div class="col-12">
                 <h1>Single Lesson</h1>
                 {{ post.content }}
+                <pre>{{ dump(lessons) }}</pre>
+                <pre>{{ dump(next_lesson_module) }}</pre>
+                <a id="lesson-complete" class="fw-next-lesson" href="#" data-lesson-key="{{ post.fw_unique_key }}"  data-post-id="{{ post.ID }}" data-user-id="{{ user.ID }}" data-url="{{ next_lesson }}">Next Lesson</a>
+
             </div>
         </div>
     </div><!-- #wrapper -->

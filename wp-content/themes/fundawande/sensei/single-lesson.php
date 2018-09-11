@@ -37,6 +37,9 @@ if (class_exists('Timber')) {
     // Assign current user to context
     $user = new TimberUser();
     $context['user'] = $user;
+//    $context['lessons'] = Sensei()->course->course_lessons(31);
+
+
 
     Timber::render(array('lms/single-lesson.twig', 'page.twig'), $context);
 

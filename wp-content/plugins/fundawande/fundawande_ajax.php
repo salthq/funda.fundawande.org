@@ -22,7 +22,7 @@ $action = esc_attr(trim($_REQUEST['action']));
 
 //A bit of security
 $allowed_actions = array(
-    '',
+    'fw_lesson_complete',
 );
 
 if(in_array($action, $allowed_actions)){
