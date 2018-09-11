@@ -53,20 +53,20 @@
                 {% if content.acf_fc_layout == 'image_full_width' %}
                     {% include '/lms/content-types/image/image-full-width.twig' %}
                 {# Container width image#}
-                {% if content.acf_fc_layout == 'image_container_width' %}    
+                {% elseif content.acf_fc_layout == 'image_container_width' %}    
                     {% include '/lms/content-types/image/image-container-width.twig' %}
                 {# Pulled left image #}
-                {% if content.acf_fc_layout == 'image_pulled_left' %}    
+                {% elseif content.acf_fc_layout == 'image_pulled_left' %}    
                     {% include '/lms/content-types/image/image-pulled-left.twig' %}
                 {# Pulled right image #}  
-                {% if content.acf_fc_layout == 'image_pulled_right' %}    
+                {% elseif content.acf_fc_layout == 'image_pulled_right' %}    
                     {% include '/lms/content-types/image/image-pulled-right.twig' %}
 
                 <!--
                     Video content types
                 -->    
                 {# Full width video #}
-                {% if content.acf_fc_layout == 'video_full_width' %}
+                {% elseif content.acf_fc_layout == 'video_full_width' %}
                     {% include '/lms/content-types/video/video-full-width.twig' %}
                 {# Container width video #}    
                 {% elseif content.acf_fc_layout == 'video_container_width' %}
@@ -104,7 +104,7 @@
                 -->
                 {# Copy text #}
                 {% elseif content.acf_fc_layout == 'copy_text' %}
-                    {% include '/lms/content-types/copy_text.twig' %}
+                    {% include '/lms/content-types/copy-text.twig' %}
 
                 {% endif %}
             {% endfor %}

@@ -1,8 +1,10 @@
-<div class = "row">
-    <div class = "col-sm-12 col-md-6">
-        {{content.text}}
-    </div>
-    <div class = "col-sm-12 col-md-6">
-        {{ mixin.videoPlayer(content.video_url) }}
+<div class = "container my-5">
+    <div class = "row">
+        <div class = "col-sm-12 col-md-6">
+            {{content.text}}
+        </div>
+        <div class = "col-sm-12 col-md-6">
+             {{ mixin.videoPlayer(content.video_url) }}
+        </div>
     </div>
 </div>
