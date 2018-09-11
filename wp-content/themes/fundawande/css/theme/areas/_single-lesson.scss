@@ -19,4 +19,26 @@
         top: 100px;
         z-index: 5;
     }
+    &-carousel {
+        &-image {
+            width: 100%;
+        }
+        @include breakpoint(desktop) {
+            &-image {
+                height: 600px;
+            }
+        }
+        @include breakpoint(mobile) {
+            &-image {
+                height: 220px;
+            }
+        }
+        &-control {
+            &-icon {
+                border-radius: 50px;
+                background-color: $brand-primary__colour;
+            }
+            top: 65%;
+        }
+    }
 }

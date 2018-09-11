@@ -187,3 +187,7 @@ body hr{height:2px;color:#ccc;opacity:.5}
 }@media(max-width:767px){.single-module-wrapper .sub-units-icon{-webkit-box-flex:0;-webkit-flex:0 0 31%;-ms-flex:0 0 31%;flex:0 0 31%}
 }.lesson-navigation-top{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .lesson-progress-sidebar{background-color:#fff;max-width:150px;position:-webkit-sticky;position:sticky;top:100px;z-index:5}
+.lesson-carousel-image{width:100%}
+@media(min-width:992px){.lesson-carousel-image{height:600px}
+}.lesson-carousel-control{top:65%}
+.lesson-carousel-control-icon{border-radius:50px;background-color:#ef9d19}
