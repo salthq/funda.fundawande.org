@@ -1,0 +1,17 @@
+<div id="carousel-image-only" class="carousel slide p-4" data-ride="carousel">
+  <div class="carousel-inner">
+        {% for item in content.carousel_items %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <img class="d-block w-100" src="{{item.image}}" alt="Image carousel item">
+            </div>
+        {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carousel-image-only" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel-image-only" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

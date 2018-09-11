@@ -31,7 +31,7 @@
         <!-- Lesson Content-->
         <div class = "container-fluid">
             <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
-            {% for content in post.get_field('content_types') %}
+            {% for content in post.get_field('lesson_content_types') %}
                 <!-- Full width video -->
                 {% if content.acf_fc_layout == 'full_width_video' %}
                     {% include '/lms/content-types/full-width-video.twig' %}
@@ -44,9 +44,12 @@
                 <!-- Pulled right smaller video -->      
                 {% elseif content.acf_fc_layout == 'pulled_right_smaller_video' %}
                     {% include '/lms/content-types/pulled-right-smaller-video.twig' %}
-                <!-- Image carousel -->      
-                {% elseif content.acf_fc_layout == 'carousel' %}
-                    {% include '/lms/content-types/image-carousel.twig' %}
+                <!-- Carousel with text -->      
+                {% elseif content.acf_fc_layout == 'carousel_with_text' %}
+                    {% include '/lms/content-types/carousel-with-text.twig' %}
+                <!-- Carousel image only -->      
+                {% elseif content.acf_fc_layout == 'carousel_image_only' %}
+                    {% include '/lms/content-types/carousel-image-only.twig' %}
                 {% endif %}
             {% endfor %}
         </div>
