@@ -24,12 +24,24 @@
             </div>
         </div>
     </div>
-    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper single-lesson-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "lesson-progress-sidebar">
             <p>Unit Progress will go here</p>
         </div>
         <!-- Lesson Content-->
         <div class = "container-fluid">
+            <div class = "row mb-5">
+                {% for content in post.get_field('lesson_hero_types') %}
+                    <!-- Image Hero-->
+                    {% if content.acf_fc_layout == 'image_hero' %}
+                        {% include '/lms/hero-types/image-hero.twig' %}
+                    {% endif %}    
+                    <!-- Video Hero -->
+                    {% if content.acf_fc_layout == 'video_hero' %}
+                        {% include '/lms/hero-types/video-hero.twig' %}
+                    {% endif %}  
+                {% endfor %}
+            </div>
             <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
             {% for content in post.get_field('lesson_content_types') %}
                 <!-- Full width video -->
