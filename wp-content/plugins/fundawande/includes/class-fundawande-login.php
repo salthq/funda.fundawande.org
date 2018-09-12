@@ -22,8 +22,6 @@ class FundaWande_Login {
      * Constructor
      */
     public function __construct() {
-        // Scripts and Styles
-        add_action( 'wp_enqueue_scripts', array( $this, 'login_enqueue_scripts'));
         //Display the login form, so it can be added to the login page template.
         add_action('show_login_form', array($this,'setup_login_form'));
         //Check for wrong login information and add 'login=failed' to URL
@@ -163,12 +161,5 @@ class FundaWande_Login {
         }
     }
 
-    /**
-     * Enqueue login scripts.
-     */
-    public function login_enqueue_scripts()
-    {
-        wp_enqueue_script('theme-login-script', FundaWande()->plugin_url . 'assets/js/login-js.min.js', array('jquery'), FundaWande()->version, true);
-    }
 
 } // end FundaWande_Login
