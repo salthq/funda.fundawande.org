@@ -38,6 +38,14 @@
                 top: 65%;
             }
         }
+        &-modal {
+            &-header {
+                justify-content: center;
+            }
+            &-footer {
+                flex-direction: column;
+            }
+        }
         @include breakpoint(tablet) {
             &-sidebar {
                 background-color: $white;

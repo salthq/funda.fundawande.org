@@ -131,12 +131,21 @@
                     Progress Component
                     </div>
                     <div class="col-sm-12 col-md-4 text-center">
+                        {# next_url won't exist if this lesson is at the end of a unit #}
                         {% if next_url %}
+                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
+                            {% if post.get_field('custom_feedback_message') %}
+                                {% include '/lms/modals/modal-end-lesson.twig' %}
+                                <button type="button" class="btn btn-outline-info module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                                    Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                </button>
+                            {% else %}
                             <a href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            {% endif %}
                         {% elseif unit_completed %}
                             {% include '/lms/modals/modal-end-unit.twig' %}
                             <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
-                                Complete Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% endif %}
                     </div>
