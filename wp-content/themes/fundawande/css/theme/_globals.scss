@@ -88,14 +88,14 @@ body {
     }
 }
 
-    #page-wrapper {
+    /*#page-wrapper {
 
         //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
         padding-top: $navbar-height;
 
         @include breakpoint(phone) {
             padding-top: $navbar-height-mobile;
-        }
+    }*
 
 }
 
