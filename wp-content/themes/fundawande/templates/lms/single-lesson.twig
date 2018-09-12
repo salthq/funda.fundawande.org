@@ -95,12 +95,19 @@
                     {# Container width carousel without text #}
                     {% elseif content.acf_fc_layout == 'carousel_container_width_without_text' %}
                         {% include '/lms/content-types/carousel/carousel-container-width-without-text.twig' %}
-                    {# Pulled left carousel #}
-                    {% elseif content.acf_fc_layout == 'carousel_pulled_left' %}
-                        {% include '/lms/content-types/carousel/carousel-pulled-left.twig' %}
-                    {# Pulled right carousel #}    
-                    {% elseif content.acf_fc_layout == 'carousel_pulled_right' %}
-                        {% include '/lms/content-types/carousel/carousel-pulled-right.twig' %}
+                    {# Pulled left without text carousel #}
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_left_without_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-left-without-text.twig' %}
+                    {# Pulled right without text carousel #}    
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_right_without_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-right-without-text.twig' %}
+                    {# Pulled left with text carousel #}
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_left_with_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-left-with-text.twig' %}
+                    {# Pulled right with text carousel #}    
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
+
                     <!--
                         Other content types
                     -->
