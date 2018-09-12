@@ -1,0 +1,56 @@
+/* ==========================================================================
+* Single Course Area
+*
+* Styling specific to the course page, single-course.twig
+*
+ ========================================================================== */
+.single-course-wrapper {
+  
+  .course-title {
+    background-color: $white;
+  }
+  
+  
+  //Remove a tag styling from cards
+  .module-link {
+    color: $text-primary__colour;
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      color: $text-primary__colour;
+    }
+  }
+  
+   .card {
+     &:hover {
+       background-color: $grey-secondary;
+     }
+    .header {
+      align-items: center;
+      &-counter {
+        border-radius:  5px;
+        h3 {
+          color: $white;
+        }
+      }
+    }
+    .module {
+      &-nav {
+        align-items: center;
+        justify-content: center;
+        &-button {
+          border-radius: 5px;
+          height: 100%;
+          flex-direction:  column;
+          justify-content:  center;
+          h3 {
+            color: $white;
+          }
+        }  
+      }
+    }
+  }
+
+}
+
+ 

@@ -1,0 +1,48 @@
+/* ==========================================================================
+* Single Lesson Area
+*
+* Styling specific to the lesson page, single-lesson.twig
+*
+ ========================================================================== */
+
+
+.lesson {
+    &-header {
+        box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important ;
+    }
+    &-navigation {
+        &-top {
+            align-items: center;
+        }
+    }
+    &-progress-sidebar {
+        background-color: $white;
+        box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important ;
+        max-width: 150px;
+        position: sticky;
+        top: 100px;
+        z-index: 5;
+    }
+    &-carousel {
+        &-image {
+            width: 100%;
+        }
+        @include breakpoint(desktop) {
+            &-image {
+                height: 600px;
+            }
+        }
+        @include breakpoint(mobile) {
+            &-image {
+                height: 220px;
+            }
+        }
+        &-control {
+            &-icon {
+                border-radius: 50px;
+                background-color: $brand-primary__colour;
+            }
+            top: 65%;
+        }
+    }
+}

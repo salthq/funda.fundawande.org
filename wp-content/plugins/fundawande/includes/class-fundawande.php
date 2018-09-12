@@ -180,6 +180,9 @@ class FundaWande_Main {
         // Setup grading functionality class
         $this->lms = new FundaWande_Lms();
 
+        // Setup grading functionality class
+        $this->modules = new FundaWande_Modules();
+
         // Differentiate between administration and frontend logic.
         if ( is_admin() ) {
 
