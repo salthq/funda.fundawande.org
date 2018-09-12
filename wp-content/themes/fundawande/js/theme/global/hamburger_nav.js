@@ -1,16 +1,12 @@
 (function() {
 
-    var toggles = document.querySelectorAll(".c-hamburger");
 
-    for (var i = toggles.length - 1; i >= 0; i--) {
-        var toggle = toggles[i];
-        toggleHandler(toggle);
-    };
+    const mainmenu = document.getElementById("main-menu-button");
 
-    function toggleHandler(toggle) {
-        toggle.addEventListener( "click", function(e) {
-            e.preventDefault();
-            (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
-        });
-    }
+    mainmenu.addEventListener( "click", function(e) {
+        e.preventDefault();
+        const toggle = this.querySelector(".nav-hamburger");
+        (toggle.classList.contains("is-active") === true) ? toggle.classList.remove("is-active") : toggle.classList.add("is-active");
+    });
+
 })();
