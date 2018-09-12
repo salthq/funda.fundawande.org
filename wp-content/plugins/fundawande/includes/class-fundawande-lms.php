@@ -44,62 +44,66 @@ class FundaWande_Lms {
         if (isset($_POST)) {
             $user_id = $_POST['userid'];
             $post_id = $_POST['postid'];
-            $lesson_key = $_POST['lessonkey'];
+            $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
 
             // Run normal Sensei update logic
             $activity_logged = WooThemes_Sensei_Utils::update_lesson_status($user_id, $post_id, 'complete');
 
-            // Determine if an existing review exists and assign
-            $current_status_args = array(
-                'number' => 1,
-                'type' => 'fw_sub_unit_progress',
-                'user_id' => $user_id,
-                'status' => $lesson_key,
-            );
-
-            // possibly returns array, we just want one object
-            $user_lesson_status = get_comments($current_status_args);
-            if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
-                $user_lesson_status = array_shift($user_lesson_status);
-
-            }
-
-            // If no current review then return the review form object with user and post details
-            if (empty($user_lesson_status)) {
-                $time = current_time('mysql');
-                $user = $user = get_userdata($user_id);
-                $data = array(
-                    'comment_type' => 'fw_sub_unit_progress',
+            // prevent fundawande progress tracking if unique lesson key isn't assigned
+            if (!empty($lesson_key)) {
+                // Determine if an existing review exists and assign
+                $current_status_args = array(
+                    'number' => 1,
+                    'type' => 'fw_sub_unit_progress',
                     'user_id' => $user_id,
-                    'comment_date' => $time,
-                    'comment_approved' => $lesson_key,
-                    'comment_karma' => 1,
-                    'comment_author' => $user->display_name,
-                    'comment_author_email' => $user->user_email
-
+                    'status' => $lesson_key,
                 );
 
-                $comment_id = wp_insert_comment($data);
+                // possibly returns array, we just want one object
+                $user_lesson_status = get_comments($current_status_args);
+                if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
+                    $user_lesson_status = array_shift($user_lesson_status);
 
-            } else {
-                $comment = array();
-                $comment['comment_ID'] = $user_lesson_status->comment_ID;
-                $comment['comment_approved'] = $lesson_key;
-                $comment['comment_karma'] = 1;
-                wp_update_comment( $comment );
+                }
 
-                $comment_id = $user_lesson_status->comment_ID;
+                // If no current review then return the review form object with user and post details
+                if (empty($user_lesson_status)) {
+                    $time = current_time('mysql');
+                    $user = $user = get_userdata($user_id);
+                    $data = array(
+                        'comment_type' => 'fw_sub_unit_progress',
+                        'user_id' => $user_id,
+                        'comment_date' => $time,
+                        'comment_approved' => $lesson_key,
+                        'comment_karma' => 1,
+                        'comment_author' => $user->display_name,
+                        'comment_author_email' => $user->user_email
+
+                    );
+
+                    $comment_id = wp_insert_comment($data);
+
+                } else {
+                    $comment = array();
+                    $comment['comment_ID'] = $user_lesson_status->comment_ID;
+                    $comment['comment_approved'] = $lesson_key;
+                    $comment['comment_karma'] = 1;
+                    wp_update_comment($comment);
+
+                    $comment_id = $user_lesson_status->comment_ID;
+                }
+
+                $course_id = Sensei()->lesson->get_course_id($post_id);
+
+
+                // Update user course progress
+                $this->fw_update_course_progress_overall($user_id, $course_id);
+                $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
+
+                return $comment_id;
             }
-
-            $course_id = Sensei()->lesson->get_course_id( $post_id );
-
-
-            // Update user course progress
-            $this->fw_update_course_progress_overall($user_id, $course_id);
-            $this->fw_modules_status_of_sub_unit($user_id, $post_id);
-
-
-            return $comment_id;
+            return false;
         }
 
 
@@ -111,7 +115,14 @@ class FundaWande_Lms {
      * @return $comment_id return the comment ID of the completed progress indicator
      */
     public function fw_quiz_submitted($user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type) {
-        //log the information
+
+        // Set default karma for non-auto graded quizzes and failed auto quizzes
+        $karma = 0;
+
+        // Check if the pass mark was achieved if it's a auto graded quiz and set karma to 1
+        if (($grade>=$quiz_pass_percentage) && ($quiz_grade_type == 'auto')) {
+            $karma = 1;
+        }
 
         if (!$user_id) {
             $user_id = get_current_user_id();
@@ -144,7 +155,7 @@ class FundaWande_Lms {
                 'user_id' => $user_id,
                 'comment_date' => $time,
                 'comment_approved' => $lesson_key,
-                'comment_karma' => 0,
+                'comment_karma' => $karma,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
 
@@ -158,7 +169,7 @@ class FundaWande_Lms {
             $comment = array();
             $comment['comment_ID'] = $user_lesson_status->comment_ID;
             $comment['comment_approved'] = $lesson_key;
-            $comment['comment_karma'] = 0;
+            $comment['comment_karma'] = $karma;
             wp_update_comment( $comment );
 
             $comment_id = $user_lesson_status->comment_ID;
