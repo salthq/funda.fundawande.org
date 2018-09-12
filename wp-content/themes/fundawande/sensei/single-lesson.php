@@ -50,6 +50,7 @@ if (class_exists('Timber')) {
     //Get the name of the current unit
     $context['current_unit_name'] = $unit->name;
 
+    //TODO: Move the code below to a new FW plugin class called class-fundawande-lessons.php 
 
     // Get previous and next lesson URLs
     $nav_links = sensei_get_prev_next_lessons( $post->ID );
