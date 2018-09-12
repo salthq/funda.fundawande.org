@@ -27,6 +27,39 @@ if ( ! defined( 'ABSPATH' ) ) {
     }
 
     /**
+	 * Returns all lessons for the given module ID, and also adds a term array to each lesson
+	 *
+	 * @since 1.0.00
+     * 
+     * @author jtame
+	 *
+	 * @param integer $course_id
+     * 
+	 * @param integer $term_id. The unit or module id to retrieve lessons for.
+     * 
+	 * @return array $lessons
+	 */
+	public function get_lessons( $course_id , $term_id ){
+
+		$lesson_query = Sensei()->modules->get_lessons_query( $course_id, $term_id );
+
+		if( isset( $lesson_query->posts ) ){
+            
+            //If any tags are added to the lesson, add to the lesson object
+            foreach ($lesson_query->posts as $key => $lesson ) {
+                $lesson_query->posts[$key]->term = array();
+                $lesson->term[] = wp_get_post_terms($lesson->ID, 'lesson-tag');
+            }
+
+			return $lesson_query->posts;
+
+        }
+        else {
+		    return array();
+		}
+	} // end get_lessons
+
+    /**
      * Get Lesson nav links to enable bi-directional navigation between lessons
      * 
      * @author jtame
@@ -35,7 +68,6 @@ if ( ! defined( 'ABSPATH' ) ) {
      *
      * @return object $nav_links
      */
-
     public function get_lesson_nav_links($post_id) {
         $prev_next_lessons = sensei_get_prev_next_lessons ($post_id);
 
@@ -70,5 +102,6 @@ if ( ! defined( 'ABSPATH' ) ) {
             return $nav_links;
         }    
     } // end get_lesson_nav_links()
+
 
  } // end FundaWande_Lessons
