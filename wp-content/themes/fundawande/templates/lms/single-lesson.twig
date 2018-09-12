@@ -126,10 +126,10 @@
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                     {% if next_url %}
-                        <a href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                        <a  id="lesson-complete" data-lesson-key="{{ post.fw_unique_key }}"  data-post-id="{{ post.ID }}" data-user-id="{{ user.ID }}" data-url="{{ next_lesson }}" href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}" >Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                     {% elseif unit_completed %}
                         {% include '/lms/modals/modal-end-unit.twig' %}
-                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal" >
                             Complete Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </button>
                     {% endif %}
