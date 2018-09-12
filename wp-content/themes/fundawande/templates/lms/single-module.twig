@@ -1,0 +1,79 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class = "container-fluid">
+        <div class = "row module-title">
+            <div class = "col-sm-12 text-center">
+                <h1 class = "mt-4"><strong>Module {{module_number}}</strong></h1>
+                <h1 class = "text-center mb-4">{{function('single_term_title')}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper single-module-wrapper background-secondary p-3" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container">
+            {% for unit in units %}
+                <div class = "card my-3">
+                    <div class = "card-body">
+                        <div class = "row">
+                            <div class = "col-sm-12">
+                                <!-- Unit Card Header -->    
+                                <div class = "row unit-header">
+                                    <div class = "col-sm-12 col-md-8">
+                                        <doiv class = "unit-header-content d-flex">
+                                            <div class = "unit-header-counter d-flex mr-2 px-2">
+                                                <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
+                                            </div>
+                                            <div class = "unit-header-text">
+                                                <h2><strong>{{unit.name}}</strong></h2>
+                                                <p class = "module-text-{{module_number}} module-progress m-0">5/7 Lessons Complete</p>
+                                            </div>
+                                        </doiv>
+                                    </div>
+                                    <!--Unit navigation buttons tablet and desktop-->
+                                    <div class = "col-sm-12 col-md-4 text-right d-none d-md-block">
+                                        <!-- TODO: Add link to current sub-unit-->
+                                        <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
+                                            Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <!-- Unit Card Content -->
+                        <div class = "row unit-content">
+                            <div class = "col-sm-12">
+                                <p>{{unit.description}}</p>
+                                <div class = "sub-units d-flex">
+                                    {% for lesson in unit.lessons %}
+                                        <div class = "sub-units-icon text-center">
+                                            <a href = "{{function('get_post_permalink', lesson.ID)}}">
+                                                <img class = "img img-rounded" src = "https://via.placeholder.com/50">
+                                                <p class = "py-2">{{lesson.post_title}}</p>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <!--Unit navigation buttons mobile-->
+                            <div class = "col-sm-12 text-right d-md-none">
+                                <hr>
+                                <!-- TODO: Add link to current sub-unit-->
+                                <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
+                                    Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}
