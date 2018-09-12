@@ -10,17 +10,25 @@
   box-shadow: 0 2px 1px 0 $brand-primary__colour;
   position: fixed;
   width: 100%;
+  z-index: 2;
   .navbar {
     padding: 0;
     #main-menu-button {
-      display: flex;
-      align-items: center;
+
       border: 2px solid #FFFFFF;
       border-radius: 6px;
       padding: 6px;
-      font-size: 15px;
+
       color: white;
       // Hamburger Nav styling
+      .open-text, .close-text {
+        @include breakpoint(phone) {
+          line-height: 15px;
+          text-align: center;
+          display: block;
+          width: 50px;
+        }
+      }
       .nav-hamburger {
         display: block;
         position: relative;
@@ -104,6 +112,25 @@
   }
   a {
     color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    &:hover {
+      opacity: 0.8;
+      text-decoration: none;
+    }
+  }
+
+  .change-lang {
+    .change-lang-icon {
+      background-color: white;
+      border-radius: 3px;
+      color: #4A4A4A;
+      height: 27px;
+      width: 31px;
+      text-align: center;
+      font-size: 8px;
+    }
   }
 
 }
