@@ -32,6 +32,14 @@ class FundaWande_Frontend {
 	 */
 	public function enqueue_scripts () {
 
+
+        // Include single quiz
+        if (( is_singular('lesson') )) {
+            wp_enqueue_script(FundaWande()->token .'-single-lesson', FundaWande()->plugin_url . 'assets/js/single-lesson.min.js', array(), FW_VER, true);
+            wp_localize_script( FundaWande()->token .'-single-lesson', 'fundawande_ajax_object', array( 'ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php') );
+
+        }
+
         // Include review activity page assets
         if (( is_page_template('template-login.php')  )) {
             wp_enqueue_script(FundaWande()->token .'-login', FundaWande()->plugin_url . 'assets/js/login.min.js', array(), FundaWande()->version, true);
