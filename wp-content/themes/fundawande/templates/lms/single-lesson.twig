@@ -95,12 +95,19 @@
                     {# Container width carousel without text #}
                     {% elseif content.acf_fc_layout == 'carousel_container_width_without_text' %}
                         {% include '/lms/content-types/carousel/carousel-container-width-without-text.twig' %}
-                    {# Pulled left carousel #}
-                    {% elseif content.acf_fc_layout == 'carousel_pulled_left' %}
-                        {% include '/lms/content-types/carousel/carousel-pulled-left.twig' %}
-                    {# Pulled right carousel #}    
-                    {% elseif content.acf_fc_layout == 'carousel_pulled_right' %}
-                        {% include '/lms/content-types/carousel/carousel-pulled-right.twig' %}
+                    {# Pulled left without text carousel #}
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_left_without_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-left-without-text.twig' %}
+                    {# Pulled right without text carousel #}    
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_right_without_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-right-without-text.twig' %}
+                    {# Pulled left with text carousel #}
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_left_with_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-left-with-text.twig' %}
+                    {# Pulled right with text carousel #}    
+                    {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
+                        {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
+
                     <!--
                         Other content types
                     -->
@@ -115,47 +122,33 @@
             <hr>
             <div class="row my-4">
                 <div class="col-sm-12 col-md-4 text-center">
-                    {% if prev_url %}
-                        <a href = "{{prev_url}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
+                    {% if nav_links.prev_link %}
+                        <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                   Progress Component
+                Progress Component
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                    {% if next_url %}
-                        <a  id="lesson-complete" data-lesson-key="{{ post.fw_unique_key }}"  data-post-id="{{ post.ID }}" data-user-id="{{ user.ID }}" data-url="{{ next_lesson }}" href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}" >Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-                    {% elseif unit_completed %}
+                    {# next_url won't exist if this lesson is at the end of a unit #}
+                    {% if nav_links.next_link %}
+                        {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
+                        {% if post.get_field('custom_feedback_message') %}
+                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            <button type="button" class="btn btn-outline-info module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                                Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% else %}
+                        <a href = "{{nav_links.next_link}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                        {% endif %}
+                    {% elseif nav_links.unit_completed %}
                         {% include '/lms/modals/modal-end-unit.twig' %}
-                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal" >
-                            Complete Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                            Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </button>
                     {% endif %}
-                {% endfor %}
-            </div>
-            <!-- Bottom navigation-->
-            <div class = "container">
-                <hr>
-                <div class="row my-4">
-                    <div class="col-sm-12 col-md-4 text-center">
-                        {% if prev_url %}
-                            <a href = "{{prev_url}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
-                        {% endif %}
-                    </div>
-                    <div class="col-sm-12 col-md-4 text-center">
-                    Progress Component
-                    </div>
-                    <div class="col-sm-12 col-md-4 text-center">
-                        {% if next_url %}
-                            <a href = "{{next_url}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-                        {% elseif unit_completed %}
-                            {% include '/lms/modals/modal-end-unit.twig' %}
-                            <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
-                                Complete Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-                            </button>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
+        </div>
     </div><!-- #wrapper -->
 {% endblock %}
