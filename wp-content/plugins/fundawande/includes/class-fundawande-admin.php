@@ -28,7 +28,7 @@ class FundaWande_Admin {
      */
     public function admin_enqueue_scripts()
     {
-        wp_enqueue_script('theme-admin-script', FundaWande()->plugin_url . 'assets/js/admin-js.min.js', array('jquery'), FundaWande()->version, true);
+        wp_enqueue_script('theme-admin-script', FundaWande()->plugin_url . 'assets/js/admin.min.js', array('jquery'), FundaWande()->version, true);
     }
 
 } // End FundaWande_Frontend Class

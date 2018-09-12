@@ -26,18 +26,18 @@ class FundaWande_Lms {
         add_action('FUNDAWANDE_HANDLER_nopriv_fw_lesson_complete', array( $this, 'fw_lesson_complete'));
 
         //  This hook is fired after a lesson quiz has been graded and the lesson status is 'passed' OR 'graded'
-        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'));
+        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
         // do_action( 'sensei_user_lesson_end', $user_id, $lesson_id );
 
         // Fires the end of the submit_answers_for_grading function. It will fire irrespective of the submission results.
-        add_action( 'sensei_user_quiz_submitted', array( $this, 'fw_quiz_submitted'));
+        add_action( 'sensei_user_quiz_submitted', array( $this, 'fw_quiz_submitted'),10,5);
         // do_action( 'sensei_user_quiz_submitted', $user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type );
 
     }
     /**
      * Complete lesson functionality to track a lesson as complete
      *
-     * @return comment_id return the comment ID of the completed progress indicator
+     * @return $comment_id return the comment ID of the completed progress indicator
      */
     public function fw_lesson_complete() {
         //log the information
@@ -104,6 +104,154 @@ class FundaWande_Lms {
 
 
     } // end fw_lesson_complete
+
+    /**
+     * Quiz submitted functionality to track a quiz as submitted but not graded
+     *
+     * @return $comment_id return the comment ID of the completed progress indicator
+     */
+    public function fw_quiz_submitted($user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type) {
+        //log the information
+
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $post_id = absint(get_post_meta($quiz_id, '_quiz_lesson', true));
+        $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
+
+
+        // Determine if an existing review exists and assign
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_sub_unit_progress',
+            'user_id' => $user_id,
+            'status' => $lesson_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_lesson_status = get_comments($current_status_args);
+        if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
+            $user_lesson_status = array_shift($user_lesson_status);
+
+        }
+
+        // If no current review then return the review form object with user and post details
+        if (empty($user_lesson_status)) {
+            $time = current_time('mysql');
+            $user = $user = get_userdata($user_id);
+            $data = array(
+                'comment_type' => 'fw_sub_unit_progress',
+                'user_id' => $user_id,
+                'comment_date' => $time,
+                'comment_approved' => $lesson_key,
+                'comment_karma' => 0,
+                'comment_author' => $user->display_name,
+                'comment_author_email' => $user->user_email
+
+            );
+
+            $comment_id = wp_insert_comment($data);
+            update_comment_meta( $comment_id, 'quiz_grade',  $grade );
+
+
+        } else {
+            $comment = array();
+            $comment['comment_ID'] = $user_lesson_status->comment_ID;
+            $comment['comment_approved'] = $lesson_key;
+            $comment['comment_karma'] = 0;
+            wp_update_comment( $comment );
+
+            $comment_id = $user_lesson_status->comment_ID;
+            update_comment_meta( $comment_id, 'quiz_grade',  $grade );
+
+        }
+
+        $course_id = Sensei()->lesson->get_course_id( $post_id );
+
+
+        // Update user course progress
+        $this->fw_update_course_progress_overall($user_id, $course_id);
+        $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
+
+        return $comment_id;
+
+
+
+    } // end fw_quiz_submitted
+
+    /**
+     * Quiz graded functionality to track a quiz as graded
+     *
+     * @return $comment_id return the comment ID of the completed progress indicator
+     */
+    public function fw_quiz_complete($user_id, $lesson_id) {
+        //log the information
+
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $post_id = $lesson_id;
+        $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
+
+
+        // Determine if an existing review exists and assign
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_sub_unit_progress',
+            'user_id' => $user_id,
+            'status' => $lesson_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_lesson_status = get_comments($current_status_args);
+        if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
+            $user_lesson_status = array_shift($user_lesson_status);
+
+        }
+
+        // If no current review then return the review form object with user and post details
+        if (empty($user_lesson_status)) {
+            $time = current_time('mysql');
+            $user = $user = get_userdata($user_id);
+            $data = array(
+                'comment_type' => 'fw_sub_unit_progress',
+                'user_id' => $user_id,
+                'comment_date' => $time,
+                'comment_approved' => $lesson_key,
+                'comment_karma' => 1,
+                'comment_author' => $user->display_name,
+                'comment_author_email' => $user->user_email
+
+            );
+
+            $comment_id = wp_insert_comment($data);
+
+
+        } else {
+            $comment = array();
+            $comment['comment_ID'] = $user_lesson_status->comment_ID;
+            $comment['comment_approved'] = $lesson_key;
+            $comment['comment_karma'] = 1;
+            wp_update_comment( $comment );
+
+            $comment_id = $user_lesson_status->comment_ID;
+
+        }
+
+        $course_id = Sensei()->lesson->get_course_id( $post_id );
+
+
+        // Update user course progress
+        $this->fw_update_course_progress_overall($user_id, $course_id);
+        $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
+
+        return $comment_id;
+
+
+
+    } // end fw_quiz_submitted
 
     /**
      * Update a users course progress
