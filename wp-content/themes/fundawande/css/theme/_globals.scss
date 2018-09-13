@@ -120,7 +120,7 @@ body {
         color: $colour_var;
     }
     .module-border-#{$colour_key} {
-        border-color: $colour_var;
+        border-color: $colour_var!important;
     }
     .module-svg-fill-#{$colour_key} {
         svg {
@@ -130,6 +130,11 @@ body {
     .module-svg-stroke-#{$colour_key} {
         svg {
             stroke: $colour_var;
+        }
+    }
+    .module-divider-before-#{$colour_key} {
+        &:before {
+            background: $colour_var!important;
         }
     }
     //This class is used to fill in the circle around icon SVGs

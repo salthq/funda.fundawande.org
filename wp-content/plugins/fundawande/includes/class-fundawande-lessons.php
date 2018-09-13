@@ -42,15 +42,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	public function get_lessons( $course_id , $term_id ){
 
 		$lesson_query = Sensei()->modules->get_lessons_query( $course_id, $term_id );
+        $user_id = get_current_user_id();
+        if ($user_id) {
+            $current_lesson_key = get_user_meta($user_id, 'fw_current_sub_unit', true);
+        } else {
+            $current_lesson_key = null;
+        }
 
 		if( isset( $lesson_query->posts ) ){
-            
             //If any tags are added to the lesson, add to the lesson object
             foreach ($lesson_query->posts as $key => $lesson ) {
-                $lesson_query->posts[$key]->term = array();
+                $lesson->term = array();
                 $lesson->term[] = wp_get_post_terms($lesson->ID, 'lesson-tag');
-            }
+                $lesson->key = get_post_meta($lesson->ID, 'fw_unique_key',true);
+                if ($current_lesson_key && $current_lesson_key == $lesson->key) {
+                    $lesson->current = true;
+                }
+                $lesson->complete = FundaWande()->lms->fw_get_sub_unit_status($lesson->key);
+                $lesson->quiz = get_post_meta($lesson->ID, '_quiz_has_questions', true);
 
+            }
 			return $lesson_query->posts;
 
         }

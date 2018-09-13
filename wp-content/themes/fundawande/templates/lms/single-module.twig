@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class = "container-fluid background-secondary">
-        <pre>
-            {{ dump(units) }}
-        </pre>
+        {#<pre>#}
+            {#{{ dump(units) }}#}
+        {#</pre>#}
             <div class = "container p-3">
                 {% for unit in units %}
                     <div class = "card my-3">
@@ -33,9 +33,15 @@
                                                 <div class = "unit-header-counter d-flex mr-2 px-2">
                                                     <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
                                                 </div>
+                                                {% set completed = 0 %}
+                                                {% for  lesson in unit.lessons  %}
+                                                    {% if lesson.complete %}
+                                                        {% set completed = completed + 1 %}
+                                                    {% endif %}
+                                                {% endfor %}
                                                 <div class = "unit-header-text">
                                                     <h2><strong>{{unit.name}}</strong></h2>
-                                                    <p class = "module-text-{{module_number}} module-progress m-0">5/7 Lessons Complete</p>
+                                                    <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} Lessons Complete</p>
                                                 </div>
                                             </doiv>
                                         </div>
@@ -52,16 +58,23 @@
                             </div>
                             <!-- Unit Card Content -->
                             <div class = "row unit-content">
-                                <div class = "col-sm-12">
+                                <div class = "col-sm-11">
                                     <p>{{unit.description}}</p>
-                                    <div class = "sub-units d-flex">
+                                    <div class = "sub-units row no-gutters">
                                         {% for lesson in unit.lessons %}
-                                            <div class = "sub-units-icon text-center">
-                                                <a href = "{{function('get_post_permalink', lesson.ID)}}">
-                                                    <img class = "img img-rounded" src = "https://via.placeholder.com/50">
+                                            <div class = "sub-units-icon row text-center col-md-2 no-gutters ">
+                                                <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}module-divider-before-{{ module_number }}{% endif %} col">
+
+                                                </div>
+                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                                                    <span class="{%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                    {{ source('assets/lms/recall_quiz.svg') }}
                                                     <p class = "py-2">{{lesson.post_title}}</p>
                                                 </a>
+
                                             </div>
+
+
                                         {% endfor %}
                                     </div>
                                 </div>

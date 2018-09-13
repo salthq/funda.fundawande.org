@@ -139,7 +139,7 @@
                                 Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
-                        <a href = "{{nav_links.next_link}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                        <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {% elseif nav_links.unit_completed %}
                         {% include '/lms/modals/modal-end-unit.twig' %}
