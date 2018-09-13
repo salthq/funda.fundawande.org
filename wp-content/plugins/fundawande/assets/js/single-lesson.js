@@ -40,6 +40,10 @@ jQuery(document).ready( function($) {
         $('#sidebar-expanded').animate({'margin-left': '-500px'});
     });  
 
+    //If there is both a custom feedback modal and an end of unit modal, 
+    $('#end-unit-modal-link').click(function() {
+        $('#end-lesson-modal').hide();
+    });
 
 
 });

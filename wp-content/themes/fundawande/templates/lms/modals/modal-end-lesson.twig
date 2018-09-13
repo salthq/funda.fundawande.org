@@ -13,8 +13,25 @@
         {{post.get_field('custom_feedback_message')}}
       </div>
       <div class="lesson-modal-footer modal-footer">
-            <p>Module progress component to go here</p>
-            <a href = "{{nav_links.next_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+            <!-- End of Lesson Progress Component -->
+            <div class = "lesson-progress-modal m-3">
+                <div class = "lesson-progress d-flex justify-content-center flex-row">
+                    {% for lesson in unit.lessons %}
+                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% endfor %}
+
+                </div>
+                <!-- TODO: Make the unit progress info dynamic -->
+                <p><strong>Unit Progress</strong> 3 of {{num_lessons}} lessons complete</p>
+            </div>
+            {# if this lesson is the end of a unit, go to the end of unit modal #}
+            {% if nav_links.unit_completed %} 
+              <button type="button" class="btn btn-info primary-border primary-bg" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+                Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+              </button>
+            {% else %}
+              <a href = "{{nav_links.next_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+            {% endif %}
       </div>
     </div>
   </div>

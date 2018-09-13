@@ -27,13 +27,13 @@
         </div>
            <!-- Expanded Sidebar Progress Component -->
             <div class = "lesson-sidebar lesson-sidebar-expanded" id = "sidebar-expanded">
-                <div class = "lesson-sidebar lesson-sidebar-component d-flex justify-content-left flex-column">
+                <div class = "lesson-progress lesson-sidebar-component d-flex justify-content-left flex-column">
                     <div class = "module-bg-{{module_number}} w-100 d-block text-white text-center">
                         <p class = "text-white text-center m-2">Hide Unit progress sidebar</p>
                     </div>
                     {% for lesson in unit.lessons %}
                         <p class = "p-2">
-                            <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                            <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
                             {{lesson.post_title}}
                         </p>    
                     {% endfor %}
@@ -41,10 +41,10 @@
             </div>
             <!-- Minimized Sidebar Progress Component -->
             <div class = "lesson-sidebar lesson-sidebar-minimized" id = "sidebar-minimized">
-                <div class = "lesson-sidebar lesson-sidebar-component d-flex justify-content-center flex-column">
-                    <div class = "lesson-progress-count module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">2.3</h4></div>
+                <div class = "lesson-progress lesson-sidebar lesson-sidebar-component d-flex justify-content-center flex-column">
+                    <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">2.3</h4></div>
                     {% for lesson in unit.lessons %}
-                        <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -147,7 +147,6 @@
                 <div class="col-sm-12 col-md-4 text-center">
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                    {# next_url won't exist if this lesson is at the end of a unit #}
                     {% if nav_links.next_link %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
@@ -158,11 +157,20 @@
                         {% else %}
                         <a href = "{{nav_links.next_link}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
+                    {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
                     {% elseif nav_links.unit_completed %}
                         {% include '/lms/modals/modal-end-unit.twig' %}
-                        <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
-                            Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-                        </button>
+                        {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
+                        {% if post.get_field('custom_feedback_message') %}
+                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% endif %}    
                     {% endif %}
                 </div>
             </div>
