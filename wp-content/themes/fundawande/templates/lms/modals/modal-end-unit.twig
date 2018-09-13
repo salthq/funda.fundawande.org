@@ -1,26 +1,31 @@
 <div id = "end-unit-modal" class="modal m-5" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content px-5 py-3">
-      <div class="lesson-modal-header modal-header">   
+      <div class="lesson-modal-header modal-header">  
         <h5 class="modal-title"><span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span><strong>Well done, {{user.display_name}}!</strong></h5>
         <!-- Commenting out as this button is not shown on mockups.
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         -->
       </div>
       <div class="modal-body">
         <p>You have successfully completed the <strong>{{unit.name}}</strong> unit</p>
         <p>Next unit up: <strong>{{nav_links.next_unit_title}}</strong>
-        {% if post.get_field('custom_feedback_message') %}
-          <hr>
-          {{ post.get_field('custom_feedback_message') }}
-          <hr>
-        {% endif %}
       </div>
       <div class="lesson-modal-footer modal-footer">
-            <p>Module progress component to go here</p>
-            <a href = "{{nav_links.next_unit_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+            <!-- End of Unit Progress Component -->
+            <div class = "lesson-progress-modal m-3">
+                <div class = "lesson-progress d-flex justify-content-center flex-row">
+                    {# TODO: This is currently showing lesson progress, but it needs to show module progress instead #}
+                    {% for lesson in unit.lessons %}
+                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% endfor %}
+                </div>
+                <!-- TODO: Make the module progress info dynamic -->
+                <p><strong>Module Progress</strong> 3 of 6 units complete</p>
+            </div>
+            <a href = "{{nav_links.next_unit_link}}" class = "btn btn-info primary-border primary-bg" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
       </div>
     </div>
   </div>
