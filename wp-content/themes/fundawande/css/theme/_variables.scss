@@ -28,12 +28,12 @@ $adminbar-height-mobile:            46px;
 $footer-height:                     40px;
 
 // Hamburger Nav
-$ham-button-width:                  50px; // The width of the button area
-$ham-button-height:                 50px; // The height of the button area
+$ham-button-width:                  26px; // The width of the button area
+$ham-button-height:                 26px; // The height of the button area
 $ham-bar-thickness:                 6px;  // The thickness of the button bars
-$ham-button-pad:                    8px;  // The left/right padding between button area and bars.
+$ham-button-pad:                    0px;  // The left/right padding between button area and bars.
 $ham-button-bar-space:              10px; // The spacing between button bars
-$ham-button-transistion-duration:   0.1s; // The transition duration
+$ham-button-transistion-duration:   0.05s; // The transition duration
 
 // # Colour palette
 $white : #ffffff;

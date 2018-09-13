@@ -1,20 +1,26 @@
 <div id = "end-unit-modal" class="modal m-5" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Well done, Anathi!</h5>
+    <div class="modal-content px-5 py-3">
+      <div class="lesson-modal-header modal-header">   
+        <h5 class="modal-title"><span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span><strong>Well done, {{user.display_name}}!</strong></h5>
+        <!-- Commenting out as this button is not shown on mockups.
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        -->
       </div>
       <div class="modal-body">
         <p>You have successfully completed the <strong>{{current_unit_name}}</strong> unit</p>
-        <!-- TODO: dynamically pull in the name of the next unit in the module-->
-        <p>Next unit up: <strong>{{next_unit_title}}</strong>
+        <p>Next unit up: <strong>{{nav_links.next_unit_title}}</strong>
+        {% if post.get_field('custom_feedback_message') %}
+          <hr>
+          {{ post.get_field('custom_feedback_message') }}
+          <hr>
+        {% endif %}
       </div>
-      <div class="modal-footer">
+      <div class="lesson-modal-footer modal-footer">
             <p>Module progress component to go here</p>
-            <a href = "{{next_unit_link}}" class = "btn btn-outline-info module-border-{{module_number}} module-text-{{module_number}}">Continue <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+            <a href = "{{nav_links.next_unit_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
       </div>
     </div>
   </div>

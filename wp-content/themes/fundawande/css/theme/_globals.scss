@@ -10,6 +10,7 @@
 # Backgrounds
 # Typography
 # Module Styling
+# Primary Brand Styling
 --------------------------------------------------------------*/
 
 /*
@@ -86,16 +87,20 @@ body {
         color: #cccccc;
         opacity: 0.5;
     }
-}
 
-    /*#page-wrapper {
+
+    #page-wrapper {
 
         //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
-        padding-top: $navbar-height;
+        margin-top: $navbar-height;
+        display: inline-block;
+        width: 100%;
+
 
         @include breakpoint(phone) {
-            padding-top: $navbar-height-mobile;
-    }*
+            margin-top: $navbar-height-mobile;
+        }
+    }
 
 }
 
@@ -103,6 +108,7 @@ body {
 /*
  * Module Styling
  */
+
 
 
 //Loop through the $module_colours array found in variables.scss and assign the colours to border, text, backgrounds and SVGs.
@@ -124,6 +130,46 @@ body {
     .module-svg-stroke-#{$colour_key} {
         svg {
             stroke: $colour_var;
+        }
+    }
+    //This class is used to fill in the circle around icon SVGs
+    .module-svg-icon-fill-#{$colour_key} {
+        svg {
+            circle {
+                fill: $colour_var;
+            }
+        }
+    }
+}
+
+/* 
+ * Primary Brand Styling
+ */
+
+.primary-bg {
+    background-color: $brand-primary__colour;
+}
+.primary-text {
+    color: $brand-primary__colour;
+}
+.primary-border {
+    border-color: $brand-primary__colour;
+}
+.primary-svg-fill {
+    svg {
+        fill: $brand-primary__colour;
+    }
+}
+.primary-svg-stroke {
+    svg {
+        stroke: $brand-primary__colour;
+    }
+}
+//This class is used to fill in the circle around icon SVGs
+.primary-svg-icon-fill {
+    svg {
+        circle {
+            fill: $brand-primary__colour;
         }
     }
 }
