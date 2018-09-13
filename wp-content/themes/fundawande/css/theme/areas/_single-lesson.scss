@@ -46,6 +46,11 @@
                 flex-direction: column;
             }
         }
+        &-progress {
+            &-indicator {
+                
+            }
+        }
         @include breakpoint(tablet) {
             &-sidebar {
                 background-color: $white;

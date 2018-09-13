@@ -25,8 +25,12 @@
                 </div>
             </div>
         </div>
-            <div class = "lesson-sidebar d-flex flex-column">
-                <div class = "lesson-sidebar-component">
+            <div class = "lesson-sidebar">
+                <div class = "lesson-sidebar-component d-flex justify-content-center flex-column">
+                    <div class = "lesson-progress-count module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">2.3</h4></div>
+                    {% for lesson in unit.lessons %}
+                        <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/plain_circle.svg')}}</span>
+                    {% endfor %}
                 </div>
             </div>
             <!-- Lesson Content-->
