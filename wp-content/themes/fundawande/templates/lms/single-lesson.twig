@@ -29,7 +29,7 @@
                 <div class = "lesson-sidebar-component d-flex justify-content-center flex-column">
                     <div class = "lesson-progress-count module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">2.3</h4></div>
                     {% for lesson in unit.lessons %}
-                        <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/plain_circle.svg')}}</span>
+                        <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -130,7 +130,6 @@
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                Progress Component
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                     {# next_url won't exist if this lesson is at the end of a unit #}
