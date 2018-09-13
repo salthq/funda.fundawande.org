@@ -19,7 +19,7 @@
                     </div>
                     <div class = "col-sm-10 col-md-4 text-center my-4">
                         <!-- TODO: change lesson number to be dynamic-->
-                        <h1><strong>Lesson 2/6</strong></h1>
+                        <h1><strong>Lesson 2/{{num_lessons}}</strong></h1>
                         <h1>{{function('get_the_title')}}</h1>
                     </div>
                 </div>
@@ -32,6 +32,9 @@
             <!-- Lesson Content-->
             <div class = "container-fluid">
                 <div class = "row mb-5">
+                <pre>
+                    {{ dump(unit) }}
+                </pre>
                     <!-- Hero Band -->
                     {% for content in post.get_field('lesson_hero_types') %}
                         {# Image Hero #}

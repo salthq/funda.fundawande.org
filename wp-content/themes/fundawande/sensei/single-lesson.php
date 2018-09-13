@@ -39,10 +39,14 @@ if (class_exists('Timber')) {
     $context['user'] = $user;
 
     //Get the unit info for the current lesson
-    $context['unit'] = FundaWande()->lessons->get_unit_info( 31, $post->ID );
+    $unit = FundaWande()->lessons->get_unit_info( 31, $post->ID );
+
+    $context['unit'] = $unit;
+
+    $context['num_lessons'] = count($unit->lessons);  
 
     //Get the module number for the parent module, to enable module-specific styling
-    $context['module_number'] = get_term_meta($context['unit']->parent, 'module_number', true);
+    $context['module_number'] = get_term_meta($unit->parent, 'module_number', true);
 
     //Get the nav links object and add to Timber context 
     $context['nav_links'] = FundaWande()->lessons->get_lesson_nav_links($post->ID);
