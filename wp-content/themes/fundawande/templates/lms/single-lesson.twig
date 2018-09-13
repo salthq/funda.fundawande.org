@@ -11,7 +11,7 @@
             <div class = "container">
                 <div class = "row lesson-navigation-top">
                     <div class = "col-sm-2 col-md-4">
-                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{current_unit.url}}">
+                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{unit.url}}">
                             <span class = "module-svg-fill-{{module_number}}">{{source('/assets/arrow_left.svg')}}</span>
                             <br>
                             <span class = "d-none d-md-block module-text-{{module_number}}">Back to Units</span> 
@@ -25,9 +25,8 @@
                 </div>
             </div>
         </div>
-            <div class = "lesson-sidebar">
+            <div class = "lesson-sidebar d-flex flex-column">
                 <div class = "lesson-sidebar-component">
-                    <p>Unit Progress will go here</p>
                 </div>
             </div>
             <!-- Lesson Content-->
