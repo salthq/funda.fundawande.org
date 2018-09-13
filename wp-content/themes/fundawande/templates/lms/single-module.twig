@@ -17,9 +17,6 @@
             </div>
         </div>
         <div class = "container-fluid background-secondary">
-        <pre>
-            {{ dump(units) }}
-        </pre>
             <div class = "container p-3">
                 {% for unit in units %}
                     <div class = "card my-3">
@@ -35,7 +32,7 @@
                                                 </div>
                                                 <div class = "unit-header-text">
                                                     <h2><strong>{{unit.name}}</strong></h2>
-                                                    <p class = "module-text-{{module_number}} module-progress m-0">5/7 Lessons Complete</p>
+                                                    <p class = "module-text-{{module_number}} module-progress m-0">5/{{unit.lesson_count}} Lessons Complete</p>
                                                 </div>
                                             </doiv>
                                         </div>

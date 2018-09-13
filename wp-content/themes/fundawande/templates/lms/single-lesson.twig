@@ -11,7 +11,7 @@
             <div class = "container">
                 <div class = "row lesson-navigation-top">
                     <div class = "col-sm-2 col-md-4">
-                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{current_unit.url}}">
+                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{unit.url}}">
                             <span class = "module-svg-fill-{{module_number}}">{{source('/assets/arrow_left.svg')}}</span>
                             <br>
                             <span class = "d-none d-md-block module-text-{{module_number}}">Back to Units</span> 
@@ -19,15 +19,33 @@
                     </div>
                     <div class = "col-sm-10 col-md-4 text-center my-4">
                         <!-- TODO: change lesson number to be dynamic-->
-                        <h1><strong>Lesson 2/6</strong></h1>
+                        <h1><strong>Lesson 2/{{num_lessons}}</strong></h1>
                         <h1>{{function('get_the_title')}}</h1>
                     </div>
                 </div>
             </div>
         </div>
-            <div class = "lesson-sidebar">
-                <div class = "lesson-sidebar-component">
-                    <p>Unit Progress will go here</p>
+           <!-- Expanded Sidebar Progress Component -->
+            <div class = "lesson-sidebar lesson-sidebar-expanded" id = "sidebar-expanded">
+                <div class = "lesson-sidebar lesson-sidebar-component d-flex justify-content-left flex-column">
+                    <div class = "module-bg-{{module_number}} w-100 d-block text-white text-center">
+                        <p class = "text-white text-center m-2">Hide Unit progress sidebar</p>
+                    </div>
+                    {% for lesson in unit.lessons %}
+                        <p class = "p-2">
+                            <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                            {{lesson.post_title}}
+                        </p>    
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- Minimized Sidebar Progress Component -->
+            <div class = "lesson-sidebar lesson-sidebar-minimized" id = "sidebar-minimized">
+                <div class = "lesson-sidebar lesson-sidebar-component d-flex justify-content-center flex-column">
+                    <div class = "lesson-progress-count module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">2.3</h4></div>
+                    {% for lesson in unit.lessons %}
+                        <span class = "lesson-progress-indicator text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% endfor %}
                 </div>
             </div>
             <!-- Lesson Content-->
@@ -127,7 +145,6 @@
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
-                Progress Component
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                     {# next_url won't exist if this lesson is at the end of a unit #}

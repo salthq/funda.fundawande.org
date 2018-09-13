@@ -46,17 +46,28 @@
                 flex-direction: column;
             }
         }
+        &-progress {
+            &-indicator {
+                
+            }
+        }
         @include breakpoint(tablet) {
             &-sidebar {
                 background-color: $white;
-                box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important ;
+                box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
                 display: inline-block;
-                max-width: 150px;
                 position: fixed;
                 top: 250px;
                 z-index: 5;
                 &-component {
                     position: sticky;
+                }
+                &-expanded {
+                    margin-left: -500px; //Hide component
+                    max-width: 500px;
+                }
+                &-minimized {
+                    max-width: 150px;
                 }
             }
         }

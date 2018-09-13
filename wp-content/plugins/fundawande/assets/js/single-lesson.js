@@ -27,5 +27,19 @@ jQuery(document).ready( function($) {
         });
     });
 
+    //Hide the minimized progress component on click and slide the expanded component in from the left
+    $('#sidebar-minimized').click(function() {
+        $('#sidebar-expanded').animate({'margin-left': '0px'});
+        $('#sidebar-minimized').hide();
+
+    });
+
+    //Slide the expanded progress component back out on click and show the minimized progress component
+    $('#sidebar-expanded').click(function() {
+        $('#sidebar-minimized').show("medium");
+        $('#sidebar-expanded').animate({'margin-left': '-500px'});
+    });  
+
+
 
 });

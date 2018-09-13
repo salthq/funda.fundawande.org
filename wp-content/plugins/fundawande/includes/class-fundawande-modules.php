@@ -91,6 +91,8 @@ class FundaWande_Modules {
             
             // Get the unit lessons for display within the module
             $module_units[$key]->lessons = FundaWande()->lessons->get_lessons($course_id, $unit);
+            
+            $module_units[$key]->lesson_count = count($module_units[$key]->lessons);
         }
 
         return $module_units;

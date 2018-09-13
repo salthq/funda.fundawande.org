@@ -10,7 +10,7 @@
         -->
       </div>
       <div class="modal-body">
-        <p>You have successfully completed the <strong>{{current_unit_name}}</strong> unit</p>
+        <p>You have successfully completed the <strong>{{unit.name}}</strong> unit</p>
         <p>Next unit up: <strong>{{nav_links.next_unit_title}}</strong>
         {% if post.get_field('custom_feedback_message') %}
           <hr>
