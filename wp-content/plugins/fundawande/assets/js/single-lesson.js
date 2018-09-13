@@ -45,5 +45,26 @@ jQuery(document).ready( function($) {
         $('#end-lesson-modal').hide();
     });
 
+    $('#sidebar-minimized').click(function() {
+        var docHeight = $(document).height();
+     
+        $("body").append("<div id='overlay'></div>");
+     
+        $("#overlay")
+           .height(docHeight)
+           .css({
+              'opacity' : 0.4,
+              'position': 'fixed',
+              'top': 0,
+              'left': 0,
+              'background-color': '#000',
+              'width': '100%',
+              'z-index': 5
+           });
+    });
+
+    $('#sidebar-expanded').click(function() {
+        $("#overlay").remove();
+    });
 
 });
