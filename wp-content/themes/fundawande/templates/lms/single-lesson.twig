@@ -33,8 +33,10 @@
                     </div>
                     {% for lesson in unit.lessons %}
                         <p class = "p-2">
-                            <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
-                            {{lesson.post_title}}
+                            <a class = "text-dark" href = "{{function ('get_permalink',lesson.ID)}}">
+                                <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                                {{lesson.post_title}}
+                            </a>    
                         </p>    
                     {% endfor %}
                 </div>
