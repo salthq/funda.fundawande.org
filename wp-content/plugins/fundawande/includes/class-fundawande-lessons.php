@@ -57,7 +57,28 @@ if ( ! defined( 'ABSPATH' ) ) {
         else {
 		    return array();
 		}
-	} // end get_lessons
+    } // end get_lessons()
+    
+    /**
+	 * Returns the current unit info, including all lessons within that unit
+	 *
+	 * @since 1.0.00
+     * 
+     * @author jtame
+	 *
+	 * @param integer $course_id
+     * 
+	 * @param integer $post_id. The ID of the lesson
+     * 
+	 * @return array $unit
+	 */
+    public function get_unit_info($course_id, $post_id) {
+        $unit = Sensei()->modules->get_lesson_module( $post_id );
+        //Add the lessons array to the unit info to make that info available on the single lesson template
+        $unit->lessons = $this->get_lessons($course_id, $unit->term_id);
+
+        return $unit;
+    } //end get_unit_info()
 
     /**
      * Get Lesson nav links to enable bi-directional navigation between lessons
