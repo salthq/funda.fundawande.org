@@ -45,6 +45,9 @@ jQuery(document).ready( function($) {
         $('#end-lesson-modal').hide();
     });
 
+
+
+    //When the user clicks the minimized sidebar, create an overlay
     $('#sidebar-minimized').click(function() {
         var docHeight = $(document).height();
      
@@ -66,5 +69,20 @@ jQuery(document).ready( function($) {
     $('#sidebar-expanded').click(function() {
         $("#overlay").remove();
     });
+
+    //The sidebar must changed between absolute and fixed positionining depending on scroll position
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop(); 
+
+        if(scroll >= 160) {
+            $('.lesson-sidebar').addClass('lesson-sidebar-fixed')
+            $('.lesson-sidebar').removeClass('lesson-sidebar-absolute')
+        }
+        else {
+            $('.lesson-sidebar').addClass('lesson-sidebar-absolute')
+            $('.lesson-sidebar').removeClass('lesson-sidebar-fixed')
+        }
+        
+    })
 
 });
