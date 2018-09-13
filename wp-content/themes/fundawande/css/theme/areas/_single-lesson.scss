@@ -55,11 +55,13 @@
             &-sidebar {
                 box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
                 display: inline-block;
-                position: fixed;
-                top: 250px;
                 z-index: 10;
-                &-component {
-                    position: sticky;
+                &-absolute {
+                    position: absolute;
+                }
+                &-fixed {
+                    position: fixed !important;
+                    top: 100px;
                 }
                 &-expanded {
                     margin-left: -500px; //Hide component
@@ -67,6 +69,12 @@
                 }
                 &-minimized {
                     max-width: 150px;
+                }
+                &-text {
+                    font-size: 14px;
+                }
+                &-module-titles {
+                    border-bottom: 1px solid $grey-secondary;
                 }
             }
         }
