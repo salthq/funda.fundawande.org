@@ -41,7 +41,7 @@
         flex-flow: wrap;
         &-icon {
             justify-content: center;
-
+            margin-top: 1.5rem;
             a {
                 width: 71px;
                 padding-top: 10px;
@@ -121,12 +121,13 @@
                 position: relative;
                 &:before {
                     content: "";
-                    background: $grey-secondary;
-                    height: 2px;
+                    background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                    background-size: 20px auto;
+                    height: 4px;
                     width: calc(100% + 2px);
-                    border-radius: 2px;
+                    border-radius: 0;
                     position: absolute;
-                    top: 45px;
+                    top: 43px;
                     left: -1px;
                 }
 
@@ -187,20 +188,3 @@
         //}
     } 
  }
-
-.stage-progress-item {
-    position: relative;
-    display: table-cell;
-}
-.stage-progress-step {
-    width: 42px;
-    font-size: 1.3rem;
-    a {
-        &.current i {
-            border-radius: 50%;
-            line-height: 1.22rem;
-            padding: 3px;
-            border: 2px dotted;
-        }
-    }
-}

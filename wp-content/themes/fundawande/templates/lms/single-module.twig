@@ -46,10 +46,13 @@
                                             </doiv>
                                         </div>
                                         <!--Unit navigation buttons tablet and desktop-->
-                                        <div class = "col-sm-12 col-md-4 text-right d-none d-md-block">
+                                        <div class = "col-sm-12 col-md-4 text-right d-none d-md-flex">
                                             <!-- TODO: Add link to current sub-unit-->
-                                            <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
-                                                Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
+                                            <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary mr-3 d-flex  module-svg-fill-{{ module-number }} align-items-center module-border-{{ module-number }} module-text-{{ module-number }} unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                                <span class="mr-2 d-inline-block" style="max-width: 80px">View lessons</span>{{ source('assets/lms/expand_icon.svg') }}
+                                            </a>
+                                            <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href="#">
+                                                Resume Unit {{ source('assets/arrow_right.svg') }}
                                             </a>
                                         </div>
                                     </div>
@@ -60,7 +63,7 @@
                             <div class = "row unit-content">
                                 <div class = "col-sm-11">
                                     <p>{{unit.description}}</p>
-                                    <div class = "sub-units row no-gutters">
+                                    <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
                                             <div class = "sub-units-icon row text-center col-md-2 no-gutters ">
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}module-divider-before-{{ module_number }}{% endif %} col">
