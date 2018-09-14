@@ -232,6 +232,10 @@ body p{font-size:16px}
 .single-course-wrapper .card .module-nav{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .single-course-wrapper .card .module-nav-button{border-radius:5px;height:100%;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .single-course-wrapper .card .module-nav-button h3{color:#fff}
+.single-module-wrapper .unit{position:relative}
+.single-module-wrapper .unit .current-unit-text{display:none}
+.single-module-wrapper .unit.current{border:3px solid #ef9d19;margin-top:3rem !important}
+.single-module-wrapper .unit.current .current-unit-text{display:block;position:absolute;font-size:17px;font-style:italic;color:white;padding:6px 18px;background:#ef9d19;border-radius:5px 5px 0 0;left:2rem;top:-42px}
 .single-module-wrapper .unit-header{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .single-module-wrapper .unit-header-counter{background-color:#ccc;border-radius:5px;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .single-module-wrapper .sub-units{-webkit-flex-flow:wrap;-ms-flex-flow:wrap;flex-flow:wrap}

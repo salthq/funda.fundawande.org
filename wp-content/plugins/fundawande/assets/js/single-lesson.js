@@ -12,12 +12,14 @@ jQuery(document).ready( function($) {
             url: fundawande_ajax_object.ajaxurl,
             data: {
                 'action':'fw_lesson_complete',
-                lessonkey: lessonKey,
                 userid: userID,
                 postid: postID
             },
             success:function(data) {
                 console.log(data);
+                if (url !== undefined) {
+                    window.location = url;
+                }
 
             },
             error: function(errorThrown){
