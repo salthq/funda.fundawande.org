@@ -168,7 +168,8 @@ body {
 //Loop through the $module_colours array found in variables.scss and assign the colours to border, text, backgrounds and SVGs.
 @each $colour_key, $colour_var in $module_colours {
     .module-bg-#{$colour_key} {
-        background-color: $colour_var;
+        background-color: $colour_var!important;
+
     }
     .module-text-#{$colour_key} {
         color: $colour_var;
