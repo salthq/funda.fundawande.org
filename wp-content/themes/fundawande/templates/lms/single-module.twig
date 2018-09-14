@@ -19,7 +19,10 @@
         <div class = "container-fluid background-secondary">
             <div class = "container p-3">
                 {% for unit in units %}
-                    <div class = "card my-3">
+                    <div class = "unit card my-3 {% if unit.current %}current{% endif %}">
+                        {% if unit.current %}
+                            <span class="current-unit-text">Current Unit</span>
+                        {% endif %}
                         <div class = "card-body">
                             <div class = "row">
                                 <div class = "col-sm-12">
@@ -38,11 +41,7 @@
                                                 {% endfor %}
                                                 <div class = "unit-header-text">
                                                     <h2><strong>{{unit.name}}</strong></h2>
-<<<<<<< HEAD
                                                     <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} Lessons Complete</p>
-=======
-                                                    <p class = "module-text-{{module_number}} module-progress m-0">5/{{unit.lesson_count}} Lessons Complete</p>
->>>>>>> master
                                                 </div>
                                             </doiv>
                                         </div>

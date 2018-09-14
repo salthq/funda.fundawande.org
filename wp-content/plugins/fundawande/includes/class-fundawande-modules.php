@@ -93,6 +93,22 @@ class FundaWande_Modules {
             $module_units[$key]->lessons = FundaWande()->lessons->get_lessons($course_id, $unit);
             
             $module_units[$key]->lesson_count = count($module_units[$key]->lessons);
+
+            // get the unit unique key
+            $unit_key = get_term_meta($module_units[$key]->term_id, 'fw_unique_key', true);
+
+            // check if user exists
+            $user_id = get_current_user_id();
+
+            // get user current unit
+            $user_current_unit = get_user_meta($user_id,'fw_current_unit',true);
+
+            // check if this unit key is equal to current unit key and if so, aassign current proporty
+            if ($unit_key == $user_current_unit) {
+                $module_units[$key]->current = true;
+            }
+
+
         }
 
         return $module_units;

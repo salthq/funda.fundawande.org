@@ -33,6 +33,10 @@ class FundaWande_Lms {
         add_action( 'sensei_user_quiz_submitted', array( $this, 'fw_quiz_submitted'),10,5);
         // do_action( 'sensei_user_quiz_submitted', $user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type );
 
+        add_filter('sensei_user_started_course', array( $this, 'fw_user_started_course'), 10,1);
+        //        return apply_filters( 'sensei_user_started_course', $user_started_course, $course_id, $user_id );
+
+
     }
     /**
      * Complete lesson functionality to track a lesson as complete
@@ -124,8 +128,10 @@ class FundaWande_Lms {
         $karma = 0;
 
         // Check if the pass mark was achieved if it's a auto graded quiz and set karma to 1
-        if (($grade>=$quiz_pass_percentage) && ($quiz_grade_type == 'auto')) {
-            $karma = 1;
+        if (is_int($grade)) {
+            if (($grade >= $quiz_pass_percentage) && ($quiz_grade_type == 'auto')) {
+                $karma = 1;
+            }
         }
 
         if (!$user_id) {
@@ -691,6 +697,23 @@ class FundaWande_Lms {
 
 
     } // end fw_get_sub_unit_status
+
+    /**
+     * Get the sub unit status from a lesson key
+     *
+     * @return boolean $status return true if lesson is complete by user, false otherwise
+     *
+     */
+    public function fw_user_started_course($user_started_course) {
+
+        // Overide alles and make user always started course
+
+        $user_started_course = true;
+
+        return $user_started_course;
+
+
+    } // end fw_user_started_course
 
 
 
