@@ -1,12 +1,17 @@
 .background-primary{background-color:#fff}
 .background-secondary{background-color:#f5f5f5}
-body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-size:21px;weight:normal;line-height:28px;color:#444;opacity:100%}
-body h1{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:32px;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
-body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;weight:500;line-height:25px;color:#444;opacity:100%}
-body p{font-size:16px}
+body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;weight:normal;line-height:28px;color:#444;opacity:100%}
+body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
+body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;weight:500;line-height:25px;color:#444;opacity:100%}
 body hr{height:2px;color:#ccc;opacity:.5}
 body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
+}@media(min-width:768px){body h1{font-size:32px}
+body h2,body h3,body h4,body h5{font-size:21px}
+body p{font-size:16px}
+}@media(max-width:767px){body h1{font-size:21px}
+body h2,body h3,body h4,body h5{font-size:18px}
+body p{font-size:16px}
 }.module-bg-0{background-color:#327da6}
 .module-text-0{color:#327da6}
 .module-border-0{border-color:#327da6 !important}
