@@ -83,6 +83,16 @@ class FundaWande_Lms {
 
                     $comment_id = wp_insert_comment($data);
 
+                    // If this is a new completion we need to update the course, module and unit progress
+                    // get course id of the lesson
+                    $course_id = Sensei()->lesson->get_course_id($post_id);
+
+                    // Update user course progress
+                    $this->fw_update_course_progress_overall($user_id, $course_id);
+
+                    // Update the module and subunit progress and set the users current lesson to the next
+                    $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
                 } else {
                     $comment = array();
                     $comment['comment_ID'] = $user_lesson_status->comment_ID;
@@ -93,11 +103,6 @@ class FundaWande_Lms {
                     $comment_id = $user_lesson_status->comment_ID;
                 }
 
-                $course_id = Sensei()->lesson->get_course_id($post_id);
-
-                // Update user course progress
-                $this->fw_update_course_progress_overall($user_id, $course_id);
-                $this->fw_modules_status_of_sub_unit($user_id, $post_id);
 
 
                 return $comment_id;
@@ -163,6 +168,16 @@ class FundaWande_Lms {
             $comment_id = wp_insert_comment($data);
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
 
+            // If this is a new completion we need to update the course, module and unit progress
+            // get course id of the lesson
+            $course_id = Sensei()->lesson->get_course_id($post_id);
+
+            // Update user course progress
+            $this->fw_update_course_progress_overall($user_id, $course_id);
+
+            // Update the module and subunit progress and set the users current lesson to the next
+            $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
 
         } else {
             $comment = array();
@@ -176,17 +191,7 @@ class FundaWande_Lms {
 
         }
 
-        $course_id = Sensei()->lesson->get_course_id( $post_id );
-
-
-        // Update user course progress
-        $this->fw_update_course_progress_overall($user_id, $course_id);
-        $this->fw_modules_status_of_sub_unit($user_id, $post_id);
-
-
         return $comment_id;
-
-
 
     } // end fw_quiz_submitted
 
@@ -237,6 +242,16 @@ class FundaWande_Lms {
 
             $comment_id = wp_insert_comment($data);
 
+            // If this is a new completion we need to update the course, module and unit progress
+            // get course id of the lesson
+            $course_id = Sensei()->lesson->get_course_id($post_id);
+
+            // Update user course progress
+            $this->fw_update_course_progress_overall($user_id, $course_id);
+
+            // Update the module and subunit progress and set the users current lesson to the next
+            $this->fw_modules_status_of_sub_unit($user_id, $post_id);
+
 
         } else {
             $comment = array();
@@ -249,17 +264,7 @@ class FundaWande_Lms {
 
         }
 
-        $course_id = Sensei()->lesson->get_course_id( $post_id );
-
-
-        // Update user course progress
-        $this->fw_update_course_progress_overall($user_id, $course_id);
-        $this->fw_modules_status_of_sub_unit($user_id, $post_id);
-
-
         return $comment_id;
-
-
 
     } // end fw_quiz_submitted
 
