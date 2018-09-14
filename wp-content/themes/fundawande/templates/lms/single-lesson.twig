@@ -164,7 +164,7 @@
                                 Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
-                        <a href = "{{nav_links.next_link}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
                     {% elseif nav_links.unit_completed %}
@@ -181,6 +181,18 @@
                             </button>
                         {% endif %}    
                     {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Footer Progress Component -->
+        <div class = "lesson-footer my-5">
+            <div class = "d-block d-sm-none lesson-footer-progress w-100">
+                <div class = "lesson-progress d-flex">
+                    <div class = "module-bg-{{module_number}}"><h4 class = "text-white m-2">2.3</h4></div>
+                    {% for lesson in unit.lessons %}
+                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

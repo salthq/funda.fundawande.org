@@ -55,6 +55,13 @@
             background-color: $white;
 
         }
+        &-footer {
+            &-progress {
+                position: fixed;
+                bottom: 0;
+                box-shadow:2px 0px 4px 0 rgba(0,0,0,0.16),2px 0px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+        }
 
         @include breakpoint(tablet) {
             &-sidebar {
