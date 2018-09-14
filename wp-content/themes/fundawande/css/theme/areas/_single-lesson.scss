@@ -81,6 +81,54 @@
                 }
                 &-minimized {
                     max-width: 150px;
+                    min-height: 300px;
+                    .lesson-progress-marker {
+                        z-index:1 ;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background: $grey-secondary;
+                        &.current {
+                            border:2px solid;
+                            width: 24px;
+                            height: 24px;
+                            background: $module0-secondary__colour!important;
+                        }
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 20px;
+                        position: relative;
+                        -webkit-transform: rotate(90deg);
+                        -moz-transform: rotate(90deg);
+                        -o-transform: rotate(90deg);
+                        -ms-transform: rotate(90deg);
+                        transform: rotate(90deg);
+                        &:before {
+                            content: "";
+                            background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                            background-size: 10px auto;
+                            height: 4px;
+                            width: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            top: 8px;
+
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
                 }
                 &-text {
                     font-size: 14px;
