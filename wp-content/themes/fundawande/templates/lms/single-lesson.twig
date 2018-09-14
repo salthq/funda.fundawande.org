@@ -148,14 +148,14 @@
         <div class = "container">
             <hr>
             <div class="row my-4">
-                <div class="col-sm-12 col-md-4 text-center">
+                <div class="lesson-navigation-bottom col-sm-12 col-md-4 text-center  py-1">
                     {% if nav_links.prev_link %}
                         <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                 </div>
-                <div class="col-sm-12 col-md-4 text-center">
+                <div class=" lesson-navigation-bottom col-sm-12 col-md-4 text-center py-1">
                     {% if nav_links.next_link %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
@@ -164,7 +164,7 @@
                                 Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
-                        <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                        <a href = "{{nav_links.next_link}}" class = "btn btn-outline-info module-border-{{module_number}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
                     {% elseif nav_links.unit_completed %}

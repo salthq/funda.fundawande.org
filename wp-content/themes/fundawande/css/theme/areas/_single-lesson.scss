@@ -14,6 +14,11 @@
             &-top {
                 align-items: center;
             }
+            &-bottom {
+                .btn {
+                    width: 200px;
+                }
+            }
         }
         //TODO: re-write carousel CSS as the arrow pointers are not whre they should be
         &-carousel {
