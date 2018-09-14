@@ -4,7 +4,6 @@ jQuery(document).ready( function($) {
     $('#lesson-complete').click(function(e) {
         e.preventDefault();
 
-        var lessonKey = $(this).data('lesson-key');
         var userID = $(this).data('user-id');
         var postID = $(this).data('post-id');
         var url = $(this).data('url');
