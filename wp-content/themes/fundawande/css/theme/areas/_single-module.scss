@@ -1,0 +1,190 @@
+/* ==========================================================================
+* Single Module Area
+*
+* Styling specific to the module page, single-module.twig
+*
+ ========================================================================== */
+
+ .single-module-wrapper {
+    .unit {
+        position: relative;
+        .current-unit-text {
+            display: none;
+        }
+        &.current {
+            border: 3px solid $brand-primary__colour;
+            margin-top: 3rem!important;
+            .current-unit-text {
+                display: block;
+                position: absolute;
+                font-size: 17px;
+                font-style: italic;
+                color: white;
+                padding: 6px 18px;
+                background: $brand-primary__colour;
+                border-radius: 5px 5px 0 0;
+                left:2rem;
+                top:-42px;
+            }
+        }
+        &-header {
+            align-items: center;
+            &-counter {
+                background-color: $grey-secondary;
+                border-radius: 5px;
+                align-items: center;
+            }
+
+        }
+    }
+    .sub-units {
+        flex-flow: wrap;
+        &-icon {
+            justify-content: center;
+            margin-top: 1.5rem;
+            a {
+                width: 71px;
+                padding-top: 10px;
+                color: $text-primary__colour;
+                text-decoration: none;
+                &:hover {
+                    opacity: 0.7;
+                }
+                &.complete {
+                    svg {
+                        #icon-inner {
+                            fill :white;
+                        }
+                    }
+                    &:before {
+
+                    }
+                }
+                &.disabled {
+                    svg {
+                        fill: $grey-secondary;
+                        #icon-inner {
+                            fill :$text-primary__colour;
+                        }
+
+
+                    }
+                    &:hover {
+                        cursor: default;
+                        opacity: 1;
+                    }
+
+                }
+                &.current {
+                    width: 95px;
+                    box-sizing: border-box;
+                    border: 2px solid;
+                    border-radius: 6px;
+                    z-index: 1;
+                    background: white;
+                    margin-right: -10px;
+                    svg {
+                        #inner {
+                            opacity: 0.7;
+                        }
+                        #icon-inner {
+                            fill :$text-primary__colour;
+                        }
+
+
+                    }
+
+                }
+            }
+            p {
+                max-width: 70px;
+                margin: auto;
+                font-size: 15px;
+                line-height: 17px;
+            }
+            span {
+                position: absolute;
+                height: 27px;
+                width: 95px;
+                border-radius: 6px 6px 0 0;
+                top: -24px;
+                left: -2px;
+                font-size: 14px;
+                font-style: italic;
+                color: white;
+
+
+            }
+            .stage-progress-item-divider
+            {
+                min-width: 30px;
+                position: relative;
+                &:before {
+                    content: "";
+                    background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                    background-size: 20px auto;
+                    height: 4px;
+                    width: calc(100% + 2px);
+                    border-radius: 0;
+                    position: absolute;
+                    top: 43px;
+                    left: -1px;
+                }
+
+            }
+            &:first-of-type {
+                .stage-progress-item-divider
+                {
+                    &:before {
+                        content: none;
+                    }
+                }
+            }
+            &:nth-of-type(7n) {
+                .stage-progress-item-divider
+                {
+                    &:before {
+                        background: blue;
+                        width: 30px;
+                        right: -1px;
+                        left: auto;
+                    }
+
+                }
+            }
+            &:nth-of-type(6n) {
+
+                    &:after {
+                        content: "";
+                        background: pink;
+                        height: 2px;
+                        width: 30px;
+                        border-radius: 2px;
+                        position: absolute;
+                        top: 45px;
+                        right: -28px;
+                    }
+
+            }
+
+        }
+        //// Display 7 items per row on desktop
+        //@include breakpoint(desktop) {
+        //    &-icon {
+        //        flex: 0 0 14%;
+        //    }
+        //}
+        //// Display 5 item per row on tablet
+        //@include breakpoint(tablet) {
+        //    &-icon {
+        //        flex: 0 0 20%;
+        //    }
+        //}
+        //// Display 3 items per row on mobile
+        //@include breakpoint(phone) {
+        //    &-icon {
+        //        flex: 0 0 31%;
+        //    }
+        //}
+    } 
+ }

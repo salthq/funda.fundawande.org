@@ -1,0 +1,38 @@
+<div id = "end-lesson-modal" class="modal m-5" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content  px-5 py-3">
+      <div class="lesson-modal-header modal-header text-center">
+        <h5 class="modal-title"><span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span><strong>Well done, {{user.display_name}}!</strong></h5>
+        <!-- Commenting out as this button is not shown on mockups.
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        -->
+      </div>
+      <div class="modal-body">
+        {{post.get_field('custom_feedback_message')}}
+      </div>
+      <div class="lesson-modal-footer modal-footer">
+            <!-- End of Lesson Progress Component -->
+            <div class = "lesson-progress-modal m-3">
+                <div class = "lesson-progress d-flex justify-content-center flex-row">
+                    {% for lesson in unit.lessons %}
+                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% endfor %}
+
+                </div>
+                <!-- TODO: Make the unit progress info dynamic -->
+                <p><strong>Unit Progress</strong> 3 of {{num_lessons}} lessons complete</p>
+            </div>
+            {# if this lesson is the end of a unit, go to the end of unit modal #}
+            {% if nav_links.unit_completed %} 
+              <button type="button" class="btn btn-info primary-border primary-bg" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+                Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+              </button>
+            {% else %}
+              <a href = "{{nav_links.next_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

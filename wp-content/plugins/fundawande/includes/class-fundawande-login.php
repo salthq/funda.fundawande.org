@@ -29,21 +29,35 @@ class FundaWande_Login {
         //Check for blank fields and add 'login=blank-field' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
     }
+
     //Set up login form options
     public function setup_login_form() {
+
+        //Bilingual display and re-direct options
+        $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
+        $username_label = "Inombolo yesazisi";
+        $password_label = "Inombolo yokuvula";
+        $login_label = "Ngema";
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
+            $redirect_url = "/course/reading-for-meaning-eng/";
+            $username_label = "ID Number";
+            $password_label = "Password";
+            $login_label = "Log In";
+        }
+
         $args = array(
             'echo'           => true,
-            //TODO: redirect to either the dashboard or modules page on login
-            'redirect'       => site_url('login'),
-            'form_id'        => 'form-login',
-            'label_username' => __( 'ID Number' ),
-            'label_password' => __( 'Password' ),
+            //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
+            'redirect'       => site_url($redirect_url),
+            'form_id'        => 'fw-form-login',
+            'label_username' => $username_label,
+            'label_password' => $password_label,
             'label_remember' => __( 'Remember Me' ),
-            'label_log_in'   => __( 'Sign In' ),
+            'label_log_in'   => $login_label,
             'id_username'    => 'user_login',
             'id_password'    => 'user_pass',
             'id_remember'    => 'rememberme',
-            'id_submit'      => 'wp-submit',
+            'id_submit'      => 'fw-submit',
             'remember'       => true,
             'value_username' => NULL,
             'value_remember' => true );
@@ -62,7 +76,7 @@ class FundaWande_Login {
         //If the login language is set to english, add it to the URL after stripping out other GET variables
         if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login-lang=eng';
+            $referrer .= '?login_lang=eng';
         }
         else {
             //No need to check for Xhosa, as that is the default language
@@ -101,7 +115,7 @@ class FundaWande_Login {
         //If the login language is set to english, add it to the URL after stripping out other GET variables
         if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login-lang=eng';
+            $referrer .= '?login_lang=eng';
         }
         else {
             //No need to check for Xhosa, as that is the default language
@@ -137,5 +151,15 @@ class FundaWande_Login {
             exit;
         }
     } // end custom_login_blank_field();
+
+    public function check_if_active_language() {
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
+            return "eng";
+        }
+        else {
+            return "xho";
+        }
+    }
+
 
 } // end FundaWande_Login

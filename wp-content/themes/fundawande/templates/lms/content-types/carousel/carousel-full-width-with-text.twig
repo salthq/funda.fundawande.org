@@ -1,0 +1,35 @@
+<div class = "container-fluid my-5 p-0">
+    <div class = "row">
+        <div class = "col-sm-12 p-0">
+            <div id="carousel-full-width-with-text" class="carousel slide" data-ride="carousel">
+                {#<ol class="carousel-indicators">
+                    {% for item in content.carousel_items %}
+                    <li data-target="#carousel-with-text" data-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}">{{loop.index}}</li>
+                    {% endfor %}
+                </ol>#}
+                <div class="carousel-inner" role="listbox">
+                        {% for item in content.carousel_items %}
+                            <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
+                                <img class = "d-block lesson-carousel-image" src ="{{ item.image_url }}">
+                                {#<p>Image {{loop.index}} of {{loop|length}}</p>#}
+                                <h4 class = "text-center mt-5"><strong>{{ item.title }}</strong></h4>
+                                <p class = "text-center m-2">{{ item.text }}</p>
+                            </div>
+                        {% endfor %}
+                </div>
+                    <a class="lesson-carousel-control carousel-control-prev mx-5" href="#carousel-full-width-with-text" role="button" data-slide="prev">
+                        <div class = "lesson-carousel-control-icon p-3">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </div>
+                    </a>
+                    <a class="lesson-carousel-control carousel-control-next mx-5" href="#carousel-full-width-with-text" role="button" data-slide="next">
+                        <div class = "lesson-carousel-control-icon p-3">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </div>
+                    </a>
+            </div>
+        </div>
+    </div>
+</div>

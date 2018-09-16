@@ -7,12 +7,153 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {# Testing the asset inclusion #}
-        <div class="row">
-            <div class="col-12">
-                <h1>Single Lesson</h1>
-                {{ post.content }}
+        {% include '/lms/embeds/lesson-sidebar.twig' %}
+        <div class = "container-fluid lesson-header">
+            <div class = "container">
+                <div class = "row lesson-navigation-top">
+                    <div class = "col-sm-2 col-md-4">
+                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{unit.url}}">
+                            <span class = "module-svg-fill-{{module_number}}">{{source('/assets/arrow_left.svg')}}</span>
+                            <br>
+                            <span class = "d-none d-md-block module-text-{{module_number}}">Back to Units</span> 
+                        </a>
+                    </div>
+                    <div class = "col-sm-10 col-md-4 text-center my-4">
+                        <!-- TODO: change lesson number to be dynamic-->
+                        <h1><strong>Lesson 2/{{num_lessons}}</strong></h1>
+                        <h1>{{function('get_the_title')}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Content-->
+        <div class = "container-fluid">
+            <div class = "row mb-5">
+                <!-- Hero Band -->
+                {% for content in post.get_field('lesson_hero_types') %}
+                    {# Image Hero #}
+                    {% if content.acf_fc_layout == 'image_hero' %}
+                        {% include '/lms/hero-types/image-hero.twig' %}
+                    {% endif %}    
+                    {# Video Hero #}
+                    {% if content.acf_fc_layout == 'video_hero' %}
+                        {% include '/lms/hero-types/video-hero.twig' %}
+                    {% endif %}  
+                {% endfor %}
+            </div>
+            <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
+            {% for content in post.get_field('lesson_content_types') %}
+
+                <!-- 
+                    Image content types
+                -->
+                {# Full width image#}
+                {% if content.acf_fc_layout == 'image_full_width' %}
+                    {% include '/lms/content-types/image/image-full-width.twig' %}
+                {# Container width image#}
+                {% elseif content.acf_fc_layout == 'image_container_width' %}    
+                    {% include '/lms/content-types/image/image-container-width.twig' %}
+                {# Pulled left image #}
+                {% elseif content.acf_fc_layout == 'image_pulled_left' %}    
+                    {% include '/lms/content-types/image/image-pulled-left.twig' %}
+                {# Pulled right image #}  
+                {% elseif content.acf_fc_layout == 'image_pulled_right' %}    
+                    {% include '/lms/content-types/image/image-pulled-right.twig' %}
+
+                <!--
+                    Video content types
+                -->    
+                {# Full width video #}
+                {% elseif content.acf_fc_layout == 'video_full_width' %}
+                    {% include '/lms/content-types/video/video-full-width.twig' %}
+                {# Container width video #}    
+                {% elseif content.acf_fc_layout == 'video_container_width' %}
+                    {% include '/lms/content-types/video/video-container-width.twig' %}
+                {# Pulled left video #}      
+                {% elseif content.acf_fc_layout == 'video_pulled_left' %}
+                    {% include '/lms/content-types/video/video-pulled-left.twig' %}
+                {# Pulled right video #}      
+                {% elseif content.acf_fc_layout == 'video_pulled_right' %}
+                    {% include '/lms/content-types/video/video-pulled-right.twig' %}
+
+                <!--
+                    Carousel content types
+                -->         
+                {# Full width carousel with text #}      
+                {% elseif content.acf_fc_layout == 'carousel_full_width_with_text' %}
+                    {% include '/lms/content-types/carousel/carousel-full-width-with-text.twig' %}
+                {# Full width carousel without text #}      
+                {% elseif content.acf_fc_layout == 'carousel_full_width_without_text' %}
+                    {% include '/lms/content-types/carousel/carousel-full-width-without-text.twig' %}
+                {# Container width carousel with text #}
+                {% elseif content.acf_fc_layout == 'carousel_container_width_with_text' %}
+                    {% include '/lms/content-types/carousel/carousel-container-width-with-text.twig' %}
+                {# Container width carousel without text #}
+                {% elseif content.acf_fc_layout == 'carousel_container_width_without_text' %}
+                    {% include '/lms/content-types/carousel/carousel-container-width-without-text.twig' %}
+                {# Pulled left without text carousel #}
+                {% elseif content.acf_fc_layout == 'carousel_pulled_left_without_text' %}
+                    {% include '/lms/content-types/carousel/carousel-pulled-left-without-text.twig' %}
+                {# Pulled right without text carousel #}    
+                {% elseif content.acf_fc_layout == 'carousel_pulled_right_without_text' %}
+                    {% include '/lms/content-types/carousel/carousel-pulled-right-without-text.twig' %}
+                {# Pulled left with text carousel #}
+                {% elseif content.acf_fc_layout == 'carousel_pulled_left_with_text' %}
+                    {% include '/lms/content-types/carousel/carousel-pulled-left-with-text.twig' %}
+                {# Pulled right with text carousel #}    
+                {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
+                    {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
+
+                <!--
+                    Other content types
+                -->
+                {# Copy text #}
+                {% elseif content.acf_fc_layout == 'copy_text' %}
+                    {% include '/lms/content-types/copy-text.twig' %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Bottom navigation-->
+        <div class = "container">
+            <hr>
+            <div class="row my-4">
+                <div class="col-sm-12 col-md-4 text-center">
+                    {% if nav_links.prev_link %}
+                        <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-12 col-md-4 text-center">
+                </div>
+                <div class="col-sm-12 col-md-4 text-center">
+                    {% if nav_links.next_link %}
+                        {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
+                        {% if post.get_field('custom_feedback_message') %}
+                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            <button type="button" class="btn btn-outline-info module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                                Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% else %}
+                        <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                        {% endif %}
+                    {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
+                    {% elseif nav_links.unit_completed %}
+                        {% include '/lms/modals/modal-end-unit.twig' %}
+                        {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
+                        {% if post.get_field('custom_feedback_message') %}
+                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            </button>
+                        {% endif %}    
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div><!-- #wrapper -->
+
 {% endblock %}

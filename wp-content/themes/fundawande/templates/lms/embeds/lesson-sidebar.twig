@@ -1,0 +1,36 @@
+<!-- Expanded Sidebar Progress Component -->
+<div class = "lesson-sidebar lesson-sidebar-expanded lesson-sidebar-absolute my-3" id = "sidebar-expanded">
+    <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
+        <div class = "module-bg-{{module_number}} w-100 text-white text-center p-2">
+                    <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
+                        <span class = "p-2">{{source('assets/minimize_icon.svg')}}</span>Hide Unit progress sidebar
+                    </span>
+        </div>
+        <div class = "lesson-sidebar-module-titles mx-3 py-3">
+            <p class = "m-0"><strong>How Children Learn to Read</strong></p>
+            <h4 class = "m-0">{{unit.name}}</h4>
+        </div>
+        <hr>
+        {% for lesson in unit.lessons %}
+            <p>
+                <a class = "text-dark" href = "{{function ('get_permalink',lesson.ID)}}">
+                    <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {{lesson.post_title}}
+                </a>
+            </p>
+        {% endfor %}
+    </div>
+</div>
+<!-- Minimized Sidebar Progress Component -->
+<div class = "lesson-sidebar lesson-sidebar-minimized lesson-sidebar-absolute my-3" id = "sidebar-minimized">
+    <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
+        <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">{{module_number}}.3</h4></div>
+        <div class="my-4 row no-gutters align-items-center flex-column">
+        {% for lesson in unit.lessons %}
+            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+            <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
+
+        {% endfor %}
+        </div>
+    </div>
+</div>

@@ -11,9 +11,9 @@ ob_start();
  * @version     1.9.0
  */
 
-// if user is not logged in direct to login page
+// if user is not logged in direct to the custom FW login page
 if (!is_user_logged_in()) {
-    wp_redirect(wp_login_url(get_permalink()));
+    wp_redirect(get_site_url(null, '/login'));
     exit();
 }
 
@@ -37,6 +37,19 @@ if (class_exists('Timber')) {
     // Assign current user to context
     $user = new TimberUser();
     $context['user'] = $user;
+
+    //Get the unit info for the current lesson
+    $unit = FundaWande()->lessons->get_unit_info( 31, $post->ID );
+
+    $context['unit'] = $unit;
+
+    $context['num_lessons'] = count($unit->lessons);  
+
+    //Get the module number for the parent module, to enable module-specific styling
+    $context['module_number'] = get_term_meta($unit->parent, 'module_number', true);
+
+    //Get the nav links object and add to Timber context 
+    $context['nav_links'] = FundaWande()->lessons->get_lesson_nav_links($post->ID);
 
     Timber::render(array('lms/single-lesson.twig', 'page.twig'), $context);
 

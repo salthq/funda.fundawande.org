@@ -178,7 +178,13 @@ class FundaWande_Main {
         $this->question_dnd_js = new FundaWande_Question_Dnd_Js();
 
         // Setup grading functionality class
-        $this->grading = new FundaWande_Grading();
+        $this->lms = new FundaWande_Lms();
+
+        // Setup module functionality class
+		$this->modules = new FundaWande_Modules();
+		
+		// Setup lesson functionality class
+		$this->lessons = new FundaWande_Lessons();
 
         // Differentiate between administration and frontend logic.
         if ( is_admin() ) {
