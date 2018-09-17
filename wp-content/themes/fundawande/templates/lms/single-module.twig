@@ -65,14 +65,17 @@
                                     <p>{{unit.description}}</p>
                                     <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
-                                            <div class = "sub-units-icon row text-center col-md-2 no-gutters ">
+                                            <div class = "sub-units-icon row text-center flex-md-row flex-column col-md-2 no-gutters ">
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}module-divider-before-{{ module_number }}{% endif %} col">
 
                                                 </div>
-                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
-                                                    <span class="{%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
-                                                    {{ source('assets/lms/recall_quiz.svg') }}
-                                                    <p class = "py-2">{{lesson.post_title}}</p>
+                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                                                    <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                    {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
+                                                    <div class="d-flex flex-column justify-content-center py-2 pl-3 pl-md-0 lesson-progress-text">
+                                                        <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                        <p class = "m-0">{{lesson.post_title}}</p>
+                                                    </div>
                                                 </a>
 
                                             </div>
