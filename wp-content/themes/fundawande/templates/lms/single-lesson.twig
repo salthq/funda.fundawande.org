@@ -162,18 +162,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Footer Progress Component -->
-        <div class = "lesson-footer my-5">
-            <div class = "d-block d-sm-none lesson-footer-progress w-100">
-                <div class = "lesson-progress d-flex">
-                    <div class = "module-bg-{{module_number}}"><h4 class = "text-white m-2">2.3</h4></div>
-                    {% for lesson in unit.lessons %}
-                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
-                    {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
     </div><!-- #wrapper -->
 
 {% endblock %}
