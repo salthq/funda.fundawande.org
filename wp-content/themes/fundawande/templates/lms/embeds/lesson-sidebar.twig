@@ -10,21 +10,25 @@
             <p class = "m-0"><strong>How Children Learn to Read</strong></p>
             <h4 class = "m-0">{{unit.name}}</h4>
         </div>
-        <hr>
+        <hr class="m-0">
+        <div class="my-4 row no-gutters px-4 flex-column">
         {% for lesson in unit.lessons %}
-            <p>
-                <a class = "text-dark" href = "{{function ('get_permalink',lesson.ID)}}">
-                    <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
-                    {{lesson.post_title}}
-                </a>
-            </p>
+            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+            <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                {{ source('assets/lms/recall_quiz.svg') }}
+                <div class="pl-2 d-flex flex-column lesson-progress-text">
+                    <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
+                    <span class = "">{{lesson.post_title}}</span>
+                </div>
+            </a>
         {% endfor %}
+        </div>
     </div>
 </div>
 <!-- Minimized Sidebar Progress Component -->
 <div class = "lesson-sidebar lesson-sidebar-minimized lesson-sidebar-absolute my-3" id = "sidebar-minimized">
     <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
-        <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">{{module_number}}.3</h4></div>
+        <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">{{module_number}}.{{ lesson_number }}</h4></div>
         <div class="my-4 row no-gutters align-items-center flex-column">
         {% for lesson in unit.lessons %}
             <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>

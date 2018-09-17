@@ -37,9 +37,22 @@ jQuery(document).ready( function($) {
 
     //Slide the expanded progress component back out on click and show the minimized progress component
     $('#sidebar-expanded').click(function() {
+        hideSidebar();
+    });
+
+    function hideOverlay () {
+        $('#overlay').click(function () {
+            $(this).remove();
+            hideSidebar();
+
+        });
+    };
+
+
+    function hideSidebar () {
         $('#sidebar-minimized').show("medium");
         $('#sidebar-expanded').animate({'margin-left': '-500px'});
-    });  
+    }
 
     //If there is both a custom feedback modal and an end of unit modal, 
     $('#end-unit-modal-link').click(function() {
@@ -65,6 +78,8 @@ jQuery(document).ready( function($) {
               'width': '100%',
               'z-index': 5
            });
+
+        hideOverlay();
     });
 
     $('#sidebar-expanded').click(function() {
@@ -76,12 +91,12 @@ jQuery(document).ready( function($) {
         var scroll = $(window).scrollTop(); 
 
         if(scroll >= 160) {
-            $('.lesson-sidebar').addClass('lesson-sidebar-fixed')
-            $('.lesson-sidebar').removeClass('lesson-sidebar-absolute')
+            $('.lesson-sidebar-minimized').addClass('lesson-sidebar-fixed')
+            $('.lesson-sidebar-minimized').removeClass('lesson-sidebar-absolute')
         }
         else {
-            $('.lesson-sidebar').addClass('lesson-sidebar-absolute')
-            $('.lesson-sidebar').removeClass('lesson-sidebar-fixed')
+            $('.lesson-sidebar-minimized').addClass('lesson-sidebar-absolute')
+            $('.lesson-sidebar-minimized').removeClass('lesson-sidebar-fixed')
         }
         
     })

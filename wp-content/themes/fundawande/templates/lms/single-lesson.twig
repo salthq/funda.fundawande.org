@@ -4,6 +4,14 @@
 {# Import macros for use in this template #}
 {% import "mixins.twig" as mixin %}
 
+{# Set lesson number #}
+{% set lesson_number=0 %}
+{% for lesson in unit.lessons %}
+    {% if lesson.ID == post.ID %}
+        {% set lesson_number=loop.index %}
+    {% endif %}
+{% endfor %}
+
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
@@ -20,7 +28,7 @@
                     </div>
                     <div class = "col-10 col-md-4 text-center my-4">
                         <!-- TODO: change lesson number to be dynamic-->
-                        <h1><strong>Lesson 2/{{num_lessons}}</strong></h1>
+                        <h1><strong>Lesson {{ lesson_number }}/{{num_lessons}}</strong></h1>
                         <h1>{{function('get_the_title')}}</h1>
                     </div>
                 </div>

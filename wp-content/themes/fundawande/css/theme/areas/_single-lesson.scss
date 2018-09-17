@@ -81,6 +81,86 @@
                 &-expanded {
                     margin-left: -500px; //Hide component
                     max-width: 500px;
+                    a.lesson-progress-marker {
+                        z-index:1 ;
+                        color: $text-primary__colour;
+                        &:hover {
+                            opacity: 0.7;
+                            text-decoration: none;
+                        }
+                        svg {
+                            height: 50px;
+                            width: 50px;
+                            #icon-inner {
+                                fill :white;
+                            }
+                        }
+                        .lesson-progress-text {
+                            line-height: 1;
+                        }
+                        &.disabled {
+                            svg {
+                                fill: $grey-secondary;
+                                #icon-inner {
+                                    fill :$text-primary__colour;
+                                }
+
+
+                            }
+                            &:hover {
+                                cursor: default;
+                                opacity: 1;
+                            }
+
+                        }
+                        &.current {
+                            box-sizing: border-box;
+                            border: 3px solid;
+                            border-radius: 28px 6px 6px 28px;
+                            z-index: 1;
+                            background: white;
+                            svg {
+                                #inner {
+                                    opacity: 0.7;
+                                }
+                                #icon-inner {
+                                    fill :$text-primary__colour;
+                                }
+
+
+                            }
+
+                        }
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 20px;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                            background-size: auto 7px;
+                            width: 4px;
+                            height: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            left: 23px;
+                            top: -1px;
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
                 }
                 &-minimized {
                     max-width: 150px;
@@ -103,20 +183,16 @@
                         min-width: 10px;
                         min-height: 20px;
                         position: relative;
-                        -webkit-transform: rotate(90deg);
-                        -moz-transform: rotate(90deg);
-                        -o-transform: rotate(90deg);
-                        -ms-transform: rotate(90deg);
-                        transform: rotate(90deg);
                         &:before {
                             content: "";
-                            background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
-                            background-size: 10px auto;
-                            height: 4px;
-                            width: calc(100% + 2px);
+                            background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            background-size: auto 7px;
+                            width: 4px;
+                            height: calc(100% + 2px);
                             border-radius: 0;
                             position: absolute;
-                            top: 8px;
+                            top: 0;
+                            left: 23px;
 
 
                         }
