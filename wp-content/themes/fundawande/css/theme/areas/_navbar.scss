@@ -11,6 +11,7 @@
   position: fixed;
   width: 100%;
   z-index: 2;
+
   .navbar {
     padding: 0;
     #main-menu-button {
@@ -18,7 +19,7 @@
       border: 2px solid #FFFFFF;
       border-radius: 6px;
       padding: 6px;
-
+      height: 44px;
       color: white;
       // Hamburger Nav styling
       .open-text, .close-text {
@@ -106,6 +107,25 @@
             display: none;
           }
 
+        }
+      }
+    }
+  }
+  &.main-menu-active {
+    z-index: 1051;
+    box-shadow: none;
+    #main-menu-button-container {
+      background: white;
+      border-radius: 0 6px 0 0;
+      #main-menu-button {
+        border: 2px solid $text-primary__colour;
+        color: $text-primary__colour;
+        .nav-hamburger {
+          span {
+            &:after, &:before {
+              background: $text-primary__colour;
+            }
+          }
         }
       }
     }

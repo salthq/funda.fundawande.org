@@ -164,7 +164,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
 #wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:2}
 #wrapper-navbar .navbar{padding:0}
-#wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;color:white}
+#wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
 @media(max-width:767px){#wrapper-navbar .navbar #main-menu-button .open-text,#wrapper-navbar .navbar #main-menu-button .close-text{line-height:15px;text-align:center;display:block;width:50px}
 }#wrapper-navbar .navbar #main-menu-button .nav-hamburger{display:block;position:relative;overflow:hidden;background:transparent;margin:0;padding:0;width:26px;height:26px;font-size:0;text-indent:-9999px;-webkit-appearance:none;-moz-appearance:none;appearance:none;box-shadow:none;border-radius:2px;border:0;cursor:pointer;-webkit-transition:background .05s;transition:background .05s}
 #wrapper-navbar .navbar #main-menu-button .nav-hamburger:focus{outline:0}
@@ -180,6 +180,10 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 #wrapper-navbar .navbar #main-menu-button .nav-hamburger.is-active span::after{bottom:0;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg)}
 #wrapper-navbar .navbar #main-menu-button .nav-hamburger.is-active ~ .close-text{display:block}
 #wrapper-navbar .navbar #main-menu-button .nav-hamburger.is-active ~ .open-text{display:none}
+#wrapper-navbar.main-menu-active{z-index:1051;box-shadow:none}
+#wrapper-navbar.main-menu-active #main-menu-button-container{background:white;border-radius:0 6px 0 0}
+#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button{border:2px solid #444;color:#444}
+#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:after,#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:before{background:#444}
 #wrapper-navbar a{color:white;font-size:15px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 #wrapper-navbar a:hover{opacity:.8;text-decoration:none}
 #wrapper-navbar .change-lang .change-lang-icon{background-color:white;border-radius:3px;color:#4a4a4a;height:27px;width:31px;text-align:center;font-size:8px}
@@ -331,4 +335,13 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:before{content:"";background:-webkit-linear-gradient(left,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;background-size:7px auto;height:4px;width:calc(100% + 2px);border-radius:0;position:absolute;top:8px}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type{min-height:0;min-width:0;display:none}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type:before{display:none}
+}#main-menu-modal .modal-dialog{margin-top:60px;margin-left:0}
+@media(max-width:767px){#main-menu-modal .modal-dialog{margin-top:60px}
+}#main-menu-modal .modal-dialog .modal-content{border:0;border-radius:0 6px 6px 0;width:auto;display:inline-block}
+#main-menu-modal .modal-dialog .modal-content a{color:#444;border-bottom:1px solid #ccc}
+#main-menu-modal .modal-dialog .modal-content a:last-of-type{border-bottom:0}
+#main-menu-modal .modal-dialog .modal-content a:hover{text-decoration:none;opacity:.7}
+#main-menu-modal .modal-dialog .modal-content a span{margin-left:1rem}
+.admin-bar #main-menu-modal .modal-dialog{margin-top:92px}
+@media(max-width:767px){.admin-bar #main-menu-modal .modal-dialog{margin-top:106px}
 }
