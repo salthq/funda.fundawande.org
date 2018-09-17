@@ -51,8 +51,8 @@
                                             <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary mr-3 d-flex  module-svg-fill-{{ module-number }} align-items-center module-border-{{ module-number }} module-text-{{ module-number }} unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">View lessons</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a>
-                                            <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href="#">
-                                                Resume Unit {{ source('assets/arrow_right.svg') }}
+                                            <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
+                                                Resume Unit <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
                                         </div>
                                     </div>
@@ -90,8 +90,8 @@
                                 <div class = "col-sm-12 text-right d-md-none">
                                     <hr>
                                     <!-- TODO: Add link to current sub-unit-->
-                                    <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation " href "#">
-                                        Resume Unit <img class = "p-2" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
+                                    <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
+                                        Resume Unit <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
                                     </a>
                                 </div>
                             </div>

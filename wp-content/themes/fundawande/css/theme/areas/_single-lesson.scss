@@ -30,7 +30,7 @@
                     height: 600px;
                 }
             }
-            @include breakpoint(mobile) {
+            @include breakpoint(phone) {
                 &-image {
                     height: 220px;
                 }
@@ -38,11 +38,25 @@
             &-control {
                 position: absolute;
                 bottom: -3em;
+
+                @include breakpoint(phone) {
+                    bottom: -1em;
+                }
+
                 &-prev {
                     left: 2em;
                 }
                 &-next {
                     right: 2em;
+                }
+
+                &-icon {
+                    @include breakpoint(phone) {
+                        svg {
+                            width: 33px;
+                            height: 33px;
+                        }
+                    }
                 }
             }
         }
