@@ -14,6 +14,24 @@ if ( ! class_exists( 'Timber' ) ) {
     return;
 }
 
+// Add General Options Page
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title'    => 'Funda Wande Global Options',
+        'menu_title'    => 'FW Options',
+        'menu_slug'    => 'fundawande-options',
+        'capability'    => 'edit_posts',
+        'redirect'        => false
+    ));
+
+    // add sub page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Course Options',
+        'menu_title' 	=> 'Course Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
+}
+
 Timber::$dirname = array('templates', 'views');
 
 class StarterSite extends TimberSite {
