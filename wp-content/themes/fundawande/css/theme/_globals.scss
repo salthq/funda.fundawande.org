@@ -78,13 +78,14 @@
 
 
     p {
+        text-align: justify;
 
         @include breakpoint (tablet) {
             font-size: 16px;
         }
 
         @include breakpoint (phone) {
-            font-size: 16px;
+            font-size: 12px;
         }
 
     }
