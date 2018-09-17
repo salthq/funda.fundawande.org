@@ -42,11 +42,24 @@
         &-icon {
             justify-content: center;
             margin-top: 1.5rem;
+            @include breakpoint(phone) {
+                margin-top: 0;
+            };
             a {
                 width: 71px;
                 padding-top: 10px;
                 color: $text-primary__colour;
                 text-decoration: none;
+                @include breakpoint(phone) {
+                    width: auto;
+                    padding-top: 0;
+                }
+                svg {
+                    @include breakpoint(phone) {
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
                 &:hover {
                     opacity: 0.7;
                 }
@@ -90,8 +103,14 @@
                         #icon-inner {
                             fill :$text-primary__colour;
                         }
-
-
+                    }
+                    @include breakpoint(phone) {
+                        width: auto;
+                        border-radius: 28px 6px 6px 28px;
+                        margin-right: 0;
+                    }
+                    .lesson-progress-text {
+                        line-height: 1;
                     }
 
                 }
@@ -101,8 +120,11 @@
                 margin: auto;
                 font-size: 15px;
                 line-height: 17px;
+                @include breakpoint(phone) {
+                    max-width: none;
+                }
             }
-            span {
+            .up-next-text {
                 position: absolute;
                 height: 27px;
                 width: 95px;
@@ -119,16 +141,31 @@
             {
                 min-width: 30px;
                 position: relative;
+                min-height: 15px;
                 &:before {
                     content: "";
                     background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
-                    background-size: 20px auto;
+                    background-size: 7px auto;
                     height: 4px;
                     width: calc(100% + 2px);
                     border-radius: 0;
                     position: absolute;
                     top: 43px;
                     left: -1px;
+                }
+                @include breakpoint(phone) {
+                    &:before {
+                        content: "";
+                        background: linear-gradient(0deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                        background-size: auto 7px ;
+                        width: 4px;
+                        height: calc(100% + 2px);
+                        border-radius: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 23px;
+
+                    }
                 }
 
             }
@@ -144,25 +181,31 @@
                 .stage-progress-item-divider
                 {
                     &:before {
-                        background: blue;
-                        width: 30px;
-                        right: -1px;
-                        left: auto;
+                        @include breakpoint(desktop) {
+                            background: blue;
+                            width: 30px;
+                            right: -1px;
+                            left: auto;
+                        }
+
                     }
+
 
                 }
             }
             &:nth-of-type(6n) {
 
                     &:after {
-                        content: "";
-                        background: pink;
-                        height: 2px;
-                        width: 30px;
-                        border-radius: 2px;
-                        position: absolute;
-                        top: 45px;
-                        right: -28px;
+                        @include breakpoint(desktop) {
+                            content: "";
+                            background: pink;
+                            height: 2px;
+                            width: 30px;
+                            border-radius: 2px;
+                            position: absolute;
+                            top: 45px;
+                            right: -28px;
+                        }
                     }
 
             }
