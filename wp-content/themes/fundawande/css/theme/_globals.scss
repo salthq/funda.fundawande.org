@@ -9,7 +9,6 @@
 ----------------------------------------------------------------
 # Backgrounds
 # Typography
-# Responsive Font Sizing
 # Module Styling
 # Primary Brand Styling
 --------------------------------------------------------------*/
@@ -30,12 +29,11 @@
 .background-secondary-light {}
 
 
-
 /*
  * Typography
  */
 
-body {
+ body {
 
     font-family: $base__font-family;
     weight: normal;
@@ -51,6 +49,14 @@ body {
         line-height: 1.25; //Line height chosen by James - mockups had a line height of 28px so I amended in the code
         color: #4A4A4A;
         opacity: 100%;
+
+        @include breakpoint (tablet) {
+            font-size: 32px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 21px;
+        }
     }
 
     h2, h3, h4, h5  {
@@ -61,10 +67,26 @@ body {
         color: $text-primary__colour;
         opacity: 100%;
 
+        @include breakpoint (tablet) {
+            font-size: 21px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 18px;
+        }
     }
 
 
     p {
+
+        @include breakpoint (tablet) {
+            font-size: 16px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 16px;
+        }
+
     }
 
 
@@ -99,67 +121,6 @@ body {
     }
 
 }
-
-/*
-* Responsive Font Styling
-*/
-
-@include breakpoint(tablet) {
-    body {
-        h1 {
-            font-size: 32px;
-        }
-    
-        h2, h3, h4, h5  {
-            font-size: 21px;
-        }
-    
-    
-        p {
-            font-size: 16px;
-        }
-    
-    
-        ul {
-    
-    
-    
-        }
-    
-        li {
-    
-        }
-    }
-}
-
-@include breakpoint(phone) {
-    body {
-        h1 {
-            font-size: 21px;
-        }
-    
-        h2, h3, h4, h5  {
-            font-size: 18px;
-        }
-    
-    
-        p {
-            font-size: 16px;
-        }
-    
-    
-        ul {
-    
-    
-    
-        }
-    
-        li {
-    
-        }
-    }
-}
-
 
 /*
  * Module Styling
