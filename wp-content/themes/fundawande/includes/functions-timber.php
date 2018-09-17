@@ -62,17 +62,11 @@ class StarterSite extends TimberSite {
         }
         $context['user_logged_in'] = is_user_logged_in();
         $context['log_out_link'] = wp_logout_url();
-        $context['foo'] = 'bar';
-        $context['stuff'] = 'I am a value set in your functions.php file';
-        $context['notes'] = 'These values are available everytime you call Timber::get_context();';
-        $context['menu'] = new TimberMenu();
-        $context['foo'] = 'bar';
-        $context['stuff'] = 'I am a value set in your functions.php file';
-        $context['notes'] = 'These values are available everytime you call Timber::get_context();';
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
         $context['site'] = $this;
+        $context['options'] = get_fields('options');
         $context['is_mobile'] = wp_is_mobile();
         // Set up language context to determine page language
         if ( isset($context['current_user']->language_preference)) {

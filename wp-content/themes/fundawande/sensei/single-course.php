@@ -25,6 +25,9 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
+    // Check correct course language
+    FundaWande()->language->fw_correct_course_lang($context['user']->fw_current_course,$post->ID);
+
     // Get the course modules to visualise on the course page
     $context['modules'] = FundaWande()->modules->get_course_modules($post->ID);
 
