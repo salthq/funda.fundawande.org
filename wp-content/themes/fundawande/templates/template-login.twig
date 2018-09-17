@@ -20,9 +20,9 @@
                     </div>
                 {% else %}
                     <!-- Login Form -->
-                    <div class="col-sm-12 col-md-6 login my-5 p-5">
+                    <div class="col-12 col-md-6 login my-md-5 p-md-5">
                         <div class="text-center login-header">
-                            <img class="mx-auto img img-fluid" src="http://fundawande.org/wp-content/uploads/2017/09/cropped-cropped-logo-long-transparent-background.png">
+                            <img class="mx-auto img img-fluid" src="{{post.get_field('logo')}}">
                             <h5 class = "mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
                             <form method="GET">
                                 <div class = "btn-group" role = "group" aria-label="Change Language buttons">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <!-- Desktop sidebar -->
-                    <div class="col-sm-12 col-md-6 sidebar p-5">
+                    <div class="col-12 col-md-6 sidebar p-5 d-none d-md-block">
                         <div class="text-center sidebar-img"><img class="img img-fluid" src="{{post.get_field('sidebar_image')}}"></div>
                         <hr>
                         <h2 class="my-3 text-center">{{ post.get_field(lang.prefix~'sidebar_title') }}</h2>
