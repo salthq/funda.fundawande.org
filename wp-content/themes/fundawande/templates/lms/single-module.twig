@@ -21,7 +21,7 @@
                 {% for unit in units %}
                     <div class = "unit card my-3 {% if unit.current %}current{% endif %}">
                         {% if unit.current %}
-                            <span class="current-unit-text">Current Unit</span>
+                            <span class="current-unit-text">{{ term.get_field(lang.prefix~'current_unit_text') }}</span>
                         {% endif %}
                         <div class = "card-body">
                             <div class = "row">
@@ -41,7 +41,7 @@
                                                 {% endfor %}
                                                 <div class = "unit-header-text">
                                                     <h2><strong>{{unit.name}}</strong></h2>
-                                                    <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} Lessons Complete</p>
+                                                    <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} {{term.get_field(lang.prefix~'lessons_complete_text')}}</p>
                                                 </div>
                                             </doiv>
                                         </div>
@@ -49,10 +49,10 @@
                                         <div class = "col-sm-12 col-md-4 text-right d-none d-md-flex">
                                             <!-- TODO: Add link to current sub-unit-->
                                             <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary mr-3 d-flex  module-svg-fill-{{ module-number }} align-items-center module-border-{{ module-number }} module-text-{{ module-number }} unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
-                                                <span class="mr-2 d-inline-block" style="max-width: 80px">View lessons</span>{{ source('assets/lms/expand_icon.svg') }}
+                                                <span class="mr-2 d-inline-block" style="max-width: 80px">{{term.get_field(lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a>
                                             <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
-                                                Resume Unit <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                                {{term.get_field(lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                     <hr>
                                     <!-- TODO: Add link to current sub-unit-->
                                     <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
-                                        Resume Unit <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                        {{term.get_field(lang.prefix~'navigation_text')}} <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
                                     </a>
                                 </div>
                             </div>
