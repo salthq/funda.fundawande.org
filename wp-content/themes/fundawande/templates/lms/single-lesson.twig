@@ -15,7 +15,13 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {# Include mobile or desktop progress #}
+        {% if is_mobile %}
+            {% include '/lms/embeds/lesson-progress-mobile.twig' %}
+        {% else %}
+            {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {% endif %}
+
         <div class = "container-fluid lesson-header">
             <div class = "container">
                 <div class = "row lesson-navigation-top">

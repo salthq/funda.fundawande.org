@@ -55,6 +55,7 @@ class StarterSite extends TimberSite {
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
         $context['site'] = $this;
+        $context['is_mobile'] = wp_is_mobile();
         // Set up language context to determine page language
         if ( isset($context['current_user']->language_preference)) {
             $context['lang'] = FundaWande()->language->get_language($context['current_user']->language_preference);
