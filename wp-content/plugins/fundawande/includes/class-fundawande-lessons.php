@@ -53,7 +53,12 @@ if ( ! defined( 'ABSPATH' ) ) {
             //If any tags are added to the lesson, add to the lesson object
             foreach ($lesson_query->posts as $key => $lesson ) {
                 $lesson->term = array();
-                $lesson->term[] = wp_get_post_terms($lesson->ID, 'lesson-tag');
+                $lesson->term = wp_get_post_terms($lesson->ID, 'lesson-tag');
+                if ($lesson->term) {
+                    $lesson->icon = $lesson->term[0]->slug;
+                } else {
+                    $lesson->icon = 'unit_quiz';
+                }
                 $lesson->key = get_post_meta($lesson->ID, 'fw_unique_key',true);
                 if ($current_lesson_key && $current_lesson_key == $lesson->key) {
                     $lesson->current = true;
