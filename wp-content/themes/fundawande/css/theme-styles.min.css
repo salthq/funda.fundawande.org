@@ -7,8 +7,9 @@ body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;line-height:1.
 }body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;weight:500;line-height:25px;color:#444;opacity:100%}
 @media(min-width:768px){body h2,body h3,body h4,body h5{font-size:21px}
 }@media(max-width:767px){body h2,body h3,body h4,body h5{font-size:18px}
-}@media(min-width:768px){body p{font-size:16px}
-}@media(max-width:767px){body p{font-size:16px}
+}body p{text-align:justify}
+@media(min-width:768px){body p{font-size:16px}
+}@media(max-width:767px){body p{font-size:12px}
 }body hr{height:2px;color:#ccc;opacity:.5}
 body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
@@ -144,8 +145,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .full-width-video-container:hover .play-button{opacity:.7}
 .full-width-video-container #videoModal .modal-dialog{max-width:844px;margin:0 auto;height:100%;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .login-wrapper{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-@media only screen and (min-width:769px){.login-wrapper .login{border-right:2px solid #ccc}
-}@media only screen and (max-width:768px){.login-wrapper .sidebar{display:none}
+@media(min-width:768px){.login-wrapper .login{border-right:2px solid #ccc}
 }.login-wrapper .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .login-wrapper .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
 .login-wrapper .login .active{background-color:#918f8f;color:#fff}
@@ -271,10 +271,13 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .single-lesson-wrapper .lesson-navigation-bottom .btn{width:200px}
 .single-lesson-wrapper .lesson-carousel-image{width:100%}
 @media(min-width:992px){.single-lesson-wrapper .lesson-carousel-image{height:600px}
+}@media(max-width:767px){.single-lesson-wrapper .lesson-carousel-image{height:220px}
 }.single-lesson-wrapper .lesson-carousel-control{position:absolute;bottom:-3em}
-.single-lesson-wrapper .lesson-carousel-control-prev{left:2em}
+@media(max-width:767px){.single-lesson-wrapper .lesson-carousel-control{bottom:-1em}
+}.single-lesson-wrapper .lesson-carousel-control-prev{left:2em}
 .single-lesson-wrapper .lesson-carousel-control-next{right:2em}
-.single-lesson-wrapper .lesson-modal-header{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+@media(max-width:767px){.single-lesson-wrapper .lesson-carousel-control-icon svg{width:33px;height:33px}
+}.single-lesson-wrapper .lesson-modal-header{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .single-lesson-wrapper .lesson-modal-footer{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
 .single-lesson-wrapper .lesson-progress{background-color:#fff}
 @media(min-width:768px){.single-lesson-wrapper .lesson-sidebar{box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;display:inline-block;z-index:10}
