@@ -36,11 +36,14 @@
                 }
             }
             &-control {
-                &-icon {
-                    border-radius: 50px;
-                    background-color: $brand-primary__colour;
+                position: absolute;
+                bottom: -3em;
+                &-prev {
+                    left: 2em;
                 }
-                top: 65%;
+                &-next {
+                    right: 2em;
+                }
             }
         }
         &-modal {
