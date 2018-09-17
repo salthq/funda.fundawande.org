@@ -216,6 +216,150 @@
                     display: none;
                 }
             }
+            &-progress-mobile-modal {
+                a.lesson-progress-marker {
+                    z-index:1 ;
+                    color: $text-primary__colour;
+                    &:hover {
+                        opacity: 0.7;
+                        text-decoration: none;
+                    }
+                    svg {
+                        height: 50px;
+                        width: 50px;
+                        #icon-inner {
+                            fill :white;
+                        }
+                    }
+                    .lesson-progress-text {
+                        line-height: 1;
+                    }
+                    &.disabled {
+                        svg {
+                            fill: $grey-secondary;
+                            #icon-inner {
+                                fill :$text-primary__colour;
+                            }
+
+
+                        }
+                        &:hover {
+                            cursor: default;
+                            opacity: 1;
+                        }
+
+                    }
+                    &.current {
+                        box-sizing: border-box;
+                        border: 3px solid;
+                        border-radius: 28px 6px 6px 28px;
+                        z-index: 1;
+                        background: white;
+                        svg {
+                            #inner {
+                                opacity: 0.7;
+                            }
+                            #icon-inner {
+                                fill :$text-primary__colour;
+                            }
+
+
+                        }
+
+                    }
+                }
+
+                .lesson-progress-divider {
+                    min-width: 10px;
+                    min-height: 20px;
+                    position: relative;
+                    &:before {
+                        content: "";
+                        background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                        background-size: auto 7px;
+                        width: 4px;
+                        height: calc(100% + 2px);
+                        border-radius: 0;
+                        position: absolute;
+                        left: 23px;
+                        top: -1px;
+
+                    }
+                    &.complete {
+
+                    }
+                    &:first-of-type {
+                        min-height: 0;
+                        min-width: 0;
+                        &:before {
+                            display: none;
+
+                        }
+                    }
+                }
+            }
+            &-progress-mobile {
+                position: fixed !important;
+                bottom: 0;
+                height: 50px;
+                width: 100%;
+                z-index: 1;
+                &-minimized {
+                    .lesson-progress-module-number {
+                        h4 {
+                            line-height: 50px;
+                        }
+                    }
+                    .lesson-progress-markers {
+                        overflow: scroll;
+                        flex-wrap: nowrap;
+                    }
+                    .lesson-progress-marker {
+                        z-index:1 ;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background: $grey-secondary;
+                        &.current {
+                            border:2px solid;
+                            width: 24px;
+                            height: 24px;
+                            background: $module0-secondary__colour!important;
+                        }
+
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 20px;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            background: linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            background-size:7px auto;
+                            height: 4px;
+                            width: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            top: 8px;
+
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            display: none;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
