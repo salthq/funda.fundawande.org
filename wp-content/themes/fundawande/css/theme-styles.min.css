@@ -1,8 +1,8 @@
 .background-primary{background-color:#fff}
 .background-secondary{background-color:#f5f5f5}
-body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;weight:normal;line-height:28px;color:#444;opacity:100%}
-body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;line-height:1.25;color:#4a4a4a;opacity:100%}
-body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;weight:500;line-height:25px;color:#444;opacity:100%}
+body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;weight:normal;color:#444;opacity:100%}
+body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;opacity:100%}
+body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;weight:500;color:#444;opacity:100%}
 body hr{height:2px;color:#ccc;opacity:.5}
 body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
