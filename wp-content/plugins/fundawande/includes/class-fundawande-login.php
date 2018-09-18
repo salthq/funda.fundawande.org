@@ -112,44 +112,48 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_blank_field( ) {
-        //If the login language is set to english, add it to the URL after stripping out other GET variables
-        if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
-            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login_lang=eng';
-        }
-        else {
-            //No need to check for Xhosa, as that is the default language
-            $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-        }
 
-        $error = false;
-        if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
-        {
-            $error = true;
-        }
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            //If the login language is set to english, add it to the URL after stripping out other GET variables
+            if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+                $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+                $referrer .= '?login_lang=eng';
+            }
+            else {
+                //No need to check for Xhosa, as that is the default language
+                $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
+            }
 
-        if (!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error)
-        {
-            if (!strstr($referrer, '?login=blank') )
+            $error = false;
+            if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
             {
-                if(!strstr($referrer, '?'))
+                $error = true;
+            }
+
+            if (!empty($referrer) && !strstr($referrer,'wp-login') && !strstr($referrer,'wp-admin') && $error)
+            {
+                if (!strstr($referrer, '?login=blank') )
                 {
-                    $referrer .= '?';
+                    if(!strstr($referrer, '?'))
+                    {
+                        $referrer .= '?';
+                    }
+                    else
+                    {
+                        $referrer .= '&';
+                    }
+
+                    wp_redirect( $referrer . 'login=blank' );
                 }
                 else
                 {
-                    $referrer .= '&';
+                    wp_redirect( $referrer );
                 }
 
-                wp_redirect( $referrer . 'login=blank' );
+                exit;
             }
-            else
-            {
-                wp_redirect( $referrer );
-            }
-
-            exit;
         }
+
     } // end custom_login_blank_field();
 
     public function check_if_active_language() {

@@ -4,23 +4,37 @@
 {# Import macros for use in this template #}
 {% import "mixins.twig" as mixin %}
 
+{# Set lesson number #}
+{% set lesson_number=0 %}
+{% for lesson in unit.lessons %}
+    {% if lesson.ID == post.ID %}
+        {% set lesson_number=loop.index %}
+    {% endif %}
+{% endfor %}
+
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {# Include mobile or desktop progress #}
+        {% if is_mobile %}
+            {% include '/lms/embeds/lesson-progress-mobile.twig' %}
+        {% else %}
+            {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {% endif %}
+
         <div class = "container-fluid lesson-header">
             <div class = "container">
                 <div class = "row lesson-navigation-top">
-                    <div class = "col-sm-2 col-md-4">
-                        <a class = "btn btn-outline-info module-border-{{module_number}}" href = "{{unit.url}}">
+                    <div class = "col-2 col-md-4">
+                        <a class = "btn btn-outline-info module-border-{{module_number}} py-4" href = "{{unit.url}}">
                             <span class = "module-svg-fill-{{module_number}}">{{source('/assets/arrow_left.svg')}}</span>
                             <br>
-                            <span class = "d-none d-md-block module-text-{{module_number}}">Back to Units</span> 
+                            <span class = "d-none d-md-block module-text-{{module_number}}">{{post.get_field(lang.prefix~'back_to_units_text')}}</span> 
                         </a>
                     </div>
-                    <div class = "col-sm-10 col-md-4 text-center my-4">
+                    <div class = "col-10 col-md-4 text-center my-4">
                         <!-- TODO: change lesson number to be dynamic-->
-                        <h1><strong>Lesson 2/{{num_lessons}}</strong></h1>
+                        <h1><strong>Lesson {{ lesson_number }}/{{num_lessons}}</strong></h1>
                         <h1>{{function('get_the_title')}}</h1>
                     </div>
                 </div>
@@ -115,26 +129,26 @@
             {% endfor %}
         </div>
         <!-- Bottom navigation-->
-        <div class = "container">
+        <div class = "container py-4">
             <hr>
             <div class="row my-4">
-                <div class="col-sm-12 col-md-4 text-center">
+                <div class="lesson-navigation-bottom col-sm-12 col-md-4 text-center  py-1">
                     {% if nav_links.prev_link %}
-                        <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>Previous Lesson</a>
+                        <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>{{post.get_field(lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-4 text-center">
                 </div>
-                <div class="col-sm-12 col-md-4 text-center">
+                <div class=" lesson-navigation-bottom col-sm-12 col-md-4 text-center py-1">
                     {% if nav_links.next_link %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
                             {% include '/lms/modals/modal-end-lesson.twig' %}
                             <button type="button" class="btn btn-outline-info module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
-                                Next Lesson <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                               {{post.get_field(lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
-                        <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">Next Lesson <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            <a id="lesson-complete" href = "#" class = "btn btn-outline-info module-border-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">{{post.get_field(lang.prefix~'next_nav_text')}} <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
                     {% elseif nav_links.unit_completed %}
@@ -143,11 +157,11 @@
                         {% if post.get_field('custom_feedback_message') %}
                             {% include '/lms/modals/modal-end-lesson.twig' %}
                             <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
-                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                {{post.get_field(lang.prefix~'complete_unit_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
                             <button type="button" class="btn btn-info module-bg-{{module_number}} module-border-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
-                                Complete Unit <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                {{post.get_field(lang.prefix~'complete_unit_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% endif %}    
                     {% endif %}

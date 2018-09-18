@@ -1,12 +1,13 @@
 <!-- ******************* The Navbar Area ******************* -->
 <div  id="wrapper-navbar"  class="wrapper-fluid wrapper-navbar " >
-    <nav class="navbar navbar-expand-lg d-flex px-4 align-items-center h-100">
-
-            <a id="main-menu-button" class="nav-link " href="#"  role="button" >
-                <div class="nav-hamburger nav-hamburger--htx  align-self-center ml-0 "><span></span></div>
-                <span class="open-text ml-2 text-uppercase">open menu</span>
-                <span class="close-text ml-2 text-uppercase">close menu</span>
-            </a>
+    <nav class="navbar navbar-expand-lg d-flex align-items-center h-100">
+            <div id="main-menu-button-container" class="px-4 h-100 d-flex align-items-center">
+                <a id="main-menu-button" class="nav-link " href="#"  role="button" data-toggle="modal" data-target="#main-menu-modal">
+                    <div class="nav-hamburger nav-hamburger--htx  align-self-center ml-0 "><span></span></div>
+                    <span class="open-text ml-2 text-uppercase">open menu</span>
+                    <span class="close-text ml-2 text-uppercase">close menu</span>
+                </a>
+            </div>
             {#<!-- TODO: create context for user role in functions.timber.php and add logic for assigning role in class-fundawande-login.php-->#}
             {#{% if user_role == 'learner' %}#}
                 {#<div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
@@ -34,20 +35,10 @@
         <!--TODO: add JS scripts and data-target for viewing information modals-->
         <a class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 d-none d-md-block">View Tooltips</span></a>
         {% if lang.id == 'eng' %}
-            <a class="change-lang ml-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
+            <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
         {% else %}
-            <a class="change-lang ml-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
+            <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
         {% endif %}
 
-        {#<div>#}
-            {#<div class = "btn-group" role = "group" aria-label = "language buttons">#}
-                {#<form method="GET">#}
-                    {#<button class="btn btn-info language-button" type="submit" name="lang" value="eng">Change Language</button>#}
-                {#</form>#}
-                {#<form method="GET">#}
-                    {#<button class="btn btn-info language-button" type="submit" name="lang" value="xho">Tshintsha ulwimi</button>#}
-                {#</form>#}
-            {#</div>#}
-        {#</div>#}
     </nav>
 </div><!-- .wrapper-navbar end -->

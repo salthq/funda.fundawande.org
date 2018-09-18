@@ -78,7 +78,104 @@ class FundaWande_Language {
             $user_id = get_current_user_id();
             $lang = $_GET['lang'];
             update_user_meta($user_id, 'language_preference', $lang );
+
+            // Set the user's current course off the lang
+            $course_obj = get_field('fw_'.$lang.'_course','options',true);
+            update_user_meta($user_id, 'fw_current_course', $course_obj[0]->ID );
+
         }
     }// end set_user_language_preference()
+
+    /**
+     * Check correct course
+     *
+     * @param int $user_current_course_id. User current course id
+     * @param int $course_id. Course ID of course to check
+     *
+     */
+    public function fw_correct_course_lang($user_current_course_id, $course_id) {
+        if ($user_current_course_id != $course_id) {
+            wp_redirect(get_permalink($user_current_course_id));
+        }
+        return;
+    }// end fw_correct_course_lang()
+
+    /**
+     * Check correct module
+     *
+     * @param int $user_current_course_id. User current course id
+     * @param int $module_id. Module ID of module to check
+     *
+     */
+    public function fw_correct_module_lang($user_current_course_id, $module_id) {
+
+        $course_modules = Sensei()->modules->get_course_modules( $user_current_course_id );
+        $course_module_ids = array();
+        foreach ($course_modules as $course_module) {
+            $course_module_ids[] = $course_module->term_id;
+        }
+        if (!in_array($module_id,$course_module_ids)) {
+            // get the unit unique key
+            $module_key = get_term_meta($module_id, 'fw_unique_key', true);
+            $args = array(
+                'taxonomy'   => 'module',
+                'number'  => 1,
+                'hide_empty' => false,
+                'include' => $course_module_ids,
+                'meta_query' => array(
+                    array(
+                        'key'       => 'fw_unique_key',
+                        'value'     => $module_key,
+                        'compare'   => '='
+                    )
+                )
+            );
+            $current_course_module = get_terms($args);
+            if ( is_array($current_course_module) && 1 == count($current_course_module) ) {
+                $current_course_module = array_shift($current_course_module);
+            }
+            wp_redirect(get_term_link($current_course_module));
+        }
+        return;
+    }// end fw_correct_module_lang()
+
+    /**
+     * Check correct lesson
+     *
+     * @param int $user_current_course_id. User current course id
+     * @param int $lesson_id. Lesson ID of lesson to check
+     *
+     */
+    public function fw_correct_lesson_lang($user_current_course_id, $lesson_id) {
+
+        $course_lessons = Sensei()->course->course_lessons($user_current_course_id);
+
+        $course_lesson_ids = array();
+        foreach ($course_lessons as $course_lesson) {
+            $course_lesson_ids[] = $course_lesson->ID;
+        }
+        if (!in_array($lesson_id,$course_lesson_ids)) {
+            // get the unit unique key
+            $lesson_key = get_post_meta($lesson_id, 'fw_unique_key', true);
+            $args = array(
+                'post_type' => 'lesson',
+                'number'  => 1,
+                'include' => $course_lesson_ids,
+                'meta_query' => array(
+                    array(
+                        'key'       => 'fw_unique_key',
+                        'value'     => $lesson_key,
+                        'compare'   => '='
+                    )
+                )
+            );
+            $current_course_lesson = get_posts($args);
+            if ( is_array($current_course_lesson) && 1 == count($current_course_lesson) ) {
+                $current_course_lesson = array_shift($current_course_lesson);
+            }
+            wp_redirect(get_permalink($current_course_lesson));
+        }
+        return;
+    }// end fw_correct_lesson_lang()
 
 } // end FundaWande_Language

@@ -14,6 +14,24 @@ if ( ! class_exists( 'Timber' ) ) {
     return;
 }
 
+// Add General Options Page
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title'    => 'Funda Wande Global Options',
+        'menu_title'    => 'FW Options',
+        'menu_slug'    => 'fundawande-options',
+        'capability'    => 'edit_posts',
+        'redirect'        => false
+    ));
+
+    // add sub page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Course Options',
+        'menu_title' 	=> 'Course Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
+}
+
 Timber::$dirname = array('templates', 'views');
 
 class StarterSite extends TimberSite {
@@ -44,17 +62,12 @@ class StarterSite extends TimberSite {
         }
         $context['user_logged_in'] = is_user_logged_in();
         $context['log_out_link'] = wp_logout_url();
-        $context['foo'] = 'bar';
-        $context['stuff'] = 'I am a value set in your functions.php file';
-        $context['notes'] = 'These values are available everytime you call Timber::get_context();';
-        $context['menu'] = new TimberMenu();
-        $context['foo'] = 'bar';
-        $context['stuff'] = 'I am a value set in your functions.php file';
-        $context['notes'] = 'These values are available everytime you call Timber::get_context();';
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
         $context['site'] = $this;
+        $context['options'] = get_fields('options');
+        $context['is_mobile'] = wp_is_mobile();
         // Set up language context to determine page language
         if ( isset($context['current_user']->language_preference)) {
             $context['lang'] = FundaWande()->language->get_language($context['current_user']->language_preference);
