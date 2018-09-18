@@ -30,11 +30,11 @@
 {% endmacro %}
 
 {# Add full screen video player #}
-{% macro fullWidthVideo(video_src, image_src) %}
+{% macro fullWidthVideo(video_src, image_src, module_number) %}
     {% import _self as mixins %}
     <div class="full-width-video-container">
         <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 80vh;{{ mixins.bgImg(image_src,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoModal" >
-                <span class="svg-green play-button" style="fill:#28a745">{{ source('/assets/video_player/Play_button.svg') }}</span>
+                <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
 
         </div>
         <div id="videoModal" class="modal" tabindex="-1" role="dialog">
@@ -50,7 +50,7 @@
 {% endmacro %}
 
 {# Add video player #}
-{% macro videoPlayer(video_src, image_src) %}
+{% macro videoPlayer(video_src, image_src, module_number) %}
     {% import _self as mixins %}
     <div class="player">
 
@@ -59,7 +59,7 @@
         </video>
 
         <div class="player__start  align-items-center justify-content-center" style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }}">
-            <span class="svg-green">{{ source('/assets/video_player/Play_button.svg') }}</span>
+            <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
         </div>
         <div class="player__end flex-column align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.3)">
             <span class="">{{ source('/assets/video_player/Replay_video_icon.svg') }}</span>

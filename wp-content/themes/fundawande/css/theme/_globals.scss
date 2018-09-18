@@ -9,7 +9,6 @@
 ----------------------------------------------------------------
 # Backgrounds
 # Typography
-# Responsive Font Sizing
 # Module Styling
 # Primary Brand Styling
 --------------------------------------------------------------*/
@@ -30,12 +29,11 @@
 .background-secondary-light {}
 
 
-
 /*
  * Typography
  */
 
-body {
+ body {
 
     font-family: $base__font-family;
     weight: normal;
@@ -49,6 +47,14 @@ body {
         weight: normal;
         color: #4A4A4A;
         opacity: 100%;
+
+        @include breakpoint (tablet) {
+            font-size: 32px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 21px;
+        }
     }
 
     h2, h3, h4, h5  {
@@ -58,10 +64,27 @@ body {
         color: $text-primary__colour;
         opacity: 100%;
 
+        @include breakpoint (tablet) {
+            font-size: 21px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 18px;
+        }
     }
 
 
     p {
+        text-align: justify;
+
+        @include breakpoint (tablet) {
+            font-size: 16px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 12px;
+        }
+
     }
 
 
@@ -96,67 +119,6 @@ body {
     }
 
 }
-
-/*
-* Responsive Font Styling
-*/
-
-@include breakpoint(tablet) {
-    body {
-        h1 {
-            font-size: 32px;
-        }
-    
-        h2, h3, h4, h5  {
-            font-size: 21px;
-        }
-    
-    
-        p {
-            font-size: 16px;
-        }
-    
-    
-        ul {
-    
-    
-    
-        }
-    
-        li {
-    
-        }
-    }
-}
-
-@include breakpoint(phone) {
-    body {
-        h1 {
-            font-size: 21px;
-        }
-    
-        h2, h3, h4, h5  {
-            font-size: 18px;
-        }
-    
-    
-        p {
-            font-size: 16px;
-        }
-    
-    
-        ul {
-    
-    
-    
-        }
-    
-        li {
-    
-        }
-    }
-}
-
 
 /*
  * Module Styling

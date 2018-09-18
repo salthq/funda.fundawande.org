@@ -26,6 +26,11 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
+    // Get the quiz lesson ID
+    $lesson_ID = $post->_quiz_lesson;
+
+    FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course,$lesson_ID);
+
     Timber::render(array('lms/single-quiz.twig', 'page.twig'), $context);
 
 }

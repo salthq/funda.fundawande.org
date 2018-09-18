@@ -7,17 +7,12 @@
 .login-wrapper {
   justify-content: center;
   //Media queries which control the sidebar content view 
-  @media only screen and (min-width: 769px) {
+  @include breakpoint(tablet) {
     .login {
       border-right: 2px solid $grey-secondary;
     }
   }
 
-  @media only screen and (max-width: 768px) {
-    .sidebar {
-      display: none;
-    }
-  }
 
   //General login page styling
   .login {

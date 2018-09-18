@@ -29,7 +29,7 @@
                                             </div>
                                             <div class = "header-text">
                                                 <h2><strong>{{module.name}}</strong></h2>
-                                                <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                                <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} {{ post.get_field(lang.prefix~'unit_progress_text') }}</h4>
                                             </div>
                                         </div>
                                         <hr>
@@ -37,10 +37,10 @@
                                     </div>
                                     <!-- Module Navigation Button -->
                                     <div class = "col-sm-12 col-md-2 module-nav d-flex">
-                                        <h4 class = "module-text-{{module.module_number}} module-progress m-3 d-sm-none">{{completed_units}}/{{total_units}} Units Complete</h4>
+                                        <h4 class = "module-text-{{module.module_number}} module-progress m-3 d-sm-none">{{completed_units}}/{{total_units}} {{ post.get_field(lang.prefix~'unit_progress_text') }}</h4>
                                         <div class = "module-bg-{{module.module_number}} module-nav-button p-3 d-flex">
                                             <img class = "img img-responsive d-none d-md-block p-3" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
-                                            <h3 class = "text-center">View Module <img class = "p-2 d-md-none" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></h3>
+                                            <h3 class = "text-center my-0">{{ post.get_field(lang.prefix~'nav_text') }} <img class = "p-2 d-md-none" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></h3>
                                         </div>
                                     </div>
                                 </div>

@@ -24,19 +24,23 @@ if (class_exists('Timber')) {
     $post = new TimberPost();
     $context['post'] = $post;
 
+
     // Check if lesson has quiz questions
     $lesson_quiz = get_post_meta($post->ID, '_quiz_has_questions', true);
 
     // If there are questions in lesson redirect to the quiz page
     if (0 < $lesson_quiz) {
         $lesson_quiz_ID = get_post_meta($post->ID, '_lesson_quiz', true);
-        header("Location: ".get_post_permalink($lesson_quiz_ID));
-        die();
+        wp_redirect(get_post_permalink($lesson_quiz_ID));
     }
-
     // Assign current user to context
     $user = new TimberUser();
     $context['user'] = $user;
+
+    FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course,$post->ID);
+
+
+
 
     //Get the unit info for the current lesson
     $unit = FundaWande()->lessons->get_unit_info( 31, $post->ID );

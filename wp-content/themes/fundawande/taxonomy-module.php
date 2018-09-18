@@ -18,6 +18,8 @@ if (class_exists('Timber')) {
     $context['user'] = new TimberUser();
     $context['term'] = $term;
 
+    FundaWande()->language->fw_correct_module_lang($context['user']->fw_current_course,$term->ID);
+
     //Get module number to enable module-specific styling
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
 
