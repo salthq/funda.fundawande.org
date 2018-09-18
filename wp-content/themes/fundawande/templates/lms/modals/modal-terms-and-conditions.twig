@@ -1,0 +1,23 @@
+<div id = "terms-and-conditions" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content px-5 py-3">
+      <div class="lesson-modal-header modal-header">  
+        <h5 class="modal-title"><span class = "px-2">Terms and Conditions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <textarea rows = "15" class = "w-100">
+              {{options.eng_terms_and_conditions}}
+            </textarea>
+            <input type="checkbox" name="agreement" value="agree"> I agree to the terms and conditions
+        </form>
+      </div>
+      <div class="lesson-modal-footer modal-footer">
+            <a href = "" class = "btn btn-info primary-border primary-bg" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+      </div>
+    </div>
+  </div>
+</div>

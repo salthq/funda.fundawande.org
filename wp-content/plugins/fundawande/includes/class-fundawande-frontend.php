@@ -46,7 +46,11 @@ class FundaWande_Frontend {
         }
 
         // Include sortable.js
-        wp_enqueue_script('sortable-js-script', FundaWande()->plugin_url . 'assets/js/sortable.min.js', array('jquery'), FundaWande()->version, true);
+		wp_enqueue_script('sortable-js-script', FundaWande()->plugin_url . 'assets/js/sortable.min.js', array('jquery'), FundaWande()->version, true);
+		
+		//Include Terms and Conditions script
+		wp_enqueue_script('terms-and-conditions', FundaWande()->plugin_url . 'assets/js/terms-and-conditions.min.js', array('jquery'), FundaWande()->version, true);
+
 
 	} // End enqueue_scripts()
 
