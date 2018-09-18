@@ -132,7 +132,7 @@
         <div class = "container py-4">
             <hr>
             <div class="row my-4">
-                <div class="lesson-navigation-bottom col-sm-12 col-md-4 text-center  py-1">
+                <div class="lesson-navigation-bottom col-sm-12 col-md-4 text-center py-1">
                     {% if nav_links.prev_link %}
                         <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>{{post.get_field(lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
