@@ -25,11 +25,11 @@
                         {% endif %}
                         <div class = "card-body">
                             <div class = "row">
-                                <div class = "col-sm-12">
+                                <div class = "col-12">
                                     <!-- Unit Card Header -->    
                                     <div class = "row unit-header">
-                                        <div class = "col-sm-12 col-md-8">
-                                            <doiv class = "unit-header-content d-flex">
+                                        <div class = "col-12 col-md-8">
+                                            <div class = "unit-header-content d-flex">
                                                 <div class = "unit-header-counter d-flex mr-2 px-2">
                                                     <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
                                                 </div>
@@ -43,10 +43,10 @@
                                                     <h2><strong>{{unit.name}}</strong></h2>
                                                     <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} {{term.get_field(lang.prefix~'lessons_complete_text')}}</p>
                                                 </div>
-                                            </doiv>
+                                            </div>
                                         </div>
                                         <!--Unit navigation buttons tablet and desktop-->
-                                        <div class = "col-sm-12 col-md-4 text-right d-none d-md-flex">
+                                        <div class = "col-12 col-md-4 text-right d-none d-md-flex">
                                             <!-- TODO: Add link to current sub-unit-->
                                             <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary mr-3 d-flex  module-svg-fill-{{ module-number }} align-items-center module-border-{{ module-number }} module-text-{{ module-number }} unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">{{term.get_field(lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}

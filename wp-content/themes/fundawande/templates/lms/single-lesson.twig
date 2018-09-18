@@ -132,14 +132,14 @@
         <div class = "container py-4">
             <hr>
             <div class="row my-4">
-                <div class="lesson-navigation-bottom col-sm-12 col-md-4 text-center  py-1">
+                <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
                     {% if nav_links.prev_link %}
                         <a href = "{{nav_links.prev_link}}" class = "btn btn-outline-info module-text-{{module_number}} module-border-{{module_number}}"> <span class = "module-svg-fill-{{module_number}} p-2">{{source ('/assets/arrow_left.svg')}}</span>{{post.get_field(lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
                 </div>
-                <div class="col-sm-12 col-md-4 text-center">
+                <div class="col-12 col-md-4 text-center">
                 </div>
-                <div class=" lesson-navigation-bottom col-sm-12 col-md-4 text-center py-1">
+                <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
                     {% if nav_links.next_link %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
