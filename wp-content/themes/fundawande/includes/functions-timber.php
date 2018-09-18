@@ -30,6 +30,20 @@ if (function_exists('acf_add_options_page')) {
         'menu_title' 	=> 'Course Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
+
+    // add sub page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Module Options',
+        'menu_title' 	=> 'Module Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
+
+    // add sub page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Lesson Unit Options',
+        'menu_title' 	=> 'Lesson Unit Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
 }
 
 Timber::$dirname = array('templates', 'views');
