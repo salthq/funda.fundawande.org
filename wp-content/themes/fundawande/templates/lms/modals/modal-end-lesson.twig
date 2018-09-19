@@ -26,11 +26,11 @@
             </div>
             {# if this lesson is the end of a unit, go to the end of unit modal #}
             {% if nav_links.unit_completed %} 
-              <button type="button" class="btn btn-info primary-border primary-bg" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+              <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
                 Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
               </button>
             {% else %}
-              <a href = "{{nav_links.next_link}}" class = "btn btn-info primary-border primary-bg">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+              <a href = "{{nav_links.next_link}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
             {% endif %}
       </div>
     </div>
