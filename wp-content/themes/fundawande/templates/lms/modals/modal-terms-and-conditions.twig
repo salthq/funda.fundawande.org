@@ -3,7 +3,7 @@
     <div class="modal-content px-5 py-3">
     <div class="d-flex m-3">
         <div class = "d-flex justify-content-center align-items-center w-100">
-          <h5 class="modal-title pl-3"><strong>Terms and Conditions</strong></h5>
+          <h5 class="modal-title pl-3"><strong>{{attribute(options, lang.prefix~'terms_and_conditions_title')}}</strong></h5>
         </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
@@ -13,14 +13,14 @@
         <form class = "fw-form" method = "POST">
           <div class = "form-group">
             <textarea class="form-control" rows = "15" readonly>
-              {{{{options.eng_terms_and_conditions}}}}
+              {{attribute(options, lang.prefix~'terms_and_conditions_content')|striptags}}
             </textarea>
           </div>
           <div class = "form-group ml-3">
-            <input type="checkbox" name="legal" value="agree"> <p class = "pl-3"><strong>I agree to the terms and conditions</strong></p>
+            <input type="checkbox" name="legal" value="agree"> <p class = "pl-3"><strong>{{attribute(options, lang.prefix~'terms_and_conditions_agree')}}</strong></p>
           </div>
           <div class = "form-group py-3 text-center">
-            <button type = "submit" value = "submit" class = "btn btn-info btn-lg primary-border primary-bg" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
+            <button type = "submit" value = "submit" class = "btn btn-info btn-lg primary-border primary-bg" >{{attribute(options, lang.prefix~'continue_button_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
           </div>
         </form>
       </div>
