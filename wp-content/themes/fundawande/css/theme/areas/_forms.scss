@@ -1,0 +1,30 @@
+/* ==========================================================================
+* Assessments area
+*
+* Styling specific for any forms on Funda Wande
+*
+ ========================================================================== */
+
+ .fw-form {
+    .form-control[readonly] {
+        background-color: white;
+    }
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        background: $white;
+        border-radius: 5px;
+        border: 3px solid $brand-primary__colour;
+
+        position: absolute;
+        margin-top: -.2rem;
+        margin-left: -1.25rem;
+        &:checked {
+            //TODO: Find solution for adding tick within checkbox when ticked
+            background-color: $grey-secondary;
+        }
+    }
+ }

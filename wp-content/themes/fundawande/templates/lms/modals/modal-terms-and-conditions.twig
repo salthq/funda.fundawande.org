@@ -1,24 +1,29 @@
 <div id = "terms-and-conditions" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content px-5 py-3">
-      <div class="lesson-modal-header modal-header">  
-        <h5 class="modal-title"><span class = "px-2">Terms and Conditions</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="d-flex m-3">
+        <div class = "d-flex justify-content-center align-items-center w-100">
+          <h5 class="modal-title pl-3"><strong>Terms and Conditions</strong></h5>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
+        </button>
       </div>
       <div class="modal-body">
-        <form method = "POST">
-            <textarea rows = "15" class = "w-100">
-              {{options.eng_terms_and_conditions}}
+        <form class = "fw-form" method = "POST">
+          <div class = "form-group">
+            <textarea class="form-control" rows = "15" readonly>
+              {{{{options.eng_terms_and_conditions}}}}
             </textarea>
-            <input type="checkbox" name="legal" value="agree"> I agree to the terms and conditions
-            <div class="lesson-modal-footer modal-footer">
-              <button type = "submit" value = "submit" class = "btn btn-info primary-border primary-bg" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
-            </div>
+          </div>
+          <div class = "form-group ml-3">
+            <input type="checkbox" name="legal" value="agree"> <p class = "pl-3"><strong>I agree to the terms and conditions</strong></p>
+          </div>
+          <div class = "form-group py-3 text-center">
+            <button type = "submit" value = "submit" class = "btn btn-info btn-lg primary-border primary-bg" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
+          </div>
         </form>
       </div>
-      
     </div>
   </div>
 </div>
