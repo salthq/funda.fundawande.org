@@ -11,10 +11,10 @@
             <div class="row login-row my-1">
                 {% if user_logged_in %}
                     <div class = "row">
-                        <div class = "col">
+                        <div class = "col mx-auto">
                             <div class = "text-center">
                                 <h2>{{ post.get_field(lang.prefix~'logout_message') }}</h2>
-                                <a class = "btn btn-info" href = "{{ log_out_link }}">{{ post.get_field(lang.prefix~'logout_button') }}</a>
+                                <a class = "btn primary-btn-fill" href = "{{ log_out_link }}">{{ post.get_field(lang.prefix~'logout_button') }}</a>
                             </div>
                         </div>
                     </div>

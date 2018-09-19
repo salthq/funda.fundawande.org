@@ -48,10 +48,10 @@
                                         <!--Unit navigation buttons tablet and desktop-->
                                         <div class = "col-12 col-md-4 text-right d-none d-md-flex">
                                             <!-- TODO: Add link to current sub-unit-->
-                                            <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary mr-3 d-flex  module-svg-fill-{{ module-number }} align-items-center module-border-{{ module-number }} module-text-{{ module-number }} unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                            <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a>
-                                            <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
+                                            <a class = "btn module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
                                                 {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
                                         </div>
@@ -90,7 +90,7 @@
                                 <div class = "col-sm-12 text-right d-md-none">
                                     <hr>
                                     <!-- TODO: Add link to current sub-unit-->
-                                    <a class = "btn btn-info module-bg-{{module_number}} unit-header-navigation" href "#">
+                                    <a class = "btn module-btn-fill-{{module_number}} unit-header-navigation" href "#">
                                         {{attribute(options, lang.prefix~'navigation_text')}} <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
                                     </a>
                                 </div>
