@@ -48,7 +48,7 @@ if (function_exists('acf_add_options_page')) {
 
 Timber::$dirname = array('templates', 'views');
 
-class StarterSite extends TimberSite {
+class FundaWandeSite extends TimberSite {
 
     function __construct() {
         add_theme_support( 'post-formats' );
@@ -63,26 +63,32 @@ class StarterSite extends TimberSite {
 
     function add_to_context( $context ) {
 
+        /**
+         * User Context
+         */
 
         $context['current_user'] = new Timber\User();
 
+        /**
+         * Login Context
+         */
+
         if (isset($_GET['login'])) {
-         if ( $_GET['login'] == 'failed') {
-             $context['error_message'] = "incorrect_credentials";
-         }
-         else if ( $_GET['login'] == 'blank') {
-             $context['error_message'] = "blank_field";
-         }
+            if ( $_GET['login'] == 'failed') {
+                $context['error_message'] = "incorrect_credentials";
+            }
+            else if ( $_GET['login'] == 'blank') {
+                $context['error_message'] = "blank_field";
+            }
         }
         $context['user_logged_in'] = is_user_logged_in();
         $context['log_out_link'] = wp_logout_url();
-        $context['menu'] = new TimberMenu();
-        $context['learner_menu'] = new Timber\Menu('learner-menu');
-        $context['coach_menu'] = new Timber\Menu('coach-menu');
-        $context['site'] = $this;
-        $context['options'] = get_fields('options');
-        $context['is_mobile'] = wp_is_mobile();
-        $context['media_url'] = FundaWande()->lms->fw_get_media_url(); //Get global media url variable to prepend before all ACF media URL fields
+
+
+         /**
+          * Language Context
+          */
+
         // Set up language context to determine page language
         if ( isset($context['current_user']->language_preference)) {
             $context['lang'] = FundaWande()->language->get_language($context['current_user']->language_preference);
@@ -91,21 +97,34 @@ class StarterSite extends TimberSite {
             $context['lang'] = FundaWande()->language->get_language(null);
         }
 
+        
+
+        /**
+         * Menu Context
+        */
+
+        $context['menu'] = new TimberMenu();
+        $context['learner_menu'] = new Timber\Menu('learner-menu');
+        $context['coach_menu'] = new Timber\Menu('coach-menu');
+
+        /** 
+         * Misc Context
+         */
+
+        $context['options'] = get_fields('options');
+        $context['is_mobile'] = wp_is_mobile();
+        $context['site'] = $this;
+
         return $context;
     }
 
-    function myfoo( $text ) {
-        $text .= ' bar!';
-        return $text;
-    }
-
     function add_to_twig( $twig ) {
-        /* this is where you can add your own functions to twig */
-        $twig->addExtension( new Twig_Extension_StringLoader() );
-        $twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
-        return $twig;
-    }
+		/* this is where you can add your own functions to twig */
+		//$twig->addExtension( new Twig_Extension_StringLoader() );
+		//$twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
+		return $twig;
+	}
 
 }
 
-new StarterSite();
+new FundaWandeSite();
