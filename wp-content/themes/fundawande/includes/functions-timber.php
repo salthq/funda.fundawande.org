@@ -82,6 +82,7 @@ class StarterSite extends TimberSite {
         $context['site'] = $this;
         $context['options'] = get_fields('options');
         $context['is_mobile'] = wp_is_mobile();
+        $context['media_url'] = FundaWande()->lms->fw_get_media_url(); //Get global media url variable to prepend before all ACF media URL fields
         // Set up language context to determine page language
         if ( isset($context['current_user']->language_preference)) {
             $context['lang'] = FundaWande()->language->get_language($context['current_user']->language_preference);
