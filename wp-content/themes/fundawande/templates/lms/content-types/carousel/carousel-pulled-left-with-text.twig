@@ -1,3 +1,5 @@
+
+<!-- Content Type: Carousel Pulled Left With Text -->
 <div class = "container my-5">
     <hr>
     <div class = "row">
@@ -12,7 +14,7 @@
                     {% for item in content.carousel_items %}
                         <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
                             <div class = "lesson-image-wrapper">
-                                <img class = "d-block lesson-carousel-image" src ="{{ item.image_url }}">
+                                <img class = "d-block lesson-carousel-image" src ="{{ media_url~item.image_url }}">
                                 <!-- Navigation Buttons -->
                                 <div class = "container">
                                     <div class = "row">
