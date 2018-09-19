@@ -44,7 +44,7 @@
         <!-- Lesson Content-->
         <div class = "container-fluid">
             <div class = "row mb-5">
-                <!-- Hero Band -->
+                {# Hero Band #}
                 {% for content in post.get_field('lesson_hero_types') %}
                     {# Image Hero #}
                     {% if content.acf_fc_layout == 'image_hero' %}
@@ -56,12 +56,13 @@
                     {% endif %}  
                 {% endfor %}
             </div>
-            <!-- This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson-->
+            {#
+                This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson
+             #}
             {% for content in post.get_field('lesson_content_types') %}
 
-                <!-- 
-                    Image content types
-                -->
+                {# Image Content Types #}
+
                 {# Full width image#}
                 {% if content.acf_fc_layout == 'image_full_width' %}
                     {% include '/lms/content-types/image/image-full-width.twig' %}
@@ -75,9 +76,8 @@
                 {% elseif content.acf_fc_layout == 'image_pulled_right' %}    
                     {% include '/lms/content-types/image/image-pulled-right.twig' %}
 
-                <!--
-                    Video content types
-                -->    
+                {# Video Content Types #}
+
                 {# Full width video #}
                 {% elseif content.acf_fc_layout == 'video_full_width' %}
                     {% include '/lms/content-types/video/video-full-width.twig' %}
@@ -91,9 +91,8 @@
                 {% elseif content.acf_fc_layout == 'video_pulled_right' %}
                     {% include '/lms/content-types/video/video-pulled-right.twig' %}
 
-                <!--
-                    Carousel content types
-                -->         
+                {# Carousel content types# }
+
                 {# Full width carousel with text #}      
                 {% elseif content.acf_fc_layout == 'carousel_full_width_with_text' %}
                     {% include '/lms/content-types/carousel/carousel-full-width-with-text.twig' %}
@@ -119,9 +118,8 @@
                 {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
                     {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
 
-                <!--
-                    Other content types
-                -->
+                {# Other Content Types #}
+
                 {# Copy text #}
                 {% elseif content.acf_fc_layout == 'copy_text' %}
                     {% include '/lms/content-types/copy-text.twig' %}
