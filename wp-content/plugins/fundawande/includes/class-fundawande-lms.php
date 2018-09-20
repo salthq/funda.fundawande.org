@@ -715,6 +715,18 @@ class FundaWande_Lms {
 
     } // end fw_user_started_course
 
+    /**
+     * Returns the global media URL variable
+     * 
+     * @return string $media_url The URL for where media assets are served from
+     */
+
+     public function fw_get_media_url() {
+         $media_url = "https://storage.googleapis.com/fwpilot_media/";
+
+         return $media_url;
+     }
+
 
 
 } // end FundaWande_Lms
