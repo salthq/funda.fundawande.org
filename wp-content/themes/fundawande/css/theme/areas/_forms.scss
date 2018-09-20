@@ -7,24 +7,38 @@
 
  .fw-form {
     .form-control[readonly] {
-        background-color: white;
+        background-color: $white;
     }
-    input[type="checkbox"] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
+    .custom-control-label::before {
         width: 30px;
         height: 30px;
         background: $white;
         border-radius: 5px;
         border: 3px solid $brand-primary__colour;
+        left: -12px;
+        top: 5px;
 
-        position: absolute;
-        margin-top: -.2rem;
+        margin-top: -.45rem;
         margin-left: -1.25rem;
-        &:checked {
-            //TODO: Find solution for adding tick within checkbox when ticked
-            background-color: $grey-secondary;
-        }
+    }
+    .custom-control-label::after {
+        left: -1.55rem;
+        top: 0.3rem;
+    }
+    
+    .custom-control-input:checked~.custom-control-label::before {
+        background-color: $brand-primary__colour;
+        color: #fff;
+    }
+    .custom-control-input:checked~.custom-control-label::after {
+        position: absolute;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+        background-image:url($assets_directory-path + 'tick.svg')
     }
  }
