@@ -15,7 +15,13 @@ class Color extends Field
 
             if(isset($detailedInformationData['colorAttribute'])) {
                 $colorAttribute = $detailedInformationData['colorAttribute'];
-                return $this->replaceSnippetsInValue($colorAttribute, $snippetData);
+                $color = $this->replaceSnippetsInValue($colorAttribute, $snippetData);
+
+                // Use max 3 colors
+                $colors = explode(',', $color);
+                $colors = $sliced_array = array_slice($colors, 0, 3);
+
+                return implode('/',$colors);
             } else {
                 return '';
             }
@@ -23,7 +29,7 @@ class Color extends Field
         } else if($detailedInformationData['color'] == self::CUSTOM_VALUE_TEXT) {
             return $this->replaceSnippetsInValue($detailedInformationData['colorCV'], $snippetData);
         } else {
-            throw new \Exception('Unknown vale '.$detailedInformationData['color'].' for field color');
+            throw new \Exception('Unknown value '.$detailedInformationData['color'].' for field color');
         }
     }
 

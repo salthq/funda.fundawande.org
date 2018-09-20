@@ -9,6 +9,9 @@ namespace Wpae\Pro\Filtering;
 class FilteringCPT extends FilteringBase
 {
 
+    public static $variationWhere;
+    public static $variationJoin = array();
+
     /**
      * @return bool
      */
@@ -43,13 +46,20 @@ class FilteringCPT extends FilteringBase
      *
      */
     public function checkNewStuff(){
-        //If re-run, this export will only include records that have not been previously exported.
-        if ($this->isExportNewStuff()){
-            $postList = new \PMXE_Post_List();
-            $this->queryWhere = " AND ({$this->wpdb->posts}.ID NOT IN (SELECT post_id FROM " . $postList->getTable() . " WHERE export_id = '". $this->exportId ."'))";
-        }
-        if ($this->isExportModifiedStuff() && ! empty(\XmlExportEngine::$exportRecord->registered_on)){
-            $this->queryWhere .= " AND {$this->wpdb->posts}.post_modified > '" . \XmlExportEngine::$exportRecord->registered_on . "' ";
+
+        $export = new \PMXE_Export_Record();
+        $export->getById($this->exportId);
+
+        if(!empty($export)) {
+            //If re-run, this export will only include records that have not been previously exported.
+            if ($this->isExportNewStuff()) {
+                $postList = new \PMXE_Post_List();
+                $this->queryWhere = " AND ({$this->wpdb->posts}.ID NOT IN (SELECT post_id FROM " . $postList->getTable() . " WHERE export_id = '" . $this->exportId . "'))";
+            }
+            if ($this->isExportModifiedStuff() && !empty($export->registered_on)) {
+
+                $this->queryWhere .= " AND {$this->wpdb->posts}.post_modified > '" . $export->registered_on . "' ";
+            }
         }
     }
 
@@ -115,9 +125,9 @@ class FilteringCPT extends FilteringBase
                         $this->userWhere .= "{$this->wpdb->users}.$rule->element " . $this->parse_condition($rule);
                         break;
                     default:
+
                         if (strpos($rule->element, "cf_") === 0)
                         {
-                            $meta_query = true;
                             $meta_key = str_replace("cf_", "", $rule->element);
 
                             if ($rule->condition == 'is_empty') {
@@ -163,21 +173,42 @@ class FilteringCPT extends FilteringBase
 
                     $meta_key = $this->removePrefix($rule->element, "cf_");
 
-                    if ($rule->condition == 'is_empty'){
+                    if ($rule->condition == 'is_empty') {
                         $table_alias = (count($this->queryJoin) > 0) ? 'meta' . count($this->queryJoin) : 'meta';
-                        $this->queryJoin[] = " LEFT JOIN {$this->wpdb->postmeta} AS $table_alias ON ($table_alias.post_id = {$this->wpdb->posts}.ID AND $table_alias.meta_key = '$meta_key') ";
-                        $this->queryWhere .= "$table_alias.meta_id " . $this->parse_condition($rule);
-                    }
-                    else {
-                        if ( in_array($meta_key, array('_completed_date')) ) {
-                            $this->parse_date_field( $rule );
+
+                        $joinString = " LEFT JOIN {$this->wpdb->postmeta} AS $table_alias ON ($table_alias.post_id = {$this->wpdb->posts}.ID AND $table_alias.meta_key = '$meta_key') ";
+                        $whereString = "$table_alias.meta_id " . $this->parse_condition($rule);
+
+                        $this->queryJoin[] = $joinString;
+                        $this->queryWhere .= $whereString;
+
+                        self::$variationJoin[] = $joinString;
+                        self::$variationWhere .= $whereString;
+
+                    } else {
+                        if (in_array($meta_key, array('_completed_date'))) {
+                            $this->parse_date_field($rule);
                         }
                         $table_alias = (count($this->queryJoin) > 0) ? 'meta' . count($this->queryJoin) : 'meta';
-                        $this->queryJoin[] = " INNER JOIN {$this->wpdb->postmeta} AS $table_alias ON ({$this->wpdb->posts}.ID = $table_alias.post_id) ";
-                        $this->queryWhere .= "$table_alias.meta_key = '$meta_key' AND $table_alias.meta_value " . $this->parse_condition($rule, false, $table_alias);
+
+                        if(empty(self::$variationWhere)) {
+                            self::$variationWhere = $this->queryWhere;
+                        }
+
+                        $joinString = " INNER JOIN {$this->wpdb->postmeta} AS $table_alias ON ({$this->wpdb->posts}.ID = $table_alias.post_id) ";
+                        $whereString = "$table_alias.meta_key = '$meta_key' AND $table_alias.meta_value " . $this->parse_condition($rule, false, $table_alias);
+
+                        $this->queryJoin[] = $joinString;
+                        $this->queryWhere .= $whereString;
+
+                        self::$variationJoin[] = $joinString;
+                        self::$variationWhere .= $whereString;
+
                     }
+
                 }
                 elseif (strpos($rule->element, "tx_") === 0){
+
                     if ( ! empty($rule->value) ){
                         $this->tax_query = true;
                         $tx_name = str_replace("tx_", "", $rule->element);

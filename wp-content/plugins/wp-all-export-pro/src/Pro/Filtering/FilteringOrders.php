@@ -30,7 +30,7 @@ class FilteringOrders extends FilteringCPT
             // No Filtering Rules defined
             if ( empty($this->filterRules)) return FALSE;
 
-            $this->queryWhere = $this->isExportNewStuff() ? $this->queryWhere . " AND (" : " AND (";
+            $this->queryWhere = ($this->isExportNewStuff() || $this->isExportModifiedStuff()) ? $this->queryWhere . " AND (" : " AND (";
 
             // Apply Filtering Rules
             foreach ($this->filterRules as $rule) {

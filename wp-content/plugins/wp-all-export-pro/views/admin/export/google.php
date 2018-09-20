@@ -1,11 +1,4 @@
 <?php
-if(getenv('WPAE_DEV')) {
-    wp_enqueue_script('pmxe-angular-app', PMXE_ROOT_URL . '/dist/app.js', array('jquery'), PMXE_VERSION);
-} else {
-    wp_enqueue_script('pmxe-angular-app', PMXE_ROOT_URL . '/dist/app.min.js', array('jquery'), PMXE_VERSION);
-}
-wp_enqueue_style('pmxe-angular-scss', PMXE_ROOT_URL . '/dist/styles.css', array(), PMXE_VERSION);
-
 $productAttributesJson = empty(XmlExportEngine::$globalAvailableSections['product_data']['additional']['attributes']['meta']) ? '' : json_encode(XmlExportEngine::$globalAvailableSections['product_data']['additional']['attributes']['meta']);
 
 if(getenv('WPAE_DEV')) {

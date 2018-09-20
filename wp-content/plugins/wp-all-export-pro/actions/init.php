@@ -24,5 +24,8 @@ function pmxe_init()
 			http_response_code(401);
 			exit(json_encode(array('status' => __('Error. Incorrect API key, check the WP All Export Pro settings page.', 'wp_all_export_plugin'))));
 		}		
-	}	
+	}
+	if(!empty($_GET['check_connection'])) {
+	    exit(json_encode(array('success' => true)));
+    }
 }

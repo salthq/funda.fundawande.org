@@ -50,9 +50,11 @@ $l10n = array(
 					<form class="confirm <?php echo ! $isWizard ? 'edit' : '' ?>" method="post" style="float:right;">							
 
 						<?php wp_nonce_field('update-export', '_wpnonce_update-export') ?>
-						<input type="hidden" name="is_confirmed" value="1" />	
+						<input type="hidden" name="is_confirmed" value="1" />
+                        <input type="hidden" name="record-count" class="wpae-record-count" value="0" />
 
-						<input type="submit" class="rad10 wp_all_export_confirm_and_run" value="<?php _e('Confirm & Run Export', 'wp_all_export_plugin') ?>" <?php if (empty(PMXE_Plugin::$session->found_posts)):?>style="display:none;"<?php endif;?>/>
+
+                        <input type="submit" class="rad10 wp_all_export_confirm_and_run" value="<?php _e('Confirm & Run Export', 'wp_all_export_plugin') ?>" <?php if (empty(PMXE_Plugin::$session->found_posts)):?>style="display:none;"<?php endif;?>/>
 					</form>	
 
 				</div>					
@@ -82,6 +84,7 @@ $l10n = array(
 					<input type="hidden" name="taxonomy_to_export" value="<?php echo $post['taxonomy_to_export'];?>">
 					<input type="hidden" name="wpml_lang" value="<?php echo $post['wpml_lang'];?>" />
 					<input type="hidden" id="export_variations" name="export_variations" value="<?php echo XmlExportEngine::getProductVariationMode();?>" />
+                    <input type="hidden" name="record-count" class="wpae-record-count" value="0" />
 
 					<?php \Wpae\Pro\Filtering\FilteringFactory::render_filtering_block( $engine, $isWizard, $post ); ?>
 

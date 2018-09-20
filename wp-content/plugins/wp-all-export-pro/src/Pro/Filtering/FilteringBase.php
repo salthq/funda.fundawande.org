@@ -126,7 +126,7 @@ abstract class FilteringBase implements FilteringInterface
             $rule->value = "-" . trim(str_replace("ago", "", $rule->value));
         }
 
-        $rule->value = strpos($rule->value, ":") !== false ? date("Y-m-d H:i:s", strtotime($rule->value)) : ( in_array($rule->condition, array('greater', 'equals_or_less')) ? date("Y-m-d", strtotime('+1 day', strtotime($rule->value))) : date("Y-m-d", strtotime($rule->value)));
+        $rule->value = strpos($rule->value, ":") !== false ? date("Y-m-d H:i:s", strtotime($rule->value)) : ( in_array($rule->condition, array('greater')) ? date("Y-m-d", strtotime('+1 day', strtotime($rule->value))) : date("Y-m-d", strtotime($rule->value)));
 
     }
 

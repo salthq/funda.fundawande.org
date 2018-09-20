@@ -1,12 +1,12 @@
 <?php
 $cron_job_key = PMXE_Plugin::getInstance()->getOption('cron_job_key');
-$urlToExport = site_url() . '/wp-cron.php?export_hash=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_data';
+$urlToExport = site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_data';
 $uploads = wp_upload_dir();
 
-$bundle_path = wp_all_export_get_absolute_path($export->options['bundlepath']);
+$bundle_path = wp_all_export_get_absolute_path($update_previous->options['bundlepath']);
 
 if (!empty($bundle_path)) {
-    $bundle_url = site_url() . '/wp-cron.php?export_hash=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_bundle&t=zip';
+    $bundle_url = site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_bundle&t=zip';
 }
 
 $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
@@ -21,7 +21,7 @@ $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
     include_once('google_merchants_success.php');
     } else {
     ?>
-        <h2 style="color:#425f9a; font-size:24px;">What's next?</h2>
+        <h2 style="color:#425f9a; font-size:24px; margin-bottom: 36px;">What's next?</h2>
 
         <script type="text/javascript">
             jQuery(document).ready(function () {
@@ -44,8 +44,8 @@ $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
         </ul>
     <hr style="margin-top:0;"/>
         <div class="tab-content-container">
-            <div class="tab-content selected" id="tab1-content">
-                <h3 style="margin-top: 30px; margin-bottom: 30px;"><?php _e("Click to download your data", 'wp_all_export_plugin'); ?></h3>
+            <div class="tab-content selected normal-tab" id="tab1-content">
+                <h3 style="margin-top: 30px; margin-bottom: 30px;"><?php _e("Click to Download", 'wp_all_export_plugin'); ?></h3>
                 <div class="input">
                     <button class="button button-primary button-hero wpallexport-large-button download_data"
                             rel="<?php echo add_query_arg(array('action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl); ?>"><?php echo strtoupper(wp_all_export_get_export_format($update_previous->options)); ?></button>
@@ -78,25 +78,14 @@ $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
             </div>
             <div class="tab-content scheduling" id="tab2-content">
                 <div class="wrap" style="text-align: left; padding-top: 10px;">
-                    <p>
-                        <?php _e("Configure this export to run automatically on a schedule.", 'wp_all_export_plugin'); ?>
-                        <a href="http://www.wpallimport.com/documentation/recurring/cron/" target="_blank">Click here to
-                            read more about scheduling exports.</a>
-                    </p>
 
-                    <h3 style="text-align: center; margin-bottom: 0;"><?php _e('Trigger Script URL', 'wp_all_export_plugin'); ?></h3>
-                    <p><a target="_blank"
-                          href="<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $update_previous->id . '&action=trigger'; ?>"><?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $update_previous->id . '&action=trigger'; ?></a>
-                    </p>
+                <?php
+                $export = $update_previous;
+                require __DIR__.'/../../../src/Scheduling/views/SchedulingUI.php'; ?>
 
-
-                    <h3 style="text-align: center; margin-bottom: 0;"><?php _e("Execution Script URL", 'wp_all_export_plugin'); ?></h3>
-                    <p><a target="_blank"
-                          href="<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $update_previous->id . '&action=processing'; ?>"><?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $update_previous->id . '&action=processing'; ?></a>
-                    </p>
                 </div>
             </div>
-            <div class="tab-content" id="tab3-content">
+            <div class="tab-content normal-tab" id="tab3-content">
                 <p>
                     <?php _e("Automatically send your data to over 500 apps with Zapier.", 'wp_all_export_plugin'); ?>
                     <br/>
@@ -106,7 +95,7 @@ $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
             </div>
             <?php if ($isImportAllowedSpecification->isSatisfied($update_previous)): ?>
 
-                <div class="tab-content" id="tab4-content">
+                <div class="tab-content normal-tab" id="tab4-content">
                     <p>
                         <?php _e("After you've downloaded your data, edit it however you like.", 'wp_all_export_plugin'); ?><br/>
                         <?php _e("Then, click below to import the data with WP All Import without having to set anything up.", 'wp_all_export_plugin'); ?>
@@ -116,7 +105,7 @@ $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
                                 rel="<?php echo add_query_arg(array('action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl); ?>"><?php _e('Download', 'wp_all_export_plugin'); ?> <?php echo strtoupper(wp_all_export_get_export_format($update_previous->options)); ?></button>
 
                         <button class="button button-primary button-hero wpallexport-large-button download_data"
-                                rel="<?php echo add_query_arg(array('page' => 'pmxi-admin-import', 'id' => $item['options']['import_id'], 'deligate' => 'wpallexport'), remove_query_arg('page', $this->baseUrl)); ?>"><?php _e('Import with WP All Import', 'wp_all_export_plugin'); ?></button>
+                                rel="<?php echo add_query_arg(array('page' => 'pmxi-admin-import', 'id' => $update_previous->options['import_id'], 'deligate' => 'wpallexport'), remove_query_arg('page', $this->baseUrl)); ?>"><?php _e('Import with WP All Import', 'wp_all_export_plugin'); ?></button>
                     </p>
                     <p>
                         <?php _e("You can also start the import by clicking 'Import with WP All Import' on the Manage Exports page.", 'wp_all_export_plugin');?>

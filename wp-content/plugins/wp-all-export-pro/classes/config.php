@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Class to load config files
- * 
+ *
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 class PMXE_Config implements IteratorAggregate {
@@ -26,29 +27,33 @@ class PMXE_Config implements IteratorAggregate {
 		$config = new self();
 		return $config->loadFromFile($filePath, $section);
 	}
-	
-	/**
-	 * Load config file
-	 * @param string $filePath
-	 * @param string[optional] $section
-	 * @return PMXE_Config
-	 */
-	public function loadFromFile($filePath, $section = NULL) {
-		if ( ! is_null($section)) {
-			$this->config[$section] = self::createFromFile($filePath);
-		} else {
-			$filePath = realpath($filePath);
-			if ($filePath and ! in_array($filePath, $this->loaded)) {
-				require $filePath;
-				
-				$sandbox = create_function('', "require '$filePath'; if(array_keys(get_defined_vars()) != array('config')) return array(); return \$config;");
-				$config = $sandbox();
-				$this->loaded[] = $filePath;
-				$this->config = array_merge($this->config, $config);
-			}
-		}
-		return $this;
-	}
+
+
+    /**
+     * Load config file
+     * @param string $filePath
+     * @param string [optional] $section
+     * @return PMXE_Config
+     */
+    public function loadFromFile($filePath, $section = NULL)
+    {
+        if (!is_null($section)) {
+            $this->config[$section] = self::createFromFile($filePath);
+        } else {
+            $filePath = realpath($filePath);
+            if ($filePath and !in_array($filePath, $this->loaded)) {
+
+                require $filePath;
+
+                if (!isset($config)) {
+                    $config = array();
+                }
+            }
+            $this->loaded[] = $filePath;
+            $this->config = array_merge($this->config, $config);
+        }
+        return $this;
+    }
 	/**
 	 * Return value of setting with specified name
 	 * @param string $field Setting name

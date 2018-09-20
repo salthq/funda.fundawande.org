@@ -12,10 +12,27 @@ class ProductType extends Field
         $productCategoriesData = $this->feed->getSectionFeedData(self::SECTION);
 
         if($productCategoriesData['productType'] == 'useWooCommerceProductCategories') {
-            $categories = wp_get_post_terms($this->entry->ID, 'product_cat');
+
+            $productId = false;
+
+            if($this->entry->post_type == 'product') {
+                $productId = $this->entry->ID;
+            } else if($this->entry->post_type == 'product_variation') {
+                $productId = $this->entry->post_parent;
+            }
+            else {
+                return '';
+            }
+
+            $categories = wp_get_post_terms($productId, 'product_cat');
             if(is_array($categories)){
-                $category = $categories[0];
-                return $category->name;
+                if(isset($categories[0])) {
+                    $category = $categories[0];
+                    return $category->name;
+                } else {
+                    return '';
+                }
+
             } else {
                 return '';
             }

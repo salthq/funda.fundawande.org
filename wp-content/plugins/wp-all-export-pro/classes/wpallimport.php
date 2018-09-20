@@ -145,6 +145,7 @@ final class PMXE_Wpallimport
 				'is_update_attachments' => 0,
 				'is_update_acf' => 0,
                 'is_update_comment_status' => 0,
+                'import_img_tags' => 1,
 				'update_acf_logic' => 'only',
 				'acf_list' => '',					
 				'is_update_product_type' => 1,
@@ -481,7 +482,9 @@ final class PMXE_Wpallimport
 			else
 			{
 				$element_name = strtolower((!empty($options['cc_name'][$ID])) ? preg_replace('/[^a-z0-9_]/i', '', $options['cc_name'][$ID]) : 'untitled_' . $ID);
-			}			
+			}
+
+			if (empty($element_name)) $element_name = 'undefined' . $ID;
 
 			$element_type = $options['cc_type'][$ID];
 

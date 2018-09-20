@@ -31,7 +31,7 @@ class ExportGoogleMerchants
         XmlExportEngine::$exportOptions['cc_label'] = $this->googleMerchantsDataProcessor->exportFieldSlugs;
     }
 
-    public function export()
+    public function export($is_cron, $file_path, $exported_by_cron = 0)
     {
         ob_start();
 
@@ -45,7 +45,7 @@ class ExportGoogleMerchants
         $pmxePlugin->adminInit();
 
         $articles = $this->exportRequestedData($articles);
-        $headers = $this->prepareCsvHeaders($headers, $stream);
+        $headers = $this->prepareCsvHeaders($headers, $stream, $exported_by_cron);
 
         foreach ($articles as $article) {
             $line = array();
@@ -56,7 +56,7 @@ class ExportGoogleMerchants
             $this->wordPressFilters->applyFilters('wp_all_export_after_csv_line', array($stream, XmlExportEngine::$exportID));
         }
 
-        $response = $this->saveCsvToFile();
+        $response = $this->saveCsvToFile($file_path, $is_cron, $exported_by_cron);
 
         return $response;
     }
@@ -66,7 +66,7 @@ class ExportGoogleMerchants
      * @param $stream
      * @return mixed
      */
-    private function prepareCsvHeaders($headers, $stream)
+    private function prepareCsvHeaders($headers, $stream, $exported = 0)
     {
         if (XmlExportEngine::$exportOptions['cc_name']) {
             foreach (XmlExportEngine::$exportOptions['cc_name'] as $ID => $value) {
@@ -78,15 +78,11 @@ class ExportGoogleMerchants
         }
         $headers = $this->wordPressFilters->applyFilters('wp_all_export_csv_headers', array($headers, XmlExportEngine::$exportID));
 
-        if (empty(PMXE_Plugin::$session->file)) {
+        if (!$exported) {
             fputcsv($stream, array_map(array('XmlCsvExport', '_get_valid_header_name'), $headers), self::GOOGLE_MERCHANTS_DELIMITER);
-            $this->wordPressFilters->applyFilters('wp_all_export_after_csv_line', array($stream, XmlExportEngine::$exportID));
-            return $headers;
-        } else {
-            $this->merge_headers(PMXE_Plugin::$session->file, $headers);
-            return $headers;
         }
 
+        return $headers;
     }
 
     private function prepare_csv_headers( &$headers, $ID)
@@ -116,10 +112,6 @@ class ExportGoogleMerchants
                 $i++;
             } while (!$is_added);
         }
-
-        //if (XmlExportEngine::$exportOptions['cc_label'][$ID] == 'product_type' and !in_array('parent_id', $headers)) {
-        //    $headers[] = 'parent_id';
-        //}
     }
 
     /**
@@ -147,22 +139,49 @@ class ExportGoogleMerchants
     /**
      * @return bool
      */
-    private function saveCsvToFile()
+    private function saveCsvToFile($file_path, $is_cron, $exported_by_cron)
     {
+        if ($is_cron) {
+            if ( ! $exported_by_cron ) {
+                // The BOM will help some programs like Microsoft Excel read your export file if it includes non-English characters.
+                if (XmlExportEngine::$exportOptions['include_bom']) {
+                    file_put_contents($file_path, chr(0xEF).chr(0xBB).chr(0xBF).ob_get_clean());
+                }
+                else {
+                    file_put_contents($file_path, ob_get_clean());
+                }
+            }
+            else {
+                file_put_contents($file_path, ob_get_clean(), FILE_APPEND);
+            }
 
-        if ( empty(PMXE_Plugin::$session->file) ){
-
-            // generate export file name
-            $export_file = wp_all_export_generate_export_file( XmlExportEngine::$exportID );
-
-            file_put_contents($export_file, ob_get_clean());
-
-            PMXE_Plugin::$session->set('file', $export_file);
-            PMXE_Plugin::$session->save_data();
+            return $file_path;
 
         }
-        else {
-            file_put_contents(PMXE_Plugin::$session->file, ob_get_clean(), FILE_APPEND);
+        else
+        {
+            if ( empty(PMXE_Plugin::$session->file) ){
+
+                // generate export file name
+                $export_file = wp_all_export_generate_export_file( XmlExportEngine::$exportID );
+
+                // The BOM will help some programs like Microsoft Excel read your export file if it includes non-English characters.
+                if (XmlExportEngine::$exportOptions['include_bom']) {
+                    file_put_contents($export_file, chr(0xEF).chr(0xBB).chr(0xBF).ob_get_clean());
+                }
+                else {
+                    file_put_contents($export_file, ob_get_clean());
+                }
+
+                PMXE_Plugin::$session->set('file', $export_file);
+                PMXE_Plugin::$session->save_data();
+
+            }
+            else {
+                file_put_contents(PMXE_Plugin::$session->file, ob_get_clean(), FILE_APPEND);
+            }
+
+            return true;
         }
 
     }

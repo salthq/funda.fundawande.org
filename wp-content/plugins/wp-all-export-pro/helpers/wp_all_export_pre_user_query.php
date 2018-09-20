@@ -10,9 +10,12 @@ function wp_all_export_pre_user_query($obj)
 
 		$customJoin = PMXE_Plugin::$session->get('joinclause');
 
-		if ( ! empty( $customJoin ) ) {		
-			$obj->query_from .= implode( ' ', array_unique( $customJoin ) );	
-		}						
+        if ( ! empty( $customJoin ) ) {
+            foreach ($customJoin as $join) {
+                $obj->query_from = str_replace(trim($join), "", $obj->query_from);
+            }
+            $obj->query_from .= implode( ' ', array_unique( $customJoin ) );
+        }
 	}
 	else
 	{

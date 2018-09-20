@@ -100,6 +100,7 @@ function pmxe_wp_ajax_wpallexport()
             remove_all_actions('parse_query');
             remove_all_actions('pre_get_posts');
             remove_all_filters('posts_clauses');
+            remove_all_filters('posts_orderby');
 
             add_filter('posts_join', 'wp_all_export_posts_join', 10, 1);
             add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
@@ -188,16 +189,23 @@ function pmxe_wp_ajax_wpallexport()
 
         $percentage = ceil(($export->exported / $foundPosts) * 100);
 
-        wp_send_json(array(
+        $responseArray = array(
             'export_id' => $export->id,
             'queue_export' => false,
             'exported' => $export->exported,
             'percentage' => $percentage,
             'done' => false,
             'posts' => $postCount,
-            'code' => $code,
             'records_per_request' => $exportOptions['records_per_iteration']
-        ));
+        );
+
+        if(isset($code)){
+            $responseArray['code'] = $code;
+        } else {
+            $responseArray['code'] = '';
+        }
+        
+        wp_send_json($responseArray);
     } else {
         if (file_exists(PMXE_Plugin::$session->file)) {
 

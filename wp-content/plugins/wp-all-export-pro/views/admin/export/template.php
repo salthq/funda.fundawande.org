@@ -1,5 +1,4 @@
 <h2 class="wpallexport-wp-notices"></h2>
-
 <div class="wpallexport-wrapper">
     <div class="wpallexport-header">
         <div class="wpallexport-logo"></div>
@@ -99,6 +98,8 @@
 																	<input type="hidden" name="cc_value[]" value="<?php echo esc_attr($post['cc_value'][$ID]); ?>"/>
 																	<input type="hidden" name="cc_name[]" value="<?php echo XmlExportEngine::sanitizeFieldName(esc_attr($field_name)); ?>"/>
 																	<input type="hidden" name="cc_settings[]" value="<?php echo (!empty($post['cc_settings'][$ID])) ? esc_attr($post['cc_settings'][$ID]) : 0; ?>"/>
+																	<input type="hidden" name="cc_combine_multiple_fields[]" value="<?php echo (!empty($post['cc_combine_multiple_fields'][$ID])) ? esc_attr($post['cc_combine_multiple_fields'][$ID]) : 0; ?>"/>
+																	<input type="hidden" name="cc_combine_multiple_fields_value[]" value="<?php echo (!empty($post['cc_combine_multiple_fields_value'][$ID])) ? esc_attr($post['cc_combine_multiple_fields_value'][$ID]) : 0; ?>"/>
 																</div>
 															</li>
 															<?php
@@ -132,6 +133,8 @@
 																<input type="hidden" name="cc_value[]" value="<?php echo $field['label']; ?>"/>
 																<input type="hidden" name="cc_name[]" value="<?php echo (strtoupper($field['name']) == 'ID') ? 'id' : $field['name'];?>"/>													
 																<input type="hidden" name="cc_settings[]" value="0"/>
+																<input type="hidden" name="cc_combine_multiple_fields[]" value=""/>
+																<input type="hidden" name="cc_combine_multiple_fields_value[]" value=""/>
 															</div>
 														</li>
 														<?php
@@ -158,6 +161,8 @@
 									<input type="hidden" name="cc_value[]" value=""/>
 									<input type="hidden" name="cc_name[]" value=""/>
 									<input type="hidden" name="cc_settings[]" value="0"/>
+									<input type="hidden" name="cc_combine_multiple_fields[]" value="0"/>
+									<input type="hidden" name="cc_combine_multiple_fields_value[]" value="0"/>
 								</div>
 
 								<!-- Warning Messages -->
@@ -328,7 +333,7 @@
 						/** @var string $random */
 						$random = uniqid();
 						?>
-			            <div class="wpallexport-collapsed-content" style="padding: 0; overflow: hidden; height: 180px;">
+			            <div class="wpallexport-collapsed-content" style="padding: 0; overflow: hidden; min-height: 180px;">
 			                <div class="wpallexport-collapsed-content-inner">               
 			                    <div class="wp-all-export-wpml-options">
 							        <h4><?php _e('Language', 'wp_all_export_plugin'); ?></h4>
@@ -347,7 +352,7 @@
 			    </div>
 			    <input type="hidden" id="wpml_lang" name="wpml_lang" value="<?php echo $post['wpml_lang'];?>" />
 			    <?php endif;?>
-
+				
 				<div class="wpallexport-collapsed wpallexport-section wpallexport-file-options closed" style="margin-top: 0px;">
 					<div class="wpallexport-content-section" style="padding-bottom: 15px; margin-bottom: 10px;">
 						<div class="wpallexport-collapsed-header" style="padding-left: 25px;">
@@ -528,7 +533,7 @@
                                                value="<?php _e("Save Functions", 'wp_all_export_plugin'); ?>"/>
                                         <a href="#help" class="wpallexport-help"
                                            title="<?php printf(__("Add functions here for use during your export. You can access this file at %s", "wp_all_export_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions)); ?>"
-                                           style="top: 0;">?</a>
+                                           style="top: 3px;">?</a>
                                         <div class="wp_all_export_functions_preloader"></div>
                                     </div>
                                     <div class="input wp_all_export_saving_status" style="display:inline-block;"></div>
@@ -596,7 +601,7 @@
 
         <td class="right template-sidebar" style="position: relative; width: 18%; right: 0px; padding: 0;">
 
-            <fieldset id="available_data" class="optionsset rad4">
+            <fieldset id="available_data" class="optionsset rad4 wpae_available_data">
 
                 <div class="title"><?php _e('Available Data', 'wp_all_export_plugin'); ?></div>
 
@@ -619,8 +624,8 @@
 <fieldset class="optionsset column rad4 wp-all-export-edit-column">
 
     <div class="title"><span
-            class="wpallexport-add-row-title"><?php _e('Add Field To Export', 'wp_all_export_plugin'); ?></span><span
-            class="wpallexport-edit-row-title"><?php _e('Edit Export Field', 'wp_all_export_plugin'); ?></span></div>
+            class="wpallexport-add-row-title" style="font-size: 14px;"><?php _e('Add Field To Export', 'wp_all_export_plugin'); ?></span><span
+            class="wpallexport-edit-row-title" style="font-size: 14px;"><?php _e('Edit Export Field', 'wp_all_export_plugin'); ?></span></div>
 
     <?php include_once 'template/add_new_field.php'; ?>
 

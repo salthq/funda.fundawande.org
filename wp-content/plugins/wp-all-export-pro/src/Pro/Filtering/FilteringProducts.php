@@ -103,6 +103,10 @@ class FilteringProducts extends FilteringCPT
             $this->queryWhere .= " AND ({$this->wpdb->posts}.ID NOT IN (SELECT post_id FROM " . $postList->getTable() . " WHERE export_id = '". $this->exportId ."'))";
         }
 
+        if ($this->isExportModifiedStuff() && ! empty(\XmlExportEngine::$exportRecord->registered_on)){
+            $this->queryWhere .= " AND {$this->wpdb->posts}.post_modified > '" . \XmlExportEngine::$exportRecord->registered_on . "' ";
+        }
+
         $where = $this->queryWhere;
         $join  = implode( ' ', array_unique( $this->queryJoin ) );
         if ($this->isLanguageFilterEnabled()){

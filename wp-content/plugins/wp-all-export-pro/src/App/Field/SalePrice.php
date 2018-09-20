@@ -31,10 +31,17 @@ class SalePrice extends Field
             }
         }
 
-        if($price) {
-            return number_format($price, 2) .' '.$availabilityPriceData['currency'];
+        $rawPrices = false;
+        $rawPrices = apply_filters('wp_all_export_raw_prices', $rawPrices);
+
+        if(!$rawPrices) {
+            if ($price) {
+                return number_format($price, 2) . ' ' . $availabilityPriceData['currency'];
+            } else {
+                return "";
+            }
         } else {
-            return "";
+            return $price;
         }
     }
 

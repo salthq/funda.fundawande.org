@@ -291,40 +291,38 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 
 		XmlExportEngine::$exportOptions  = $this->options;
 		
-		// if posts still exists then export them
-		if ( $postCount )
-		{
-			switch ( $this->options['export_to'] ) {
 
-				case XmlExportEngine::EXPORT_TYPE_XML:
+        switch ( $this->options['export_to'] ) {
 
-					if($this->options['xml_template_type'] == XmlExportEngine::EXPORT_TYPE_GOOLE_MERCHANTS) {
-						$googleMerchantsServiceFactory = new \Wpae\App\Service\ExportGoogleMerchantsFactory();
-						$googleMerchantsService = $googleMerchantsServiceFactory->createService();
-						$googleMerchantsService->export();
-					} else {
-						XmlCsvExport::export_xml( false, $cron, $file_path, $this->exported );
-					}
+            case XmlExportEngine::EXPORT_TYPE_XML:
 
-					break;
+                if($this->options['xml_template_type'] == XmlExportEngine::EXPORT_TYPE_GOOLE_MERCHANTS) {
+                    $googleMerchantsServiceFactory = new \Wpae\App\Service\ExportGoogleMerchantsFactory();
+                    $googleMerchantsService = $googleMerchantsServiceFactory->createService();
+                    $googleMerchantsService->export($cron, $file_path, $this->exported);
+                } else {
+                    XmlCsvExport::export_xml( false, $cron, $file_path, $this->exported );
+                }
 
-				case XmlExportEngine::EXPORT_TYPE_CSV:
+                break;
 
-					XmlCsvExport::export_csv( false, $cron, $file_path, $this->exported );
-					break;
+            case XmlExportEngine::EXPORT_TYPE_CSV:
 
-				default:
-					# code...
-					break;
-			}
+                XmlCsvExport::export_csv( false, $cron, $file_path, $this->exported );
+                break;
 
-			$this->set(array(
-				'exported' => $this->exported + $postCount,
-				'last_activity' => date('Y-m-d H:i:s'),
-				'processing' => 0
-			))->save();	
+            default:
+                # code...
+                break;
+        }
 
-		}	
+        $this->set(array(
+            'exported' => $this->exported + $postCount,
+            'last_activity' => date('Y-m-d H:i:s'),
+            'processing' => 0
+        ))->save();
+
+
 
 		if ( empty($foundPosts) )
 		{
@@ -335,7 +333,6 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 				'registered_on' => date('Y-m-d H:i:s'),
 				'iteration' => ++$this->iteration
 			))->update();	
-
 			do_action('pmxe_after_export', $this->id, $this);
 		}
 		elseif ( ! $postCount or $foundPosts == $this->exported )
@@ -348,7 +345,7 @@ class PMXE_Export_Record extends PMXE_Model_Record {
                         case 'XmlGoogleMerchants':
                         case 'custom':
                             require_once PMXE_ROOT_DIR . '/classes/XMLWriter.php';
-                            file_put_contents($file_path, PMXE_XMLWriter::preprocess_xml(XmlExportEngine::$exportOptions['custom_xml_template_footer']), FILE_APPEND);
+                            file_put_contents($file_path, PMXE_XMLWriter::preprocess_xml("\n".XmlExportEngine::$exportOptions['custom_xml_template_footer']), FILE_APPEND);
                         break;
                     }
 
@@ -390,7 +387,9 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 			))->update();	
 
 			do_action('pmxe_after_export', $this->id, $this);
-		}
+		} else {
+		    do_action('pmxe_after_iteration', $this->id, $this);
+        }
 
 		$this->set('registered_on', date('Y-m-d H:i:s'))->save(); // update registered_on to indicated that job has been exectured even if no files are going to be imported by the rest of the method
 		
@@ -572,6 +571,12 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 					'cc_settings' => empty($options['cc_settings'][$ID]) ? '' : $options['cc_settings'][$ID],
 				);
 
+				if(isset($options['cc_combine_multiple_fields']) && isset($options['cc_combine_multiple_fields_value'])) {
+
+					$field['cc_combine_multiple_fields'] = empty($options['cc_combine_multiple_fields'][$ID]) ? '' : $options['cc_combine_multiple_fields'][$ID];
+					$field['cc_combine_multiple_fields_value'] = empty($options['cc_combine_multiple_fields_value'][$ID]) ? '' : $options['cc_combine_multiple_fields_value'][$ID];
+				}
+
 				switch ($field['cc_type']) 
 				{
 					case 'media':
@@ -650,6 +655,8 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 			$options['cc_value'] = array();
 			$options['cc_name'] = array();
 			$options['cc_settings'] = array();
+			$options['cc_combine_multiple_fields'] = array();
+			$options['cc_combine_multiple_fields_value'] = array();
 
 			// apply new field settings
 			foreach ($fields as $ID => $field) {
@@ -663,6 +670,11 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 				$options['cc_value'][] = $field['cc_value'];
 				$options['cc_name'][] = $field['cc_name'];
 				$options['cc_settings'][] = $field['cc_settings'];
+				if(isset($field['cc_combine_multiple_fields']) && isset($field['cc_combine_multiple_fields_value'])) {
+					$options['cc_combine_multiple_fields'][] = $field['cc_combine_multiple_fields'];
+					$options['cc_combine_multiple_fields_value'][] = $field['cc_combine_multiple_fields_value'];
+				}
+
 			}
 
 			$this->set(array('options' => $options))->save();

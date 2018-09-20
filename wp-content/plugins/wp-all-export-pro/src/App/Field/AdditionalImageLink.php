@@ -14,11 +14,7 @@ class AdditionalImageLink extends Field
 
         if($basicInformationData['additionalImageLink'] == 'productImages') {
             
-            if($this->wooCommerceVersion->isWooCommerceNewerThan('3.0')) {
-                $attachment_ids = $product->get_gallery_attachment_ids();
-            } else {
-                $attachment_ids = $product->get_gallery_image_ids();
-            }
+            $attachment_ids = $product->get_gallery_attachment_ids();
 
             if(is_array($attachment_ids) && count($attachment_ids)) {
                 return wp_get_attachment_url($attachment_ids[0]);

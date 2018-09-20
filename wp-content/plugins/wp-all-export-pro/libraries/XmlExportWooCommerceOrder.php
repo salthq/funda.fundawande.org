@@ -200,14 +200,15 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 
 			if ( ! self::$is_active || empty(XmlExportEngine::$exportQuery)) return;
 
-            $in_orders = preg_replace("%(SQL_CALC_FOUND_ROWS|LIMIT.*)%", "", XmlExportEngine::$exportQuery->request);
+			global $wpdb;
+
+			$table_prefix = $wpdb->prefix;
+
+			$in_orders = preg_replace("%(SQL_CALC_FOUND_ROWS|LIMIT.*)%", "", XmlExportEngine::$exportQuery->request);
+			$in_orders = str_replace("{$table_prefix}posts.*", "{$table_prefix}posts.ID", $in_orders);
 
             if ( ! empty($in_orders) ){
-
-                global $wpdb;
-
-                $table_prefix = $wpdb->prefix;
-
+				
                 if ( empty(self::$orders_data['line_items_max_count']) ){
                     self::$orders_data['line_items_max_count'] = $wpdb->get_var($wpdb->prepare("SELECT max(cnt) as line_items_count FROM ( 
 					SELECT order_id, COUNT(*) as cnt FROM {$table_prefix}woocommerce_order_items 
@@ -638,25 +639,29 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 												break;
 
 											default:
-												
-												$meta_key_founded = false;
-												foreach ($meta_data as $meta) {
-													if ($meta['meta_key'] == $options['cc_value'][$subID]){
-														if ( ! isset($item_data[$element_name])){
-															$item_data[$element_name] = array();
-														}
-														$item_data[$element_name][] = $meta['meta_value'];
-														$meta_key_founded = true;
-													}
-												}
-												if ( ! $meta_key_founded ){
-													$item_data[$element_name] = pmxe_filter( '', $ItemsfieldSnipped);
-												}
-												else{
-													$item_data[$element_name] = pmxe_filter(implode($implode_delimiter, $item_data[$element_name]), $ItemsfieldSnipped);
-												}
 
-												break;
+                                                $meta_key_founded = false;
+                                                foreach ($meta_data as $meta) {
+                                                    if ($meta['meta_key'] == $options['cc_value'][$subID]){
+                                                        if ( ! isset($item_data[$element_name])){
+                                                            $item_data[$element_name] = array();
+                                                        }
+                                                        if(!is_array($item_data[$element_name]) ) {
+                                                            $item_data[$element_name] = array($item_data[$element_name]);
+                                                        }
+                                                        $item_data[$element_name][] = $meta['meta_value'];
+                                                        $meta_key_founded = true;
+
+                                                    }
+                                                }
+                                                if ( ! $meta_key_founded ){
+                                                    $item_data[$element_name] = pmxe_filter( '', $ItemsfieldSnipped);
+                                                }
+                                                else{
+                                                    $item_data[$element_name] = pmxe_filter(implode($implode_delimiter, $item_data[$element_name]), $ItemsfieldSnipped);
+                                                }
+
+                                                break;
 										}										
 									}	
 
@@ -948,7 +953,7 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 				if ( in_array($key, array('items', 'taxes', 'shipping', 'coupons', 'surcharge', 'refunds')) )
 				{
 					if ( ! empty($data))
-					{													
+					{
 						if ( $key == 'items' and ( $options['order_item_per_row'] or $options['xml_template_type'] == 'custom'))
 						{
 							foreach ($data as $item) {			
@@ -1059,8 +1064,11 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 							// $friendly_name = str_replace("per tax", $this->get_rate_friendly_name($tax->order_item_id), $options['cc_name'][$element_key]);							
 							$friendly_name = str_replace(" (per tax)", "", $options['cc_name'][$element_key]);							
 							if ( ! in_array($friendly_name, $headers)) $headers[] = $friendly_name;
-							if ( ! in_array("Rate Name", $headers)) $headers[] = "Rate Name";
 						}
+					}
+					else{
+						$friendly_name = str_replace(" (per tax)", "", $options['cc_name'][$element_key]);
+						if ( ! in_array($friendly_name, $headers)) $headers[] = $friendly_name;
 					}
 
 					break;
@@ -1076,6 +1084,11 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 							if ( ! in_array("Coupon Code", $headers)) $headers[] = "Coupon Code";
 						}
 					}
+					else{
+						$friendly_name = str_replace("(per coupon)", "", $options['cc_name'][$element_key]);
+						if ( ! in_array($friendly_name, $headers)) $headers[] = $friendly_name;
+						if ( ! in_array("Coupon Code", $headers)) $headers[] = "Coupon Code";
+					}
 
 					break;
 				// Fee Amount (per surcharge)	
@@ -1089,6 +1102,11 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 							if ( ! in_array($friendly_name, $headers)) $headers[] = $friendly_name;
 							if ( ! in_array("Fee Name", $headers)) $headers[] = "Fee Name";
 						}
+					}
+					else{
+						$friendly_name = str_replace(" (per surcharge)", "", $options['cc_name'][$element_key]);
+						if ( ! in_array($friendly_name, $headers)) $headers[] = $friendly_name;
+						if ( ! in_array("Fee Name", $headers)) $headers[] = "Fee Name";
 					}
 
 					break;	
@@ -1508,7 +1526,10 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 									<input type="hidden" name="cc_value[]" value="<?php echo (is_array($field)) ? $field['label'] : $cur_meta_key; ?>"/>
 									<input type="hidden" name="cc_name[]" value="<?php echo (is_array($field)) ? $field['name'] : $field;?>"/>
 									<input type="hidden" name="cc_settings[]" value=""/>
-								</div>
+                                    <input type="hidden" name="cc_combine_multiple_fields[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields'] : '';?>"/>
+                                    <input type="hidden" name="cc_combine_multiple_fields_value[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields_value'] : '';?>"/>
+
+                                </div>
 							</li>
 							<?php
 							$i++;												
@@ -1546,7 +1567,10 @@ if ( ! class_exists('XmlExportWooCommerceOrder') )
 													<input type="hidden" name="cc_value[]" value="item_data__<?php echo (is_array($field)) ? $field['label'] : $field; ?>"/>
 													<input type="hidden" name="cc_name[]" value="<?php echo (is_array($field)) ? $field['name'] : $field;?>"/>
 													<input type="hidden" name="cc_settings[]" value=""/>
-												</div>
+                                                    <input type="hidden" name="cc_combine_multiple_fields[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields'] : '';?>"/>
+                                                    <input type="hidden" name="cc_combine_multiple_fields_value[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields_value'] : '';?>"/>
+
+                                                </div>
 											</li>
 											<?php
 											$i++;												

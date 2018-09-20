@@ -13,7 +13,11 @@ class Size extends Field
 
         if($detailedInformationData['size'] == self::SELECT_FROM_WOOCOMMERCE_PRODUCT_ATTRIBUTES) {
 
-            $sizeAttribute = $detailedInformationData['sizeAttribute'];
+            if(isset($detailedInformationData['sizeAttribute'])) {
+                $sizeAttribute = $detailedInformationData['sizeAttribute'];
+            } else {
+                $sizeAttribute = '';
+            }
             return $this->replaceSnippetsInValue($sizeAttribute, $snippetData);
 
         } else if($detailedInformationData['size'] == self::CUSTOM_VALUE_TEXT) {

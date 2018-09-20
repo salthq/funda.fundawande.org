@@ -1,27 +1,18 @@
 <?php
-
-
 namespace Wpae\App\Field;
-
-
 use Wpae\App\Feed\Feed;
 use Wpae\App\Service\WooCommerceVersion;
 use Wpae\WordPress\Filters;
-use WpaeString;
 
 abstract class Field
 {
     const CUSTOM_VALUE_TEXT = 'customValue';
-
     const SELECT_FROM_WOOCOMMERCE_PRODUCT_ATTRIBUTES = 'selectFromWooCommerceProductAttributes';
-
     protected $entry;
-    
     /**
      * @var Filters
      */
     private $filters;
-
     /**
      * @var Feed
      */
@@ -30,7 +21,6 @@ abstract class Field
      * @var WooCommerceVersion
      */
     protected $wooCommerceVersion;
-
     /**
      * Field constructor.
      * @param $entry
@@ -49,15 +39,23 @@ abstract class Field
     public function getFieldValue($snippetData)
     {
         $value = strip_tags($this->getValue($snippetData));
+
         $functions = array();
         preg_match_all('%(\[[^\]\[]*\])%', $value, $functions);
-
         if(is_array($functions) && isset($functions[0]) && !empty($functions[0])) {
-
             foreach($functions[0] as $function) {
                 if(!empty($function)) {
+
                     $functionSnippet = $function;
+
                     $function = str_replace(array('[',']'), '', $function);
+                    $function = str_replace("('", "(\"", $function);
+                    $function = str_replace("( '", "(\"", $function);
+                    $function = str_replace("')", "\")", $function);
+                    $function = str_replace("' )", "\")", $function);
+                    $function = str_replace(array("','","', '", "' ,'", "',\"", "\",'"), "\",\"", $function);
+
+                    $function = $this->quoteParams($function);
                     $functionName = explode("(", $function);
                     $functionName = $functionName[0];
                     if(function_exists($functionName)) {
@@ -69,6 +67,9 @@ abstract class Field
                 }
             }
         }
+
+        $value = str_replace("**DOUBLEQUOT**", "\\\"", $value);
+        $value = str_replace("**SINGLEQUOT**","'", $value);
 
         return $value;
     }
@@ -89,15 +90,11 @@ abstract class Field
             if($key == 'id') {
                 $key = 'ID';
             }
-
             $fieldKey = '{' . $key . '}';
-
             $value = str_replace($fieldKey, $fieldValue, $value);
         }
-
         // Replace strong tags used on the frontend
         $value = str_replace(array('<strong>', '</strong>'), '', $value);
-
         foreach(\XmlExportEngine::$exportOptions['snippets'] as $snippet) {
             $value = str_replace('{' . $snippet . '}','', $value);
         }
@@ -123,4 +120,24 @@ abstract class Field
     abstract function getFieldName();
 
     abstract function getValue($snippetData);
+
+    /**
+     * @param $function
+     * @return mixed|string
+     */
+    protected function quoteParams($function)
+    {
+        $function = str_replace(array('" , "', '", "', '" ,"', '","'), "**BETWEENPARAMS**", $function);
+        $function = str_replace(array('("', '( "'), "**BEFOREPARAMS**", $function);
+        $function = str_replace(array('")', '" )'), "**AFTERPARAMS**", $function);
+        $function = addslashes($function);
+        $function = str_replace("**BETWEENPARAMS**", '","', $function);
+        $function = str_replace("**BEFOREPARAMS**", '("', $function);
+        $function = str_replace("**AFTERPARAMS**", '")', $function);
+
+        $function = str_replace("**DOUBLEQUOT**", "\\\"", $function);
+        $function = str_replace("**SINGLEQUOT**","'", $function);
+
+        return $function;
+    }
 }

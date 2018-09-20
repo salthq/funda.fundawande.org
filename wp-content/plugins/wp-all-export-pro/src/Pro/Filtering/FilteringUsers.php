@@ -57,7 +57,7 @@ class FilteringUsers extends FilteringBase
                 break;
             case 'user_role':
                 $cap_key = $this->wpdb->prefix . 'capabilities';
-                $this->queryJoin[] = " INNER JOIN {$this->wpdb->usermeta} ON ({$this->wpdb->usermeta}.user_id = {$this->wpdb->users}.ID) ";
+                $this->queryJoin[] = " INNER JOIN {$this->wpdb->usermeta} ON ( {$this->wpdb->users}.ID = {$this->wpdb->usermeta}.user_id ) ";
                 $this->queryWhere .= "{$this->wpdb->usermeta}.meta_key = '$cap_key' AND {$this->wpdb->usermeta}.meta_value " . $this->parse_condition($rule);
                 break;
             case 'user_registered':
@@ -88,7 +88,7 @@ class FilteringUsers extends FilteringBase
                     }
                     else{
                         $table_alias = (count($this->queryJoin) > 0) ? 'meta' . count($this->queryJoin) : 'meta';
-                        $this->queryJoin[] = " INNER JOIN {$this->wpdb->usermeta} AS $table_alias ON ({$this->wpdb->users}.ID = $table_alias.user_id) ";
+                        $this->queryJoin[] = " INNER JOIN {$this->wpdb->usermeta} AS $table_alias ON ( {$this->wpdb->users}.ID = $table_alias.user_id ) ";
                         $this->queryWhere .= "$table_alias.meta_key = '$meta_key' AND $table_alias.meta_value " . $this->parse_condition($rule, false, $table_alias);
                     }
                 }

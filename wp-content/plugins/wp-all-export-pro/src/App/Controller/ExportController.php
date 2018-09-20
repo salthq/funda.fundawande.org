@@ -49,7 +49,7 @@ class ExportController extends BaseController
             $sessionData = PMXE_Plugin::$session->get_session_data();
             $exportData = unserialize($sessionData['google_merchants_post_data']);
         } else {
-            $id = $_GET['id'];
+            $id = intval($_GET['id']);
             $export = new \PMXE_Export_Record();
             if ($export->getById($id)->isEmpty()) { // specified import is not found
                 wp_redirect(add_query_arg('page', 'pmxe-admin-manage', admin_url('admin.php'))); die();
@@ -74,7 +74,7 @@ class ExportController extends BaseController
 
         $default = PMXE_Plugin::get_default_import_options();
 
-        if(!$extraData['save_template_as']) {
+        if(!isset($extraData['save_template_as'])) {
             $extraData['save_template_as'] = '';
             $extraData['name'] = '';
         }

@@ -114,11 +114,37 @@ if ( ! class_exists('XmlExportEngine') ){
 				'name'  => 'Status',
 				'type'  => 'status'
 			),
+
 			array(
-				'label' => 'author', 
-				'name'  => 'Author',
+				'label' => 'author',
+				'name'  => 'Author ID',
 				'type'  => 'author'
 			),
+
+			array(
+				'label' => 'author_username',
+				'name'  => 'Author Username',
+				'type'  => 'author_username'
+			),
+
+			array(
+				'label' => 'author_email',
+				'name'  => 'Author Email',
+				'type'  => 'author_email'
+			),
+
+			array(
+				'label' => 'author_first_name',
+				'name'  => 'Author First Name',
+				'type'  => 'author_first_name'
+			),
+
+			array(
+				'label' => 'author_last_name',
+				'name'  => 'Author Last Name',
+				'type'  => 'author_last_name'
+			),
+
 			array(
 				'label' => 'slug', 
 				'name'  => 'Slug',
@@ -257,6 +283,12 @@ if ( ! class_exists('XmlExportEngine') ){
 									'name'  => 'Alt Text',
 									'label' => 'alt',
 									'type'  => 'image_alt',
+									'auto'  => 1
+								),
+								array(
+									'name'  => 'Featured',
+									'label' => 'featured',
+									'type'  => 'image_featured',
 									'auto'  => 1
 								),
 							)
@@ -487,7 +519,7 @@ if ( ! class_exists('XmlExportEngine') ){
 			}	
 			if ( 'advanced' == $this->post['export_type'] and ! self::$is_user_export and ! self::$is_comment_export and ! self::$is_taxonomy_export )
 			{
-				$meta_keys = $wpdb->get_results("SELECT DISTINCT meta_key FROM {$table_prefix}postmeta WHERE {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' LIMIT 500");
+				$meta_keys = $wpdb->get_results("SELECT DISTINCT meta_key FROM {$table_prefix}postmeta WHERE {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' LIMIT 1000");
 				if ( ! empty($meta_keys)){
 					$exclude_keys = array('_first_variation_attributes', '_is_first_variation_created');
 					foreach ($meta_keys as $meta_key) {
@@ -544,7 +576,7 @@ if ( ! class_exists('XmlExportEngine') ){
 			$this->available_data['default_fields'] = apply_filters('wp_all_export_default_fields', self::$default_fields);
 			$this->available_data['other_fields']   = apply_filters('wp_all_export_other_fields', $this->other_fields);
 
-			$this->available_data = apply_filters("wp_all_export_available_data", $this->available_data);;
+			$this->available_data = apply_filters("wp_all_export_available_data", $this->available_data);
 
 			return $this->available_data;
 
@@ -562,7 +594,9 @@ if ( ! class_exists('XmlExportEngine') ){
 				'cc_type' => array(),
 				'cc_value' => array(),
 				'cc_name' => array(),
-				'cc_settings' => array()
+				'cc_settings' => array(),
+				'cc_combine_multiple_fields' => array(),
+				'cc_combine_multiple_fields_value' => array()
 			);				
 
 			self::$woo_order_export->get_fields_options( $fields, $field_keys );
@@ -590,6 +624,8 @@ if ( ! class_exists('XmlExportEngine') ){
 						$fields['cc_value'][] = (is_array($field)) ? $field['label'] : $field;
 						$fields['cc_name'][] = $field_key;
 						$fields['cc_settings'][] = '';
+						$fields['cc_combine_multiple_fields'][] = '';
+						$fields['cc_combine_multiple_fields_value'][] = '';
 					}
 				endif;
 
@@ -618,7 +654,9 @@ if ( ! class_exists('XmlExportEngine') ){
 							$fields['cc_type'][] = (is_array($field)) ? $field['type'] : $sub_slug;
 							$fields['cc_value'][] = (is_array($field)) ? $field['label'] : $field;
 							$fields['cc_name'][] = $key_to_check;
-							$fields['cc_settings'][] = '';	
+							$fields['cc_settings'][] = '';
+							$fields['cc_combine_multiple_fields'][] = '';
+							$fields['cc_combine_multiple_fields_value'][] = '';
 						}																
 					}					
 				}	
@@ -643,6 +681,8 @@ if ( ! class_exists('XmlExportEngine') ){
 						$sort_fields['cc_value'][] = $fields['cc_value'][$j];
 						$sort_fields['cc_name'][] = $fields['cc_name'][$j];
 						$sort_fields['cc_settings'][] = $fields['cc_settings'][$j];
+						$sort_fields['cc_combine_multiple_fields'][] = isset($fields['cc_combine_multiple_fields'][$j])? $fields['cc_combine_multiple_fields'][$j] : 0 ;
+						$sort_fields['cc_combine_multiple_fields_value'][] = isset($fields['cc_combine_multiple_fields_value'][$j])? $fields['cc_combine_multiple_fields_value'][$j] : 0;
 						break;
 					}
 				}
@@ -663,6 +703,11 @@ if ( ! class_exists('XmlExportEngine') ){
 
 			// Render Available WooCommerce Orders Data
 			self::$woo_order_export->render($i);
+
+			$default = array(
+				'cc_combine_multiple_fields' => '',
+				'cc_combine_multiple_fields_value' => ''
+			);
 
 			foreach ($available_sections as $slug => $section)
 			{
@@ -687,7 +732,11 @@ if ( ! class_exists('XmlExportEngine') ){
 							if ( $field_type == 'cf' && $field_name == '_thumbnail_id' ) continue;
 
 							$is_auto_field = ( ! empty($field['auto']) or self::$is_auto_generate_enabled and ('specific' != $this->post['export_type'] or 'specific' == $this->post['export_type'] and ! in_array(self::$post_types[0], array('product'))));
-							
+
+							if (is_array($field)){
+								$field += $default;
+							}
+
 							?>
 							<li class="pmxe_<?php echo $slug; ?> <?php if ( $is_auto_field ) echo 'wp_all_export_auto_generate';?>">
 								<div class="custom_column" rel="<?php echo ($i + 1);?>">															
@@ -702,6 +751,8 @@ if ( ! class_exists('XmlExportEngine') ){
 									<input type="hidden" name="cc_value[]" value="<?php echo (is_array($field)) ? $field['label'] : $field; ?>"/>
 									<input type="hidden" name="cc_name[]"  value="<?php echo (is_array($field)) ? $field['name'] : $field;?>"/>
 									<input type="hidden" name="cc_settings[]"  value="0"/>
+									<input type="hidden" name="cc_combine_multiple_fields[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields'] : '';?>"/>
+									<input type="hidden" name="cc_combine_multiple_fields_value[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields_value'] : '';?>"/>
 								</div>
 							</li>
 							<?php
@@ -728,6 +779,9 @@ if ( ! class_exists('XmlExportEngine') ){
 										foreach ($sub_section['meta'] as $field) {
 											$is_auto_field = empty($field['auto']) ? false : true;
 											$field_options = ( in_array($sub_slug, array('images', 'attachments')) ) ? esc_attr('{"is_export_featured":true,"is_export_attached":true,"image_separator":"|"}') : '0';
+											if (is_array($field)){
+												$field += $default;
+											}
 											?>
 											<li class="pmxe_<?php echo $slug; ?>_<?php echo $sub_slug;?> <?php if ( $is_auto_field ) echo 'wp_all_export_auto_generate';?>">
 												<div class="custom_column" rel="<?php echo ($i + 1);?>">
@@ -742,6 +796,8 @@ if ( ! class_exists('XmlExportEngine') ){
 													<input type="hidden" name="cc_value[]" value="<?php echo (is_array($field)) ? $field['label'] : $field; ?>"/>
 													<input type="hidden" name="cc_name[]" value="<?php echo (is_array($field)) ? XmlExportEngine::sanitizeFieldName($field['name']) : $field;?>"/>
 													<input type="hidden" name="cc_settings[]" value=""/>
+													<input type="hidden" name="cc_combine_multiple_fields[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields'] : '';?>"/>
+													<input type="hidden" name="cc_combine_multiple_fields_value[]"  value="<?php echo (is_array($field)) ? $field['cc_combine_multiple_fields_value'] : '';?>"/>
 												</div>
 											</li>
 											<?php
@@ -845,6 +901,10 @@ if ( ! class_exists('XmlExportEngine') ){
 													break;
 												case 'parent':
 												case 'author':
+												case 'author_username':
+												case 'author_email':
+												case 'author_first_name':
+												case 'author_last_name':
 												case 'status':
 												case 'title':
 												case 'content':
@@ -1103,7 +1163,7 @@ if ( ! class_exists('XmlExportEngine') ){
 					}			
 				}			
 					
-				if ( ! empty($field_keys)){						
+				if (!empty($field_keys)){
 					$result['custom_xml_template_options'] = $this->get_fields_options( $field_keys );						
 				}
 			}
@@ -1134,6 +1194,10 @@ if ( ! class_exists('XmlExportEngine') ){
 
 		public static function getProductVariationMode()
 		{
+			if(isset(self::$exportOptions['xml_template_type']) && self::$exportOptions['xml_template_type'] == self::EXPORT_TYPE_GOOLE_MERCHANTS){
+				self::$exportOptions['export_variations'] = self::VARIABLE_PRODUCTS_EXPORT_VARIATION;
+			}
+
 			if(!isset(self::$exportOptions['export_variations'])) {
 				self::$exportOptions['export_variations'] = self::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION;
 			}

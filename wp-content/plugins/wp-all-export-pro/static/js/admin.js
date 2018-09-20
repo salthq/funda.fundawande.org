@@ -15,7 +15,9 @@
 		'isProductVariationsExport' : function() {
 			return this.hasVariations;
 		},
-		'hasVariations' : false
+		'hasVariations' : false,
+		'availableDataSelector': $('.right.template-sidebar .wpae_available_data'),
+		'availableDataSelectorInModal' : $('fieldset.optionsset .wpae_available_data')
 	};
 
 	function processElementName($element, $elementName){
@@ -33,6 +35,9 @@
 	function selectSpreadsheet()
 	{
 		vm.isGoogleMerchantsExport = false;
+		if(vm.availableDataSelector.css('position') == 'fixed') {
+            $('.template-sidebar').find('.wpae_available_data').css({'position': 'static', 'top': '50px'});
+        }
 		resetDraggable();
 		angular.element(document.getElementById('googleMerchants')).injector().get('$rootScope').$broadcast('googleMerchantsDeselected');
 		$('.wpallexport-custom-xml-template').slideUp();
@@ -42,6 +47,12 @@
 
 		$('.wpallexport-csv-advanced-options').css('display', 'block');
 		$('.wpallexport-xml-advanced-options').css('display', 'none');
+
+		if($('#export_to_sheet').val() === 'csv') {
+			$('.csv_delimiter').show();
+		} else {
+			$('.csv_delimiter').hide();
+		}
 
 		$('input[name=export_to]').val('csv');
 
@@ -78,17 +89,21 @@
 
 	var dragHelper = function(e, ui) {
 
-		if(!vm.isGoogleMerchantsExport) {
-			return $(this).clone().css("pointer-events","none").appendTo("body").show();
+
+		var isEditingField = $('#combine_multiple_fields_data').find(e.currentTarget).length;
+
+		if(!vm.isGoogleMerchantsExport && !isEditingField) {
+			return $(this).clone().css("pointer-events","none").css('z-index', '99999999999999999').appendTo("body").show();
 		}
-		if(!$(this).find('.custom_column').length) {
-			return $(this).clone().css("pointer-events","none").appendTo("body").show();
+		if(!$(this).find('.custom_column').length && !isEditingField) {
+			return $(this).clone().css("pointer-events","none").css('z-index', '999999999999999999').appendTo("body").show();
 		}
+
 		var elementName = $(this).find('.custom_column').find('input[name^=cc_name]').val();
 		elementName = helpers.sanitizeElementName(elementName);
 		elementName = processElementName($(this), elementName);
 
-		return $('<div>{' + elementName + '}</div>').css("pointer-events","none").appendTo("body").show();
+		return $('<div>{' + elementName + '}</div>').css("pointer-events","none").css('z-index', 9999999999999999).appendTo("body").show();
 
 	};
 
@@ -153,27 +168,34 @@
 	}
 
 	var initDraggable = function() {
-		$( "#available_data li:not(.available_sub_section)").draggable({
-			appendTo: "body",
-			containment: "document",
-			helper: dragHelper,
-			drag: onDrag,
-			start: function() {
-				$('.google-merchants-droppable').css('cursor', 'copy');
-				$('#columns').css('cursor', 'copy');
-				$('.CodeMirror-lines').css('cursor', 'copy');
-			},
-			stop: function() {
-				$('#columns').css('cursor', 'initial');
-				$('.CodeMirror-lines').css('cursor', 'text');
-				$('.google-merchants-droppable').css('cursor', 'initial');
-			}
-		});
+		function initGeneralDraggable($element) {
+			$element.find("li:not(.available_sub_section)").draggable({
+				appendTo: "body",
+				containment: "document",
+				helper: dragHelper,
+				drag: onDrag,
+				start: function () {
+					$('.google-merchants-droppable').css('cursor', 'copy');
+					$('#columns').css('cursor', 'copy');
+					$('.CodeMirror-lines').css('cursor', 'copy');
+					$('#combine_multiple_fields_value').css('cursor', 'copy');
+				},
+				stop: function () {
+					$('#columns').css('cursor', 'initial');
+					$('.CodeMirror-lines').css('cursor', 'text');
+					$('.google-merchants-droppable').css('cursor', 'initial');
+					$('#combine_multiple_fields_value').css('cursor', 'initial');
+				}
+			});
+		}
+
+		initGeneralDraggable(vm.availableDataSelector);
+		initGeneralDraggable(vm.availableDataSelectorInModal);
 	};
 
 	var resetDraggable = function() {
 
-		var $draggableSelector = $("#available_data li:not(.available_sub_section)");
+		var $draggableSelector = vm.availableDataSelector.find("li:not(.available_sub_section)");
 
 		if($draggableSelector.data('ui-draggable')){
 			$draggableSelector.draggable('destroy');
@@ -215,7 +237,7 @@
 	}, 10);
 
 	// help icons
-	$('a.wpallexport-help').tipsy({
+    $('.wpallexport-help, .help_scheduling').tipsy({
 		gravity: function() {
 			var ver = 'n';
 			if ($(document).scrollTop() < $(this).offset().top - $('.tipsy').height() - 2) {
@@ -249,6 +271,7 @@
 	        lineWrapping: true
 	    });
 	    editor.setCursor(1);
+
 	    $('.CodeMirror').resizable({
 		  resize: function() {
 		    editor.setSize("100%", $(this).height());
@@ -361,7 +384,9 @@
 	});
 
 	$('.wpallexport-collapsed').find('.wpallexport-collapsed-header:not(.disable-jquery)').live('click', function(){
-			var $parent = $(this).parents('.wpallexport-collapsed:first');
+
+		var $parent = $(this).parents('.wpallexport-collapsed:first');
+
 		if ($parent.hasClass('closed')){
 			$parent.find('hr').show();
 			$parent.removeClass('closed');
@@ -657,7 +682,9 @@
 			data: request,
 			success: function(response) {
 
-				vm.hasVariations = response.hasVariations;
+                $('.wpae-record-count').val(response.found_records);
+
+                vm.hasVariations = response.hasVariations;
 				if(vm.hasVariations) {
 
 					if($('#export_to_sheet').val() == 'xls' || $('#export_to_sheet').val() == 'xlsx') {
@@ -977,6 +1004,10 @@
 			hoverClass: "pmxe-state-hover",
 			accept: ":not(.ui-sortable-helper)",
 			drop: function( event, ui ) {
+
+				if(event.originalEvent.target.nodeName == 'TEXTAREA') {
+					return;
+				}
 				$( this ).find( ".placeholder" ).hide();
 
 				if (ui.draggable.find('input[name^=rules]').length){
@@ -1105,7 +1136,17 @@
 		$addAnother.click(function(){
 
 			$addAnotherForm.find('form')[0].reset();
-			$addAnotherForm.find('input[type=checkbox]').removeAttr('checked');
+			$addAnotherForm.find('.column_name').val('ID');
+
+            $addAnotherForm.find('input[name="combine_multiple_fields"][value="0"]').prop('checked',true).trigger('click');
+            //$addAnotherForm.find('input[name="combine_multiple_fields"]').trigger('change');
+
+            // Reset custom field
+            $('#combine_multiple_fields_value_container').hide();
+            $('#combine_multiple_fields_data').hide();
+            $('.export-single').show();
+            $('.single-field-options').show();
+            $('.php_snipped').show();
 
 			$addAnotherForm.removeAttr('rel');
 			$addAnotherForm.removeClass('dc').addClass('cc');
@@ -1155,6 +1196,12 @@
 		// Add/Edit custom column action
 		$addAnotherForm.find('.save_action').click(function(){
 
+			if($('.wp-all-export-field-options input[name="combine_multiple_fields"]').val() == '1') {
+				if(!wpaeValidateBraces($('#combine_multiple_fields_value').val())) {
+					return false;
+				}
+
+			}
 			var $save = true;
 
 			// element name in exported file
@@ -1208,6 +1255,10 @@
 			// save element options
 			$clone.find('input[name^=cc_options]').val( $elementDetails.attr('options') );
 
+			// save combine into multiple fields
+			$clone.find('input[name^=cc_combine_multiple_fields]').val($addAnotherForm.find('input[name="combine_multiple_fields"]:checked').val());
+			$clone.find('input[name^=cc_combine_multiple_fields_value]').val( $addAnotherForm.find('#combine_multiple_fields_value').val() );
+
 			// if new field adding append element to the export template
 			if ( ! parseInt( $elementIndex ) )
 			{
@@ -1223,6 +1274,11 @@
 			// set up additional element settings by element type
 			switch ( $fieldType )
 			{
+				case 'content':
+					var obj = {};
+					obj['export_images_from_gallery'] = $addAnotherForm.find('#export_images_from_gallery').is(':checked');
+					$clone.find('input[name^=cc_settings]').val(window.JSON.stringify(obj));
+					break;
 				// save post date field format
 				case 'date':
 				case 'comment_date':
@@ -1294,6 +1350,7 @@
 
 		});
 
+		//custom_column_logic
 		// Clicking on column for edit
 		$('#columns').find('.custom_column').live('click', function(){
 
@@ -1307,6 +1364,15 @@
 			$addAnotherForm.find('.wpallexport-edit-row-title').show();
 
 			$addAnotherForm.find('input.column_name').parents('div.input:first').show();
+
+			if($('input[name^=export_to]').val() == 'xml') {
+				$addAnotherForm.find('.wpae_column_name').css('display', 'none');
+				$addAnotherForm.find('.wpae_element_name').css('display', 'block');
+
+			} else {
+				$addAnotherForm.find('.wpae_column_name').css('display', 'block');
+				$addAnotherForm.find('.wpae_element_name').css('display', 'none');
+			}
 
 			$addAnotherForm.find('.cc_field').hide();
 			$('.custom_column').removeClass('active');
@@ -1340,6 +1406,24 @@
 				$addAnotherForm.find('#coperate_php').parents('div.input:first').find('div[class^=switcher-target]').hide();
 			}
 
+			var $isCombineMultipleFieldsIntoOne = $(this).find('input[name^=cc_combine_multiple_fields]').val();
+
+			if($isCombineMultipleFieldsIntoOne == "1") {
+				$addAnotherForm.find('input[name="combine_multiple_fields"][value="1"]').attr('checked', true);
+				$addAnotherForm.find('#combine_multiple_fields_value').val($(this).find('input[name^=cc_combine_multiple_fields_value]').val());
+
+				$('#combine_multiple_fields_value_container').show();
+				$('#combine_multiple_fields_data').show();
+				$('.export-single').hide();
+			} else {
+				$addAnotherForm.find('input[name="combine_multiple_fields"][value="0"]').attr('checked', true);
+
+				$('#combine_multiple_fields_value_container').hide();
+				$('#combine_multiple_fields_data').hide();
+				$('.export-single').show();
+
+			}
+
 			$addAnotherForm.find('#coperate_php').parents('div.input:first').find('.php_code').val($php_code.val());
 
 			var $options = $(this).find('input[name^=cc_options]').val();
@@ -1350,6 +1434,18 @@
 			if ($elementLabel.val() == '_sale_price_dates_from' || $elementLabel.val() == '_sale_price_dates_to') $fieldType = 'date';
 
 			switch ( $fieldType ){
+				case 'content':
+					$addAnotherForm.find('.content_field_type').show();
+					if ($settings != "" && $settings != 0)
+					{
+						var $field_options = window.JSON.parse($settings);
+						if ($field_options.export_images_from_gallery) $addAnotherForm.find('#export_images_from_gallery').attr('checked','checked');
+					}
+					else{
+						// this option should be enabled by default
+						$addAnotherForm.find('#export_images_from_gallery').attr('checked','checked');
+					}
+					break;
 				case 'sql':
 					$addAnotherForm.find('textarea.column_value').val($(this).find('input[name^=cc_sql]').val());
 					$addAnotherForm.find('.sql_field_type').show();
@@ -1457,8 +1553,18 @@
 
 			$addAnotherForm.find('input.column_name').val($column_name);
 			$addAnotherForm.show();
+
+			setTimeout(function(){
+				editor.refresh();
+			},1);
+
 			$('.wpallexport-overlay').show();
 
+			var availableDataHeight = $('.wp-all-export-edit-column.cc').height()- 200;
+			$addAnotherForm.find('.wpallexport-pointer-data.available-data').css('max-height', availableDataHeight);
+
+			var editor =$('#wp_all_export_code + .CodeMirror').get(0).CodeMirror;
+			editor.refresh();
 		});
 
 		// Preview export file
@@ -1472,7 +1578,7 @@
 	                edge: 'right',
 	                align: 'center'
 	            },
-	            pointerWidth: 715,
+	            pointerWidth: 850,
 	            close: function() {
 	                $.post( ajaxurl, {
 	                    pointer: 'pksn1',
@@ -1484,7 +1590,7 @@
 
 	        var $pointer = $('.wpallexport-pointer-preview').parents('.wp-pointer').first();
 
-	        var $leftOffset = ($(window).width() - 715)/2;
+	        var $leftOffset = ($(window).width() - 850)/2;
 
 	        $pointer.css({'position':'fixed', 'top' : '15%', 'left' : $leftOffset + 'px'});
 
@@ -1575,12 +1681,12 @@
                 $(this).find('span').html("+");
             });
             if ( $action == "+" ) {
-                $('.wp_all_export_help_tab').slideUp();
-                $('.wp_all_export_help_tab[rel=' + $(this).attr('id') + ']').slideDown();
+                $('.wp_all_export_help_tab').slideUp({queue:false});
+                $('.wp_all_export_help_tab[rel=' + $(this).attr('id') + ']').slideDown({queue: false});
                 $(this).find('span').html("-");
             }
             else{
-                $('.wp_all_export_help_tab[rel=' + $(this).attr('id') + ']').slideUp();
+                $('.wp_all_export_help_tab[rel=' + $(this).attr('id') + ']').slideUp({queue: false});
                 $(this).find('span').html("+");
             }
         });
@@ -1623,7 +1729,7 @@
 			var $tr = $(this).parent().parent().filter('tr.xml-element').next()[method]('collapsed');
 		});
 
-		$('.wp-all-export-edit-column').css('left', ($( document ).width()/2) - 355 );
+		$('.wp-all-export-edit-column').css('left', ($( document ).width()/2) - 432);
 
 	    var wp_all_export_config = {
 	      '.wp-all-export-chosen-select' : {width:"50%"}
@@ -1643,6 +1749,9 @@
 						break;
 					case 'sql':
 						$('.sql_field_type').show();
+						break;
+					case 'content':
+						$('.content_field_type').show();
 						break;
 					case 'woo':
 							switch (selected_value){
@@ -1683,9 +1792,10 @@
 	    	$('ol#columns').find('li:not(.placeholder)').fadeOut().remove();
 	    	$('ol#columns').find('li.placeholder').fadeOut();
 
-	    	if ($('#available_data').find('li.wp_all_export_auto_generate').length)
+
+            if (vm.availableDataSelector.find('li.wp_all_export_auto_generate').length)
 	    	{
-	    		$('#available_data').find('li.wp_all_export_auto_generate, li.pmxe_cats').each(function(i, e){
+	    		vm.availableDataSelector.find('li.wp_all_export_auto_generate, li.pmxe_cats').each(function(i, e){
 		    		var $clone = $(this).clone();
 		    		$clone.attr('rel', i);
 		    		$( "<li></li>" ).html( $clone.html() ).appendTo( $( "#columns_to_export ol" ) );
@@ -1693,7 +1803,7 @@
 	    	}
 	    	else
 	    	{
-	    		$('#available_data').find('div.custom_column').each(function(i, e){
+	    		vm.availableDataSelector.find('div.custom_column').each(function(i, e){
 	    			var $parent = $(this).parent('li');
 		    		var $clone = $parent.clone();
 		    		$clone.attr('rel', i);
@@ -1724,8 +1834,6 @@
 		});
 
 	    if ($('input[name^=selected_post_type]').length){
-
-    		var postType = $('input[name^=selected_post_type]').val();
 
     		init_filtering_fields();
 
@@ -1837,7 +1945,7 @@
 		});
 
 		var height = $(window).height();
-		$('#available_data').find('.wpallexport-xml').css({'max-height': height - 125});
+		vm.availableDataSelector.find('.wpallexport-xml').css({'max-height': height - 125});
 
         // dismiss export template warnings
         $('.wp-all-export-warning').find('.notice-dismiss').click(function(){
@@ -1883,15 +1991,9 @@
     		var postType = $('input[name^=selected_post_type]').val();
 
     		init_filtering_fields();
+			liveFiltering();
 
-    		// if ($('form.edit').length){
-
-    			liveFiltering();
-
-    		// }
-
-		    $('form.choose-export-options').find('input[type=submit]').click(function(e){
-				e.preventDefault();
+		    $(document).on('wpae-scheduling-options-form:submit', function(e){
 
 				$('.hierarhy-output').each(function(){
 					var sortable = $('.wp_all_export_filtering_rules.ui-sortable');
@@ -1900,14 +2002,9 @@
 					}
 				});
 
-				$(this).parents('form:first').submit();
+				$('#wpae-options-form').submit();
 			});
     	}
-
-    	$('.wp_all_export_confirm_and_run').click(function(e){
-			e.preventDefault();
-			$('form.choose-export-options').submit();
-		});
 
     }
 	$('#export_only_new_stuff').click(function(){
@@ -2109,6 +2206,10 @@
                 }
                 vm.isGoogleMerchantsExport = false;
 
+                if(vm.availableDataSelector.css('position') == 'fixed') {
+                    $('.template-sidebar').find('.wpae_available_data').css({'position': 'static', 'top': '50px'});
+                }
+
 				if(!angular.isUndefined(e.originalEvent)) {
 					if ( ! $('.wpallexport-file-options').hasClass('closed')) $('.wpallexport-file-options').find('.wpallexport-collapsed-header').click();
 				}
@@ -2120,6 +2221,10 @@
 					angular.element(document.getElementById('googleMerchants')).injector().get('$rootScope').$broadcast('googleMerchantsDeselected');
                 }
                 vm.isGoogleMerchantsExport = false;
+
+                if(vm.availableDataSelector.css('position') == 'fixed') {
+                    $('.template-sidebar').find('.wpae_available_data').css({'position': 'static', 'top': '50px'});
+                }
 
     			$('.simple_xml_template_options').slideUp();
     			$('.wpallexport-simple-xml-template').slideUp();
@@ -2191,6 +2296,11 @@
 				resetDraggable();
 				angular.element(document.getElementById('googleMerchants')).injector().get('$rootScope').$broadcast('googleMerchantsDeselected');
     			vm.isGoogleMerchantsExport = false;
+
+                if(vm.availableDataSelector.css('position') == 'fixed') {
+                    $('.template-sidebar').find('.wpae_available_data').css({'position': 'static', 'top': '50px'});
+                }
+
                 $('.simple_xml_template_options').slideUp();
     			$('.wpallexport-simple-xml-template').slideDown();
     			$('.wpallexport-custom-xml-template').slideUp();
@@ -2204,10 +2314,22 @@
     }).change();
 
     $('.wpallexport-overlay').click(function(){
+
+		if($('.wp-all-export-edit-column.cc').css('visibility') == 'hidden') {
+			$('.wp-all-export-edit-column.cc').css('visibility', 'visible');
+			$('.wp-pointer').hide();
+
+            window.$pmxeBackupElement.html(window.$pmxeBackupElementContent);
+			return;
+		}
+
 		$('.wp-pointer').hide();
 		$('#columns').find('div.active').removeClass('active');
 		$('fieldset.wp-all-export-edit-column').hide();
         $('fieldset.wp-all-export-custom-xml-help').hide();
+        $('fieldset.wp-all-export-scheduling-help').hide();
+
+
 		$(this).hide();
 	});
 
@@ -2279,8 +2401,23 @@
 
 	$('#templateForm').submit(function(event, data){
 
-		if(vm.isGoogleMerchantsExport) {
-			if(data !== 'templateSelected') {
+		//var schedulingFormValid = pmxeISchedulingFormValid();
+		var schedulingFormValid = {
+			isValid : true
+		};
+
+		if (schedulingFormValid.isValid) {
+		} else {
+			alert(schedulingFormValid.message);
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			return false;
+
+		}
+
+
+		if (vm.isGoogleMerchantsExport) {
+			if (data !== 'templateSelected') {
 				event.stopImmediatePropagation();
 				var templateName = $('.switcher-target-save_template_as input').val();
 				angular.element(document.getElementById('googleMerchants')).injector().get('$rootScope').$broadcast('googleMerchantsSubmitted', {templateName: templateName});
@@ -2290,6 +2427,7 @@
 				return true;
 			}
 		}
+
 
 	});
 
@@ -2303,28 +2441,203 @@
 
 	});
 
-	var $el = $('#available_data');
-	if($el) {
-		if($el.offset()) {
+	if(vm.availableDataSelector.length) {
 
+		var originalOffset = vm.availableDataSelector.offset().top - 50;
+		var elementWidth = vm.availableDataSelector.width();
 
-			var originalOffset = $el.offset().top - 50;
-			var elementWidth = $el.width();
+		vm.availableDataSelector.css('width', elementWidth);
 
-			$el.css('width', elementWidth);
+		$(window).scroll(function (e) {
 
-			$(window).scroll(function (e) {
-
-				var isPositionFixed = ($el.css('position') == 'fixed');
-				if ($(this).scrollTop() > originalOffset && !isPositionFixed) {
-					$('#available_data').css({'position': 'fixed', 'top': '50px'});
-				}
-				if ($(this).scrollTop() < originalOffset && isPositionFixed) {
-					$('#available_data').css({'position': 'static', 'top': '50px'});
-				}
-			});
-		}
+			if(vm.isGoogleMerchantsExport) {
+                var isPositionFixed = (vm.availableDataSelector.css('position') == 'fixed');
+                if ($(this).scrollTop() > originalOffset && !isPositionFixed) {
+                    $('.template-sidebar').find('.wpae_available_data').css({'position': 'fixed', 'top': '50px'});
+                }
+                if ($(this).scrollTop() < originalOffset && isPositionFixed) {
+                    $('.template-sidebar').find('.wpae_available_data').css({'position': 'static', 'top': '50px'});
+                }
+            }
+		});
 	}
 
 
+	window.openSchedulingDialog = function(itemId, element, preloaderSrc) {
+		$('.wpallexport-overlay').show();
+		$('.wpallexport-loader').show();
+
+		var $self = element;
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			context: element,
+			data: {
+				'action': 'scheduling_dialog_content',
+				'id': itemId,
+				'security' : wp_all_export_security
+			},
+			success: function (data) {
+
+                $('.wpallexport-loader').hide();
+                $(this).pointer({
+					content: '<div id="scheduling-popup">' + data + '</div>',
+					position: {
+						edge: 'right',
+						align: 'center'
+					},
+					pointerWidth: 815,
+					show: function (event, t) {
+
+						$('.timepicker').timepicker();
+
+						var $leftOffset = ($(window).width() - 715) / 2;
+
+						var $pointer = $('.wp-pointer').last();
+						$pointer.css({'position': 'absolute', 'top': '50px', 'left': $leftOffset + 'px'});
+
+						$pointer.find('a.close').remove();
+						$pointer.find('.wp-pointer-buttons').append('<button class="save-changes button button-primary button-hero wpallexport-large-button" style="float: right; background-image: none;">Save</button>');
+						$pointer.find('.wp-pointer-buttons').append('<button class="close-pointer button button-primary button-hero wpallexport-large-button" style="float: right; background: #F1F1F1 none;text-shadow: 0 0 black; color: #777; margin-right: 10px;">Cancel</button>');
+
+						$(".close-pointer, .wpallexport-overlay").unbind('click').click(function () {
+							$self.pointer('close');
+							$self.pointer('destroy');
+						});
+
+                        if(!window.pmxeHasSchedulingSubscription) {
+                            $('.save-changes ').addClass('disabled');
+                        }
+
+						$(".save-changes").unbind('click').click(function () {
+							if($(this).hasClass('disabled')) {
+								return false;
+							}
+
+							var formValid = pmxeValidateSchedulingForm();
+
+							if (formValid.isValid) {
+
+								var schedulingEnable = $('input[name="scheduling_enable"]:checked').val();
+
+								var formData = $('#scheduling-form').serializeArray();
+								formData.push({name: 'security', value: wp_all_export_security});
+								formData.push({name: 'action', value: 'save_scheduling'});
+								formData.push({name: 'element_id', value: itemId});
+								formData.push({name: 'scheduling_enable', value: schedulingEnable});
+
+								$('.close-pointer').hide();
+								$('.save-changes').hide();
+
+								$('.wp-pointer-buttons').append('<img id="pmxe_button_preloader" style="float:right" src="' + preloaderSrc + '" /> ');
+								$.ajax({
+									type: "POST",
+									url: ajaxurl,
+									data: formData,
+									dataType: "json",
+									success: function (data) {
+										$('#pmxe_button_preloader').remove();
+										$('.close-pointer').show();
+										$(".wpallexport-overlay").trigger('click');
+									},
+									error: function () {
+										alert('There was a problem saving the schedule');
+										$('#pmxe_button_preloader').remove();
+										$('.close-pointer').show();
+										$(".wpallexport-overlay").trigger('click');
+									}
+								});
+
+							} else {
+								alert(formValid.message);
+							}
+							return false;
+						});
+					},
+					close: function () {
+						jQuery('.wpallexport-overlay').hide();
+					}
+				}).pointer('open');
+			},
+			error: function () {
+				alert('There was a problem saving the schedule');
+				$('#pmxe_button_preloader').remove();
+				$('.close-pointer').show();
+				$(".wpallexport-overlay").trigger('click');
+                $('.wpallexport-loader').hide();
+			}
+		});
+	};
+
+    window.pmxeValidateSchedulingForm = function () {
+
+        var schedulingEnabled = $('input[name="scheduling_enable"]:checked').val() == 1;
+
+        if (!schedulingEnabled) {
+            return {
+                isValid: true
+            };
+        }
+
+        var runOn = $('input[name="scheduling_run_on"]:checked').val();
+
+        // Validate weekdays
+        if (runOn == 'weekly') {
+            var weeklyDays = $('#weekly_days').val();
+
+            if (weeklyDays == '') {
+                $('#weekly li').addClass('error');
+                return {
+                    isValid: false,
+                    message: 'Please select at least a day on which the export should run'
+                }
+            }
+        } else if (runOn == 'monthly') {
+            var monthlyDays = $('#monthly_days').val();
+
+            if (monthlyDays == '') {
+                $('#monthly li').addClass('error');
+                return {
+                    isValid: false,
+                    message: 'Please select at least a day on which the export should run'
+                }
+            }
+        }
+
+        // Validate times
+        var timeValid = true;
+        var timeMessage = 'Please select at least a time for the export to run';
+        var timeInputs = $('.timepicker');
+        var timesHasValues = false;
+
+        timeInputs.each(function (key, $elem) {
+
+            if($(this).val() !== ''){
+                timesHasValues = true;
+            }
+
+            if (!$(this).val().match(/^(0?[1-9]|1[012])(:[0-5]\d)[APap][mM]$/) && $(this).val() != '') {
+                $(this).addClass('error');
+                timeValid = false;
+            } else {
+                $(this).removeClass('error');
+            }
+        });
+
+        if(!timesHasValues) {
+            timeValid = false;
+            $('.timepicker').addClass('error');
+        }
+
+        if (!timeValid) {
+            return {
+                isValid: false,
+                message: timeMessage
+            };
+        }
+
+        return {
+            isValid: true
+        };
+    };
 });})(jQuery, window.EventService);
