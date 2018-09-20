@@ -12,7 +12,7 @@
                 <div class = "lesson-image-wrapper">
                     {% for item in content.carousel_items %}
                         <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
-                            <img class = "d-block lesson-carousel-image" src ="{{ media_url~item.image_url }}">
+                            <img class = "d-block lesson-carousel-image" src ="{{ media_url~item.image_file_name }}">
                         </div>
                     {% endfor %}
                     <!-- Navigation Buttons -->
