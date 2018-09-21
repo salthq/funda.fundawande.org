@@ -38,21 +38,26 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' 	=> 'fundawande-options',
     ));
 
-    // Add Lesson Unit Options Page
+    // Add Lesson Options Page
     acf_add_options_sub_page(array(
         'page_title' 	=> 'Funda Wande Lesson Unit Options',
         'menu_title' 	=> 'Lesson Unit Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
 
-     // Add Terms And Conditions Page
-     acf_add_options_sub_page(array(
+    // Add Terms And Conditions Page
+    acf_add_options_sub_page(array(
         'page_title' 	=> 'Funda Wande Terms and Conditions',
         'menu_title' 	=> 'Terms and Conditions Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
-    
 
+    // Add Navbar Options Page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Navbar Options',
+        'menu_title' 	=> 'Navbar Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
 }
 
 Timber::$dirname = array('templates', 'views');
