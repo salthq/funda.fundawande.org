@@ -54,6 +54,9 @@ class FundaWande_Frontend {
 			wp_enqueue_script('terms-and-conditions', FundaWande()->plugin_url . 'assets/js/terms-and-conditions.min.js', array('jquery'), FundaWande()->version, true);
 		}
 
+		wp_enqueue_script('language-preference', FundaWande()->plugin_url . 'assets/js/language-preference.min.js', array('jquery'), FundaWande()->version, true);
+
+
 
 	} // End enqueue_scripts()
 

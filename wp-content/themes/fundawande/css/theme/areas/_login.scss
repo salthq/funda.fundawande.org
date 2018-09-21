@@ -102,4 +102,14 @@
   }
 }
 
+.login-language-button {
+  border: 1px solid $grey-tertiary;
+  border-radius: 5px;
+  color: #787878;
+}
+
+.active {
+  background-color: $grey-tertiary;
+  color: $white;
+}
 

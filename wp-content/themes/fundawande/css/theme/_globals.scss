@@ -275,3 +275,14 @@
         }
     }
 }
+
+.button-tertiary {
+    border-color: $grey-tertiary;
+    background-color: $white;
+    color: $grey-tertiary;
+    &-active {
+    background-color: $grey-tertiary;
+    color: $white;
+    }
+}
+
