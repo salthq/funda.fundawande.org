@@ -48,7 +48,7 @@ class FundaWande_Login {
         $args = array(
             'echo'           => true,
             //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
-            'redirect'       => site_url($redirect_url),
+            'redirect'       => home_url(),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,
@@ -165,17 +165,24 @@ class FundaWande_Login {
         }
     }
 
-    /**
-     * Check if user has agreed to terms and conditions
+     /**
+     * Check if user has a set language preference and that terms and conditions have been signed 
      * 
-     * @return boolean $terms_accepted. if the legal agreement meta is found in current user meta, return true 
+     * @return boolean $user_meta_found. if 'legal' and 'language_preference are found in 
+     * the user meta, this boolean is set to true
      */
-
-    public function check_if_terms_accepted() {
-        $terms_accepted = false;
+    public function fw_check_user_meta() {
         $user_id = get_current_user_id();
 
-        if(isset($_POST['legal'])) {
+        $language_set = false;
+        $terms_accepted = false;
+        $user_meta_found = false;
+
+        if(get_user_meta($user_id, 'language_preference', true) != "") {
+            $language_set = true;
+        }
+
+        if(isset($_GET['legal'])) {
             update_user_meta($user_id, 'legal', 'agreed');
         }
 
@@ -183,8 +190,12 @@ class FundaWande_Login {
             $terms_accepted = true;
         }
 
-        return $terms_accepted;
-    } // end check_if_terms_accepted();
+        if($language_set == true && $terms_accepted == true) {
+            $user_meta_found = true;
+        }
+
+        return $user_meta_found;
+    } // end fw_check_user_meta();
 
 
 } // end FundaWande_Login

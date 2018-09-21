@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class = "fw-form" method = "POST">
+        <form class = "fw-form" method = "GET">
           <div class = "form-group">
             <textarea class="form-control" rows = "{% if is_mobile %}8{% else %}15{% endif %}" readonly>
                 {{attribute(options, lang.prefix~'terms_and_conditions_content')|striptags}}
@@ -24,7 +24,7 @@
             </div>          
           </div>
           <div class = "form-group py-3 text-center">
-            <button type = "submit" value = "submit" class = "btn btn-lg primary-btn-fill" >{{attribute(options, lang.prefix~'continue_button_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
+            <button id = "go-to-course" type = "submit" value = "submit" class = "btn btn-lg primary-btn-fill" >{{attribute(options, lang.prefix~'continue_button_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
           </div>
         </form>
       </div>
