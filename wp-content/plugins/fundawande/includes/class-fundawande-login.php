@@ -165,5 +165,26 @@ class FundaWande_Login {
         }
     }
 
+    /**
+     * Check if user has agreed to terms and conditions
+     * 
+     * @return boolean $terms_accepted. if the legal agreement meta is found in current user meta, return true 
+     */
+
+    public function check_if_terms_accepted() {
+        $terms_accepted = false;
+        $user_id = get_current_user_id();
+
+        if(isset($_POST['legal'])) {
+            update_user_meta($user_id, 'legal', 'agreed');
+        }
+
+        if(get_user_meta($user_id, 'legal', true) == 'agreed') {
+            $terms_accepted = true;
+        }
+
+        return $terms_accepted;
+    } // end check_if_terms_accepted();
+
 
 } // end FundaWande_Login
