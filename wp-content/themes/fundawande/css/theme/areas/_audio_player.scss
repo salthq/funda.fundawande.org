@@ -1,0 +1,61 @@
+/* ==========================================================================
+* Video Player
+*
+* Styling specific to video player
+*
+ ========================================================================== */
+.audio_player_container {
+  .open-toggle {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+  .audio_player{
+    width: 480px;
+    height: 60px;
+    border: 2px solid;
+    border-radius: 6px;
+    display: none;
+    align-items: center;
+  }
+
+  .play__button{
+    background: none;
+    border: none;
+  }
+  .current-time, .duration-time {
+    padding: 0 0.5rem;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .progress{
+    flex:10;
+    position: relative;
+    border-radius: 0;
+    display:flex;
+    flex-basis:100%;
+    height:5px;
+    background:rgba(0,0,0,0.1);
+    cursor:ew-resize;
+    overflow: inherit;
+    .progress__filled {
+      width:0%;
+      height: 5px;
+      background:red;
+      flex:0;
+      flex-basis:0%;
+      position: absolute;
+      &:after {
+        content: '';
+        position: absolute;
+        background: red;
+        height: 14px;
+        width: 1px;
+        right: 0;
+        top: -4px;
+      }
+    }
+  }
+}
+

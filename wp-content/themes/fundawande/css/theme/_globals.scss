@@ -129,6 +129,11 @@
     .module-bg-#{$colour_key} {
         background-color: $colour_var!important;
     }
+    .module-after-bg-#{$colour_key} {
+        &:after {
+            background-color: $colour_var!important;
+        }
+    }
     .module-text-#{$colour_key} {
         color: $colour_var;
     }

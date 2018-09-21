@@ -113,3 +113,24 @@
         </div>
     </div>
 {% endmacro %}
+
+{# Add video player #}
+{% macro audioPlayer(audio_src, module_number) %}
+    {% import _self as mixins %}
+
+    <div class="audio_player_container">
+        <audio class="audio" preload="true">
+            <source src="{{ audio_src }}">
+            <source src="http://www.alexkatz.me/codepen/music/interlude.ogg">
+        </audio>
+        <div class="open-toggle">{{ source('/assets/audio_player/speaker_icon.svg') }}</div>
+        <div class="audio_player module-border-{{ module_number }}">
+            <button  class="play__button module-text-{{ module_number }}">►</button>
+            <div class="current-time"></div>
+            <div class="progress ">
+                <div class="progress__filled module-bg-{{ module_number }} module-after-bg-{{ module_number }}"></div>
+            </div>
+            <div class="duration-time"></div>
+        </div>
+    </div>
+{% endmacro %}
