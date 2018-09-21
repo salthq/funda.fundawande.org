@@ -278,6 +278,11 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 #wrapper-navbar a{color:white;font-size:15px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 #wrapper-navbar a:hover{opacity:.8;text-decoration:none}
 #wrapper-navbar .change-lang .change-lang-icon{background-color:white;border-radius:3px;color:#4a4a4a;height:27px;width:31px;text-align:center;font-size:8px}
+.fw-form .form-control[readonly]{background-color:#fff}
+.fw-form .custom-control-label::before{width:30px;height:30px;background:#fff;border-radius:5px;border:3px solid #ef9d19;left:-12px;top:5px;margin-top:-.45rem;margin-left:-1.25rem}
+.fw-form .custom-control-label::after{left:-1.55rem;top:.3rem}
+.fw-form .custom-control-input:checked ~ .custom-control-label::before{background-color:#ef9d19;color:#fff}
+.fw-form .custom-control-input:checked ~ .custom-control-label::after{position:absolute;display:block;width:2rem;height:2rem;top:-0.2rem;left:-2.05rem;content:"";background-repeat:no-repeat;background-position:center center;background-size:50% 50%;background-image:url("/wp-content/themes/fundawande/assets/tick.svg")}
 .single-quiz img{max-width:100%;height:auto}
 .drag-and-drop-sequential ._top-mobile-title{display:none}
 .drag-and-drop-sequential ._answer-container ._box-image-container{width:100%;height:300px;border:1px solid #ccc}
