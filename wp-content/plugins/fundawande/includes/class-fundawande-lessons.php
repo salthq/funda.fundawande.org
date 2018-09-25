@@ -57,6 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 $lesson->term = wp_get_post_terms($lesson->ID, 'lesson-tag');
                 $lesson->icon = get_post_meta($lesson->ID, 'sub_unit_icon',true);
                 $lesson->key = get_post_meta($lesson->ID, 'fw_unique_key',true);
+                $lesson->title = get_post_meta($lesson->ID, 'lesson_title', true);
                 if ($current_lesson_key && $current_lesson_key == $lesson->key) {
                     $lesson->current = true;
                 }

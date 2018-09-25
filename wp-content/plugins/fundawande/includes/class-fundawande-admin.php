@@ -29,6 +29,9 @@ class FundaWande_Admin {
 
         //Remove add media button from ACF fields
         add_action('acf/input/admin_head', array($this, 'fw_remove_media_buttons') );
+
+        //Remove Lesson information meta box
+        add_action('admin_menu', array($this, 'fw_remove_lesson_info_metabox'), 100);
     
 
 	} // End __construct()
@@ -97,6 +100,14 @@ class FundaWande_Admin {
             exit(wp_redirect( $redirect ));
         }
     } // end fw_restrict_dashboard_visibility()
+
+    /**
+     * Remove the lesson information metabox from the WooSensei lesson editor
+     */
+    function fw_remove_lesson_info_metabox() {
+        $lesson = Sensei()->lesson->token;
+        remove_meta_box('lesson-info', $lesson, 'normal');
+    } // end fw_remove_lesson_info_metabox()
     
      
 
