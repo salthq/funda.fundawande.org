@@ -20,7 +20,7 @@
                 <div class = "col-auto text-center">
 
                     <h1 class = "mt-4"><strong>Module {{module_number}}</strong></h1>
-                    <h1 class = "text-center mb-4">{{function('single_term_title')}}</h1>
+                    <h1 class = "text-center mb-4">{{post.get_field('module_title')}}</h1>
                 </div>
                 <div class = "col "></div>
             </div>
@@ -49,7 +49,7 @@
                                                     {% endif %}
                                                 {% endfor %}
                                                 <div class = "unit-header-text">
-                                                    <h2><strong>{{unit.name}}</strong></h2>
+                                                    <h2><strong>{{unit.module_title}}</strong></h2>
                                                     <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} {{attribute(options, lang.prefix~'lessons_complete_text')}}</p>
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@
                             <!-- Unit Card Content -->
                             <div class = "row unit-content">
                                 <div class = "col-sm-11">
-                                    <p>{{unit.description}}</p>
+                                    <p>{{unit.module_description}}</p>
                                     <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
                                             <div class = "sub-units-icon row text-center flex-md-row flex-column col-md-2 no-gutters ">
