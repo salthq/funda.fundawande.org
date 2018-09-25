@@ -146,7 +146,7 @@
         border-color: $colour_var!important;
     }
     .module-btn-outline-#{$colour_key} {
-        border-color: $colour_var;
+        border-color: $colour_var!important;
         color: $colour_var;
         svg {
             fill: $colour_var;
@@ -156,14 +156,17 @@
             background-color: $colour_var;
             color: $white;
             svg {
-                fill: $white;
+                fill: white;
+                #inner {
+                    fill: $colour_var;
+                }
             }
         }
     }
     .module-btn-fill-#{$colour_key} {
-        background-color: $colour_var;
-        border-color: $colour_var;
-        color: $white;
+        background-color: $colour_var!important;
+        border-color: $colour_var!important;
+        color: $white!important;
         svg {
             fill: $white;
         }
@@ -261,6 +264,28 @@
  * Button Styling
  */
 
+.button-text-width-limit {
+    max-width: 100px;
+}
+
+.button-primary {
+    border: 1.5px solid;
+    border-color: $grey-secondary;
+    border-radius: 4px;
+    color: white;
+    background-color: $grey-secondary;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+        opacity: 0.7;
+        text-decoration: none;
+    }
+}
+
 .button-secondary {
     border: 1.5px solid;
     border-color: $grey-secondary;
@@ -274,8 +299,9 @@
     display: inline-block;
     &:hover {
         opacity: 0.7;
+        text-decoration: none;
     }
-    &:not(.collapsed) {
+    &.collapsed {
         svg {
             -webkit-transform: rotate(180deg);
             -moz-transform: rotate(180deg);

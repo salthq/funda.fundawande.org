@@ -83,6 +83,12 @@ class FundaWande_Language {
             $course_obj = get_field('fw_'.$lang.'_course','options',true);
             update_user_meta($user_id, 'fw_current_course', $course_obj[0]->ID );
 
+
+            $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );
+            if (empty($current_sub_unit)) {
+                FundaWande()->lms->fw_set_first_sub_unit($course_obj[0]->ID,$user_id);
+            }
+
         }
     }// end set_user_language_preference()
 

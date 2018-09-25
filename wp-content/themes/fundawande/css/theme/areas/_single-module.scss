@@ -55,6 +55,7 @@
                     padding-top: 0;
                 }
                 svg {
+                    z-index: 1;
                     @include breakpoint(phone) {
                         width: 50px;
                         height: 50px;
@@ -116,7 +117,8 @@
                 }
             }
             p {
-                max-width: 70px;
+                max-width: 100px;
+                text-align: center;
                 margin: auto;
                 font-size: 15px;
                 line-height: 17px;
@@ -178,33 +180,88 @@
                 }
             }
             &:nth-of-type(7n) {
-                .stage-progress-item-divider
-                {
-                    &:before {
-                        @include breakpoint(desktop) {
-                            background: blue;
+                @include breakpoint(desktop) {
+                    .stage-progress-item-divider {
+                        &:before {
+
                             width: 30px;
                             right: -1px;
                             left: auto;
                         }
+                        &:after {
+                            content: '';
+                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            background-repeat: no-repeat;
+                            width: 9px;
+                            position: absolute;
+                            top: 38px;
+                            height: 15px;
+                            right: 25px;
+                            left: auto;
+
+                        }
+                        &.complete {
+                            &:before {
+                                background: $brand-primary__colour;
+                                width: 30px;
+                                right: -1px;
+                                left: auto;
+                                z-index: 1;
+                            }
+                            &:after {
+                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                background: $brand-primary__colour;
+                                width: 12px;
+                                font-size: 0;
+                                height: 16px;
+                                top: 37px
+
+                            }
+                        }
 
                     }
+
 
 
                 }
             }
             &:nth-of-type(6n) {
 
-                    &:after {
-                        @include breakpoint(desktop) {
+
+                    @include breakpoint(desktop) {
+                        &:before {
                             content: "";
-                            background: pink;
-                            height: 2px;
+                            background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                            background-size: 7px auto;
+                            height: 4px;
                             width: 30px;
                             border-radius: 2px;
                             position: absolute;
                             top: 45px;
                             right: -28px;
+                            z-index: 1;
+                        }
+                        &:after {
+                            content: '';
+                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            background-repeat: no-repeat;
+                            width: 9px;
+                            position: absolute;
+                            top: 39px;
+                            height: 15px;
+                            right: -33px;
+                            left: auto;
+
+                        }
+                        &.complete {
+                            &:after {
+                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                background: $brand-primary__colour;
+                                width: 12px;
+                                font-size: 0;
+                                height: 16px;
+
+                            }
                         }
                     }
 

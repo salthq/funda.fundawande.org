@@ -24,6 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // Add the construct elements
 
+        // Setup Taxonomies
+        add_action( 'init', array( $this, 'setup_sub_unit_icon_taxonomy' ), 100 );
+
+
     }
 
     /**
@@ -53,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             //If any tags are added to the lesson, add to the lesson object
             foreach ($lesson_query->posts as $key => $lesson ) {
                 $lesson->term = array();
-                $lesson->term = wp_get_post_terms($lesson->ID, 'lesson-tag');
+                $lesson->term = wp_get_post_terms($lesson->ID, 'sub-unit-icon');
                 if ($lesson->term) {
                     $lesson->icon = $lesson->term[0]->slug;
                 } else {
@@ -141,6 +145,28 @@ if ( ! defined( 'ABSPATH' ) ) {
             return $nav_links;
         }    
     } // end get_lesson_nav_links()
+
+     /**
+      * Setup the "sub unit icon" taxonomy, linked to the "course" post type.
+      * @since  1.1.0
+      * @return void
+      */
+     public function setup_sub_unit_icon_taxonomy () {
+         register_taxonomy(
+             'sub-unit-icon',  //The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+             'lesson',        //post type name
+             array(
+                 'hierarchical' => true,
+                 'label' => 'Sub Unit Icons',  //Display name
+                 'query_var' => true,
+                 'rewrite' => array(
+                     'slug' => 'sub-unit-icon', // This controls the base slug that will display before each term
+                     'with_front' => false // Don't display the category base before
+                 )
+             )
+         );
+
+     } // End setup_sub_unit_icon_taxonomy()
 
 
  } // end FundaWande_Lessons

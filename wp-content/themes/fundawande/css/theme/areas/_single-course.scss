@@ -23,7 +23,8 @@
   
    .card {
      &:hover {
-       background-color: $grey-secondary;
+       border: 2px solid $brand-primary__colour;
+
      }
     .header {
       align-items: center;
