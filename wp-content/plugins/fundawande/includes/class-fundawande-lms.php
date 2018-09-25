@@ -34,7 +34,7 @@ class FundaWande_Lms {
         // do_action( 'sensei_user_quiz_submitted', $user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type );
 
         add_filter('sensei_user_started_course', array( $this, 'fw_user_started_course'), 10,1);
-        //        return apply_filters( 'sensei_user_started_course', $user_started_course, $course_id, $user_id );
+        //  return apply_filters( 'sensei_user_started_course', $user_started_course, $course_id, $user_id );
 
 
     }
