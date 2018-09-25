@@ -84,7 +84,7 @@
                                                     {% if image %}
                                                         {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
                                                     {% else %}
-                                                        {{ source('assets/lms/lesson_reading.svg') }}
+                                                        {{ source('assets/lms/book_icon.svg') }}
                                                     {% endif %}
                                                     <div class="d-flex flex-column justify-content-center py-2 pl-3 pl-md-0 lesson-progress-text">
                                                         <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
