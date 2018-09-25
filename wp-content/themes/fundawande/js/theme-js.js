@@ -4,6 +4,7 @@ audio_players.forEach(function (player) {
     // Set all the video elements that pertain to a specific video, especially important if multiple videos exist on one page
     var audio = player.querySelector('.audio'); // id for audio element
     var duration = audio.duration; // Duration of audio clip, calculated here for embedding purposes
+    var closeButton = player.querySelector('.close__button'); // play button
     var toggle = player.querySelector('.play__button'); // play button
     var playhead = player.querySelector('.play_head'); // playhead
     var progress = player.querySelector('.progress'); // timeline
@@ -130,8 +131,11 @@ audio_players.forEach(function (player) {
         handleProgress();
     });
 
-    // Hook play on play button click
+    // Hook open toggle on open click
     openButton.addEventListener('click', openToggle);
+
+    // Hook close on close click
+    closeButton.addEventListener('click', openToggle);
 
 
 // getPosition

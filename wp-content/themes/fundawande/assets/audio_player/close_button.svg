@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <defs></defs>
+    <g id="Units---Wireframes-1:1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Units---Info-Modal-[FW2COURSE003---Tablet]" transform="translate(-758.000000, -160.000000)">
+            <g id="Modal" transform="translate(197.000000, 130.000000)">
+                <g id="Close-button" transform="translate(561.000000, 30.000000)">
+                    <circle id="Oval-2" fill="#EF9D19" cx="20" cy="20" r="20"></circle>
+                    <g id="X" transform="translate(10.769231, 10.769231)" stroke="#FFFFFF" stroke-width="3.07692308">
+                        <polyline id="Path-3-Copy-4" transform="translate(9.230769, 13.653846) scale(-1, 1) rotate(-270.000000) translate(-9.230769, -13.653846) " points="13.6032389 5 4.8582996 13.6538462 13.6032389 22.3076923"></polyline>
+                        <polyline id="Path-3-Copy-4" transform="translate(9.230769, 4.807692) scale(-1, 1) rotate(-90.000000) translate(-9.230769, -4.807692) " points="13.6032389 -3.84615385 4.8582996 4.80769231 13.6032389 13.4615385"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

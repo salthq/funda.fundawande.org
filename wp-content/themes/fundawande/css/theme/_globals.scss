@@ -134,6 +134,11 @@
             background-color: $colour_var!important;
         }
     }
+    .module-before-border-#{$colour_key} {
+        &:before {
+            border-color: $colour_var!important;
+        }
+    }
     .module-text-#{$colour_key} {
         color: $colour_var;
     }
