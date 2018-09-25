@@ -48,7 +48,7 @@ class FundaWande_Login {
         $args = array(
             'echo'           => true,
             //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
-            'redirect'       => home_url(),
+            'redirect'       => home_url('/'),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,

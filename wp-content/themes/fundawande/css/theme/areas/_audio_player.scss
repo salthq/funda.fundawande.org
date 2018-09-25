@@ -1,0 +1,98 @@
+/* ==========================================================================
+* Audio Player
+*
+* Styling specific to audio player
+*
+ ========================================================================== */
+.audio_player_container {
+  .open-toggle {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+  .audio_player{
+    width: 480px;
+    height: 60px;
+    border: 2px solid;
+    border-radius: 6px;
+    display: none;
+    align-items: center;
+    position: relative;
+    margin-top: 0.5rem;
+    &:before {
+      width: 0px;
+      height: 0px;
+      content: '';
+      border-left: 10px solid transparent!important;
+      border-right: 10px solid transparent!important;
+      position: absolute;
+      border-bottom: 12px solid black;
+      top:-13px;
+      left: 1rem;
+    }
+    &:after {
+      width: 0px;
+      height: 0px;
+      content: '';
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      position: absolute;
+      border-bottom: 12px solid white;
+      top:-10px;
+      left: 1rem;
+    }
+
+  }
+
+  .play__button{
+    background: none;
+    border: none;
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+  .close__button{
+    border-left: 1px solid $grey-secondary;
+    padding: 0 0.25rem;
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+  .current-time, .duration-time {
+    padding: 0 0.5rem;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .progress{
+    flex:10;
+    position: relative;
+    border-radius: 0;
+    display:flex;
+    flex-basis:100%;
+    height:5px;
+    background:rgba(0,0,0,0.1);
+    cursor:ew-resize;
+    overflow: inherit;
+    .progress__filled {
+      width:0%;
+      height: 5px;
+      background:red;
+      flex:0;
+      flex-basis:0%;
+      position: absolute;
+      &:after {
+        content: '';
+        position: absolute;
+        background: red;
+        height: 14px;
+        width: 1px;
+        right: 0;
+        top: -4px;
+      }
+    }
+  }
+}
+
