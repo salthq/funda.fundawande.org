@@ -141,7 +141,7 @@
                     {% if nav_links.next_link %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
-                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            {% include '/embeds/modals/modal-end-lesson.twig' %}
                             <button type="button" class="btn module-btn-outline-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
                                {{attribute(options, lang.prefix~'lessons_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
@@ -150,10 +150,10 @@
                         {% endif %}
                     {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}    
                     {% elseif nav_links.unit_completed %}
-                        {% include '/lms/modals/modal-end-unit.twig' %}
+                        {% include '/embeds/modals/modal-end-unit.twig' %}
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
                         {% if post.get_field('custom_feedback_message') %}
-                            {% include '/lms/modals/modal-end-lesson.twig' %}
+                            {% include '/embeds/modals/modal-end-lesson.twig' %}
                             <button type="button" class="btn module-btn-fill-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
                                 {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
