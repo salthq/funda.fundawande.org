@@ -640,10 +640,10 @@ class FundaWande_Lms {
         }
         $course_lessons = Sensei()->course->course_lessons($course_id);
         $sub_unit_key = '';
-//        if ($course_lessons[0] ) {
-//            $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
-//            update_user_meta($user_id, 'fw_current_sub_unit',$sub_unit_key);
-//        }
+        if ($course_lessons[0] ) {
+            $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
+            update_user_meta($user_id, 'fw_current_sub_unit',$sub_unit_key);
+        }
         return $sub_unit_key;
 
 
