@@ -52,6 +52,12 @@ if (class_exists('Timber')) {
     //Get the module number for the parent module, to enable module-specific styling
     $context['module_number'] = get_term_meta($unit->parent, 'module_number', true);
 
+    //Get the parent module title
+    $context['module_title'] = get_term_meta($unit->parent, 'module_title', true );
+
+    //Get the unit title
+    $context['unit_title'] = get_term_meta($unit->term_id, 'module_title', true);
+
     //Get the nav links object and add to Timber context 
     $context['nav_links'] = FundaWande()->lessons->get_lesson_nav_links($post->ID);
 
