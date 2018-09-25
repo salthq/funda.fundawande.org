@@ -132,6 +132,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 elseif( strpos($prev_next_lessons['next']['url'], '/modules/') ) {
                     $nav_links->unit_completed = true;
                     $nav_links->next_unit_link = $prev_next_lessons['next']['url'];
+                    //TODO: Change this from the actual title of the lesson, to the custom title
                     $nav_links->next_unit_title = $prev_next_lessons['next']['name'];
                 }
             }
