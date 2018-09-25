@@ -98,6 +98,9 @@ class FundaWandeSite extends TimberSite {
         $context['user_logged_in'] = is_user_logged_in();
         $context['log_out_link'] = wp_logout_url();
 
+        //If language preference is not set and Ts and Cs are not signed, this returns false
+        $context['user_meta_found'] = FundaWande()->login->fw_check_user_meta(); 
+
 
          /**
           * Language Context
