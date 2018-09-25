@@ -20,7 +20,7 @@
                             {{ source('assets/lms/recall_quiz.svg') }}
                             <div class="pl-2 d-flex flex-column lesson-progress-text">
                                 <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
-                                <span class = "">{{lesson.post_title}}</span>
+                                <span class = "">{{lesson.title}}</span>
                             </div>
                         </a>
                     {% endfor %}
