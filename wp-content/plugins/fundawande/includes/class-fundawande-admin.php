@@ -24,6 +24,9 @@ class FundaWande_Admin {
         //Remove editor capabilities
         add_action('init', array($this, 'fw_remove_editor_caps') );
 
+        //Restrict dashboard visibility
+        add_action('admin_init', array($this, 'fw_restrict_dashboard_visibility') );
+
         //Remove add media button from ACF fields
         add_action('acf/input/admin_head', array($this, 'fw_remove_media_buttons') );
     
@@ -83,7 +86,17 @@ class FundaWande_Admin {
             //Remove the capability
             $editor->remove_cap($cap);
         }
-    } // end fw_remove_editor_caps();
+    } // end fw_remove_editor_caps()
+
+    /**
+     * Disallow subscribers from viewing the admin dashboard
+     */
+    function fw_restrict_dashboard_visibility() {
+        $redirect = home_url( '/' );
+        if (!current_user_can('administrator') && !is_super_admin() && !current_user_can('editor') && $_SERVER['PHP_SELF'] != '/wp-admin/admin-ajax.php') {
+            exit(wp_redirect( $redirect ));
+        }
+    } // end fw_restrict_dashboard_visibility()
     
      
 
