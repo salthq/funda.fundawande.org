@@ -16,11 +16,21 @@
     {% embed "embeds/header-navbar.twig" %}
 
     {% endembed %}
+    
+    {% if not user_meta_found %}
+        {# Language Preference modal #}
+        {% embed '/embeds/modals/modal-language-preference.twig' %}
 
-    {# Terms and Conditions modal #}
-    {% include '/lms/modals/modal-terms-and-conditions.twig' %}
+        {% endembed %}
 
-    {% embed "lms/modals/modal-main-menu.twig" %}
+        {# Terms and Conditions modal #}
+        {% embed '/embeds/modals/modal-terms-and-conditions.twig' %}
+
+        {% endembed %}
+    {% endif %}
+    
+
+    {% embed "embeds/modals/modal-main-menu.twig" %}
 
     {% endembed %}
 
@@ -29,7 +39,6 @@
 	 {% block content %}
 	 {% endblock %}
 
-</div>
 </div><!-- #page -->
 
 

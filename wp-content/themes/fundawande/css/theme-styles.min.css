@@ -221,6 +221,8 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .button-secondary{border:1.5px solid;border-color:#ccc;border-radius:4px;background-color:#fff;font-size:14px;font-weight:500;line-height:15px;text-align:center;padding:5px;display:inline-block}
 .button-secondary:hover{opacity:.7}
 .button-secondary:not(.collapsed) svg{-webkit-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg)}
+.button-tertiary{border-color:#918f8f;background-color:#fff;color:#918f8f}
+.button-tertiary-active{background-color:#918f8f;color:#fff}
 .player{position:relative;width:100%;height:0;padding-bottom:55.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}
 .player:fullscreen,.player:-webkit-full-screen{max-width:none;width:100%}
@@ -289,6 +291,8 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .login-wrapper #fw-form-login .login-remember{display:none}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
 .login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
+.login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
+.active{background-color:#918f8f;color:#fff}
 #wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:2}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
