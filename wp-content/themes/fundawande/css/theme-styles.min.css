@@ -368,7 +368,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 }.single-course-wrapper .course-title{background-color:#fff}
 .single-course-wrapper .module-link{color:#444}
 .single-course-wrapper .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
-.single-course-wrapper .card:hover{background-color:#ccc}
+.single-course-wrapper .card:hover{border:2px solid #ef9d19}
 .single-course-wrapper .card .header{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .single-course-wrapper .card .header-counter{border-radius:5px}
 .single-course-wrapper .card .header-counter h3{color:#fff}
