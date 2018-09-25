@@ -7,9 +7,9 @@ jQuery(document).ready( function($) {
         $('#terms-and-conditions').modal('show');
     });
 
-    //Force a page reload so the user is properly redirected to their current course page after signing Ts and Cs
+    //Trigger a reload when the terms and conditions are signed, so the user is directed to their course
     $('#go-to-course').click(function() {
-        location.reload();
+        location.reload('true');
     });
 
 });
