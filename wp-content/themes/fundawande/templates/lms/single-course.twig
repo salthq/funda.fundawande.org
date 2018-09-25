@@ -17,6 +17,7 @@
         <div class = "container-fluid background-secondary">
             <div class = "container p-3">
                 {% for module in modules %}
+                
                     <a class = "module-link" href = "{{module.link}}">
                         <div class = "card my-3"> 
                             <div class = "card-body">
@@ -28,12 +29,12 @@
                                                 <h3 class= "m-0">{{module.module_number}}</h3>
                                             </div>
                                             <div class = "header-text">
-                                                <h2><strong>{{module.name}}</strong></h2>
+                                                <h2><strong>{{module.module_title}}</strong></h2>
                                                 <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
                                             </div>
                                         </div>
                                         <hr>
-                                        <p>{{module.description}}</p>
+                                        <p>{{module.module_description}}</p>
                                     </div>
                                     <!-- Module Navigation Button -->
                                     <div class = "col-12 col-md-2 module-nav d-flex">

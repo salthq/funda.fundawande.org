@@ -24,7 +24,7 @@
       border-radius: 5px;
       color: #787878;
     }
-    .active {
+    &-active {
       background-color: $grey-tertiary;
       color: $white;
     }
@@ -108,8 +108,8 @@
   color: #787878;
 }
 
-.active {
+.active-button {
   background-color: $grey-tertiary;
-  color: $white;
+  color: $white !important;
 }
 

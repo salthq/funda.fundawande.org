@@ -61,6 +61,11 @@ class FundaWande_Modules {
                 }
                 $course_modules[$key]->link = get_term_link($module->term_id);
 
+                //Get the custom module title
+                $course_modules[$key]->module_title = get_term_meta($module->term_id, 'module_title', true);
+                //Get the custom module description
+                $course_modules[$key]->module_description = get_term_meta($module->term_id, 'module_description', true);
+
                 $course_module_number++;
             }
         }
