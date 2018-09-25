@@ -62,6 +62,7 @@ if (function_exists('acf_add_options_page')) {
 
 Timber::$dirname = array('templates', 'views');
 
+
 class FundaWandeSite extends TimberSite {
 
     function __construct() {
@@ -71,8 +72,11 @@ class FundaWandeSite extends TimberSite {
         add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
         add_filter( 'timber_context', array( $this, 'add_to_context' ) );
         add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
+
         parent::__construct();
     }
+
+
 
 
     function add_to_context( $context ) {
