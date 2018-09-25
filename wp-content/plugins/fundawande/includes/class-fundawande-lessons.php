@@ -90,6 +90,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         //Add the lessons array to the unit info to make that info available on the single lesson template
         $unit->lessons = $this->get_lessons($course_id, $unit->term_id);
 
+        //$unit->title = get_post_meta($post_id, 'module_title',
+
         return $unit;
     } //end get_unit_info()
 
