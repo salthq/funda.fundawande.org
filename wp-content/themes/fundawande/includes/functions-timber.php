@@ -114,12 +114,12 @@ class FundaWandeSite extends TimberSite {
             $context['lang'] = FundaWande()->language->get_language(null);
         }
 
-        
-
         /**
          * Menu Context
         */
-
+        if ( isset($context['user']->fw_current_course)) {
+            $context['course_link'] = get_permalink($context['user']->fw_current_course);
+        }
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
