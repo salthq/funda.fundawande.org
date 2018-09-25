@@ -31,16 +31,6 @@ if (class_exists('Timber')) {
     // Get the course modules to visualise on the course page
     $context['modules'] = FundaWande()->modules->get_course_modules($post->ID);
 
-    //TODO: replace this dummy unit array with a function that pulls in all the child modules of the current module
-    $total_units = array('Unit 1', 'Unit 2', 'Unit 3', 'Unit 4');
-    //count child modules (units) and add to context
-    $context['total_units'] = count($total_units);
-
-    //TODO: replace this dummy unit array with a function that pulls in the completed child modules of the current module
-    $completed_units = array('Unit 1', 'Unit 2', 'Unit 3');
-    //count completed child modules (units) and add to context
-    $context['completed_units'] = count($completed_units);
-
 
     Timber::render(array('lms/single-course.twig', 'page.twig'), $context);
 }

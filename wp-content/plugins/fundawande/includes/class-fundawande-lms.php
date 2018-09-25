@@ -569,7 +569,34 @@ class FundaWande_Lms {
         return $module_progress;
 
 
-    } // end fw_module_progress
+    } // end fw_module_progress_at_unit
+
+    /**
+     * Module progress functionality off of a given unit ID
+     *
+     * @return $module_progress return the module progress percent
+     *
+     */
+    public function fw_is_module_complete($module_id,$user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        // Determine if an existing unit status exists
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_module_progress',
+            'user_id' => $user_id,
+            'status' => $module_id,
+        );
+
+        // possibly returns array, we just want one object
+        $user_module_status = get_comments($current_status_args);
+        if ($user_module_status) {
+            return true;
+
+        }
+        return false;
+    } // end fw_is_module_complete
 
     /**
      * Course progress functionality off of a given module ID
