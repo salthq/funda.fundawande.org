@@ -51,9 +51,12 @@ class FundaWande_Modules {
             } else {
                 // Get the term data in case there are custom fields
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
-                // If the module number meta does not exist or is different to  
+                $module_units = get_term_children( $module->term_id,'module');
+                error_log(print_r($course_modules[$key]->units,true));
+                // If the module number meta does not exist or is different to
                 //  $course_module_number, change the module number meta to be the same as course_module_number 
                 $module_number_meta = get_term_meta($module->term_id, 'module_number', true);
+
 
                 if (!isset($module_number_meta) || $module_number_meta !== $course_module_number) {
                     update_term_meta($module->term_id,'module_number',$course_module_number);
@@ -61,6 +64,11 @@ class FundaWande_Modules {
                 }
                 $course_modules[$key]->link = get_term_link($module->term_id);
 
+                foreach($module_units  as $key2 => $unit) {
+                    $course_modules[$key]->units = new stdClass();
+                    $course_modules[$key]->units->ID = $unit;
+                    $course_modules[$key]->units->complete = FundaWande()->lms->fw_is_module_complete($unit);
+                }
                 //Get the custom module title
                 $course_modules[$key]->module_title = get_term_meta($module->term_id, 'module_title', true);
                 //Get the custom module description
