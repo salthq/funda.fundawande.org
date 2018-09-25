@@ -96,6 +96,7 @@ audio_players.forEach(function (player) {
     function openToggle() {
         if (playerBlock.style.display === "flex") {
             playerBlock.style.display = "none"
+            audio['pause']();
         } else {
             playerBlock.style.display = "flex"
         }
@@ -104,10 +105,11 @@ audio_players.forEach(function (player) {
     // Hook button updates on play/pause
     audio.addEventListener('play', updateButton);
     audio.addEventListener('pause', updateButton);
+
     // Hook play on play button click
     toggle.addEventListener('click', togglePlay);
 
-// Gets audio file duration
+    // Gets audio file duration
     audio.addEventListener("canplaythrough", function() {
         duration = audio.duration;
     }, false);
