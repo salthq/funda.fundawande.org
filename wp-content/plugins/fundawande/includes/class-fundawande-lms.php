@@ -625,6 +625,31 @@ class FundaWande_Lms {
         return $links;
     } // End fw_get_prev_next_lessons()
 
+    /**
+     * Sets the first sub unit of the course to current sub unit
+     *
+     * @since  1.0.0
+     * @param  integer $course_id Course ID.
+     * @param  integer $user_id User ID.
+     * @return string $sub_unit_key
+     */
+    public function fw_set_first_sub_unit($course_id , $user_id = null ) {
+        //
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $course_lessons = Sensei()->course->course_lessons($course_id);
+        $sub_unit_key = '';
+//        if ($course_lessons[0] ) {
+//            $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
+//            update_user_meta($user_id, 'fw_current_sub_unit',$sub_unit_key);
+//        }
+        return $sub_unit_key;
+
+
+    } // End fw_get_prev_next_lessons()
+
+
 
     /**
      * Get the sub unit status from a lesson key
