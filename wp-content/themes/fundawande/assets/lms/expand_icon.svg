@@ -1,24 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="34px" height="34px" fill="#ccc" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: sketchtool 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-    <title>773C86F6-C903-4F5F-A1E2-8B42DC9522FA-6396-00000F3E927EBC39</title>
-    <defs></defs>
-    <g id="3.-Units" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="Units---Landing-[FW2COURSE002---Tablet]" transform="translate(-897.000000, -238.000000)">
-            <g id="Group">
-                <g id="Unit-1" transform="translate(50.000000, 207.000000)">
-                    <g id="Heading" transform="translate(30.000000, 24.000000)">
-                        <g id="Button-/-View-Lessons-Tablet" transform="translate(744.000000, 0.000000)">
-                            <g id="Unit-info-button-Copy">
-                                <g id="info-icon" transform="translate(73.000000, 7.000000)">
-                                    <circle id="Combined-Shape"  stroke-width="1.61904762" cx="17" cy="17" r="16.1904762"></circle>
-                                    <path d="M17,19.8768758 L11.7088279,14.4773803 C11.0704866,13.821293 10.0570179,13.844334 9.44518211,14.5288438 C8.83334634,15.2133537 8.85483331,16.3001224 9.4931746,16.9562097 L15.8921733,23.5221055 C16.5112025,24.1592982 17.4887975,24.1592982 18.1078267,23.5221055 L24.5068254,16.9562097 C25.1451667,16.3001224 25.1666537,15.2133537 24.5548179,14.5288438 C23.9429821,13.844334 22.9295134,13.821293 22.2911721,14.4773803 L17,19.8768758 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="34" height="34" fill="#ccc" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+<title>773C86F6-C903-4F5F-A1E2-8B42DC9522FA-6396-00000F3E927EBC39</title>
+<g transform="translate(0 0)" fill-rule="evenodd"><circle cx="17" cy="17" r="16.19"/><path d="M17 19.877l-5.291-5.399c-.638-.656-1.652-.633-2.264.051-.612.685-.59 1.771.048 2.427l6.399 6.566c.619.637 1.597.637 2.216 0l6.399-6.566c.638-.656.66-1.743.048-2.427-.612-.685-1.625-.708-2.264-.051l-5.291 5.399z" fill="#fff" fill-rule="nonzero"/></g></svg>
