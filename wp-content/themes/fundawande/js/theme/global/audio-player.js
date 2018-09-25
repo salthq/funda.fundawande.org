@@ -96,6 +96,7 @@ audio_players.forEach(function (player) {
     function openToggle() {
         if (playerBlock.style.display === "flex") {
             playerBlock.style.display = "none"
+            audio['pause']();
         } else {
             playerBlock.style.display = "flex"
         }
