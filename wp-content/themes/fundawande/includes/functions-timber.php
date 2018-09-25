@@ -117,7 +117,9 @@ class FundaWandeSite extends TimberSite {
         /**
          * Menu Context
         */
-        $context['course_link'] = get_permalink($context['user']->fw_current_course);
+        if ( isset($context['user']->fw_current_course)) {
+            $context['course_link'] = get_permalink($context['user']->fw_current_course);
+        }
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
