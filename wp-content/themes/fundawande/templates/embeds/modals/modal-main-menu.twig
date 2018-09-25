@@ -3,21 +3,21 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content  p-4">
             <div id="main-menu" class = " d-flex justify-content-left flex-column">
-                <a class="d-flex align-items-center py-2 pr-3" href="#" >
+                <a class="d-flex align-items-center py-2 pr-3" href="{{course_link}}" >
                     {{ source('assets/menu/dash_menu_icon.svg') }}
-                    <span>Go to Dashboard</span>
+                    <span>{{attribute(options, lang.prefix~'go_to_modules_link')}}</span>
                 </a>
                 <a class="d-flex align-items-center py-2 pr-3" href="#" >
                     {{ source('assets/menu/modules_menu_icon.svg') }}
-                    <span>Go to Modules</span>
+                    <span>{{attribute(options, lang.prefix~'continue_learning_link')}}</span>
                 </a>
                 <a class="d-flex align-items-center py-2 pr-3" href="#" >
                     {{ source('assets/menu/contact_menu_icon.svg') }}
-                    <span>View Contacts</span>
+                    <span>{{attribute(options, lang.prefix~'view_contacts_link')}}</span>
                 </a>
                 <a class="d-flex align-items-center py-2 pr-3" href="#" >
                     {{ source('assets/menu/messages_menu_icon.svg') }}
-                    <span>View Messages</span>
+                    <span>{{attribute(options, lang.prefix~'view_messages_link')}}</span>
                 </a>
             </div>
         </div>
