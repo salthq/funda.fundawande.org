@@ -4,7 +4,11 @@
     <div class="modal-content px-3 py-3">
       <div class="d-flex m-3">
         <div class = "d-flex justify-content-center align-items-center w-100">
-          <h5 class="modal-title text-center pl-3"><strong>Language Preference/<br>Ukukhetha Ulwimi</strong></h5>
+        {% if user.language_preference %}
+          <h5 class="modal-title text-center pl-3"><strong>{{attribute(options, lang.prefix~'chosen_language_text')}}</strong></h5>
+        {% else %}
+          <h5 class="modal-title text-center pl-3"><strong>{{attribute(options,'language_preference_title')}}</strong></h5>
+        {% endif %}
         </div>
       </div>
       <div class="modal-body">
@@ -17,9 +21,9 @@
           </div>
         </form>
         {% if user.language_preference %}
-          <div class = "text-center"><p>The course will now be in English. You can click the change language button at any time to change this setting</p></div>
+          <div class = "text-center"><p>{{attribute(options, lang.prefix~'chosen_language_explanation')}}</p></div>
           <div class = "py-3 text-center">
-            <button id = "set-language-preference" class = "btn btn-lg primary-btn-fill" >Continue<span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
+            <button id = "set-language-preference" class = "btn btn-lg primary-btn-fill" >{{attribute(options, lang.prefix~'continue_button_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
           </div>
         {% endif %}
 
