@@ -510,7 +510,15 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:before{content:"";background:-webkit-linear-gradient(left,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;background-size:7px auto;height:4px;width:calc(100% + 2px);border-radius:0;position:absolute;top:8px}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type{min-height:0;min-width:0;display:none}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type:before{display:none}
-}#main-menu-modal .modal-dialog{margin-top:60px;margin-left:0}
+}#end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-markers{overflow:scroll;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-marker{z-index:1;width:20px;height:20px;border-radius:50%;background:#ccc}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-marker.current{border:2px solid;width:24px;height:24px;background:#8bb5cc !important}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-divider{min-width:10px;min-height:20px;position:relative}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-divider:before{content:"";background:-webkit-linear-gradient(left,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;background-size:7px auto;height:4px;width:calc(100% + 2px);border-radius:0;position:absolute;top:8px;left:0}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-divider:first-of-type{min-height:0;min-width:0;display:none}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-divider:first-of-type:before{display:none}
+#main-menu-modal .modal-dialog{margin-top:60px;margin-left:0}
 @media(max-width:767px){#main-menu-modal .modal-dialog{margin-top:60px}
 }#main-menu-modal .modal-dialog .modal-content{border:0;border-radius:0 6px 6px 0;width:auto;display:inline-block}
 #main-menu-modal .modal-dialog .modal-content a{color:#444;border-bottom:1px solid #ccc}

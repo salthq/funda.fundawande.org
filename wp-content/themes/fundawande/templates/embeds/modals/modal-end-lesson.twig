@@ -15,14 +15,17 @@
       <div class="lesson-modal-footer modal-footer">
             <!-- End of Lesson Progress Component -->
             <div class = "lesson-progress-modal m-3">
+                {%  set completed_lessons = 0 %}
                 <div class = "lesson-progress d-flex justify-content-center flex-row">
                     {% for lesson in unit.lessons %}
-                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
+                    {% if lesson.complete %}{%  set completed_lessons = completed_lessons +1  %}{% endif %}
+                    <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                        <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
                     {% endfor %}
 
                 </div>
                 <!-- TODO: Make the unit progress info dynamic -->
-                <p><strong>Unit Progress</strong> 3 of {{num_lessons}} lessons complete</p>
+                <p><strong>Unit Progress</strong> {{ completed_lessons }} / {{unit.lessons|length}} lessons complete</p>
             </div>
             {# if this lesson is the end of a unit, go to the end of unit modal #}
             {% if nav_links.unit_completed %} 

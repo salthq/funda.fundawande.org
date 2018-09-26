@@ -14,17 +14,19 @@
         <p>Next unit up: <strong>{{nav_links.next_unit_title}}</strong>
       </div>
       <div class="lesson-modal-footer modal-footer">
-            <!-- End of Unit Progress Component -->
-            <div class = "lesson-progress-modal m-3">
-                <div class = "lesson-progress d-flex justify-content-center flex-row">
-                    {# TODO: This is currently showing lesson progress, but it needs to show module progress instead #}
-                    {% for lesson in unit.lessons %}
-                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
-                    {% endfor %}
-                </div>
+          {# TODO: Add module progress view #}
+          {#<!-- End of Unit Progress Component -->#}
+            {#<div class = "lesson-progress-modal m-3">#}
+                {#<div class = "lesson-progress d-flex justify-content-center flex-row">#}
+                    {#{% for lesson in unit.lessons %}#}
+                        {#<span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>#}
+                    {#{% endfor %}#}
+                    {##}
+
+                {#</div>#}
                 <!-- TODO: Make the module progress info dynamic -->
-                <p><strong>Module Progress</strong> 3 of 6 units complete</p>
-            </div>
+                {#<p><strong>Module Progress</strong> 3 of 6 units complete</p>#}
+            {#</div>#}
             <a href = "{{nav_links.next_unit_link}}" class = "btn primary-btn-fill" >Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
       </div>
     </div>
