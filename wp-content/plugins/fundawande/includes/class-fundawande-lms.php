@@ -700,7 +700,7 @@ class FundaWande_Lms {
         $sub_unit_key = '';
         if ($course_lessons[0] ) {
             $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
-            update_user_meta($user_id, 'fw_current_sub_unit',$sub_unit_key);
+            update_user_meta($user_id, 'fw_current_sub_unit','r4m_m00_u01_s01');
             update_user_meta($user_id,'fw_current_unit','r4m_m00_u01');
             update_user_meta($user_id,'fw_current_module','r4m_m00');
 
