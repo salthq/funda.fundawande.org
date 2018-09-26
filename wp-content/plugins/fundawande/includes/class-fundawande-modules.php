@@ -128,6 +128,10 @@ class FundaWande_Modules {
             // check if user exists
             $user_id = get_current_user_id();
 
+            // check if unit is complete
+            $module_units[$key]->complete = FundaWande()->lms->fw_is_unit_complete($module_units[$key]->term_id,$user_id);
+
+
             // get user current unit
             $user_current_unit = get_user_meta($user_id,'fw_current_unit',true);
 

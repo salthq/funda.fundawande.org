@@ -36,8 +36,8 @@
                             <div class = "row">
                                 <div class = "col-12">
                                     <!-- Unit Card Header -->    
-                                    <div class = "row unit-header">
-                                        <div class = "col-12 col-md-8">
+                                    <div class = "row unit-header justify-content-between">
+                                        <div class = "col-12 col-md-auto">
                                             <div class = "unit-header-content d-flex">
                                                 <div class = "unit-header-counter d-flex mr-2 px-2">
                                                     <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
@@ -55,14 +55,17 @@
                                             </div>
                                         </div>
                                         <!--Unit navigation buttons tablet and desktop-->
-                                        <div class = "col-12 col-md-4 text-right d-none d-md-flex">
+                                        <div class = "col-12 col-md-auto text-right d-none d-md-flex">
                                             <!-- TODO: Add link to current sub-unit-->
                                             <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a>
-                                            <a class = "button-primary  module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
+                                            {#// TODO ADD next lesson link for current unit   #}
+                                            {% if unit.current or unit.complete %}
+                                            <a class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
                                                 {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <hr>
