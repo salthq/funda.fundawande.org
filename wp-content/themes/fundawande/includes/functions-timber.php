@@ -127,8 +127,18 @@ class FundaWandeSite extends TimberSite {
         /**
          * Menu Context
         */
+
+        //Get current course link
         if ( isset($context['user']->fw_current_course)) {
             $context['course_link'] = get_permalink($context['user']->fw_current_course);
+        }
+
+        //Get current lesson link
+        if ( isset($context['user']->fw_current_course) && isset($context['user']->fw_current_sub_unit) ) {
+            $sub_unit_key = $context['user']->fw_current_sub_unit;
+            $course_id = $context['user']->fw_current_course;
+
+            $context['current_lesson_link'] = FundaWande()->lms->fw_get_current_lesson_link($sub_unit_key, $course_id);
         }
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
