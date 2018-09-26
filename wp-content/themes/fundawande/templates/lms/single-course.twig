@@ -26,7 +26,11 @@
                         {% endif %}
                     {% endfor %}
                     <a class = "module-link" href = "{{module.link}}">
-                        <div class = "card my-3"> 
+
+                        <div class = "card my-3 {% if module.current %}current{% endif %}">
+                            {% if module.current %}
+                                <span class="current-module-text">{{attribute(options, lang.prefix~'current_module_text')}}</span>
+                            {% endif %}
                             <div class = "card-body">
                                 <div class = "row">
                                     <!-- Module Info -->

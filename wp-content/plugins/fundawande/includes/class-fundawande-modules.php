@@ -52,10 +52,22 @@ class FundaWande_Modules {
                 // Get the term data in case there are custom fields
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
                 $module_units = get_term_children( $module->term_id,'module');
-                error_log(print_r($course_modules[$key]->units,true));
                 // If the module number meta does not exist or is different to
                 //  $course_module_number, change the module number meta to be the same as course_module_number 
                 $module_number_meta = get_term_meta($module->term_id, 'module_number', true);
+                // get the module unique key
+                $module_key = get_term_meta($module->term_id, 'fw_unique_key', true);
+
+                // check if user exists
+                $user_id = get_current_user_id();
+
+                // get user current module
+                $user_current_module = get_user_meta($user_id,'fw_current_module',true);
+
+                // check if this unit key is equal to current unit key and if so, aassign current proporty
+                if ($module_key == $user_current_module) {
+                    $course_modules[$key]->current = true;
+                }
 
 
                 if (!isset($module_number_meta) || $module_number_meta !== $course_module_number) {
@@ -63,11 +75,14 @@ class FundaWande_Modules {
                     $course_modules[$key]->module_number = $course_module_number;
                 }
                 $course_modules[$key]->link = get_term_link($module->term_id);
-
+                $course_modules[$key]->complete = FundaWande()->lms->fw_is_module_complete($module->term_id,$user_id);
+                $course_modules[$key]->units = array();
                 foreach($module_units  as $key2 => $unit) {
-                    $course_modules[$key]->units = new stdClass();
-                    $course_modules[$key]->units->ID = $unit;
-                    $course_modules[$key]->units->complete = FundaWande()->lms->fw_is_module_complete($unit);
+
+                    $unit_data = new stdClass();
+                    $unit_data->ID = $unit;
+                    $unit_data->complete = FundaWande()->lms->fw_is_unit_complete($unit,$user_id);
+                    $course_modules[$key]->units[] = $unit_data;
                 }
                 //Get the custom module title
                 $course_modules[$key]->module_title = get_term_meta($module->term_id, 'module_title', true);

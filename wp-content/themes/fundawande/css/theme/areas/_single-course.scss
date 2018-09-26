@@ -22,8 +22,25 @@
   }
   
    .card {
+     &.current {
+       border: 3px solid $brand-primary__colour;
+       margin-top: 3rem!important;
+       .current-module-text {
+         display: block;
+         position: absolute;
+         font-size: 17px;
+         font-style: italic;
+         color: white;
+         padding: 6px 18px;
+         background: $brand-primary__colour;
+         border-radius: 5px 5px 0 0;
+         left:2rem;
+         top:-37px;
+       }
+     }
      &:hover {
-       border: 2px solid $brand-primary__colour;
+       -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
 
      }
     .header {

@@ -90,6 +90,9 @@
                     a.lesson-progress-marker {
                         z-index:1 ;
                         color: $text-primary__colour;
+                        .title {
+                            font-size: 14px;
+                        }
                         &:hover {
                             opacity: 0.7;
                             text-decoration: none;
@@ -170,7 +173,7 @@
                 }
                 &-minimized {
                     max-width: 150px;
-                    min-height: 300px;
+                    min-height: 50px;
                     .lesson-progress-marker {
                         z-index:1 ;
                         width: 20px;
@@ -181,7 +184,7 @@
                             border:2px solid;
                             width: 24px;
                             height: 24px;
-                            background: $module0-secondary__colour!important;
+                            background: white!important;
                         }
                     }
 
