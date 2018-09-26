@@ -22,11 +22,10 @@ if (class_exists('Timber')) {
 
     //Get module number to enable module-specific styling
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
+    $context['module_title'] = get_term_meta($term->ID, 'module_title', true);
 
     // Get the modules units to visualise on the module page
-    // TODO: Remove the 31 and replace with the actual course ID, possibly saved in the user as their current course.
-    $context['units'] = FundaWande()->modules->get_module_units($term->ID,31);
-    
+    $context['units'] = FundaWande()->modules->get_module_units($term->ID,$context['user']->fw_current_course);
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);
 }
