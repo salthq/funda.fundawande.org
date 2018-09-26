@@ -1,3 +1,12 @@
-<svg width="34" height="34" fill="#ccc" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-<title>773C86F6-C903-4F5F-A1E2-8B42DC9522FA-6396-00000F3E927EBC39</title>
-<g transform="translate(0 0)" fill-rule="evenodd"><circle cx="17" cy="17" r="16.19"/><path d="M17 19.877l-5.291-5.399c-.638-.656-1.652-.633-2.264.051-.612.685-.59 1.771.048 2.427l6.399 6.566c.619.637 1.597.637 2.216 0l6.399-6.566c.638-.656.66-1.743.048-2.427-.612-.685-1.625-.708-2.264-.051l-5.291 5.399z" fill="#fff" fill-rule="nonzero"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" fill="#CCCCCC" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="expand_icon" fill-rule="nonzero">
+            <circle id="Oval"  cx="16.19" cy="16.19" r="16.19"></circle>
+            <path id="inner" d="M16.3857143,15.4428482 L11.0947143,10.0438482 C10.4567143,9.38784821 9.44271429,9.41084821 8.83071429,10.0948482 C8.21871429,10.7798482 8.24071429,11.8658482 8.87871429,12.5218482 L15.2777143,19.0878482 C15.8967143,19.7248482 16.8747143,19.7248482 17.4937143,19.0878482 L23.8927143,12.5218482 C24.5307143,11.8658482 24.5527143,10.7788482 23.9407143,10.0948482 C23.3287143,9.40984821 22.3157143,9.38684821 21.6767143,10.0438482 L16.3857143,15.4428482 Z" id="Shape" fill="#FFFFFF" transform="translate(16.385714, 14.565657) rotate(-180.000000) translate(-16.385714, -14.565657) "></path>
+        </g>
+    </g>
+</svg>

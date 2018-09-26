@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // Add the construct elements
 
+
     }
 
     /**
@@ -54,12 +55,9 @@ if ( ! defined( 'ABSPATH' ) ) {
             foreach ($lesson_query->posts as $key => $lesson ) {
                 $lesson->term = array();
                 $lesson->term = wp_get_post_terms($lesson->ID, 'lesson-tag');
-                if ($lesson->term) {
-                    $lesson->icon = $lesson->term[0]->slug;
-                } else {
-                    $lesson->icon = 'unit_quiz';
-                }
+                $lesson->icon = get_post_meta($lesson->ID, 'sub_unit_icon',true);
                 $lesson->key = get_post_meta($lesson->ID, 'fw_unique_key',true);
+                $lesson->title = get_post_meta($lesson->ID, 'lesson_title', true);
                 if ($current_lesson_key && $current_lesson_key == $lesson->key) {
                     $lesson->current = true;
                 }
@@ -92,6 +90,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         $unit = Sensei()->modules->get_lesson_module( $post_id );
         //Add the lessons array to the unit info to make that info available on the single lesson template
         $unit->lessons = $this->get_lessons($course_id, $unit->term_id);
+
+        //$unit->title = get_post_meta($post_id, 'module_title',
 
         return $unit;
     } //end get_unit_info()
@@ -132,6 +132,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 elseif( strpos($prev_next_lessons['next']['url'], '/modules/') ) {
                     $nav_links->unit_completed = true;
                     $nav_links->next_unit_link = $prev_next_lessons['next']['url'];
+                    //TODO: Change this from the actual title of the lesson, to the custom title
                     $nav_links->next_unit_title = $prev_next_lessons['next']['name'];
                 }
             }

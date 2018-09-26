@@ -9,11 +9,20 @@
     <div class="wrapper single-module-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
 
         <div class = "container-fluid">
-            <div class = "row module-title">
-                <div class = "col-sm-12 text-center">
+            <div class = "row module-title justify-content-between">
+                <div class = "col ">
+                    <a class = "button-secondary module-btn-outline-{{module_number}} py-4 my-4" href = "{{course_link}}">
+                        <span class="mb-2 d-inline-block">{{source('/assets/arrow_left.svg')}}</span>
+                        <br>
+                        <span class = "d-none d-md-block button-text-width-limit">{{attribute(options, lang.prefix~'back_to_modules_text')}}</span>
+                    </a>
+                </div>
+                <div class = "col-auto text-center">
+
                     <h1 class = "mt-4"><strong>Module {{module_number}}</strong></h1>
                     <h1 class = "text-center mb-4">{{post.get_field('module_title')}}</h1>
                 </div>
+                <div class = "col "></div>
             </div>
         </div>
         <div class = "container-fluid background-secondary">
@@ -51,7 +60,7 @@
                                             <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a>
-                                            <a class = "btn module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
+                                            <a class = "button-primary  module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="#">
                                                 {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
                                         </div>
@@ -65,16 +74,21 @@
                                     <p>{{unit.module_description}}</p>
                                     <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
-                                            <div class = "sub-units-icon row text-center flex-md-row flex-column col-md-2 no-gutters ">
-                                                <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}module-divider-before-{{ module_number }}{% endif %} col">
+                                            <div class = "sub-units-icon {%  if lesson.complete %}complete module-divider-before-{{ module_number }} module-after-bg-{{ module_number }}{% endif %} row text-center flex-md-row flex-column col-md-2 no-gutters ">
+                                                <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">
 
                                                 </div>
-                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row module-svg-icon-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
                                                     <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
-                                                    {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
+                                                    {% set image = source('assets/lms/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
+                                                    {% if image %}
+                                                        {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
+                                                    {% else %}
+                                                        {{ source('assets/lms/book_icon.svg') }}
+                                                    {% endif %}
                                                     <div class="d-flex flex-column justify-content-center py-2 pl-3 pl-md-0 lesson-progress-text">
                                                         <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
-                                                        <p class = "m-0">{{lesson.post_title}}</p>
+                                                        <p class = "m-0">{{lesson.title}}</p>
                                                     </div>
                                                 </a>
 

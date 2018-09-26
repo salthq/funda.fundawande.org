@@ -26,7 +26,7 @@
             <div class = "container">
                 <div class = "row lesson-navigation-top">
                     <div class = "col-2 col-md-4">
-                        <a class = "btn module-btn-outline-{{module_number}} py-4" href = "{{unit.url}}">
+                        <a class = "btn module-btn-outline-{{module_number}} py-4 my-4" href = "{{unit.url}}">
                             {{source('/assets/arrow_left.svg')}}
                             <br>
                             <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span> 
@@ -142,8 +142,8 @@
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                         {% if post.get_field('custom_feedback_message') %}
                             {% include '/embeds/modals/modal-end-lesson.twig' %}
-                            <button type="button" class="btn module-btn-outline-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
-                               {{attribute(options, lang.prefix~'lessons_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            <button id="lesson-complete"  type="button" class="btn module-btn-outline-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
+                               {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
                             <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{nav_links.next_link}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
@@ -154,11 +154,11 @@
                         {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
                         {% if post.get_field('custom_feedback_message') %}
                             {% include '/embeds/modals/modal-end-lesson.twig' %}
-                            <button type="button" class="btn module-btn-fill-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal">
+                            <button id="lesson-complete"  type="button" class="btn module-btn-fill-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
                                 {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% else %}
-                            <button type="button" class="btn module-btn-fill-{{module_number}}" data-toggle="modal" data-target="#end-unit-modal">
+                            <button id="lesson-complete" type="button" class="btn module-btn-fill-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
                                 {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                             </button>
                         {% endif %}    

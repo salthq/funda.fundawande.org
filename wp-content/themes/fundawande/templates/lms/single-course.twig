@@ -16,9 +16,21 @@
         </div>
         <div class = "container-fluid background-secondary">
             <div class = "container p-3">
+
+
                 {% for module in modules %}
+                    {% set completed = 0 %}
+                    {% for unit in module.units %}
+                        {% if unit.complete %}
+                            {% set completed = completed + 1 %}
+                        {% endif %}
+                    {% endfor %}
                     <a class = "module-link" href = "{{module.link}}">
-                        <div class = "card my-3"> 
+
+                        <div class = "card my-3 {% if module.current %}current{% endif %}">
+                            {% if module.current %}
+                                <span class="current-module-text">{{attribute(options, lang.prefix~'current_module_text')}}</span>
+                            {% endif %}
                             <div class = "card-body">
                                 <div class = "row">
                                     <!-- Module Info -->
@@ -28,16 +40,16 @@
                                                 <h3 class= "m-0">{{module.module_number}}</h3>
                                             </div>
                                             <div class = "header-text">
-                                                <h2><strong>{{module.name}}</strong></h2>
-                                                <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed_units}}/{{total_units}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
+                                                <h2><strong>{{module.module_title}}</strong></h2>
+                                                <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed}}/{{module.units|length}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
                                             </div>
                                         </div>
                                         <hr>
-                                        <p>{{module.description}}</p>
+                                        <p>{{module.module_description}}</p>
                                     </div>
                                     <!-- Module Navigation Button -->
                                     <div class = "col-12 col-md-2 module-nav d-flex">
-                                        <h4 class = "module-text-{{module.module_number}} module-progress m-3 d-sm-none">{{completed_units}}/{{total_units}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
+                                        <h4 class = "module-text-{{module.module_number}} module-progress m-3 d-sm-none">{{completed}}/{{module.units|length}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
                                         <div class = "module-bg-{{module.module_number}} module-nav-button p-3 d-flex">
                                             <img class = "img img-responsive d-none d-md-block p-3" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
                                             <h3 class = "text-center my-0">{{attribute(options, lang.prefix~'nav_text')}}<img class = "p-2 d-md-none" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></h3>

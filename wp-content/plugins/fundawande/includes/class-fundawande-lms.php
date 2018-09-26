@@ -569,7 +569,65 @@ class FundaWande_Lms {
         return $module_progress;
 
 
-    } // end fw_module_progress
+    } // end fw_module_progress_at_unit
+
+    /**
+     * Unit progress functionality off of a given unit ID
+     *
+     * @return boolean module_progress return the unit progress percent
+     *
+     */
+    public function fw_is_unit_complete($unit_id,$user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $unit_key = get_term_meta($unit_id, 'fw_unique_key',true);
+
+        // Determine if an existing unit status exists
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_unit_progress',
+            'user_id' => $user_id,
+            'status' => $unit_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_module_status = get_comments($current_status_args);
+        if ($user_module_status) {
+            return true;
+
+        }
+        return false;
+    } // end fw_is_unit_complete
+
+    /**
+     * Module progress functionality off of a given module ID
+     *
+     * @return $module_progress return the module progress percent
+     *
+     */
+    public function fw_is_module_complete($module_id,$user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
+
+        // Determine if an existing unit status exists
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_module_progress',
+            'user_id' => $user_id,
+            'status' => $module_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_module_status = get_comments($current_status_args);
+        if ($user_module_status) {
+            return true;
+
+        }
+        return false;
+    } // end fw_is_module_complete
 
     /**
      * Course progress functionality off of a given module ID
@@ -624,6 +682,31 @@ class FundaWande_Lms {
 
         return $links;
     } // End fw_get_prev_next_lessons()
+
+    /**
+     * Sets the first sub unit of the course to current sub unit
+     *
+     * @since  1.0.0
+     * @param  integer $course_id Course ID.
+     * @param  integer $user_id User ID.
+     * @return string $sub_unit_key
+     */
+    public function fw_set_first_sub_unit($course_id , $user_id = null ) {
+        //
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $course_lessons = Sensei()->course->course_lessons($course_id);
+        $sub_unit_key = '';
+        if ($course_lessons[0] ) {
+            $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
+            update_user_meta($user_id, 'fw_current_sub_unit',$sub_unit_key);
+        }
+        return $sub_unit_key;
+
+
+    } // End fw_get_prev_next_lessons()
+
 
 
     /**
