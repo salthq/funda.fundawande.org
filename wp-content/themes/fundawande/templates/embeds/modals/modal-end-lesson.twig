@@ -16,10 +16,12 @@
             <!-- End of Lesson Progress Component -->
             <div class = "lesson-progress-modal m-3">
                 <div class = "lesson-progress d-flex justify-content-center flex-row">
-                    {% for lesson in unit.lessons %}
-                        <span class = "text-center p-2">{{source('/assets/progress_indicator.svg')}}</span>
-                    {% endfor %}
-
+                     <div class=" lesson-progress-markers px-3 w-100 row no-gutters align-items-center flex-row">
+                      {% for lesson in unit.lessons %}
+                          <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                          <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
+                      {% endfor %}
+                    </div>
                 </div>
                 <!-- TODO: Make the unit progress info dynamic -->
                 <p><strong>Unit Progress</strong> 3 of {{num_lessons}} lessons complete</p>
