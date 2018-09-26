@@ -678,9 +678,15 @@ class FundaWande_Lms {
         //The meta query returns an array, but we just want the lesson object
         if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
             $sub_unit = array_shift($sub_unit_list);
+
+            $sub_unit_link = get_permalink($sub_unit->ID);
         }
-        
-        $sub_unit_link = get_permalink($sub_unit->ID);
+        else {
+            // If no post is found which matches the query, add home_url as the link,
+            // which will take them to their course page. This should only happen if the key
+            // has been incorrectly set on the lesson editor screen. 
+            $sub_unit_link = home_url('/'); 
+        }        
 
         return $sub_unit_link;
 
