@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<ul class="answers row">
+<ul class="answers">
 
 <?php
 $count = 0;
@@ -30,7 +30,7 @@ foreach( $question_data[ 'answer_options' ] as $id => $option ) {
 
     ?>
 
-    <li class="<?php echo esc_attr( $option[ 'option_class' ] ); ?>col-md-3 custom-control custom-radio-image" >
+    <li class="<?php echo esc_attr( $option[ 'option_class' ] ); ?> custom-control custom-radio">
         <input class="custom-control-input" type="<?php echo $option[ 'type' ]; ?>"
                id="<?php echo esc_attr( 'question_' . $question_data['ID'] ) . '-option-' . $count; ?>"
                name="<?php echo esc_attr( 'sensei_question[' . $question_data['ID'] . ']' ); ?>[]"
@@ -39,7 +39,9 @@ foreach( $question_data[ 'answer_options' ] as $id => $option ) {
             />
 
         <label class="custom-control-label" for="<?php echo esc_attr( 'question_' . $question_data['ID'] ) . '-option-' . $count; ?>">
-            <?php echo wp_get_attachment_image($option['answer'], array('390', '300'), "", array("class" => "img-responsive")); ?>
+
+            <?php echo apply_filters( 'sensei_answer_text', $option['answer'] ); ?>
+
         </label>
 
     </li>

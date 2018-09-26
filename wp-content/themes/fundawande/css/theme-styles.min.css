@@ -392,7 +392,32 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .drag-and-drop-non-sequential ._option-image:nth-child(3),.drag-and-drop-non-sequential ._option-image:nth-child(4),.drag-and-drop-sequential ._option-image:nth-child(3),.drag-and-drop-sequential ._option-image:nth-child(4){padding-top:10px}
 }@media(max-width:400px){.drag-and-drop-non-sequential ._answer-container,.drag-and-drop-sequential ._answer-container{padding-bottom:30px !important}
 }@media(max-width:768px){.single-quiz-wrapper .quiz-questions #sensei-quiz-list .answers{padding:0 !important}
-}.single-course-wrapper .course-title{background-color:#fff}
+}.single-lesson-wrapper .quiz-questions span.grade{display:none}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio{height:2rem}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-label{line-height:2rem}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-label:before{width:1.5rem;height:1.5rem;border:1px solid #ef9d19;background-color:white;left:-2.5rem}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-input:checked ~ .custom-control-label{font-weight:bold}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-input:checked ~ .custom-control-label:before{background-color:#ef9d19}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-input:checked ~ .custom-control-label:after{background-image:none}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image{padding-right:15px;padding-left:15px}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image .custom-control-label{border:3px solid transparent}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image .custom-control-label:before{width:1.5rem;height:1.5rem;border:1px solid #ef9d19;background-color:white;left:calc(50% - 0.75rem);bottom:-2rem;border-radius:50%;top:auto}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image .custom-control-input:checked ~ .custom-control-label{border:3px solid #ef9d19;border-radius:6px}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image .custom-control-input:checked ~ .custom-control-label:before{background-color:#ef9d19}
+.single-lesson-wrapper .quiz-questions .custom-control.custom-radio-image .custom-control-input:checked ~ .custom-control-label:after{background-image:none}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._option-images ._image-container{border:2px solid #ef9d19;border-radius:6px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._option-images ._image-container.chosen{border:2px solid #ccc;opacity:.5}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._images-answers ._image-container{border-radius:6px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._images-answers ._image-container ._sortable-spot{border:2px dashed #ef9d19}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._images-answers ._image-container.chosen ._sortable-spot{border:2px solid #ef9d19;border-radius:2px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container{border:2px solid #ef9d19;border-radius:6px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container.chosen{border:2px solid #ccc;opacity:.5}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container{border:0;height:200px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._sortable-spot{border:2px dashed #ef9d19;border-radius:6px}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container.chosen ._sortable-spot{border:2px solid #ef9d19}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._sortable-label{position:absolute;bottom:-2.5rem;left:calc(50% - 0.5rem);font-size:1.5rem;font-family:Arial}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._arrow-right{LEFT:-36px}
+.single-course-wrapper .course-title{background-color:#fff}
 .single-course-wrapper .module-link{color:#444}
 .single-course-wrapper .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
 .single-course-wrapper .card.current{border:3px solid #ef9d19;margin-top:3rem !important}

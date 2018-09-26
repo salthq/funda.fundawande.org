@@ -1,0 +1,137 @@
+/* ==========================================================================
+* Single Quiz Questions Area
+*
+* Styling specific to the lesson page, single-lesson.twig
+*
+ ========================================================================== */
+
+.single-lesson-wrapper {
+    .quiz-questions {
+        span.grade {
+            display: none;
+        }
+
+        .custom-control {
+            &.custom-radio {
+                height: 2rem;
+                .custom-control-label {
+                    line-height: 2rem;
+                    &:before {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border: 1px solid $brand-primary__colour;
+                        background-color: white;
+                        left: -2.5rem;
+                    }
+                }
+                .custom-control-input:checked ~ .custom-control-label {
+                    font-weight: bold;
+                    &:before {
+                        background-color: $brand-primary__colour;
+                    }
+                    &:after {
+                        background-image:none;
+                    }
+                }
+            }
+            &.custom-radio-image {
+                padding-right: 15px;
+                padding-left: 15px;
+                .custom-control-label {
+                    border: 3px solid transparent;
+                    &:before {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border: 1px solid #ef9d19;
+                        background-color: white;
+                        left: calc(50% - 0.75rem);
+                        bottom: -2rem;
+                        border-radius: 50%;
+                        top: auto;
+                    }
+                }
+                .custom-control-input:checked ~ .custom-control-label {
+                    border: 3px solid $brand-primary__colour;
+                    border-radius: 6px;
+                    &:before {
+                        background-color: $brand-primary__colour;
+                    }
+                    &:after {
+                        background-image:none;
+                    }
+                }
+            }
+        }
+        .drag-and-drop-non-sequential {
+            ._option-images {
+                ._image-container {
+                    border: 2px solid $brand-primary__colour;
+                    border-radius: 6px;
+                    &.chosen {
+                        border: 2px solid $grey-secondary;
+                        opacity: 0.5;
+                    }
+                }
+            }
+            ._images-answers {
+                ._image-container {
+
+                    border-radius: 6px;
+                    ._sortable-spot {
+                        border: 2px dashed $brand-primary__colour;
+                    }
+                    &.chosen {
+
+                        ._sortable-spot {
+                            border: 2px solid $brand-primary__colour;
+                            border-radius: 2px;
+                        }
+                    }
+
+                }
+            }
+        }
+        .drag-and-drop-sequential {
+            ._option-images {
+                ._image-container {
+                    border: 2px solid $brand-primary__colour;
+                    border-radius: 6px;
+                    &.chosen {
+                        border: 2px solid $grey-secondary;
+                        opacity: 0.5;
+                    }
+                }
+            }
+            ._images-answers {
+                ._image-container {
+                    border: none;
+                    height: 200px;
+                    ._sortable-spot {
+                        border: 2px dashed $brand-primary__colour;
+                        border-radius: 6px;
+
+                    }
+                    &.chosen {
+
+                        ._sortable-spot {
+                            border: 2px solid $brand-primary__colour;
+
+                        }
+                    }
+                    ._sortable-label {
+                        position: absolute;
+                        bottom: -2.5rem;
+                        left: calc(50% - 0.5rem);
+                        font-size: 1.5rem;
+                        font-family: Arial;
+                    }
+                    ._arrow-right {
+                        LEFT: -36px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+

@@ -34,7 +34,7 @@ class FundaWande_Frontend {
 
 
         // Include single quiz
-        if (( is_singular('lesson') )) {
+        if (( is_singular('lesson') ) || ( is_singular('quiz') )) {
             wp_enqueue_script(FundaWande()->token .'-single-lesson', FundaWande()->plugin_url . 'assets/js/single-lesson.min.js', array(), FW_VER, true);
             wp_localize_script( FundaWande()->token .'-single-lesson', 'fundawande_ajax_object', array( 'ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php') );
 

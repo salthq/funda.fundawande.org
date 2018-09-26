@@ -37,6 +37,11 @@ class FundaWande_Lms {
         //  return apply_filters( 'sensei_user_started_course', $user_started_course, $course_id, $user_id );
 
 
+        remove_action( 'sensei_single_quiz_content_inside_before', array( 'Sensei_Quiz', 'the_title' ), 20 ); //output single quiz
+        remove_action( 'sensei_single_quiz_content_inside_before', array( 'Sensei_Quiz', 'the_user_status_message' ), 40 );
+        remove_action( 'sensei_single_quiz_questions_before', array( 'Sensei_Messages', 'send_message_link' ), 10 );
+
+
     }
     /**
      * Complete lesson functionality to track a lesson as complete

@@ -54,7 +54,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
 
                 ?>
 
-                <div class="col-sm-3 _option-image">
+                <div class="col-sm-3 _option-image d-flex justify-content-center">
                     <div class="_image-letters">
                         Image <?= chr(ord('A') + $count) ?>
                     </div>
@@ -76,9 +76,11 @@ $uniqueId = FundaWande()->question->getUniqueId();
             foreach ($question_data['answer_options'] as $id => $option) {
                 ?>
 
-                <div class="col-sm-3 _answer-container">
+                <div class="col-sm-3 mb-4 px-4 _answer-container">
                     <div class="_box-image-container _image-container <?php echo esc_attr($option['option_class']); ?>">
                         <div class="_sortable-spot"></div>
+
+                        <div class="_sortable-label"><?php echo $count+1; ?></div>
 
                         <div class="_box-container"></div>
 

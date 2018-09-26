@@ -43,7 +43,7 @@ if (class_exists('Timber')) {
 
 
     //Get the unit info for the current lesson
-    $unit = FundaWande()->lessons->get_unit_info( 31, $post->ID );
+    $unit = FundaWande()->lessons->get_unit_info($context['user']->fw_current_course, $post->ID );
 
     $context['unit'] = $unit;
 

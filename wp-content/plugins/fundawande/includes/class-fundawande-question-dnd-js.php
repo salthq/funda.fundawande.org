@@ -47,6 +47,16 @@ class FundaWande_Question_Dnd_Js
                             // Hide all other image options from inside the "to" element, e.g. when we're dragging over an existing image.
                             $(evt.to).find('img').css('display', 'none');
                             $(evt.dragged).css('display', '');
+                        },
+                        // Element dragging ended
+                        onEnd: function (evt, originalEvent) {
+//                            var itemEl = evt.item;  // dragged HTMLElement
+//                            evt.to;    // target list
+//                            evt.from;  // previous list
+                            $(evt.from).addClass('chosen')
+                            $(evt.to).parents('._image-container').addClass('chosen')
+//                            evt.oldIndex;  // element's old index within old parent
+//                            evt.newIndex;  // element's new index within new parent
                         }
                     });
                 });

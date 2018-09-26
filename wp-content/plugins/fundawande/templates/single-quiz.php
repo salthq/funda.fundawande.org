@@ -26,6 +26,10 @@
          *
          */
         do_action( 'sensei_single_quiz_content_inside_before', get_the_ID() );
+        $context = Timber::get_context();
+        // TODO Add function to create a complete message/ status message for quiz.
+        //$context['message'] = 'This is a complete message';
+        Timber::render(array('lms/embeds/quiz-status-message.twig'), $context);
 
     ?>
 
@@ -46,7 +50,6 @@
 	                     *
 	                     * @param string $the_quiz_id
 	                     */
-	                    do_action( 'sensei_single_quiz_questions_before', get_the_id() );
 
 	                ?>
 

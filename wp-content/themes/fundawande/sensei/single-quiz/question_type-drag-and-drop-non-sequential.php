@@ -53,7 +53,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 $imageHash = FundaWande()->question->getImageHash($parts[0]);
                 ?>
 
-                <div class="col-sm-3 _option-image">
+                <div class="col-sm-3 _option-image d-flex justify-content-center">
                     <div class="_image-letters">
                         Image <?= chr(ord('A') + $count - 1) ?>
                     </div>
@@ -74,7 +74,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
             </p>
         </div>
 
-        <div class="row _images-answers">
+        <div class="row _images-answers ">
             <?php
             // Shuffle answers again before echoing destination images.
             shuffle($question_data['answer_options']);
@@ -84,7 +84,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 $imageHash = FundaWande()->question->getImageHash($parts[1]);
                 ?>
 
-                <div class="col-sm-3 _answer-container">
+                <div class="col-sm-3 _answer-container justify-content-center">
                     <div class="<?php echo esc_attr($option['option_class']); ?> _image-container">
                         <?php echo wp_get_attachment_image($parts[1], ['390', '300'], '', ['class' => 'img-responsive']); ?>
 
