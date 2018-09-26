@@ -688,7 +688,7 @@ class FundaWande_Lms {
             $sub_unit_link = home_url('/'); 
         }        
 
-        //return $sub_unit_link;
+        return $sub_unit_link;
 
     } // end fw_get_current_lesson_link()
 
