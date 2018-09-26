@@ -646,6 +646,52 @@ class FundaWande_Lms {
 
     } // end fw_course_progress_at_module
 
+    /**
+     * Return a lesson link based on it's key and parent course
+     * @param string $sub_unit_key. The key for the user's current lesson
+     * @param int $course_id. The ID for the currently active course
+     * 
+     * @return string $sub_unit_link. The URL for the current lesson.  
+     */
+    public function fw_get_current_lesson_link($sub_unit_key, $course_id) {
+
+        // '_lesson_course' is a user meta field for the current active course, which could be in English or Xhosa. 
+        // The lesson's key is the same in both courses, so this meta query matches the key to the current active course. 
+        $args = array(
+            'number' => 1,
+            'post_type' => 'lesson',
+            'meta_query' => array(
+                array(
+                    'key' => 'fw_unique_key',
+                    'value' => $sub_unit_key
+                ),
+                array(
+                    'key' => '_lesson_course',
+                    'value' => $course_id
+                )
+            )
+        );
+
+        // Using just 'get_posts' returns an empty array for some reason
+        $sub_unit_list = Timber::get_posts($args);
+
+        //The meta query returns an array, but we just want the lesson object
+        if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
+            $sub_unit = array_shift($sub_unit_list);
+
+            $sub_unit_link = get_permalink($sub_unit->ID);
+        }
+        else {
+            // If no post is found which matches the query, add home_url as the link,
+            // which will take them to their course page. This should only happen if the key
+            // has been incorrectly set on the lesson editor screen. 
+            $sub_unit_link = home_url('/'); 
+        }        
+
+        return $sub_unit_link;
+
+    } // end fw_get_current_lesson_link()
+
 
     /**
      * Returns next and previous lesson IDs.

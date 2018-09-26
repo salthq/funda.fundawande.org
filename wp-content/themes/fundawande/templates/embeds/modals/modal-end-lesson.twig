@@ -22,7 +22,6 @@
                     <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
                         <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
                     {% endfor %}
-
                 </div>
                 <!-- TODO: Make the unit progress info dynamic -->
                 <p><strong>Unit Progress</strong> {{ completed_lessons }} / {{unit.lessons|length}} lessons complete</p>
