@@ -43,3 +43,15 @@ add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
  * Load Timber compatibility file.
  */
 require get_template_directory() . '/includes/functions-timber.php';
+
+
+// Ideally this function should be in class-fundawande-admin.php, but it doesn't trigger when added there. 
+// TODO: Find a way to add this function to the FW plugin
+function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_super_admin() && !current_user_can('editor') && $_SERVER['PHP_SELF'] != '/wp-admin/admin-ajax.php') {
+        add_filter('show_admin_bar', '__return_false');
+    }
+}
+
+add_action('init', 'remove_admin_bar');
+
