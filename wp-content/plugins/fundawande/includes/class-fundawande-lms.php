@@ -392,35 +392,6 @@ class FundaWande_Lms {
 
 
     }
-    /**
-     * Return a lesson link based on it's unique key and parent course
-     */
-    public function get_current_lesson_link($sub_unit_key, $course_id) {
-
-        $args = array(
-            'number' => 1,
-            'post_type' => 'lesson',
-            'meta_query' = array(
-                array(
-                    'key' => 'fw_unique_key',
-                    'value' => $sub_unit_key
-                ),
-                array(
-                    'key' => '_lesson_course',
-                    'value' => $course_id
-                )
-            )
-        );
-        $sub_unit_list = get_posts($args);
-
-        if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
-            $sub_unit = array_shift($sub_unit_list);
-        }
-        
-        $sub_unit_link = $sub_unit->link;
-
-        return $sub_unit_link;
-    }
 
     /**
      * Complete unit functionality to track a unit as complete
