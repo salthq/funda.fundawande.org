@@ -5,6 +5,10 @@
  * @package Pango
  */
 
+if( is_user_logged_in() ) {
+    wp_redirect(home_url('/'));
+}
+
 if ( class_exists( 'Timber' ) ) {
 
     $context = Timber::get_context();
