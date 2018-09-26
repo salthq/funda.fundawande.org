@@ -2,7 +2,6 @@ jQuery(document).ready( function($) {
 
     // Mark lesson complete and continue functionality
     $('#lesson-complete').click(function(e) {
-        e.preventDefault();
 
         var userID = $(this).data('user-id');
         var postID = $(this).data('post-id');
@@ -31,6 +30,8 @@ jQuery(document).ready( function($) {
     //Hide the minimized progress component on click and slide the expanded component in from the left
     $('#sidebar-minimized').click(function() {
         $('#sidebar-expanded').animate({'margin-left': '0px'});
+        $('.lesson-sidebar-expanded').removeClass('lesson-sidebar-absolute')
+        $('.lesson-sidebar-expanded').addClass('lesson-sidebar-fixed')
         $('#sidebar-minimized').hide();
 
     });
@@ -84,6 +85,8 @@ jQuery(document).ready( function($) {
 
     $('#sidebar-expanded').click(function() {
         $("#overlay").remove();
+        $('.lesson-sidebar-expanded').addClass('lesson-sidebar-absolute')
+        $('.lesson-sidebar-expanded').removeClass('lesson-sidebar-fixed')
     });
 
     //The sidebar must changed between absolute and fixed positionining depending on scroll position

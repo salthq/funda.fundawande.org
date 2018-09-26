@@ -65,9 +65,11 @@ class FundaWande_Modules {
                 $course_modules[$key]->link = get_term_link($module->term_id);
 
                 foreach($module_units  as $key2 => $unit) {
-                    $course_modules[$key]->units = new stdClass();
-                    $course_modules[$key]->units->ID = $unit;
-                    $course_modules[$key]->units->complete = FundaWande()->lms->fw_is_module_complete($unit);
+                    $course_modules[$key]->units = array();
+                    $unit_data = new stdClass();
+                    $unit_data->ID = $unit;
+                    $unit_data->complete = FundaWande()->lms->fw_is_unit_complete($unit);
+                    $course_modules[$key]->units[] = $unit_data;
                 }
                 //Get the custom module title
                 $course_modules[$key]->module_title = get_term_meta($module->term_id, 'module_title', true);
