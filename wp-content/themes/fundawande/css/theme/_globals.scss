@@ -11,6 +11,7 @@
 # Typography
 # Module Styling
 # Primary Brand Styling
+# Misc Styling
 --------------------------------------------------------------*/
 
 /*
@@ -324,4 +325,12 @@
     color: $white;
     }
 }
+
+/*
+ * Misc Styling
+ */
+
+ .text-tertiary {
+     color: $grey-tertiary;
+ }
 
