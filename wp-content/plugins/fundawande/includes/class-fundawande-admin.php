@@ -143,7 +143,7 @@ class FundaWande_Admin {
     function fw_change_lesson_title_text( $title, $post ){
      
         if  ( $post->post_type == 'lesson' ) {
-             $title = 'Enter the internal title for this lesson here ';
+             $title = 'Enter the internal title for this lesson here (this will not be visible to users)';
         }
 
         return $title;
