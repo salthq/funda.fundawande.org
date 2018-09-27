@@ -1,7 +1,7 @@
 <!-- Terms and Conditions Modal -->
 <div id = "terms-and-conditions" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content px-3 py-3">
+    <div class="modal-content {% if is_mobile %} p-2 {% else %} px-5 py-3 {% endif %}">
       <div class="d-flex m-3">
         <div class = "d-flex justify-content-center align-items-center w-100">
           <h5 class="modal-title pl-3"><strong>{{attribute(options, lang.prefix~'terms_and_conditions_title')}}</strong></h5>

@@ -1,6 +1,6 @@
 <div id = "end-unit-modal" class="modal m-5" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content px-5 py-3">
+    <div class="modal-content {% if is_mobile %} p-2 {% else %} px-5 py-3 {% endif %}">
       <div class="lesson-modal-header modal-header">  
         <h5 class="modal-title"><span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span><strong>Well done, {{user.display_name}}!</strong></h5>
         <!-- Commenting out as this button is not shown on mockups.
