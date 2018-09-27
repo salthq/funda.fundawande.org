@@ -320,6 +320,8 @@ body #page-wrapper{margin-top:60px;display:inline-block;width:100%}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
 .login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
 .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
+.login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
+.login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
 #wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:2}
 #wrapper-navbar .navbar{padding:0}
