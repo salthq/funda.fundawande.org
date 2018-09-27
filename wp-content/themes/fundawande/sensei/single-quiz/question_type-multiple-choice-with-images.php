@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<ul class="answers row">
+<ul class="answers row no-gutters pl-0">
 
 <?php
 $count = 0;

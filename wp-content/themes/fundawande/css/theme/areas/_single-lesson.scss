@@ -83,10 +83,14 @@
                 &-fixed {
                     position: fixed !important;
                     top: 100px;
+                    overflow-y: auto;
                 }
                 &-expanded {
                     margin-left: -500px; //Hide component
                     max-width: 500px;
+                    &.lesson-sidebar-expanded {
+                        bottom: 0;
+                    }
                     a.lesson-progress-marker {
                         z-index:1 ;
                         color: $text-primary__colour;

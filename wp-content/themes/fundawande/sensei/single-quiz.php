@@ -21,7 +21,7 @@ if (class_exists('Timber')) {
     $context = Timber::get_context();
     $post = new TimberPost();
     $context['post'] = $post;
-
+    do_action( 'sensei_single_quiz_content_inside_before', get_the_ID() );
     // Assign current user to context
     $user = new TimberUser();
     $context['user'] = $user;
