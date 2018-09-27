@@ -40,8 +40,8 @@ if (function_exists('acf_add_options_page')) {
 
     // Add Lesson Options Page
     acf_add_options_sub_page(array(
-        'page_title' 	=> 'Funda Wande Lesson Unit Options',
-        'menu_title' 	=> 'Lesson Unit Options',
+        'page_title' 	=> 'Funda Wande Lesson Options',
+        'menu_title' 	=> 'Lesson Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
 
