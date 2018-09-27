@@ -36,6 +36,8 @@ class FundaWande_Lms {
         add_filter('sensei_user_started_course', array( $this, 'fw_user_started_course'), 10,1);
         //  return apply_filters( 'sensei_user_started_course', $user_started_course, $course_id, $user_id );
 
+        add_action( 'sensei_user_lesson_reset', array( $this, 'fw_user_reset_quiz'),10,2);
+
 
         remove_action( 'sensei_single_quiz_content_inside_before', array( 'Sensei_Quiz', 'the_title' ), 20 ); //output single quiz
         remove_action( 'sensei_single_quiz_content_inside_before', array( 'Sensei_Quiz', 'the_user_status_message' ), 40 );
@@ -863,6 +865,37 @@ class FundaWande_Lms {
 
          return $media_url;
      }
+
+
+    /**
+     * Fires after an activity is reset to update the progress
+     *
+     **/
+    public function fw_user_reset_quiz($user_id, $lesson_id) {
+        $lesson_key = get_post_meta($lesson_id, 'fw_unique_key',true);
+        // Determine if an existing review exists and assign
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_sub_unit_progress',
+            'user_id' => $user_id,
+            'status' => $lesson_key,
+        );
+
+        $status = false;
+        $user_lesson_status = get_comments($current_status_args);
+        if ($user_lesson_status) {
+            // possibly returns array, we just want one object
+            if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
+                $user_lesson_status = array_shift($user_lesson_status);
+
+            }
+            error_log(print_r($user_lesson_status,true));
+            $status = wp_delete_comment($user_lesson_status->comment_ID);
+
+        }
+        return $status;
+
+    }
 
 
 

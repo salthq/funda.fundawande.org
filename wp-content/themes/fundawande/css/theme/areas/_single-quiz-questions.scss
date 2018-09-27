@@ -6,6 +6,11 @@
  ========================================================================== */
 
 .single-lesson-wrapper {
+    .quiz-submit {
+      &.reset, &.complete, &.save {
+          display: none!important;
+      }
+    }
     .quiz-questions {
         img {
             max-width: 100%;
@@ -59,11 +64,23 @@
                         height: 1.5rem;
                         border: 1px solid #ef9d19;
                         background-color: white;
-                        left: calc(50% - 0.75rem);
+                        left:50%;
+                        transform: translateX(-50%);
                         bottom: -2rem;
                         border-radius: 50%;
                         top: auto;
+                        @include breakpoint(phone) {
+
+                            right:-2.5rem;
+                            transform: translateY(-50%);
+                            top: 50%;
+                            left:auto;
+                            border-radius: 50%;
+                            bottom: auto;
+
+                        }
                     }
+
                 }
                 .custom-control-input:checked ~ .custom-control-label {
                     border: 3px solid $brand-primary__colour;
@@ -76,6 +93,9 @@
                     }
                 }
             }
+        }
+        .multiple-choice-with-images {
+
         }
         .drag-and-drop-non-sequential {
             ._option-images {
