@@ -39,7 +39,9 @@ class FundaWande_Admin {
         
         //Remove description column from module editor columns
         add_action('manage_edit-module_columns', array($this, 'fw_remove_description_column'), 100, 1);
-    
+        
+        //Change the placeholder text for lesson titles
+        add_filter( 'enter_title_here', array($this, 'fw_change_lesson_title_text'), 100, 2 );
 
 	} // End __construct()
 
@@ -135,5 +137,17 @@ class FundaWande_Admin {
         return $columns;
     } // end fw_remove_description_column()
 
+    /**
+     * Change the placeholder text for lesson titles
+     */
+    function fw_change_lesson_title_text( $title, $post ){
+     
+        if  ( $post->post_type == 'lesson' ) {
+             $title = 'Enter the internal title for this lesson here ';
+        }
+
+        return $title;
+   } // End fw_change_lesson_title_text()
+     
 
 } // End FundaWande_Admin Class
