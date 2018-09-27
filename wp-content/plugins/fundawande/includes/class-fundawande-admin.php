@@ -35,6 +35,10 @@ class FundaWande_Admin {
 
         //Remove the description input from module editor
         add_action('module_add_form', array($this, 'fw_remove_description_input'), 100);
+        add_action('module_edit_form', array($this, 'fw_remove_description_input'), 100);
+        
+        //Remove description column from module editor columns
+        add_action('manage_edit-module_columns', array($this, 'fw_remove_description_column'), 100, 1);
     
 
 	} // End __construct()
@@ -115,12 +119,21 @@ class FundaWande_Admin {
     /**
      * Remove the description input from module editor 
      */
-
     function fw_remove_description_input() {
         ?>
             <style>.term-description-wrap{display:none;}</style>
         <?php
     } // end fw_remove_description_input()
+
+    /**
+     * Remove description column from module editor columns
+     */
+    function fw_remove_description_column($columns) {
+        if( isset( $columns['description'] ) )
+            unset( $columns['description'] );   
+    
+        return $columns;
+    } // end fw_remove_description_column()
 
 
 } // End FundaWande_Admin Class
