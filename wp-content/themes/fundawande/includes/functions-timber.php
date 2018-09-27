@@ -158,8 +158,8 @@ class FundaWandeSite extends TimberSite {
 		//$twig->addExtension( new Twig_Extension_StringLoader() );
 		//$twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
-	}
-
+    }
+    
 }
 
 new FundaWandeSite();

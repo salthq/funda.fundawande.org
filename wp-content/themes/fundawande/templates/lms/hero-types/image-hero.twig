@@ -1,4 +1,6 @@
 <!-- Content Type: Image Hero -->
-<div class = "col-sm-12 p-0">
-    <img class = "d-block w-100" src = {{media_url~content.image_file_name}}>
+<div class = "col-sm-12 p-0">        
+    {# Remove whitespace from beginning and end of the file name before appending to media url #}
+    {% set file_name =  content.image_file_name|trim %}
+    <img class = "d-block lesson-carousel-image" src ="{{ media_url~file_name }}">
 </div>
