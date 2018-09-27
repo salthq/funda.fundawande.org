@@ -898,5 +898,92 @@ class FundaWande_Lms {
     }
 
 
+    /**
+     * Get the current Unit based off a user
+     *
+     * @return string $unit_key return the unit key of the current Unit
+     */
+    public function fw_get_current_unit($user_id = null) {
+
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
+//        $current_sub_unit_key = get_user_meta($user_id,'fw_current_sub_unit',true);
+//        $current_unit = Sensei()->modules->get_lesson_module($next_lesson_id);
+//        $changed = false;
+//
+//        $lesson_unit = Sensei()->modules->get_lesson_module($lesson_id);
+        $lesson_unit_key = get_term_meta($lesson_unit->term_id, 'fw_unique_key',true);
+
+        $lesson_module_id = $lesson_unit->parent;
+        $lesson_module_key = get_term_meta($lesson_module_id, 'fw_unique_key',true);
+        $lesson_nav = $this->fw_get_prev_next_lessons($lesson_id);
+
+        if (!empty($lesson_nav['next'])) {
+            $next_lesson_id = $lesson_nav['next'];
+            $next_lesson_key = get_post_meta($next_lesson_id, 'fw_unique_key',true);
+            // Set current sub unit to the next lesson
+            update_user_meta($user_id,'fw_current_sub_unit',$next_lesson_key);
+
+            $next_lesson_unit = Sensei()->modules->get_lesson_module($next_lesson_id);
+            $next_lesson_unit_key = get_term_meta($next_lesson_unit->term_id, 'fw_unique_key', true);
+
+            $next_lesson_module_id = $next_lesson_unit->parent;
+            $next_lesson_module_key = get_term_meta($next_lesson_module_id, 'fw_unique_key', true);
+        } else {
+            $next_lesson_unit_key = '';
+            $next_lesson_module_key = '';
+
+        }
+
+        if ($lesson_unit_key !== $next_lesson_unit_key) {
+            // complete the current unit
+            $changed = true;
+            $this->fw_unit_complete($lesson_unit_key,$user_id);
+
+            // Set current unit to the next lesson unit
+            update_user_meta($user_id,'fw_current_unit',$next_lesson_unit_key);
+            // Set current unit progress to 0, as we are in a new unit
+            update_user_meta($user_id,'fw_current_unit_progress',0);
+
+
+
+        } else {
+            $unit_progress = $this->fw_unit_progress_at_lesson($lesson_id);
+            update_user_meta($user_id,'fw_current_unit_progress',$unit_progress);
+            update_user_meta($user_id,'fw_current_unit',$lesson_unit_key);
+
+
+        }
+
+        if ($lesson_module_key !== $next_lesson_module_key) {
+            // complete the current module
+            $changed = true;
+            $this->fw_module_complete($lesson_module_key,$user_id);
+
+            // Set current module to the next lesson unit
+            update_user_meta($user_id,'fw_current_module',$next_lesson_module_key);
+            // Set current module progress to 0, as we are in a new module
+            update_user_meta($user_id,'fw_current_module_progress',0);
+        } else {
+            // get lesson unit to determine term ID
+            $unit = Sensei()->modules->get_lesson_module($lesson_id);
+            $module_progress = $this->fw_module_progress_at_unit($unit->term_id);
+
+            update_user_meta($user_id,'fw_current_module_progress',$module_progress);
+            update_user_meta($user_id,'fw_current_module',$lesson_module_key);
+
+            $course_module_progress = $this->fw_course_progress_at_module($unit->parent);
+            update_user_meta($user_id,'fw_course_module_progress',$course_module_progress);
+
+
+
+        }
+
+        return $changed;
+
+
+    }
 
 } // end FundaWande_Lms
