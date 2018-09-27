@@ -51,6 +51,10 @@ class FundaWande_Frontend {
 		//Include Login Modals
 		wp_enqueue_script('login-modals', FundaWande()->plugin_url . 'assets/js/login-modals.min.js', array('jquery'), FundaWande()->version, true);
 
+		//Include scroll to current script
+		wp_enqueue_script('scroll-to-current', FundaWande()->plugin_url . 'assets/js/scroll-to-current.min.js', array('jquery'), FundaWande()->version, true);
+
+
 	} // End enqueue_scripts()
 
 } // End FundaWande_Frontend Class
