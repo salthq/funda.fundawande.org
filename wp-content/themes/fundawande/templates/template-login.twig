@@ -7,10 +7,10 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper login-wrapper background-secondary d-flex" xmlns="http://www.w3.org/1999/html">
-        <div class="container card login-card m-5">
+        <div class="container card login-card m-2">
             <div class="row login-row my-1">
                 <!-- Login Form -->
-                <div class="col-12 col-md-6 login my-md-5 p-md-5">
+                <div class="col-12 col-md-6 login my-md-5 px-md-5">
                     <div class="text-center login-header">
                         {{ source('assets/logos/fw_logo_landscape.svg') }}
                         <h5 class = "mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
@@ -34,10 +34,20 @@
                     </div>
                 </div>
                 <!-- Desktop sidebar -->
-                <div class="col-12 col-md-6 sidebar p-5 d-none d-md-block">
-                    <div class="text-center sidebar-img"><img class="img img-fluid" src="{{post.get_field('sidebar_image')}}"></div>
+                <div class="col-12 col-md-6 sidebar px-5 d-none d-md-block">
+                    <div class="text-center sidebar-media">
+                        {% for content in post.get_field('sidebar_media') %}
+                            {# Image #}
+                            {% if content.acf_fc_layout == 'image' %}
+                                {% include '/embeds/login-sidebar-image.twig' %}
+                            {% endif %}    
+                            {# Video #}
+                            {% if content.acf_fc_layout == 'video' %}
+                                {% include '/embeds/login-sidebar-video.twig' %}
+                            {% endif %}  
+                        {% endfor %}
+                    </div>
                     <hr>
-                    <h2 class="my-3 text-center">{{ post.get_field(lang.prefix~'sidebar_title') }}</h2>
                     <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
                 </div>
             </div>
