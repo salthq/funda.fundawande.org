@@ -32,6 +32,9 @@ class FundaWande_Admin {
 
         //Remove Lesson information meta box
         add_action('admin_menu', array($this, 'fw_remove_lesson_info_metabox'), 100);
+
+        //Remove the description input from module editor
+        add_action('module_add_form', array($this, 'fw_remove_description_input'), 100);
     
 
 	} // End __construct()
@@ -109,6 +112,15 @@ class FundaWande_Admin {
         remove_meta_box('lesson-info', $lesson, 'normal');
     } // end fw_remove_lesson_info_metabox()
     
-     
+    /**
+     * Remove the description input from module editor 
+     */
+
+    function fw_remove_description_input() {
+        ?>
+            <style>.term-description-wrap{display:none;}</style>
+        <?php
+    } // end fw_remove_description_input()
+
 
 } // End FundaWande_Admin Class
