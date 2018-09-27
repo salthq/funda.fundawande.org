@@ -318,13 +318,13 @@
             &-progress-mobile {
                 position: fixed !important;
                 bottom: 0;
-                height: 50px;
+                height: 30px;
                 width: 100%;
                 z-index: 1;
                 &-minimized {
                     .lesson-progress-module-number {
                         h4 {
-                            line-height: 50px;
+                            line-height: 30px;
                         }
                     }
                     .lesson-progress-markers {
@@ -333,22 +333,22 @@
                     }
                     .lesson-progress-marker {
                         z-index:1 ;
-                        width: 20px;
-                        height: 20px;
+                        width: 18px;
+                        height: 18px;
                         border-radius: 50%;
                         background: $grey-secondary;
                         &.current {
                             border:2px solid;
                             width: 24px;
                             height: 24px;
-                            background: $module0-secondary__colour!important;
+                            background: white!important;
                         }
 
                     }
 
                     .lesson-progress-divider {
                         min-width: 10px;
-                        min-height: 20px;
+                        min-height: 18px;
                         position: relative;
                         &:before {
                             content: "";
