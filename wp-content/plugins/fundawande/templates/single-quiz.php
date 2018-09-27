@@ -56,10 +56,11 @@
 
 
 	                <ol id="sensei-quiz-list">
-
+                    <?php $count = 1 ?>
 	                <?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
 
 	                    <li class="<?php sensei_the_question_class();?>">
+                            <span class="question-number"><b><?php echo $count; ?>.</b></span>
 
 	                        <?php
 
@@ -94,6 +95,7 @@
 	                        ?>
 
 	                    </li>
+                        <?php $count++; ?>
 
 	                <?php endwhile; ?>
 

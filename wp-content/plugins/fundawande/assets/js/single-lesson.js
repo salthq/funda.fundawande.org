@@ -105,4 +105,22 @@ jQuery(document).ready( function($) {
         
     })
 
+    // // make custom file name change
+    $('.custom-file-input').on('change',function(){
+        var fileName = $(this).attr('name');
+        // console.log(fileName);
+
+    });
+    // make custom file name change
+    $('input[type="file"]').change(function(e){
+
+        var fileName = e.target.files[0].name;
+
+        // alert('The file "' + fileName +  '" has been selected.');
+        const label = $(this).siblings('.custom-file-label');
+        console.log(label);
+        label.find('.custom-file-meta').html('<b>Submitted file: </b>'+fileName);
+        label.find('label').html('Change file');
+    });
+
 });

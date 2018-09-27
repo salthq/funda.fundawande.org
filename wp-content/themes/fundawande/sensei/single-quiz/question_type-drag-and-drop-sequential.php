@@ -75,22 +75,19 @@ $uniqueId = FundaWande()->question->getUniqueId();
             $count = 0;
             foreach ($question_data['answer_options'] as $id => $option) {
                 ?>
-
-                <div class="col-sm-3 mb-4 px-4 _answer-container">
+                <?php if ($count > 0)  { ?>
+                    <div class="col-sm-auto px-0 _arrow d-flex align-items-center justify-content-center">
+                        <img class="d-md-block d-none" src="/wp-content/themes/fundawande/assets/lms/right_arrow.svg">
+                        <img class="d-md-none d-block" src="/wp-content/themes/fundawande/assets/lms/down_arrow.svg">
+                    </div>
+                <?php } ?>
+                <div class="col-6 col-md my-4 mt-md-0 px-4 _answer-container">
                     <div class="_box-image-container _image-container <?php echo esc_attr($option['option_class']); ?>">
                         <div class="_sortable-spot"></div>
 
-                        <div class="_sortable-label"><?php echo $count+1; ?></div>
+                        <div class="_sortable-label"><em><?php echo ($count+1).'.'; ?></em></div>
 
                         <div class="_box-container"></div>
-
-                        <div class="_arrow-right">
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </div>
-
-                        <div class="_arrow-down">
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                        </div>
                     </div>
 
                     <div class="_mobile-images-answers">
@@ -103,14 +100,18 @@ $uniqueId = FundaWande()->question->getUniqueId();
                             $imageHash = FundaWande()->question->getImageHash($imageId);
                             $checked = array_key_exists($count, $userAnswers) ? $userAnswers[$count] === $imageHash : false;
                             ?>
-                            <div>
-                                <label>
-                                    <input type="radio" <?= $checked ? 'checked' : '' ?>
-                                           data-index="<?= $count ?>"
-                                           name="<?= 'question_' . $question_data['ID'] . '-option-' . $count ?>"
-                                           value="<?= $imageHash ?>">
+                            <div class=" custom-control custom-radio">
+                                <input id="<?= 'question_' . $question_data['ID'] . '-'.$count.'-' . '-option-' . $count2 ?>"
+                                       class="custom-control-input" type="radio" <?= $checked ? 'checked' : '' ?>
+                                       data-index="<?= $count ?>"
+                                       name="<?= 'question_' . $question_data['ID'] . '-option-' . $count ?>"
+                                       value="<?= $imageHash ?>"
+                                />
+
+                                <label class="custom-control-label" for="<?= 'question_' . $question_data['ID'] . '-'.$count.'-' .  '-option-' . $count2 ?>">
                                     Image <?= chr(ord('A') + $count2) ?>
                                 </label>
+
                             </div>
                             <?php
                             $count2++;

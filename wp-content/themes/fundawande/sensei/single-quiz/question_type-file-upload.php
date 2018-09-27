@@ -50,12 +50,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <?php } ?>
 
 <?php if( ! $question_data[ 'lesson_complete' ]  ) { ?>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="file_upload_<?php echo  $question_data[ 'ID' ] ; ?>" name="file_upload_<?php echo  $question_data[ 'ID' ] ; ?>">
+        <input type="hidden" name="sensei_question[<?php echo  $question_data[ 'ID' ]; ?>]"
+               value="<?php echo esc_attr(  $question_data[ 'user_answer_entry' ] ); ?>" />
+        <div class="d-flex custom-file-label align-items-center">
+            <label class="" for="file_upload_<?php echo  $question_data[ 'ID' ] ; ?>">Choose file</label>
+            <aside class="ml-3 custom-file-meta"><?php echo  $question_data[ 'max_upload_size' ]; ?></aside>
 
-    <input type="file" name="file_upload_<?php echo  $question_data[ 'ID' ] ; ?>" />
-
-    <input type="hidden" name="sensei_question[<?php echo  $question_data[ 'ID' ]; ?>]"
-           value="<?php echo esc_attr(  $question_data[ 'user_answer_entry' ] ); ?>" />
-
-    <aside class="max_upload_size"><?php echo  $question_data[ 'max_upload_size' ]; ?></aside>
+        </div>
+    </div>
 
 <?php } ?>
