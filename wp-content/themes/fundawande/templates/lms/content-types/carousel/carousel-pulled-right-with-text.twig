@@ -16,7 +16,9 @@
                     {% for item in content.carousel_items %}
                         <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
                             <div class = "lesson-image-wrapper">
-                                <img class = "d-block lesson-carousel-image" src ="{{ media_url~item.image_file_name }}">
+                                {# Remove whitespace from beginning and end of the file name before appending to media url #}
+                                {% set file_name =  item.image_file_name|trim %}
+                                <img class = "d-block lesson-carousel-image" src ="{{ media_url~file_name }}">
                                 <!-- Navigation Buttons -->
                                 <div class = "container">
                                     <div class = "row">
