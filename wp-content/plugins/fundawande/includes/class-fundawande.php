@@ -182,7 +182,10 @@ class FundaWande_Main {
 
         // Setup module functionality class
 		$this->modules = new FundaWande_Modules();
-		
+
+        // Setup units functionality class
+		$this->units = new FundaWande_Units();
+
 		// Setup lesson functionality class
 		$this->lessons = new FundaWande_Lessons();
 
