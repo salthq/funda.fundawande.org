@@ -32,7 +32,16 @@ class FundaWande_Admin {
 
         //Remove Lesson information meta box
         add_action('admin_menu', array($this, 'fw_remove_lesson_info_metabox'), 100);
-    
+
+        //Remove the description input from module editor
+        add_action('module_add_form', array($this, 'fw_remove_description_input'), 100);
+        add_action('module_edit_form', array($this, 'fw_remove_description_input'), 100);
+        
+        //Remove description column from module editor columns
+        add_action('manage_edit-module_columns', array($this, 'fw_remove_description_column'), 100, 1);
+        
+        //Change the placeholder text for lesson titles
+        add_filter( 'enter_title_here', array($this, 'fw_change_lesson_title_text'), 100, 2 );
 
 	} // End __construct()
 
@@ -109,6 +118,36 @@ class FundaWande_Admin {
         remove_meta_box('lesson-info', $lesson, 'normal');
     } // end fw_remove_lesson_info_metabox()
     
+    /**
+     * Remove the description input from module editor 
+     */
+    function fw_remove_description_input() {
+        ?>
+            <style>.term-description-wrap{display:none;}</style>
+        <?php
+    } // end fw_remove_description_input()
+
+    /**
+     * Remove description column from module editor columns
+     */
+    function fw_remove_description_column($columns) {
+        if( isset( $columns['description'] ) )
+            unset( $columns['description'] );   
+    
+        return $columns;
+    } // end fw_remove_description_column()
+
+    /**
+     * Change the placeholder text for lesson titles
+     */
+    function fw_change_lesson_title_text( $title, $post ){
+     
+        if  ( $post->post_type == 'lesson' ) {
+             $title = 'Enter the internal title for this lesson here (this will not be visible to users)';
+        }
+
+        return $title;
+   } // End fw_change_lesson_title_text()
      
 
 } // End FundaWande_Admin Class

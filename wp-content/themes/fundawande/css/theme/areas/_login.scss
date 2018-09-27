@@ -106,6 +106,14 @@
   border: 1px solid $grey-tertiary;
   border-radius: 5px;
   color: #787878;
+  &:hover {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+  }
+  &:active {
+    background-color: $grey-tertiary;
+    color: $white !important;
+  }
 }
 
 .active-button {
