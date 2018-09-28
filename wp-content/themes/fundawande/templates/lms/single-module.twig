@@ -1,0 +1,123 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper single-module-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+
+        <div class = "container-fluid">
+            <div class = "row module-title justify-content-between">
+                <div class = "col-2 ">
+                    <a class = "button-secondary module-btn-outline-{{module_number}} py-2 py-md-4 my-4" href = "{{course_link}}">
+                        <span class="mb-0 mb-md-2 d-inline-block">{{source('/assets/arrow_left.svg')}}</span>
+                        <br>
+                        <span class = "d-none d-md-block button-text-width-limit">{{attribute(options, lang.prefix~'back_to_modules_text')}}</span>
+                    </a>
+                </div>
+                <div class = "col col-md-8 text-center">
+
+                    <h1 class = "mt-4"><strong>Module {{module_number}}</strong></h1>
+                    <h1 class = "text-center mb-4">{{module_title }}</h1>
+                </div>
+                <div class = "col-2 "></div>
+            </div>
+        </div>
+        <div class = "container-fluid background-secondary">
+            <div class = "container p-3">
+                {% for unit in units %}
+                    <div class = "unit card my-3 {% if unit.current %}current{% endif %}">
+                        {% if unit.current %}
+                            <span class="current-unit-text">{{attribute(options, lang.prefix~'current_unit_text')}}</span>
+                        {% endif %}
+                        <div class = "card-body">
+                            <div class = "row">
+                                <div class = "col-12">
+                                    <!-- Unit Card Header -->    
+                                    <div class = "row unit-header justify-content-between">
+                                        <div class = "col-12 col-md-6">
+                                            <div class = "unit-header-content d-flex">
+                                                <div class = "unit-header-counter d-flex mr-2 px-2">
+                                                    <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
+                                                </div>
+                                                {% set completed = 0 %}
+                                                {% for  lesson in unit.lessons  %}
+                                                    {% if lesson.complete %}
+                                                        {% set completed = completed + 1 %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <div class = "unit-header-text">
+                                                    <h2><strong>{{unit.module_title}}</strong></h2>
+                                                    <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} {{attribute(options, lang.prefix~'lessons_complete_text')}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Unit navigation buttons tablet and desktop-->
+                                        <div class = "col-12 col-md-auto text-right d-none d-md-flex">
+                                            <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                                <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
+                                            </a>
+                                            {% if unit.current or unit.complete %}
+                                            <a class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                                {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                            <!-- Unit Card Content -->
+                            <div class = "row unit-content">
+                                <div class = "col-sm-11">
+                                    <p>{{unit.module_description}}</p>
+                                    <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
+                                        {% for lesson in unit.lessons %}
+                                            <div class = "sub-units-icon {%  if lesson.complete %}complete module-divider-before-{{ module_number }} module-after-bg-{{ module_number }}{% endif %} row text-center flex-md-row flex-column col-md-2 no-gutters pb-3">
+                                                <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">
+
+                                                </div>
+                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-svg-fill-{{ module_number }}  module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                                                    <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                    {% set image = source('assets/lms/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
+                                                    {% if image %}
+                                                        {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
+                                                    {% else %}
+                                                        {{ source('assets/lms/book_icon.svg') }}
+                                                    {% endif %}
+                                                    <div class="d-flex flex-column justify-content-center py-1 py-md-2 pl-2 pl-md-0 lesson-progress-text">
+                                                        <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                        <p class = "m-0">{{lesson.title}}</p>
+                                                    </div>
+                                                </a>
+
+                                            </div>
+
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <!--Unit navigation buttons mobile-->
+                                <div class = "col-sm-12 text-right d-flex d-md-none">
+                                    <hr>
+                                    <a class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                        <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
+                                    </a>
+                                    {% if unit.current or unit.complete %}
+                                    <a class = "btn module-btn-fill-{{module_number}} unit-header-navigation" href="">
+                                        <small>{{attribute(options, lang.prefix~'navigation_text')}}</small> <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}

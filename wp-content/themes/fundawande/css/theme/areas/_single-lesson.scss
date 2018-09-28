@@ -1,0 +1,388 @@
+/* ==========================================================================
+* Single Lesson Area
+*
+* Styling specific to the lesson page, single-lesson.twig
+*
+ ========================================================================== */
+
+.single-lesson-wrapper {
+    .lesson {
+        &-header {
+            box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important ;
+        }
+        &-navigation {
+            &-top {
+                align-items: center;
+            }
+            &-bottom {
+                .btn {
+                    width: 200px;
+                }
+            }
+        }
+        //TODO: re-write carousel CSS as the arrow pointers are not whre they should be
+        &-carousel {
+            &-image {
+                width: 100%;
+            }
+            @include breakpoint(desktop) {
+                &-image {
+                    height: 600px;
+                }
+            }
+            @include breakpoint(phone) {
+                &-image {
+                    height: 220px;
+                }
+            }
+            &-control {
+                position: absolute;
+                bottom: -3em;
+
+                @include breakpoint(phone) {
+                    bottom: -1em;
+                }
+
+                &-prev {
+                    left: 2em;
+                }
+                &-next {
+                    right: 2em;
+                }
+
+                &-icon {
+                    @include breakpoint(phone) {
+                        svg {
+                            width: 33px;
+                            height: 33px;
+                        }
+                    }
+                }
+            }
+        }
+        &-modal {
+            &-header {
+                justify-content: center;
+            }
+            &-footer {
+                flex-direction: column;
+            }
+        }
+        &-progress {
+            background-color: $white;
+
+        }
+        @include breakpoint(tablet) {
+            &-sidebar {
+                box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+                display: inline-block;
+                z-index: 10;
+                &-absolute {
+                    position: absolute;
+                }
+                &-fixed {
+                    position: fixed !important;
+                    top: 100px;
+                    overflow-y: auto;
+                }
+                &-expanded {
+                    margin-left: -500px; //Hide component
+                    max-width: 500px;
+                    &.lesson-sidebar-expanded {
+                        bottom: 0;
+                    }
+                    a.lesson-progress-marker {
+                        z-index:1 ;
+                        color: $text-primary__colour;
+                        .title {
+                            font-size: 14px;
+                        }
+                        &:hover {
+                            opacity: 0.7;
+                            text-decoration: none;
+                        }
+                        svg {
+                            height: 50px;
+                            width: 50px;
+                            #icon-inner {
+                                fill :white;
+                            }
+                        }
+                        .lesson-progress-text {
+                            line-height: 1;
+                        }
+                        &.disabled {
+                            svg {
+                                fill: $grey-secondary;
+                                #icon-inner {
+                                    fill :$text-primary__colour;
+                                }
+
+
+                            }
+                            &:hover {
+                                cursor: default;
+                                opacity: 1;
+                            }
+
+                        }
+                        &.current {
+                            box-sizing: border-box;
+                            border: 3px solid;
+                            border-radius: 28px 6px 6px 28px;
+                            z-index: 1;
+                            background: white;
+                            svg {
+                                #inner {
+                                    opacity: 0.7;
+                                }
+                                #icon-inner {
+                                    fill :$text-primary__colour;
+                                }
+
+
+                            }
+
+                        }
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 20px;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                            background-size: auto 7px;
+                            width: 4px;
+                            height: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            left: 23px;
+                            top: -1px;
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
+                }
+                &-minimized {
+                    max-width: 150px;
+                    min-height: 50px;
+                    .lesson-progress-marker {
+                        z-index:1 ;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background: $grey-secondary;
+                        &.current {
+                            border:2px solid;
+                            width: 24px;
+                            height: 24px;
+                            background: white!important;
+                        }
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 20px;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            background-size: auto 7px;
+                            width: 4px;
+                            height: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            top: 0;
+                            left: 23px;
+
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
+                }
+                &-text {
+                    font-size: 14px;
+                }
+                &-module-titles {
+                    border-bottom: 1px solid $grey-secondary;
+                }
+            }
+        }
+        @include breakpoint(phone) {
+            &-sidebar {
+                display: none;
+                &-component {
+                    display: none;
+                }
+            }
+            &-progress-mobile-modal {
+                a.lesson-progress-marker {
+                    z-index:1 ;
+                    color: $text-primary__colour;
+                    &:hover {
+                        opacity: 0.7;
+                        text-decoration: none;
+                    }
+                    svg {
+                        height: 50px;
+                        width: 50px;
+                        #icon-inner {
+                            fill :white;
+                        }
+                    }
+                    .lesson-progress-text {
+                        line-height: 1;
+                    }
+                    &.disabled {
+                        svg {
+                            fill: $grey-secondary;
+                            #icon-inner {
+                                fill :$text-primary__colour;
+                            }
+
+
+                        }
+                        &:hover {
+                            cursor: default;
+                            opacity: 1;
+                        }
+
+                    }
+                    &.current {
+                        box-sizing: border-box;
+                        border: 3px solid;
+                        border-radius: 28px 6px 6px 28px;
+                        z-index: 1;
+                        background: white;
+                        svg {
+                            #inner {
+                                opacity: 0.7;
+                            }
+                            #icon-inner {
+                                fill :$text-primary__colour;
+                            }
+
+
+                        }
+
+                    }
+                }
+
+                .lesson-progress-divider {
+                    min-width: 10px;
+                    min-height: 20px;
+                    position: relative;
+                    &:before {
+                        content: "";
+                        background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                        background-size: auto 7px;
+                        width: 4px;
+                        height: calc(100% + 2px);
+                        border-radius: 0;
+                        position: absolute;
+                        left: 23px;
+                        top: -1px;
+
+                    }
+                    &.complete {
+
+                    }
+                    &:first-of-type {
+                        min-height: 0;
+                        min-width: 0;
+                        &:before {
+                            display: none;
+
+                        }
+                    }
+                }
+            }
+            &-progress-mobile {
+                position: fixed !important;
+                bottom: 0;
+                height: 30px;
+                width: 100%;
+                z-index: 1;
+                &-minimized {
+                    .lesson-progress-module-number {
+                        h4 {
+                            line-height: 30px;
+                        }
+                    }
+                    .lesson-progress-markers {
+                        overflow: scroll;
+                        flex-wrap: nowrap;
+                    }
+                    .lesson-progress-marker {
+                        z-index:1 ;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 50%;
+                        background: $grey-secondary;
+                        &.current {
+                            border:2px solid;
+                            width: 24px;
+                            height: 24px;
+                            background: white!important;
+                        }
+
+                    }
+
+                    .lesson-progress-divider {
+                        min-width: 10px;
+                        min-height: 18px;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            background: linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            background-size:7px auto;
+                            height: 4px;
+                            width: calc(100% + 2px);
+                            border-radius: 0;
+                            position: absolute;
+                            top: 7px;
+
+
+                        }
+                        &.complete {
+
+                        }
+                        &:first-of-type {
+                            min-height: 0;
+                            min-width: 0;
+                            display: none;
+                            &:before {
+                                display: none;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+

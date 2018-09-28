@@ -1,0 +1,48 @@
+/* ==========================================================================
+* Main Menu Modal
+*
+* Styling specific to main menu modal
+*
+ ========================================================================== */
+#main-menu-modal {
+  .modal-dialog {
+    margin-top: $navbar-height;
+    margin-left: 0;
+    @include breakpoint(phone) {
+      margin-top: $navbar-height-mobile;
+    }
+    .modal-content {
+      border: none;
+      border-radius: 0 6px 6px 0;
+      width: auto;
+      display: inline-block;
+      a {
+        color: $text-primary__colour;
+        border-bottom: 1px solid $grey-secondary;
+        &:last-of-type {
+          border-bottom:none;
+        }
+        &:hover {
+          text-decoration: none;
+          opacity: 0.7;
+        }
+        span {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+}
+
+.admin-bar {
+  #main-menu-modal {
+    .modal-dialog {
+      margin-top: $navbar-height + $adminbar-height;
+      @include breakpoint(phone) {
+        margin-top: $navbar-height-mobile + $adminbar-height-mobile;
+      }
+    }
+
+  }
+}

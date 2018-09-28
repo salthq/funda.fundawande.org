@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Sound_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.5,2.5 L22.5,22.5" id="path-1"></path>
+        <filter x="-7.7%" y="-7.7%" width="115.4%" height="115.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="1.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feMorphology radius="1.5" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowInner" result="shadowInner"></feOffset>
+            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sound_icon">
+            <g id="path-1-link" fill="#000000" fill-rule="nonzero">
+                <path d="M4.6875,8.59375 L0,8.59375 L0,16.40625 L4.6875,16.40625 L4.6875,17.1875 L10.9375,23.4375 L10.9375,1.5625 L4.6875,7.8125 L4.6875,8.59375 Z M14.1849132,2.3970115 C19.02842,3.2739794 22.623963,7.502717 22.623963,12.4903945 C22.623963,17.5190008 18.970387,21.7711553 14.0754817,22.6029959 L14.0625,25 C20.240439,24.1573134 25,18.877696 25,12.4903945 C25,6.1498332 20.309842,0.9008038 14.1978949,0 L14.1849132,2.3970115 Z M14.0625,7.8599702 C14.2538689,7.8286866 14.4494992,7.8125 14.6484375,7.8125 C16.9136679,7.8125 18.75,9.9111652 18.75,12.5 C18.75,15.0888348 16.9136679,17.1875 14.6484375,17.1875 C14.4494992,17.1875 14.2538689,17.1713134 14.0625,17.1400298 L14.0625,7.8599702 Z" id="path-1"></path>
+            </g>
+            <g id="path-1-link" fill="#FFFFFF" fill-rule="nonzero">
+                <path d="M4.6875,8.59375 L0,8.59375 L0,16.40625 L4.6875,16.40625 L4.6875,17.1875 L10.9375,23.4375 L10.9375,1.5625 L4.6875,7.8125 L4.6875,8.59375 Z M14.1849132,2.3970115 C19.02842,3.2739794 22.623963,7.502717 22.623963,12.4903945 C22.623963,17.5190008 18.970387,21.7711553 14.0754817,22.6029959 L14.0625,25 C20.240439,24.1573134 25,18.877696 25,12.4903945 C25,6.1498332 20.309842,0.9008038 14.1978949,0 L14.1849132,2.3970115 Z M14.0625,7.8599702 C14.2538689,7.8286866 14.4494992,7.8125 14.6484375,7.8125 C16.9136679,7.8125 18.75,9.9111652 18.75,12.5 C18.75,15.0888348 16.9136679,17.1875 14.6484375,17.1875 C14.4494992,17.1875 14.2538689,17.1713134 14.0625,17.1400298 L14.0625,7.8599702 Z" id="path-1"></path>
+            </g>
+            <g id="mute-line" stroke-linecap="square">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use stroke="#FFFFFF" stroke-width="3" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

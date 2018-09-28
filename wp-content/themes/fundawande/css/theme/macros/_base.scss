@@ -1,0 +1,37 @@
+// ==========================================================================
+// Base Styles
+//
+// Set your global base styles
+//
+// ==========================================================================
+
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+  font-size: $base__font-size;
+  line-height: ($base__line/$base__font-size);
+  font-family: $font-family--primary;
+}
+
+header {
+  text-align:center;
+  padding: em(48px) 0;
+}
+
+h1 {
+  font-weight: $font-weight--light;
+  font-size: em(42px);
+  line-height: (46px / 42px);
+  margin-bottom: em(70px, 42px);
+	color: palette(grey, x-dark);
+}
+
+h2 {
+  font-family: $font-family--secondary;
+  font-weight: $font-weight--thin;
+  font-size: em(24px);
+	color: palette(grey, light);
+}

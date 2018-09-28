@@ -1,0 +1,311 @@
+/* ==========================================================================
+* Single Module Area
+*
+* Styling specific to the module page, single-module.twig
+*
+ ========================================================================== */
+
+ .single-module-wrapper {
+    .unit {
+        position: relative;
+        .current-unit-text {
+            display: none;
+        }
+        &.current {
+            border: 3px solid $brand-primary__colour;
+            margin-top: 3rem!important;
+            .current-unit-text {
+                display: block;
+                position: absolute;
+                font-size: 17px;
+                font-style: italic;
+                color: white;
+                padding: 6px 18px;
+                background: $brand-primary__colour;
+                border-radius: 5px 5px 0 0;
+                left:2rem;
+                top:-37px;
+            }
+        }
+        &-header {
+            align-items: center;
+            &-counter {
+                background-color: $grey-secondary;
+                border-radius: 5px;
+                align-items: center;
+            }
+
+        }
+    }
+    .sub-units {
+        flex-flow: wrap;
+        &-icon {
+            justify-content: center;
+            margin-top: 1.5rem;
+            @include breakpoint(phone) {
+                margin-top: 0;
+            };
+            a {
+                width: 71px;
+                padding-top: 10px;
+                color: $text-primary__colour;
+                text-decoration: none;
+                @include breakpoint(phone) {
+                    width: auto;
+                    padding-top: 0;
+                    .lesson-progress-text {
+                        line-height: 1;
+                        width: 80%;
+                        p {
+                            font-size: 14px;
+                            line-height: 16px;
+                            text-align: left;
+                        }
+
+                    }
+                }
+                svg {
+                    z-index: 1;
+                    @include breakpoint(phone) {
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+                &:hover {
+                    opacity: 0.7;
+                }
+                &.complete {
+                    svg {
+                        #icon-inner {
+                            fill :white;
+                        }
+                    }
+                    &:before {
+
+                    }
+                }
+                &.disabled {
+                    svg {
+                        fill: $grey-secondary;
+                        #icon-inner {
+                            fill :$text-primary__colour;
+                        }
+
+
+                    }
+                    &:hover {
+                        cursor: default;
+                        opacity: 1;
+                    }
+
+                }
+                &.current {
+                    width: 95px;
+                    box-sizing: border-box;
+                    border: 2px solid;
+                    border-radius: 6px;
+                    z-index: 1;
+                    background: white;
+                    margin-right: -10px;
+                    svg {
+                        circle {
+                            opacity: 0.7;
+                        }
+                        #icon-inner {
+                            fill :$text-primary__colour;
+                        }
+                    }
+                    @include breakpoint(phone) {
+                        width: auto;
+                        border-radius: 28px 6px 6px 28px;
+                        margin-right: 0;
+                        .lesson-progress-text {
+                            line-height: 1;
+                            width: 80%;
+                            span {
+                                font-size: 80%;
+                            }
+                            p {
+                                font-size: 10px;
+                                line-height: 12px;
+                                text-align: left;
+                            }
+
+                        }
+                    }
+
+
+                }
+            }
+            p {
+                max-width: 100px;
+                text-align: center;
+                margin: auto;
+                font-size: 15px;
+                line-height: 17px;
+                @include breakpoint(phone) {
+                    max-width: none;
+                }
+            }
+            .up-next-text {
+                position: absolute;
+                height: 27px;
+                width: 95px;
+                border-radius: 6px 6px 0 0;
+                top: -24px;
+                left: -2px;
+                font-size: 14px;
+                font-style: italic;
+                color: white;
+
+
+            }
+            .stage-progress-item-divider
+            {
+                min-width: 30px;
+                position: relative;
+                min-height: 15px;
+                &:before {
+                    content: "";
+                    background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                    background-size: 7px auto;
+                    height: 4px;
+                    width: calc(100% + 2px);
+                    border-radius: 0;
+                    position: absolute;
+                    top: 43px;
+                    left: -1px;
+                }
+                @include breakpoint(phone) {
+                    &:before {
+                        content: "";
+                        background: linear-gradient(0deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                        background-size: auto 7px ;
+                        width: 4px;
+                        height: calc(100% + 2px);
+                        border-radius: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 23px;
+
+                    }
+                }
+
+            }
+            &:first-of-type {
+                .stage-progress-item-divider
+                {
+                    &:before {
+                        content: none;
+                    }
+                }
+            }
+            &:nth-of-type(7n) {
+                @include breakpoint(desktop) {
+                    .stage-progress-item-divider {
+                        &:before {
+
+                            width: 30px;
+                            right: -1px;
+                            left: auto;
+                        }
+                        &:after {
+                            content: '';
+                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            background-repeat: no-repeat;
+                            width: 9px;
+                            position: absolute;
+                            top: 38px;
+                            height: 15px;
+                            right: 25px;
+                            left: auto;
+
+                        }
+                        &.complete {
+                            &:before {
+                                background: $brand-primary__colour;
+                                width: 30px;
+                                right: -1px;
+                                left: auto;
+                                z-index: 1;
+                            }
+                            &:after {
+                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                background: $brand-primary__colour;
+                                width: 12px;
+                                font-size: 0;
+                                height: 16px;
+                                top: 37px
+
+                            }
+                        }
+
+                    }
+
+
+
+                }
+            }
+            &:nth-of-type(6n) {
+
+
+                    @include breakpoint(desktop) {
+                        &:before {
+                            content: "";
+                            background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                            background-size: 7px auto;
+                            height: 4px;
+                            width: 30px;
+                            border-radius: 2px;
+                            position: absolute;
+                            top: 45px;
+                            right: -28px;
+                            z-index: 1;
+                        }
+                        &:after {
+                            content: '';
+                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            background-repeat: no-repeat;
+                            width: 9px;
+                            position: absolute;
+                            top: 39px;
+                            height: 15px;
+                            right: -33px;
+                            left: auto;
+
+                        }
+                        &.complete {
+                            &:after {
+                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                background: $brand-primary__colour;
+                                width: 12px;
+                                font-size: 0;
+                                height: 16px;
+
+                            }
+                        }
+                    }
+
+            }
+
+        }
+        //// Display 7 items per row on desktop
+        //@include breakpoint(desktop) {
+        //    &-icon {
+        //        flex: 0 0 14%;
+        //    }
+        //}
+        //// Display 5 item per row on tablet
+        //@include breakpoint(tablet) {
+        //    &-icon {
+        //        flex: 0 0 20%;
+        //    }
+        //}
+        //// Display 3 items per row on mobile
+        //@include breakpoint(phone) {
+        //    &-icon {
+        //        flex: 0 0 31%;
+        //    }
+        //}
+    } 
+ }

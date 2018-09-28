@@ -1,0 +1,339 @@
+/* ==========================================================================
+* Theme Global styling
+*
+* Define all global styling classes used in theme
+*
+ ========================================================================== */
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Backgrounds
+# Typography
+# Module Styling
+# Primary Brand Styling
+# Misc Styling
+--------------------------------------------------------------*/
+
+/*
+ * Backgrounds
+ */
+
+.background-primary {  background-color: $white; }
+.background-primary-light { }
+
+.background-secondary {
+
+    background-color: $grey-primary;
+
+}
+
+.background-secondary-light {}
+
+
+/*
+ * Typography
+ */
+
+ body {
+
+    font-family: $base__font-family;
+    weight: normal;
+    color: $text-primary__colour;
+    opacity: 100%;
+
+
+    h1 {
+
+        font-family: $base-header__font-family;
+        weight: normal;
+        color: #4A4A4A;
+        opacity: 100%;
+
+        @include breakpoint (tablet) {
+            font-size: 32px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 21px;
+        }
+    }
+
+    h2, h3, h4, h5  {
+
+        font-family: $base-header__font-family;
+        weight: 500;
+        color: $text-primary__colour;
+        opacity: 100%;
+
+        @include breakpoint (tablet) {
+            font-size: 21px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 18px;
+        }
+    }
+
+
+    p {
+        text-align: justify;
+
+        @include breakpoint (tablet) {
+            font-size: 16px;
+        }
+
+        @include breakpoint (phone) {
+            font-size: 12px;
+        }
+
+    }
+
+
+    ul {
+
+
+
+    }
+
+    li {
+
+    }
+
+    hr {
+        //below styles taking
+        height: 2px;
+        color: #cccccc;
+        opacity: 0.5;
+    }
+
+    #page-wrapper {
+
+        //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
+        margin-top: $navbar-height;
+        display: inline-block;
+        min-height: calc(100vh - #{$navbar-height});
+        width: 100%;
+
+
+        @include breakpoint(phone) {
+            margin-top: $navbar-height-mobile;
+        }
+    }
+
+}
+
+/*
+ * Module Styling
+ */
+
+//Loop through the $module_colours array found in variables.scss and assign the colours to border, text, backgrounds, buttons and SVGs.
+@each $colour_key, $colour_var in $module_colours {
+    .module-bg-#{$colour_key} {
+        background-color: $colour_var!important;
+    }
+    .module-after-bg-#{$colour_key} {
+        &:after {
+            background-color: $colour_var!important;
+        }
+    }
+    .module-before-border-#{$colour_key} {
+        &:before {
+            border-color: $colour_var!important;
+        }
+    }
+    .module-text-#{$colour_key} {
+        color: $colour_var;
+    }
+    .module-border-#{$colour_key} {
+        border-color: $colour_var!important;
+    }
+    .module-btn-outline-#{$colour_key} {
+        border-color: $colour_var!important;
+        color: $colour_var;
+        svg {
+            fill: $colour_var;
+        }
+        &:hover {
+            border-color: $colour_var;
+            background-color: $colour_var;
+            color: $white;
+            svg {
+                fill: white;
+                #inner {
+                    fill: $colour_var;
+                }
+            }
+        }
+    }
+    .module-btn-fill-#{$colour_key} {
+        background-color: $colour_var!important;
+        border-color: $colour_var!important;
+        color: $white!important;
+        svg {
+            fill: $white;
+        }
+        &:hover {
+            @extend .module-btn-fill-#{$colour_key};
+            opacity: 0.8
+        }
+    }
+    .module-svg-fill-#{$colour_key} {
+        svg {
+            fill: $colour_var;
+        }
+    }
+    .module-svg-stroke-#{$colour_key} {
+        svg {
+            stroke: $colour_var;
+        }
+    }
+    .module-divider-before-#{$colour_key} {
+        &:before {
+            background: $colour_var!important;
+        }
+    }
+    //This class is used to fill in the circle around icon SVGs
+    .module-svg-icon-fill-#{$colour_key} {
+        svg {
+            circle {
+                fill: $colour_var;
+            }
+            #inner {
+                fill: white;
+            }
+        }
+    }
+}
+
+/* 
+ * Primary Brand Styling
+ */
+
+.primary-bg {
+    background-color: $brand-primary__colour;
+}
+.primary-text {
+    color: $brand-primary__colour;
+}
+.primary-border {
+    border-color: $brand-primary__colour;
+}
+.primary-btn-outline {
+    border-color: $brand-primary__colour;
+    color: $brand-primary__colour;
+    svg {
+        fill: $brand-primary__colour;
+    }
+    &:hover {
+        border-color: $brand-primary__colour;
+        background-color: $brand-primary__colour;
+        color: $white;
+        svg {
+            fill: $white;
+        }
+    }
+}
+.primary-btn-fill {
+    background-color: $brand-primary__colour;
+    border-color: $brand-primary__colour;
+    color: $white;
+    svg {
+        fill: $white;
+    }
+    &:hover {
+        @extend .primary-btn-fill;
+        opacity: 0.8
+    }
+}
+.primary-svg-fill {
+    svg {
+        fill: $brand-primary__colour;
+    }
+}
+.primary-svg-stroke {
+    svg {
+        stroke: $brand-primary__colour;
+    }
+}
+//This class is used to fill in the circle around icon SVGs
+.primary-svg-icon-fill {
+    svg {
+        circle {
+            fill: $brand-primary__colour;
+        }
+    }
+}
+
+
+/*
+ * Button Styling
+ */
+
+.button-text-width-limit {
+    max-width: 100px;
+}
+
+.button-primary {
+    border: 1.5px solid;
+    border-color: $grey-secondary;
+    border-radius: 4px;
+    color: white;
+    background-color: $grey-secondary;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+        opacity: 0.7;
+        text-decoration: none;
+    }
+}
+
+.button-secondary {
+    border: 1.5px solid;
+    border-color: $grey-secondary;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    padding: 5px;
+    display: inline-block;
+    &:hover {
+        opacity: 0.7;
+        text-decoration: none;
+    }
+    &.collapsed {
+        svg {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.button-tertiary {
+    border-color: $grey-tertiary;
+    background-color: $white;
+    color: $grey-tertiary;
+    &-active {
+    background-color: $grey-tertiary;
+    color: $white;
+    }
+}
+
+/*
+ * Misc Styling
+ */
+
+ .text-tertiary {
+     color: $grey-tertiary;
+ }
+
+ 
+

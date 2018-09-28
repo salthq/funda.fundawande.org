@@ -1,0 +1,111 @@
+/* ==========================================================================
+* Theme SASS variables
+*
+* Define all variables used in theme
+*
+ ========================================================================== */
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Useful Micro efficiency Variables
+# Navbar
+# Footer
+# Colour palette
+# Typography
+--------------------------------------------------------------*/
+
+// # Useful Micro efficiency Variables
+
+$assets_directory-path : "/wp-content/themes/fundawande/assets/";
+
+// # Navbar
+$navbar-height:                     60px;
+$navbar-height-mobile :             60px; //TODO: Set this mobile nav header
+$adminbar-height:                   32px;
+$adminbar-height-mobile:            46px;
+
+// # Footer
+$footer-height:                     40px;
+
+// Hamburger Nav
+$ham-button-width:                  26px; // The width of the button area
+$ham-button-height:                 26px; // The height of the button area
+$ham-bar-thickness:                 6px;  // The thickness of the button bars
+$ham-button-pad:                    0px;  // The left/right padding between button area and bars.
+$ham-button-bar-space:              10px; // The spacing between button bars
+$ham-button-transistion-duration:   0.05s; // The transition duration
+
+// # Colour palette
+$white : #ffffff;
+$black : #000000;
+$grey-primary : #F5F5F5; //I grabbed this background colour off the module navigation page using the inkdropper. Change if necessary and delete comment.
+$grey-secondary : #CCCCCC;
+$grey-tertiary : #918F8F; //This shade of grey is used numerous times on the login page.  
+
+$text-primary__colour : #444444;
+
+
+
+$brand-primary__colour: #EF9D19;
+$brand-secondary__colour: #231F20;
+
+$module0-primary__colour: #327DA6;
+$module0-secondary__colour:#8bb5cc; ;
+$module1-primary__colour: #2B8933;
+$module2-primary__colour: #61C436;
+$module3-primary__colour: #E73E53;
+$module4-primary__colour: #49A631;
+$module5-primary__colour: #3DC4E4;
+$module6-primary__colour: #FF9D45;
+$module7-primary__colour: #F7B446;
+$module8-primary__colour: #3BA9DC;
+$module9-primary__colour: #FF5943;
+$module10-primary__colour: #CB384A;
+$module11-primary__colour: #FF7C43;
+
+//Array of colours used in global.scss to create module-specific styles
+$module-colours: (
+    0: $module0-primary__colour,
+    1: $module1-primary__colour,
+    2: $module2-primary__colour,
+    3: $module3-primary__colour,
+    4: $module4-primary__colour,
+    5: $module5-primary__colour,
+    6: $module6-primary__colour,
+    7: $module7-primary__colour,
+    8: $module8-primary__colour,
+    9: $module9-primary__colour,
+    10: $module10-primary__colour,
+    11: $module11-primary__colour
+);
+
+
+$coaching-primary__colour: #FED044;
+
+
+
+// #  Typography
+
+/* Preamble:
+The typography variable config has been been laid out according to the logical levels that exist. This is mostly categorised by area or taxonomy
+and we have tried to be as logical as possible to keep the variables modular and helpful.
+*/
+
+//// Base typography
+$base__font-family : "Roboto Condensed", Verdana, Geneva, sans-serif;
+$base__font-size: 21px; //same as mockups as at 03/09/2018
+$base__letter-spacing : normal; //same as mockups as at 03/09/2018
+$base__line-height : 28px; //same as mockups as at 03/09/2018
+
+//// Header base
+$base-header__font-family : Rubik, Verdana, Geneva, sans-serif;
+
+//// Navbar typography
+
+/* Use the existing font family  variables until there is something that is absolutely specific */
+
+//// Call-to-actions (CTAs) typography
+
+/* Use the existing font family variables until there is something that is absolutely specific */
+
+

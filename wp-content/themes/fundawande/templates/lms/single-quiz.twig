@@ -1,0 +1,111 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Set lesson number #}
+{% set lesson_number=0 %}
+{% set lesson_complete = false %}
+{% for lesson in unit.lessons %}
+    {% if lesson.ID == quiz_lesson.ID %}
+        {% set lesson_number=loop.index %}
+        {% if lesson.complete %}
+            {% set lesson_complete = true %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        {# Include mobile or desktop progress #}
+        {% if is_mobile %}
+            {% include '/lms/embeds/lesson-progress-mobile.twig' %}
+        {% else %}
+            {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {% endif %}
+
+        <div class = "container-fluid lesson-header">
+            <div class = "container">
+                <div class = "row lesson-navigation-top">
+                    <div class = "col-2 col-md-4">
+                        <a class = "btn module-btn-outline-{{module_number}} py-4 my-4" href = "{{unit.url}}">
+                            {{source('/assets/arrow_left.svg')}}
+                            <br>
+                            <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span>
+                        </a>
+                    </div>
+                    <div class = "col-10 col-md-4 text-center my-4">
+                        <!-- TODO: change lesson number to be dynamic-->
+                        <h1><strong>Lesson {{ lesson_number }}/{{unit.lessons|length}}</strong></h1>
+                        <h1>{{quiz_lesson.get_field('lesson_title')}}</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Lesson Content-->
+        <div class = "container ">
+            <div class="row">
+                <div class="col-12">
+                {% do action('fundawande_single_quiz_content',post.id) %}
+
+                </div>
+            </div>
+        </div>
+        <!-- Bottom navigation-->
+        <div class = "container py-4">
+            <hr>
+            <div class="row my-4">
+                <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
+                    {% if nav_links.prev_link %}
+                        <a href = "{{nav_links.prev_link}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
+                    {% endif %}
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    {% if lesson_complete %}
+                        <a id="quiz-reset"  class="btn module-btn-outline-{{module_number}}" href="#" >
+                            Reset quiz
+                        </a>
+                    {% endif %}
+                </div>
+                <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
+                    {% if lesson_complete %}
+                        {% if nav_links.next_link %}
+                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
+                            {% if post.get_field('custom_feedback_message') %}
+                                {% include '/embeds/modals/modal-end-lesson.twig' %}
+                                <button id="lesson-complete"  type="button" class="btn module-btn-outline-{{module_number}}" data-toggle="modal" data-target="#end-lesson-modal" data-user-id="{{ user.ID }}" data-post-id="{{ quiz_lesson.ID }}">
+                                    {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                </button>
+                            {% else %}
+                                <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ quiz_lesson.ID }}" data-url="{{nav_links.next_link}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            {% endif %}
+                            {# nav_links.unit_completed is a boolean which is set to true if the next lesson link goes to the unit page, rather than another lesson #}
+                        {% elseif nav_links.unit_completed %}
+                            {% include '/embeds/modals/modal-end-unit.twig' %}
+                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
+                            {% if post.get_field('custom_feedback_message') %}
+                                {% include '/embeds/modals/modal-end-lesson.twig' %}
+                                <button id="lesson-complete"  type="button" class="btn module-btn-fill-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ quiz_lesson.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
+                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                </button>
+                            {% else %}
+                                <button id="lesson-complete" type="button" class="btn module-btn-fill-{{module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ quiz_lesson.ID }}" data-toggle="modal" data-target="#end-unit-modal">
+                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                </button>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <a id="quiz-complete"  class="btn module-btn-outline-{{module_number}}" href="#" >
+                            Submit <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+
+{% endblock %}

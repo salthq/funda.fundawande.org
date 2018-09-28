@@ -1,0 +1,440 @@
+/* ==========================================================================
+* Single Quiz Questions Area
+*
+* Styling specific to the lesson page, single-lesson.twig
+*
+ ========================================================================== */
+
+.single-lesson-wrapper {
+    .quiz-submit {
+      &.reset, &.complete, &.save {
+          display: none!important;
+      }
+    }
+    .quiz-questions {
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        #sensei-quiz-list {
+            list-style: none;
+            padding-left: 0;
+            .question-number {
+                position: absolute;
+            }
+            .question-title{
+                padding-left: 2rem;
+            }
+
+        }
+        span.grade {
+            display: none;
+        }
+
+        .custom-control {
+            &.custom-radio {
+                height: 2rem;
+                .custom-control-label {
+                    line-height: 2rem;
+                    &:before {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border: 1px solid $brand-primary__colour;
+                        background-color: white;
+                        left: -2.5rem;
+                    }
+                }
+                .custom-control-input:checked ~ .custom-control-label {
+                    font-weight: bold;
+                    &:before {
+                        background-color: $brand-primary__colour;
+                    }
+                    &:after {
+                        background-image:none;
+                    }
+                }
+            }
+            &.custom-radio-image {
+                padding-right: 15px;
+                padding-left: 15px;
+                .custom-control-label {
+                    border: 3px solid transparent;
+                    &:before {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border: 1px solid #ef9d19;
+                        background-color: white;
+                        left:50%;
+                        transform: translateX(-50%);
+                        bottom: -2rem;
+                        border-radius: 50%;
+                        top: auto;
+                        @include breakpoint(phone) {
+
+                            right:-2.5rem;
+                            transform: translateY(-50%);
+                            top: 50%;
+                            left:auto;
+                            border-radius: 50%;
+                            bottom: auto;
+
+                        }
+                    }
+
+                }
+                .custom-control-input:checked ~ .custom-control-label {
+                    border: 3px solid $brand-primary__colour;
+                    border-radius: 2px;
+                    &:before {
+                        background-color: $brand-primary__colour;
+                    }
+                    &:after {
+                        background-image:none;
+                    }
+                }
+            }
+        }
+        .multiple-choice-with-images {
+
+        }
+        .drag-and-drop-non-sequential {
+            ._option-images {
+                ._image-container {
+                    border: 3px solid $brand-primary__colour;
+                    border-radius: 6px;
+                    &.chosen {
+                        border: 3px solid $grey-secondary;
+                        opacity: 0.5;
+                    }
+                }
+                @include breakpoint(phone) {
+                    ._option-image {
+                        flex-direction: column;
+                        align-items: center;
+                        ._image-container {
+                            border: none;
+                        }
+                    }
+
+                }
+            }
+            ._images-answers {
+                ._image-container {
+                    border-radius: 2px;
+                    border:3px solid $grey-secondary;
+                    ._sortable-spot {
+                        border: 3px dashed $brand-primary__colour;
+                        width: 60%;
+                        height: 60%;
+                        right: 0;
+                        bottom: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background: rgba(#fff, 0.333);
+                        overflow: hidden;
+                        img {
+                            width: auto;
+                            height: auto;
+                        }
+
+                    }
+                    &.chosen {
+                        border:3px solid $grey-secondary;
+                        ._sortable-spot {
+                            border: 3px solid $brand-primary__colour;
+                            border-radius: 2px;
+                        }
+                    }
+
+                }
+            }
+        }
+        .drag-and-drop-sequential {
+            ._top-mobile-title {
+                display: none;
+                @include breakpoint(phone) {
+                    display: block;
+                }
+            }
+            ._box-image-container {
+                width: 100%;
+                height: 300px;
+                border: 1px solid #ccc;
+                @include breakpoint(phone) {
+                    width: 50%;
+                    margin-right: 20px !important;
+                }
+            }
+            ._option-images {
+                ._image-container {
+                    border: 3px solid $brand-primary__colour;
+                    border-radius: 2px;
+                    @include breakpoint(phone) {
+                        border:none;
+                    }
+                    &.chosen {
+                        border: 3px solid $grey-secondary;
+                        opacity: 0.5;
+                        @include breakpoint(phone) {
+                            border:none;
+                        }
+                    }
+                }
+                @include breakpoint(phone) {
+                    ._option-image {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center
+                    }
+                }
+            }
+            ._images-answers {
+                ._image-container {
+                    border: none;
+                    height: 200px;
+                    background-image: url('/wp-content/themes/fundawande/assets/lms/image_placeholder.svg');
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+
+                    ._sortable-spot {
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                        border: 3px dashed $brand-primary__colour;
+                        border-radius: 2px;
+
+                    }
+                    &.chosen {
+
+                        ._sortable-spot {
+                            border: 3px solid $brand-primary__colour;
+
+                        }
+                    }
+                    ._sortable-label {
+                        position: absolute;
+                        bottom: -2.5rem;
+                        left: calc(50% - 0.5rem);
+                        font-size: 1.5rem;
+                        font-family: Arial;
+                    }
+                    ._arrow-down {
+                        display: none;
+                        @include breakpoint(phone) {
+                            position: absolute;
+                            left: 50%;
+                            bottom: -50px;
+                            transform: translateX(-50%);
+                            display: block;
+                        }
+                    }
+                    ._arrow {
+                        left: -36px;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        @include breakpoint(phone) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            ._mobile-images-answers {
+                .custom-control {
+                    padding-left: 2.5rem;
+                }
+            }
+        }
+        .drag-and-drop-non-sequential,
+        .drag-and-drop-sequential {
+            ._text-mobile {
+                display: none;
+            }
+
+            ._answer-container {
+                display: flex;
+            }
+
+            ._image-container {
+                position: relative;
+                text-align: center;
+
+                ._sortable-spot {
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            ._option-image {
+                ._image-letters {
+                    display: none;
+                }
+            }
+
+            .answers {
+                padding: 0;
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+            }
+
+            ._option-images {
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+
+            ._mobile-images-answers {
+                display: none;
+            }
+
+            @media (max-width: 768px) {
+                ._text-desktop {
+                    display: none;
+                }
+
+                ._text-mobile {
+                    display: block;
+                }
+
+                ._option-image {
+                    ._image-letters {
+                        display: block !important;
+                    }
+                }
+
+                ._mobile-images-answers {
+                    display: block !important;
+                }
+
+                ._images-answers {
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    ._answer-container {
+                        padding-bottom: 60px;
+                        align-items: center;
+                        max-width: 100%;
+
+                        &:last-child ._arrow-down {
+                            display: none !important;
+                        }
+
+                        img {
+                            padding-right: 10px;
+                        }
+                    }
+                }
+
+                .container-fluid {
+                    padding-left: 0;
+                }
+            }
+
+            @media (max-width: 575px) {
+                ._option-image {
+                    width: 50%;
+
+                    &:nth-child(1),
+                    &:nth-child(3) {
+                        border-right: 1px solid #ccc;
+                    }
+
+                    &:nth-child(1),
+                    &:nth-child(2) {
+                        border-bottom: 1px solid #ccc;
+                        padding-bottom: 5px;
+                    }
+
+                    &:nth-child(3),
+                    &:nth-child(4) {
+                        padding-top: 10px;
+                    }
+                }
+            }
+
+            @media (max-width: 400px) {
+                ._answer-container {
+                    padding-bottom: 30px !important;
+                }
+            }
+        }
+        .custom-file {
+            width: 100%;
+            height: 100%;
+            background: $grey-primary;
+            .custom-file-input {
+                min-height: 100px;
+
+            }
+
+            .custom-file-label {
+                 left: 2rem;
+                top:1.5rem;
+                color: white;
+
+                display: table;
+                background: transparent;
+                border: none;
+                outline: none!important;
+                @include breakpoint(phone) {
+                    left: 1rem;
+                }
+                &:focus, &:active  {
+                    outline: none;
+                }
+                label {
+                    border: 1px solid #EF9D19;
+                    border-radius: 4px;
+                    background-color: #EF9D19;
+                    padding: 0.25rem 1rem ;
+                    margin: 0;
+                    display: table;
+
+
+                }
+                aside {
+                    color: #444444;
+                    font-style: italic;
+                    font-size: 16px;
+                    overflow: hidden;
+                }
+                &:after {
+                    content: none;
+                }
+
+            }
+            &:hover {
+                cursor: pointer;
+                .custom-file-label label {
+                    opacity:0.7;
+                }
+            }
+        }
+        .multi-line {
+            .wp-editor-wrap {
+                border: 3px solid $brand-primary__colour;
+                border-radius: 2px;
+            }
+        }
+        .single-line {
+            input[type="text"] {
+                border: 3px solid $brand-primary__colour;
+                border-radius: 2px;
+            }
+        }
+        .gap-fill {
+            input[type="text"] {
+                border: 3px solid $brand-primary__colour;
+                border-radius: 2px;
+            }
+        }
+
+    }
+}

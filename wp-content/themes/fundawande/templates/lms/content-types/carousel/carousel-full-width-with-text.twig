@@ -1,0 +1,48 @@
+<!-- Content Type: Carousel Full Width With Text -->
+<div class = "container-fluid my-5 p-0">
+    <hr>
+    <div class = "row"> 
+        <div class = "col-12 px-0 pt-4">
+            <div id="carousel-full-width-with-text" class="carousel slide" data-ride="carousel">
+                {#<ol class="carousel-indicators">
+                    {% for item in content.carousel_items %}
+                    <li data-target="#carousel-with-text" data-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}">{{loop.index}}</li>
+                    {% endfor %}
+                </ol>#}
+                <div class="" role="listbox">
+                    {% for item in content.carousel_items %}
+                        <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
+                            <div class = "lesson-image-wrapper">
+                                {# Remove whitespace from beginning and end of the file name before appending to media url #}
+                                {% set file_name =  item.image_file_name|trim %}
+                                <img class = "d-block lesson-carousel-image" src ="{{ media_url~file_name }}">
+                                <!-- Navigation Buttons -->
+                                <div class = "container">
+                                    <div class = "row">
+                                        <div class = "col-12">
+                                        <a class="lesson-carousel-control lesson-carousel-control-prev" href="#carousel-full-width-with-text" role="button" data-slide="prev">
+                                            <div class = "lesson-carousel-control-icon d-flex justify-content-center">
+                                                <span class="module-svg-icon-fill-{{module_number}}" aria-hidden="true">{{source('/assets/carousel_prev.svg')}}</span>
+                                                <span class="sr-only">Previous</span>
+                                            </div>
+                                        </a>
+                                        <a class="lesson-carousel-control lesson-carousel-control-next" href="#carousel-full-width-with-text" role="button" data-slide="next">
+                                            <div class = "lesson-carousel-control-icon d-flex justify-content-center">
+                                                <span class="module-svg-icon-fill-{{module_number}}" aria-hidden="true">{{source('/assets/carousel_next.svg')}}</span>
+                                                <span class="sr-only">Next</span>
+                                            </div>
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class = "text-center mt-5"><strong>{{ item.title }}</strong></h4>
+                            <div class = "text-center m-2 px-2">{{ item.text }}</div>
+                            {#<p>Image {{loop.index}} of {{loop|length}}</p>#}
+                        </div>
+                    {% endfor %}
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
