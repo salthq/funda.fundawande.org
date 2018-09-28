@@ -7,12 +7,12 @@
                     </span>
         </div>
         <div class = "lesson-sidebar-module-titles mx-3 py-3">
-            <p class = "m-0"><strong>{{module_title}}</strong></p>
-            <h4 class = "m-0">{{unit_title}}</h4>
+            <p class = "m-0"><strong>{{sub_unit_meta.module_title}}</strong></p>
+            <h4 class = "m-0">{{sub_unit_meta.unit_title}}</h4>
         </div>
         <hr class="m-0">
         <div class="my-4 row no-gutters px-4 flex-column">
-        {% for lesson in unit.lessons %}
+        {% for lesson in sub_unit_meta.unit_lessons %}
             <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
             <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
                 {{ source('assets/lms/recall_quiz.svg') }}
@@ -30,7 +30,7 @@
     <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
         <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-white m-2">{{module_number}}.{{ lesson_number }}</h4></div>
         <div class="my-4 row no-gutters align-items-center flex-column">
-        {% for lesson in unit.lessons %}
+        {% for lesson in sub_unit_meta.unit_lessons %}
             <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
             <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
 

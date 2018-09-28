@@ -78,68 +78,62 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 *
 	 * @since 1.0.00
      * 
-     * @author jtame
+     * @author cwbmuller
 	 *
 	 * @param integer $course_id
      * 
 	 * @param integer $post_id. The ID of the lesson
      * 
-	 * @return array $unit
+	 * @return object $unit
 	 */
-    public function get_unit_info($course_id, $post_id) {
-        $unit = Sensei()->modules->get_lesson_module( $post_id );
+    public function fw_get_sub_unit_meta($course_id, $post_id) {
+        $meta_obj = new stdClass();
+        // get the lesson nav object
+        $meta_obj->nav = FundaWande()->lms->fw_get_prev_next_lessons( $post_id );
+
+        // get the sub unit unit
+        $meta_obj->unit = FundaWande()->units->fw_get_sub_unit_unit( $post_id );
+
+        //Get the unit title
+        $meta_obj->unit_title = get_term_meta($meta_obj->unit->term_id, 'module_title', true);
+
         //Add the lessons array to the unit info to make that info available on the single lesson template
-        $unit->lessons = $this->get_lessons($course_id, $unit->term_id);
+        $meta_obj->unit_lessons = $this->get_lessons($course_id, $meta_obj->unit->term_id);
+        // get the last sub unit from array
+        $last_sub_unit = array_values(array_slice($meta_obj->unit_lessons, -1))[0];
+        $meta_obj->is_last_in_unit = false;
+        // if sub unit is last mark as last
+        if ($post_id == $last_sub_unit->ID) {
+            $meta_obj->is_last_in_unit = true;
+            $meta_obj->next_unit = FundaWande()->units->fw_get_sub_unit_unit($meta_obj->nav->next);
 
-        //$unit->title = get_post_meta($post_id, 'module_title',
+        }
 
-        return $unit;
+        // get sub unit module
+        $meta_obj->module_id = $meta_obj->unit->parent;
+        //Get the module number for the parent module, to enable module-specific styling
+        $meta_obj->module_number = get_term_meta($meta_obj->module_id, 'module_number', true);
+
+        // get the sub unit module title
+        $meta_obj->module_title = get_term_meta($meta_obj->module_id, 'module_title', true );
+
+        // get the module unit array
+        $module_units = get_term_children($meta_obj->module_id, 'module' );
+        // retrieve the last unit from array
+        $last_unit = array_values(array_slice($module_units, -1))[0];
+        $meta_obj->is_last_in_module = false;
+        // if sub unit is last in module, mark as such
+        if ($meta_obj->unit->term_id == $last_unit) {
+            $meta_obj->is_last_in_module = true;
+            $meta_obj->next_module = get_term($meta_obj->next_unit->parent);
+
+
+        }
+
+        return $meta_obj;
+
     } //end get_unit_info()
 
-    /**
-     * Get Lesson nav links to enable bi-directional navigation between lessons
-     * 
-     * @author jtame
-     *
-     * @param integer $post_id. The ID of the lesson
-     *
-     * @return object $nav_links
-     */
-    public function get_lesson_nav_links($post_id) {
-        $prev_next_lessons = sensei_get_prev_next_lessons ($post_id);
-
-        $nav_links = (object) [
-            'unit_completed' => false,
-            'prev_link' => '',
-            'next_link' => '',
-            'next_unit_link' => '',
-            'next_unit_title' => ''
-        ];
-
-        if ( isset( $prev_next_lessons['previous']) || isset( $prev_next_lessons['next']) ) {
-            if( isset( $prev_next_lessons['previous']) ) {
-                //The value for the prev_link property must only be set if the previous link is a lesson. 
-                if( strpos($prev_next_lessons['previous']['url'], '/lesson/') ) {
-                    $nav_links->prev_link = $prev_next_lessons['previous']['url'];
-                }
-            }
-            if( isset( $prev_next_lessons['next']) ) {
-                //The value for the next_link property must only be set if the next link is a lesson. 
-                if( strpos($prev_next_lessons['next']['url'], '/lesson/') ) {
-                    $nav_links->next_link = $prev_next_lessons['next']['url'];
-                }
-                //If the next link is a module instead, then the lesson is the last one within a unit. 
-                elseif( strpos($prev_next_lessons['next']['url'], '/modules/') ) {
-                    $nav_links->unit_completed = true;
-                    $nav_links->next_unit_link = $prev_next_lessons['next']['url'];
-                    //TODO: Change this from the actual title of the lesson, to the custom title
-                    $nav_links->next_unit_title = $prev_next_lessons['next']['name'];
-                }
-            }
-            
-            return $nav_links;
-        }    
-    } // end get_lesson_nav_links()
 
      /**
       * Return a lesson link based on it's key and parent course

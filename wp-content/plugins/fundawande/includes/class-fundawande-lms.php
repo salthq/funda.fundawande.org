@@ -336,8 +336,8 @@ class FundaWande_Lms {
         $current_module_progress = FundaWande()->modules->fw_module_progress($current_module->term_id);
 
         $lesson_nav = $this->fw_get_prev_next_lessons($lesson_id);
-        if (!empty($lesson_nav['next'])) {
-            $next_lesson_id = $lesson_nav['next'];
+        if (!empty($lesson_nav->next)) {
+            $next_lesson_id = $lesson_nav->next;
             $next_lesson_key = get_post_meta($next_lesson_id, 'fw_unique_key',true);
             // Set current sub unit to the next lesson
             update_user_meta($user_id,'fw_current_sub_unit',$next_lesson_key);
@@ -419,7 +419,7 @@ class FundaWande_Lms {
      */
     public function fw_get_prev_next_lessons( $lesson_id ) {
         // For modules, $lesson_id is the first lesson in the module.
-        $links               = array();
+        $links               = new stdClass();
         $course_id           = Sensei()->lesson->get_course_id( $lesson_id );
 
         // Get ordered list of sub units
@@ -431,15 +431,16 @@ class FundaWande_Lms {
 
 
                 if ( isset( $item->ID ) && $found ) {
-                    $links['next'] = $item->ID;
+                    $links->next = $item->ID;
                     break;
                 } else {
-                    $links['next'] = '';
+                    $links->next = '';
                 }
                 if ( isset( $item->ID ) && (absint( $item->ID ) === absint( $lesson_id )) ) {
                     $found = true;
                 } else {
-                    $links['previous'] = $item->ID;
+                    $links->previous = $item->ID;
+
 
                 }
             }
