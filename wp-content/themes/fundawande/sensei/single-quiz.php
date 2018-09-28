@@ -33,6 +33,8 @@ if (class_exists('Timber')) {
     $lesson = new TimberPost($lesson_id);
     $context['quiz_lesson'] =  $lesson;
 
+
+
     FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course, $lesson->ID);
 
     // check if is retry quiz

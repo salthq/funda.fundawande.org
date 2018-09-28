@@ -47,8 +47,38 @@
                 </div>
             </div>
         </div>
+
+        {%  if quiz_retry or lesson_complete %}
+            <!-- Quiz messages-->
+            <div class = "container mt-5">
+                <div class="row">
+
+                        {%  if quiz_retry %}
+                            <div class="col">
+                                <p>Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit of try again right away.</p>
+                            </div>
+                            <div class="col-auto">
+                                <a   class="btn mr-md-3 mr-0 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
+                                    Review Unit
+                                </a>
+                                <a id="quiz-reset"  class="btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
+                                    Retry quiz
+                                </a>
+                            </div>
+
+                        {% elseif lesson_complete %}
+                            <div class="col-12">
+                                <p>Well done, you passed the quiz! Review the feedback below and then click 'Continue' at the bottom to proceed</p>
+                            </div>
+                        {% endif %}
+
+
+                </div>
+                <hr>
+            </div>
+        {% endif %}
         <!-- Lesson Content-->
-        <div class = "container ">
+        <div class = "container mt-5">
             <div class="row">
                 <div class="col-12">
                 {% do action('fundawande_single_quiz_content',post.id) %}
