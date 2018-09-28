@@ -77,10 +77,12 @@ class FundaWande_Units {
         foreach ($unit_lessons as $unit_lesson) {
             $total++;
 
-            if (FundaWande()->lessons->fw_is_sub_unit_complete($unit_lesson->ID,$unit_id)) {
+            if (FundaWande()->lessons->fw_is_sub_unit_complete($unit_lesson->ID)) {
                 $completed = $total;
             }
         }
+
+        error_log($completed.' '.$total);
 
         $unit_progress = ($completed/$total) * 100;
 
@@ -104,12 +106,14 @@ class FundaWande_Units {
             $user_id = get_current_user_id();
         }
 
+        $unit_key = get_term_meta($unit_id, 'fw_unique_key',true);
+
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_unit_progress',
             'user_id' => $user_id,
-            'status' => $unit_id,
+            'status' => $unit_key,
         );
 
         // possibly returns array, we just want one object
@@ -127,7 +131,7 @@ class FundaWande_Units {
                 'comment_type' => 'fw_unit_progress',
                 'user_id' => $user_id,
                 'comment_date' => $time,
-                'comment_approved' => $unit_id,
+                'comment_approved' => $unit_key,
                 'comment_karma' => 1,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
@@ -180,9 +184,9 @@ class FundaWande_Units {
     /**
      * Get the Unit of a sub unit
      *
-     * @param int $user_id. The ID for the current user
+     * @param int $sub_unit_id. The ID sub unit
      *
-     * @return string $unit return the unit object of the current Unit
+     * @return object $unit return the unit object of the current Unit
      */
     public function fw_get_sub_unit_unit($sub_unit_id) {
 

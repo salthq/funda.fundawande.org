@@ -155,11 +155,12 @@ class FundaWande_Modules {
      *
      */
     public function fw_module_progress($module_id) {
-
+//        error_log(print_r($module_id,true));
         $module_units = get_term_children($module_id, 'module' );
 
         $completed = 0;
         $total = 0;
+//        error_log(print_r($module_units,true));
         foreach ($module_units as $module_unit) {
             $total++;
             if (FundaWande()->units->fw_is_unit_complete($module_unit)) {
@@ -220,12 +221,15 @@ class FundaWande_Modules {
             $user_id = get_current_user_id();
         }
 
+        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
+
+
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_module_progress',
             'user_id' => $user_id,
-            'status' => $module_id,
+            'status' => $module_key,
         );
 
         // possibly returns array, we just want one object
@@ -243,7 +247,7 @@ class FundaWande_Modules {
                 'comment_type' => 'fw_module_progress',
                 'user_id' => $user_id,
                 'comment_date' => $time,
-                'comment_approved' => $module_id,
+                'comment_approved' => $module_key,
                 'comment_karma' => 1,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
