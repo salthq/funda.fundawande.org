@@ -326,7 +326,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
-#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:2}
+#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:10000}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
 @media(max-width:767px){#wrapper-navbar .navbar #main-menu-button .open-text,#wrapper-navbar .navbar #main-menu-button .close-text{line-height:15px;text-align:center;display:block;width:50px}
@@ -578,7 +578,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 #main-menu-modal .modal-dialog .modal-content a span{margin-left:1rem}
 .admin-bar #main-menu-modal .modal-dialog{margin-top:92px}
 @media(max-width:767px){.admin-bar #main-menu-modal .modal-dialog{margin-top:106px}
-}.anno{position:absolute;padding:15px;z-index:5000;width:300px;cursor:default;text-transform:none;text-align:left;line-height:.9em;-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1);-webkit-transition-property:opacity,margin;transition-property:opacity,margin}
+}.anno{position:absolute;padding:15px;z-index:50000;width:300px;cursor:default;text-transform:none;text-align:left;line-height:.9em;-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1);-webkit-transition-property:opacity,margin;transition-property:opacity,margin}
 .anno .anno-inner{position:relative;background:white;box-shadow:0 5px 20px 0 rgba(0,0,0,0.35)}
 .anno .anno-inner .anno-content{padding:15px 20px;line-height:1.3em;font-family:sans-serif;font-weight:normal;font-size:15px;color:#56565a}
 .anno .anno-inner .anno-btn-container{text-align:right}

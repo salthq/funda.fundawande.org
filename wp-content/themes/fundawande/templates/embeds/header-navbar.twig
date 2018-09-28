@@ -9,12 +9,11 @@
             </a>
         </div>
 
-        <!--TODO: add JS scripts and data-target for viewing information modals-->
-        <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 d-none d-md-block">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
+        <div  id = "view-tooltips" style="background-color: #4a4a4a"><a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 d-none d-md-block">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a></div>
         {% if lang.id == 'eng' %}
-            <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
+            <a id = "change-lang" class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
         {% else %}
-            <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
+            <a id = "change-lang" class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
         {% endif %}
 
     </nav>

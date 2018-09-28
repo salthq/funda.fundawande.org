@@ -126,36 +126,38 @@
             {% endfor %}
         </div>
         <!-- Bottom navigation-->
-        <div class = "container py-4">
-            <hr>
-            <div class="row my-4">
-                <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
-                    {% if sub_unit_meta.nav.prev %}
-                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
-                    {% endif %}
-                </div>
-                <div class="col-12 col-md-4 text-center">
-                </div>
-                <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
-                    {% if sub_unit_meta.nav.next %}
-                        {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
-                        {% if sub_unit_meta.is_last_in_unit %}
-                            {% include '/embeds/modals/modal-end-unit.twig' %}
-                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
-                            {% if post.get_field('custom_feedback_message') %}
-                                {% include '/embeds/modals/modal-end-lesson.twig' %}
-                                <button id="lesson-complete"  type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                </button>
-                            {% else %}
-                                <button id="lesson-complete" type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                </button>
-                            {% endif %}
-                        {% else %}
-                            <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+        <div id = "navigation-links"  class = "container-fluid my-4 py-4">
+            <div class = "container">
+                <hr>
+                <div class="row ">
+                    <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
+                        {% if sub_unit_meta.nav.prev %}
+                            <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
                         {% endif %}
-                    {% endif %}
+                    </div>
+                    <div class="col-12 col-md-4 text-center">
+                    </div>
+                    <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
+                        {% if sub_unit_meta.nav.next %}
+                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
+                            {% if sub_unit_meta.is_last_in_unit %}
+                                {% include '/embeds/modals/modal-end-unit.twig' %}
+                                {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
+                                {% if post.get_field('custom_feedback_message') %}
+                                    {% include '/embeds/modals/modal-end-lesson.twig' %}
+                                    <button id="lesson-complete"  type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
+                                        {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                    </button>
+                                {% else %}
+                                    <button id="lesson-complete" type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
+                                        {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                    </button>
+                                {% endif %}
+                            {% else %}
+                                <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,14 +1,20 @@
-//Module Page Walkthrough
+//English Module Page Walkthrough
 
 var tour = new Anno([{
     target: '#wrapper-navbar',
     position: 'bottom',
-    content: 'This is the navbar',
+    content: "Click 'Open Menu' to see the different menu options.",
     buttons: [AnnoButton.NextButton]
   },
   {
+    target: '#view-tooltips',
+    position: 'bottom',
+    content: "The 'View Tooltips' button will replay this walkthrough.",
+    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+  },
+  {
     target : '#module-card',
-    position: 'top',
-    content : 'These cards show you information about each module.',
-    buttons: [AnnoButton.NextButton]
+    position: 'bottom',
+    content : "These cards show you information about each module. Click on 'view module' to see the units within that module",
+    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton]
   }])

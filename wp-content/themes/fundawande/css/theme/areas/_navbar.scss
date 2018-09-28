@@ -10,7 +10,7 @@
   box-shadow: 0 2px 1px 0 $brand-primary__colour;
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 10000; //Changed to make sure that it displays on top of walkthrough modals.
 
   .navbar {
     padding: 0;
