@@ -20,7 +20,7 @@ var tour = new Anno([{
 
   }, {
     target: '#view-lessons',
-    position: 'top',
+    position: 'left',
     content: 'Click this button to view the lessons within the unit',
     buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
   }, 

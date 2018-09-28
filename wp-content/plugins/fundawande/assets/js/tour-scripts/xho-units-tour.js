@@ -20,7 +20,7 @@ var tour = new Anno([{
 
 }, {
   target: '#view-lessons',
-  position: 'top',
+  position: 'left',
   content: 'Cofa le qhosha ukubuyela kuluhlu lwee modyuli',
   buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
 }, 

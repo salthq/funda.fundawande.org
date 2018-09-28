@@ -18,6 +18,7 @@
     -moz-transition-property: opacity, margin;
     transition-property: opacity, margin;
     .anno-inner {
+      border: 2px solid $brand-primary__colour;
       position: relative;
       background: white;
       -webkit-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.35);
@@ -26,7 +27,7 @@
       .anno-content {
         padding: 15px 20px;
         line-height: 1.3em;
-        font-family: sans-serif;
+        font-family: $base__font-family;
         font-weight: normal;
         font-size: 15px;
         color: #56565a;
@@ -45,7 +46,7 @@
           -ms-border-radius: 0px;
           -o-border-radius: 0px;
           border-radius: 0px;
-          font-family: sans-serif;
+          font-family: $base__font-family;
           font-weight: bold;
           font-size: 12px;
           color: white;
@@ -60,6 +61,9 @@
           }
           &:active {
             background: $brand-primary__colour;
+          }
+          &:focus {
+            outline: $brand-primary__colour;
           }
           &.anno-btn-low-importance {
             background: none;
@@ -79,7 +83,7 @@
       top: 100%;
       left: 20px;
       border-bottom: none;
-      border-color: white transparent;
+      border-color: $brand-primary__colour transparent;
     }
     &.anno-target-center-bottom.anno-hidden, &.anno-target-bottom.anno-hidden {
       margin-top: -20px;
@@ -88,7 +92,7 @@
       right: 100%;
       top: 15px;
       border-left: none;
-      border-color: transparent white;
+      border-color: transparent $brand-primary__colour;
     }
     &.anno-target-center-left.anno-hidden, &.anno-target-left.anno-hidden {
       margin-left: 20px;
@@ -97,7 +101,7 @@
       bottom: 100%;
       left: 20px;
       border-top: none;
-      border-color: white transparent;
+      border-color: $brand-primary__colour transparent;
     }
     &.anno-target-center-top.anno-hidden, &.anno-target-top.anno-hidden {
       margin-top: 20px;
@@ -106,7 +110,7 @@
       left: 100%;
       top: 15px;
       border-right: none;
-      border-color: transparent white;
+      border-color: transparent $brand-primary__colour;
     }
     &.anno-target-center-right.anno-hidden, &.anno-target-right.anno-hidden {
       margin-left: -20px;
