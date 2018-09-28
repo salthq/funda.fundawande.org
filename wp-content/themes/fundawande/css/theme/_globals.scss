@@ -111,6 +111,7 @@
         //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
         margin-top: $navbar-height;
         display: inline-block;
+        min-height: calc(100vh - #{$navbar-height});
         width: 100%;
 
 
@@ -333,4 +334,6 @@
  .text-tertiary {
      color: $grey-tertiary;
  }
+
+ 
 

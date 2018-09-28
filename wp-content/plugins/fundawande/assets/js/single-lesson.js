@@ -118,9 +118,24 @@ jQuery(document).ready( function($) {
 
         // alert('The file "' + fileName +  '" has been selected.');
         const label = $(this).siblings('.custom-file-label');
-        console.log(label);
+
         label.find('.custom-file-meta').html('<b>Submitted file: </b>'+fileName);
         label.find('label').html('Change file');
+    });
+
+    // on quiz complete click, click the quiz complete
+    $('#quiz-complete').click(function(e) {
+        e.preventDefault();
+
+
+        $(".quiz-submit.complete").click();
+    });
+
+    $('#quiz-reset').click(function(e) {
+        e.preventDefault();
+
+
+        $(".quiz-submit.reset").click();
     });
 
 });

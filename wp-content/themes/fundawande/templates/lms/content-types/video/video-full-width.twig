@@ -3,7 +3,10 @@
     <hr>
     <div class = "row">
         <div class = "col-sm-12 px-0 pt-4">
-            {{ mixin.fullWidthVideo(media_url~content.video_file_name, media_url~content.holding_image_file_name, module_number) }}
+            {# Remove whitespace from beginning and end of the file name before appending to media url #}
+            {% set holding_image_file_name =  content.holding_image_file_name|trim %}
+            {% set video_file_name =  content.video_file_name|trim %}
+            {{ mixin.videoPlayer(media_url~video_file_name, media_url~holding_image_file_name, module_number) }}
         </div>
     </div>
 </div>
