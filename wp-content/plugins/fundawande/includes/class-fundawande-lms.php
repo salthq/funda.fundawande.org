@@ -59,7 +59,6 @@ class FundaWande_Lms {
 
             // Run normal Sensei update logic
             $activity_logged = WooThemes_Sensei_Utils::update_lesson_status($user_id, $post_id, 'complete');
-
             // prevent fundawande progress tracking if unique lesson key isn't assigned
             if (!empty($lesson_key)) {
                 // Determine if an existing status exists and assign
