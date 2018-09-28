@@ -30,7 +30,7 @@
                 {% for unit in units %}
                     <div class = "unit card my-3 {% if unit.current %}current{% endif %}">
                         {% if unit.current %}
-                            <span class="current-unit-text">{{attribute(options, lang.prefix~'current_unit_text')}}</span>
+                            <span id = "current" class="current-unit-text">{{attribute(options, lang.prefix~'current_unit_text')}}</span>
                         {% endif %}
                         <div class = "card-body">
                             <div class = "row">
