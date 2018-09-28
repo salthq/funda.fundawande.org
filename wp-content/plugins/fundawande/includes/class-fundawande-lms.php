@@ -62,7 +62,7 @@ class FundaWande_Lms {
 
             // prevent fundawande progress tracking if unique lesson key isn't assigned
             if (!empty($lesson_key)) {
-                // Determine if an existing review exists and assign
+                // Determine if an existing status exists and assign
                 $current_status_args = array(
                     'number' => 1,
                     'type' => 'fw_sub_unit_progress',
@@ -77,7 +77,7 @@ class FundaWande_Lms {
 
                 }
 
-                // If no current review then return the review form object with user and post details
+                // If no current sub unit status then skip progress
                 if (empty($user_lesson_status)) {
                     $time = current_time('mysql');
                     $user = $user = get_userdata($user_id);
@@ -95,21 +95,15 @@ class FundaWande_Lms {
                     $comment_id = wp_insert_comment($data);
 
                     // If this is a new completion we need to update the course, module and unit progress
-                    // get course id of the lesson
-                    $course_id = Sensei()->lesson->get_course_id($post_id);
 
                     // Update user course progress
-                    $this->fw_update_course_progress_overall($user_id, $course_id);
+                    $this->fw_update_course_progress_overall($user_id);
 
                     // Update the module and subunit progress and set the users current lesson to the next
                     $this->fw_modules_status_of_sub_unit($user_id, $post_id);
 
+
                 } else {
-                    $comment = array();
-                    $comment['comment_ID'] = $user_lesson_status->comment_ID;
-                    $comment['comment_approved'] = $lesson_key;
-                    $comment['comment_karma'] = 1;
-                    wp_update_comment($comment);
 
                     $comment_id = $user_lesson_status->comment_ID;
                 }
@@ -182,11 +176,10 @@ class FundaWande_Lms {
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
 
             // If this is a new completion we need to update the course, module and unit progress
-            // get course id of the lesson
-            $course_id = Sensei()->lesson->get_course_id($post_id);
+
 
             // Update user course progress
-            $this->fw_update_course_progress_overall($user_id, $course_id);
+            $this->fw_update_course_progress_overall($user_id);
 
             // Update the module and subunit progress and set the users current lesson to the next
             $this->fw_modules_status_of_sub_unit($user_id, $post_id);
@@ -256,11 +249,10 @@ class FundaWande_Lms {
             $comment_id = wp_insert_comment($data);
 
             // If this is a new completion we need to update the course, module and unit progress
-            // get course id of the lesson
-            $course_id = Sensei()->lesson->get_course_id($post_id);
+
 
             // Update user course progress
-            $this->fw_update_course_progress_overall($user_id, $course_id);
+            $this->fw_update_course_progress_overall($user_id);
 
             // Update the module and subunit progress and set the users current lesson to the next
             $this->fw_modules_status_of_sub_unit($user_id, $post_id);
@@ -286,13 +278,18 @@ class FundaWande_Lms {
      *
      * @return $course_progress return the course progress of the user
      */
-    public function fw_update_course_progress_overall($user_id = null,$course_id) {
+    public function fw_update_course_progress_overall($user_id = null,$course_id=null) {
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
 
+        if (!$course_id) {
+            $course_id = get_user_meta($user_id,'fw_current_course',true);
+        }
+
+
         // Get course lessons
-        $course_lessons = Sensei()->course->course_lessons($course_id);
+        $sub_unit_list = FundaWande()->lessons->fw_get_course_sub_units($course_id);
 
         // Get lessons the user has completed
         global $wpdb;
@@ -303,7 +300,7 @@ class FundaWande_Lms {
         $user_lesson_status = $wpdb->get_results( $query );
 
         if ($user_lesson_status) {
-            $course_progress = (count($user_lesson_status)/count($course_lessons)) * 100;
+            $course_progress = (count($user_lesson_status)/count($sub_unit_list)) * 100;
         } else {
             $course_progress = 0;
         }
@@ -326,315 +323,45 @@ class FundaWande_Lms {
         }
 
         $changed = false;
+        // get current unit before change of sub unit
+        $current_unit = FundaWande()->units->fw_get_set_current_unit($user_id);
 
-        $lesson_unit = Sensei()->modules->get_lesson_module($lesson_id);
-        $lesson_unit_key = get_term_meta($lesson_unit->term_id, 'fw_unique_key',true);
+        // Update the unit progress
+        $current_unit_progress = FundaWande()->units->fw_unit_progress($current_unit->term_id);
 
-        $lesson_module_id = $lesson_unit->parent;
-        $lesson_module_key = get_term_meta($lesson_module_id, 'fw_unique_key',true);
+        // get the current module before change
+        $current_module = FundaWande()->modules->fw_get_set_current_module($user_id,$current_unit);
+
+        // Update the module progress
+        $current_module_progress = FundaWande()->modules->fw_module_progress($current_module->term_id);
+
         $lesson_nav = $this->fw_get_prev_next_lessons($lesson_id);
-
         if (!empty($lesson_nav['next'])) {
             $next_lesson_id = $lesson_nav['next'];
             $next_lesson_key = get_post_meta($next_lesson_id, 'fw_unique_key',true);
             // Set current sub unit to the next lesson
             update_user_meta($user_id,'fw_current_sub_unit',$next_lesson_key);
-
-            $next_lesson_unit = Sensei()->modules->get_lesson_module($next_lesson_id);
-            $next_lesson_unit_key = get_term_meta($next_lesson_unit->term_id, 'fw_unique_key', true);
-
-            $next_lesson_module_id = $next_lesson_unit->parent;
-            $next_lesson_module_key = get_term_meta($next_lesson_module_id, 'fw_unique_key', true);
-        } else {
-            $next_lesson_unit_key = '';
-            $next_lesson_module_key = '';
-
-        }
-
-        if ($lesson_unit_key !== $next_lesson_unit_key) {
-            // complete the current unit
             $changed = true;
-            $this->fw_unit_complete($lesson_unit_key,$user_id);
 
-            // Set current unit to the next lesson unit
-            update_user_meta($user_id,'fw_current_unit',$next_lesson_unit_key);
-            // Set current unit progress to 0, as we are in a new unit
-            update_user_meta($user_id,'fw_current_unit_progress',0);
+            $current_unit = FundaWande()->units->fw_get_set_current_unit($user_id);
+            $current_unit_progress = FundaWande()->units->fw_unit_progress($current_unit->term_id);
 
-
-
-        } else {
-            $unit_progress = $this->fw_unit_progress_at_lesson($lesson_id);
-            update_user_meta($user_id,'fw_current_unit_progress',$unit_progress);
-            update_user_meta($user_id,'fw_current_unit',$lesson_unit_key);
-
+            $current_module = FundaWande()->modules->fw_get_set_current_module($user_id,$current_unit);
+            $current_module_progress = FundaWande()->modules->fw_module_progress($current_module->term_id);
 
         }
 
-        if ($lesson_module_key !== $next_lesson_module_key) {
-            // complete the current module
-            $changed = true;
-            $this->fw_module_complete($lesson_module_key,$user_id);
+        // Update unit and module progress irrelevant of change
+       update_user_meta($user_id,'fw_current_unit_progress',$current_unit_progress);
+       update_user_meta($user_id,'fw_current_module_progress',$current_module_progress);
 
-            // Set current module to the next lesson unit
-            update_user_meta($user_id,'fw_current_module',$next_lesson_module_key);
-            // Set current module progress to 0, as we are in a new module
-            update_user_meta($user_id,'fw_current_module_progress',0);
-        } else {
-            // get lesson unit to determine term ID
-            $unit = Sensei()->modules->get_lesson_module($lesson_id);
-            $module_progress = $this->fw_module_progress_at_unit($unit->term_id);
-
-            update_user_meta($user_id,'fw_current_module_progress',$module_progress);
-            update_user_meta($user_id,'fw_current_module',$lesson_module_key);
-
-            $course_module_progress = $this->fw_course_progress_at_module($unit->parent);
-            update_user_meta($user_id,'fw_course_module_progress',$course_module_progress);
-
-
-
-        }
 
         return $changed;
 
 
     }
 
-    /**
-     * Complete unit functionality to track a unit as complete
-     *
-     * @return $comment_id return the comment ID of the completed progress indicator
-     */
-    public function fw_unit_complete($unit_id, $user_id) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
 
-        // Determine if an existing unit status exists
-        $current_status_args = array(
-            'number' => 1,
-            'type' => 'fw_unit_progress',
-            'user_id' => $user_id,
-            'status' => $unit_id,
-        );
-
-        // possibly returns array, we just want one object
-        $user_unit_status = get_comments($current_status_args);
-        if (is_array($user_unit_status) && 1 == count($user_unit_status)) {
-            $user_unit_status = array_shift($user_unit_status);
-
-        }
-
-        // If no current review then return the review form object with user and post details
-        if (empty($user_unit_status)) {
-            $time = current_time('mysql');
-            $user = $user = get_userdata($user_id);
-            $data = array(
-                'comment_type' => 'fw_unit_progress',
-                'user_id' => $user_id,
-                'comment_date' => $time,
-                'comment_approved' => $unit_id,
-                'comment_karma' => 1,
-                'comment_author' => $user->display_name,
-                'comment_author_email' => $user->user_email
-
-            );
-
-            $comment_id = wp_insert_comment($data);
-
-        } else {
-            $comment = array();
-            $comment['comment_ID'] = $user_unit_status->comment_ID;
-            $comment['comment_approved'] = $unit_id;
-            $comment['comment_karma'] = 1;
-            wp_update_comment( $comment );
-
-            $comment_id = $user_unit_status->comment_ID;
-        }
-
-        return $comment_id;
-
-
-    } // end fw_unit_complete
-
-
-    /**
-     * Complete unit functionality to track a unit as complete
-     *
-     * @return $comment_id return the comment ID of the completed progress indicator
-     *
-     * TODO replace hard coded course ID
-     */
-    public function fw_unit_progress_at_lesson($lesson_id) {
-        $unit = Sensei()->modules->get_lesson_module($lesson_id);
-
-        $course_id = Sensei()->lesson->get_course_id( $lesson_id);
-
-
-        $unit_lessons = Sensei()->modules->get_lessons( $course_id , $unit->term_id);
-
-        $completed = 0;
-        $total = 0;
-
-        foreach ($unit_lessons as $unit_lesson) {
-            $total++;
-
-            if ($unit_lesson->ID == $lesson_id) {
-                $completed = $total;
-            }
-        }
-
-        $unit_progress = ($completed/$total) * 100;
-
-        return $unit_progress;
-
-
-    } // end fw_unit_progress
-
-
-    /**
-     * Complete unit functionality to track a unit as complete
-     *
-     * @return $comment_id return the comment ID of the completed progress indicator
-     */
-    public function fw_module_complete($module_id, $user_id) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-
-        // Determine if an existing unit status exists
-        $current_status_args = array(
-            'number' => 1,
-            'type' => 'fw_module_progress',
-            'user_id' => $user_id,
-            'status' => $module_id,
-        );
-
-        // possibly returns array, we just want one object
-        $user_module_status = get_comments($current_status_args);
-        if (is_array($user_module_status) && 1 == count($user_module_status)) {
-            $user_module_status = array_shift($user_module_status);
-
-        }
-
-        // If no current review then return the review form object with user and post details
-        if (empty($user_module_status)) {
-            $time = current_time('mysql');
-            $user = $user = get_userdata($user_id);
-            $data = array(
-                'comment_type' => 'fw_module_progress',
-                'user_id' => $user_id,
-                'comment_date' => $time,
-                'comment_approved' => $module_id,
-                'comment_karma' => 1,
-                'comment_author' => $user->display_name,
-                'comment_author_email' => $user->user_email
-
-            );
-
-            $comment_id = wp_insert_comment($data);
-
-        } else {
-            $comment = array();
-            $comment['comment_ID'] = $user_module_status->comment_ID;
-            $comment['comment_approved'] = $module_id;
-            $comment['comment_karma'] = 1;
-            wp_update_comment( $comment );
-
-            $comment_id = $user_module_status->comment_ID;
-        }
-
-        return $comment_id;
-
-
-    } // end fw_module_complete
-
-
-    /**
-     * Module progress functionality off of a given unit ID
-     *
-     * @return $module_progress return the module progress percent
-     *
-     */
-    public function fw_module_progress_at_unit($unit_id) {
-
-        $unit = get_term($unit_id, 'module');
-
-        $module_units = get_term_children($unit->parent, 'module' );
-
-        $completed = 0;
-        $total = 0;
-        foreach ($module_units as $module_unit) {
-            $total++;
-            if ($module_unit === $unit_id) {
-                $completed = $total;
-            }
-        }
-
-        $module_progress = ($completed/$total) * 100;
-
-        return $module_progress;
-
-
-    } // end fw_module_progress_at_unit
-
-    /**
-     * Unit progress functionality off of a given unit ID
-     *
-     * @return boolean module_progress return the unit progress percent
-     *
-     */
-    public function fw_is_unit_complete($unit_id,$user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-        $unit_key = get_term_meta($unit_id, 'fw_unique_key',true);
-
-        // Determine if an existing unit status exists
-        $current_status_args = array(
-            'number' => 1,
-            'type' => 'fw_unit_progress',
-            'user_id' => $user_id,
-            'status' => $unit_key,
-        );
-
-        // possibly returns array, we just want one object
-        $user_module_status = get_comments($current_status_args);
-        if ($user_module_status) {
-            return true;
-
-        }
-        return false;
-    } // end fw_is_unit_complete
-
-    /**
-     * Module progress functionality off of a given module ID
-     *
-     * @return $module_progress return the module progress percent
-     *
-     */
-    public function fw_is_module_complete($module_id,$user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
-
-        // Determine if an existing unit status exists
-        $current_status_args = array(
-            'number' => 1,
-            'type' => 'fw_module_progress',
-            'user_id' => $user_id,
-            'status' => $module_key,
-        );
-
-        // possibly returns array, we just want one object
-        $user_module_status = get_comments($current_status_args);
-        if ($user_module_status) {
-            return true;
-
-        }
-        return false;
-    } // end fw_is_module_complete
 
     /**
      * Course progress functionality off of a given module ID
@@ -660,33 +387,16 @@ class FundaWande_Lms {
      * 
      * @return string $sub_unit_link. The URL for the current lesson.  
      */
-    public function fw_get_current_lesson_link($sub_unit_key, $course_id) {
-
-        // '_lesson_course' is a user meta field for the current active course, which could be in English or Xhosa. 
-        // The lesson's key is the same in both courses, so this meta query matches the key to the current active course. 
-        $args = array(
-            'number' => 1,
-            'post_type' => 'lesson',
-            'meta_query' => array(
-                array(
-                    'key' => 'fw_unique_key',
-                    'value' => $sub_unit_key
-                ),
-                array(
-                    'key' => '_lesson_course',
-                    'value' => $course_id
-                )
-            )
-        );
-
-        // Using just 'get_posts' returns an empty array for some reason
-        $sub_unit_list = Timber::get_posts($args);
+    public function fw_get_current_lesson_link($user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $current_sub_unit = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
 
         //The meta query returns an array, but we just want the lesson object
-        if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
-            $sub_unit = array_shift($sub_unit_list);
+        if($current_sub_unit) {
 
-            $sub_unit_link = get_permalink($sub_unit->ID);
+            $sub_unit_link = get_permalink($current_sub_unit->ID);
         }
         else {
             // If no post is found which matches the query, add home_url as the link,
@@ -707,16 +417,18 @@ class FundaWande_Lms {
      * @param  integer $lesson_id Lesson ID.
      * @return array Multi-dimensional array of previous and next lesson IDs.
      */
-    public function fw_get_prev_next_lessons( $lesson_id = 0 ) {
+    public function fw_get_prev_next_lessons( $lesson_id ) {
         // For modules, $lesson_id is the first lesson in the module.
         $links               = array();
         $course_id           = Sensei()->lesson->get_course_id( $lesson_id );
-        $course_lessons = Sensei()->course->course_lessons($course_id);
 
-        if ( is_array( $course_lessons ) && count( $course_lessons ) > 0 ) {
+        // Get ordered list of sub units
+        $sub_unit_list = FundaWande()->lessons->fw_get_course_sub_units($course_id);
+        if ( is_array( $sub_unit_list ) && count( $sub_unit_list ) > 0 ) {
             $found = false;
 
-            foreach ( $course_lessons as $item ) {
+            foreach ( $sub_unit_list as $item ) {
+
 
                 if ( isset( $item->ID ) && $found ) {
                     $links['next'] = $item->ID;
@@ -752,10 +464,9 @@ class FundaWande_Lms {
         $course_lessons = Sensei()->course->course_lessons($course_id);
         $sub_unit_key = '';
         if ($course_lessons[0] ) {
-            $sub_unit_key = get_post_meta($course_lessons[0]->ID, 'fw_unique_key',true);
-            update_user_meta($user_id, 'fw_current_sub_unit','r4m_m00_u01_s01');
-            update_user_meta($user_id,'fw_current_unit','r4m_m00_u01');
-            update_user_meta($user_id,'fw_current_module','r4m_m00');
+            update_user_meta($user_id, 'fw_current_sub_unit',get_field('fw_starting_sub_unit','options') );
+            update_user_meta($user_id, 'fw_current_unit',get_field('fw_starting_unit','options'));
+            update_user_meta($user_id, 'fw_current_module',get_field('fw_starting_module','options'));
 
         }
         return $sub_unit_key;
@@ -763,55 +474,6 @@ class FundaWande_Lms {
 
     } // End fw_get_prev_next_lessons()
 
-
-
-    /**
-     * Get the sub unit status from a lesson key
-     *
-     * @return boolean $status return true if lesson is complete by user, false otherwise
-     *
-     */
-    public function fw_get_sub_unit_status($lesson_key, $user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-
-        // Determine if an existing review exists and assign
-        $current_status_args = array(
-            'number' => 1,
-            'type' => 'fw_sub_unit_progress',
-            'user_id' => $user_id,
-            'status' => $lesson_key,
-        );
-
-        $status = false;
-        $user_lesson_status = get_comments($current_status_args);
-        if ($user_lesson_status) {
-//            // possibly returns array, we just want one object
-//            if (is_array($user_lesson_status) && 1 == count($user_lesson_status)) {
-//                $user_lesson_status = array_shift($user_lesson_status);
-//
-//            }
-//
-//            switch ($user_lesson_status->comment_karma) {
-//                case 0:
-//                    $status = true;
-//                    break;
-//                case 1:
-//                    $status = true;
-//                    break;
-//                // Add default just as a catch all
-//                default:
-//                    $status = true;
-//            }
-            $status = true;
-
-        }
-
-        return $status;
-
-
-    } // end fw_get_sub_unit_status
 
 
     /**
@@ -835,7 +497,7 @@ class FundaWande_Lms {
         return false;
 
 
-    } // end fw_get_sub_unit_status
+    } // end fw_is_sub_unit_current
 
     /**
      * Get the sub unit status from a lesson key
@@ -889,14 +551,12 @@ class FundaWande_Lms {
                 $user_lesson_status = array_shift($user_lesson_status);
 
             }
-            error_log(print_r($user_lesson_status,true));
             $status = wp_delete_comment($user_lesson_status->comment_ID);
 
         }
         return $status;
 
     }
-
 
 
 } // end FundaWande_Lms

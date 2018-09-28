@@ -75,13 +75,13 @@ class FundaWande_Modules {
                     $course_modules[$key]->module_number = $course_module_number;
                 }
                 $course_modules[$key]->link = get_term_link($module->term_id);
-                $course_modules[$key]->complete = FundaWande()->lms->fw_is_module_complete($module->term_id,$user_id);
+                $course_modules[$key]->complete = $this->fw_is_module_complete($module->term_id,$user_id);
                 $course_modules[$key]->units = array();
                 foreach($module_units  as $key2 => $unit) {
 
                     $unit_data = new stdClass();
                     $unit_data->ID = $unit;
-                    $unit_data->complete = FundaWande()->lms->fw_is_unit_complete($unit,$user_id);
+                    $unit_data->complete = FundaWande()->units->fw_is_unit_complete($unit,$user_id);
                     $course_modules[$key]->units[] = $unit_data;
                 }
                 //Get the custom module title
@@ -129,7 +129,7 @@ class FundaWande_Modules {
             $user_id = get_current_user_id();
 
             // check if unit is complete
-            $module_units[$key]->complete = FundaWande()->lms->fw_is_unit_complete($module_units[$key]->term_id,$user_id);
+            $module_units[$key]->complete = FundaWande()->units->fw_is_unit_complete($module_units[$key]->term_id,$user_id);
 
 
             // get user current unit
@@ -145,7 +145,164 @@ class FundaWande_Modules {
 
         return $module_units;
 
-    } // end get_course_modules
+    } // end get_module_units
+
+
+    /**
+     * Module progress functionality off of a given unit ID
+     *
+     * @return $module_progress return the module progress percent
+     *
+     */
+    public function fw_module_progress($module_id) {
+//        error_log(print_r($module_id,true));
+        $module_units = get_term_children($module_id, 'module' );
+
+        $completed = 0;
+        $total = 0;
+//        error_log(print_r($module_units,true));
+        foreach ($module_units as $module_unit) {
+            $total++;
+            if (FundaWande()->units->fw_is_unit_complete($module_unit)) {
+                $completed = $total;
+            }
+        }
+
+        $module_progress = ($completed/$total) * 100;
+
+
+        if ($module_progress == 100) {
+            $user_id = get_current_user_id();
+            $this->fw_complete_module($module_id,$user_id);
+        }
+        return $module_progress;
+
+
+    } // end fw_module_progress_at_unit
+
+
+
+    /**
+     * Module progress functionality off of a given module ID
+     *
+     * @return $module_progress return the module progress percent
+     *
+     */
+    public function fw_is_module_complete($module_id,$user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
+
+        // Determine if an existing unit status exists
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_module_progress',
+            'user_id' => $user_id,
+            'status' => $module_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_module_status = get_comments($current_status_args);
+        if ($user_module_status) {
+            return true;
+
+        }
+        return false;
+    } // end fw_is_module_complete
+
+    /**
+     * Complete unit functionality to track a unit as complete
+     *
+     * @return $comment_id return the comment ID of the completed progress indicator
+     */
+    public function fw_complete_module($module_id, $user_id) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
+        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
+
+
+        // Determine if an existing unit status exists
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_module_progress',
+            'user_id' => $user_id,
+            'status' => $module_key,
+        );
+
+        // possibly returns array, we just want one object
+        $user_module_status = get_comments($current_status_args);
+        if (is_array($user_module_status) && 1 == count($user_module_status)) {
+            $user_module_status = array_shift($user_module_status);
+
+        }
+
+        // If no current review then return the review form object with user and post details
+        if (empty($user_module_status)) {
+            $time = current_time('mysql');
+            $user = $user = get_userdata($user_id);
+            $data = array(
+                'comment_type' => 'fw_module_progress',
+                'user_id' => $user_id,
+                'comment_date' => $time,
+                'comment_approved' => $module_key,
+                'comment_karma' => 1,
+                'comment_author' => $user->display_name,
+                'comment_author_email' => $user->user_email
+
+            );
+
+            $comment_id = wp_insert_comment($data);
+
+        } else {
+
+            $comment_id = $user_module_status->comment_ID;
+        }
+
+        return $comment_id;
+
+
+    } // end fw_complete_module
+
+
+
+    /**
+     * Get and set the current Module  based off a user
+     *
+     * @param int $user_id. The ID for the current user
+     * @param object $current_unit. The object of the current unit
+     *
+     * @return string $unit return the unit object of the current Unit
+     */
+    public function fw_get_set_current_module($user_id = null, $current_unit = null) {
+
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
+        // If current unit isn't set then get it
+        if (!$current_unit) {
+            // Get the current unit object from from the user
+            $current_unit = $this->fw_get_set_current_unit($user_id);
+        }
+
+        // Get the current module ID
+        $current_module_id = $current_unit->parent;
+
+        // et the current module object
+        $current_module = new TimberTerm($current_module_id);
+
+        // add the unit key to object
+        $current_module->key = get_term_meta($current_module->term_id, 'fw_unique_key',true);
+
+        // update the current unit off of the key in case they have become misaligned
+        update_user_meta($user_id,'fw_current_module',$current_module->key);
+
+        return $current_module;
+
+    }
 
 
 } // end FundaWande_Modules
