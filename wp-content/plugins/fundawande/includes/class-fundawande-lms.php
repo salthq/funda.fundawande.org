@@ -26,7 +26,7 @@ class FundaWande_Lms {
         add_action('FUNDAWANDE_HANDLER_nopriv_fw_lesson_complete', array( $this, 'fw_lesson_complete'));
 
         //  This hook is fired after a lesson quiz has been graded and the lesson status is 'passed' OR 'graded'
-        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
+//        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
         // do_action( 'sensei_user_lesson_end', $user_id, $lesson_id );
 
         // Fires the end of the submit_answers_for_grading function. It will fire irrespective of the submission results.
@@ -129,8 +129,9 @@ class FundaWande_Lms {
         $karma = 0;
 
         // Check if the pass mark was achieved if it's a auto graded quiz and set karma to 1
-        if (is_int($grade)) {
-            if (($grade >= $quiz_pass_percentage) && ($quiz_grade_type == 'auto')) {
+        if ($grade) {
+
+            if (((int)$grade == 100) && ($quiz_grade_type == 'auto')) {
                 $karma = 1;
             }
         }
@@ -174,7 +175,7 @@ class FundaWande_Lms {
 
             $comment_id = wp_insert_comment($data);
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
-
+            update_comment_meta( $comment_id, 'quiz_attempts', 1 );
             // If this is a new completion we need to update the course, module and unit progress
 
 
@@ -194,6 +195,16 @@ class FundaWande_Lms {
 
             $comment_id = $user_lesson_status->comment_ID;
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
+
+            $tries = get_comment_meta( $comment_id, 'quiz_attempts', true );
+            $tries++;
+            update_comment_meta( $comment_id, 'quiz_attempts',$tries );
+
+            // Update user course progress
+            $this->fw_update_course_progress_overall($user_id);
+
+            // Update the module and subunit progress and set the users current lesson to the next
+            $this->fw_modules_status_of_sub_unit($user_id, $post_id);
 
         }
 
@@ -552,7 +563,11 @@ class FundaWande_Lms {
                 $user_lesson_status = array_shift($user_lesson_status);
 
             }
-            $status = wp_delete_comment($user_lesson_status->comment_ID);
+            $comment = array();
+            $comment['comment_ID'] = $user_lesson_status->comment_ID;
+            $comment['comment_approved'] = $lesson_key;
+            $comment['comment_karma'] = 0;
+            wp_update_comment( $comment );
 
         }
         return $status;

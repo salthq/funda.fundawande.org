@@ -21,6 +21,8 @@ if (class_exists('Timber')) {
     $context = Timber::get_context();
     $post = new TimberPost();
     $context['post'] = $post;
+
+    // run this is make sure the quiz progress is updated before it loads
     do_action( 'sensei_single_quiz_content_inside_before', get_the_ID() );
     // Assign current user to context
     $user = new TimberUser();
@@ -33,25 +35,15 @@ if (class_exists('Timber')) {
 
     FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course, $lesson->ID);
 
+    // check if is retry quiz
+    $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
+
 
     //Get the unit info for the current lesson
-    $unit = FundaWande()->lessons->get_unit_info($context['user']->fw_current_course,$lesson->ID);
+    $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($context['user']->fw_current_course, $lesson_id );
 
-    $context['unit'] = $unit;
-
-    $context['num_lessons'] = count($unit->lessons);
-
-    //Get the module number for the parent module, to enable module-specific styling
-    $context['module_number'] = get_term_meta($unit->parent, 'module_number', true);
-
-    //Get the parent module title
-    $context['module_title'] = get_term_meta($unit->parent, 'module_title', true );
-
-    //Get the unit title
-    $context['unit_title'] = get_term_meta($unit->term_id, 'module_title', true);
-
-    //Get the nav links object and add to Timber context
-    $context['nav_links'] = FundaWande()->lessons->get_lesson_nav_links($lesson->ID);
+    $context['sub_unit_meta'] = $sub_unit_meta;
+    $context['module_number'] = $sub_unit_meta->module_number;
 
 
     Timber::render(array('lms/single-quiz.twig', 'page.twig'), $context);

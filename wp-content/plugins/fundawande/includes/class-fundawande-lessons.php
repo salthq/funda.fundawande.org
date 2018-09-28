@@ -125,6 +125,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         // if sub unit is last in module, mark as such
         if ($meta_obj->unit->term_id == $last_unit) {
             $meta_obj->is_last_in_module = true;
+            $meta_obj->next_unit = FundaWande()->units->fw_get_sub_unit_unit($meta_obj->nav->next);
             $meta_obj->next_module = get_term($meta_obj->next_unit->parent);
 
 
@@ -191,7 +192,7 @@ if ( ! defined( 'ABSPATH' ) ) {
              $user_id = get_current_user_id();
          }
 
-         if (is_int($lesson_id_or_key)) {
+         if (is_numeric($lesson_id_or_key)) {
              $lesson_key = get_post_meta($lesson_id_or_key,'fw_unique_key',true);
          } else {
              $lesson_key = $lesson_id_or_key;
@@ -208,9 +209,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          $status = false;
          $user_lesson_status = get_comments($current_status_args);
+         if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
+             $user_lesson_status  = array_shift($user_lesson_status );
+         }
          if ($user_lesson_status) {
-
-             $status = true;
+             switch ($user_lesson_status->comment_karma) {
+                 case 1:
+                     $status = true;
+                     break;
+                 case 0:
+                     $status = false;
+                     break;
+                 // Add default just as a catch all
+                 default:
+                     $status = true;
+             }
 
          }
 
