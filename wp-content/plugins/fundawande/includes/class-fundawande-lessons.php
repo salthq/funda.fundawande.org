@@ -154,7 +154,6 @@ if ( ! defined( 'ABSPATH' ) ) {
          // '_lesson_course' is a user meta field for the current active course, which could be in English or Xhosa.
          // The lesson's key is the same in both courses, so this meta query matches the key to the current active course.
          $args = array(
-             'number' => 1,
              'post_type' => 'lesson',
              'meta_query' => array(
                  array(
@@ -170,7 +169,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          // Using just 'get_posts' returns an empty array for some reason
          $sub_unit_list = Timber::get_posts($args);
-
          //The meta query returns an array, but we just want the lesson object
          if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
              $sub_unit = array_shift($sub_unit_list);
