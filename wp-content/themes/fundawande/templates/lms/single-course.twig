@@ -16,8 +16,6 @@
         </div>
         <div class = "container-fluid background-secondary">
             <div class = "container p-3">
-
-
                 {% for module in modules %}
                     {% set completed = 0 %}
                     {% for unit in module.units %}
@@ -25,7 +23,7 @@
                             {% set completed = completed + 1 %}
                         {% endif %}
                     {% endfor %}
-                    <a class = "module-link" href = "{{module.link}}">
+                    <a id = "module-card" class = "module-link" href = "{{module.link}}">
 
                         <div class = "card my-3 {% if module.current %}current{% endif %}">
                             {% if module.current %}

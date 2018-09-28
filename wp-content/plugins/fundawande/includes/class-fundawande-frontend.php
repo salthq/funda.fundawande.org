@@ -67,23 +67,28 @@ class FundaWande_Frontend {
 		//Include Anno
 		wp_enqueue_script('anno-script', FundaWande()->plugin_url . 'assets/js/anno.min.js', array('jquery'), FundaWande()->version, true);
 
+
+		//Get the user language preference, which will be used to pull in the right script. 
+		$user_id = get_current_user_id();
+		$language = get_user_meta($user_id, 'language_preference', true);
+
 		// Clicking on the 'view tooltips' button on the navbar will trigger the Anno walkthrough script.
 		// The following wp_enqueue script calls are wrapped in conditionals to ensure that
 		// only the right script is loaded for the page the user is currently viewing.
 	
 		//Include Module Page Walkthrough Script if user is on the modules page
 		if( is_singular('course') ) {
-			wp_enqueue_script('modules-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/modules-tour.min.js', array('jquery'), FundaWande()->version, true);
+			wp_enqueue_script('modules-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-modules-tour.min.js', array('jquery'), FundaWande()->version, true);
 		}
 
 		//Include Unit Page Walkthrough Script if user is on the units page
 		if( is_tax('module') ) {
-			wp_enqueue_script('units-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/units-tour.min.js', array('jquery'), FundaWande()->version, true);
+			wp_enqueue_script('units-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-units-tour.min.js', array('jquery'), FundaWande()->version, true);
 		}
 
 		//Include Lesson Page Walkthrough Script if user is on a lesson page
 		if( is_singular('lesson') ) {
-			wp_enqueue_script('lessons-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/lessons-tour.min.js', array('jquery'), FundaWande()->version, true);
+			wp_enqueue_script('lessons-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-lessons-tour.min.js', array('jquery'), FundaWande()->version, true);
 		}
 	
 	} // End fw_tour_scripts()
