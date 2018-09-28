@@ -90,8 +90,8 @@
         <div class = "container pb-5">
             <div class="row my-0 justify-content-between">
                 <div class="lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
-                    {% if sub_unit_meta.nav.next %}
-                        <a href = "{{sub_unit_meta.nav.next}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
+                    {% if sub_unit_meta.nav.prev %}
+                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
                 </div>
                 <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">

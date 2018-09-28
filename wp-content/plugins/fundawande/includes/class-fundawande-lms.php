@@ -450,7 +450,7 @@ class FundaWande_Lms {
                 if ( isset( $item->ID ) && (absint( $item->ID ) === absint( $lesson_id )) ) {
                     $found = true;
                 } else {
-                    $links->previous = $item->ID;
+                    $links->prev = $item->ID;
 
 
                 }
