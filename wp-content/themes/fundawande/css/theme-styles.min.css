@@ -469,7 +469,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .single-module-wrapper .sub-units-icon a.disabled svg #icon-inner{fill:#444}
 .single-module-wrapper .sub-units-icon a.disabled:hover{cursor:default;opacity:1}
 .single-module-wrapper .sub-units-icon a.current{width:95px;box-sizing:border-box;border:2px solid;border-radius:6px;z-index:1;background:white;margin-right:-10px}
-.single-module-wrapper .sub-units-icon a.current svg #inner{opacity:.7}
+.single-module-wrapper .sub-units-icon a.current svg circle{opacity:.7}
 .single-module-wrapper .sub-units-icon a.current svg #icon-inner{fill:#444}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon a.current{width:auto;border-radius:28px 6px 6px 28px;margin-right:0}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text{line-height:1;width:80%}

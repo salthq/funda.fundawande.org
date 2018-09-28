@@ -81,7 +81,7 @@
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">
 
                                                 </div>
-                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
+                                                <a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-svg-fill-{{ module_number }}  module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">
                                                     <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
                                                     {% set image = source('assets/lms/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
                                                     {% if image %}

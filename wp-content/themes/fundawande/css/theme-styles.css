@@ -971,7 +971,7 @@ body #page-wrapper { margin-top: 60px; display: inline-block; min-height: calc(1
 
 .single-module-wrapper .sub-units-icon a.current { width: 95px; box-sizing: border-box; border: 2px solid; border-radius: 6px; z-index: 1; background: white; margin-right: -10px; }
 
-.single-module-wrapper .sub-units-icon a.current svg #inner { opacity: 0.7; }
+.single-module-wrapper .sub-units-icon a.current svg circle { opacity: 0.7; }
 
 .single-module-wrapper .sub-units-icon a.current svg #icon-inner { fill: #444444; }
 

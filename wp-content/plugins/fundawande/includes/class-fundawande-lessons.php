@@ -225,4 +225,53 @@ if ( ! defined( 'ABSPATH' ) ) {
 
      } // end fw_get_sub_unit_status
 
+     /**
+      * Get the sub units in a course
+      *
+      * @param int $course_id Course ID of the course to get sub units from
+      *
+      * @return array $sub_unit_list return array of sub units
+      *
+      */
+     public function fw_get_course_sub_units($course_id = null) {
+
+         if (!$course_id) {
+             $user_id = get_current_user_id();
+             $course_id = get_user_meta($user_id,'fw_current_course',true);
+
+         }
+
+         $args = array(
+             'numberposts' => -1,
+             'post_type' => 'lesson',
+             'meta_query' => array(
+                 array(
+                     'key' => '_lesson_course',
+                     'value' => $course_id
+                 ),
+                 // Only get those with a year
+                 'unique_key' => array(
+                     'key' => 'fw_unique_key',
+                     'compare' => 'EXISTS',
+                 ),
+             ),
+             'orderby'    => array(
+
+                 'unique_key' => 'ASC'
+             ),
+
+
+         );
+
+         // Using just 'get_posts' returns an empty array for some reason
+         $sub_unit_list = get_posts($args);
+
+
+
+         return $sub_unit_list;
+
+
+     } // end fw_get_course_sub_units
+
+
  } // end FundaWande_Lessons
