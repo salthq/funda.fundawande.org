@@ -28,7 +28,7 @@
         <div class = "container-fluid background-secondary">
             <div class = "container p-3">
                 {% for unit in units %}
-                    <div class = "unit card my-3 {% if unit.current %}current{% endif %}">
+                    <div class = "unit card my-3 {% if unit.current %}current{% endif %} d-inline-block w-100">
                         {% if unit.current %}
                             <span id = "current" class="current-unit-text">{{attribute(options, lang.prefix~'current_unit_text')}}</span>
                         {% endif %}
