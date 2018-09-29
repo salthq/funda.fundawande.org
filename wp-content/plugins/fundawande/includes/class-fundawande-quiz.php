@@ -40,4 +40,59 @@ class FundaWande_Quiz {
 
     } // end load_single_quiz_template()
 
+    /**
+     * Get the sub unit status from a lesson key
+     *
+     * @return boolean $status return true if lesson is complete by user, false otherwise
+     *
+     */
+    public function fw_is_quiz_retry($lesson_id_or_key, $user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+        $lesson_id = $lesson_id_or_key;
+        if (is_numeric($lesson_id_or_key)) {
+
+            $lesson_key = get_post_meta($lesson_id_or_key,'fw_unique_key',true);
+        } else {
+            $lesson_key = $lesson_id_or_key;
+        }
+
+
+        // Determine if an existing review exists and assign
+        $current_status_args = array(
+            'number' => 1,
+            'type' => 'fw_sub_unit_progress',
+            'user_id' => $user_id,
+            'status' => $lesson_key,
+        );
+
+        $status = false;
+        $user_lesson_status = get_comments($current_status_args);
+        if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
+            $user_lesson_status  = array_shift($user_lesson_status );
+        }
+
+        if ($user_lesson_status) {
+            switch ($user_lesson_status->comment_karma) {
+                case 0:
+                    If (WooThemes_Sensei_Utils::user_completed_lesson( $lesson_id, get_current_user_id())) {
+                        $status = true;
+                    }
+                    break;
+                case 1:
+                    $status = false;
+                    break;
+                // Add default just as a catch all
+                default:
+                    $status = true;
+            }
+
+        }
+
+        return $status;
+
+
+    } // end fw_get_sub_unit_status
+
 } // end FundaWande_Quiz

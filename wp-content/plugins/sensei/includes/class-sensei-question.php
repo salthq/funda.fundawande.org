@@ -730,7 +730,7 @@ class Sensei_Question {
 		$user_question_grade  = Sensei()->quiz->get_user_question_grade( $lesson_id, $question_id, get_current_user_id() );
 
 		// Defaults
-        $answer_message       = __( 'Incorrect - Right Answer:','woothemes-sensei') . ' ' . self::get_correct_answer( $question_id );
+        $answer_message       =  'Incorrect';
 
 		// For zero grade mark as 'correct' but add no classes
 		if ( 0 == $question_grade   ) {
@@ -740,7 +740,7 @@ class Sensei_Question {
 		} elseif( $user_question_grade > 0 ) {
 			$user_correct         = true;
 			$answer_message_class = 'user_right';
-			$answer_message       = sprintf( __( 'Grade: %d', 'woothemes-sensei' ), $user_question_grade );
+			$answer_message       = 'Correct';
 		} else {
             $user_correct          = false;
             $answer_message_class  = 'user_wrong';

@@ -82,8 +82,6 @@ class FundaWande_Units {
             }
         }
 
-        error_log($completed.' '.$total);
-
         $unit_progress = ($completed/$total) * 100;
 
         if ($unit_progress == 100) {
@@ -199,6 +197,8 @@ class FundaWande_Units {
                 break;
             }
         }
+
+        $unit = new TimberTerm($unit->term_id);
         return $unit;
 
     }

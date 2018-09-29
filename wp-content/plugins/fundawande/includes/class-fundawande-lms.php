@@ -26,7 +26,7 @@ class FundaWande_Lms {
         add_action('FUNDAWANDE_HANDLER_nopriv_fw_lesson_complete', array( $this, 'fw_lesson_complete'));
 
         //  This hook is fired after a lesson quiz has been graded and the lesson status is 'passed' OR 'graded'
-        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
+//        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
         // do_action( 'sensei_user_lesson_end', $user_id, $lesson_id );
 
         // Fires the end of the submit_answers_for_grading function. It will fire irrespective of the submission results.
@@ -59,7 +59,6 @@ class FundaWande_Lms {
 
             // Run normal Sensei update logic
             $activity_logged = WooThemes_Sensei_Utils::update_lesson_status($user_id, $post_id, 'complete');
-
             // prevent fundawande progress tracking if unique lesson key isn't assigned
             if (!empty($lesson_key)) {
                 // Determine if an existing status exists and assign
@@ -129,8 +128,9 @@ class FundaWande_Lms {
         $karma = 0;
 
         // Check if the pass mark was achieved if it's a auto graded quiz and set karma to 1
-        if (is_int($grade)) {
-            if (($grade >= $quiz_pass_percentage) && ($quiz_grade_type == 'auto')) {
+        if ($grade) {
+
+            if (((int)$grade == 100) && ($quiz_grade_type == 'auto')) {
                 $karma = 1;
             }
         }
@@ -174,7 +174,7 @@ class FundaWande_Lms {
 
             $comment_id = wp_insert_comment($data);
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
-
+            update_comment_meta( $comment_id, 'quiz_attempts', 1 );
             // If this is a new completion we need to update the course, module and unit progress
 
 
@@ -194,6 +194,16 @@ class FundaWande_Lms {
 
             $comment_id = $user_lesson_status->comment_ID;
             update_comment_meta( $comment_id, 'quiz_grade',  $grade );
+
+            $tries = get_comment_meta( $comment_id, 'quiz_attempts', true );
+            $tries++;
+            update_comment_meta( $comment_id, 'quiz_attempts',$tries );
+
+            // Update user course progress
+            $this->fw_update_course_progress_overall($user_id);
+
+            // Update the module and subunit progress and set the users current lesson to the next
+            $this->fw_modules_status_of_sub_unit($user_id, $post_id);
 
         }
 
@@ -336,8 +346,8 @@ class FundaWande_Lms {
         $current_module_progress = FundaWande()->modules->fw_module_progress($current_module->term_id);
 
         $lesson_nav = $this->fw_get_prev_next_lessons($lesson_id);
-        if (!empty($lesson_nav['next'])) {
-            $next_lesson_id = $lesson_nav['next'];
+        if (!empty($lesson_nav->next)) {
+            $next_lesson_id = $lesson_nav->next;
             $next_lesson_key = get_post_meta($next_lesson_id, 'fw_unique_key',true);
             // Set current sub unit to the next lesson
             update_user_meta($user_id,'fw_current_sub_unit',$next_lesson_key);
@@ -380,35 +390,6 @@ class FundaWande_Lms {
 
     } // end fw_course_progress_at_module
 
-    /**
-     * Return a lesson link based on it's key and parent course
-     * @param string $sub_unit_key. The key for the user's current lesson
-     * @param int $course_id. The ID for the currently active course
-     * 
-     * @return string $sub_unit_link. The URL for the current lesson.  
-     */
-    public function fw_get_current_lesson_link($user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-        $current_sub_unit = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
-
-        //The meta query returns an array, but we just want the lesson object
-        if($current_sub_unit) {
-
-            $sub_unit_link = get_permalink($current_sub_unit->ID);
-        }
-        else {
-            // If no post is found which matches the query, add home_url as the link,
-            // which will take them to their course page. This should only happen if the key
-            // has been incorrectly set on the lesson editor screen. 
-            $sub_unit_link = home_url('/'); 
-        }        
-
-        return $sub_unit_link;
-
-    } // end fw_get_current_lesson_link()
-
 
     /**
      * Returns next and previous lesson IDs.
@@ -419,7 +400,7 @@ class FundaWande_Lms {
      */
     public function fw_get_prev_next_lessons( $lesson_id ) {
         // For modules, $lesson_id is the first lesson in the module.
-        $links               = array();
+        $links               = new stdClass();
         $course_id           = Sensei()->lesson->get_course_id( $lesson_id );
 
         // Get ordered list of sub units
@@ -431,15 +412,16 @@ class FundaWande_Lms {
 
 
                 if ( isset( $item->ID ) && $found ) {
-                    $links['next'] = $item->ID;
+                    $links->next = $item->ID;
                     break;
                 } else {
-                    $links['next'] = '';
+                    $links->next = '';
                 }
                 if ( isset( $item->ID ) && (absint( $item->ID ) === absint( $lesson_id )) ) {
                     $found = true;
                 } else {
-                    $links['previous'] = $item->ID;
+                    $links->prev = $item->ID;
+
 
                 }
             }
@@ -551,7 +533,11 @@ class FundaWande_Lms {
                 $user_lesson_status = array_shift($user_lesson_status);
 
             }
-            $status = wp_delete_comment($user_lesson_status->comment_ID);
+            $comment = array();
+            $comment['comment_ID'] = $user_lesson_status->comment_ID;
+            $comment['comment_approved'] = $lesson_key;
+            $comment['comment_karma'] = 0;
+            wp_update_comment( $comment );
 
         }
         return $status;
