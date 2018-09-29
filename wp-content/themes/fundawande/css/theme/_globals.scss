@@ -191,6 +191,9 @@
         &:before {
             background: $colour_var!important;
         }
+        &:after {
+            background: $colour_var!important;
+        }
     }
     //This class is used to fill in the circle around icon SVGs
     .module-svg-icon-fill-#{$colour_key} {
