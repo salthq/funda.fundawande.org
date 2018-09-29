@@ -250,7 +250,7 @@
 
                 }
             }
-            &:nth-of-type(6n) {
+            &:nth-of-type(6n):not(:last-of-type) {
 
 
                     @include breakpoint(desktop) {
