@@ -74,22 +74,29 @@ class FundaWande_Language {
      * If the user is logged in and a get variable for the language is set, add to the user object
      */
     public function set_user_language_preference() {
-        if ( is_user_logged_in() && isset($_GET['lang'])) {
+        if ( is_user_logged_in()) {
             $user_id = get_current_user_id();
-            $lang = $_GET['lang'];
-            update_user_meta($user_id, 'language_preference', $lang );
+            $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
 
-            // Set the user's current course off the lang
-            $course_obj = get_field('fw_'.$lang.'_course','options',true);
-            update_user_meta($user_id, 'fw_current_course', $course_obj[0]->ID );
-
-
-            $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );
-//            if (empty($current_sub_unit)) {
-                FundaWande()->lms->fw_set_first_sub_unit($course_obj[0]->ID,$user_id);
-//            }
+            if (isset($_GET['lang'])) {
+                $lang = $_GET['lang'];
+                update_user_meta($user_id, 'language_preference', $lang);
+                // Set the user's current course off the lang
+                $current_course_id = get_field('fw_'.$lang.'_course','options',true);
+                update_user_meta($user_id, 'fw_current_course', $current_course_id );
+            } elseif (empty($current_course_id)) {
+                $current_course_id = get_field('fw_xho_course','options',true);
+                update_user_meta($user_id, 'fw_current_course', $current_course_id );
+            }
 
         }
+
+        $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );
+        if (empty($current_sub_unit)) {
+            FundaWande()->lms->fw_set_first_sub_unit($current_course_id,$user_id);
+        }
+
+
     }// end set_user_language_preference()
 
     /**
