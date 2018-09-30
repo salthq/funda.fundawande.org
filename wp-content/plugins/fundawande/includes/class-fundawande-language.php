@@ -76,7 +76,7 @@ class FundaWande_Language {
     public function set_user_language_preference() {
         if ( is_user_logged_in()) {
             $user_id = get_current_user_id();
-            $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+            $current_course_id = FundaWande()->lms->fw_get_current_course_id($user_id);
 
             if (isset($_GET['lang'])) {
                 $lang = $_GET['lang'];
@@ -88,13 +88,13 @@ class FundaWande_Language {
                 $current_course_id = get_field('fw_xho_course','options',true);
                 update_user_meta($user_id, 'fw_current_course', $current_course_id );
             }
-
+            $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );
+            if (empty($current_sub_unit)) {
+                FundaWande()->lms->fw_set_first_sub_unit($user_id);
+            }
         }
 
-        $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );
-        if (empty($current_sub_unit)) {
-            FundaWande()->lms->fw_set_first_sub_unit($current_course_id,$user_id);
-        }
+
 
 
     }// end set_user_language_preference()

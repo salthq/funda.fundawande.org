@@ -37,13 +37,15 @@ if (class_exists('Timber')) {
     $user = new TimberUser();
     $context['user'] = $user;
 
-    FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course,$post->ID);
+    $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
+
+    FundaWande()->language->fw_correct_lesson_lang($current_course_id,$post->ID);
 
 
 
 
     //Get the unit info for the current lesson
-    $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($context['user']->fw_current_course, $post->ID );
+    $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($current_course_id, $post->ID );
 
     $context['sub_unit_meta'] = $sub_unit_meta;
     $context['module_number'] = $sub_unit_meta->module_number;

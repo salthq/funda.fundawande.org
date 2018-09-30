@@ -128,13 +128,11 @@ class FundaWandeSite extends TimberSite {
 
         //Get current course link
         if ( isset($context['user']->fw_current_course)) {
-            $context['course_link'] = get_permalink($context['user']->fw_current_course);
+            $context['course_link'] = FundaWande()->lms->fw_get_current_course_id($context['user']->ID);
         }
 
         //Get current lesson link
         if ( isset($context['user']->fw_current_course) && isset($context['user']->fw_current_sub_unit) ) {
-            $sub_unit_key = $context['user']->fw_current_sub_unit;
-            $course_id = $context['user']->fw_current_course;
 
             $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($context['user']->ID);
             $context['current_lesson_link'] = get_the_permalink($current_lesson_id);

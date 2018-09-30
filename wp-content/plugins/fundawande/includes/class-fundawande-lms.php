@@ -294,7 +294,7 @@ class FundaWande_Lms {
         }
 
         if (!$course_id) {
-            $course_id = get_user_meta($user_id,'fw_current_course',true);
+            $course_id = FundaWande()->lms->fw_get_current_course_id($user_id);
         }
 
 
@@ -438,21 +438,17 @@ class FundaWande_Lms {
      * @param  integer $user_id User ID.
      * @return string $sub_unit_key
      */
-    public function fw_set_first_sub_unit($course_id , $user_id = null ) {
+    public function fw_set_first_sub_unit($user_id = null ) {
         //
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
-        $course_lessons = Sensei()->course->course_lessons($course_id);
-        $sub_unit_key = '';
-        if ($course_lessons[0] ) {
-            update_user_meta($user_id, 'fw_current_sub_unit',get_field('fw_starting_sub_unit','options') );
-            update_user_meta($user_id, 'fw_current_unit',get_field('fw_starting_unit','options'));
-            update_user_meta($user_id, 'fw_current_module',get_field('fw_starting_module','options'));
 
-        }
-        return $sub_unit_key;
+        update_user_meta($user_id, 'fw_current_sub_unit',get_field('fw_starting_sub_unit','options') );
+        update_user_meta($user_id, 'fw_current_unit',get_field('fw_starting_unit','options'));
+        update_user_meta($user_id, 'fw_current_module',get_field('fw_starting_module','options'));
 
+        return true;
 
     } // End fw_get_prev_next_lessons()
 
@@ -541,6 +537,23 @@ class FundaWande_Lms {
 
         }
         return $status;
+
+    }
+    /**
+     * Get the current course from user
+     *
+     **/
+    public function fw_get_current_course_id($user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
+        $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+
+        if (is_numeric($current_course_id)) {
+            return $current_course_id;
+        }
+        return false;
 
     }
 
