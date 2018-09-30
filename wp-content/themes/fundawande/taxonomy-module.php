@@ -20,7 +20,8 @@ if (class_exists('Timber')) {
     $context['term'] = $term;
     $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
 
-    FundaWande()->language->fw_correct_module_lang($current_course_id,$term->ID);
+    // TODO add back lang redirect
+     FundaWande()->language->fw_correct_module_lang($current_course_id,$term->ID);
 
     //Get module number to enable module-specific styling
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
