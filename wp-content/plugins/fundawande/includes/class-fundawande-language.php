@@ -42,6 +42,12 @@ class FundaWande_Language {
         // Create empty $language_obj
         $language_obj = new stdClass();
 
+
+        // Default to eng for pilot
+        // TODO remove this default for the language changing pilot
+        $language = 'eng';
+
+
         // Create switch case depending on the $language
         // Add language prefix to $language_obj
         // Add language url suffix to $language_obj
@@ -77,6 +83,10 @@ class FundaWande_Language {
         if ( is_user_logged_in()) {
             $user_id = get_current_user_id();
             $current_course_id = FundaWande()->lms->fw_get_current_course_id($user_id);
+
+            // Default to eng for pilot
+            // TODO remove this default for the language changing pilot
+            $_GET['lang'] = 'eng';
 
             if (isset($_GET['lang'])) {
                 $lang = $_GET['lang'];
