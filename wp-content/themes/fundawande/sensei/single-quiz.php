@@ -33,16 +33,17 @@ if (class_exists('Timber')) {
     $lesson = new TimberPost($lesson_id);
     $context['quiz_lesson'] =  $lesson;
 
+    $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
 
 
-    FundaWande()->language->fw_correct_lesson_lang($context['user']->fw_current_course, $lesson->ID);
+    FundaWande()->language->fw_correct_lesson_lang($current_course_id, $lesson->ID);
 
     // check if is retry quiz
     $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
 
 
     //Get the unit info for the current lesson
-    $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($context['user']->fw_current_course, $lesson_id );
+    $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($current_course_id, $lesson_id );
 
     $context['sub_unit_meta'] = $sub_unit_meta;
     $context['module_number'] = $sub_unit_meta->module_number;

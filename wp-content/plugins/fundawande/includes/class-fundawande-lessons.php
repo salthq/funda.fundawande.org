@@ -147,8 +147,7 @@ if ( ! defined( 'ABSPATH' ) ) {
          if (!$user_id) {
              $user_id = get_current_user_id();
          }
-
-         $current_course_id = get_user_meta($user_id,'fw_current_course',true);
+         $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user_id);
          $current_sub_unit_key = get_user_meta($user_id,'fw_current_sub_unit',true);
 
          // '_lesson_course' is a user meta field for the current active course, which could be in English or Xhosa.
@@ -242,7 +241,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          if (!$course_id) {
              $user_id = get_current_user_id();
-             $course_id = get_user_meta($user_id,'fw_current_course',true);
+             $course_id =  FundaWande()->lms->fw_get_current_course_id($user_id);
 
          }
 

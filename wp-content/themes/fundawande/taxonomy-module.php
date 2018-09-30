@@ -15,17 +15,19 @@ if (class_exists('Timber')) {
         exit();
     } // End if, else show module and its units
 
-    $context['user'] = new TimberUser();
+    $user = new TimberUser();
+    $context['user'] = $user;
     $context['term'] = $term;
+    $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
 
-    FundaWande()->language->fw_correct_module_lang($context['user']->fw_current_course,$term->ID);
+    FundaWande()->language->fw_correct_module_lang($current_course_id,$term->ID);
 
     //Get module number to enable module-specific styling
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
     $context['module_title'] = get_term_meta($term->ID, 'module_title', true);
 
     // Get the modules units to visualise on the module page
-    $context['units'] = FundaWande()->modules->get_module_units($term->ID,$context['user']->fw_current_course);
+    $context['units'] = FundaWande()->modules->get_module_units($term->ID,$current_course_id);
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);
 }
