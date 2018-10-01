@@ -1,13 +1,35 @@
 <!-- Expanded Sidebar Progress Component -->
-<div id = "lesson-progress-mobile-modal" class="lesson-progress-mobile-modal modal mt-5 m-4" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content  ">
-                <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
-                    <div class = "lesson-sidebar-header module-bg-{{module_number}} w-100 text-white text-center p-2" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
-                                <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
-                                    <span class = "p-2">{{source('assets/minimize_icon.svg')}}</span>{{attribute(options, lang.prefix~'hide_unit_progress_text')}}
-                                </span>
+<div class = "d-md-none">
+    <div id = "lesson-progress-mobile-modal" class="lesson-progress-mobile-modal modal mt-5 m-4" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content  ">
+                    <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
+                        <div class = "lesson-sidebar-header module-bg-{{module_number}} w-100 text-white text-center p-2" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
+                                    <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
+                                        <span class = "p-2">{{source('assets/minimize_icon.svg')}}</span>{{attribute(options, lang.prefix~'hide_unit_progress_text')}}
+                                    </span>
+                        </div>
+                        <div class = "lesson-sidebar-module-titles mx-3 py-3">
+                            <p class = "m-0"><strong>How Children Learn to Read</strong></p>
+                            <h4 class = "m-0">{{sub_unit_meta.unit.name}}</h4>
+                        </div>
+                        <hr class="m-0">
+                        <div class="my-4 row no-gutters px-4 flex-column">
+                        {% for lesson in sub_unit_meta.unit_lessons %}
+                            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                            {# TODO add back limit #}
+                            {#<a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">#}
+                            <a href = "{{function('get_post_permalink', lesson.ID)}}" class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %}">
+                                {{ source('assets/lms/recall_quiz.svg') }}
+                                <div class="pl-2 d-flex flex-column lesson-progress-text">
+                                    <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
+                                    <span class = "">{{lesson.title}}</span>
+                                </div>
+                            </a>
+                        {% endfor %}
+                        </div>
                     </div>
+<<<<<<< HEAD
                     <div class = "lesson-sidebar-module-titles mx-3 py-3">
                         <p class = "m-0"><strong>How Children Learn to Read</strong></p>
                         <h4 class = "m-0">{{sub_unit_meta.unit.name}}</h4>
@@ -33,18 +55,21 @@
                     {% endfor %}
                     </div>
                 </div>
+=======
+            </div>
+>>>>>>> 840bbb9e9fb6e542fe1922225df3b7cccb789163
         </div>
     </div>
-</div>
-<!-- Minimized Sidebar Progress Component -->
-<div class = "lesson-progress-mobile lesson-progress-mobile-minimized " id = "progress-mobile-minimized" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
-    <div class = "lesson-progress align-items-center d-flex no-gutters flex-row">
-        <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{module_number}}.{{ lesson_number }}</h4></div>
-        <div class=" lesson-progress-markers px-3 w-100 row no-gutters align-items-center flex-row">
-        {% for lesson in sub_unit_meta.unit_lessons %}
-            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
-            <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
-        {% endfor %}
+    <!-- Minimized Sidebar Progress Component -->
+    <div class = "lesson-progress-mobile lesson-progress-mobile-minimized " id = "progress-mobile-minimized" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
+        <div class = "lesson-progress align-items-center d-flex no-gutters flex-row">
+            <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{module_number}}.{{ lesson_number }}</h4></div>
+            <div class=" lesson-progress-markers px-3 w-100 row no-gutters align-items-center flex-row">
+            {% for lesson in sub_unit_meta.unit_lessons %}
+                <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
+            {% endfor %}
+            </div>
         </div>
     </div>
 </div>

@@ -36,12 +36,13 @@
                 height: 2rem;
                 .custom-control-label {
                     line-height: 2rem;
+                    padding-left: 50px;
                     &:before {
                         width: 1.5rem;
                         height: 1.5rem;
                         border: 1px solid $brand-primary__colour;
                         background-color: white;
-                        left: -2.5rem;
+                        margin-left: 30px;
                     }
                 }
                 .custom-control-input:checked ~ .custom-control-label {
