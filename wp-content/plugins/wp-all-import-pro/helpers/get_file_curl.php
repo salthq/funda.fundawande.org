@@ -75,7 +75,6 @@ if ( ! function_exists('pmxi_curl_download') ) {
 		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 		$rawdata = curl_exec_follow($ch);	    	    
 
 	    $result = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -142,7 +141,7 @@ if ( ! function_exists('curl_exec_follow') ):
 	      curl_setopt($rch, CURLOPT_HEADER, true);
 	      curl_setopt($rch, CURLOPT_NOBODY, true);
 	      curl_setopt($rch, CURLOPT_FORBID_REUSE, false);
-	      curl_setopt($rch, CURLOPT_CONNECTTIMEOUT, 5);
+
 	      do
 	      {
 	        curl_setopt($rch, CURLOPT_URL, $newurl);

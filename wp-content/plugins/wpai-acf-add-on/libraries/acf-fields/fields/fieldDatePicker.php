@@ -25,6 +25,7 @@ class FieldDatePicker extends Field {
      */
     public function parse($xpath, $parsingData, $args = array()) {
         parent::parse($xpath, $parsingData, $args);
+
         if ("" != $xpath) {
             $values = $this->getByXPath($xpath);
             foreach ($values as $i => $d) {
@@ -51,14 +52,27 @@ class FieldDatePicker extends Field {
     public function import($importData, $args = array()) {
         $isUpdated = parent::import($importData, $args);
         if ($isUpdated){
+            $field = $this->getData('field');
             $time = strtotime($this->getFieldValue());
             if (FALSE === $time) {
                 $value = $this->getFieldValue();
             }
             else{
-                $value = date('Ymd', $time);
+                $value = isset($field['date_format']) ? date($this->massageDateFormat($field['date_format']), $time) : date('Ymd', $time);
             }
             ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $value);
         }
+    }
+
+    /**
+     *
+     * Convert js date format into PHP date format.
+     *
+     * @param $format
+     *
+     * @return mixed
+     */
+    private function massageDateFormat($format){
+        return str_replace(array('yy', 'mm', 'dd'), array('Y','m','d'), $format);
     }
 }

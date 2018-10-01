@@ -52,6 +52,7 @@ class FieldCloneV5 extends Field {
 
         /** @var Field $subField */
         foreach ($this->getSubFields() as $subField){
+            $subField->importData = $importData;
             $subField->import($importData, array(
                 'container_name' => $this->importData['container_name']
             ));
@@ -70,8 +71,10 @@ class FieldCloneV5 extends Field {
 
         if ($subFieldsData){
             foreach ($subFieldsData as $subFieldData) {
-                $field = $this->initDataAndCreateField($subFieldData);
-                $this->subFields[] = $field;
+                if ($subFieldData) {
+                    $field = $this->initDataAndCreateField($subFieldData);
+                    $this->subFields[] = $field;
+                }
             }
         }
     }

@@ -779,7 +779,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                     <div id="times-container" style="margin-left: 5px;">
                         <div style="margin-top: 10px; margin-bottom: 5px;">
-                            What times do you want this export to run?
+                            What times do you want this import to run?
                         </div>
 
                         <div id="times" style="margin-bottom: 10px;">

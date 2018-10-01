@@ -15,6 +15,17 @@ class GroupV5Local extends Group {
      */
     public function initFields() {
         $fields = acf_local()->fields;
+        // Re-init ACF group in case it was defined in ACF 4.x
+        if (isset($this->group['ID'])) {
+            $groups = acf_local()->groups;
+            if (!empty($groups)) {
+                foreach ($groups as $group) {
+                    if (isset($group['id']) && $group['id'] == $this->group['ID']) {
+                        $this->group['ID'] = $group['key'];
+                    }
+                }
+            }
+        }
         if (!empty($fields)) {
             foreach ($fields as $key => $field) {
                 if ($field['parent'] == $this->group['ID']) {
@@ -26,7 +37,7 @@ class GroupV5Local extends Group {
                     $this->fieldsData[] = $fieldData;
                 }
             }
-        }
+        }        
         // create field instances
         parent::initFields();
     }

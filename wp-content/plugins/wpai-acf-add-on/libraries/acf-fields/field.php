@@ -211,6 +211,7 @@ abstract class Field implements FieldInterface {
         $this->setOption('multiple_value', $multipleValue);
         $this->setOption('count', ($args['repeater_count_rows']) ? $args['repeater_count_rows'] : $parsingData['count']);
         $this->setOption('values', array_fill(0, $this->getOption('count'), ""));
+        $this->setOption('field_path', $args['field_path']);
     }
 
     /**
@@ -264,9 +265,18 @@ abstract class Field implements FieldInterface {
                 $fieldDir = PMAI_FIELDS_ROOT_DIR . '/views/'. $this->type;
                 $filePath = $fieldDir . DIRECTORY_SEPARATOR . $this->type . '-' . $this->supportedVersion . '.php';
                 if (is_file($filePath)) {
-                    include $fieldDir . DIRECTORY_SEPARATOR . 'header.php';
+                    // Render field header.
+                    $header = $fieldDir . DIRECTORY_SEPARATOR . 'header.php';
+                    if (file_exists($header) && is_readable($header)) {
+                        include $header;
+                    }
+                    // Render field.
                     include $filePath;
-                    include $fieldDir . DIRECTORY_SEPARATOR . 'footer.php';
+                    // Render field footer.
+                    $footer = $fieldDir . DIRECTORY_SEPARATOR . 'footer.php';
+                    if (file_exists($footer) && is_readable($footer)) {
+                        include $footer;
+                    }
                 }
                 break;
             default:
@@ -399,7 +409,14 @@ abstract class Field implements FieldInterface {
      * @return string
      */
     public function getFieldName(){
-        return $this->importData['container_name'] . $this->data['field']['name'];
+        $fieldName = ( isset($this->data['field']['name']) ? $this->data['field']['name'] : '' );
+        if (empty($fieldName)) {
+            $field = _acf_get_field_by_id($this->data['field']['ID']);
+            if (!empty($field)) {
+                $fieldName = $this->data['field']['name'] = $field['name'];
+            }
+        }
+        return $this->importData['container_name'] . $fieldName;
     }
 
     /**
@@ -428,12 +445,18 @@ abstract class Field implements FieldInterface {
      * @return mixed
      */
     public function getFieldValue(){
-        $value = $this->options['values'][$this->getPostIndex()];
-        $parents = $this->getParents();
-        if (!empty($parents)){
-            foreach ($parents as $key => $parent) {
-                $value = explode($parent['delimiter'], $value);
-                $value = $value[$parent['index']];
+        $values = $this->options['values'];
+        if (isset($this->options['is_multiple_field']) && $this->options['is_multiple_field'] == 'yes') {
+            $value = array_shift($values);
+        }
+        else {
+            $value = isset($values[$this->getPostIndex()]) ? $values[$this->getPostIndex()] : '';
+            $parents = $this->getParents();
+            if (!empty($parents)){
+                foreach ($parents as $key => $parent) {
+                    $value = explode($parent['delimiter'], $value);
+                    $value = isset($value[$parent['index']]) ? $value[$parent['index']] : '';
+                }
             }
         }
         return $value;
@@ -651,7 +674,7 @@ abstract class Field implements FieldInterface {
     public function getCountValues(){
         $parents = $this->getParents();
         $value = $this->getOriginalFieldValueAsString();
-        if (!empty($parents) && !is_array($value)){
+        if (!empty($parents) && !$this->isEmptyValue($value) && !is_array($value)){
             $parentIndex = false;
             foreach ($parents as $key => $parent) {
                 if ($parentIndex !== false){
@@ -661,14 +684,26 @@ abstract class Field implements FieldInterface {
                 $parentIndex = $parent['index'];
             }
         }
-        return is_array($value) ? count($value) : ( ! is_null($value) && $value !== false && $value !== "");
+        return is_array($value) ? count($value) : !$this->isEmptyValue($value);
+    }
+
+    /**
+     *
+     * Helper function to detect is provided field is empty or not
+     *
+     * @param $value
+     * @return bool
+     */
+    protected function isEmptyValue($value){
+        return ( is_null($value) || $value === false || $value === "");
     }
 
     /**
      * @return mixed
      */
     public function getOriginalFieldValueAsString(){
-        return $this->options['values'][$this->getPostIndex()];
+        $values = $this->options['values'];
+        return isset($values[$this->getPostIndex()]) ? $values[$this->getPostIndex()] : '';
     }
 
     /**
@@ -704,7 +739,7 @@ abstract class Field implements FieldInterface {
      * @return array
      */
     public function getParsedData(){
-        $field = $this->getOption('field');
+        $field = $this->getData('field');
         return array(
             'type' => $field['type'],
             'post_type' => isset($field['post_type']) ? $field['post_type'] : FALSE,
