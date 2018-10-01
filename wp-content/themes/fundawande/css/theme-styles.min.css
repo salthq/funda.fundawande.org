@@ -559,7 +559,7 @@ img{width:100%;height:auto}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker:hover{opacity:.7;text-decoration:none}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg{height:50px;width:50px}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg #icon-inner{fill:white}
-.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker .lesson-progress-text{line-height:1}
+.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker .lesson-progress-text{line-height:1;font-size:14px;width:80%}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled svg{fill:#ccc}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled svg #icon-inner{fill:#444}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled:hover{cursor:default;opacity:1}
