@@ -78,6 +78,11 @@ class FundaWande_Frontend {
 	
 		//Include Module Page Walkthrough Script if user is on the modules page
 		if( is_singular('course') ) {
+			//If this is the first time that the user has landed on the course page, the script will load.
+			if(get_user_meta($user_id, 'first-visit', true) == 0) {
+				wp_enqueue_script('initial-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-initial-tour.min.js', array('jquery'), FundaWande()->version, true);
+				update_user_meta($user_id, 'first-visit', 1);
+			}
 			wp_enqueue_script('modules-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-modules-tour.min.js', array('jquery'), FundaWande()->version, true);
 		}
 

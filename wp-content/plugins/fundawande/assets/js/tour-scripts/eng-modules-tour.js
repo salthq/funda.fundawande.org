@@ -7,12 +7,6 @@ var tour = new Anno([{
     buttons: [AnnoButton.NextButton]
   },
   {
-    target: '#view-tooltips',
-    position: 'bottom',
-    content: "The 'View Tooltips' button will replay this walkthrough.",
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
-  },
-  {
     target : '#module-card',
     position: 'bottom',
     content : "These cards show you information about each module. Click on 'view module' to see the units within that module",

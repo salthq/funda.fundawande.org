@@ -7,12 +7,6 @@ var tour = new Anno([{
     buttons: [AnnoButton.NextButton]
   },
   {
-    target: '#view-tooltips',
-    position: 'bottom',
-    content: "The 'View Tooltips' button will replay this walkthrough.",
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
-  },
-  {
     target : '#sidebar-minimized',
     position: 'bottom',
     content : 'Click this button to view unit progress',

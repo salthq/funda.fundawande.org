@@ -7,12 +7,6 @@ var tour = new Anno([{
   buttons: [AnnoButton.NextButton]
 },
 {
-  target: '#view-tooltips',
-  position: 'bottom',
-  content: "Inkinobho ethi 'View Tooltips' iya kuphinda ilayishe le ndlela.",
-  buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
-},
-{
   target : '#back-to-modules',
   position: 'right',
   content : 'Click this button to go back to the list of modules',
