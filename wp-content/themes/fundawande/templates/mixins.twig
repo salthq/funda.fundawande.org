@@ -52,7 +52,10 @@
 {# Add video player #}
 {% macro videoPlayer(video_src, image_src, module_number) %}
     {% import _self as mixins %}
-    <div class="player">
+    <video width="100%" height="auto" controls class="d-md-none" >
+        <source src="{{ video_src }}" type="video/mp4">
+    </video>
+    <div class="player d-none d-md-flex">
 
         <video class="player__video viewer" >
             <source src="{{ video_src }}" type="video/mp4">
