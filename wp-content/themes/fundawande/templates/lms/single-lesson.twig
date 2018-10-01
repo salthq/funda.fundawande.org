@@ -122,6 +122,9 @@
                 {# Copy text #}
                 {% elseif content.acf_fc_layout == 'copy_text' %}
                     {% include '/lms/content-types/copy-text.twig' %}
+                {# Table #}
+                {% elseif content.acf_fc_layout == 'table' %}
+                    {% include '/lms/content-types/table.twig' %}
             {% endif %}
             {% endfor %}
         </div>
