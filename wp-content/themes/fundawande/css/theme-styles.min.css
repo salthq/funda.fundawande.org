@@ -338,7 +338,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
-#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:2}
+#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:10000}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
 @media(max-width:767px){#wrapper-navbar .navbar #main-menu-button .open-text,#wrapper-navbar .navbar #main-menu-button .close-text{line-height:15px;text-align:center;display:block;width:50px}
@@ -593,4 +593,33 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 #main-menu-modal .modal-dialog .modal-content a span{margin-left:1rem}
 .admin-bar #main-menu-modal .modal-dialog{margin-top:92px}
 @media(max-width:767px){.admin-bar #main-menu-modal .modal-dialog{margin-top:106px}
-}
+}.anno{position:absolute;padding:15px;z-index:50000;width:300px;cursor:default;text-transform:none;text-align:left;line-height:.9em;-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1);-webkit-transition-property:opacity,margin;transition-property:opacity,margin}
+.anno .anno-inner{border:2px solid #ef9d19;position:relative;background:white;box-shadow:0 5px 20px 0 rgba(0,0,0,0.35)}
+.anno .anno-inner .anno-content{padding:15px 20px;line-height:1.3em;font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-weight:normal;font-size:15px;color:#56565a}
+.anno .anno-inner .anno-btn-container{text-align:right}
+.anno .anno-inner .anno-btn-container .anno-btn{margin:0 20px 15px -10px;padding:7px 14px;height:auto;width:auto;background:#ef9d19;border:0;border-radius:0;font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-weight:bold;font-size:12px;color:white;-webkit-transition:all 150ms cubic-bezier(0.68,0,0.265,1);transition:all 150ms cubic-bezier(0.68,0,0.265,1)}
+.anno .anno-inner .anno-btn-container .anno-btn:hover{background:#ef9d19;opacity:.8}
+.anno .anno-inner .anno-btn-container .anno-btn:active{background:#ef9d19}
+.anno .anno-inner .anno-btn-container .anno-btn:focus{outline:#ef9d19}
+.anno .anno-inner .anno-btn-container .anno-btn.anno-btn-low-importance{background:0;color:#bbbbbd}
+.anno .anno-inner .anno-btn-container .anno-btn.anno-btn-low-importance:hover{color:#78787b}
+.anno .anno-arrow{position:absolute;border:8px solid white}
+.anno.anno-target-center-bottom .anno-arrow,.anno.anno-target-bottom .anno-arrow{top:100%;left:20px;border-bottom:0;border-color:#ef9d19 transparent}
+.anno.anno-target-center-bottom.anno-hidden,.anno.anno-target-bottom.anno-hidden{margin-top:-20px}
+.anno.anno-target-center-left .anno-arrow,.anno.anno-target-left .anno-arrow{right:100%;top:15px;border-left:0;border-color:transparent #ef9d19}
+.anno.anno-target-center-left.anno-hidden,.anno.anno-target-left.anno-hidden{margin-left:20px}
+.anno.anno-target-center-top .anno-arrow,.anno.anno-target-top .anno-arrow{bottom:100%;left:20px;border-top:0;border-color:#ef9d19 transparent}
+.anno.anno-target-center-top.anno-hidden,.anno.anno-target-top.anno-hidden{margin-top:20px}
+.anno.anno-target-center-right .anno-arrow,.anno.anno-target-right .anno-arrow{left:100%;top:15px;border-right:0;border-color:transparent #ef9d19}
+.anno.anno-target-center-right.anno-hidden,.anno.anno-target-right.anno-hidden{margin-left:-20px}
+.anno.anno-target-center-left .anno-arrow,.anno.anno-target-center-right .anno-arrow{top:50%;margin-top:-8px}
+.anno.anno-target-center-bottom .anno-arrow,.anno.anno-target-center-top .anno-arrow{left:50%;margin-left:-8px}
+.anno.anno-hidden{opacity:0}
+.anno.anno-width-400{width:400px}
+.anno.anno-width-250{width:250px}
+.anno.anno-width-200{width:200px}
+.anno.anno-width-175{width:175px}
+.anno.anno-width-150{width:150px}
+.anno-overlay{position:fixed;z-index:1000;height:100%;width:100%;top:0;left:0;background:rgba(0,0,0,0.7);-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1)}
+.anno-overlay.anno-hidden{pointer-events:none;opacity:0}
+.anno-emphasise-target{z-index:1001 !important !important}

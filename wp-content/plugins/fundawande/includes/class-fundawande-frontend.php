@@ -22,6 +22,9 @@ class FundaWande_Frontend {
 		// Scripts and Styles
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+		//Walkthrough Scripts
+		add_action( 'wp_enqueue_scripts', array( $this, 'fw_tour_scripts' ));
+
 	} // End __construct()
 
 
@@ -54,7 +57,45 @@ class FundaWande_Frontend {
 		//Include scroll to current script
 		wp_enqueue_script('scroll-to-current', FundaWande()->plugin_url . 'assets/js/scroll-to-current.min.js', array('jquery'), FundaWande()->version, true);
 
-
 	} // End enqueue_scripts()
+
+	/**
+	 * Enqueue walkthrough scripts
+	 */
+	public function fw_tour_scripts() {
+
+		//Include Anno
+		wp_enqueue_script('anno-script', FundaWande()->plugin_url . 'assets/js/anno.min.js', array('jquery'), FundaWande()->version, true);
+
+
+		//Get the user language preference, which will be used to pull in the right script. 
+		$user_id = get_current_user_id();
+		$language = get_user_meta($user_id, 'language_preference', true);
+
+		// Clicking on the 'view tooltips' button on the navbar will trigger the Anno walkthrough script.
+		// The following wp_enqueue script calls are wrapped in conditionals to ensure that
+		// only the right script is loaded for the page the user is currently viewing.
+	
+		//Include Module Page Walkthrough Script if user is on the modules page
+		if( is_singular('course') ) {
+			//If this is the first time that the user has landed on the course page, the script will load.
+			if(get_user_meta($user_id, 'first-visit', true) == 0) {
+				wp_enqueue_script('initial-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-initial-tour.min.js', array('jquery'), FundaWande()->version, true);
+				update_user_meta($user_id, 'first-visit', 1);
+			}
+			wp_enqueue_script('modules-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-modules-tour.min.js', array('jquery'), FundaWande()->version, true);
+		}
+
+		//Include Unit Page Walkthrough Script if user is on the units page
+		if( is_tax('module') ) {
+			wp_enqueue_script('units-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-units-tour.min.js', array('jquery'), FundaWande()->version, true);
+		}
+
+		//Include Lesson Page Walkthrough Script if user is on a lesson page
+		if( is_singular('lesson') ) {
+			wp_enqueue_script('lessons-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-lessons-tour.min.js', array('jquery'), FundaWande()->version, true);
+		}
+	
+	} // End fw_tour_scripts()
 
 } // End FundaWande_Frontend Class
