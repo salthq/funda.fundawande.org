@@ -178,7 +178,7 @@
         }
     }
     .module-svg-fill-#{$colour_key} {
-        svg {
+        svg circle {
             fill: $colour_var;
         }
     }
