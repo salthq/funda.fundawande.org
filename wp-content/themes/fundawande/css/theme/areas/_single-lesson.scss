@@ -74,7 +74,6 @@
         }
         @include breakpoint(tablet) {
             &-sidebar {
-                box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
                 display: inline-block;
                 z-index: 10;
                 &-absolute {
@@ -89,11 +88,21 @@
                 h4 {
                     font-size:18px
                 };
+                .lesson-progress {
+                    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+                }
                 &-expanded {
                     margin-left: -500px; //Hide component
                     max-width: 500px;
                     &.lesson-sidebar-expanded {
                         bottom: 0;
+                    }
+                    .lesson-sidebar-header:hover {
+                        opacity: 0.8
+                    }
+                    .lesson-sidebar-text {
+                        cursor: pointer;
+                        hover: 0.8;
                     }
                     a.lesson-progress-marker {
                         z-index:1 ;
@@ -182,6 +191,7 @@
                 &-minimized {
                     width: 50px;
                     min-height: 50px;
+                    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
                     .lesson-progress-marker {
                         z-index:1 ;
                         width: 20px;

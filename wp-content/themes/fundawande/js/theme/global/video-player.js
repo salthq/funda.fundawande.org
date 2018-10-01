@@ -1,5 +1,6 @@
 /* Get Our Elements */
 const players = document.querySelectorAll('.player');
+timeoutHandle = null;
 players.forEach(function (player) {
     // Set all the video elements that pertain to a specific video, especially important if multiple videos exist on one page
     const video = player.querySelector('.viewer');
@@ -37,6 +38,19 @@ players.forEach(function (player) {
     // Toggle the overall play/pause
     function togglePlay() {
         const method = video.paused ? 'play' : 'pause';
+
+        if (method === 'pause') {
+
+            if (timeoutHandle) {
+                clearTimeout(timeoutHandle);
+
+            }
+            controls.style.display = "flex";
+        } else {
+            startControlsTimer();
+            controlsToggle();
+        }
+
         video[method]();
     }
 
@@ -110,6 +124,21 @@ players.forEach(function (player) {
             settings.style.display = "block"
         }
     }
+    function startControlsTimer() {
+        timeoutHandle = setTimeout(function() {
+            controls.style.display = "none"
+        }, 3000); // <-- time in milliseconds
+    }
+
+
+    // Handle showing or hiding controls block
+    function controlsToggle() {
+        if (timeoutHandle && !video.paused) {
+            controls.style.display = "flex";
+            clearTimeout(timeoutHandle);
+            startControlsTimer();
+        }
+    }
 
 
     // Handle video start screen click
@@ -118,11 +147,18 @@ players.forEach(function (player) {
         controls.style.display = "flex";
         togglePlay();
 
+
     }
 
-    // Handle video start screen click
+    // Handle video stop screen click
     function playerStop() {
         video['pause']();
+
+        if (timeoutHandle) {
+            clearTimeout(timeoutHandle);
+
+        }
+        controls.style.display = "flex";
 
     }
 
@@ -187,6 +223,8 @@ players.forEach(function (player) {
     video.addEventListener('play', updateButton);
     video.addEventListener('pause', updateButton);
 
+
+
     if (modal) {
         jQuery(document).ready(function ($) {
             $(document).ready(function () {
@@ -237,6 +275,9 @@ players.forEach(function (player) {
     progress.addEventListener('mouseup', function () {
         return mousedown = false;
     });
+
+    // Hook show controls on mouse move
+    player.addEventListener('mousemove', controlsToggle);
 
     // Hook progress scrub change
     progress.addEventListener('click', scrub);
