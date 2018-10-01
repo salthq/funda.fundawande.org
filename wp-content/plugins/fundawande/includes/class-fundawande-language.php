@@ -35,17 +35,16 @@ class FundaWande_Language {
 
         // Determine if $language was assigned, if not then assign to the default language
         if ($language === null ) {
-            // Assign default language, currently Xhosa
-            $language = 'xho';
+            // Default to eng for pilot
+            // TODO remove this default for the language changing pilot
+            $language = 'eng';  
         }
 
         // Create empty $language_obj
         $language_obj = new stdClass();
 
 
-        // Default to eng for pilot
-        // TODO remove this default for the language changing pilot
-        $language = 'eng';
+        
 
 
         // Create switch case depending on the $language
