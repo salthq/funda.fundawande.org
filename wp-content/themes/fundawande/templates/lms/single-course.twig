@@ -25,7 +25,7 @@
                     {% endfor %}
                     <div id = "module-card" class = "my-3">
                         <a class = "module-link" href = "{{module.link}}">
-                                <div class = "card {% if module.current %}current{% endif %}">
+                                <div class = "card {% if module.current %}current{% endif %} d-inline-block w-100">
                                     {% if module.current %}
                                         <span id = "current" class="current-module-text">{{attribute(options, lang.prefix~'current_module_text')}}</span>
                                     {% endif %}
