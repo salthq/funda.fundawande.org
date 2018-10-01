@@ -314,7 +314,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .full-width-video-container:hover{cursor:pointer}
 .full-width-video-container:hover .play-button{opacity:.7}
 .full-width-video-container #videoModal .modal-dialog{max-width:844px;margin:0 auto;height:100%;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
-.login-wrapper{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
+.login-wrapper{height:100vh;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 @media(min-width:768px){.login-wrapper .login{border-right:2px solid #ccc}
 }.login-wrapper .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .login-wrapper .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}

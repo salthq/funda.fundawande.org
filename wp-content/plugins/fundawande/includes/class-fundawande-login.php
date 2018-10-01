@@ -33,17 +33,22 @@ class FundaWande_Login {
     //Set up login form options
     public function setup_login_form() {
 
-        //Bilingual display and re-direct options
-        $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
-        $username_label = "Inombolo yesazisi";
-        $password_label = "Inombolo yokuvula";
-        $login_label = "Ngema";
-        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
-            $redirect_url = "/course/reading-for-meaning-eng/";
-            $username_label = "ID Number";
-            $password_label = "Password";
-            $login_label = "Log In";
-        }
+        //TODO: Uncomment the bilingual form option lines. Perhaps move to ACF?
+        $redirect_url = "/course/reading-for-meaning-eng/";
+        $username_label = "ID Number";
+        $password_label = "Password";
+        $login_label = "Log In";
+        // //Bilingual display and re-direct options
+        // $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
+        // $username_label = "Inombolo yesazisi";
+        // $password_label = "Inombolo yokuvula";
+        // $login_label = "Ngema";
+        // if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
+        //     $redirect_url = "/course/reading-for-meaning-eng/";
+        //     $username_label = "ID Number";
+        //     $password_label = "Password";
+        //     $login_label = "Log In";
+        // }
 
         $args = array(
             'echo'           => true,
