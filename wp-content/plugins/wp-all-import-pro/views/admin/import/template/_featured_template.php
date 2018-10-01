@@ -70,7 +70,7 @@
 								<?php if ($section_type == 'images'): ?>
 								<div class="input" style="margin: 3px;">
 									<input type="hidden" name="<?php echo $section_slug; ?>import_img_tags" value="0" />
-									<input type="checkbox" id="<?php echo $section_slug; ?>import_img_tags" name="<?php echo $section_slug; ?>import_img_tags" value="1" <?php echo ($post[$section_slug . 'import_img_tags']) ? 'checked="checked"': '' ?> />
+									<input type="checkbox" id="<?php echo $section_slug; ?>import_img_tags" name="<?php echo $section_slug; ?>import_img_tags" value="1" <?php echo (isset($post[$section_slug . 'import_img_tags']) && $post[$section_slug . 'import_img_tags']) ? 'checked="checked"': '' ?> />
 									<label for="<?php echo $section_slug; ?>import_img_tags"><?php _e('Scan through post content and import images wrapped in &lt;img&gt; tags', 'wp_all_import_plugin') ?></label>
 									<a href="#help" class="wpallimport-help" title="<?php _e('Only images hosted on other sites will be imported. Images will be imported to WordPress and the <img> tag updated with the new image URL.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
 								</div>

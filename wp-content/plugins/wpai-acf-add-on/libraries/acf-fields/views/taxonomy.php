@@ -38,6 +38,10 @@
                         $field['choices'] = array(
                             '' => __('Select term')
                         );
+                        $terms = get_terms( array(
+                            'taxonomy' => $field['taxonomy'],
+                            'hide_empty' => false
+                        ) );
                         if (!empty($terms)){
                             foreach ($terms as $term){
                                 $field['choices'][$term->term_id] = $term->name;

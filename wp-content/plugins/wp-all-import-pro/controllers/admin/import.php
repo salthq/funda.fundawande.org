@@ -1943,7 +1943,9 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 						} elseif (isset($mtch[3]) and intval($mtch[3]) > PMXI_Plugin::$session->count) {
 							$this->errors->add('form-validation', __('One of the numbers in `Import only specified records` value exceeds record quantity in XML file', 'wp_all_import_plugin'));
 							break;
-						}
+						} elseif (preg_match('%^(\d+)-(\d+)$%', $chank, $mtch) && intval($mtch[1]) > intval($mtch[2])) {
+                            $this->errors->add('form-validation', __('Wrong format of `Import only specified records` value', 'wp_all_import_plugin'));
+                        }
 					}
 				}
 			}
@@ -2480,7 +2482,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 			// unlink previous logs
 			$by = array();
-			$by[] = array(array('import_id' => $import->id, 'type NOT LIKE' => 'trigger'), 'AND');
+			$by[] = array(array('import_id' => $import->id), 'AND');
 			$historyLogs = new PMXI_History_List();
 			$historyLogs->setColumns('id', 'import_id', 'type', 'date')->getBy($by, 'id ASC');
 			if ($historyLogs->count() and $historyLogs->count() >= $log_storage ){
@@ -2522,13 +2524,6 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					'options' => $currentOptions
 				))->update();
 			}
-
-            $currentOptions = $import->options;
-            $currentOptions['records_per_request_detected'] = 0;
-            $currentOptions['auto_records_per_request'] = 0;
-            $import->set(array(
-                'options' => $currentOptions
-            ))->update();
 
 			// unlink previous files
 			$history = new PMXI_File_List();
@@ -2655,7 +2650,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 		if ($ajax_processing)
 		{			
-			$logger = function($m) {printf("<div class='progress-msg'>[%s] $m</div>\n", date("H:i:s"));flush();};
+			$logger = function($m) {echo "<div class='progress-msg'>[". date("H:i:s") ."] $m</div>\n";flush();};
 		}
 		else
 		{

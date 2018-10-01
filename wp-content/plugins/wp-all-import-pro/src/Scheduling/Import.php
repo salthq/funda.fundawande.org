@@ -17,7 +17,7 @@ class Import
         // unlink previous logs
         if ((int)$import->imported + (int)$import->skipped <= (int)$import->count) {
             $by = array();
-            $by[] = array(array('import_id' => $import->id, 'type NOT LIKE' => 'trigger'), 'AND');
+            $by[] = array(array('import_id' => $import->id), 'AND');
             $historyLogs = new \PMXI_History_List();
             $historyLogs->setColumns('id', 'import_id', 'type', 'date')->getBy($by, 'id ASC');
             if ($historyLogs->count() and $historyLogs->count() >= $log_storage) {

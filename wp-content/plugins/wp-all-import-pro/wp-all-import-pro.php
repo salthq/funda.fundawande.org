@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.5.4
+Version: 4.5.5
 Author: Soflyy
 */
 
@@ -31,7 +31,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 }
 else {
 
-	define('PMXI_VERSION', '4.5.4');
+	define('PMXI_VERSION', '4.5.5');
 
 	define('PMXI_EDITION', 'paid');
 
@@ -636,7 +636,7 @@ else {
 							'id' => $controllerName,
 							'base' => $controllerName,
 							'action' => $actionName,
-							'is_ajax' => strpos($_SERVER["HTTP_ACCEPT"], 'json') !== false,
+							'is_ajax' => (isset($_SERVER["HTTP_ACCEPT"]) && strpos($_SERVER["HTTP_ACCEPT"], 'json')) !== false,
 							'is_network' => is_network_admin(),
 							'is_user' => is_user_admin(),
 						);
@@ -891,7 +891,7 @@ else {
 						// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 						$post = new PMXI_Post_Record();
-						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 		            }
 		            switch_to_blog($old_blog);
 		            return;
@@ -903,7 +903,7 @@ else {
 			// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 			$post = new PMXI_Post_Record();
-			$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+			$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 
 		}
 
@@ -952,7 +952,7 @@ else {
 						// sync data between plugin tables and wordpress (mostly for the case when plugin is reactivated)
 
 						$post = new PMXI_Post_Record();
-						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts . ')');
+						$wpdb->query('DELETE FROM ' . $post->getTable() . ' WHERE post_id NOT IN (SELECT ID FROM ' . $wpdb->posts .') AND post_id NOT IN ( SELECT ID FROM ' . $wpdb->users . ') AND post_id NOT IN ( SELECT term_taxonomy_id FROM ' . $wpdb->term_taxonomy . ')');
 		            }
 		            switch_to_blog($old_blog);
 		            return;
@@ -1239,7 +1239,6 @@ else {
 				'scheduled_period' => '',
 				'friendly_name' => '',
 				'records_per_request' => 20,
-				'auto_records_per_request' => 0,
 				'auto_rename_images' => 0,
 				'auto_rename_images_suffix' => '',
 				'images_name' => 'filename',
@@ -1264,7 +1263,6 @@ else {
 				'chuncking' => 1,
 				'import_processing' => 'ajax',
 				'processing_iteration_logic' => 'auto',
-				'records_per_request_detected' => 0,
 				'save_template_as' => 0,
 
 				'title' => '',
@@ -1349,7 +1347,7 @@ else {
 		}
 
 		public static function is_ajax(){
-			return strpos($_SERVER["HTTP_ACCEPT"], 'json') !== false;
+			return (isset($_SERVER["HTTP_ACCEPT"]) && strpos($_SERVER["HTTP_ACCEPT"], 'json')) !== false;
 		}
 
 	}

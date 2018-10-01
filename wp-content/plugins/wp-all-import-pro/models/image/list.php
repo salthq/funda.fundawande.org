@@ -19,7 +19,7 @@ class PMXI_Image_List extends PMXI_Model_List {
      */
     public function getExistingImageByUrl($url) {
         $args = array(
-            'image_url' => $url,
+            'image_url' => trim($url),
         );
         return $this->getExistingImage($args);
     }
@@ -30,7 +30,7 @@ class PMXI_Image_List extends PMXI_Model_List {
      */
     public function getExistingImageByFilename($image) {
         $args = array(
-            'image_filename' => $image,
+            'image_filename' => trim($image),
         );
         return $this->getExistingImage($args);
     }
@@ -43,7 +43,7 @@ class PMXI_Image_List extends PMXI_Model_List {
         $attid = false;
         foreach($this->getBy($args)->convertRecords() as $imageRecord) {
             if ( ! $imageRecord->isEmpty() ) {
-                $attid = $imageRecord->attachment_id;
+                $attid = apply_filters('wp_all_import_get_existing_image', $imageRecord->attachment_id);
                 break;
             }
         }

@@ -80,7 +80,8 @@ class FieldCheckbox extends Field {
         }
 
         if ($parsedData['is_multiple']) {
-            $value = (!empty($value) && is_array($value)) ? $value : array($value);
+            $value = (!empty($value) && is_array($value)) ? $value : explode(',', $value);
+            $value = array_map('trim', $value);
         }
         return $value;
     }

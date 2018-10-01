@@ -40,8 +40,10 @@ function pmxi_pmxi_after_xml_import( $import_id, $import )
 				        'hide_empty' => false,
 				        'fields' => 'ids',
 			        )
-		        );
-		        wp_update_term_count_now( $term_ids, $taxonomy );
+                );
+                if ( ! empty( $term_ids ) ) {
+                    wp_update_term_count_now( $term_ids, $taxonomy );
+                }
 	        }
         }
 

@@ -25,6 +25,7 @@ class FieldPostObject extends Field {
      */
     public function parse($xpath, $parsingData, $args = array()) {
         parent::parse($xpath, $parsingData, $args);
+        $xpath = is_array($xpath) ? $xpath['value'] : $xpath;
         $values = $this->getByXPath($xpath);
         $this->setOption('values', $values);
     }
@@ -52,10 +53,11 @@ class FieldPostObject extends Field {
         $values = parent::getFieldValue();
 
         if (!is_array($values)){
-            $values = explode($xpath['delim'], $values);
+            $delimiter = empty($xpath['delim']) ? ',' : $xpath['delim'];
+            $values = explode($delimiter, $values);
         }
 
-        $post_ids = ACFService::get_posts_by_relationship($values);
+        $post_ids = ACFService::get_posts_by_relationship($values, $this->getFieldOption('post_type'));
 
         if (!empty($post_ids)) {
             $parsedData = $this->getParsedData();

@@ -56,7 +56,7 @@ class FieldRelationship extends Field {
             $values = explode($xpath['delim'], $values);
         }
 
-        $post_ids = ACFService::get_posts_by_relationship($values);
+        $post_ids = ACFService::get_posts_by_relationship($values, $this->getFieldOption('post_type'));
 
         return empty($post_ids) ? '' : $post_ids;
     }

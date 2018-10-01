@@ -38,7 +38,7 @@ class FieldSelect extends Field {
                     $field = $this->getData('field');
                     $values = $this->getByXPath($this->getOption('xpath'));
 
-                    if (!empty($field['multiple']) || in_array($field['field_type'], array('checkbox', 'multi_select'))) {
+                    if (!empty($field['multiple']) || isset($field['field_type']) && in_array($field['field_type'], array('checkbox', 'multi_select'))) {
                         foreach ($values as $key => $value) {
                             $values[$key] = array_map('trim', explode(",", $value));
                         }

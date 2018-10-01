@@ -103,8 +103,10 @@ class FieldRepeater extends Field {
 
         parent::parse($xpath, $parsingData, $args);
 
-        // remove repeater row template
-        unset($xpath['rows']['ROWNUMBER']);
+        // Remove repeater row template.
+        if (isset($xpath['rows']['ROWNUMBER'])) {
+            unset($xpath['rows']['ROWNUMBER']);
+        }
 
         if (!empty($xpath['rows'])) {
 
@@ -150,6 +152,7 @@ class FieldRepeater extends Field {
                     switch ($xpath['is_variable']){
                         case 'csv':
                             $this->setDelimiter($xpath['separator']);
+                            $this->setIgnoreEmpties(true);
                             break;
                         default:
                             $this->setDelimiter(false);
@@ -161,13 +164,15 @@ class FieldRepeater extends Field {
                         $subFields = $this->getSubFields();
                         /** @var Field $subField */
                         foreach ($subFields as $subField){
-                            $subField->parse($rowFields[$subField->getFieldKey()], $parsingData, array(
-                                'field_path' => $this->getOption('field_path') . "[" . $this->getFieldKey() . "][rows][" . $key . "]",
-                                'xpath_suffix' => '',
-                                'repeater_count_rows' => 0,
-                                'inside_repeater' => true
-                            ));
-                            $rowData[$subField->getFieldKey()] = clone $subField;
+                            if (isset($rowFields[$subField->getFieldKey()])) {
+                                $subField->parse($rowFields[$subField->getFieldKey()], $parsingData, array(
+                                    'field_path' => $this->getOption('field_path') . "[" . $this->getFieldKey() . "][rows][" . $key . "]",
+                                    'xpath_suffix' => '',
+                                    'repeater_count_rows' => 0,
+                                    'inside_repeater' => true
+                                ));
+                                $rowData[$subField->getFieldKey()] = clone $subField;
+                            }
                         }
                         $values[] = $rowData;
                     }
@@ -209,12 +214,21 @@ class FieldRepeater extends Field {
                     $countRows = 0;
                     $fields = array_shift($values);
                     if (!empty($fields)) {
+                        // Init importData in all sub fields
+                        /** @var Field $subField */
+                        foreach ($fields as $subFieldKey => $subField) {
+                            $subField->importData = $importData;
+                        }
                         if ($this->isImportRow($fields)) {
                             $countRows = $this->getCountRows($fields);
                             for ($k = 0; $k < $countRows; $k++) {
                                 $this->setRowIndex($k);
                                 /** @var Field $subField */
                                 foreach ($fields as $subFieldKey => $subField) {
+                                    $parentField = $subField->getParent();
+                                    if ($parentField) {
+                                        $parentField->setRowIndex($k);
+                                    }
                                     $subField->import($importData, array(
                                         'container_name' => $this->getFieldName() . "_" . $k . "_"
                                     ));
@@ -281,6 +295,7 @@ class FieldRepeater extends Field {
         $countRows = 0;
         /** @var Field $field */
         foreach ($fields as $field){
+            if ($field->getType() == 'repeater') continue;
             $field->importData = $this->getImportData();
             $count = $field->getCountValues();
             if ($count > $countRows){
