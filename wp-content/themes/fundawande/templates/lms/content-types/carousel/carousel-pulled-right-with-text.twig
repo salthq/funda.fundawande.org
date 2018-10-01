@@ -6,7 +6,7 @@
             {{content.text}}
         </div>
         <div class = "col-12 col-md-6 pt-4">
-            <div id="carousel-pulled-right-with-text" class="carousel slide" data-ride="carousel">
+            <div id="carousel-pulled-right-with-text" class="carousel slide" data-ride="carousel" data-interval="false">
                 {#<ol class="carousel-indicators">
                     {% for item in content.carousel_items %}
                     <li data-target="#carousel-with-text" data-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}">{{loop.index}}</li>
