@@ -59,7 +59,6 @@ class FundaWande_Lms {
 
             // Run normal Sensei update logic
             $activity_logged = WooThemes_Sensei_Utils::update_lesson_status($user_id, $post_id, 'complete');
-
             // prevent fundawande progress tracking if unique lesson key isn't assigned
             if (!empty($lesson_key)) {
                 // Determine if an existing status exists and assign
@@ -295,7 +294,7 @@ class FundaWande_Lms {
         }
 
         if (!$course_id) {
-            $course_id = get_user_meta($user_id,'fw_current_course',true);
+            $course_id = FundaWande()->lms->fw_get_current_course_id($user_id);
         }
 
 
@@ -391,35 +390,6 @@ class FundaWande_Lms {
 
     } // end fw_course_progress_at_module
 
-    /**
-     * Return a lesson link based on it's key and parent course
-     * @param string $sub_unit_key. The key for the user's current lesson
-     * @param int $course_id. The ID for the currently active course
-     * 
-     * @return string $sub_unit_link. The URL for the current lesson.  
-     */
-    public function fw_get_current_lesson_link($user_id = null) {
-        if (!$user_id) {
-            $user_id = get_current_user_id();
-        }
-        $current_sub_unit = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
-
-        //The meta query returns an array, but we just want the lesson object
-        if($current_sub_unit) {
-
-            $sub_unit_link = get_permalink($current_sub_unit->ID);
-        }
-        else {
-            // If no post is found which matches the query, add home_url as the link,
-            // which will take them to their course page. This should only happen if the key
-            // has been incorrectly set on the lesson editor screen. 
-            $sub_unit_link = home_url('/'); 
-        }        
-
-        return $sub_unit_link;
-
-    } // end fw_get_current_lesson_link()
-
 
     /**
      * Returns next and previous lesson IDs.
@@ -468,21 +438,17 @@ class FundaWande_Lms {
      * @param  integer $user_id User ID.
      * @return string $sub_unit_key
      */
-    public function fw_set_first_sub_unit($course_id , $user_id = null ) {
+    public function fw_set_first_sub_unit($user_id = null ) {
         //
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
-        $course_lessons = Sensei()->course->course_lessons($course_id);
-        $sub_unit_key = '';
-        if ($course_lessons[0] ) {
-            update_user_meta($user_id, 'fw_current_sub_unit',get_field('fw_starting_sub_unit','options') );
-            update_user_meta($user_id, 'fw_current_unit',get_field('fw_starting_unit','options'));
-            update_user_meta($user_id, 'fw_current_module',get_field('fw_starting_module','options'));
 
-        }
-        return $sub_unit_key;
+        update_user_meta($user_id, 'fw_current_sub_unit',get_field('fw_starting_sub_unit','options') );
+        update_user_meta($user_id, 'fw_current_unit',get_field('fw_starting_unit','options'));
+        update_user_meta($user_id, 'fw_current_module',get_field('fw_starting_module','options'));
 
+        return true;
 
     } // End fw_get_prev_next_lessons()
 
@@ -571,6 +537,23 @@ class FundaWande_Lms {
 
         }
         return $status;
+
+    }
+    /**
+     * Get the current course from user
+     *
+     **/
+    public function fw_get_current_course_id($user_id = null) {
+        if (!$user_id) {
+            $user_id = get_current_user_id();
+        }
+
+        $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+
+        if (is_numeric($current_course_id)) {
+            return $current_course_id;
+        }
+        return false;
 
     }
 

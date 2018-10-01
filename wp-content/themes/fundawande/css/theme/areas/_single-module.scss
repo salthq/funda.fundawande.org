@@ -115,6 +115,10 @@
                             fill :$text-primary__colour;
                         }
                     }
+                    .lesson-progress-text p {
+                        font-size: 14px;
+                        width: 93px;
+                    }
                     @include breakpoint(phone) {
                         width: auto;
                         border-radius: 28px 6px 6px 28px;
@@ -138,7 +142,7 @@
                 }
             }
             p {
-                max-width: 100px;
+                width: 110px;
                 text-align: center;
                 margin: auto;
                 font-size: 15px;
@@ -246,7 +250,7 @@
 
                 }
             }
-            &:nth-of-type(6n) {
+            &:nth-of-type(6n):not(:last-of-type) {
 
 
                     @include breakpoint(desktop) {

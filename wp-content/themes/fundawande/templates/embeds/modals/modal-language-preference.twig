@@ -19,7 +19,9 @@
           <div class = "form-group text-center">
             <div class="btn-group" role="group" aria-label="Change Language buttons">
               <button class = "btn button-tertiary {% if lang.id == 'eng'%} active-button {% endif %}" type = "submit" name = "lang" value ="eng">English</button>
-              <button class = "btn button-tertiary {% if lang.id == 'xho'%} active-button {% endif %}" type = "submit" name = "lang" value ="xho">Xhosa</button>
+              {#// Default to eng for pilot#}
+              {#// TODO uncomment for the language changing pilot#}
+              {#<button class = "btn button-tertiary {% if lang.id == 'xho'%} active-button {% endif %}" type = "submit" name = "lang" value ="xho">Xhosa</button>#}
             </div>
           </div>
         </form>

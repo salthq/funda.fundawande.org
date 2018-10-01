@@ -147,14 +147,12 @@ if ( ! defined( 'ABSPATH' ) ) {
          if (!$user_id) {
              $user_id = get_current_user_id();
          }
-
-         $current_course_id = get_user_meta($user_id,'fw_current_course',true);
+         $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user_id);
          $current_sub_unit_key = get_user_meta($user_id,'fw_current_sub_unit',true);
 
          // '_lesson_course' is a user meta field for the current active course, which could be in English or Xhosa.
          // The lesson's key is the same in both courses, so this meta query matches the key to the current active course.
          $args = array(
-             'number' => 1,
              'post_type' => 'lesson',
              'meta_query' => array(
                  array(
@@ -170,7 +168,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          // Using just 'get_posts' returns an empty array for some reason
          $sub_unit_list = Timber::get_posts($args);
-
          //The meta query returns an array, but we just want the lesson object
          if(is_array($sub_unit_list) && 1 == count($sub_unit_list)) {
              $sub_unit = array_shift($sub_unit_list);
@@ -244,7 +241,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          if (!$course_id) {
              $user_id = get_current_user_id();
-             $course_id = get_user_meta($user_id,'fw_current_course',true);
+             $course_id =  FundaWande()->lms->fw_get_current_course_id($user_id);
 
          }
 

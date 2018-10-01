@@ -79,12 +79,16 @@
                 z-index: 10;
                 &-absolute {
                     position: absolute;
+                    top: 210px;
                 }
                 &-fixed {
                     position: fixed !important;
                     top: 100px;
                     overflow-y: auto;
                 }
+                h4 {
+                    font-size:18px
+                };
                 &-expanded {
                     margin-left: -500px; //Hide component
                     max-width: 500px;
@@ -176,7 +180,7 @@
                     }
                 }
                 &-minimized {
-                    max-width: 150px;
+                    width: 50px;
                     min-height: 50px;
                     .lesson-progress-marker {
                         z-index:1 ;

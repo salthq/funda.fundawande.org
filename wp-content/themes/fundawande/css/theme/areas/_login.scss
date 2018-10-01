@@ -5,6 +5,8 @@
 *
  ========================================================================== */
 .login-wrapper {
+
+  height: 100vh;
   justify-content: center;
   //Media queries which control the sidebar content view 
   @include breakpoint(tablet) {
