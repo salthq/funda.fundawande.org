@@ -263,6 +263,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .button-tertiary{border-color:#918f8f;background-color:#fff;color:#918f8f}
 .button-tertiary-active{background-color:#918f8f;color:#fff}
 .text-tertiary{color:#918f8f}
+img{width:100%;height:auto}
 .site-footer{border-top:8px solid #4a4a4a}
 .player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}
@@ -524,6 +525,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .single-lesson-wrapper .lesson-sidebar h4{font-size:18px}
 .single-lesson-wrapper .lesson-sidebar-expanded{margin-left:-500px;max-width:500px}
 .single-lesson-wrapper .lesson-sidebar-expanded.lesson-sidebar-expanded{bottom:0}
+.single-lesson-wrapper .lesson-sidebar-expanded .lesson-sidebar-text{cursor:pointer;hover:.8}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker{z-index:1;color:#444}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker .title{font-size:14px}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker:hover{opacity:.7;text-decoration:none}

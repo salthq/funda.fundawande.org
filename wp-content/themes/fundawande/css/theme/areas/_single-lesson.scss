@@ -95,6 +95,10 @@
                     &.lesson-sidebar-expanded {
                         bottom: 0;
                     }
+                    .lesson-sidebar-text {
+                        cursor: pointer;
+                        hover: 0.8;
+                    }
                     a.lesson-progress-marker {
                         z-index:1 ;
                         color: $text-primary__colour;
