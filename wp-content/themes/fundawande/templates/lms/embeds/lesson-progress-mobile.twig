@@ -19,8 +19,13 @@
                             <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
                             {# TODO add back limit #}
                             {#<a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">#}
-                            <a href = "{{function('get_post_permalink', lesson.ID)}}" class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %}">
-                                {{ source('assets/lms/recall_quiz.svg') }}
+                            <a href = "{{function('get_post_permalink', lesson.ID)}}" class="lesson-progress-marker d-flex align-items-center col-auto {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-border-{{ module_number }} module-svg-fill-{{ module_number }} current{% endif %}">
+                                {% set image = source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
+                                {% if image %}
+                                    {{ source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg') }}
+                                {% else %}
+                                    {{ source('assets/lms/lesson_icons/book-front.svg') }}
+                                {% endif %}
                                 <div class="pl-2 d-flex flex-column lesson-progress-text">
                                     <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
                                     <span class = "">{{lesson.title}}</span>
@@ -29,7 +34,9 @@
                         {% endfor %}
                         </div>
                     </div>
+
             </div>
+
         </div>
     </div>
     <!-- Minimized Sidebar Progress Component -->
