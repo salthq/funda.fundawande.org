@@ -32,7 +32,7 @@ function pmxi_wp_loaded_99() {
 	if (!empty($cron_job_key) and !empty($_GET['import_key']) and $_GET['import_key'] == $cron_job_key and !empty($_GET['action']) and in_array($_GET['action'], array('processing','trigger','pipe','cancel','cleanup'))) {
 
         $logger = function($m) {
-            printf("<p>[%s] $m</p>\n", date("H:i:s"));
+            print("<p>[". date("H:i:s") ."] $m</p>\n");
         };
 
 		if (empty($_GET['import_id']))

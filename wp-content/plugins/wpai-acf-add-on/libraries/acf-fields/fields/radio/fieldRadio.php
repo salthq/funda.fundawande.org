@@ -88,4 +88,19 @@ class FieldRadio extends Field {
         }
         return $value;
     }
+
+    /**
+     *
+     * If radio field is not set with XPath then it means it has empty value
+     * in case it is inside repeater field.
+     *
+     * @return int
+     */
+    public function getCountValues() {
+        $count = 0;
+        if ("yes" !== $this->getOption('is_multiple_field')){
+            $count = parent::getCountValues();
+        }
+        return $count;
+    }
 }

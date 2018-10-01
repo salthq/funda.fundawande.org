@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - ACF Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields.
-Version: 3.1.7
+Version: 3.1.9
 Author: Soflyy
 */
 /**
@@ -24,7 +24,7 @@ define('PMAI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMAI_PREFIX', 'pmai_');
 
-define('PMAI_VERSION', '3.1.7');
+define('PMAI_VERSION', '3.1.9');
 
 if ( class_exists('PMAI_Plugin') and PMAI_EDITION == "free"){
 
@@ -190,7 +190,8 @@ else {
 			}
 
 			if (is_dir(self::ROOT_DIR . '/libraries')) foreach (PMAI_Helper::safe_glob(self::ROOT_DIR . '/libraries/*.php', PMAI_Helper::GLOB_RECURSE | PMAI_Helper::GLOB_PATH | PMAI_Helper::GLOB_NOSORT) as $filePath) {
-				if (strpos($filePath, 'view') === false && strpos($filePath, 'template') === false) require_once $filePath;
+				$subPath = substr($filePath, strlen( self::ROOT_DIR ));
+				if (strpos($subPath, 'view') === false && strpos($subPath, 'template') === false) require_once $filePath;
 			}
 
 			// init plugin options

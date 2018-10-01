@@ -38,11 +38,6 @@ final class ACFService{
                 update_user_meta($pid, $name, $cf_value);
                 break;
             case 'taxonomies':
-                $option = $field->getTaxonomyType() . '_' . $pid . '_' . $name;
-                if (strpos($cf_value, 'field_') === 0 && strpos($name, '_') === 0) {
-                    $option = '_' . $field->getTaxonomyType() . '_' . $pid . $name;
-                }
-                update_option($option, $cf_value);
                 update_term_meta($pid, $name, $value);
                 break;
             default:
@@ -66,7 +61,7 @@ final class ACFService{
                 $value = get_user_meta($pid, $name, TRUE);
                 break;
             case 'taxonomies':
-                $value = get_option($field->getTaxonomyType() . '_' . $pid . '_' . $name);
+                $value = get_term_meta($pid, $name, TRUE);
                 break;
             default:
                 $value = get_post_meta($pid, $name, TRUE);
@@ -127,18 +122,39 @@ final class ACFService{
      * @param $pid
      * @param $logger
      * @param bool $search_in_gallery
+     * @param bool $search_in_files
+     *
      * @return bool|int|\WP_Error
      */
-    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE) {
+    public static function import_image($img_url, $pid, $logger, $search_in_gallery = FALSE, $search_in_files = FALSE) {
 
-        // search image attachment by ID
+        // Search image attachment by ID.
         if ($search_in_gallery and is_numeric($img_url)) {
             if (wp_get_attachment_url($img_url)) {
                 return $img_url;
             }
         }
 
-        return PMXI_API::upload_image($pid, $img_url, "yes", $logger, true);
+        $downloadFiles = "yes";
+        $fileName = "";
+        // Search for existing image in /files folder.
+        if ($search_in_files) {
+            // Before start searching check for existing image in pmxi_images table.
+            if ($search_in_gallery) {
+                $logger and call_user_func($logger, sprintf(__('- Searching for existing image `%s` by Filename...', 'wp_all_import_plugin'), rawurldecode($img_url)));
+                $imageList = new \PMXI_Image_List();
+                $attch = $imageList->getExistingImageByFilename($img_url);
+                if ($attch){
+                    $logger and call_user_func($logger, sprintf(__('Existing image was found by Filename `%s`...', 'wp_all_import_plugin'), $img_url));
+                    return $attch->ID;
+                }
+            }
+
+            $downloadFiles = "no";
+            $fileName = $img_url;
+        }
+
+        return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName);
     }
 
     /**
@@ -147,9 +163,11 @@ final class ACFService{
      * @param $logger
      * @param bool $fast
      * @param bool $search_in_gallery
+     * @param bool $search_in_files
+     *
      * @return bool|int|\WP_Error
      */
-    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE) {
+    public static function import_file($atch_url, $pid, $logger, $fast = FALSE, $search_in_gallery = FALSE, $search_in_files = FALSE) {
 
         // search file attachment by ID
         if ($search_in_gallery and is_numeric($atch_url)) {
@@ -158,7 +176,26 @@ final class ACFService{
             }
         }
 
-        return PMXI_API::upload_image($pid, $atch_url, "yes", $logger, true, "", "files");
+        $downloadFiles = "yes";
+        $fileName = "";
+        // Search for existing image in /files folder.
+        if ($search_in_files) {
+            // Before start searching check for existing file in pmxi_images table.
+            if ($search_in_gallery) {
+                $logger and call_user_func($logger, sprintf(__('- Searching for existing file `%s` by Filename...', 'wp_all_import_plugin'), rawurldecode($atch_url)));
+                $imageList = new \PMXI_Image_List();
+                $attch = $imageList->getExistingImageByFilename($atch_url);
+                if ($attch){
+                    $logger and call_user_func($logger, sprintf(__('Existing file was found by Filename `%s`...', 'wp_all_import_plugin'), $atch_url));
+                    return $attch->ID;
+                }
+            }
+
+            $downloadFiles = "no";
+            $fileName = $atch_url;
+        }
+
+        return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files");
     }
 
     /**
@@ -167,25 +204,30 @@ final class ACFService{
      * @return array
      */
     public static function get_posts_by_relationship($values, $post_types = array()){
-        global $wpdb;
         $post_ids = array();
-        foreach ($values as $ev) {
-            $relation = false;
-            if (ctype_digit($ev)) {
-                $relation = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %s", $ev));
-            }
-            if (empty($relation)){
-                if (empty($post_types)){
-                    $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type != %s AND ( post_title = %s OR post_name = %s )";
-                    $relation = $wpdb->get_row($wpdb->prepare($sql, 'revision', $ev, sanitize_title_for_query($ev)));
+        $values = array_filter($values);
+        if (!empty($values)) {
+            $values = array_map('trim', $values);
+            global $wpdb;
+            foreach ($values as $ev) {
+
+                $relation = false;
+                if (ctype_digit($ev)) {
+                    $relation = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE ID = %s", $ev));
                 }
-                else{
-                    $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type IN ('%s') AND ( post_title = %s OR post_name = %s )";
-                    $relation = $wpdb->get_row($wpdb->prepare($sql, implode("','", $post_types), $ev, sanitize_title_for_query($ev)));
+                if (empty($relation)){
+                    if (empty($post_types)){
+                        $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type != %s AND ( post_title = %s OR post_name = %s )";
+                        $relation = $wpdb->get_row($wpdb->prepare($sql, 'revision', $ev, sanitize_title_for_query($ev)));
+                    }
+                    else{
+                        $sql = "SELECT * FROM {$wpdb->posts} WHERE post_type IN ('" . implode("','", $post_types) . "') AND ( post_title = %s OR post_name = %s )";
+                        $relation = $wpdb->get_row($wpdb->prepare($sql, $ev, sanitize_title_for_query($ev)));
+                    }
                 }
-            }
-            if ($relation) {
-                $post_ids[] = (string) $relation->ID;
+                if ($relation) {
+                    $post_ids[] = (string) $relation->ID;
+                }
             }
         }
         return $post_ids;

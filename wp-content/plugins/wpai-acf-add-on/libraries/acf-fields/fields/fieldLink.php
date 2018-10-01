@@ -56,6 +56,17 @@ class FieldLink extends Field {
     public function getFieldValue() {
         global $wpdb;
         $values = $this->getOption('values');
+        $parents = $this->getParents();
+        if (!empty($parents)){
+            foreach ($this->keys as $key){
+                $value = '';
+                foreach ($parents as $parent) {
+                    $value = explode($parent['delimiter'], $values[$key][$this->getPostIndex()]);
+                    $value = $value[$parent['index']];
+                }
+                $values[$key][$this->getPostIndex()] = $value;
+            }
+        }
         // prepare permalink in case if it's non external URL
         if ( ! empty($values['url'][$this->getPostIndex()]) && ! preg_match('%^https?://%i', $values['url'][$this->getPostIndex()]) ){
             $relationID = $values['url'][$this->getPostIndex()];
@@ -85,16 +96,19 @@ class FieldLink extends Field {
             $values = $this->getOption('values');
             foreach ( $this->keys as $field_key){
                 $value = $values[$field_key][$this->getPostIndex()];
-                $parentIndex = false;
-                foreach ($parents as $key => $parent) {
-                    if ($parentIndex !== false){
-                        $value = $value[$parentIndex];
+                if ($value != "") {
+                    $parentIndex = false;
+                    foreach ($parents as $key => $parent) {
+                        if ($parentIndex !== false){
+                            $value = $value[$parentIndex];
+                        }
+                        $value = explode($parent['delimiter'], $value);
+                        $parentIndex = $parent['index'];
                     }
-                    $value = explode($parent['delimiter'], $value);
-                    $parentIndex = $parent['index'];
-                }
-                if (count($value) > $count) {
-                    $count = count($value);
+                    $value = array_filter($value);
+                    if (count($value) > $count) {
+                        $count = count($value);
+                    }
                 }
             }
         }

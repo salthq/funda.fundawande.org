@@ -69,7 +69,7 @@ class FieldTaxonomy extends Field {
                         }
                         $count_cats = count($values[$tx_name][$i]);
 
-                        $delimetedTaxonomies = $this->getOption('inside_repeater') ? array($tx_raw) : explode($xpath['delim'], $tx_raw);
+                        $delimetedTaxonomies = $this->getParent() ? array($tx_raw) : explode($xpath['delim'], $tx_raw);
 
                         if ('' != $tx_raw) {
                             foreach ($delimetedTaxonomies as $j => $cc) {
@@ -107,6 +107,7 @@ class FieldTaxonomy extends Field {
                 }
             }
         }
+
         $this->setOption('values', $values);
     }
 
@@ -124,7 +125,7 @@ class FieldTaxonomy extends Field {
 
         $parsedData = $this->getParsedData();
 
-        $values = $this->getOption('values');
+        $values = $this->getFieldValue();
 
         if ($parsedData['is_multiple'] !== TRUE and $parsedData['is_multiple'] == 'nesting') {
 
@@ -133,42 +134,43 @@ class FieldTaxonomy extends Field {
                 foreach ($values as $tx_name => $txes) {
 
                     $assign_taxes = array();
-                    // create term if not exists
-                    if (!empty($txes[$this->getPostIndex()])) {
-                        foreach ($txes[$this->getPostIndex()] as $key => $single_tax) {
-                            if (is_array($single_tax)) {
-                                $terms = explode(",", $single_tax['name']);
-                                if (!empty($terms)) {
-                                    foreach ($terms as $term_name) {
-                                        $parent_id = (!empty($single_tax['parent'])) ? pmxi_recursion_taxes($single_tax['parent'], $tx_name, $txes[$this->getPostIndex()], $key) : '';
+                    // Create term if not exists.
+                    foreach ($txes as $key => $single_tax) {
+                        if (is_array($single_tax)) {
+	                        $term_name = $single_tax['name'];
+                            if (!empty($term_name)) {
+	                            $parent_id = (!empty($single_tax['parent'])) ? pmxi_recursion_taxes($single_tax['parent'], $tx_name, $txes, $key) : '';
 
-                                        $term = $parent_id ? is_exists_term($term_name, $tx_name, (int)$parent_id) : is_exists_term($term_name, $tx_name);
+	                            $term = $parent_id ? is_exists_term($term_name, $tx_name, (int)$parent_id) : is_exists_term($term_name, $tx_name);
 
-                                        if (empty($term) and !is_wp_error($term)) {
-                                            $term_attr = array('parent' => (!empty($parent_id)) ? $parent_id : 0);
-                                            $term = wp_insert_term(
-                                                $term_name, // the term
-                                                $tx_name, // the taxonomy
-                                                $term_attr
-                                            );
-                                        }
+	                            if (empty($term) and !is_wp_error($term)) {
+		                            $term_attr = array('parent' => (!empty($parent_id)) ? $parent_id : 0);
+		                            $term = wp_insert_term(
+			                            $term_name, // the term
+			                            $tx_name, // the taxonomy
+			                            $term_attr
+		                            );
+	                            }
 
-                                        if (!empty($term) && !is_wp_error($term)) {
-                                            $cat_id = is_array($term) ? $term['term_id'] : (int) $term;
-                                            if ($cat_id and $single_tax['assign']) {
-                                                if (!in_array($cat_id, $assign_taxes)) {
-                                                    $assign_taxes[] = $cat_id;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+	                            if (!empty($term) && !is_wp_error($term)) {
+		                            $cat_id = is_array($term) ? $term['term_id'] : (int) $term;
+		                            if ($cat_id and $single_tax['assign']) {
+			                            if (!in_array($cat_id, $assign_taxes)) {
+				                            $assign_taxes[] = $cat_id;
+			                            }
+		                            }
+	                            }
                             }
                         }
                     }
 
                     if (!empty($assign_taxes)) {
-                        ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $assign_taxes);
+
+                        $field = $this->getData('field');
+
+                        $value = ($field['multiple'] || in_array($field['field_type'], array('multi_select', 'checkbox'))) ? $assign_taxes : array_shift($assign_taxes);
+
+                        ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $value);
                     }
                 }
             }
@@ -181,7 +183,7 @@ class FieldTaxonomy extends Field {
             ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $mult_values);
         }
         else {
-            ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), $values[$this->getPostIndex()]);
+            ACFService::update_post_meta($this, $this->getPostID(), $this->getFieldName(), isset($values[$this->getPostIndex()]) ? $values[$this->getPostIndex()] : '');
         }
     }
 
@@ -195,6 +197,9 @@ class FieldTaxonomy extends Field {
         $field = $this->getData('field');
 
         if (!empty($assign_taxes) && !empty($field['save_terms'])){
+            if (!is_array($assign_taxes)){
+                $assign_taxes = array($assign_taxes);
+            }
             $assign_terms = array();
             foreach ($assign_taxes as $cat_id){
                 $term = get_term_by('id', $cat_id, $field['taxonomy']);
@@ -212,7 +217,30 @@ class FieldTaxonomy extends Field {
      * @return false|int|mixed|string
      */
     public function getFieldValue() {
-        return $this->getOption('is_multiple_field') ? explode(",", parent::getFieldValue()) : parent::getFieldValue();
+        // Special case for nested taxonomies structure.
+        if ($this->getOption('is_multiple') !== TRUE and $this->getOption('is_multiple') == 'nesting'){
+            $parents = $this->getParents();
+            $values = $this->options['values'];
+            foreach ($values as $tx_name => $terms){
+                $value = $terms[$this->getPostIndex()];
+                if (!empty($parents)){
+                    foreach ($value as $i => $term){
+                        $termName = $term['name'];
+                        foreach ($parents as $key => $parent) {
+                            $termName = explode($parent['delimiter'], $termName);
+                            $termName = $termName[$parent['index']];
+                        }
+                        $value[$i]['name'] = $termName;
+                    }
+                }
+                $values[$tx_name] = $value;
+            }
+            return $values;
+        }
+        else{
+            $value = $this->getOption('is_multiple_field') ? explode(",", parent::getFieldValue()) : parent::getFieldValue();
+        }
+        return $value;
     }
 
     /**
@@ -223,7 +251,7 @@ class FieldTaxonomy extends Field {
         $count = 0;
         if (!empty($parents)){
             foreach ($this->getOption('values') as $tx_name => $tx_terms) {
-                if (is_array($tx_terms[$this->getPostIndex()])) {
+                if (!empty($tx_terms[$this->getPostIndex()]) && is_array($tx_terms[$this->getPostIndex()])) {
                     foreach ($tx_terms[$this->getPostIndex()] as $tx_term) {
                         $value = $tx_term['name'];
                         $parentIndex = false;

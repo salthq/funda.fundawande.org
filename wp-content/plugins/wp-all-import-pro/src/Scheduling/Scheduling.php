@@ -227,12 +227,19 @@ class Scheduling
                 if (!$time) {
                     break;
                 }
-                $timeParts = explode(':', $time); 
+
+                $timeParts = explode(':', $time);
                 $hour = $timeParts[0];
                 $min = (int)$timeParts[1];
 
                 if (strpos($time, 'pm') !== false && $hour < 12) {
                     $hour = $hour + 12;
+                }
+
+                if($hour == 12) {
+                    if(strpos($time, 'am') !== false) {
+                        $hour = 0;
+                    }
                 }
 
                 $times[] = array(

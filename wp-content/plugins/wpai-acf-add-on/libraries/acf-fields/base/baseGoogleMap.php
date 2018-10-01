@@ -86,10 +86,12 @@ abstract class BaseGoogleMap extends Field {
     private function getApiKey(){
         $values = $this->getOption('values');
         $api_key = '';
-        if ($values['address_geocode'] == 'address_google_developers' && !empty($values['api_key'][$this->getPostIndex()])) {
+        $parsed_data = $this->getParsedData();
+        $xpath = $parsed_data['xpath'];
+        if ($xpath['address_geocode'] == 'address_google_developers' && !empty($values['api_key'][$this->getPostIndex()])) {
             $api_key = '&key=' . $values['api_key'][$this->getPostIndex()];
         }
-        elseif ($values['address_geocode'] == 'address_google_for_work' && !empty($values['client_id'][$this->getPostIndex()]) && !empty($values['signature'][$this->getPostIndex()])) {
+        elseif ($xpath['address_geocode'] == 'address_google_for_work' && !empty($values['client_id'][$this->getPostIndex()]) && !empty($values['signature'][$this->getPostIndex()])) {
             $api_key = '&client=' . $values['client_id'][$this->getPostIndex()] . '&signature=' . $values['signature'][$this->getPostIndex()];
         }
         return $api_key;
