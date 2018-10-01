@@ -25,7 +25,7 @@
             <div class = "container">
                 <div class = "row lesson-navigation-top">
                     <div class = "col-2 col-md-4">
-                        <a class = "btn module-btn-outline-{{sub_unit_meta.module_number}} py-4 my-4" href = "{{sub_unit_meta.unit.link}}">
+                        <a id = "back-to-units" class = "btn module-btn-outline-{{sub_unit_meta.module_number}} py-4 my-4" href = "{{sub_unit_meta.unit.link}}">
                             {{source('/assets/arrow_left.svg')}}
                             <br>
                             <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span> 

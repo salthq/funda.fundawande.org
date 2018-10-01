@@ -7,6 +7,12 @@ var tour = new Anno([{
   buttons: [AnnoButton.NextButton]
 },
 {
+  target: '#back-to-units',
+  position: 'right',
+  content: 'Cofa le iqhosha ukuba ubuyele kwiiyunithi zokujonga',
+  buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+},
+{
   target : '#sidebar-minimized',
   position: 'bottom',
   content : 'Cofa le iqhosha ukujonga inkqubela phambili',

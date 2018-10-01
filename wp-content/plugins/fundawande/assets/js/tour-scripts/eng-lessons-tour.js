@@ -7,10 +7,16 @@ var tour = new Anno([{
     buttons: [AnnoButton.NextButton]
   },
   {
+    target: '#back-to-units',
+    position: 'right',
+    content: 'Click this button to go back to the units view',
+    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+  },
+  {
     target : '#sidebar-minimized',
     position: 'bottom',
     content : 'Click this button to view unit progress',
-    buttons: [AnnoButton.NextButton]
+    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
   },
   {
     target : '#navigation-links',
