@@ -68,6 +68,9 @@
                 {# Container width image#}
                 {% elseif content.acf_fc_layout == 'image_container_width' %}    
                     {% include '/lms/content-types/image/image-container-width.twig' %}
+                {# Half Image #}
+                {% elseif content.acf_fc_layout == 'image_half_width' %}
+                    {% include '/lms/content-types/image/image-half-width.twig' %}
                 {# Pulled left image #}
                 {% elseif content.acf_fc_layout == 'image_pulled_left' %}    
                     {% include '/lms/content-types/image/image-pulled-left.twig' %}

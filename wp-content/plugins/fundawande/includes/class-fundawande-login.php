@@ -42,7 +42,7 @@ class FundaWande_Login {
         // $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
         // $username_label = "Inombolo yesazisi";
         // $password_label = "Inombolo yokuvula";
-        // $login_label = "Ngema";
+        // $login_label = "Ngena";
         // if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
         //     $redirect_url = "/course/reading-for-meaning-eng/";
         //     $username_label = "ID Number";
