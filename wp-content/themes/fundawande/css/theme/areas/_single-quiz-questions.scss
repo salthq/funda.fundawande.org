@@ -160,7 +160,7 @@
             }
             ._box-image-container {
                 width: 100%;
-                height: 300px;
+                min-height: 200px;
                 border: 1px solid #ccc;
                 @include breakpoint(phone) {
                     width: 50%;
@@ -193,7 +193,7 @@
             ._images-answers {
                 ._image-container {
                     border: none;
-                    height: 200px;
+                    min-height: 200px;
                     background-image: url('/wp-content/themes/fundawande/assets/lms/image_placeholder.svg');
                     background-repeat: no-repeat;
                     background-position: 50% 50%;

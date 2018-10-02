@@ -400,14 +400,14 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._images-answers ._image-container.chosen ._sortable-spot{border:3px solid #ef9d19;border-radius:2px}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._top-mobile-title{display:none}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._top-mobile-title{display:block}
-}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._box-image-container{width:100%;height:300px;border:1px solid #ccc}
+}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._box-image-container{width:100%;min-height:200px;border:1px solid #ccc}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._box-image-container{width:50%;margin-right:20px !important}
 }.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container{border:3px solid #ef9d19;border-radius:2px}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container{border:0}
 }.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container.chosen{border:3px solid #ccc;opacity:.5}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._image-container.chosen{border:0}
 }@media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images ._option-image{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
-}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container{border:0;height:200px;background-image:url("/wp-content/themes/fundawande/assets/lms/image_placeholder.svg");background-repeat:no-repeat;background-position:50% 50%}
+}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container{border:0;min-height:200px;background-image:url("/wp-content/themes/fundawande/assets/lms/image_placeholder.svg");background-repeat:no-repeat;background-position:50% 50%}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._sortable-spot{width:100%;height:100%;left:0;top:0;border:3px dashed #ef9d19;border-radius:2px}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container.chosen ._sortable-spot{border:3px solid #ef9d19}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._sortable-label{position:absolute;bottom:-2.5rem;left:calc(50% - 0.5rem);font-size:1.5rem;font-family:Arial}
