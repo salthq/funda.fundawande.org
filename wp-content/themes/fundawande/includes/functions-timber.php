@@ -58,6 +58,13 @@ if (function_exists('acf_add_options_page')) {
         'menu_title' 	=> 'Navbar Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
+
+    // Add 404 Options Page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande 404 Options',
+        'menu_title' 	=> '404 Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
 }
 
 Timber::$dirname = array('templates', 'views');
