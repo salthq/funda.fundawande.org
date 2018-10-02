@@ -4,7 +4,7 @@
 
 {% embed "embeds/header-head.twig" %}
     {% block head_content %}
-		<title>{{ post.title }} | {{ site.name }}</title>
+		<title>{{ post.title|split('|', 2)[1]  }}</title>
         {{ function('wp_head') }}
     {% endblock %}
 {% endembed %}
