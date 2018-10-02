@@ -95,7 +95,7 @@
             <div class="row my-0 justify-content-between">
                 <div class="lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
                     {% if sub_unit_meta.nav.prev %}
-                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
+                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-fill-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
                 </div>
                 <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
@@ -121,10 +121,10 @@
                                 </button>
                             {% endif %}
                         {% else %}
-                            <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {% else %}
-                        <a id="quiz-complete"  class="btn module-btn-outline-{{module_number}}" href="#" >
+                        <a id="quiz-complete"  class="btn module-btn-fill-{{module_number}}" href="#" >
                             Submit <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </a>
                     {% endif %}
