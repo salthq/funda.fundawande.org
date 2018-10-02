@@ -106,6 +106,10 @@
                     &.chosen {
                         border: 3px solid $grey-secondary;
                         opacity: 0.5;
+                        &:hover {
+                            cursor: pointer;
+                            opacity: 1;
+                        }
                     }
                 }
                 @include breakpoint(phone) {
@@ -177,6 +181,10 @@
                     &.chosen {
                         border: 3px solid $grey-secondary;
                         opacity: 0.5;
+                        &:hover {
+                            cursor: pointer;
+                            opacity: 1;
+                        }
                         @include breakpoint(phone) {
                             border:none;
                         }
