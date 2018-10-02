@@ -64,34 +64,33 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     ?>
 
-    <li class="<?php echo esc_attr( $answer_class ); ?>">
+        <li class="<?php echo esc_attr( $answer_class ); ?> custom-control custom-radio">
+            <input class="custom-control-input" type="radio"
+                   id="<?php echo esc_attr( 'question_' . $question_data[ 'ID' ]  ) . '-option-'. $option_value; ?>"
+                   name="<?php echo esc_attr( 'sensei_question[' . $question_data[ 'ID' ]  . ']' ); ?>"
+                   value="<?php echo $option_value; ?>"
+                <?php echo checked( $question_data[ 'user_answer_entry' ], $option_value, false ); ?>
+                <?php if ( !is_user_logged_in() ) { echo ' disabled'; } ?>
+            />
 
-        <input type="radio"
-               id="<?php echo esc_attr( 'question_' . $question_data[ 'ID' ]  ) . '-option-'. $option_value; ?>"
-               name="<?php echo esc_attr( 'sensei_question[' . $question_data[ 'ID' ]  . ']' ); ?>"
-               value="<?php echo $option_value; ?>"
-            <?php echo checked( $question_data[ 'user_answer_entry' ], $option_value, false ); ?>
-            <?php if ( !is_user_logged_in() ) { echo ' disabled'; } ?>
-	    />
-        <label for="<?php echo esc_attr( 'question_' . $question_data[ 'ID' ]  ) . '-option-' . $option_value; ?>">
-            <?php
+            <label class="custom-control-label" for="<?php echo esc_attr( 'question_' . $question_data[ 'ID' ]  ) . '-option-' . $option_value; ?>">
 
-            if( 'true' == $option ){
+                <?php
 
-                _e( 'True', 'woothemes-sensei' );
+                if( 'true' == $option ){
 
-            }else{
+                    _e( 'True', 'woothemes-sensei' );
 
-                _e( 'False', 'woothemes-sensei' );
+                }else{
 
-            }
+                    _e( 'False', 'woothemes-sensei' );
 
-            ?>
+                }
 
+                ?>
+            </label>
 
-        </label>
-
-    </li>
+        </li>
 
     <?php } ?>
 

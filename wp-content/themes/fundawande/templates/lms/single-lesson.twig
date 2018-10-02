@@ -39,95 +39,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Lesson Content-->
-        <div class = "container-fluid">
-            <div class = "row mb-5">
-                {# Hero Band #}
-                {% for content in post.get_field('lesson_hero_types') %}
-                    {# Image Hero #}
-                    {% if content.acf_fc_layout == 'image_hero' %}
-                        {% include '/lms/hero-types/image-hero.twig' %}
-                    {% endif %}    
-                    {# Video Hero #}
-                    {% if content.acf_fc_layout == 'video_hero' %}
-                        {% include '/lms/hero-types/video-hero.twig' %}
-                    {% endif %}  
-                {% endfor %}
-            </div>
-            {#
-                This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson
-             #}
-            {% for content in post.get_field('lesson_content_types') %}
-
-                {# Image Content Types #}
-
-                {# Full width image#}
-                {% if content.acf_fc_layout == 'image_full_width' %}
-                    {% include '/lms/content-types/image/image-full-width.twig' %}
-                {# Container width image#}
-                {% elseif content.acf_fc_layout == 'image_container_width' %}    
-                    {% include '/lms/content-types/image/image-container-width.twig' %}
-                {# Half Image #}
-                {% elseif content.acf_fc_layout == 'image_half_width' %}
-                    {% include '/lms/content-types/image/image-half-width.twig' %}
-                {# Pulled left image #}
-                {% elseif content.acf_fc_layout == 'image_pulled_left' %}    
-                    {% include '/lms/content-types/image/image-pulled-left.twig' %}
-                {# Pulled right image #}  
-                {% elseif content.acf_fc_layout == 'image_pulled_right' %}    
-                    {% include '/lms/content-types/image/image-pulled-right.twig' %}
-
-                {# Video Content Types #}
-
-                {# Full width video #}
-                {% elseif content.acf_fc_layout == 'video_full_width' %}
-                    {% include '/lms/content-types/video/video-full-width.twig' %}
-                {# Container width video #}    
-                {% elseif content.acf_fc_layout == 'video_container_width' %}
-                    {% include '/lms/content-types/video/video-container-width.twig' %}
-                {# Pulled left video #}      
-                {% elseif content.acf_fc_layout == 'video_pulled_left' %}
-                    {% include '/lms/content-types/video/video-pulled-left.twig' %}
-                {# Pulled right video #}      
-                {% elseif content.acf_fc_layout == 'video_pulled_right' %}
-                    {% include '/lms/content-types/video/video-pulled-right.twig' %}
-
-                {# Carousel content types# }
-
-                {# Full width carousel with text #}      
-                {% elseif content.acf_fc_layout == 'carousel_full_width_with_text' %}
-                    {% include '/lms/content-types/carousel/carousel-full-width-with-text.twig' %}
-                {# Full width carousel without text #}      
-                {% elseif content.acf_fc_layout == 'carousel_full_width_without_text' %}
-                    {% include '/lms/content-types/carousel/carousel-full-width-without-text.twig' %}
-                {# Container width carousel with text #}
-                {% elseif content.acf_fc_layout == 'carousel_container_width_with_text' %}
-                    {% include '/lms/content-types/carousel/carousel-container-width-with-text.twig' %}
-                {# Container width carousel without text #}
-                {% elseif content.acf_fc_layout == 'carousel_container_width_without_text' %}
-                    {% include '/lms/content-types/carousel/carousel-container-width-without-text.twig' %}
-                {# Pulled left without text carousel #}
-                {% elseif content.acf_fc_layout == 'carousel_pulled_left_without_text' %}
-                    {% include '/lms/content-types/carousel/carousel-pulled-left-without-text.twig' %}
-                {# Pulled right without text carousel #}    
-                {% elseif content.acf_fc_layout == 'carousel_pulled_right_without_text' %}
-                    {% include '/lms/content-types/carousel/carousel-pulled-right-without-text.twig' %}
-                {# Pulled left with text carousel #}
-                {% elseif content.acf_fc_layout == 'carousel_pulled_left_with_text' %}
-                    {% include '/lms/content-types/carousel/carousel-pulled-left-with-text.twig' %}
-                {# Pulled right with text carousel #}    
-                {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
-                    {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
-
-                {# Other Content Types #}
-
-                {# Copy text #}
-                {% elseif content.acf_fc_layout == 'copy_text' %}
-                    {% include '/lms/content-types/copy-text.twig' %}
-            {% endif %}
-            {% endfor %}
-        </div>
+        {% include '/lms/embeds/lesson-content.twig' %}
         <!-- Bottom navigation-->
         <div id = "navigation-links"  class = "container-fluid my-4 py-4">
             <div class = "container">
@@ -135,7 +48,7 @@
                 <div class="row ">
                     <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
                         {% if sub_unit_meta.nav.prev %}
-                            <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
+                            <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
                         {% endif %}
                     </div>
                     <div class="col-12 col-md-4 text-center">
@@ -157,7 +70,7 @@
                                     </button>
                                 {% endif %}
                             {% else %}
-                                <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                                <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                             {% endif %}
                         {% endif %}
                     </div>
