@@ -4,7 +4,13 @@
 
 {% embed "embeds/header-head.twig" %}
     {% block head_content %}
-		<title>{{ post.title|split('|', 2)[1]  }}</title>
+		{%  if post.title|split('|', 2)[1]  %}
+			<title>{{ post.title|split('|', 2)[1]  }}</title>
+		{% elseif term.title|split('|', 2)[1] %}
+			<title>{{ term.title|split('|', 2)[1]  }}</title>
+		{% else %}
+			<title>{{ fn('bloginfo','name') }}</title>
+		{% endif %}
         {{ function('wp_head') }}
     {% endblock %}
 {% endembed %}
