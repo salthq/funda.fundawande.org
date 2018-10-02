@@ -59,7 +59,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 $lesson->key = get_post_meta($lesson->ID, 'fw_unique_key',true);
                 $lesson->title = get_post_meta($lesson->ID, 'lesson_title', true);
                 if ($current_lesson_key && $current_lesson_key == $lesson->key) {
-                    $lesson->current = true;
+                    // default current to false for now
+                    // TODO turn back on
+//                    $lesson->current = true;
+                    $lesson->current = false;
                 }
                 $lesson->complete = $this->fw_is_sub_unit_complete($lesson->key);
                 $lesson->quiz = get_post_meta($lesson->ID, '_quiz_has_questions', true);
