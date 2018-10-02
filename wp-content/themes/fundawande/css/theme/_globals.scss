@@ -21,6 +21,11 @@
 .background-primary {  background-color: $white; }
 .background-primary-light { }
 
+.background-white {
+
+    background-color: white;
+
+}
 .background-secondary {
 
     background-color: $grey-primary;
@@ -339,7 +344,8 @@
  }
 
  img {
-     width: 100%;
+     max-width: 100%;
+     margin: auto;
      height: auto;
  }
 
