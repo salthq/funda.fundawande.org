@@ -1,0 +1,20 @@
+/* ==========================================================================
+* 404 Page
+*
+* Styling specific to the 404 page
+*
+ ========================================================================== */
+
+ .wrapper-404 {
+    a {
+        color: $text-primary__colour;
+        &:hover {
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        svg {
+            margin-bottom: 0.5rem;
+        }
+    }
+ }
