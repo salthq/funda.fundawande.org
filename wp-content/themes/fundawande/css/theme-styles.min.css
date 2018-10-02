@@ -263,7 +263,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .button-tertiary{border-color:#918f8f;background-color:#fff;color:#918f8f}
 .button-tertiary-active{background-color:#918f8f;color:#fff}
 .text-tertiary{color:#918f8f}
-img{width:100%;height:auto}
+img{max-width:100%;margin:auto;height:auto}
 .site-footer{border-top:8px solid #4a4a4a}
 .player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}
