@@ -20,43 +20,42 @@
                 }
             }
         }
-        //TODO: re-write carousel CSS as the arrow pointers are not whre they should be
         &-carousel {
-            &-image {
-                width: 100%;
-            }
-            @include breakpoint(desktop) {
-                &-image {
-                    height: 600px;
+            overflow: hidden;
+            a {
+                &:hover {
+                    opacity: 0.7;
                 }
             }
-            @include breakpoint(phone) {
-                &-image {
-                    height: 220px;
+            .carousel-item {
+                padding-top: 2rem;
+            }
+            .carousel-indicators {
+                bottom: auto;
+                top:0;
+                li:not(.active) {
+                    background: $grey-secondary!important;
                 }
             }
-            &-control {
+            .carousel-control-container {
                 position: absolute;
-                bottom: -3em;
-
-                @include breakpoint(phone) {
-                    bottom: -1em;
+                z-index: 1;
+                svg {
+                    width: 80px;
+                    height:80px;
                 }
-
-                &-prev {
-                    left: 2em;
+            }
+            .lesson-carousel-text {
+                p {
+                    text-align: inherit;
                 }
-                &-next {
-                    right: 2em;
-                }
+            }
+            .lesson-carousel-image {
+                img {
+                    margin: auto;
+                    width: auto;
+                    max-width: 100%;
 
-                &-icon {
-                    @include breakpoint(phone) {
-                        svg {
-                            width: 33px;
-                            height: 33px;
-                        }
-                    }
                 }
             }
         }
@@ -165,7 +164,9 @@
                         position: relative;
                         &:before {
                             content: "";
-                            background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                            // TODO change after
+                            background: transparent!important;
+                            //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -212,7 +213,9 @@
                         position: relative;
                         &:before {
                             content: "";
-                            background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            // TODO change after
+                            background: transparent!important;
+                            //background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -312,7 +315,9 @@
                     position: relative;
                     &:before {
                         content: "";
-                        background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                        // TODO change after
+                        background: transparent!important;
+                        //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                         background-size: auto 7px;
                         width: 4px;
                         height: calc(100% + 2px);
