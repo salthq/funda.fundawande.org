@@ -41,7 +41,8 @@
         flex-flow: wrap;
         &-icon {
             justify-content: center;
-            margin-top: 1.5rem;
+            // TODO add margin top if current shows
+            //margin-top: 1.5rem;
             @include breakpoint(phone) {
                 margin-top: 0;
             };
@@ -171,7 +172,9 @@
                 min-height: 15px;
                 &:before {
                     content: "";
-                    background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                    // TODO change after
+                    background: transparent!important;
+                    //background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
                     background-size: 7px auto;
                     height: 4px;
                     width: calc(100% + 2px);
@@ -183,7 +186,9 @@
                 @include breakpoint(phone) {
                     &:before {
                         content: "";
-                        background: linear-gradient(0deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                        // TODO change after
+                        background: transparent!important;
+                        //background: linear-gradient(0deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
                         background-size: auto 7px ;
                         width: 4px;
                         height: calc(100% + 2px);
@@ -215,7 +220,9 @@
                         }
                         &:after {
                             content: '';
-                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            // TODO change after
+                            background: transparent!important;
+                            //background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
                             background-repeat: no-repeat;
                             width: 9px;
                             position: absolute;
@@ -227,14 +234,18 @@
                         }
                         &.complete {
                             &:before {
-                                background: $brand-primary__colour;
+                                // TODO change after
+                                background: transparent!important;
+                                //background: $brand-primary__colour;
                                 width: 30px;
                                 right: -1px;
                                 left: auto;
                                 z-index: 1;
                             }
                             &:after {
-                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                // TODO change after
+                                background: transparent!important;
+                                //content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
                                 background: $brand-primary__colour;
                                 width: 12px;
                                 font-size: 0;
@@ -256,7 +267,9 @@
                     @include breakpoint(desktop) {
                         &:before {
                             content: "";
-                            background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
+                            // TODO change after
+                            background: transparent!important;
+                            //background: linear-gradient(90deg,rgba(255,255,255,1) 50%,transparent 50%,transparent 0),$grey-secondary;
                             background-size: 7px auto;
                             height: 4px;
                             width: 30px;
@@ -268,7 +281,9 @@
                         }
                         &:after {
                             content: '';
-                            background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
+                            // TODO change after
+                            background: transparent!important;
+                            //background: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg');
                             background-repeat: no-repeat;
                             width: 9px;
                             position: absolute;
@@ -280,7 +295,9 @@
                         }
                         &.complete {
                             &:after {
-                                content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
+                                // TODO change after
+                                background: transparent!important;
+                                //content: url('/wp-content/themes/fundawande/assets/lms/progress_arrow_complete_icon.svg');
                                 background: $brand-primary__colour;
                                 width: 12px;
                                 font-size: 0;

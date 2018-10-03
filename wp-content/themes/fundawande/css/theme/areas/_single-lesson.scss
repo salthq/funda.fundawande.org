@@ -20,43 +20,42 @@
                 }
             }
         }
-        //TODO: re-write carousel CSS as the arrow pointers are not whre they should be
         &-carousel {
-            &-image {
-                width: 100%;
-            }
-            @include breakpoint(desktop) {
-                &-image {
-                    height: 600px;
+            overflow: hidden;
+            a {
+                &:hover {
+                    opacity: 0.7;
                 }
             }
-            @include breakpoint(phone) {
-                &-image {
-                    height: 220px;
+            .carousel-item {
+                padding-top: 2rem;
+            }
+            .carousel-indicators {
+                bottom: auto;
+                top:0;
+                li:not(.active) {
+                    background: $grey-secondary!important;
                 }
             }
-            &-control {
+            .carousel-control-container {
                 position: absolute;
-                bottom: -3em;
-
-                @include breakpoint(phone) {
-                    bottom: -1em;
+                z-index: 1;
+                svg {
+                    width: 80px;
+                    height:80px;
                 }
-
-                &-prev {
-                    left: 2em;
+            }
+            .lesson-carousel-text {
+                p {
+                    text-align: inherit;
                 }
-                &-next {
-                    right: 2em;
-                }
+            }
+            .lesson-carousel-image {
+                img {
+                    margin: auto;
+                    width: auto;
+                    max-width: 100%;
 
-                &-icon {
-                    @include breakpoint(phone) {
-                        svg {
-                            width: 33px;
-                            height: 33px;
-                        }
-                    }
                 }
             }
         }
@@ -74,7 +73,6 @@
         }
         @include breakpoint(tablet) {
             &-sidebar {
-                box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
                 display: inline-block;
                 z-index: 10;
                 &-absolute {
@@ -89,11 +87,21 @@
                 h4 {
                     font-size:18px
                 };
+                .lesson-progress {
+                    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+                }
                 &-expanded {
                     margin-left: -500px; //Hide component
                     max-width: 500px;
                     &.lesson-sidebar-expanded {
                         bottom: 0;
+                    }
+                    .lesson-sidebar-header:hover {
+                        opacity: 0.8
+                    }
+                    .lesson-sidebar-text {
+                        cursor: pointer;
+                        hover: 0.8;
                     }
                     a.lesson-progress-marker {
                         z-index:1 ;
@@ -137,10 +145,10 @@
                             z-index: 1;
                             background: white;
                             svg {
-                                #inner {
+                                circle {
                                     opacity: 0.7;
                                 }
-                                #icon-inner {
+                                #inner {
                                     fill :$text-primary__colour;
                                 }
 
@@ -156,7 +164,9 @@
                         position: relative;
                         &:before {
                             content: "";
-                            background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                            // TODO change after
+                            background: transparent!important;
+                            //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -182,6 +192,7 @@
                 &-minimized {
                     width: 50px;
                     min-height: 50px;
+                    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
                     .lesson-progress-marker {
                         z-index:1 ;
                         width: 20px;
@@ -202,7 +213,9 @@
                         position: relative;
                         &:before {
                             content: "";
-                            background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            // TODO change after
+                            background: transparent!important;
+                            //background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -258,6 +271,8 @@
                     }
                     .lesson-progress-text {
                         line-height: 1;
+                        font-size: 14px;
+                        width: 80%;
                     }
                     &.disabled {
                         svg {
@@ -300,7 +315,9 @@
                     position: relative;
                     &:before {
                         content: "";
-                        background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                        // TODO change after
+                        background: transparent!important;
+                        //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                         background-size: auto 7px;
                         width: 4px;
                         height: calc(100% + 2px);

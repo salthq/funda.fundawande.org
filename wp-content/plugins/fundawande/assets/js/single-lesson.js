@@ -131,7 +131,7 @@ jQuery(document).ready( function($) {
         $(".quiz-submit.complete").click();
     });
 
-    $('#quiz-reset').click(function(e) {
+    $('.fw-quiz-reset').click(function(e) {
         e.preventDefault();
 
 

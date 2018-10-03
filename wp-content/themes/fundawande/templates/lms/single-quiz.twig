@@ -47,37 +47,82 @@
                 </div>
             </div>
         </div>
-
+        {# If quiz outcome is set then show message and modal #}
         {%  if quiz_retry or lesson_complete %}
-            <!-- Quiz messages-->
-            <div class = "container mt-5">
-                <div class="row">
 
-                        {%  if quiz_retry %}
-                            <div class="col">
-                                <p>Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit of try again right away.</p>
-                            </div>
-                            <div class="col-auto">
-                                <a   class="btn mr-md-3 mr-0 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                                    Review Unit
-                                </a>
-                                <a id="quiz-reset"  class="btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
-                                    Retry quiz
-                                </a>
-                            </div>
+            {# Set the modal content depending on outcome #}
+            {%  if quiz_retry %}
+                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_retry_content') %}
+            {% elseif lesson_complete %}
+                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_success_content')  %}
+            {% endif %}
+            {# Set the modal ID to use to open the modal #}
+            {% set modal_id = "quiz-message" %}
+            {% embed "embeds/modals/modal-global.twig" %}
+                {# Add quiz outcome header to modal #}
+                {% block modal_header %}
 
-                        {% elseif lesson_complete %}
-                            <div class="col-12">
-                                <p>Well done, you passed the quiz! Review the feedback below and then click 'Continue' at the bottom to proceed</p>
-                            </div>
-                        {% endif %}
+                        <div class="col-auto">
+                            {{source('/assets/lms/quiz_outcome.svg')}}
+                        </div>
+                        <div class="col-auto">
+                           <h2>{{attribute(options, lang.prefix~'quiz_outcome_header')}}</h2>
+                        </div>
 
+                {% endblock %}
+                {# Add quiz modal content to modal #}
+                {% block modal_body %}
+
+                   <div class="col-12">
+                       {{  modal_content }}
+                   </div>
+
+                {% endblock %}
+
+            {% endembed %}
+            {# Default the modal to open #}
+            <script>
+                jQuery(document).ready( function($) {
+                    $('#{{ modal_id }}').modal('show');
+                });
+            </script>
+
+            {# Set the quiz outcome message  #}
+            <div class = "container quiz-message-container ">
+                <div class="row quiz-message-box primary-border my-5 p-3">
+                    <div class="col-auto">
+                        {{source('/assets/lms/quiz_outcome.svg')}}
+                    </div>
+                    {%  if quiz_retry %}
+
+                        <div class="col">
+                            {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
+                        </div>
+                        <div class="col-auto d-flex flex-column">
+                            <a   class="btn mb-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
+                               {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
+                            </a>
+                            <a id="quiz-reset"  class=" fw-quiz-reset btn primary-btn-fill" href="#" >
+                                {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
+                            </a>
+                        </div>
+
+                    {% elseif lesson_complete %}
+                        <div class="col">
+                            {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
+                        </div>
+                    {% endif %}
 
                 </div>
                 <hr>
             </div>
         {% endif %}
+
+
         <!-- Lesson Content-->
+        {% set lesson_post = quiz_lesson %}
+        {% include '/lms/embeds/lesson-content.twig' %}
+        <!-- Quiz Content-->
         <div class = "container mt-5">
             <div class="row">
                 <div class="col-12">
@@ -97,10 +142,10 @@
                 <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
                     {% if quiz_retry %}
                         <a   class="btn mr-md-3 mr-0 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                            Review Unit
+                            {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
                         </a>
-                        <a id="quiz-reset"  class="btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
-                            Retry quiz
+                        <a id="quiz-reset"  class=" fw-quiz-reset btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
+                            {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
                         </a>
                     {% elseif lesson_complete %}
                         {% if sub_unit_meta.is_last_in_unit %}
@@ -117,11 +162,11 @@
                                 </button>
                             {% endif %}
                         {% else %}
-                            <a id="lesson-complete" href = "#" class = "btn module-btn-outline-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+                            <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                         {% endif %}
                     {% else %}
-                        <a id="quiz-complete"  class="btn module-btn-outline-{{module_number}}" href="#" >
-                            Submit <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                        <a id="quiz-complete"  class="btn module-btn-fill-{{module_number}}" href="#" >
+                            {{  attribute(options, lang.prefix~'quiz_submit_button_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </a>
                     {% endif %}
                 </div>

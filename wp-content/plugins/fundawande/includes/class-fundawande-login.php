@@ -28,7 +28,42 @@ class FundaWande_Login {
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
         //Check for blank fields and add 'login=blank-field' to URL
         add_action('authenticate', array($this, 'custom_login_blank_field'));
+        // add custom login redirect
+        add_action( 'wp_login', array($this,'fw_login_redirect') ,10,2);
+
     }
+
+    /**
+     * Redirect user after successful login.
+     *
+     * @param string $redirect_url URL to redirect to.
+     * @param string $request URL the user is coming from.
+     * @param object $user Logged user's data.
+     * @return string
+     */
+
+    function fw_login_redirect( $user_login, $user  ) {
+        //is there a user to check?
+        $user_id =$user->ID;
+
+        if ($user_id) {
+            $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
+            $redirect_url = get_the_permalink($current_lesson_id);
+
+            if (empty($redirect_url)) {
+                // TODO HARDCODE IN FIRST LESSON
+                $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
+                $redirect_url = get_the_permalink($current_lessons[0]->ID);
+            }
+
+        } else {
+            $redirect_url = home_url('/');
+        }
+
+        wp_redirect($redirect_url);
+        exit();
+    }
+
 
     //Set up login form options
     public function setup_login_form() {
@@ -42,7 +77,7 @@ class FundaWande_Login {
         // $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
         // $username_label = "Inombolo yesazisi";
         // $password_label = "Inombolo yokuvula";
-        // $login_label = "Ngema";
+        // $login_label = "Ngena";
         // if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
         //     $redirect_url = "/course/reading-for-meaning-eng/";
         //     $username_label = "ID Number";
@@ -50,10 +85,11 @@ class FundaWande_Login {
         //     $login_label = "Log In";
         // }
 
+
         $args = array(
             'echo'           => true,
             //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
-            'redirect'       => home_url('/'),
+//            'redirect'       => home_url('/'),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,

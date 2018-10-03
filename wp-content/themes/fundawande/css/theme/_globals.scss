@@ -21,6 +21,11 @@
 .background-primary {  background-color: $white; }
 .background-primary-light { }
 
+.background-white {
+
+    background-color: white;
+
+}
 .background-secondary {
 
     background-color: $grey-primary;
@@ -178,7 +183,7 @@
         }
     }
     .module-svg-fill-#{$colour_key} {
-        svg {
+        svg circle {
             fill: $colour_var;
         }
     }
@@ -219,7 +224,7 @@
     color: $brand-primary__colour;
 }
 .primary-border {
-    border-color: $brand-primary__colour;
+    border-color: $brand-primary__colour!important;
 }
 .primary-btn-outline {
     border-color: $brand-primary__colour;
@@ -336,6 +341,12 @@
 
  .text-tertiary {
      color: $grey-tertiary;
+ }
+
+ img {
+     max-width: 100%;
+     margin: auto;
+     height: auto;
  }
 
  

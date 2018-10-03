@@ -6,10 +6,10 @@
 
 {# Twig block to be included in Base.twig #}
 {% block content %}
-    <div class="wrapper single-module-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper single-module-wrapper  background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
 
-        <div class = "container-fluid">
-            <div class = "row module-title justify-content-between align-items-center">
+        <div class = "container-fluid ">
+            <div class = "row module-title justify-content-between align-items-center  background-white">
                 <div class = "col-2 ">
                     <a id = "back-to-modules" class = "button-secondary module-btn-outline-{{module_number}} py-2 py-md-4 my-4" href = "{{course_link}}">
                         <span class="mb-0 mb-md-2 d-inline-block">{{source('/assets/arrow_left.svg')}}</span>
@@ -25,7 +25,7 @@
                 <div class = "col-2 "></div>
             </div>
         </div>
-        <div class = "container-fluid background-secondary">
+        <div class = "container-fluid">
             <div class = "container p-3">
                 {% for unit in units %}
                     <div class = "unit card my-3 {% if unit.current %}current{% endif %} d-inline-block w-100">
@@ -56,14 +56,20 @@
                                         </div>
                                         <!--Unit navigation buttons tablet and desktop-->
                                         <div class = "col-12 col-md-auto text-right d-none d-md-flex">
-                                            <a {% if not is_mobile %}id = "view-lessons" {% endif %} class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
-                                                <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
-                                            </a>
-                                            {% if unit.current or unit.complete %}
-                                            <a {% if not is_mobile %}id = "resume-unit" {% endif %} class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                            {# TODO: uncomment the lines below this, always show lessons #}
+
+                                            {#<a id = "view-lessons"class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">#}
+                                                {#<span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}#}
+                                            {#</a>#}
+                                            {# TODO: uncomment the lines below this, delete the resume-unit link #}
+                                            {# {% if unit.current or unit.complete %}
+                                            <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
                                                 {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
-                                            {% endif %}
+                                            {% endif %} #}
+                                            <a id = "resume-unit" class = "btn module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="{{function('get_post_permalink', unit.lessons[0].ID)}}">
+                                                {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                            </a>
                                         </div>
                                     </div>
                                     <hr>
@@ -73,7 +79,7 @@
                             <div class = "row unit-content">
                                 <div class = "col-sm-11">
                                     <p>{{unit.module_description}}</p>
-                                    <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
+                                    <div class = "sub-units row no-gutters " id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
                                             <div class = "sub-units-icon {%  if lesson.complete %}complete module-divider-before-{{ module_number }} module-after-bg-{{ module_number }}{% endif %} row text-center flex-md-row flex-column col-md-2 no-gutters pb-3">
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">
@@ -82,11 +88,11 @@
                                                 {# TODO re-add check if lesson is currnent or complete before showig Href #}
                                                 <a href = "{{function('get_post_permalink', lesson.ID)}}" class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-svg-fill-{{ module_number }}  module-border-{{ module_number }} current{% endif %} ">
                                                     <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
-                                                    {% set image = source('assets/lms/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
+                                                    {% set image = source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
                                                     {% if image %}
-                                                        {{ source('assets/lms/' ~ lesson.icon ~ '.svg') }}
+                                                        {{ source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg') }}
                                                     {% else %}
-                                                        {{ source('assets/lms/book_icon.svg') }}
+                                                        {{ source('assets/lms/lesson_icons/book-front.svg') }}
                                                     {% endif %}
                                                     <div class="d-flex flex-column justify-content-center py-1 py-md-2 pl-2 pl-md-0 lesson-progress-text">
                                                         <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
@@ -105,14 +111,18 @@
                                 <!--Unit navigation buttons mobile-->
                                 <div class = "col-sm-12 text-right d-flex d-md-none">
                                     <hr>
-                                    <a {% if is_mobile %} id = "view-lessons" {% endif %} class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                    <a id = "view-lessons" class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                         <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                     </a>
-                                    {% if unit.current or unit.complete %}
-                                    <a {% if is_mobile %} id = "resume-unit" {% endif %} class = "btn module-btn-fill-{{module_number}} unit-header-navigation" href="">
-                                        <small>{{attribute(options, lang.prefix~'navigation_text')}}</small> <span class = "px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                    {# TODO: uncomment the lines below this, delete the resume-unit link #}
+                                    {# {% if unit.current or unit.complete %}
+                                   <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                        {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                     </a>
-                                    {% endif %}
+                                    {% endif %} #}
+                                    <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" href="{{function('get_post_permalink', unit.lessons[0].ID)}}">
+                                        {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

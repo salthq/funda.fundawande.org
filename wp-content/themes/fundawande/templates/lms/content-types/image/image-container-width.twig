@@ -5,7 +5,7 @@
         <div class = "col-sm-12 text-center pt-4">
             {# Remove whitespace from beginning and end of the file name before appending to media url #}
             {% set file_name =  content.image_file_name|trim %}
-            <img class = "d-block lesson-carousel-image h-100" src ="{{ media_url~file_name }}">
+            <img class = "d-block" src ="{{ media_url~file_name }}">
         </div>
     </div>
 </div>

@@ -6,6 +6,56 @@
  ========================================================================== */
 
 .single-lesson-wrapper {
+    .quiz-message-container {
+       .quiz-message-box {
+           border: 3px solid;
+           border-radius: 8px;
+           p {
+               font-size: 25px;
+               font-style: italic;
+               line-height: 33px;
+           }
+       }
+    }
+    .sensei-message.answer-feedback {
+        display: none!important;
+    }
+    .answer-message-container {
+        border: 2px solid;
+        border-radius: 6px;
+        &.user_right {
+            border-color: #526a06;
+        }
+        &.user_wrong {
+            border-color: #c55c26;
+        }
+        .answer-outcome {
+            padding-left: 3rem;
+            position: relative;
+            font-size: 22px;
+            line-height: 40px;
+            &:before {
+                background: transparent;
+                background-repeat: no-repeat;
+                position: absolute;
+                content: '';
+                left: 0;
+                height: 40px;
+                width: 40px;
+            }
+            &.user_wrong {
+                &:before {
+                    background: url('/wp-content/themes/fundawande/assets/lms/incorrect_answer.svg');
+                }
+            }
+            &.user_right {
+                &:before {
+                    background: url('/wp-content/themes/fundawande/assets/lms/correct_answer.svg');
+                }
+            }
+        }
+    }
+
     .quiz-submit {
       &.reset, &.complete, &.save {
           display: none!important;
@@ -36,12 +86,13 @@
                 height: 2rem;
                 .custom-control-label {
                     line-height: 2rem;
+                    padding-left: 50px;
                     &:before {
                         width: 1.5rem;
                         height: 1.5rem;
                         border: 1px solid $brand-primary__colour;
                         background-color: white;
-                        left: -2.5rem;
+                        margin-left: 30px;
                     }
                 }
                 .custom-control-input:checked ~ .custom-control-label {
@@ -105,6 +156,10 @@
                     &.chosen {
                         border: 3px solid $grey-secondary;
                         opacity: 0.5;
+                        &:hover {
+                            cursor: pointer;
+                            opacity: 1;
+                        }
                     }
                 }
                 @include breakpoint(phone) {
@@ -159,7 +214,7 @@
             }
             ._box-image-container {
                 width: 100%;
-                height: 300px;
+                min-height: 200px;
                 border: 1px solid #ccc;
                 @include breakpoint(phone) {
                     width: 50%;
@@ -176,6 +231,10 @@
                     &.chosen {
                         border: 3px solid $grey-secondary;
                         opacity: 0.5;
+                        &:hover {
+                            cursor: pointer;
+                            opacity: 1;
+                        }
                         @include breakpoint(phone) {
                             border:none;
                         }
@@ -192,14 +251,14 @@
             ._images-answers {
                 ._image-container {
                     border: none;
-                    height: 200px;
+                    min-height: 200px;
                     background-image: url('/wp-content/themes/fundawande/assets/lms/image_placeholder.svg');
                     background-repeat: no-repeat;
                     background-position: 50% 50%;
 
                     ._sortable-spot {
                         width: 100%;
-                        height: 100%;
+                        min-height: 200px;
                         left: 0;
                         top: 0;
                         border: 3px dashed $brand-primary__colour;

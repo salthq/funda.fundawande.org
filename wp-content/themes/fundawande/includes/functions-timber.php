@@ -45,6 +45,13 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' 	=> 'fundawande-options',
     ));
 
+    // Add Quiz Options Page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande Quiz Options',
+        'menu_title' 	=> 'Quiz Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
+
     // Add Terms And Conditions Page
     acf_add_options_sub_page(array(
         'page_title' 	=> 'Funda Wande Terms and Conditions',
@@ -56,6 +63,13 @@ if (function_exists('acf_add_options_page')) {
     acf_add_options_sub_page(array(
         'page_title' 	=> 'Funda Wande Navbar Options',
         'menu_title' 	=> 'Navbar Options',
+        'parent_slug' 	=> 'fundawande-options',
+    ));
+
+    // Add 404 Options Page
+    acf_add_options_sub_page(array(
+        'page_title' 	=> 'Funda Wande 404 Options',
+        'menu_title' 	=> '404 Options',
         'parent_slug' 	=> 'fundawande-options',
     ));
 }

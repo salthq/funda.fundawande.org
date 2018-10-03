@@ -66,7 +66,10 @@ class FundaWande_Modules {
 
                 // check if this unit key is equal to current unit key and if so, aassign current proporty
                 if ($module_key == $user_current_module) {
-                    $course_modules[$key]->current = true;
+                    // TODO change after
+
+//                    $course_modules[$key]->current = true;
+                    $course_modules[$key]->current = false;
                 }
 
 
@@ -137,7 +140,9 @@ class FundaWande_Modules {
 
             // check if this unit key is equal to current unit key and if so, aassign current proporty
             if ($unit_key == $user_current_unit) {
-                $module_units[$key]->current = true;
+                // TODO change after
+//                $module_units[$key]->current = true;
+                $module_units[$key]->current = false;
             }
 
 

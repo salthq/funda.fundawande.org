@@ -1,42 +1,50 @@
 <!-- Expanded Sidebar Progress Component -->
-<div class = "lesson-sidebar lesson-sidebar-expanded lesson-sidebar-absolute my-3" id = "sidebar-expanded">
-    <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
-        <div class = "module-bg-{{module_number}} w-100 text-white text-center p-2">
-                    <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
-                        <span class = "p-2">{{source('assets/minimize_icon.svg')}}</span>{{attribute(options, lang.prefix~'hide_unit_progress_text')}}
-                    </span>
-        </div>
-        <div class = "lesson-sidebar-module-titles mx-3 py-3">
-            <p class = "m-0"><strong>{{sub_unit_meta.module_title}}</strong></p>
-            <h4 class = "m-0">{{sub_unit_meta.unit_title}}</h4>
-        </div>
-        <hr class="m-0">
-        <div class="my-4 row no-gutters px-4 flex-column">
-        {% for lesson in sub_unit_meta.unit_lessons %}
-            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
-            {# TODO add back limit #}
-            {#<a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">#}
-            <a href = "{{function('get_post_permalink', lesson.ID)}}" class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %}">
-                {{ source('assets/lms/recall_quiz.svg') }}
-                <div class="pl-2 d-flex flex-column lesson-progress-text">
-                    <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
-                    <span class = "title">{{lesson.title}}</span>
-                </div>
-            </a>
-        {% endfor %}
+
+<div class = "d-none d-md-block">
+    <div class = "lesson-sidebar lesson-sidebar-expanded lesson-sidebar-absolute my-3" id = "sidebar-expanded">
+        <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
+            <div class = "lesson-sidebar-header module-bg-{{module_number}} w-100 text-white text-center p-2">
+                <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
+                    <span class = "p-2">{{source('assets/minimize_icon.svg')}}</span>{{attribute(options, lang.prefix~'hide_unit_progress_text')}}
+                </span>
+            </div>
+            <div class = "lesson-sidebar-module-titles mx-3 py-3">
+                <p class = "m-0"><strong>{{sub_unit_meta.module_title}}</strong></p>
+                <h4 class = "m-0">{{sub_unit_meta.unit_title}}</h4>
+            </div>
+            <hr class="m-0">
+            <div class="my-4 row no-gutters px-4 flex-column">
+            {% for lesson in sub_unit_meta.unit_lessons %}
+                <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                {# TODO add back limit #}
+                {#<a {%  if lesson.complete or lesson.current %}href = "{{function('get_post_permalink', lesson.ID)}}"{% endif %} class="lesson-progress-marker d-flex align-items-center col-auto module-svg-fill-{{ module_number }} {%  if lesson.complete  %}complete {% endif %} {%  if lesson.current  %}module-border-{{ module_number }} current{% endif %} {%  if not (lesson.complete or lesson.current ) %}disabled{% endif %}">#}
+                <a href = "{{function('get_post_permalink', lesson.ID)}}" class="lesson-progress-marker d-flex align-items-center col-auto  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-border-{{ module_number }} module-svg-fill-{{ module_number }} current{% endif %}">
+                    {% set image = source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
+                    {% if image %}
+                        {{ source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg') }}
+                    {% else %}
+                        {{ source('assets/lms/lesson_icons/book-front.svg') }}
+                    {% endif %}
+                    <div class="pl-2 d-flex flex-column lesson-progress-text">
+                        <span class="{%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Current{% endif %}</span>
+                        <span class = "title">{{lesson.title}}</span>
+                    </div>
+                </a>
+            {% endfor %}
+            </div>
         </div>
     </div>
-</div>
-<!-- Minimized Sidebar Progress Component -->
-<div class = "lesson-sidebar lesson-sidebar-minimized lesson-sidebar-absolute my-3" id = "sidebar-minimized">
-    <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
-        <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-center text-white my-2">{{module_number}}.{{ lesson_number }}</h4></div>
-        <div class="my-4 row no-gutters align-items-center flex-column">
-        {% for lesson in sub_unit_meta.unit_lessons %}
-            <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
-            <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
+    <!-- Minimized Sidebar Progress Component -->
+    <div class = "lesson-sidebar lesson-sidebar-minimized lesson-sidebar-absolute my-3" id = "sidebar-minimized">
+        <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
+            <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-center text-white my-2">{{module_number}}.{{ lesson_number }}</h4></div>
+            <div class="my-4 row no-gutters align-items-center flex-column">
+            {% for lesson in sub_unit_meta.unit_lessons %}
+                <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
+                <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
 
-        {% endfor %}
+            {% endfor %}
+            </div>
         </div>
     </div>
 </div>

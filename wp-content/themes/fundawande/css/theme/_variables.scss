@@ -86,6 +86,11 @@ $coaching-primary__colour: #FED044;
 
 // #  Typography
 
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url("../assets/fonts/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
 /* Preamble:
 The typography variable config has been been laid out according to the logical levels that exist. This is mostly categorised by area or taxonomy
 and we have tried to be as logical as possible to keep the variables modular and helpful.

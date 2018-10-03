@@ -52,7 +52,10 @@
 {# Add video player #}
 {% macro videoPlayer(video_src, image_src, module_number) %}
     {% import _self as mixins %}
-    <div class="player">
+    <video width="100%" height="auto" controls class="d-md-none" >
+        <source src="{{ video_src }}" type="video/mp4">
+    </video>
+    <div class="player d-none d-md-flex">
 
         <video class="player__video viewer" >
             <source src="{{ video_src }}" type="video/mp4">
@@ -114,8 +117,30 @@
     </div>
 {% endmacro %}
 
-{# Add video player #}
+{# Add fixed audio player #}
 {% macro audioPlayer(audio_src, module_number) %}
+    {% import _self as mixins %}
+    <div class="audio_player_container">
+         <audio class="audio" preload="true">
+            <source src="{{ audio_src }}">
+        </audio>
+        <div style = "display:none" class="open-toggle">{{ source('/assets/audio_player/speaker_icon.svg') }}</div>
+        <div class = "audio_player_fixed d-flex module-border-{{module_number}}">
+            <button class = "play__button module-text-{{module_number}}">►</button>
+            <div class = "current-time"></div>
+            <div class="progress ">
+                <div class="progress__filled module-bg-{{ module_number }} module-after-bg-{{ module_number }}"></div>
+            </div>
+            <div class="duration-time"></div>
+            <div style = "display:none" class="close__button ">{{ source('/assets/audio_player/close_button.svg') }}</div>
+        </div>
+    </div>
+
+    
+{% endmacro %}
+
+{# Add toggleable audio player #}
+{% macro audioPlayerIcon(audio_src, module_number) %}
     {% import _self as mixins %}
 
     <div class="audio_player_container">
