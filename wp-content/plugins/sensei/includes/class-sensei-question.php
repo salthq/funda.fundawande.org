@@ -778,9 +778,10 @@ class Sensei_Question {
          */
 		$final_message = apply_filters( 'sensei_question_answer_message_text', $answer_message, $lesson_id, $question_id, get_current_user_id(), $user_correct );
 		?>
-		<div class="answer_message <?php echo esc_attr( $final_css_classes ); ?>">
+		<div class="answer-message-container my-4 p-3 <?php echo $answer_message_class; ?> <?php echo esc_attr( $final_css_classes ); ?>">
 
-			<span><?php echo Sensei_Wp_Kses::wp_kses( $final_message ) ?></span>
+			<span class="answer-outcome mb-2 <?php echo $answer_message_class; ?>"><?php echo Sensei_Wp_Kses::wp_kses( $final_message ) ?></span>
+            <p class="mb-0 mt-2"><?php echo $answer_notes; ?></p>
 
 		</div>
 		<?php
