@@ -56,9 +56,11 @@
                                         </div>
                                         <!--Unit navigation buttons tablet and desktop-->
                                         <div class = "col-12 col-md-auto text-right d-none d-md-flex">
-                                            <a id = "view-lessons"class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
-                                                <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
-                                            </a>
+                                            {# TODO: uncomment the lines below this, always show lessons #}
+
+                                            {#<a id = "view-lessons"class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">#}
+                                                {#<span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}#}
+                                            {#</a>#}
                                             {# TODO: uncomment the lines below this, delete the resume-unit link #}
                                             {# {% if unit.current or unit.complete %}
                                             <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
@@ -77,7 +79,7 @@
                             <div class = "row unit-content">
                                 <div class = "col-sm-11">
                                     <p>{{unit.module_description}}</p>
-                                    <div class = "sub-units row no-gutters collapse {% if unit.current %}show{% endif %}" id="collapse-unit{{ loop.index }}">
+                                    <div class = "sub-units row no-gutters " id="collapse-unit{{ loop.index }}">
                                         {% for lesson in unit.lessons %}
                                             <div class = "sub-units-icon {%  if lesson.complete %}complete module-divider-before-{{ module_number }} module-after-bg-{{ module_number }}{% endif %} row text-center flex-md-row flex-column col-md-2 no-gutters pb-3">
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">

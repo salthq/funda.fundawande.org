@@ -41,7 +41,8 @@
         flex-flow: wrap;
         &-icon {
             justify-content: center;
-            margin-top: 1.5rem;
+            // TODO add margin top if current shows
+            //margin-top: 1.5rem;
             @include breakpoint(phone) {
                 margin-top: 0;
             };
