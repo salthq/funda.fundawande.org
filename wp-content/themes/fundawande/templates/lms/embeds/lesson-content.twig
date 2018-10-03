@@ -2,7 +2,7 @@
 <div class = "container-fluid">
     <div class = "row mb-5">
         {# Hero Band #}
-        {% for content in post.get_field('lesson_hero_types') %}
+        {% for content in leeson_post.get_field('lesson_hero_types') %}
             {# Image Hero #}
             {% if content.acf_fc_layout == 'image_hero' %}
                 {% include '/lms/hero-types/image-hero.twig' %}
@@ -16,7 +16,7 @@
     {#
         This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson
      #}
-    {% for content in post.get_field('lesson_content_types') %}
+    {% for content in lesson_post.get_field('lesson_content_types') %}
 
         {# Image Content Types #}
 
