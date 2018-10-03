@@ -129,7 +129,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         if ($meta_obj->unit->term_id == $last_unit) {
             $meta_obj->is_last_in_module = true;
             $meta_obj->next_unit = FundaWande()->units->fw_get_sub_unit_unit($meta_obj->nav->next);
-            $meta_obj->next_module = get_term($meta_obj->next_unit->parent);
+            if ($meta_obj->next_unit) {
+                $meta_obj->next_module = get_term($meta_obj->next_unit->parent);
+            }
 
 
         }

@@ -82,7 +82,14 @@
                                     <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
                                 {% endif %}
                             {% endif %}
-                        {% endif %}
+                       {% else %}
+                           {# If there is no next lesson then assume it is the last lesson of the course#}
+                           {% include '/embeds/modals/modal-end-course.twig' %}
+                           <button id="lesson-complete" onclick="completeCourse()" type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
+                               {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                           </button>
+
+                       {% endif %}
                     </div>
                 </div>
             </div>

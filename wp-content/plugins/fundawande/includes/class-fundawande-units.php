@@ -198,7 +198,9 @@ class FundaWande_Units {
             }
         }
 
-        $unit = new TimberTerm($unit->term_id);
+        if ($unit) {
+            $unit = new TimberTerm($unit->term_id);
+        }
         return $unit;
 
     }
