@@ -50,27 +50,30 @@
 
         {%  if quiz_retry or lesson_complete %}
             <!-- Quiz messages-->
-            <div class = "container mt-5">
-                <div class="row">
+            <div class = "container quiz-message-container ">
+                <div class="row quiz-message-box primary-border my-5 p-3">
+                    <div class="col-auto">
+                        {{source('/assets/lms/quiz_outcome.svg')}}
+                    </div>
+                    {%  if quiz_retry %}
 
-                        {%  if quiz_retry %}
-                            <div class="col">
-                                <p>Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit or try again right away.</p>
-                            </div>
-                            <div class="col-auto">
-                                <a   class="btn mr-md-3 mr-0 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                                    Review Unit
-                                </a>
-                                <a id="quiz-reset"  class="btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
-                                    Retry quiz
-                                </a>
-                            </div>
+                        <div class="col">
+                            <p>Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit or try again right away.</p>
+                        </div>
+                        <div class="col-auto d-flex flex-column">
+                            <a   class="btn mb-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
+                                Review Unit
+                            </a>
+                            <a id="quiz-reset"  class="btn primary-btn-fill" href="#" >
+                                Retry quiz
+                            </a>
+                        </div>
 
-                        {% elseif lesson_complete %}
-                            <div class="col-12">
-                                <p>Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed</p>
-                            </div>
-                        {% endif %}
+                    {% elseif lesson_complete %}
+                        <div class="col">
+                            <p>Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed</p>
+                        </div>
+                    {% endif %}
 
                 </div>
                 <hr>
@@ -94,7 +97,7 @@
             <div class="row my-0 justify-content-between">
                 <div class="lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
                     {% if sub_unit_meta.nav.prev %}
-                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-fill-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
+                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
                     {% endif %}
                 </div>
                 <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">

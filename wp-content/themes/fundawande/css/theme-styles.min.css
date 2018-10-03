@@ -1,3 +1,4 @@
+@font-face{font-family:'Roboto Condensed';src:url("../assets/fonts/RobotoCondensed-Regular.ttf") format("truetype")}
 .background-primary{background-color:#fff}
 .background-white{background-color:white}
 .background-secondary{background-color:#f5f5f5}
@@ -244,7 +245,7 @@ body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 
 .module-svg-icon-fill-11 svg #inner{fill:white}
 .primary-bg{background-color:#ef9d19}
 .primary-text{color:#ef9d19}
-.primary-border{border-color:#ef9d19}
+.primary-border{border-color:#ef9d19 !important}
 .primary-btn-outline{border-color:#ef9d19;color:#ef9d19}
 .primary-btn-outline svg{fill:#ef9d19}
 .primary-btn-outline:hover{border-color:#ef9d19;background-color:#ef9d19;color:#fff}
@@ -370,6 +371,16 @@ img{max-width:100%;margin:auto;height:auto}
 .fw-form .custom-control-label::after{left:-1.55rem;top:.3rem}
 .fw-form .custom-control-input:checked ~ .custom-control-label::before{background-color:#ef9d19;color:#fff}
 .fw-form .custom-control-input:checked ~ .custom-control-label::after{position:absolute;display:block;width:2rem;height:2rem;top:-0.2rem;left:-2.05rem;content:"";background-repeat:no-repeat;background-position:center center;background-size:50% 50%;background-image:url("/wp-content/themes/fundawande/assets/tick.svg")}
+.single-lesson-wrapper .quiz-message-container .quiz-message-box{border:3px solid;border-radius:8px}
+.single-lesson-wrapper .quiz-message-container .quiz-message-box p{font-size:25px;font-style:italic;line-height:33px}
+.single-lesson-wrapper .sensei-message.answer-feedback{display:none !important}
+.single-lesson-wrapper .answer-message-container{border:2px solid;border-radius:6px}
+.single-lesson-wrapper .answer-message-container.user_right{border-color:#526a06}
+.single-lesson-wrapper .answer-message-container.user_wrong{border-color:#c55c26}
+.single-lesson-wrapper .answer-message-container .answer-outcome{padding-left:3rem;position:relative;font-size:22px;line-height:40px}
+.single-lesson-wrapper .answer-message-container .answer-outcome:before{background:transparent;background-repeat:no-repeat;position:absolute;content:'';left:0;height:40px;width:40px}
+.single-lesson-wrapper .answer-message-container .answer-outcome.user_wrong:before{background:url("/wp-content/themes/fundawande/assets/lms/incorrect_answer.svg")}
+.single-lesson-wrapper .answer-message-container .answer-outcome.user_right:before{background:url("/wp-content/themes/fundawande/assets/lms/correct_answer.svg")}
 .single-lesson-wrapper .quiz-submit.reset,.single-lesson-wrapper .quiz-submit.complete,.single-lesson-wrapper .quiz-submit.save{display:none !important}
 .single-lesson-wrapper .quiz-questions img{max-width:100%;height:auto}
 .single-lesson-wrapper .quiz-questions #sensei-quiz-list{list-style:none;padding-left:0}

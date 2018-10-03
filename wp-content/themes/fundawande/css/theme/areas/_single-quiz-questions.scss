@@ -6,6 +6,56 @@
  ========================================================================== */
 
 .single-lesson-wrapper {
+    .quiz-message-container {
+       .quiz-message-box {
+           border: 3px solid;
+           border-radius: 8px;
+           p {
+               font-size: 25px;
+               font-style: italic;
+               line-height: 33px;
+           }
+       }
+    }
+    .sensei-message.answer-feedback {
+        display: none!important;
+    }
+    .answer-message-container {
+        border: 2px solid;
+        border-radius: 6px;
+        &.user_right {
+            border-color: #526a06;
+        }
+        &.user_wrong {
+            border-color: #c55c26;
+        }
+        .answer-outcome {
+            padding-left: 3rem;
+            position: relative;
+            font-size: 22px;
+            line-height: 40px;
+            &:before {
+                background: transparent;
+                background-repeat: no-repeat;
+                position: absolute;
+                content: '';
+                left: 0;
+                height: 40px;
+                width: 40px;
+            }
+            &.user_wrong {
+                &:before {
+                    background: url('/wp-content/themes/fundawande/assets/lms/incorrect_answer.svg');
+                }
+            }
+            &.user_right {
+                &:before {
+                    background: url('/wp-content/themes/fundawande/assets/lms/correct_answer.svg');
+                }
+            }
+        }
+    }
+
     .quiz-submit {
       &.reset, &.complete, &.save {
           display: none!important;
