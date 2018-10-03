@@ -47,9 +47,47 @@
                 </div>
             </div>
         </div>
-
+        {# If quiz outcome is set then show message and modal #}
         {%  if quiz_retry or lesson_complete %}
-            <!-- Quiz messages-->
+
+            {# Set the modal content depending on outcome #}
+            {%  if quiz_retry %}
+                {% set modal_content = "Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit or try again right away." %}
+            {% elseif lesson_complete %}
+                {% set modal_content = "Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed" %}
+            {% endif %}
+            {# Set the modal ID to use to open the modal #}
+            {% set modal_id = "quiz-message" %}
+            {% embed "embeds/modals/modal-global.twig" %}
+                {# Add quiz outcome header to modal #}
+                {% block modal_header %}
+
+                        <div class="col-auto">
+                            {{source('/assets/lms/quiz_outcome.svg')}}
+                        </div>
+                        <div class="col-auto">
+                           <h2>Quiz Outcome</h2>
+                        </div>
+
+                {% endblock %}
+                {# Add quiz modal content to modal #}
+                {% block modal_body %}
+
+                   <div class="col-12">
+                       {{  modal_content }}
+                   </div>
+
+                {% endblock %}
+
+            {% endembed %}
+            {# Default the modal to open #}
+            <script>
+                jQuery(document).ready( function($) {
+                    $('#{{ modal_id }}').modal('show');
+                });
+            </script>
+
+            {# Set the quiz outcome message  #}
             <div class = "container quiz-message-container ">
                 <div class="row quiz-message-box primary-border my-5 p-3">
                     <div class="col-auto">
@@ -72,7 +110,7 @@
                     {% elseif lesson_complete %}
                         <div class="col">
                             <p>Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed</p>
-                        </div>
+                </div>
                     {% endif %}
 
                 </div>

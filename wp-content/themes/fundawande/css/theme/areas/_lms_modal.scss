@@ -1,0 +1,14 @@
+/* ==========================================================================
+* Global LMS modal
+*
+* Styling specific to the lms modal
+*
+ ========================================================================== */
+
+.lms-global-modal {
+    button.close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}

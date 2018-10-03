@@ -317,6 +317,7 @@ img{max-width:100%;margin:auto;height:auto}
 .full-width-video-container:hover{cursor:pointer}
 .full-width-video-container:hover .play-button{opacity:.7}
 .full-width-video-container #videoModal .modal-dialog{max-width:844px;margin:0 auto;height:100%;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.lms-global-modal button.close{position:absolute;right:1rem;top:1rem}
 .login-wrapper{height:100vh;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 @media(min-width:768px){.login-wrapper .login{border-right:2px solid #ccc}
 }.login-wrapper .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
