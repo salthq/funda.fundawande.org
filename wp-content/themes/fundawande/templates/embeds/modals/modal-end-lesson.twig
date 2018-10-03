@@ -1,40 +1,38 @@
-<div id = "end-lesson-modal" class="modal m-5" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content p-2 px-md-5 py-md-3">
-      <div class="lesson-modal-header modal-header text-center">
-        <h5 class="modal-title"><span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span><strong>Well done, {{user.display_name}}!</strong></h5>
-        <!-- Commenting out as this button is not shown on mockups.
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        -->
-      </div>
-      <div class="modal-body">
-        {{post.get_field('custom_feedback_message')}}
-      </div>
-      <div class="lesson-modal-footer modal-footer">
-            <!-- End of Lesson Progress Component -->
-            {#<div class = "lesson-progress-modal m-3">#}
-                {#{%  set completed_lessons = 0 %}#}
-                {#<div class = "lesson-progress d-flex justify-content-center flex-row">#}
-                    {#{% for lesson in sub_unit_meta.unit_lessons %}#}
-                    {#{% if lesson.complete %}{%  set completed_lessons = completed_lessons +1  %}{% endif %}#}
-                    {#<div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>#}
-                        {#<div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson.current %}module-bg-{{module_number}}{% endif %} {% if lesson.current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-                {#<!-- TODO: Make the unit progress info dynamic -->#}
-                {#<p><strong>Unit Progress</strong> {{ completed_lessons }} / {{sub_unit_meta.unit_lessons|length}} lessons complete</p>#}
-            {#</div>#}
-            {# if this lesson is the end of a unit, go to the end of unit modal #}
-            {% if sub_unit_meta.is_last_in_unit %}
-              <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
-                Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-              </button>
-            {% else %}
-              <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-            {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+<!-- End of Lesson Modal -->
+{% set modal_id = "end-lesson-modal" %}
+{% embed "embeds/modals/modal-global.twig" %}
+  {# Add quiz outcome header to modal #}
+  {% block modal_header %}
+    <h5 class="modal-title">
+      <span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span>
+      <strong>Well done, {{user.display_name}}!</strong>
+    </h5>
+  {% endblock %}
+  {# Remove the close button #}
+  {% block modal_close %}
+
+  {% endblock %}
+  {# Add quiz modal content to modal #}
+  {% block modal_body %}
+
+    {{post.get_field('custom_feedback_message')}}
+
+  {% endblock %}
+
+  {% block modal_footer %}
+    {% if sub_unit_meta.is_last_in_unit %}
+      <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+        Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+      </button>
+    {% else %}
+      <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+    {% endif %}
+  {% endblock %}
+
+{% endembed %}
+
+<script>
+  jQuery(document).ready( function($) {
+      $('#{{ modal_id }}').modal('show');
+  });
+</script>
