@@ -54,7 +54,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
 
                 ?>
 
-                <div class="col-sm-3 _option-image d-flex justify-content-center">
+                <div class="col-6 col-md _option-image d-flex justify-content-center">
                     <div class="_image-letters">
                         Image <?= chr(ord('A') + $count) ?>
                     </div>
