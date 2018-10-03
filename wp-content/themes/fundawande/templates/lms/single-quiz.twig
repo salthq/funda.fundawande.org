@@ -52,9 +52,9 @@
 
             {# Set the modal content depending on outcome #}
             {%  if quiz_retry %}
-                {% set modal_content = "Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit or try again right away." %}
+                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_retry_content') %}
             {% elseif lesson_complete %}
-                {% set modal_content = "Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed" %}
+                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_success_content')  %}
             {% endif %}
             {# Set the modal ID to use to open the modal #}
             {% set modal_id = "quiz-message" %}
@@ -66,7 +66,7 @@
                             {{source('/assets/lms/quiz_outcome.svg')}}
                         </div>
                         <div class="col-auto">
-                           <h2>Quiz Outcome</h2>
+                           <h2>{{attribute(options, lang.prefix~'quiz_outcome_header')}}</h2>
                         </div>
 
                 {% endblock %}
@@ -96,21 +96,21 @@
                     {%  if quiz_retry %}
 
                         <div class="col">
-                            <p>Sorry you did not succeed this time. Once you have reviewed feedback you can either go back and review the Unit or try again right away.</p>
+                            {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
                         </div>
                         <div class="col-auto d-flex flex-column">
                             <a   class="btn mb-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                                Review Unit
+                               {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
                             </a>
-                            <a id="quiz-reset"  class="btn primary-btn-fill" href="#" >
-                                Retry quiz
+                            <a id="quiz-reset"  class=" fw-quiz-reset btn primary-btn-fill" href="#" >
+                                {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
                             </a>
                         </div>
 
                     {% elseif lesson_complete %}
                         <div class="col">
-                            <p>Well done, you passed the quiz! Review the feedback below and then click 'Next Lesson' at the bottom to proceed</p>
-                </div>
+                            {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
+                        </div>
                     {% endif %}
 
                 </div>
@@ -141,10 +141,10 @@
                 <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
                     {% if quiz_retry %}
                         <a   class="btn mr-md-3 mr-0 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                            Review Unit
+                            {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
                         </a>
-                        <a id="quiz-reset"  class="btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
-                            Retry quiz
+                        <a id="quiz-reset"  class=" fw-quiz-reset btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
+                            {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
                         </a>
                     {% elseif lesson_complete %}
                         {% if sub_unit_meta.is_last_in_unit %}
@@ -165,7 +165,7 @@
                         {% endif %}
                     {% else %}
                         <a id="quiz-complete"  class="btn module-btn-fill-{{module_number}}" href="#" >
-                            Submit <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            {{  attribute(options, lang.prefix~'quiz_submit_button_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </a>
                     {% endif %}
                 </div>
