@@ -531,7 +531,8 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .lesson-carousel .carousel-indicators li:not(.active){background:#ccc !important}
 .single-lesson-wrapper .lesson-carousel .carousel-control-container{position:absolute;z-index:1}
 .single-lesson-wrapper .lesson-carousel .carousel-control-container svg{width:80px;height:80px}
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-text p{text-align:inherit}
+@media(max-width:767px){.single-lesson-wrapper .lesson-carousel .carousel-control-container svg{width:40px;height:40px}
+}.single-lesson-wrapper .lesson-carousel .lesson-carousel-text p{text-align:inherit}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-image img{margin:auto;width:auto;max-width:100%}
 .single-lesson-wrapper .lesson-modal-header{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .single-lesson-wrapper .lesson-modal-footer{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
