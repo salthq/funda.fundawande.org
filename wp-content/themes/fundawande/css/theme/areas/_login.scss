@@ -6,8 +6,9 @@
  ========================================================================== */
 .login-wrapper {
 
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
+
   //Media queries which control the sidebar content view 
   @include breakpoint(tablet) {
     .login {
@@ -102,6 +103,22 @@
       }
     }
   }
+
+  #fw-registration-form {
+    input {
+      border: 1px solid $brand-primary__colour;
+      border-radius: 5px;
+      color: $grey-tertiary;
+      padding: 10px;
+      height: auto;
+    }
+    label {
+      font-weight: bold;
+    }
+
+
+  }
+
 }
 
 //Embedded video container responsive styling

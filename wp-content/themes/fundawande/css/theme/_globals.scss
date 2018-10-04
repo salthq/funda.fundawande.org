@@ -44,7 +44,7 @@
     font-family: $base__font-family;
     weight: normal;
     color: $text-primary__colour;
-    opacity: 100%;
+    opacity: 1;
 
 
     h1 {
@@ -124,6 +124,11 @@
             margin-top: $navbar-height-mobile;
         }
     }
+
+     #login-wrapper {
+         min-height: 100vh;
+         width: 100%;
+     }
 
 }
 

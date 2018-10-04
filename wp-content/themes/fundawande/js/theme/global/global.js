@@ -8,4 +8,13 @@ jQuery(document).ready( function($) {
         $('.nav-hamburger').removeClass('is-active');
     })
 
+    $('.fw-get-help').on('click', function (e) {
+        e.preventDefault();
+        Intercom('update', {
+            "hide_default_launcher": false
+        });
+        Intercom('show');
+
+    })
+
 });

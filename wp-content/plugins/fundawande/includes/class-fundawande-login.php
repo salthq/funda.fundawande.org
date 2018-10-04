@@ -238,5 +238,44 @@ class FundaWande_Login {
         return $user_meta_found;
     } // end fw_check_user_meta();
 
+    /**
+     * Register a new FW user
+     *
+     * @param string $user_login_ID number of new user.
+     * @param string $first_name first name of new user.
+     * @param string $last_name last name of new user.
+     *
+     * @return integer $user_id. if the user is added return the user ID, if not then false
+     */
+    public function fw_register_user($user_login, $first_name, $last_name) {
+
+        // set the user email to be the username (ID) plus string
+        $user_email = $user_login . '@fundawande.org';
+        // if either the email or ID exists then return false
+        if (email_exists( $user_email ) || username_exists($user_login)) {
+            return false;
+        }
+
+        // set the password to be the same as username (ID)
+        $password = $user_login;
+
+        // set up the user data
+        $userdata = array(
+            'user_login' => $user_login,
+            'user_email' => $user_email,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'user_pass' => apply_filters('pre_user_user_pass', $password),
+            'role' => 'subscriber'
+        );
+
+        // inser user
+        $user_id = wp_insert_user($userdata);
+
+        // return user ID
+        return $user_id;
+
+    } // end fw_register_user();
+
 
 } // end FundaWande_Login
