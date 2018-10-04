@@ -15,26 +15,23 @@
   {# Add quiz modal content to modal #}
   {% block modal_body %}
 
-    {{post.get_field('custom_feedback_message')}}
+      {{attribute(options, lang.prefix~'course_complete_content')}}
 
   {% endblock %}
 
   {% block modal_footer %}
-    {% if sub_unit_meta.is_last_in_unit %}
-      <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
-        Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-      </button>
-    {% else %}
-      <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-    {% endif %}
+
+      <a href = "{{course_link }}" class = "btn primary-btn-fill">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
   {% endblock %}
 
 {% endembed %}
 
 <script>
-  jQuery(document).ready( function($) {
-      $('#lesson-complete').click(function(){
-        $('#{{ modal_id }}').modal('show');
+    function completeCourse() {
+      jQuery(document).ready( function($) {
+
+            $('#{{ modal_id }}').modal('show');
+
       });
-  });
+    }
 </script>
