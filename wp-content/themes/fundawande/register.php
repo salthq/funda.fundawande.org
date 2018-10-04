@@ -40,6 +40,7 @@ if ( class_exists( 'Timber' ) ) {
 
             if (!$user_id) {
                 $context['register_failed'] = true;
+            }
         } else {
             $context['form_error'] = true;
         }
