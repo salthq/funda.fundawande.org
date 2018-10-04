@@ -23,7 +23,7 @@ class FundaWande_Frontend {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		//Walkthrough Scripts
-		add_action( 'wp_enqueue_scripts', array( $this, 'fw_tour_scripts' ));
+		add_action( 'wp_enqueue_scripts', array( $this, 'fw_tour_scripts' ), 15);
 
 	} // End __construct()
 
