@@ -28,7 +28,7 @@ var tour = new Anno([{
   },
   {
     target : '#sidebar-minimized',
-    position: 'bottom',
+    position: 'right',
     content : 'Click this button to view unit progress',
     buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
   },

@@ -27,7 +27,7 @@ var tour = new Anno([{
 },
 {
   target : '#sidebar-minimized',
-  position: 'bottom',
+  position: 'right',
   content : 'Cofa le iqhosha ukujonga inkqubela phambili',
   buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
 },
