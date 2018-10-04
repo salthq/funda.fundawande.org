@@ -2,8 +2,22 @@
 
 var tour = new Anno([{
     target: '#wrapper-navbar',
-    position: 'bottom',
+    position: 'right',
     content: "Click 'Open Menu' to see the different menu options.",
+    onShow: function() {
+      jQuery(document).ready( function($) {
+        $('#main-menu-modal').modal('show');
+      });
+    },  
+    onHide: function() {
+      jQuery(document).ready( function($) {
+        $('#main-menu-modal').modal('hide');
+      });
+    },
+    position: {
+      top: '3em',
+      left: '15em'
+    },
     buttons: [AnnoButton.NextButton]
   },
   {
@@ -14,7 +28,7 @@ var tour = new Anno([{
   },
   {
     target : '#sidebar-minimized',
-    position: 'bottom',
+    position: 'right',
     content : 'Click this button to view unit progress',
     buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
   },

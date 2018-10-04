@@ -1,7 +1,7 @@
 /* Get Our Elements */
 const audio_players = document.querySelectorAll('.audio_player_container');
 audio_players.forEach(function (player) {
-    // Set all the video elements that pertain to a specific video, especially important if multiple videos exist on one page
+    // Set all the audio elements that pertain to a specific audio clip, especially important if multiple audio clips exist on one page
     var audio = player.querySelector('.audio'); // id for audio element
     var duration = audio.duration; // Duration of audio clip, calculated here for embedding purposes
     var closeButton = player.querySelector('.close__button'); // play button

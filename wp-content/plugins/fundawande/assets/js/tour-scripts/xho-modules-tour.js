@@ -1,9 +1,22 @@
 //Xhosa Module Page Walkthrough
-
 var tour = new Anno([{
   target: '#wrapper-navbar',
-  position: 'bottom',
+  position: 'right',
   content: "Cofa iqhosha 'Vula Imenyu' ukuze ubone iinketho ezahlukeneyo zemenyu.",
+  onShow: function() {
+    jQuery(document).ready( function($) {
+      $('#main-menu-modal').modal('show');
+    });
+  },  
+  onHide: function() {
+    jQuery(document).ready( function($) {
+      $('#main-menu-modal').modal('hide');
+    });
+  },
+  position: {
+    top: '3em',
+    left: '15em'
+  },
   buttons: [AnnoButton.NextButton]
 },
 {
