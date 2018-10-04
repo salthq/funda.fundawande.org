@@ -1,6 +1,6 @@
 <?php
 /**
- *Template Name: Registration Page Template
+ * Template Name: Register Page Template
  *
  * @package Pango
  */
