@@ -1,6 +1,6 @@
 <!-- Terms and Conditions Modal -->
-<div id = "terms-and-conditions" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div id = "terms-and-conditions" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+  <div class="lms-global-modal modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content p-2 px-md-5 py-md-3">
       <div class="d-flex m-3">
         <div class = "d-flex justify-content-center align-items-center w-100">
@@ -13,7 +13,7 @@
       <div class="modal-body">
         <form class = "fw-form" method = "GET">
           <div class = "form-group">
-            <textarea class="form-control" rows = "{% if is_mobile %}8{% else %}15{% endif %}" readonly>
+            <textarea class="form-control" rows = "12" readonly>
                 {{attribute(options, lang.prefix~'terms_and_conditions_content')|striptags}}
             </textarea>
           </div>
