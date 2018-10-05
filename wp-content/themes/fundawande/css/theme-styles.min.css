@@ -434,7 +434,7 @@ img{max-width:100%;margin:auto;height:auto}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._arrow-down{position:absolute;left:50%;bottom:-50px;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);display:block}
 }.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._arrow{left:-36px;position:absolute;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
 @media(max-width:767px){.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._images-answers ._image-container ._arrow{display:none}
-}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._mobile-images-answers .custom-control{padding-left:2.5rem}
+}.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._mobile-images-answers .custom-control{padding-left:1.5rem;padding-top:.5rem}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._text-mobile,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._text-mobile{display:none}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._answer-container,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._answer-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._image-container,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._image-container{position:relative;text-align:center}
