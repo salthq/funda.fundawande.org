@@ -19,13 +19,12 @@
 
           {% endblock %}
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-center">
           {% block modal_footer %}
-            <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
-              Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-            </button>
+              <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
+                Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+              </button>
           {% endblock %}
-
       </div>
     </div>
   </div>
