@@ -1,0 +1,473 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: User Import Add-On Pro\n"
+"Language: ja\n"
+
+#: wpai-user-add-on.php:35
+msgid "Please de-activate and remove the free version of the User add-on before activating the paid version."
+msgstr "有料版を有効にする前に、無料のバージョンのユーザーアドオンを無効にして削除してください。"
+
+#: actions/admin_notices.php:23
+msgid "<b>%s Plugin</b>: Please update your WP All Import to the latest version"
+msgstr "<b>%s プラグイン</b>: あなたのWP All Importを最新バージョンに更新してください"
+
+#: actions/init.php:6
+msgid "Users"
+msgstr "ユーザー"
+
+#: actions/init.php:7
+msgid "User"
+msgstr "ユーザー"
+
+#: actions/wp_ajax_get_umeta_values.php:6
+#: actions/wp_ajax_get_umeta_values.php:10
+msgid "Security check"
+msgstr "セキュリティーチェック"
+
+#: actions/wp_ajax_get_umeta_values.php:28
+msgid "Existing Values..."
+msgstr "既存の値..."
+
+#: actions/wp_ajax_get_umeta_values.php:34
+msgid "No existing values were found for this field."
+msgstr "このフィールドの既存の値が見つかりませんでした。"
+
+#: classes/updater.php:65
+msgid "View WP All Import - User Add-On Changelog"
+msgstr "WP All Import を表示 - ユーザーアドオンの変更履歴"
+
+#: classes/updater.php:65
+msgid "Changelog"
+msgstr "変更履歴"
+
+#: filters/pmxi_options_validation.php:8
+msgid "`Login` must be specified"
+msgstr "'ログイン' を指定する必要があります。"
+
+#: filters/pmxi_options_validation.php:11
+msgid "`Email` must be specified"
+msgstr "`メール アドレス`を指定する必要があります。"
+
+#: models/import/record.php:41
+msgid "Composing users..."
+msgstr "ユーザーの作成..."
+
+#: models/import/record.php:80
+msgid "<b>WARNING</b>: unrecognized date format `%s`, assigning current date"
+msgstr "<b>警告</b> ：認識できない日付形式 `％s`は、現在の日付を割り当てています"
+
+#: views/admin/import/confirm.php:3
+#: views/admin/import/options/_reimport_options.php:49
+msgid "First Name"
+msgstr "姓"
+
+#: views/admin/import/confirm.php:6
+#: views/admin/import/options/_reimport_options.php:55
+msgid "Last Name"
+msgstr "名"
+
+#: views/admin/import/confirm.php:9
+#: views/admin/import/options/_reimport_options.php:61
+msgid "Role"
+msgstr "権限"
+
+#: views/admin/import/confirm.php:12
+#: views/admin/import/options/_reimport_options.php:67
+msgid "Nickname"
+msgstr "ニックネーム"
+
+#: views/admin/import/confirm.php:15
+#: views/admin/import/options/_reimport_options.php:73
+msgid "Description"
+msgstr "詳細"
+
+#: views/admin/import/confirm.php:18
+#: views/admin/import/options/_reimport_options.php:79
+msgid "Login"
+msgstr "ログイン"
+
+#: views/admin/import/confirm.php:21
+#: views/admin/import/options/_reimport_options.php:85
+msgid "Password"
+msgstr "パスワード"
+
+#: views/admin/import/confirm.php:24
+#: views/admin/import/options/_reimport_options.php:91
+msgid "Nicename"
+msgstr "ユーザー ID、ユーザー名、電子メールまたはニックネーム"
+
+#: views/admin/import/confirm.php:27
+#: views/admin/import/options/_reimport_options.php:97
+msgid "Email"
+msgstr "メール"
+
+#: views/admin/import/confirm.php:30
+#: views/admin/import/options/_reimport_options.php:103
+msgid "Registered Date"
+msgstr "登録日"
+
+#: views/admin/import/confirm.php:33
+#: views/admin/import/options/_reimport_options.php:109
+msgid "Display Name"
+msgstr "表示名"
+
+#: views/admin/import/confirm.php:36
+#: views/admin/import/options/_reimport_options.php:115
+msgid "URL"
+msgstr "URL"
+
+#: views/admin/import/confirm.php:43
+msgid "All advanced custom fields"
+msgstr "すべてのアドバンスカスタムフィールド"
+
+#: views/admin/import/confirm.php:46
+msgid "Only ACF presented in import options"
+msgstr "インポートオプションで提示されたACFのみ"
+
+#: views/admin/import/confirm.php:49
+msgid "Only these ACF : %s"
+msgstr "これらのACF : %s"
+
+#: views/admin/import/confirm.php:52
+msgid "All ACF except these: %s"
+msgstr "これらを除くすべてのACF: %s"
+
+#: views/admin/import/confirm.php:62
+msgid "All custom fields"
+msgstr "すべてのカスタムフィールド"
+
+#: views/admin/import/confirm.php:65
+msgid "Only these custom fields : %s"
+msgstr "これらのカスタムフィールドのみ : %s"
+
+#: views/admin/import/confirm.php:68
+msgid "All custom fields except these: %s"
+msgstr "すべてのカスタム フィールドを除くこれら: %s"
+
+#: views/admin/import/options/_main_options_template.php:4
+msgid "User's Data"
+msgstr "ユーザーのデータ"
+
+#: views/admin/import/options/_main_options_template.php:13
+msgid "<b>First Name</b>"
+msgstr "名"
+
+#: views/admin/import/options/_main_options_template.php:13
+msgid "The user's first name. "
+msgstr "姓が表示されます。"
+
+#: views/admin/import/options/_main_options_template.php:17
+msgid "<b>Last Name</b>"
+msgstr "姓"
+
+#: views/admin/import/options/_main_options_template.php:17
+msgid "The user's last name."
+msgstr "名が表示されます。"
+
+#: views/admin/import/options/_main_options_template.php:21
+msgid "<b>Role</b>"
+msgstr "<b>役割</b>"
+
+#: views/admin/import/options/_main_options_template.php:21
+msgid "A string with role slug used to set the user's role. Default role is subscriber."
+msgstr "役割スラグ ユーザーの役割を設定するために使用を含む文字列。既定の役割はサブスクライバーで。"
+
+#: views/admin/import/options/_main_options_template.php:25
+msgid "<b>Nickname</b>"
+msgstr "<b>ニックネーム</b>"
+
+#: views/admin/import/options/_main_options_template.php:25
+msgid "The user's nickname, defaults to the user's username. "
+msgstr "ユーザーのニックネーム、デフォルト ユーザーのユーザー名。"
+
+#: views/admin/import/options/_main_options_template.php:29
+msgid "<b>Description</b>"
+msgstr "<b>説明</b>"
+
+#: views/admin/import/options/_main_options_template.php:29
+msgid "A string containing content about the user."
+msgstr "ユーザーのコンテンツを含む文字列。"
+
+#: views/admin/import/options/_main_options_template.php:33
+msgid "<b>* Login</b>"
+msgstr "<b>* ログイン</b>"
+
+#: views/admin/import/options/_main_options_template.php:33
+msgid "A string that contains the user's username for logging in."
+msgstr "ログインするためのユーザーのユーザー名を含む文字列です。"
+
+#: views/admin/import/options/_main_options_template.php:37
+msgid "<b>Password</b>"
+msgstr "<b>パスワード</b>"
+
+#: views/admin/import/options/_main_options_template.php:37
+msgid "A string that contains the plain text password for the user."
+msgstr "ユーザーのプレーン テキストのパスワードを含む文字列。"
+
+#: views/admin/import/options/_main_options_template.php:41
+msgid "<b>Nicename</b>"
+msgstr "<b>ナイスネーム</b>"
+
+#: views/admin/import/options/_main_options_template.php:41
+msgid "A string that contains a URL-friendly name for the user. The default is the user's username."
+msgstr "ユーザーの URL の表示名を含む文字列です。既定では、ユーザーのユーザー名です。"
+
+#: views/admin/import/options/_main_options_template.php:45
+msgid "<b>* Email</b>"
+msgstr "<b>* E メール</b>"
+
+#: views/admin/import/options/_main_options_template.php:45
+msgid "A string containing the user's email address."
+msgstr "ユーザーの電子メール アドレスを含む文字列。"
+
+#: views/admin/import/options/_main_options_template.php:49
+msgid "<b>Registered</b>"
+msgstr "<b>登録</b>"
+
+#: views/admin/import/options/_main_options_template.php:49
+msgid "The date the user registered. Format is Y-m-d H:i:s"
+msgstr "ユーザーが登録した日付。形式は Y m d H:i:s です。"
+
+#: views/admin/import/options/_main_options_template.php:53
+msgid "<b>Display Name</b>"
+msgstr "表示する名前"
+
+#: views/admin/import/options/_main_options_template.php:53
+msgid "A string that will be shown on the site. Defaults to user's username. It is likely that you will want to change this, for both appearance and security through obscurity (that is if you dont use and delete the default admin user). "
+msgstr "サイト上に表示される文字列です。デフォルト ユーザーのユーザー名です。外観およびあいまいさ (つまりを使用し、デフォルトの管理者ユーザーを削除しないかどうか)、セキュリティのため、これを変更することになりそうです。"
+
+#: views/admin/import/options/_main_options_template.php:57
+msgid "<b>URL</b>"
+msgstr "<b>URL</b>"
+
+#: views/admin/import/options/_main_options_template.php:57
+msgid "A string containing the user's URL for the user's web site. "
+msgstr "ユーザーの web サイトのユーザーの URL を含む文字列。"
+
+#: views/admin/import/options/_reimport_options.php:1
+msgid "When WP All Import finds new or changed data..."
+msgstr "WP All Importは、新規または変更されたデータを見つけます..."
+
+#: views/admin/import/options/_reimport_options.php:5
+msgid "Create new users from records newly present in your file"
+msgstr "あなたのファイルに新しく存在するレコードから新しい%sを作成する"
+
+#: views/admin/import/options/_reimport_options.php:10
+msgid "Delete users that are no longer present in your file"
+msgstr "ファイルに存在しない%sを削除する"
+
+#: views/admin/import/options/_reimport_options.php:12
+msgid "Records removed from the import file can only be deleted when importing into New Items. This feature cannot be enabled when importing into Existing Items."
+msgstr "インポート ファイルから削除されたレコードは、新しいアイテムにインポートする場合にのみ削除できます。既存のアイテムにインポートする場合、この機能を有効にできません。"
+
+#: views/admin/import/options/_reimport_options.php:19
+msgid "Instead of deletion, set Meta Field"
+msgstr "削除、代わりに Meta フィールドを設定します。"
+
+#: views/admin/import/options/_reimport_options.php:20
+msgid "Check this option if you want to update users meta fields from the previous import operation which are not found among newly imported set."
+msgstr "新しくインポートしたセットの中で発見されていない以前のインポート操作からユーザー メタ フィールドを更新する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:23
+#: views/admin/import/options/_reimport_template.php:100
+msgid "Name"
+msgstr "名称"
+
+#: views/admin/import/options/_reimport_options.php:25
+#: views/admin/import/options/_reimport_template.php:102
+msgid "Value"
+msgstr "値"
+
+#: views/admin/import/options/_reimport_options.php:34
+msgid "Update existing users with changed data in your file"
+msgstr "既存のユーザーをファイル内の変更されたデータで更新する"
+
+#: views/admin/import/options/_reimport_options.php:38
+msgid "Update all data"
+msgstr "すべてのデータを更新"
+
+#: views/admin/import/options/_reimport_options.php:41
+msgid "Choose which data to update"
+msgstr "更新するデータを選択する"
+
+#: views/admin/import/options/_reimport_options.php:50
+msgid "Check this option if you want previously imported users to change their first name."
+msgstr "以前にインポートしたユーザーが最初の名前を変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:56
+msgid "Check this option if you want previously imported users to change their last name."
+msgstr "以前にインポートしたユーザーが、姓と名を変更したい場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:62
+msgid "Check this option if you want previously imported users to change their role."
+msgstr "以前にインポートしたユーザー ロールを変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:68
+msgid "Check this option if you want previously imported users to change their nickname."
+msgstr "以前にインポートしたユーザーのニックネームを変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:74
+msgid "Check this option if you want previously imported users to change their description."
+msgstr "以前にインポートしたユーザーの説明を変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:80
+msgid "Check this option if you want previously imported users to change their login."
+msgstr "以前にインポートしたユーザーのログインを変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:86
+msgid "Check this option if you want previously imported users to change their password."
+msgstr "以前にインポートしたユーザーが自分のパスワードを変更したい場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:92
+msgid "Check this option if you want previously imported users to change their nicename."
+msgstr "以前にインポートされたユーザーのナイスネームを変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:98
+msgid "Check this option if you want previously imported users to change their email."
+msgstr "以前にインポートしたユーザーが自分のメール アドレスを変更したい場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:104
+msgid "Check this option if you want previously imported users to change their registered date."
+msgstr "以前にインポートされたユーザーの登録の日付を変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:110
+msgid "Check this option if you want previously imported users to change their display name."
+msgstr "以前にインポートされたユーザーの表示名を変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:116
+msgid "Check this option if you want previously imported users to change their URL."
+msgstr "以前にインポートしたユーザーの URL を変更する場合は、このオプションをオンにします。"
+
+#: views/admin/import/options/_reimport_options.php:122
+msgid "Meta Fields"
+msgstr "メタフィールド"
+
+#: views/admin/import/options/_reimport_options.php:123
+msgid "If Keep Custom Fields box is checked, it will keep all Custom Fields, and add any new Custom Fields specified in Custom Fields section, as long as they do not overwrite existing fields. If 'Only keep this Custom Fields' is specified, it will only keep the specified fields."
+msgstr "カスタムフィールドを保持するためのチェックボックスをオンにすると、既存のフィールドを上書きしないかぎり、すべてのカスタムフィールドが保持され、カスタムフィールドのセクションで指定された新しいカスタムフィールドが追加されます。 「このカスタムフィールドのみを保持する」が指定されている場合、指定されたフィールドのみが保持されます。"
+
+#: views/admin/import/options/_reimport_options.php:127
+msgid "Update all Meta Fields"
+msgstr "すべてのメタデータ フィールドを更新します。"
+
+#: views/admin/import/options/_reimport_options.php:131
+msgid "Update only these Meta Fields, leave the rest alone"
+msgstr "これらのカスタムフィールドのみを更新し、残りはそのままにします"
+
+#: views/admin/import/options/_reimport_options.php:140
+msgid "Leave these fields alone, update all other Meta Fields"
+msgstr "単独でこれらのフィールドを残して、他のすべてのメタデータ フィールドを更新"
+
+#: views/admin/import/options/_reimport_template.php:15
+#: views/admin/import/options/_reimport_template.php:76
+msgid "Record Matching"
+msgstr "レコードマッチング"
+
+#: views/admin/import/options/_reimport_template.php:23
+msgid "Choose how exported data will be re-imported."
+msgstr "エクスポートされたデータをどのように再インポートするかを選択します。"
+
+#: views/admin/import/options/_reimport_template.php:29
+msgid "WP All Import will create new %s for each unique record in your file."
+msgstr "WP All Importは、新しい%sのあなたのファイル内の各一意のレコードのために作成されます。"
+
+#: views/admin/import/options/_reimport_template.php:43
+msgid "WP All Import will associate records in your file with %s it has already created from previous runs of this import basis on the Unique Identifier."
+msgstr "WP All Importは、%sのそれは既に一意識別子に基づいて、このインポートの以前の実行から作成していると、ファイル内のレコードを関連付けます。"
+
+#: views/admin/import/options/_reimport_template.php:46
+msgid "Unique Identifier"
+msgstr "一意の識別子"
+
+#: views/admin/import/options/_reimport_template.php:52
+msgid "Auto-detect"
+msgstr "Auto-detect"
+
+#: views/admin/import/options/_reimport_template.php:54
+msgid "Edit"
+msgstr "編集"
+
+#: views/admin/import/options/_reimport_template.php:55
+msgid "Warning: Are you sure you want to edit the Unique Identifier?"
+msgstr "警告：あなたは一意の識別子を編集してもよろしいですか？"
+
+#: views/admin/import/options/_reimport_template.php:56
+msgid "It is recommended you delete all %s associated with this import before editing the unique identifier."
+msgstr "あなたが一意の識別子を編集する前に、このインポートに関連付けられているすべての%sを削除することをお勧めします。"
+
+#: views/admin/import/options/_reimport_template.php:57
+msgid "Editing the unique identifier will dissociate all existing %s linked to this import. Future runs of the import will result in duplicates, as WP All Import will no longer be able to update these %s."
+msgstr "一意の識別子を編集すると、このインポートにリンクされているすべての既存の%sが分離されます。 WP All Importはこれらの%sを更新することができなくなるので、インポートの将来の実行は重複を招きます。"
+
+#: views/admin/import/options/_reimport_template.php:58
+msgid "You really should just re-create your import, and pick the right unique identifier to start with."
+msgstr "あなたは本当に自分のインポートを再作成し、で開始する権利一意の識別子を選択する必要があります。"
+
+#: views/admin/import/options/_reimport_template.php:64
+msgid "Drag an element, or combo of elements, to the box above. The Unique Identifier should be unique for each record in your file, and should stay the same even if your file is updated. Things like product IDs, titles, and SKUs are good Unique Identifiers because they probably won't change. Don't use a description or price, since that might be changed."
+msgstr "上のボックスに、要素、または要素のコンボをドラッグします。一意識別子は、ファイル内のレコードごとに一意である必要があり、あなたのファイルが更新されていても同じままである必要があります。彼らはおそらく変更されませんので、製品ID、タイトル、およびSKUのようなものが良いユニークな識別子です。それは変更される場合がありますので、説明や価格を使用しないでください。"
+
+#: views/admin/import/options/_reimport_template.php:65
+msgid "If you run this import again with an updated file, the Unique Identifier allows WP All Import to correctly link the records in your updated file with the %s it will create right now. If multiple records in this file have the same Unique Identifier, only the first will be created. The others will be detected as duplicates."
+msgstr "あなたが更新されたファイルで再びこのインポートを実行する場合は、一意の識別子がWPすべてのインポートが正しく%sのあなたの更新されたファイル内のレコードをリンクすることができ、それは今作成されます。このファイルに複数のレコードが同じ一意の識別子を使用している場合は、最初に作成されます。他の人が重複として検出されます。"
+
+#: views/admin/import/options/_reimport_template.php:78
+msgid "WP All Import will merge data into existing %s."
+msgstr "WP All Import は、既存の %sにデータをマージします。"
+
+#: views/admin/import/options/_reimport_template.php:89
+msgid "Records in your file will be matched with %s on your site based on..."
+msgstr "あなたのファイルのレコードは、あなたのサイトの %s と一致します..."
+
+#: views/admin/import/options/_reimport_template.php:93
+msgid "match by Login"
+msgstr "ログインで一致します。"
+
+#: views/admin/import/options/_reimport_template.php:95
+msgid "match by Email"
+msgstr "メールで一致します。"
+
+#: views/admin/import/options/_reimport_template.php:98
+msgid "match by Custom Field"
+msgstr "カスタム フィールドを一致させる"
+
+#: views/admin/import/options/_reimport_template.php:108
+msgid "User ID"
+msgstr "ユーザーID"
+
+#: views/admin/import/options/_reimport_template.php:129
+msgid "Email Notifications For Imported Users"
+msgstr "インポートされたユーザーのメール通知"
+
+#: views/admin/import/options/_reimport_template.php:136
+msgid "Block email notifications during import"
+msgstr "インポート中に電子メール通知をブロック"
+
+#: views/admin/import/options/_reimport_template.php:137
+msgid "If enabled, WP All Import will prevent WordPress from sending notification emails to imported users while the import is processing."
+msgstr "有効な場合、WP All Import はインポートの処理中に、インポートされたユーザーにWordpressからの通知メールの送信を防ぐ。"
+
+#. Name of the plugin
+#: 
+msgid "WP All Import - User Import Add-On"
+msgstr "WP All Import - ユーザー インポート アドオン"
+
+#. Description of the plugin
+#: 
+msgid "Import Users & User's metadata to WordPress. Requires WP All Import."
+msgstr "ユーザーとユーザーのメタデータをWordPressにインポートします。 WP All Importが必要です。"
+
+#. URI of the plugin
+#: 
+msgid "http://www.wpallimport.com/"
+msgstr "http://www.wpallimport.com/"
+
+#. Author of the plugin
+#: 
+msgid "Soflyy"
+msgstr "Soflyy"
+

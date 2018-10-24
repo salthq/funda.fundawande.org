@@ -1,0 +1,11 @@
+<!-- Content Type: Image Half Width -->
+<div class = "container my-5">
+    <hr>
+    <div class = "row">
+        <div class = "col-sm-12 col-md-6 mx-auto text-center pt-4">
+            {# Remove whitespace from beginning and end of the file name before appending to media url #}
+            {% set file_name =  content.image_file_name|trim %}
+            <img class = "d-block" src ="{{ media_url~file_name }}">
+        </div>
+    </div>
+</div>

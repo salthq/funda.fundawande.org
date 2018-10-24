@@ -9,7 +9,7 @@ wp-content/*
 # ignore all files starting with . or ~
 .*
 ~*
-# ignore node dependency directories (used by grunt)
+# ignore node dependency directories (used by gulp)
 node_modules/
 # ignore OS generated files
 ehthumbs.db
@@ -48,5 +48,6 @@ Thumbs.db
 !CHANGELOG.md
 !composer.json
 wp-content/plugins/what-the-file/*
+wp-content/plugins/debug-bar/*
+wp-content/plugins/debug-bar-timber/*
 !/.gitignore
-wp-content/plugins/advantagelearn/docs/*

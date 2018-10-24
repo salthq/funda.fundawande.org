@@ -1,0 +1,15 @@
+<!-- Content Type: Video Pulled Right -->
+<div class = "container my-5">
+    <hr>
+    <div class = "row">
+         <div class = "col-sm-12 col-md-6 pt-4">
+            {{content.text}}
+        </div>
+        <div class = "col-sm-12 col-md-6 pt-4">
+             {# Remove whitespace from beginning and end of the file name before appending to media url #}
+            {% set holding_image_file_name =  content.holding_image_file_name|trim %}
+            {% set video_file_name =  content.video_file_name|trim %}
+            {{ mixin.videoPlayer(media_url~video_file_name, media_url~holding_image_file_name, module_number) }}
+        </div>
+    </div>
+</div>

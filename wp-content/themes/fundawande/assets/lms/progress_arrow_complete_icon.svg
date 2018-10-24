@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="17px" viewBox="0 0 12 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>progress_arrow_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="progress_arrow_icon" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M0,0 L12,0 L12,17 L0,17 L0,0 Z M7.2894814,8.5 L2.4303243,13.4602397 C1.83991737,14.0583559 1.86061761,15.0089669 2.47622484,15.5827085 C3.09273209,16.1564501 4.07014357,16.1358254 4.66055051,15.5377092 L10.5700199,9.53873475 C11.1433267,8.95843077 11.1433267,8.04156923 10.5700199,7.46126525 L4.66055051,1.46229082 C4.07014357,0.864174604 3.09183208,0.843549907 2.47622484,1.41729148 C1.8597176,1.99103306 1.83901736,2.94070662 2.4303243,3.53976032 L7.2894814,8.5 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

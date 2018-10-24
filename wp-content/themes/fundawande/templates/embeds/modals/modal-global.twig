@@ -1,0 +1,31 @@
+{# When you extend this template, set the modal ID to use to open the modal as shown in the line below #}
+{# {% set modal_id = "quiz-message" %} #}
+
+<div id = "{{ modal_id }}" class="lms-global-modal modal  m-5" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-2 px-md-5 py-md-3">
+      <div class="modal-header  justify-content-center align-items-center">
+          {% block modal_header %}
+
+          {% endblock %}
+          {% block modal_close %}
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
+            </button>
+          {% endblock %}
+      </div>
+      <div class="modal-body">
+          {% block modal_body %}
+
+          {% endblock %}
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+          {% block modal_footer %}
+              <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
+                Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+              </button>
+          {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

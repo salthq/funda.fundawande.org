@@ -1,0 +1,63 @@
+// ==========================================================================
+// Utilities
+//
+// Functions, Macros
+//
+// ==========================================================================
+
+// Import if Google Fonts URL is defined
+
+@if variable-exists(font-url--google) {
+	@import url($font-url--google);
+}
+
+// Calculate em values
+
+@function em($target, $context: $base__font-size) {
+	@return ($target / $context) * 1em;
+}
+	
+// Call the color palette modifiers
+
+@function palette($palette, $shade: 'base') {
+  @return map-get(map-get($palettes, $palette), $shade);
+}
+
+// Mixins
+  
+@mixin bg-colors($map) {
+	@each $theme, $color in $map {
+		&--#{$theme} {
+			background-color: $color;    
+		}
+	}
+}
+  
+@mixin img-replace($img, $w, $h, $disp: block) {
+   background-image: url('#{$path--rel}/#{$img}');
+   background-repeat: no-repeat;
+   width: $w;
+   height: $h;
+   display: $disp;
+}
+   
+@mixin p-el(
+    $el,
+    $el-w: null,
+    $el-h: null) {
+    
+    @if $el == "before" or $el == "after" {
+      &:#{$el} {
+        @extend %pseudos;
+        width: $el-w;
+        height: $el-h;
+        @content;
+      }
+     }
+     @else {
+      @error "`#{$el}` is not a valid pseudo-element.";
+     }     
+}
+   
+   
+  
