@@ -1,8 +1,8 @@
 <!-- Lesson Content-->
-<div class = "container-fluid">
-    <div class = "row mb-5">
+<div class="container-fluid">
+    <div class="row mb-5">
         {# Hero Band #}
-        {% for content in leeson_post.get_field('lesson_hero_types') %}
+        {% for content in lesson_post.get_field('lesson_hero_types') %}
             {# Image Hero #}
             {% if content.acf_fc_layout == 'image_hero' %}
                 {% include '/lms/hero-types/image-hero.twig' %}
@@ -13,6 +13,22 @@
             {% endif %}
         {% endfor %}
     </div>
+
+    {# 
+        Audio Player
+        If an audio file has been added to the Lesson Audio ACF field, then the audioPlayerIcon mixin will be added to the lesson
+    #}
+    {% if lesson_post.get_field('lesson_audio') %}
+        {% set file_name = lesson_post.get_field('lesson_audio') | trim %}
+        <div class="container">
+            <div class="row">
+                <div class="col pl-3">
+                    {{ mixin.audioPlayerIcon(media_url~file_name,sub_unit_meta.module_number) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {#
         This loop goes through all the ACF flexible content fields and embeds templates based upon the content types found in the lesson
      #}
