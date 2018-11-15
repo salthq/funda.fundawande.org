@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.8.0
  */
 function FundaWande() {
-    return FundaWande_Main::instance( array( 'version' => '3.2.00' ) );
+    return FundaWande_Main::instance( array( 'version' => '1.0.00' ) );
 }
 
 // Get active theme
