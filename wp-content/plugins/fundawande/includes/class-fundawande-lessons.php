@@ -41,8 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 * @return array $lessons
 	 */
 	public function get_lessons( $course_id , $term_id ){
-
-		$lesson_query = Sensei()->modules->get_lessons_query( $course_id, $term_id );
+        
+        $lesson_query = Sensei()->modules->get_lessons_query( $course_id, $term_id );
         $user_id = get_current_user_id();
         if ($user_id) {
             $current_lesson_key = get_user_meta($user_id, 'fw_current_sub_unit', true);

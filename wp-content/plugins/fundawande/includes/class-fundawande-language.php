@@ -83,9 +83,8 @@ class FundaWande_Language {
             $user_id = get_current_user_id();
             $current_course_id = FundaWande()->lms->fw_get_current_course_id($user_id);
 
-            // Default to eng for pilot
-            // TODO remove this default for the language changing pilot
-            $_GET['lang'] = 'eng';
+            
+        
 
             if (isset($_GET['lang'])) {
                 $lang = $_GET['lang'];
@@ -93,8 +92,14 @@ class FundaWande_Language {
                 // Set the user's current course off the lang
                 $current_course_id = get_field('fw_'.$lang.'_course','options',true);
                 update_user_meta($user_id, 'fw_current_course', $current_course_id );
+            } elseif (isset($_GET['course_id'])) {
+                $current_course_id = $_GET['course_id'];
+                update_user_meta($user_id, 'fw_current_course', $current_course_id );
             } elseif (empty($current_course_id)) {
-                $current_course_id = get_field('fw_xho_course','options',true);
+                // $current_course_id = get_field('fw_xho_course','options',true);
+                // Default to eng for pilot
+                // TODO remove this default for the language changing pilot
+                $current_course_id = get_field('fw_eng_course','options',true);
                 update_user_meta($user_id, 'fw_current_course', $current_course_id );
             }
             $current_sub_unit = get_user_meta($user_id, 'fw_current_sub_unit', true );

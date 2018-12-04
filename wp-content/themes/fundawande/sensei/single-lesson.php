@@ -39,7 +39,8 @@ if (class_exists('Timber')) {
 
     $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
 
-    FundaWande()->language->fw_correct_lesson_lang($current_course_id,$post->ID);
+    // Remove correct lesson language checker
+    // FundaWande()->language->fw_correct_lesson_lang($current_course_id,$post->ID);
 
 
 

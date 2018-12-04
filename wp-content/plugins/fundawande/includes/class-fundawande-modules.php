@@ -114,7 +114,7 @@ class FundaWande_Modules {
         $module_units = get_term_children( $module_id, 'module' );
 
         foreach($module_units  as $key => $unit) {
-
+    
             $module_units[$key] = new TimberTerm($unit);
 
             // Get the term data in case there are custom fields
@@ -124,8 +124,8 @@ class FundaWande_Modules {
             $module_units[$key]->lessons = FundaWande()->lessons->get_lessons($course_id, $unit);
             
             $module_units[$key]->lesson_count = count($module_units[$key]->lessons);
-
-            // get the unit unique key
+           
+            // get the unit unique key  
             $unit_key = get_term_meta($module_units[$key]->term_id, 'fw_unique_key', true);
 
             // check if user exists
