@@ -23,6 +23,16 @@
                     {{ source('assets/menu/logout_menu_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'logout_link')}}</span>
                 </a>
+                {% if fn('is_super_admin') %}
+                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','586') }}?course_id=586" >
+                        {{ source('assets/menu/dash_menu_icon.svg') }}
+                        <span>Change to Reading for Meaning course</span>
+                    </a>
+                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','1421') }}?course_id=1421" >
+                        {{ source('assets/menu/dash_menu_icon.svg') }}
+                        <span>Change to Rhodes course</span>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
