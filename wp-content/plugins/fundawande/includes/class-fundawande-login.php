@@ -154,6 +154,11 @@ class FundaWande_Login {
      */
     public function custom_login_blank_field( ) {
 
+        if (!is_user_logged_in()) {
+            wp_redirect(get_site_url(null, '/login'));
+            exit();
+        }
+        
         if(isset($_SERVER['HTTP_REFERER'])) {
             //If the login language is set to english, add it to the URL after stripping out other GET variables
             if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
