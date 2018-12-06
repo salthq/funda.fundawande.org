@@ -3,9 +3,7 @@
     <hr>
     <div class = "row">
         <div class = "col-sm-12 px-0 pt-4">
-            {# Remove whitespace from beginning and end of the file name before appending to media url #}
-            {% set file_name =  content.image_file_name|trim %}
-            <img class = "d-block" src ="{{ media_url~file_name }}">
+            <img class = "d-block" src ="{{ content.image }}">
         </div>
     </div>
 </div>
