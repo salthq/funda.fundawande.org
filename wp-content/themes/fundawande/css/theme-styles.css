@@ -52,9 +52,9 @@ body h2, body h3, body h4, body h5 { font-family: Rubik, Verdana, Geneva, sans-s
 
 body p { text-align: justify; }
 
-@media (min-width: 768px) { body p { font-size: 16px; } }
+@media (min-width: 768px) { body p { font-size: 18px; } }
 
-@media (max-width: 767px) { body p { font-size: 12px; } }
+@media (max-width: 767px) { body p { font-size: 14px; } }
 
 body hr { height: 2px; color: #cccccc; opacity: 0.5; }
 

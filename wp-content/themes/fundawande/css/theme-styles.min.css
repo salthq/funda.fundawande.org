@@ -10,8 +10,8 @@ body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;
 @media(min-width:768px){body h2,body h3,body h4,body h5{font-size:21px}
 }@media(max-width:767px){body h2,body h3,body h4,body h5{font-size:18px}
 }body p{text-align:justify}
-@media(min-width:768px){body p{font-size:16px}
-}@media(max-width:767px){body p{font-size:12px}
+@media(min-width:768px){body p{font-size:18px}
+}@media(max-width:767px){body p{font-size:14px}
 }body hr{height:2px;color:#ccc;opacity:.5}
 body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
