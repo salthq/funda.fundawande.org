@@ -45,7 +45,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             // get the course for the lesson
             $lesson_course_id = get_post_meta( $current_lesson_id, '_lesson_course', true );
-        
+            $course_language = get_post_meta($lesson_course_id,'course_language',true);
+
             $module_lessons = Sensei()->modules->get_lessons($lesson_course_id, $course_module->term_id);
 
             $lesson_count = 1;

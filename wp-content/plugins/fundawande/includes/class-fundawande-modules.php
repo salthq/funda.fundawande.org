@@ -209,7 +209,7 @@ class FundaWande_Modules {
             if ($module->parent) {
                 
                 // Set the unique key programatically
-                $unique_key = sprintf("%sM%02dU%02d",$course_unique_key,$course_module_number, $course_unit_number);
+                $unique_key = sprintf("%s_M%02d_U%02d",$course_unique_key,$course_module_number, $course_unit_number);
                 update_term_meta($module->term_id,'fw_unique_key',$unique_key);
                 $module_title = get_term_meta($module->term_id,'module_title',true);
                 $name = sprintf("%s_M%02d_U%02d_%s | %s",$course_unique_key,$course_module_number, $course_unit_number,$course_language,$module_title);
@@ -229,7 +229,7 @@ class FundaWande_Modules {
                // reset unit numbering to 1 as we are in a new module
                $course_module_number++;
                $course_unit_number = 1;
-               $unique_key = sprintf("%sM%02d",$course_unique_key,$course_module_number);
+               $unique_key = sprintf("%s_M%02d",$course_unique_key,$course_module_number);
                update_term_meta($module->term_id,'fw_unique_key', $unique_key);
                $module_title = get_term_meta($module->term_id,'module_title',true);
                $name = sprintf("%s_M%02d_%s | %s",$course_unique_key,$course_module_number,$course_language,$module_title);
