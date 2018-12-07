@@ -24,6 +24,7 @@ class FundaWande_Modules {
 
         // Add the construct elements
         add_action( 'edit_term', array($this,'set_module_unit_unique_key'), 10, 3 );
+        add_action( 'create_module_key_after_ordering', array($this,'set_module_unit_unique_key_after_ordering'), 10, 1 );
 
     }
 
@@ -102,7 +103,7 @@ class FundaWande_Modules {
     } // end get_course_modules
 
  /**
-     * Get course parent modules for display on the course page.
+     * Set module unique key after course module edit
      *
      * @param integer $term_id. The term ID being edited
      * @param integer $tt_id. The taxonomy id?
@@ -138,6 +139,16 @@ class FundaWande_Modules {
                 // Set the unique key programatically
                 $module->key = $unique_key = sprintf("%sM%02dU%02d",$course_unique_key,$course_module_number, $course_unit_number);
                 update_term_meta($module->term_id,'fw_unique_key',$unique_key);
+                $module_title = get_term_meta($module->term_id,'module_title',true);
+                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                global $wpdb;
+                $wpdb->query( $wpdb->prepare( "
+                    UPDATE `wp_terms` SET name = %s
+                    WHERE term_id = %d;
+                ", [
+                   $name,
+                    $module->term_id
+                ] ) );
                 // incriment the unit number
                 $course_unit_number++;
 
@@ -148,6 +159,16 @@ class FundaWande_Modules {
                $course_unit_number = 1;
                $module->key = $unique_key = sprintf("%sM%02d",$course_unique_key,$course_module_number);
                update_term_meta($module->term_id,'fw_unique_key', $unique_key);
+               $module_title = get_term_meta($module->term_id,'module_title',true);
+                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                global $wpdb;
+                $wpdb->query( $wpdb->prepare( "
+                    UPDATE `wp_terms` SET name = %s
+                    WHERE term_id = %d;
+                ", [
+                   $name,
+                    $module->term_id
+                ] ) );
                // incriment the module number
             }
         }
@@ -155,6 +176,75 @@ class FundaWande_Modules {
         return true;
 
     } // end set_module_unit_unique_key
+
+    /**
+     * Set module unique key after course module ordering
+     *
+     * @param integer $course_id. The course ID being ordered
+     *
+     */
+    public function set_module_unit_unique_key_after_ordering($course_id) {
+        // if the course Id doesn't exist, return.
+        if (!$course_id) {
+            return __return_false();
+        }
+
+        // Get all modules in the course
+        $course_modules = Sensei()->modules->get_course_modules($course_id);
+        // Get the unique key from the course
+        $course_unique_key = get_post_meta($course_id,'fw_unique_key',true);
+
+        
+        // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first incriment 
+        $course_module_number = -1;
+        // unit numbering starts at 1
+        $course_unit_number = 1;
+
+        // loop through the course modules
+        foreach($course_modules  as $key => $module) {
+
+            // if there is a module parent then it's a child module (unit)
+            if ($module->parent) {
+                
+                // Set the unique key programatically
+                $unique_key = sprintf("%sM%02dU%02d",$course_unique_key,$course_module_number, $course_unit_number);
+                update_term_meta($module->term_id,'fw_unique_key',$unique_key);
+                $module_title = get_term_meta($module->term_id,'module_title',true);
+                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                global $wpdb;
+                $wpdb->query( $wpdb->prepare( "
+                    UPDATE `wp_terms` SET name = %s
+                    WHERE term_id = %d;
+                ", [
+                   $name,
+                    $module->term_id
+                ] ) );
+                // incriment the unit number
+                $course_unit_number++;
+
+            } else {
+               // Set the unique key programatically
+               // reset unit numbering to 1 as we are in a new module
+               $course_module_number++;
+               $course_unit_number = 1;
+               $unique_key = sprintf("%sM%02d",$course_unique_key,$course_module_number);
+               update_term_meta($module->term_id,'fw_unique_key', $unique_key);
+               $module_title = get_term_meta($module->term_id,'module_title',true);
+               $name = sprintf("%s_M%02d | %s",$course_unique_key,$course_module_number,$module_title);
+               global $wpdb;
+               $wpdb->query( $wpdb->prepare( "
+                   UPDATE `wp_terms` SET name = %s
+                   WHERE term_id = %d;
+               ", [
+                  $name,
+                   $module->term_id
+               ] ) );
+               // incriment the module number
+            }
+        }
+
+
+    } // end set_module_unit_unique_key_after_order
 
     /**
      * Get module units and their lessons based on the parent module ID
