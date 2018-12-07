@@ -95,4 +95,49 @@ class FundaWande_Quiz {
 
     } // end fw_get_sub_unit_status
 
+      /**
+     * Check whether the activity needs feedback, or is graded automatically.
+     *
+     * Activities with boolean, gap fill and MCQ questions do not need feedback as they are graded automatically. Activities with file-upload and single line submission need feedback
+     *
+     * @return boolean true or false.
+     */
+    public function assessment_needs_feedback($lesson_id) {
+        $needs_feedback = true;
+        $quiz_id = get_post_meta($lesson_id, '_lesson_quiz', true);
+
+        $questions = Sensei_Utils::sensei_get_quiz_questions($quiz_id);
+
+        foreach ($questions as $key => $question) {
+
+            $type = Sensei()->question->get_question_type( $question->ID );
+            // error_log($type);
+            switch ($type){
+                case "boolean":
+                    $needs_feedback = false;
+                    break;
+                case 'multiple-choice':
+                    $needs_feedback = false;
+                    break;
+                case 'gap-fill':
+                    $needs_feedback = false;
+                    break;
+                case 'multiple-choice-with-images':
+                    $needs_feedback = false;
+                    break;
+                case 'drag-and-drop-non-sequential':
+                    $needs_feedback = false;
+                    break;
+                case 'drag-and-drop-sequential':
+                    $needs_feedback = false;
+                    break;
+                default:
+                    $needs_feedback = true;
+            }
+            break;
+        }
+        return $needs_feedback;
+
+    }
+
 } // end FundaWande_Quiz

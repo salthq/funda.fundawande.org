@@ -1,0 +1,122 @@
+{#
+#  My Assignments page template included in template-assignments.php
+#
+#}
+
+{# Choose base on which to extend this template #}
+{% extends "lms/base-lms.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in base.twig #}
+{% block content %}
+    <div class="wrapper review-activity-wrapper" id="lms-page-wrapper" xmlns="http://www.w3.org/1999/html">
+
+        {# Header band #}
+        <header class="container-fluid  " style="{{ mixin.bgImg(post.thumbnail.src,'0,0,0',0.3) }}">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 py-4">
+                        <h1 class="text-white d-inline-block">Activity review - {{ activity_data.user_name }}</h1>
+                        <h4 class="text-white">{{ activity_data.lesson_name }}</h4>
+                        <p class="text-white"><em>{{ activity_data.week.name }}</em></p>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+        {# Sign up information band #}
+        <section class="container ">
+            <form id="review-activity" role="form" action="" method="post" >
+                <div class="row ">
+
+                    <div class="col-6  py-md-5 ">
+                        <div class="row justify-content-between">
+                            <div class="form-group col-12">
+                                <label class="d-block">Check to complete activity and/or submit feedback:</label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="activity_complete" class="custom-control-input" {% if activity_data.status == 'graded'%}checked{% endif %} value="true">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description text-color-brandpurple">Activity complete</span>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="feedback_complete" class="custom-control-input" {% if activity_data.feedback %}checked{% endif %} value="true">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description text-color-brandpurple">Feedback complete</span>
+                                </label>
+                            </div>
+                        </div>
+                        {% for question in activity_data.questions %}
+                            <div class="question-block p-3" data-question-id="{{ question.ID }}">
+                                <h3>Question {{ loop.index  }}</h3>
+                                <input type="hidden" name="questions[{{ loop.index - 1}}][question_id]" value="{{ question.ID }}" />
+                                <input type="hidden" name="questions[{{ loop.index - 1 }}][feedback]" value="{{ question.ID }}" />
+                                <p>Submitted file: {{ question.answer }}</p>
+                                {{ fn('wp_editor',question.feedback, 'feedback') }}
+                                <div class="form-group mt-4">
+                                    <label class="input-label">Add voice note link is you are giving audio feedback, to record go <a href="https://clyp.it" target="_blank">here</a></label>
+                                    <input type="text" class="form-control" name="questions[{{ loop.index - 1 }}][audio_feedback]" id="{{ question.ID }}_audio_feedback" placeholder="Audio feedback link" value="{{  question.audio }}">
+                                </div>
+                                {% if question.audio %}
+                                    <iframe width="100%" height="200" src="{{  question.audio }}/widget" frameborder="0"></iframe>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="row no-gutters justify-content-between">
+                            <div class="col-auto mt-4 mb-3">
+                                <h4 class="lbreaker-lms-purple ">Feedback responses</h4>
+                            </div>
+                            <div class="col-auto mt-4 mb-3">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="responses_closed" class="custom-control-input" {% if activity_data.responses_closed %}checked{% endif %} value="true">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description text-color-brandpurple">Close responses</span>
+                                </label>
+                            </div>
+                            <div class="col-12">
+                            {% if activity_data.responses %}
+
+                                {% for response in activity_data.responses %}
+                                    <div class="response-comment" data-comment-id="{{ response.comment_ID }}">
+                                        <a href="#" class="delete-comment">{{ source('assets/lms/Cross.svg') }}</a>
+                                        <p class="mb-0"><em><b>{{ response.comment_author }}</b> - {{ response.comment_date }}</em></p>
+                                        <p>{{ response.comment_content }}</p>
+                                        {% if not loop.last %}<hr>{% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <em>No feedback responses yet</em>
+                            {% endif %}
+                            </div>
+
+                        </div>
+
+                        <h4 class="lbreaker-lms-purple mt-4 mb-3">Add response</h4>
+                        <textarea id="feedback-response"  name="response_feedback" style="" rows="3" ></textarea>
+                        <input type="hidden" name="lesson_id" value="{{ activity_data.lesson_id }}" />
+                        <input type="hidden" name="quiz_id" value="{{ activity_data.quiz_id }}" />
+                        <input type="hidden" name="user_id" value="{{ activity_data.user_id }}" />
+                        <input type="hidden" name="comment_id" value="{{ activity_data.comment_id }}" />
+                        <input type="hidden" name="task" value="update_activity" />
+                        <button id="activity-review-submit" type="submit" class="my-4 btn cta-button full-brand-button box-shadow-block ">Save activity review</button>
+                    </div>
+                    <div class="col-6  py-md-5 ">
+                        <h4 class="lbreaker-lms-purple mb-3">Model answer:</h4>
+
+                        {% if activity_data.model_answer %}
+                            {{ activity_data.model_answer }}
+                        {% else %}
+                            <em>No model answer for activity. <a href="/wp-admin/post.php?post={{ activity_data.lesson_id }}&action=edit" target="_blank" >Add one here</a></em>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+
+
+
+
+        </section>
+
+    </div><!-- #wrapper -->
+{% endblock %}

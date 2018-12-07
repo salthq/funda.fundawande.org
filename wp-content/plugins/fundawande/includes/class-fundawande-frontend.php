@@ -46,6 +46,15 @@ class FundaWande_Frontend {
         // Include review activity page assets
         if (( is_page_template('template-login.php')  )) {
             wp_enqueue_script(FundaWande()->token .'-login', FundaWande()->plugin_url . 'assets/js/login.min.js', array(), FundaWande()->version, true);
+		}
+		
+		   // Include coach dashboard page assets
+		   if (( is_page_template('template-coach-dash.php')  )) {
+            wp_enqueue_script(FundaWande()->token .'-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
+            wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
+            wp_enqueue_style( 'data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css' ,array(),FW_VER );
+
+
         }
 
         // Include sortable.js
