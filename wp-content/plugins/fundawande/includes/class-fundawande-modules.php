@@ -123,6 +123,7 @@ class FundaWande_Modules {
         $course_modules = Sensei()->modules->get_course_modules($course_id);
         // Get the unique key from the course
         $course_unique_key = get_post_meta($course_id,'fw_unique_key',true);
+        $course_language = get_post_meta($course_id,'course_language',true);
 
         
         // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first incriment 
@@ -140,7 +141,7 @@ class FundaWande_Modules {
                 $module->key = $unique_key = sprintf("%sM%02dU%02d",$course_unique_key,$course_module_number, $course_unit_number);
                 update_term_meta($module->term_id,'fw_unique_key',$unique_key);
                 $module_title = get_term_meta($module->term_id,'module_title',true);
-                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                $name = sprintf("%s_M%02d_U%02d_%s | %s",$course_unique_key,$course_module_number, $course_unit_number,$course_language,$module_title);
                 global $wpdb;
                 $wpdb->query( $wpdb->prepare( "
                     UPDATE `wp_terms` SET name = %s
@@ -160,7 +161,7 @@ class FundaWande_Modules {
                $module->key = $unique_key = sprintf("%sM%02d",$course_unique_key,$course_module_number);
                update_term_meta($module->term_id,'fw_unique_key', $unique_key);
                $module_title = get_term_meta($module->term_id,'module_title',true);
-                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                $name = sprintf("%s_M%02d_%s | %s",$course_unique_key,$course_module_number,$course_language,$module_title);
                 global $wpdb;
                 $wpdb->query( $wpdb->prepare( "
                     UPDATE `wp_terms` SET name = %s
@@ -193,6 +194,7 @@ class FundaWande_Modules {
         $course_modules = Sensei()->modules->get_course_modules($course_id);
         // Get the unique key from the course
         $course_unique_key = get_post_meta($course_id,'fw_unique_key',true);
+        $course_language = get_post_meta($course_id,'course_language',true);
 
         
         // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first incriment 
@@ -210,7 +212,7 @@ class FundaWande_Modules {
                 $unique_key = sprintf("%sM%02dU%02d",$course_unique_key,$course_module_number, $course_unit_number);
                 update_term_meta($module->term_id,'fw_unique_key',$unique_key);
                 $module_title = get_term_meta($module->term_id,'module_title',true);
-                $name = sprintf("%s_M%02d_U%02d | %s",$course_unique_key,$course_module_number, $course_unit_number,$module_title);
+                $name = sprintf("%s_M%02d_U%02d_%s | %s",$course_unique_key,$course_module_number, $course_unit_number,$course_language,$module_title);
                 global $wpdb;
                 $wpdb->query( $wpdb->prepare( "
                     UPDATE `wp_terms` SET name = %s
@@ -230,7 +232,7 @@ class FundaWande_Modules {
                $unique_key = sprintf("%sM%02d",$course_unique_key,$course_module_number);
                update_term_meta($module->term_id,'fw_unique_key', $unique_key);
                $module_title = get_term_meta($module->term_id,'module_title',true);
-               $name = sprintf("%s_M%02d | %s",$course_unique_key,$course_module_number,$module_title);
+               $name = sprintf("%s_M%02d_%s | %s",$course_unique_key,$course_module_number,$course_language,$module_title);
                global $wpdb;
                $wpdb->query( $wpdb->prepare( "
                    UPDATE `wp_terms` SET name = %s
