@@ -61,12 +61,23 @@
                                 <input type="text" class="form-control" name="last_name" id="last_name" size="30" value="{{ last_name }}" required />
                             </div>
                             <div class="reg-username mb-3">
-                                <label for="school">School or University</label>
+                                <label for="school">{{post.get_field(lang.prefix~'school_label')}}</label>
                                 <input type="text" class="form-control" name="school" id="school" size="30" value="{{ school }}" required />
                             </div>
                             <div class="reg-username mb-3">
-                                <label for="province">Province</label>
-                                <input type="text" class="form-control" name="province" id="province" size="30" value="{{ province }}" required />
+                                <label for="province">{{post.get_field(lang.prefix~'province_label')}}</label>
+                                <select  name="province" id="province" class="custom-select">
+                                    <option selected>{{post.get_field(lang.prefix~'province_instructions')}}</option>
+                                    <option value="Eastern Cape">Eastern Cape</option>
+                                    <option value="Free State">Free State</option>
+                                    <option value="Gauteng">Gauteng</option>
+                                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                    <option value="Limpopo">Limpopo</option>
+                                    <option value="Mpumalanga">Mpumalanga</option>
+                                    <option value="North West">North West</option>
+                                    <option value="Northern Cape">Northern Cape</option>
+                                    <option value="Western Cape">Western Cape</option>
+                                </select>
                             </div>
                             <input type="hidden" class="form-control" name="action"   id="action" value="register" />
                             {# <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div> #}
