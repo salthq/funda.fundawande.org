@@ -76,6 +76,9 @@
         border-radius: 5px;
         color: $grey-tertiary;
         padding: 10px;
+        &:focus {
+          outline-color: $brand-primary__colour;
+        }
       }
     }
     .login-username {
@@ -100,6 +103,9 @@
         font-size: 21px;
         padding: 10px;
         width: 100%;
+        &:focus {
+          outline-color: $white;
+        }
       }
     }
   }
@@ -111,6 +117,16 @@
       color: $grey-tertiary;
       padding: 10px;
       height: auto;
+      &:focus {
+        box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+        outline-color: $brand-primary__colour;
+      }
+    }
+    select:focus {
+      border-color: #918f8f;
+      box-shadow: 0 0 0 0.1rem #918f8f;
+      outline-color: #918f8f;
+
     }
     label {
       font-weight: bold;
