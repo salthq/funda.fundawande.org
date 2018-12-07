@@ -23,7 +23,67 @@ if ( ! defined( 'ABSPATH' ) ) {
     public function __construct() {
 
         // Add the construct elements
+	// Update various meta fields when the post is updated.
+    add_action( 'save_post_lesson', [ $this, 'save_post_lesson' ], 30, 3 );
 
+
+    }
+
+    /**
+     * Actions to run on lesson post being saved
+     */
+    public function save_post_lesson( $post_ID, $post, $update ) {
+
+        // Get the lesson module
+        $lesson_module = Sensei()->modules->get_lesson_module($post_ID);
+        
+        // If module exists then get the key
+        if ($lesson_module) {
+
+            // If module exists then get the key
+            $module_unique_key = get_term_meta($lesson_module->term_id,'module_title',true);
+
+            // get the course for the lesson
+            $lesson_course_id = get_post_meta( $current_lesson_id, '_lesson_course', true );
+        
+            $module_lessons = Sensei()->modules->get_lessons($lesson_course_id, $course_module->term_id);
+
+            $lesson_count = 1;
+            foreach ($module_lessons as $module_lesson) {
+
+                $lesson_title = get_post_meta($module_lesson->ID, 'lesson_title', true);
+                $lesson_unique_key = sprintf("%s_%02d",$module_unique_key,$lesson_count);
+                $lesson_name = sprintf("%s_%02d_%s | %s",$module_unique_key,$lesson_count,$course_language,$lesson_title);
+                
+                update_post_meta($module_lesson->ID,'fw_unique_key', $lesson_unique_key);
+                 // Update lesson post
+                $update_post = array(
+                    'ID'           => $module_lesson->ID,
+                    'post_title'   => $lesson_name
+                );
+
+                // Update the post into the database
+                wp_update_post( $update_post );
+                $lesson_count++;
+
+
+            }
+        } else {
+            $lesson_title = get_post_meta($post_ID, 'lesson_title', true);
+            $lesson_unique_key = false;
+            $lesson_name = sprintf("(No module) | %s",$lesson_title);
+            update_post_meta($post_ID,'fw_unique_key', $lesson_unique_key);
+
+            // Update lesson post
+            $update_post = array(
+                'ID'           => $post_ID,
+                'post_title'   => $lesson_name
+            );
+
+            // Update the post into the database
+            wp_update_post( $update_post );
+        }
+        
 
     }
 
