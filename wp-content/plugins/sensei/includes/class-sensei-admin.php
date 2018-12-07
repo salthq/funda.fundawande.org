@@ -1274,7 +1274,7 @@ class Sensei_Admin {
                             $count++;
                             $class = 'lesson';
                             if ( $count == 1 ) { $class .= ' first'; }
-                            if ( $count == count( $lesson ) ) { $class .= ' last'; }
+                            if ( $count == count( $lessons ) ) { $class .= ' last'; }
                             if ( $count % 2 != 0 ) {
                                 $class .= ' alternate';
                             }
@@ -1322,7 +1322,7 @@ class Sensei_Admin {
 						$count++;
 						$class = 'lesson';
 						if ( $count == 1 ) { $class .= ' first'; }
-						if ( $count == count( $lesson ) ) { $class .= ' last'; }
+						if ( $count == count( $lessons ) ) { $class .= ' last'; }
 						if ( $count % 2 != 0 ) {
 
 							$class .= ' alternate';
@@ -1398,6 +1398,9 @@ class Sensei_Admin {
 					}
 				}
 			}
+			// CUSTOM pango action to create key
+			do_action('create_lesson_key_after_ordering', $course_id );
+
 
 			return true;
 		}

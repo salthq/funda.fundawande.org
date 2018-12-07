@@ -24,67 +24,116 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // Add the construct elements
 	// Update various meta fields when the post is updated.
-    add_action( 'save_post_lesson', [ $this, 'save_post_lesson' ], 30, 3 );
+    add_action( 'save_post_lesson', [ $this, 'handle_save_post_lesson' ], 30, 3 );
+
+    add_action( 'create_lesson_key_after_ordering', array($this,'handle_save_lesson_ordering'), 10, 1 );
+
 
 
     }
 
     /**
-     * Actions to run on lesson post being saved
+     * Set lesson unique keys by lesson ID
+     *
+     * @param integer post_id. The lesson ID to be set
+     *
      */
-    public function save_post_lesson( $post_ID, $post, $update ) {
+    public function set_lesson_unique_keys( $post_ID ) {
 
-        // Get the lesson module
-        $lesson_module = Sensei()->modules->get_lesson_module($post_ID);
+         // Get the lesson module
+         $lesson_module = Sensei()->modules->get_lesson_module($post_ID);
         
-        // If module exists then get the key
-        if ($lesson_module) {
+         // If module exists then get the key
+         if ($lesson_module) {
+ 
+             // If module exists then get the key
+             $module_unique_key = get_term_meta($lesson_module->term_id,'fw_unique_key',true);
+ 
+             // get the course for the lesson
+             $lesson_course_id = get_post_meta( $post_ID, '_lesson_course', true );
+             $course_language = get_post_meta($lesson_course_id,'course_language',true);
+ 
+             $module_lessons = Sensei()->modules->get_lessons($lesson_course_id, $lesson_module->term_id);
+     
+             $lesson_count = 1;
+             foreach ($module_lessons as $module_lesson) {
+ 
+                 $lesson_title = get_post_meta($module_lesson->ID, 'lesson_title', true);
+                 $lesson_unique_key = sprintf("%s_s%02d",$module_unique_key,$lesson_count);
+                 $lesson_name = sprintf("%s_s%02d_%s | %s",$module_unique_key,$lesson_count,$course_language,$lesson_title);
+                 
+                 $updated = update_post_meta($module_lesson->ID,'fw_unique_key', $lesson_unique_key);
+                 // update lesson post via SQL query because otherwise the post update will create an infinite loop
+                 global $wpdb;
+                 $wpdb->query( $wpdb->prepare( "
+                     UPDATE `wp_posts` SET post_title = %s
+                     WHERE ID = %d;
+                 ", [
+                     $lesson_name,
+                    $module_lesson->ID
+                 ] ) );
+ 
+                 $lesson_count++;
+ 
+ 
+             }
+         } else {
+             $lesson_title = get_post_meta($post_ID, 'lesson_title', true);
+             $lesson_unique_key = false;
+             $lesson_name = sprintf("(No module) | %s",$lesson_title);
+             update_post_meta($post_ID,'fw_unique_key', $lesson_unique_key);
+ 
+              // update lesson post via SQL query because otherwise the post update will create an infinite loop
+              global $wpdb;
+              $wpdb->query( $wpdb->prepare( "
+                  UPDATE `wp_posts` SET post_title = %s
+                  WHERE post_id = %d;
+              ", [
+                  $lesson_name,
+                 $post_ID
+              ] ) );
+ 
+         }
+         return true;
+        
+    }
 
-            // If module exists then get the key
-            $module_unique_key = get_term_meta($lesson_module->term_id,'module_title',true);
+     /**
+     * Set lesson unique keys after course lessons ordered
+     *
+     * @param integer $course_id. The course ID being ordered
+     *
+     */
+    public function handle_save_lesson_ordering( $course_id ) {
 
-            // get the course for the lesson
-            $lesson_course_id = get_post_meta( $current_lesson_id, '_lesson_course', true );
-            $course_language = get_post_meta($lesson_course_id,'course_language',true);
-
-            $module_lessons = Sensei()->modules->get_lessons($lesson_course_id, $course_module->term_id);
-
-            $lesson_count = 1;
+        // Get course modules to loop through
+        $course_modules = Sensei()->modules->get_course_modules( $course_id );
+        // loop through modules
+        foreach ($course_modules as $course_module) {
+            // get module lessons
+            $module_lessons = Sensei()->modules->get_lessons($course_id, $course_module->term_id);
+            // Loop through module lessons
             foreach ($module_lessons as $module_lesson) {
-
-                $lesson_title = get_post_meta($module_lesson->ID, 'lesson_title', true);
-                $lesson_unique_key = sprintf("%s_%02d",$module_unique_key,$lesson_count);
-                $lesson_name = sprintf("%s_%02d_%s | %s",$module_unique_key,$lesson_count,$course_language,$lesson_title);
-                
-                update_post_meta($module_lesson->ID,'fw_unique_key', $lesson_unique_key);
-                 // Update lesson post
-                $update_post = array(
-                    'ID'           => $module_lesson->ID,
-                    'post_title'   => $lesson_name
-                );
-
-                // Update the post into the database
-                wp_update_post( $update_post );
-                $lesson_count++;
-
-
+                // Set the module lesson keys via the first lesson ID
+                self::set_lesson_unique_keys($module_lesson->ID );
+                // no need to do it for each lesson in module so break
+                break;
             }
-        } else {
-            $lesson_title = get_post_meta($post_ID, 'lesson_title', true);
-            $lesson_unique_key = false;
-            $lesson_name = sprintf("(No module) | %s",$lesson_title);
-            update_post_meta($post_ID,'fw_unique_key', $lesson_unique_key);
-
-            // Update lesson post
-            $update_post = array(
-                'ID'           => $post_ID,
-                'post_title'   => $lesson_name
-            );
-
-            // Update the post into the database
-            wp_update_post( $update_post );
         }
-        
+     
+    }
+
+
+    /**
+     * Set lesson unique keys after a lesson has been updated
+     *
+     * @param integer post_ID. The lesson ID to be set
+     * @param string post. The post type being updated
+     *
+     */
+    public function handle_save_post_lesson( $post_ID, $post, $update ) {
+
+        self::set_lesson_unique_keys($post_ID );
 
     }
 
