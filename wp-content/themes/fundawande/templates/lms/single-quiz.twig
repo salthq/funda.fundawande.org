@@ -48,6 +48,37 @@
             </div>
         </div>
         {# If quiz outcome is set then show message and modal #}
+        {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
+        <script>
+            function animate(elem, style, unit, from, to, time, prop) {
+                if (!elem) {
+                    return;
+                }
+                var start = new Date().getTime(),
+                    timer = setInterval(function () {
+                        var step = Math.min(1, (new Date().getTime() - start) / time);
+                        if (prop) {
+                            elem[style] = (from + step * (to - from))+unit;
+                        } else {
+                            elem.style[style] = (from + step * (to - from))+unit;
+                        }
+                        if (step === 1) {
+                            clearInterval(timer);
+                        }
+                    }, 25);
+                if (prop) {
+                    elem[style] = from+unit;
+                } else {
+                    elem.style[style] = from+unit;
+                }
+            }
+
+            window.onload = function () {
+                var target = document.getElementById("quiz-questions");
+                animate(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop -350, 1000, true);
+            };
+        </script>
+        {% endif %}
         {%  if (quiz_retry or lesson_complete) and show_notifications %}
 
             {# Set the modal content depending on outcome #}
@@ -127,7 +158,7 @@
         {% set lesson_post = quiz_lesson %}
         {% include '/lms/embeds/lesson-content.twig' %}
         <!-- Quiz Content-->
-        <div class = "container mt-5">
+        <div id="quiz-questions" class = "container mt-5">
             <div class="row">
                 <div class="col-12">
                 {% do action('fundawande_single_quiz_content',post.id) %}
