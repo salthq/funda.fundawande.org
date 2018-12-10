@@ -161,17 +161,24 @@
                     {% endif %}
                     {% if lesson_complete %}
                         {% if sub_unit_meta.is_last_in_unit %}
-                            {% include '/embeds/modals/modal-end-unit.twig' %}
+                        
+                            {% if show_notifications %}
+                                {% include '/embeds/modals/modal-end-unit.twig' %}
+                          
                             {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
                             {% if post.get_field('custom_feedback_message') %}
                                 {% include '/embeds/modals/modal-end-lesson.twig' %}
                                 <button  type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
                                     {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                                 </button>
+                                {% else %}
+                                    <button type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
+                                        {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                    </button>
+                                {% endif %}
                             {% else %}
-                                <button type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                </button>
+                                <a id="lesson-next" href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" >{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+
                             {% endif %}
                         {% else %}
                             <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
