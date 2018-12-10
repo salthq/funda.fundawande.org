@@ -42,94 +42,67 @@ class FundaWande_Coaching {
                 $quiz_id = $values['quiz_id'];
                 $comment_id = $values['comment_id'];
                 $questions = $values['questions'];
-                $response = $values['response_feedback'];
+              
 
                 // If assessment has been set to complete then mark as graded, ungraded otherwise
-                $assessment_status = $values['assessment_complete'] ? 'graded' : 'ungraded';
+                if(isset($values['assessment_complete'])) {
 
-                // Update assessment status
-                $comment = array(
-                    'comment_ID' => $comment_id,
-                    'comment_approved' => $assessment_status,
-                );
-                wp_update_comment($comment);
+                    $assessment_status = $values['assessment_complete'] ? 'graded' : 'ungraded';
+                  
+                } else {
+                    $assessment_status ='ungraded';
 
-                $assessment_comment = get_comment($comment_id);
-                $learner_id = $assessment_comment->user_id;
-                $learner = get_userdata($learner_id);
+                }
+                  // Update assessment status
+                    $comment = array(
+                        'comment_ID' => $comment_id,
+                        'comment_approved' => $assessment_status,
+                    );
+                    wp_update_comment($comment);
+
+                    $assessment_comment = get_comment($comment_id);
+               
+                
+                $learner = get_userdata( $user_id );
 
                 // get the assessment title
                 $assessment_title = get_the_title($lesson_id);
                 $assessment_link = get_the_permalink($lesson_id);
                 // error_log('learnerid-' . $learner_id);
 
-                if (!empty($response)) {
-                    $time = current_time('mysql');
-                    $user = get_userdata(get_current_user_id());
-                    $data = array(
-                        'comment_post_ID' => $lesson_id,
-                        'comment_type' => 'sus_feedback_resp',
-                        'user_id' => $user->ID,
-                        'comment_date' => $time,
-                        'comment_content' => $response,
-                        'comment_approved' => '1',
-                        'comment_author' => $user->display_name,
-                        'comment_author_email' => $user->user_email,
-                        'comment_parent' => $comment_id,
-                    );
-
-                    $comment_id = wp_insert_comment($data);
-
-
-                    // $send the entrep an email letting them know the coach responded
-
-                    $message = sprintf(__('Hi %s,'), $learner->first_name) . "<br><br>";
-                    $message .= __('Your coach responded to you!') . "<br><br>";
-                    $message .= sprintf(__('<b>assessment:</b> <a href="%s">%s</a> '), $assessment_link, $assessment_title) . "<br><br>";
-                    $message .= __('Click the link above to go to the assessment to view the response (you need to be logged in).') . "<br><br>";
-                    $message .= __('Regards,') . "<br>";
-                    $message .= __('Startup School Bot') . "<br><br>";
-
-                    wp_mail($learner->user_email, sprintf(__('SUS assessment response: Your coach has responsed to you.')), $message);
-
-                }
-
-                // If assessment responses are closed set to true or false
-                if(isset($values['responses_closed'])) {
-                    $assessment_responses_closed = $values['responses_closed'] ? true : false;
-
-
-                    // update the assessment response status
-                    $responses_closed = update_comment_meta($comment_id, 'responses_closed', $assessment_responses_closed);
-                }
+                
                 if(isset($values['feedback_complete'])) {
                     // If assessment feedback is being released set to true or false
                     $assessment_feedback = $values['feedback_complete'] ? true : false;
 
                     $already_had_feedback = get_comment_meta($comment_id, 'quiz_has_feedback', true);
 
-                    if (!$already_had_feedback && $assessment_feedback) {
+                    // if (!$already_had_feedback && $assessment_feedback) {
 
-                        // $send the teacher an email letting them know the coach released feedback
+                    //     // $send the teacher an email letting them know the coach released feedback
 
-                        $message = sprintf(__('Hi %s,'), $learner->first_name) . "<br><br>";
-                        $message .= __('Your coach has given you feedback!') . "<br><br>";
-                        $message .= sprintf(__('<b>assessment:</b> <a href="%s">%s</a> '), $assessment_link, $assessment_title) . "<br><br>";
-                        $message .= __('Click the link above to go to the assessment to view the feedback (you need to be logged in).') . "<br><br>";
-                        $message .= __('Regards,') . "<br>";
-                        $message .= __('Startup School Bot') . "<br><br>";
+                    //     $message = sprintf(__('Hi %s,'), $learner->first_name) . "<br><br>";
+                    //     $message .= __('Your coach has given you feedback!') . "<br><br>";
+                    //     $message .= sprintf(__('<b>assessment:</b> <a href="%s">%s</a> '), $assessment_link, $assessment_title) . "<br><br>";
+                    //     $message .= __('Click the link above to go to the assessment to view the feedback (you need to be logged in).') . "<br><br>";
+                    //     $message .= __('Regards,') . "<br>";
+                    //     $message .= __('Startup School Bot') . "<br><br>";
 
-                        wp_mail($learner->user_email, sprintf(__('SUS assessment feedback: Your coach has given you feedback.')), $message);
+                    //     wp_mail($learner->user_email, sprintf(__('SUS assessment feedback: Your coach has given you feedback.')), $message);
 
-                    }
+                    // }
 
                     // update the comment post meta for feedback boolean
-                    $has_feedback = update_comment_meta($comment_id, 'quiz_has_feedback', $assessment_feedback);
+                    error_log(print_r($assessment_feedback,true));
+
+                } else {
+                    $assessment_feedback =  false;
                 }
+                $has_feedback = update_comment_meta($comment_id, 'quiz_has_feedback', $assessment_feedback);
 
                 // Set arrays for feedback, both audio and written
                 $all_answers_feedback = array();
-                $all_answers_audio_feedback = array();
+              
 
                 // loop through questions
                 foreach ($questions as $question) {
@@ -141,7 +114,6 @@ class FundaWande_Coaching {
                     }
                     // assign both arrays
                     $all_answers_feedback[$question['question_id']] = $question_feedback;
-                    $all_answers_audio_feedback[$question['question_id']] = $question['audio_feedback'];
 
                 }
 
@@ -153,7 +125,6 @@ class FundaWande_Coaching {
 
                 // save the user data for feedback - audio and written
                 $feedback_saved = update_comment_meta($comment_id, 'quiz_answers_feedback', $encoded_answers_feedback);
-                $audio_feedback_saved = update_comment_meta($comment_id, 'quiz_answers_audio_feedback', $all_answers_audio_feedback);
 
                 // Were the the question feedback save correctly?
                 // This is done by Sensei so it has to be done here.
@@ -231,7 +202,7 @@ class FundaWande_Coaching {
             );
 
             $assessment_comments = get_comments( $comment_args );
-            error_log(print_r($assessment_comments,true));
+            // error_log(print_r($assessment_comments,true));
 
             // Set up assessments variable
             $assessments = [];
@@ -251,7 +222,7 @@ class FundaWande_Coaching {
                         $assessments[$key2]->week = Sensei()->modules->get_lesson_module($comment->comment_post_ID);
                         $assessments[$key2]->quiz_id =  get_post_meta($assessments[$key2]->lesson_id, '_lesson_quiz', true);
                         // $assessments[$key2]->feedback = FundaWande()->assessments->user_can_view_feedback($assessments[$key2]->lesson_id,$teacher->ID);
-                        $assessments[$key2]->need_feedback = FundaWande()->quiz->assessment_needs_feedback($assessments[$key2]->lesson_id);
+                        $assessments[$key2]->needs_feedback = FundaWande()->quiz->assessment_needs_feedback($assessments[$key2]->lesson_id);
                         // $assessments[$key2]->response_status = FundaWande()->assessments->assessment_response_status($assessments[$key2]->lesson_id,$teacher->ID,$comment->comment_ID);
                         // $assessments[$key2]->submitted = FundaWande()->assessments->user_has_submitted($assessments[$key2]->lesson_id,$teacher->ID);
 
@@ -309,10 +280,7 @@ class FundaWande_Coaching {
         $assessment_obj->quiz_id = get_post_meta($assessment_obj->lesson_id, '_lesson_quiz', true);
 
         $assessment_obj->week = Sensei()->modules->get_lesson_module($assessment_comment->comment_post_ID);
-        $assessment_obj->responses = FundaWande()->assessments->get_assessment_feedback_responses($teacher->ID,$assessment_obj->lesson_id);
-
-        // get the audio feedback
-        $audio_feeback =   get_comment_meta($assessment_comment->comment_ID,'quiz_answers_audio_feedback',true);
+        // $assessment_obj->responses = FundaWande()->quiz->get_assessment_feedback_responses($teacher->ID,$assessment_obj->lesson_id);
 
         // set up questions array - in case more than one question in assessment
         $assessment_obj->questions = array();
@@ -328,25 +296,33 @@ class FundaWande_Coaching {
             $assessment_obj->questions[$key] = new stdClass();
             $assessment_obj->questions[$key]->ID = $question->ID;
 
-            // Check audio feedback is set
-            if ($audio_feeback) {
-                // assign audio feedback to the question object
-                $assessment_obj->questions[$key]->audio = $audio_feeback[$question->ID];
-            }
 
             // Get uploaded file
             if( $user_answer_content ) {
-                $attachment_id = $user_answer_content;
-                $answer_media_url = $answer_media_filename = '';
-                if( 0 < intval( $attachment_id ) ) {
-                    $answer_media_url = wp_get_attachment_url( $attachment_id );
-                    $answer_media_filename = basename( $answer_media_url );
-                    if( $answer_media_url && $answer_media_filename ) {
-                        $user_answer_content = '<a href="' . esc_url( $answer_media_url ) . '" target="_blank">' . esc_html( $answer_media_filename ) . '</a>';
-                    }
+                $type = Sensei()->question->get_question_type( $question->ID );
+            
+                switch ($type){
+                    case "file-upload":
+                        $attachment_id = $user_answer_content;
+                        $answer_media_url = $answer_media_filename = '';
+                        if( 0 < intval( $attachment_id ) ) {
+                            $answer_media_url = wp_get_attachment_url( $attachment_id );
+                            $answer_media_filename = basename( $answer_media_url );
+                            if( $answer_media_url && $answer_media_filename ) {
+                                $user_answer_content = 'Submitted file: <a href="' . esc_url( $answer_media_url ) . '" target="_blank">' . esc_html( $answer_media_filename ) . '</a>';
+                            }
+                        }
+                        break;
+                    case 'multi-line':
+                        $user_answer_content = "User answer: </br>" .$user_answer_content;
+                        
+                    default:
+                        $user_answer_content = $user_answer_content;
                 }
+                
+        
             } else {
-                $user_answer_content = '';
+                $user_answer_content = $user_answer_content;
             }
             // Store the user answer to the question object
             $assessment_obj->questions[$key]->answer = $user_answer_content;

@@ -48,14 +48,22 @@ class FundaWande_Frontend {
             wp_enqueue_script(FundaWande()->token .'-login', FundaWande()->plugin_url . 'assets/js/login.min.js', array(), FundaWande()->version, true);
 		}
 		
-		   // Include coach dashboard page assets
-		   if (( is_page_template('template-coach-dash.php')  )) {
-            wp_enqueue_script(FundaWande()->token .'-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
-            wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
-            wp_enqueue_style( 'data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css' ,array(),FW_VER );
+		// Include coach dashboard page assets
+		if (( is_page_template('template-coach-dash.php')  )) {
+		wp_enqueue_script(FundaWande()->token .'-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
+		wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
+		wp_enqueue_style( 'data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css' ,array(),FW_VER );
+
+
+		}
+		
+		   // Include review activity page assets
+		   if (( is_page_template('template-review-assessment.php')  )) {
+            wp_enqueue_script(FundaWande()->token .'-review-activity', FundaWande()->plugin_url . 'assets/js/review-assessment.min.js', array(), FW_VER, true);
 
 
         }
+
 
         // Include sortable.js
 		wp_enqueue_script('sortable-js-script', FundaWande()->plugin_url . 'assets/js/sortable.min.js', array('jquery'), FundaWande()->version, true);
