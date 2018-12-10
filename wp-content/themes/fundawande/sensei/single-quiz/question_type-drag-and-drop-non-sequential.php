@@ -67,6 +67,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
             }
             ?>
         </div>
+        
 
         <div class="_top-mobile-title">
             <p class="_text-mobile">
@@ -124,6 +125,9 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 $count++;
             }
             ?>
+        </div>
+        <div >
+            <p class="_text-desktop"><small>*To change your answers, drag from the top (choices) to the bottom (answers) again</small></p>
         </div>
     </div>
 </div>
