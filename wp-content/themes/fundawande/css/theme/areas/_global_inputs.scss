@@ -1,0 +1,131 @@
+/* ==========================================================================
+* Stying global inputs for consistency
+*
+* Styling inputs globally for consistency
+*
+ ========================================================================== */
+
+/*
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Globals
+  --------------------------------------------------------------*/
+
+
+// Globals
+.input-label {
+  font-size: 12px;
+  margin-bottom: 0.25rem;
+}
+
+.other-field {
+  display: none;
+}
+
+input[type='text'],input[type='email'],input[type='tel'], input[type="number"], input[type="url"], input[type="password"] {
+  border: 1px solid $grey-secondary;
+  border-radius: 1px;
+  line-height: normal;
+  height:40px;
+  padding: 0 1rem;
+  min-width: 300px;
+  &::-webkit-input-placeholder {
+    color: $grey-secondary;
+    font-size: 12px;
+    line-height: 1rem;
+    vertical-align: middle;
+  }
+}
+
+textarea {
+  border: 1px solid $grey-secondary!important;
+  border-radius: 1px!important;
+  width: 100%;
+  padding: 1rem!important;
+  &::-webkit-input-placeholder {
+    color: $grey-secondary!important;
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+select.custom-select {
+  border: 1px solid $grey-secondary;
+  border-radius: 1px;
+  line-height: 40px;
+  height: 44px!important;
+  padding: 0 1rem;
+  width: 300px;
+  display: block;
+}
+.custom-control-indicator {
+  position: absolute;
+  top:0;
+  left: 0;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #fff;
+  border: 2px solid $grey-secondary;
+  border-radius: 0!important;
+}
+.custom-checkbox .custom-control-description:indeterminate ~ .custom-control-indicator, .custom-control-input:checked ~ .custom-control-indicator {
+  background-color: $brand-primary__colour;
+}
+
+.custom-checkbox  {
+  padding-left: 0!important;
+  .custom-control-description {
+    padding-left: 2.5rem;
+    line-height: 2rem;
+  }
+  .custom-control-description::before {
+    position: absolute;
+    top:0;
+    left: 0;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    content: " ";
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+    border: 2px solid $grey-secondary;
+    border-radius: 0!important;
+  }
+  .custom-control-input:checked~.custom-control-description::before {
+    background-color: $brand-primary__colour;
+    color: #fff;
+  }
+  .custom-control-input:checked~.custom-control-description::after {
+    position: absolute;
+    left: 0;
+    display: block;
+    width: 2rem;
+    top:0;
+    height: 2rem;
+    content: " ";
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E")
+  }
+}
+
+
+.custom-control-description {
+  padding-left: 1rem;
+  line-height: 2rem;
+}
+
+select[name="data-table_length"] {
+  width: 60px!important;
+}
