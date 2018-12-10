@@ -245,6 +245,8 @@ body .text-secondary{color:#f5f5f5}
 .module-divider-before-11:after{background:#ff7c43 !important}
 .module-svg-icon-fill-11 svg circle{fill:#ff7c43}
 .module-svg-icon-fill-11 svg #inner{fill:white}
+.red-border{border-color:red !important}
+.green-border{border-color:green !important}
 .primary-bg{background-color:#ef9d19}
 .primary-text{color:#ef9d19}
 .primary-border{border-color:#ef9d19 !important}

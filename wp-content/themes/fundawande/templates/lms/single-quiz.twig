@@ -78,6 +78,35 @@
                 animate(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop -350, 1000, true);
             };
         </script>
+         {# Set the quiz outcome message  #}
+            <div class = "container quiz-message-container ">
+                <div class="row flex-sm-column flex-md-row quiz-message-box {% if quiz_retry %}red-border{%  elseif lesson_complete %}green-border{% else %}primary-border{% endif %} mx-3 my-5 p-3">
+                    <div class="col-auto d-none d-md-block">
+                        {{source('/assets/lms/quiz_outcome.svg')}} 
+                    </div>
+                    {%  if quiz_retry %}
+
+                        <div class="col-sm-12 col-md">
+                            {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
+                        </div>
+                        <div class="col-sm-12 col-md-auto d-flex flex-column">
+                            <a   class="btn mx-3 mx-md-0 my-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
+                               {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
+                            </a>
+                            <a id="quiz-reset"  class="fw-quiz-reset btn primary-btn-fill mx-3 mx-md-0" href="#" >
+                                {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
+                            </a>
+                        </div>
+
+                    {% elseif lesson_complete %}
+                        <div class="col">
+                            {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
+                        </div>
+                    {% endif %}
+
+                </div>
+                <hr>
+            </div>
         {% endif %}
         {%  if (quiz_retry or lesson_complete) and show_notifications %}
 
@@ -122,35 +151,7 @@
                 });
             </script>
 
-            {# Set the quiz outcome message  #}
-            <div class = "container quiz-message-container ">
-                <div class="row flex-sm-column flex-md-row quiz-message-box primary-border mx-3 my-5 p-3">
-                    <div class="col-auto d-none d-md-block">
-                        {{source('/assets/lms/quiz_outcome.svg')}} 
-                    </div>
-                    {%  if quiz_retry %}
-
-                        <div class="col-sm-12 col-md">
-                            {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
-                        </div>
-                        <div class="col-sm-12 col-md-auto d-flex flex-column">
-                            <a   class="btn mx-3 mx-md-0 my-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                               {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
-                            </a>
-                            <a id="quiz-reset"  class="fw-quiz-reset btn primary-btn-fill mx-3 mx-md-0" href="#" >
-                                {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
-                            </a>
-                        </div>
-
-                    {% elseif lesson_complete %}
-                        <div class="col">
-                            {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
-                        </div>
-                    {% endif %}
-
-                </div>
-                <hr>
-            </div>
+           
         {% endif %}
 
 
