@@ -8,10 +8,17 @@
 {% block content %}
     <div class="wrapper home-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         {# Testing the asset inclusion #}
-        <div class="row">
-            <div class="col-12">
-                <h1 class="my-3 text-center">{{post.get_field(lang.prefix~'terms_and_conditions_title')}}</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="my-md-5 my-3 text-center">{{post.get_field(lang.prefix~'terms_and_conditions_title')}}</h1>
+                    <div class="my-md-5 my-3">{{post.get_field(lang.prefix~'terms_and_conditions_content') }}</div>
+                </div>
             </div>
         </div>
     </div><!-- #wrapper -->
+
+    {% embed "embeds/footer.twig" %}{% endembed %}
 {% endblock %}
+
+
