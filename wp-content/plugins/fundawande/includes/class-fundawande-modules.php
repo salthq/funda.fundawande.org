@@ -66,12 +66,11 @@ class FundaWande_Modules {
                 // get user current module
                 $user_current_module = get_user_meta($user_id,'fw_current_module',true);
 
-                // check if this unit key is equal to current unit key and if so, aassign current proporty
+                // check if this unit key is equal to current unit key and if so, aassign current property
                 if ($module_key == $user_current_module) {
-                    // TODO change after
 
-//                    $course_modules[$key]->current = true;
-                    $course_modules[$key]->current = false;
+                    $course_modules[$key]->current = true;
+                    // $course_modules[$key]->current = false;
                 }
 
 
@@ -163,7 +162,7 @@ class FundaWande_Modules {
                     $name,
                      $module->term_id
                  ] ) );
-                 // incriment the unit number
+                 // increment the unit number
                  $course_unit_number++;
  
              } else {
@@ -183,7 +182,7 @@ class FundaWande_Modules {
                     $name,
                      $module->term_id
                  ] ) );
-                // incriment the module number
+                // increment the module number
              }
          }
     }

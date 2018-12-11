@@ -170,9 +170,8 @@
                         position: relative;
                         &:before {
                             content: "";
-                            // TODO change after
-                            background: transparent!important;
-                            //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                            // background: transparent!important;
+                            background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -221,9 +220,8 @@
                         position: relative;
                         &:before {
                             content: "";
-                            // TODO change after
-                            background: transparent!important;
-                            //background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
+                            // background: transparent!important;
+                            background: linear-gradient(0deg,white 50%,transparent 50%,transparent 0),#ccc;
                             background-size: auto 7px;
                             width: 4px;
                             height: calc(100% + 2px);
@@ -323,9 +321,8 @@
                     position: relative;
                     &:before {
                         content: "";
-                        // TODO change after
-                        background: transparent!important;
-                        //background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
+                        // background: transparent!important;
+                        background: linear-gradient(0deg, white 50%, transparent 50%, transparent 0), #ccc;
                         background-size: auto 7px;
                         width: 4px;
                         height: calc(100% + 2px);

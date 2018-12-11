@@ -27,12 +27,12 @@ var tour = new Anno([{
     buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
 
   },
-  // //TODO: uncomment the view lessons tooltip below {
-  //   target: '#view-lessons',
-  //   position: 'left',
-  //   content: 'Click this button to view the lessons within the unit',
-  //   buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
-  // }, 
+  {
+    target: '#view-lessons',
+    position: 'left',
+    content: 'Click this button to view the lessons within the unit',
+    buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
+  }, 
   {
     target: '#resume-unit',
     position: 'left',
