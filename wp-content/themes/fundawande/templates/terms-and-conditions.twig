@@ -1,0 +1,17 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper home-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        {# Testing the asset inclusion #}
+        <div class="row">
+            <div class="col-12">
+                <h1 class="my-3 text-center">{{post.get_field(lang.prefix~'terms_and_conditions_title')}}</h1>
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}
