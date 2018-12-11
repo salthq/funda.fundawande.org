@@ -301,14 +301,14 @@ img{max-width:100%;margin:auto;height:auto}
 .player .progress{-webkit-box-flex:10;-webkit-flex:10;-ms-flex:10;flex:10;position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-basis:100%;-ms-flex-preferred-size:100%;flex-basis:100%;height:5px;background-color:rgba(255,255,255,0.2);cursor:ew-resize}
 .player .progress__filled{width:0;height:5px;background:red;-webkit-box-flex:0;-webkit-flex:0;-ms-flex:0;flex:0;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;position:absolute}
 .player .progress__loaded{width:0;height:5px;background-color:rgba(255,255,255,0.5);-webkit-box-flex:0;-webkit-flex:0;-ms-flex:0;flex:0;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;position:absolute}
-.player input[type=range]{-webkit-appearance:none;background:transparent;width:100%;margin:0 5px}
-.player input[type=range][name="volume"]{width:80px;margin:0 5px}
-.player input[type=range]:focus{outline:0}
-.player input[type=range]::-webkit-slider-runnable-track{width:100%;height:8.4px;cursor:pointer;box-shadow:1px 1px 1px transparent,0 0 1px rgba(13,13,13,0);background-color:rgba(255,255,255,0.2);border-radius:1.3px;border:.2px solid rgba(1,1,1,0)}
-.player input[type=range]::-webkit-slider-thumb{height:15px;width:15px;border-radius:50px;background:#ffc600;cursor:pointer;-webkit-appearance:none;margin-top:-3.5px;box-shadow:0 0 2px rgba(0,0,0,0.2)}
-.player input[type=range]:focus::-webkit-slider-runnable-track{background-color:rgba(255,255,255,0.5)}
-.player input[type=range]::-moz-range-track{width:100%;height:8.4px;cursor:pointer;box-shadow:1px 1px 1px transparent,0 0 1px rgba(13,13,13,0);background-color:rgba(255,255,255,0.2);border-radius:1.3px;border:.2px solid rgba(1,1,1,0)}
-.player input[type=range]::-moz-range-thumb{box-shadow:0 0 0 transparent,0 0 0 rgba(13,13,13,0);height:15px;width:15px;border-radius:50px;background:#ffc600;cursor:pointer}
+.player input[type=range],.player .login-wrapper #fw-registration-form select[type=range],.login-wrapper #fw-registration-form .player select[type=range]{-webkit-appearance:none;background:transparent;width:100%;margin:0 5px}
+.player input[type=range][name="volume"],.player .login-wrapper #fw-registration-form select[type=range][name="volume"],.login-wrapper #fw-registration-form .player select[type=range][name="volume"]{width:80px;margin:0 5px}
+.player input[type=range]:focus,.player .login-wrapper #fw-registration-form select[type=range]:focus,.login-wrapper #fw-registration-form .player select[type=range]:focus{outline:0}
+.player input[type=range]::-webkit-slider-runnable-track,.player .login-wrapper #fw-registration-form select[type=range]::-webkit-slider-runnable-track,.login-wrapper #fw-registration-form .player select[type=range]::-webkit-slider-runnable-track{width:100%;height:8.4px;cursor:pointer;box-shadow:1px 1px 1px transparent,0 0 1px rgba(13,13,13,0);background-color:rgba(255,255,255,0.2);border-radius:1.3px;border:.2px solid rgba(1,1,1,0)}
+.player input[type=range]::-webkit-slider-thumb,.player .login-wrapper #fw-registration-form select[type=range]::-webkit-slider-thumb,.login-wrapper #fw-registration-form .player select[type=range]::-webkit-slider-thumb{height:15px;width:15px;border-radius:50px;background:#ffc600;cursor:pointer;-webkit-appearance:none;margin-top:-3.5px;box-shadow:0 0 2px rgba(0,0,0,0.2)}
+.player input[type=range]:focus::-webkit-slider-runnable-track,.player .login-wrapper #fw-registration-form select[type=range]:focus::-webkit-slider-runnable-track,.login-wrapper #fw-registration-form .player select[type=range]:focus::-webkit-slider-runnable-track{background-color:rgba(255,255,255,0.5)}
+.player input[type=range]::-moz-range-track,.player .login-wrapper #fw-registration-form select[type=range]::-moz-range-track,.login-wrapper #fw-registration-form .player select[type=range]::-moz-range-track{width:100%;height:8.4px;cursor:pointer;box-shadow:1px 1px 1px transparent,0 0 1px rgba(13,13,13,0);background-color:rgba(255,255,255,0.2);border-radius:1.3px;border:.2px solid rgba(1,1,1,0)}
+.player input[type=range]::-moz-range-thumb,.player .login-wrapper #fw-registration-form select[type=range]::-moz-range-thumb,.login-wrapper #fw-registration-form .player select[type=range]::-moz-range-thumb{box-shadow:0 0 0 transparent,0 0 0 rgba(13,13,13,0);height:15px;width:15px;border-radius:50px;background:#ffc600;cursor:pointer}
 .audio_player_container .open-toggle:hover{cursor:pointer;opacity:.7}
 .audio_player_container .audio_player{width:480px;height:60px;border:2px solid;border-radius:6px;display:none;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;position:relative;margin-top:.5rem}
 .audio_player_container .audio_player:before{width:0;height:0;content:'';border-left:10px solid transparent !important;border-right:10px solid transparent !important;position:absolute;border-bottom:12px solid black;top:-13px;left:1rem}
@@ -341,15 +341,15 @@ img{max-width:100%;margin:auto;height:auto}
 .login-wrapper .login-alert{background-color:#f5f5f5;border:1px solid #918f8f;border-radius:5px}
 .login-wrapper #fw-form-login .login-username,.login-wrapper #fw-form-login .login-password{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;text-align:left}
 .login-wrapper #fw-form-login .login-username label,.login-wrapper #fw-form-login .login-password label{font-weight:bold}
-.login-wrapper #fw-form-login .login-username input,.login-wrapper #fw-form-login .login-password input{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px}
-.login-wrapper #fw-form-login .login-username input:focus,.login-wrapper #fw-form-login .login-password input:focus{outline-color:#ef9d19}
+.login-wrapper #fw-form-login .login-username input,.login-wrapper #fw-form-login .login-password input,.login-wrapper #fw-form-login .login-username #fw-registration-form select,.login-wrapper #fw-registration-form #fw-form-login .login-username select,.login-wrapper #fw-form-login .login-password #fw-registration-form select,.login-wrapper #fw-registration-form #fw-form-login .login-password select{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px}
+.login-wrapper #fw-form-login .login-username input:focus,.login-wrapper #fw-form-login .login-password input:focus,.login-wrapper #fw-form-login .login-username #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-username select:focus,.login-wrapper #fw-form-login .login-password #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-password select:focus{outline-color:#ef9d19}
 .login-wrapper #fw-form-login .login-remember{display:none}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
 .login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
 .login-wrapper #fw-form-login .login-submit #fw-submit:focus{outline-color:#fff}
-.login-wrapper #fw-registration-form input{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px;height:auto}
-.login-wrapper #fw-registration-form input:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
-.login-wrapper #fw-registration-form select:focus{border-color:#918f8f;box-shadow:0 0 0 .1rem #918f8f;outline-color:#918f8f}
+.login-wrapper #fw-registration-form input,.login-wrapper #fw-registration-form select{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px;height:auto}
+.login-wrapper #fw-registration-form input:focus,.login-wrapper #fw-registration-form select:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
+.login-wrapper #fw-registration-form select{line-height:24px;width:100%}
 .login-wrapper #fw-registration-form label{font-weight:bold}
 .embed-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%}
 .embed-container iframe,.embed-container object,.embed-container embed{position:absolute;top:0;left:0;width:100%;height:100%}
@@ -451,7 +451,7 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._image-container ._sortable-spot,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._image-container ._sortable-spot{position:absolute;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._option-image ._image-letters,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-image ._image-letters{display:none}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential .answers,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential .answers{padding:0}
-.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential .answers input[type="checkbox"],.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential .answers input[type="checkbox"]{display:none}
+.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential .answers input[type="checkbox"],.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential .answers .login-wrapper #fw-registration-form select[type="checkbox"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential .answers select[type="checkbox"],.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential .answers input[type="checkbox"],.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential .answers .login-wrapper #fw-registration-form select[type="checkbox"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .drag-and-drop-sequential .answers select[type="checkbox"]{display:none}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._option-images,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._option-images{border-bottom:1px solid #ccc;margin-bottom:30px;padding-bottom:20px}
 .single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._mobile-images-answers,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._mobile-images-answers{display:none}
 @media(max-width:768px){.single-lesson-wrapper .quiz-questions .drag-and-drop-non-sequential ._text-desktop,.single-lesson-wrapper .quiz-questions .drag-and-drop-sequential ._text-desktop{display:none}
@@ -479,8 +479,8 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .quiz-questions .custom-file:hover{cursor:pointer}
 .single-lesson-wrapper .quiz-questions .custom-file:hover .custom-file-label label{opacity:.7}
 .single-lesson-wrapper .quiz-questions .multi-line .wp-editor-wrap{border:3px solid #ef9d19;border-radius:2px}
-.single-lesson-wrapper .quiz-questions .single-line input[type="text"]{border:3px solid #ef9d19;border-radius:2px}
-.single-lesson-wrapper .quiz-questions .gap-fill input[type="text"]{border:3px solid #ef9d19;border-radius:2px}
+.single-lesson-wrapper .quiz-questions .single-line input[type="text"],.single-lesson-wrapper .quiz-questions .single-line .login-wrapper #fw-registration-form select[type="text"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .single-line select[type="text"]{border:3px solid #ef9d19;border-radius:2px}
+.single-lesson-wrapper .quiz-questions .gap-fill input[type="text"],.single-lesson-wrapper .quiz-questions .gap-fill .login-wrapper #fw-registration-form select[type="text"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .gap-fill select[type="text"]{border:3px solid #ef9d19;border-radius:2px}
 .single-course-wrapper .course-title{background-color:#fff}
 .single-course-wrapper .module-link{color:#444}
 .single-course-wrapper .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
@@ -663,8 +663,8 @@ img{max-width:100%;margin:auto;height:auto}
 .wrapper-404 a svg{margin-bottom:.5rem}
 .input-label{font-size:12px;margin-bottom:.25rem}
 .other-field{display:none}
-input[type='text'],input[type='email'],input[type='tel'],input[type="number"],input[type="url"],input[type="password"]{border:1px solid #ccc;border-radius:1px;line-height:normal;height:40px;padding:0 1rem;min-width:300px}
-input[type='text']::-webkit-input-placeholder,input[type='email']::-webkit-input-placeholder,input[type='tel']::-webkit-input-placeholder,input[type="number"]::-webkit-input-placeholder,input[type="url"]::-webkit-input-placeholder,input[type="password"]::-webkit-input-placeholder{color:#ccc;font-size:12px;line-height:1rem;vertical-align:middle}
+input[type='text'],.login-wrapper #fw-registration-form select[type='text'],input[type='email'],.login-wrapper #fw-registration-form select[type='email'],input[type='tel'],.login-wrapper #fw-registration-form select[type='tel'],input[type="number"],.login-wrapper #fw-registration-form select[type="number"],input[type="url"],.login-wrapper #fw-registration-form select[type="url"],input[type="password"],.login-wrapper #fw-registration-form select[type="password"]{border:1px solid #ccc;border-radius:1px;line-height:normal;height:40px;padding:0 1rem;min-width:300px}
+input[type='text']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='text']::-webkit-input-placeholder,input[type='email']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='email']::-webkit-input-placeholder,input[type='tel']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='tel']::-webkit-input-placeholder,input[type="number"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="number"]::-webkit-input-placeholder,input[type="url"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="url"]::-webkit-input-placeholder,input[type="password"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="password"]::-webkit-input-placeholder{color:#ccc;font-size:12px;line-height:1rem;vertical-align:middle}
 textarea{border:1px solid #ccc !important;border-radius:1px !important;width:100%;padding:1rem !important}
 textarea::-webkit-input-placeholder{color:#ccc !important;font-size:12px;line-height:12px}
 select.custom-select{border:1px solid #ccc;border-radius:1px;line-height:40px;height:44px !important;padding:0 1rem;width:300px;display:block}

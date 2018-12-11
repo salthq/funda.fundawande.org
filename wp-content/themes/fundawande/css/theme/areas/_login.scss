@@ -122,11 +122,10 @@
         outline-color: $brand-primary__colour;
       }
     }
-    select:focus {
-      border-color: #918f8f;
-      box-shadow: 0 0 0 0.1rem #918f8f;
-      outline-color: #918f8f;
-
+    select{
+      @extend input;
+      line-height: 24px;
+      width: 100%;
     }
     label {
       font-weight: bold;
