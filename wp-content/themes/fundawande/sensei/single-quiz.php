@@ -40,6 +40,7 @@ if (class_exists('Timber')) {
 
     // check if is retry quiz
     $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
+    $context['quiz_submitted'] = FundaWande()->quiz->user_has_submitted($lesson_id,$user->ID);
 
 
     //Get the unit info for the current lesson

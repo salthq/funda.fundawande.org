@@ -95,4 +95,29 @@ class FundaWande_Quiz {
 
     } // end fw_get_sub_unit_status
 
+    /**
+     * Check whether user has submitted a file/video.
+     *
+     * @return boolean true or false.
+     */
+    public function user_has_submitted($lesson_id,$user_id) {
+
+        $has_submitted = true;
+        $quiz_id = get_post_meta($lesson_id, '_lesson_quiz', true);
+
+        $questions = Sensei_Utils::sensei_get_quiz_questions($quiz_id);
+
+        foreach ($questions as $key => $question) {
+            $user_answer_content = Sensei()->quiz->get_user_question_answer( $lesson_id,  $question->ID , $user_id );
+
+            if (!$user_answer_content) {
+                $has_submitted = false;
+            }
+        }
+
+
+        return $has_submitted;
+
+    }
+
 } // end FundaWande_Quiz
