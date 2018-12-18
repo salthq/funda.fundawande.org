@@ -179,8 +179,8 @@
                     border:3px solid $grey-secondary;
                     ._sortable-spot {
                         border: 3px dashed $brand-primary__colour;
-                        width: 60%;
-                        height: 60%;
+                        width: 100%;
+                        height: 100%;
                         right: 0;
                         bottom: 0;
                         display: flex;
@@ -199,6 +199,8 @@
                         ._sortable-spot {
                             border: 3px solid $brand-primary__colour;
                             border-radius: 2px;
+                            width: 60%;
+                            height: 60%;
                         }
                     }
 
