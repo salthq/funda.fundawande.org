@@ -403,7 +403,6 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .quiz-questions #sensei-quiz-list .question-number{position:absolute}
 .single-lesson-wrapper .quiz-questions #sensei-quiz-list .question-title{padding-left:2rem}
 .single-lesson-wrapper .quiz-questions span.grade{display:none}
-.single-lesson-wrapper .quiz-questions .custom-control.custom-radio{height:2rem}
 .single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-label{line-height:2rem;padding-left:40px}
 .single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-label:before{width:1.5rem;height:1.5rem;border:1px solid #ef9d19;background-color:white;margin-left:30px}
 .single-lesson-wrapper .quiz-questions .custom-control.custom-radio .custom-control-input:checked ~ .custom-control-label{font-weight:bold}
