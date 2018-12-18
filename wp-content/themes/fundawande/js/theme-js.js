@@ -209,7 +209,7 @@ players.forEach(function (player) {
     const start = player.querySelector('.player__start');
     const end = player.querySelector('.player__end');
     const controls = player.querySelector('.player__controls');
-    const progress = player.querySelector('.progress');
+    const progress = player.querySelector('.progress-container');
     const progressBar = player.querySelector('.progress__filled');
     const progressLoaded = player.querySelector('.progress__loaded');
     const toggle = player.querySelector('.toggle');
@@ -300,6 +300,14 @@ players.forEach(function (player) {
 
     // Handle mouse/finger scrubbing
     function scrub(e) {
+        const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+        const percent = (scrubTime / video.duration) * 100;
+        progressBar.style.flexBasis = percent + "%";
+        progressBar.style.width = percent + "%";
+    }
+
+    // Handle mouse/finger scrubbing
+    function scrubEnd(e) {
         const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
         video.currentTime = scrubTime;
     }
@@ -471,10 +479,12 @@ players.forEach(function (player) {
     progress.addEventListener('mousemove', function (e) {
         return mousedown && scrub(e);
     });
-    progress.addEventListener('mousedown', function () {
+    progress.addEventListener('mousedown', function (e) {
+        scrubEnd(e);
         return mousedown = true;
     });
-    progress.addEventListener('mouseup', function () {
+    progress.addEventListener('mouseup', function (e) {
+        scrubEnd(e);
         return mousedown = false;
     });
 
