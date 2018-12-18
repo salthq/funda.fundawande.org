@@ -142,7 +142,7 @@ class FundaWandeSite extends TimberSite
          * LMS Context
          */
 
-        // $context['media_url'] = FundaWande()->lms->fw_get_media_url();
+        $context['media_url'] = FundaWande()->lms->fw_get_media_url();
 
         /**
          * Menu Context

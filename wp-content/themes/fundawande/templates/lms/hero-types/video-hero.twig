@@ -1,4 +1,6 @@
 <!-- Content Type: Video Hero -->
-<div class = "col-sm-12 p-0">
-    {{ mixin.fullWidthVideo(content.video_file, content.holding_image, module_number) }}
+<div class="col-12 p-0">
+    {# Remove whitespace from beginning and end of the file name before appending to media url #}
+    {% set video_file_name = content.video_file_name | trim %}
+    {{ mixin.fullWidthVideo(media_url~video_file_name, content.holding_image, module_number) }}
 </div>
