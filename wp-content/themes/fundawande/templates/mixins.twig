@@ -41,7 +41,7 @@
 
             <div class=" modal-dialog d-flex"  role="document">
                 <div class="modal-content">
-                    {{ mixins.videoPlayer(video_src) }}
+                    {{ mixins.videoPlayer('https://storage.cloud.google.com/fwpilot_media/%20fw_rhodes_m01_u02_s05_Show%20cover.mov?_ga=2.161922430.-3394473.1544622676') }}
                 </div>
             </div>
         </div>
@@ -70,14 +70,14 @@
         </div>
 
         <div class="player__controls ">
-            <div class="col-12">
-                <div class="progress ">
+            <div class="col-12 progress-container">
+                    <div class="progress ">
 
-                    <div class="progress__loaded"></div>
-                    <div class="progress__filled"></div>
-                </div>
+                        <div class="progress__loaded"></div>
+                        <div class="progress__filled"></div>
+                    </div>
             </div>
-            <div class="col-12 d-flex justify-content-between">
+            <div class="col-12 d-flex justify-content-between actions-container">
                 <div class="d-flex align-items-center ">
                     <div class="d-flex align-items-center">
 

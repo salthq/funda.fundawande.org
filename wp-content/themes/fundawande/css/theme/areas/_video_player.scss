@@ -94,7 +94,6 @@
     width: 100%;
     font-size: 25px;
     flex-wrap:wrap;
-    background:rgba(0,0,0,0.3);
     .settings-block {
       position: relative;
       .settings {
@@ -149,14 +148,14 @@
     position: relative;
     display:flex;
     flex-basis:100%;
-    height:5px;
+    height:10px;
     background-color: rgba(255,255,255,0.2);
-    cursor:ew-resize;
+    
   }
 
   .progress__filled {
     width:0%;
-    height: 5px;
+    height: 10px;
     background:red;
     flex:0;
     flex-basis:0%;
@@ -164,11 +163,23 @@
   }
   .progress__loaded {
     width:0%;
-    height: 5px;
+    height: 10px;
     background-color: rgba(255,255,255,0.5);
     flex:0;
     flex-basis:0%;
     position: absolute;
+  }
+
+  .progress-container {
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 25%,rgba(0,0,0,0.3) 25%);
+    padding: 0.25rem 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    cursor:ew-resize;
+  }
+
+  .actions-container {
+    background: rgba(0,0,0,0.3);
   }
 
   /* unholy css to style input type="range" */
