@@ -32,6 +32,12 @@ class FundaWande_Admin
         //Remove Lesson information meta box
         add_action('admin_menu', array($this, 'fw_remove_lesson_info_metabox'), 100);
 
+        //Re-add justify button to tinyMCE editor
+        add_filter('mce_buttons', array($this, 'fw_tiny_mce_buttons_justify'), 5);
+
+        //Re-add underline button to tinyMCE editor
+        add_filter('mce_buttons', array($this, 'fw_tiny_mce_buttons_underline'), 5);
+
         //Remove the description input from module editor
         add_action('module_add_form', array($this, 'fw_remove_description_input'), 100);
         add_action('module_edit_form', array($this, 'fw_remove_description_input'), 100);
@@ -78,6 +84,39 @@ class FundaWande_Admin
         $lesson = Sensei()->lesson->token;
         remove_meta_box('lesson-info', $lesson, 'normal');
     } // end fw_remove_lesson_info_metabox()
+
+
+    /**
+     * Re-add justify button to WYSWYG editor
+     * @param $buttons_array: Array of all tinyMCE buttons
+     */
+    function fw_tiny_mce_buttons_justify( $buttons_array ){
+            
+        if ( !in_array( 'alignjustify', $buttons_array ) && in_array( 'alignright', $buttons_array ) ){
+            $key = array_search( 'alignright', $buttons_array );
+            $inserted = array( 'alignjustify' );
+            array_splice( $buttons_array, $key + 1, 0, $inserted );
+        }
+        
+        return $buttons_array;
+        
+    } // end fw_tiny_mce_buttons_justify();
+
+    /**
+     * Re-add underline button to WYSWYG editor
+     * @param $buttons_array: Array of all tinyMCE buttons
+     */
+    function fw_tiny_mce_buttons_underline( $buttons_array ){
+            
+        if ( !in_array( 'underline', $buttons_array ) ){
+            $inserted = array( 'underline' );
+            // We add the button at the begining of the second line
+            array_splice( $buttons_array, 3, 0, $inserted );
+        }
+        
+        return $buttons_array;
+        
+    } // end fw_tiny_mce_buttons_underline();
 
     /**
      * Remove the description input from module editor 
