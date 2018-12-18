@@ -86,7 +86,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 ?>
 
                 <div class="col-6 col-md row no-gutters _answer-container justify-content-center">
-                    <div class="col mr-md-0 mr-4<?php echo esc_attr($option['option_class']); ?> _image-container">
+                    <div class="col mr-md-0 mr-4<?php echo esc_attr($option['option_class']); ?> _image-container <?php echo array_key_exists($imageHash, $userAnswers) ?  'chosen' : '' ;?>">
                         <?php echo wp_get_attachment_image($parts[1], ['390', '300'], '', ['class' => 'img-responsive']); ?>
 
                         <div class="_sortable-spot"></div>
