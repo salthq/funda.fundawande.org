@@ -1103,7 +1103,7 @@ img { max-width: 100%; margin: auto; height: auto; }
 
 .single-lesson-wrapper .lesson-navigation-top { -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }
 
-.single-lesson-wrapper .lesson-navigation-bottom .btn { width: 200px; }
+.single-lesson-wrapper .lesson-navigation-bottom .btn { width: 250px; }
 
 .single-lesson-wrapper .lesson-carousel { overflow: hidden; }
 
