@@ -49,6 +49,17 @@
 
 {% endmacro %}
 
+{% macro videoGrid(video_src, image_src, caption, module_number) %}
+    {% import _self as mixins %}
+    <div class="col-12 col-sm text-center pt-4">
+        <div class="p-3">
+            {{ mixins.videoPlayer(video_src, image_src, module_number) }}
+            <p>{{caption}}</p>
+        </div>
+    </div>
+    
+{% endmacro %}
+
 {# Add video player #}
 {% macro videoPlayer(video_src, image_src, module_number) %}
     {% import _self as mixins %}
