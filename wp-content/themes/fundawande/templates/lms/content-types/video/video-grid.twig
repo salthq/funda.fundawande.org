@@ -2,9 +2,21 @@
 <div class="container my-5">
     <div class="row">
         {% for video in content.video_grid %}
-            {# Remove whitespace from beginning and end of the file name before appending to media url #}
-            {% set video_file_name = video.video_file_name | trim %}
-            {{ mixin.videoGrid(media_url~video_file_name, video.holding_image, video.caption, module_number) }}  
+            {% set numVideos = content.video_grid | length %}
+            {% if numVideos == 2 %}
+                {% set videoCols = "col-md-6" %}
+            {% elseif numVideos == 3 %}
+                {% set videoCols = "col-md-4" %}
+            {% elseif numVideos == 4 %}
+                {% set videoCols = "col-md-3" %}
+            {% endif %}
+            
+            <div class="col-12 {{videoCols}} text-center pt-3">
+                {% set video_id = loop.index %}
+                {# Remove whitespace from beginning and end of the file name before appending to media url #}
+                {% set video_file_name = video.video_file_name | trim %}
+                {{ mixin.videoCard(media_url~video_file_name, video.holding_image, video_id, video.title, video.description, module_number) }}  
+            </div>
         {% endfor %}
     </div>
 </div>

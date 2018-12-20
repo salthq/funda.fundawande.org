@@ -35,7 +35,6 @@
     <div class="full-width-video-container">
         <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 80vh;{{ mixins.bgImg(image_src,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoModal" >
                 <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
-
         </div>
         <div id="videoModal" class="modal" tabindex="-1" role="dialog">
 
@@ -49,15 +48,35 @@
 
 {% endmacro %}
 
-{% macro videoGrid(video_src, image_src, caption, module_number) %}
+{% macro videoCard(video_src, image_src, video_id, video_title, video_description, module_number) %}
     {% import _self as mixins %}
-    <div class="col-12 col-sm text-center pt-4">
-        <div class="p-3">
-            {{ mixins.videoPlayer(video_src, image_src, module_number) }}
-            <p>{{caption}}</p>
+    <div class="video-grid-container card">
+        <div class="card-body">
+            <div style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoCardModal{{ video_id }}">
+                <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
+            </div>
+            <h5 class="card-title pt-3">{{video_title}}</h5>
+            <p class="card-text">{{ video_description }}</p>
         </div>
     </div>
-    
+
+    <div id="videoCardModal{{ video_id }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="d-flex m-3">
+                    <div class = "d-flex justify-content-center align-items-center w-100">
+                        <h5 class="modal-title"><strong>{{video_title}}</strong></h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    {{ mixins.videoPlayer(video_src, image_src, module_number) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endmacro %}
 
 {# Add video player #}
