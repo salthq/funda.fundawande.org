@@ -66,6 +66,9 @@
             {# Pulled right video #}
         {% elseif content.acf_fc_layout == 'video_pulled_right' %}
             {% include '/lms/content-types/video/video-pulled-right.twig' %}
+            {# Video Grid #}
+        {% elseif content.acf_fc_layout == 'video_grid' %}
+            {% include '/lms/content-types/video/video-grid.twig' %}
 
             {# Carousel content types# }
 

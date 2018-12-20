@@ -1,0 +1,15 @@
+<!-- Content Type: Video Container Width -->
+<div class="container my-5">
+    <div class="row">
+        {% for video in content.video_grid %}
+            <div class="col-12 col-sm text-center pt-4">
+                <div class="p-3">
+                    {# Remove whitespace from beginning and end of the file name before appending to media url #}
+                    {% set video_file_name = video.video_file_name | trim %}
+                    {{ mixin.videoPlayer(media_url~video_file_name, video.holding_image, module_number) }}
+                    <p>{{video.caption}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
