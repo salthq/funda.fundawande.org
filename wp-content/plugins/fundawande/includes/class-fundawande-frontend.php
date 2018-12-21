@@ -111,7 +111,7 @@ class FundaWande_Frontend {
 		}
 
 		//Include Lesson Page Walkthrough Script if user is on a lesson page
-		if( is_singular('lesson') ) {
+		if( is_singular('lesson') || is_singular('quiz') ) {
 			// TODO: Remove the initial tour script below
 			//If this is the first time that the user has landed on the lesson page, 
 			//and the terms and conditions have been signed, the script will load.
