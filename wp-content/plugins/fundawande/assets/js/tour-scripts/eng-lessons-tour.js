@@ -24,17 +24,60 @@ var tour = new Anno([{
     target: '#back-to-units',
     position: 'right',
     content: 'Click this button to go back to the units view',
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+    buttons: [AnnoButton.BackButton, AnnoButton.NextButton],
+    onShow: function() {
+      jQuery(document).ready( function($) {
+        $('html, body').animate({ scrollTop: 0 }, 100, function () {});
+      })
+    }
   },
   {
     target : '#sidebar-minimized',
     position: 'right',
-    content : 'Click this button to view unit progress',
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+    content : 'Your progress is shown here. For more detail, click on the sidebar',
+    buttons: [{
+	    text: 'Back',
+	    className: 'anno-btn-low-importance',
+	    click: function() {
+	      return this.switchToChainPrev();
+      }
+    }, 
+    {
+      text: 'Next',
+      click: function() {
+        jQuery(document).ready(function($) {
+          $('#sidebar-minimized').css('display', 'none');
+          $('#sidebar-expanded').css('margin-left', '0px');
+        })
+        return this.switchToChainNext();
+      }
+    }]
+  },
+  {
+    target: '#sidebar-expanded',
+    position: 'top',
+    content: 'You can now see an expanded view of the lessons within this unit. You can navigate to different lessons by clicking on their icon in this list',
+    buttons: [{
+	    text: 'Back',
+	    className: 'anno-btn-low-importance',
+	    click: function() {
+	      return this.switchToChainPrev();
+      }
+    }, 
+    {
+      text: 'Next',
+      click: function() {
+        jQuery(document).ready(function($) {
+          $('#sidebar-minimized').css('display', 'block');
+          $('#sidebar-expanded').css('margin-left', '-500px');
+        })
+        return this.switchToChainNext();
+      }
+    }]
   },
   {
     target : '#navigation-links',
     position: 'top',
-    content : 'The navigation links help you to move between lessons within the course',
+    content : 'These navigation links help you to move between lessons within the course',
     buttons: [AnnoButton.DoneButton]
   }])

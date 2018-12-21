@@ -23,7 +23,12 @@ var tour = new Anno([{
   target : '#back-to-modules',
   position: 'right',
   content : 'Cofa le qhosha ukubuyela kuluhlu lwee modyuli',
-  buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
+  buttons: [AnnoButton.BackButton,AnnoButton.NextButton],
+  onShow: function() {
+    jQuery(document).ready( function($) {
+      $('html, body').animate({ scrollTop: 0 }, 100, function () {});
+    })
+  }
 
 },
 {

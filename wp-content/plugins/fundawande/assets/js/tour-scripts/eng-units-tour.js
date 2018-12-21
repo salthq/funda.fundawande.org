@@ -24,7 +24,12 @@ var tour = new Anno([
     target: "#back-to-modules",
     position: "right",
     content: "Click this button to go back to the list of modules",
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+    buttons: [AnnoButton.BackButton, AnnoButton.NextButton],
+    onShow: function() {
+      jQuery(document).ready( function($) {
+        $('html, body').animate({ scrollTop: 0 }, 100, function () {});
+      })
+    }
   },
   {
     target: "#view-lessons",
