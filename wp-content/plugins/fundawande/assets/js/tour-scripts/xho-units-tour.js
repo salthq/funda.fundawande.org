@@ -14,8 +14,8 @@ var tour = new Anno([{
     });
   },
   position: {
-    top: '3em',
-    left: '15em'
+    top: '8em',
+    left: '23em'
   },
   buttons: [AnnoButton.NextButton]
 },
