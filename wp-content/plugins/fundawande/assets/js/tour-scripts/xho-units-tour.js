@@ -26,15 +26,38 @@ var tour = new Anno([{
   buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
 
 },
-// //TODO: uncomment the view lessons tooltip below {
-//   target: '#view-lessons',
-//   position: 'left',
-//   content: 'Cofa le iqhosha ukujonga izifundo ngaphakathi kwunithi',
-//   buttons: [AnnoButton.BackButton,AnnoButton.NextButton]
-// }, 
 {
-  target: '#resume-unit',
+  target: '#view-lessons',
   position: 'left',
-  content: 'Cofa apha ukuze ufinyelele isifundo sakho samanje ngaphakathi kwunithi',
-  buttons: [AnnoButton.BackButton,AnnoButton.DoneButton]
-}])
+  content: 'Cofa le iqhosha ukujonga izifundo ngaphakathi kwunithi',
+  buttons: [{
+    text: 'Back',
+    className: 'anno-btn-low-importance',
+    click: function() {
+      return this.switchToChainPrev();
+    }
+  }, 
+  {
+    text: 'Next',
+    click: function() {
+      jQuery(document).ready(function($) {
+        $('#view-lessons').toggleClass('collapsed');
+        $('#collapse-unit1').toggleClass('collapse show');
+      })
+      return this.switchToChainNext();
+    }
+  }]
+},
+{
+  target: '#collapse-unit1',
+  position: "top",
+  content: "Olu uluhlu lwezifundo ngaphakathi kwunithi. Cofa kwisithonjana sokufunda ukufikelela kwisifundo",
+  buttons: [AnnoButton.BackButton, AnnoButton.DoneButton]
+}
+// {
+//   target: '#resume-unit',
+//   position: 'left',
+//   content: 'Cofa apha ukuze ufinyelele isifundo sakho samanje ngaphakathi kwunithi',
+//   buttons: [AnnoButton.BackButton,AnnoButton.DoneButton]
+// }
+])
