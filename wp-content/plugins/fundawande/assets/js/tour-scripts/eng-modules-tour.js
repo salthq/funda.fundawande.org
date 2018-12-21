@@ -18,7 +18,20 @@ var tour = new Anno([{
       top: '8em',
       left: '23em'
     },
-    buttons: [AnnoButton.NextButton]
+    buttons: [{
+	    text: 'Back',
+	    className: 'anno-btn-low-importance',
+	    click: function() {
+	      return this.switchToChainPrev();
+      }
+    }, 
+    {
+      text: 'Next',
+	    className: 'pulse',
+	    click: function() {
+	      return this.switchToChainNext();
+      }
+    }]
   },
   {
     target : '#module-card',
