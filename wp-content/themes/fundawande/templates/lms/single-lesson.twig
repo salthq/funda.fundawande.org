@@ -20,25 +20,9 @@
         {% include '/lms/embeds/lesson-progress-mobile.twig' %}
         {# Include desktop progress component #}
         {% include '/lms/embeds/lesson-sidebar.twig' %}
-
-        <div class = "container-fluid lesson-header">
-            <div class = "container">
-                <div class = "row lesson-navigation-top">
-                    <div class = "col-12 col-md-2 text-center">
-                        <a id = "back-to-units" class = "btn module-btn-outline-{{sub_unit_meta.module_number}} py-md-4 my-md-4 mt-4" href = "{{sub_unit_meta.unit.link}}">
-                            {{source('/assets/arrow_left.svg')}}
-                            <br>
-                            <span class = "">{{attribute(options, lang.prefix~'back_to_units_text')}}</span> 
-                        </a>
-                    </div>
-                    <div class = "col-12 col-md-10 text-center my-4">
-                        <h1><strong>{{sub_unit_meta.module_title}}</strong></h1>
-                        <h2><strong>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</strong></h2>
-                        <h3>{{post.get_field('lesson_title')}}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {# Include lesson header component #}
+        {% include '/lms/embeds/lesson-header.twig' %}
+        
         <!-- Lesson Content-->
         {% set lesson_post = post %}
         {% include '/lms/embeds/lesson-content.twig' %}
