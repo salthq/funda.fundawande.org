@@ -18,13 +18,36 @@ var tour = new Anno([
       top: "8em",
       left: "23em"
     },
-    buttons: [AnnoButton.NextButton]
+    buttons: [
+      {
+        text: "Next",
+        className: "pulse",
+        click: function() {
+          return this.switchToChainNext();
+        }
+      }
+    ]
   },
   {
     target: "#back-to-modules",
     position: "right",
     content: "Click this button to go back to the list of modules",
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton],
+    buttons: [
+      {
+        text: "Back",
+        className: "anno-btn-low-importance",
+        click: function() {
+          return this.switchToChainPrev();
+        }
+      },
+      {
+        text: "Next",
+        className: "pulse",
+        click: function() {
+          return this.switchToChainNext();
+        }
+      }
+    ],
     onShow: function() {
       jQuery(document).ready( function($) {
         $('html, body').animate({ scrollTop: 0 }, 100, function () {});
@@ -44,6 +67,7 @@ var tour = new Anno([
     }, 
     {
       text: 'Next',
+      className: 'pulse',
       click: function() {
         jQuery(document).ready(function($) {
           $('#view-lessons').toggleClass('collapsed');
@@ -57,7 +81,22 @@ var tour = new Anno([
     target: '#collapse-unit1',
     position: "top",
     content: "This is the list of lessons within the unit. Click on a lesson icon to access that lesson",
-    buttons: [AnnoButton.BackButton, AnnoButton.DoneButton]
+    buttons: [
+      {
+        text: "Back",
+        className: "anno-btn-low-importance",
+        click: function() {
+          return this.switchToChainPrev();
+        }
+      },
+      {
+        text: "Done",
+        className: "pulse",
+        click: function() {
+          return this.hide();
+        }
+      }
+    ]
   }
 
   // {

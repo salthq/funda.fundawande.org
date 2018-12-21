@@ -18,13 +18,36 @@ var tour = new Anno([{
       top: '8em',
       left: '23em'
     },
-    buttons: [AnnoButton.NextButton]
+    uttons: [
+      {
+        text: "Next",
+        className: "pulse",
+        click: function() {
+          return this.switchToChainNext();
+        }
+      }
+    ]
   },
   {
     target: '#back-to-units',
     position: 'right',
     content: 'Click this button to go back to the units view',
-    buttons: [AnnoButton.BackButton, AnnoButton.NextButton],
+    buttons: [
+      {
+        text: "Back",
+        className: "anno-btn-low-importance",
+        click: function() {
+          return this.switchToChainPrev();
+        }
+      },
+      {
+        text: "Next",
+        className: "pulse",
+        click: function() {
+          return this.switchToChainNext();
+        }
+      }
+    ],
     onShow: function() {
       jQuery(document).ready( function($) {
         $('html, body').animate({ scrollTop: 0 }, 100, function () {});
@@ -44,6 +67,7 @@ var tour = new Anno([{
     }, 
     {
       text: 'Next',
+      className: 'pulse',
       click: function() {
         jQuery(document).ready(function($) {
           $('#sidebar-minimized').css('display', 'none');
@@ -66,6 +90,7 @@ var tour = new Anno([{
     }, 
     {
       text: 'Next',
+      className: 'pulse',
       click: function() {
         jQuery(document).ready(function($) {
           $('#sidebar-minimized').css('display', 'block');
@@ -79,5 +104,20 @@ var tour = new Anno([{
     target : '#navigation-links',
     position: 'top',
     content : 'These navigation links help you to move between lessons within the course',
-    buttons: [AnnoButton.DoneButton]
+    buttons: [
+      {
+        text: "Back",
+        className: "anno-btn-low-importance",
+        click: function() {
+          return this.switchToChainPrev();
+        }
+      },
+      {
+        text: "Done",
+        className: "pulse",
+        click: function() {
+          return this.hide();
+        }
+      }
+    ]
   }])

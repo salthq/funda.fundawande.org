@@ -44,6 +44,7 @@ var tour = new Anno([{
   }, 
   {
     text: 'Next',
+    className: 'pulse',
     click: function() {
       jQuery(document).ready(function($) {
         $('#view-lessons').toggleClass('collapsed');
@@ -57,7 +58,20 @@ var tour = new Anno([{
   target: '#collapse-unit1',
   position: "top",
   content: "Olu uluhlu lwezifundo ngaphakathi kwunithi. Cofa kwisithonjana sokufunda ukufikelela kwisifundo",
-  buttons: [AnnoButton.BackButton, AnnoButton.DoneButton]
+  buttons: [{
+    text: 'Buyela',
+    className: 'anno-btn-low-importance',
+    click: function() {
+      return this.switchToChainPrev();
+    }
+  }, 
+  {
+    text: 'Yenziwe',
+    className: 'pulse',
+    click: function() {
+      return this.hide();
+    }
+  }]
 }
 // {
 //   target: '#resume-unit',
