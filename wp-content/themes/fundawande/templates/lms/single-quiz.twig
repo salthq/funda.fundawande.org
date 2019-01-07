@@ -89,49 +89,7 @@
             </div>
         {% endif %}
         {%  if (quiz_retry or lesson_complete) and show_notifications %}
-
-            {# Set the modal content depending on outcome #}
-            {%  if quiz_retry %}
-                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_retry_content') %}
-            {% elseif lesson_complete %}
-                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_success_content')  %}
-            {% endif %}
-            {# Set the modal ID to use to open the modal #}
-            {% set modal_id = "quiz-message" %}
-            {% embed "embeds/modals/modal-global.twig" %}
-                {# Add quiz outcome header to modal #}
-                {% block modal_header %}
-
-                        <div class="col-auto">
-                            {{source('/assets/lms/quiz_outcome.svg')}}
-                        </div>
-                        <div class="col-auto">
-                           <h2>{{attribute(options, lang.prefix~'quiz_outcome_header')}}</h2>
-                        </div>
-
-                {% endblock %}
-                {# Remove close button #}
-                {% block modal_close %}
-                
-                {% endblock %}
-                {# Add quiz modal content to modal #}
-                {% block modal_body %}
-
-                   <div class="col-12">
-                       {{  modal_content }}
-                   </div>
-
-                {% endblock %}
-
-            {% endembed %}
-            {# Default the modal to open #}
-            <script>
-                jQuery(document).ready( function($) {
-                    $('#{{ modal_id }}').modal('show');
-                });
-            </script>
-
-           
+            {% include '/embeds/modals/modal-quiz.twig' %}
         {% endif %}
 
 
@@ -202,9 +160,9 @@
                         </a>
                     {% endif %}
 
--                    {% if not lesson_complete and not quiz_resubmit and not quiz_retry %}
+                   {% if not lesson_complete and not quiz_resubmit and not quiz_retry %}
                         <a id="quiz-complete"  class="btn module-btn-fill-{{module_number}}" href="#" >
-                                                    {{  attribute(options, lang.prefix~'quiz_submit_button_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                            {{  attribute(options, lang.prefix~'quiz_submit_button_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                         </a>
                 
                     {% endif %}
