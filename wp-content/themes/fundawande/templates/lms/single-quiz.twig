@@ -5,12 +5,12 @@
 {% import "mixins.twig" as mixin %}
 
 {# Set lesson number #}
-{% set lesson_number=0 %}
+{% set lesson_number = 0 %}
 {% set lesson_complete = false %}
 {% for lesson in sub_unit_meta.unit_lessons %}
 
     {% if lesson.ID == quiz_lesson.ID %}
-        {% set lesson_number=loop.index %}
+        {% set lesson_number = loop.index %}
         {% if lesson.complete %}
             {% set lesson_complete = true %}
         {% endif %}
@@ -52,9 +52,10 @@
             
                 PLEASE NOTE: 
             
-                Quiz script has been moved to wp-content/plugins/fundawande/assets/js/quiz.js due to syntax highlighter issues 
+                Quiz script has been moved due to syntax highlighter issues 
             
             #}
+            <script src="/wp-content/themes/fundawande/js/theme/global/quiz.js"></script>
 
 
            {# Set the quiz outcome message  #}
