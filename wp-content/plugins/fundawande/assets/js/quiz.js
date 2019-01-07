@@ -23,13 +23,15 @@ function animate(elem, style, unit, from, to, time, prop) {
 
 window.onload = function() {
   var target = document.getElementById("quiz-questions");
-  animate(
-    document.scrollingElement || document.documentElement,
-    "scrollTop",
-    "",
-    0,
-    target.offsetTop - 350,
-    1000,
-    true
-  );
+  if (target) {
+    animate(
+      document.scrollingElement || document.documentElement,
+      "scrollTop",
+      "",
+      0,
+      target.offsetTop - 350,
+      1000,
+      true
+    );
+  }
 };
