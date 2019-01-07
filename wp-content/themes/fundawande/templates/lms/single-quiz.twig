@@ -47,36 +47,17 @@
         </div>
         {# If quiz outcome is set then show message and modal #}
         {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
-        <script>
-            function animate(elem, style, unit, from, to, time, prop) {
-                if (!elem) {
-                    return;
-                }
-                var start = new Date().getTime(),
-                    timer = setInterval(function () {
-                        var step = Math.min(1, (new Date().getTime() - start) / time);
-                        if (prop) {
-                            elem[style] = (from + step * (to - from))+unit;
-                        } else {
-                            elem.style[style] = (from + step * (to - from))+unit;
-                        }
-                        if (step === 1) {
-                            clearInterval(timer);
-                        }
-                    }, 25);
-                if (prop) {
-                    elem[style] = from+unit;
-                } else {
-                    elem.style[style] = from+unit;
-                }
-            }
+        
+            {# 
+            
+                PLEASE NOTE: 
+            
+                Quiz script has been moved to wp-content/plugins/fundawande/assets/js/quiz.js due to syntax highlighter issues 
+            
+            #}
 
-            window.onload = function () {
-                var target = document.getElementById("quiz-questions");
-                animate(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop -350, 1000, true);
-            };
-        </script>
-         {# Set the quiz outcome message  #}
+
+           {# Set the quiz outcome message  #}
             <div class = "container quiz-message-container ">
                 <div class="row flex-sm-column flex-md-row quiz-message-box {% if quiz_retry %}red-border{%  elseif lesson_complete %}green-border{% else %}primary-border{% endif %} mx-3 my-5 p-3">
                     <div class="col-auto d-none d-md-block">
