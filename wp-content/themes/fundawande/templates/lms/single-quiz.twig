@@ -21,7 +21,7 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-    
+
         {# Include mobile progress component #}
         {% include '/lms/embeds/lesson-progress-mobile.twig' %}
         {# Include desktop progress component #}
@@ -29,23 +29,6 @@
         {# Include lesson header component #}
         {% include '/lms/embeds/lesson-header.twig' %}
 
-        <div class = "container-fluid lesson-header">
-            <div class = "container">
-                <div class = "row lesson-navigation-top">
-                    <div class = "col-2 col-md-4">
-                        <a class = "btn module-btn-outline-{{module_number}} py-4 my-4" href = "{{sub_unit_meta.unit.link}}">
-                            {{source('/assets/arrow_left.svg')}}
-                            <br>
-                            <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span>
-                        </a>
-                    </div>
-                    <div class = "col-10 col-md-4 text-center my-4">
-                        <h1><strong>Lesson {{ lesson_number }}/{{sub_unit_meta.unit_lessons|length}}</strong></h1>
-                        <h1>{{quiz_lesson.get_field('lesson_title')}}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
         {# If quiz outcome is set then show message and modal #}
         {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
         
