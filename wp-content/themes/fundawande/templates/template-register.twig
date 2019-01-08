@@ -32,9 +32,9 @@
                                 <p>
                                     {{post.get_field(lang.prefix~'registration_failed')}}</p>
                                 <div class=" text-center">
-                                    <a class="d-inline-block primary-btn-outline btn mr-3 text-center" href="/login">
+                                    <a class="d-inline-block primary-btn-outline btn mr-3 text-center registration-link" href="/login">
                                         {{post.get_field(lang.prefix~'login_link')}}</a>
-                                    <a class="d-inline-block fw-get-help primary-btn-outline btn text-center" href="#">
+                                    <a class="d-inline-block fw-get-help primary-btn-outline btn text-center registration-link" href="#">
                                         {{post.get_field(lang.prefix~'get_help_link')}}</a>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                 <p>
                                     {{post.get_field(lang.prefix~'registration_success')}}</p>
                                 <div class=" text-center">
-                                    <a class=" primary-btn-outline btn text-center" href="/login">
+                                    <a class=" primary-btn-outline btn text-center registration-link" href="/login">
                                         {{post.get_field(lang.prefix~'login_link')}}</a>
                                 </div>
                             </div>
@@ -76,9 +76,9 @@
                                 <label for="province">
                                     {{post.get_field(lang.prefix~'province_label')}}</label>
                                 <select class="custom-select" id="province" name="province">
-                                    <option selected>
+                                    <option>
                                         {{post.get_field(lang.prefix~'province_instructions')}}</option>
-                                    <option value="Eastern Cape">Eastern Cape</option>
+                                    <option selected value="Eastern Cape">Eastern Cape</option>
                                     <option value="Free State">Free State</option>
                                     <option value="Gauteng">Gauteng</option>
                                     <option value="KwaZulu-Natal">KwaZulu-Natal</option>
