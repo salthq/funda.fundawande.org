@@ -13,6 +13,7 @@ body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;
 @media(min-width:768px){body p{font-size:18px}
 }@media(max-width:767px){body p{font-size:14px}
 }body hr{height:2px;color:#ccc;opacity:.5}
+body video{min-height:200px}
 body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
 }body #login-wrapper{min-height:100vh;width:100%}

@@ -105,10 +105,14 @@
     }
 
     hr {
-        //below styles taking
         height: 2px;
         color: #cccccc;
         opacity: 0.5;
+    }
+
+    video {
+        //This ensures videos aren't too small on mobile devices
+        min-height: 200px;
     }
 
     #page-wrapper {
