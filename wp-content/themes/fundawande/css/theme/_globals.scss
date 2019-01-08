@@ -183,7 +183,10 @@
     .module-btn-fill-#{$colour_key} {
         background-color: $colour_var!important;
         border-color: $colour_var!important;
-        color: $white!important;
+        color: $white !important;
+        h1,h2,h3,a {
+            color: $white !important;
+        }
         svg {
             fill: $white;
         }

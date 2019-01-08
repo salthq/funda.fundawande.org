@@ -38,17 +38,17 @@
                                     <div class = "row unit-header justify-content-between">
                                         <div class = "col-12 col-md-6">
                                             <div class = "unit-header-content d-flex">
-                                                <div class = "unit-header-counter d-flex mr-2 px-2">
+                                                <div class = "unit-header-counter {% if unit.complete %} module-btn-fill-{{module_number}} {% endif %} d-flex mr-2 px-2">
                                                     <h3 class = "m-0">{{module_number}}.{{loop.index}}</h3>
                                                 </div>
-                                                {% set completed = 0 %}
-                                                {% for  lesson in unit.lessons  %}
-                                                    {% if lesson.complete %}
-                                                        {% set completed = completed + 1 %}
-                                                    {% endif %}
-                                                {% endfor %}
                                                 <div class = "unit-header-text">
                                                     <h2><strong>{{unit.module_title}}</strong></h2>
+                                                    {% set completed = 0 %}
+                                                    {% for  lesson in unit.lessons  %}
+                                                        {% if lesson.complete %}
+                                                            {% set completed = completed + 1 %}
+                                                        {% endif %}
+                                                    {% endfor %}
                                                     <p class = "module-text-{{module_number}} module-progress m-0">{{ completed }}/{{ unit.lessons|length }} {{attribute(options, lang.prefix~'lessons_complete_text')}}</p>
                                                 </div>
                                             </div>
