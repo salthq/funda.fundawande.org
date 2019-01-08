@@ -28,7 +28,7 @@ input[type='text'],input[type='email'],input[type='tel'], input[type="number"], 
   line-height: normal;
   height:40px;
   padding: 0 1rem;
-  min-width: 300px;
+  // min-width: 300px; Removed due to mobile display issues.  
   &::-webkit-input-placeholder {
     color: $grey-secondary;
     font-size: 12px;
