@@ -16,12 +16,13 @@
             <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 ">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
         </div>
 
-        <!-- Language Change Button -->
+        {# TODO: Re-add this once decision on language changing has been reached #}
+        {# <!-- Language Change Button -->
         {% if lang.id == 'eng' %}
             <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
         {% else %}
             <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
-        {% endif %}
+        {% endif %} #}
 
     </nav>
 </div><!-- .wrapper-navbar end -->
