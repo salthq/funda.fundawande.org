@@ -102,7 +102,8 @@
         cursor: pointer;
         font-family: $base-header__font-family;
         font-size: 21px;
-        padding: 10px;
+        line-height: 22px;
+        padding-bottom: 8px;
         width: 100%;
         &:focus {
           outline-color: $white;

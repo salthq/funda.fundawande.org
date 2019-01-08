@@ -359,7 +359,7 @@ img{max-width:100%;margin:auto;height:auto}
 .login-wrapper #fw-form-login .login-username input:focus,.login-wrapper #fw-form-login .login-password input:focus,.login-wrapper #fw-form-login .login-username #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-username select:focus,.login-wrapper #fw-form-login .login-password #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-password select:focus{outline-color:#ef9d19}
 .login-wrapper #fw-form-login .login-remember{display:none}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
-.login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;cursor:pointer;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;padding:10px;width:100%}
+.login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;cursor:pointer;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;line-height:22px;padding-bottom:8px;width:100%}
 .login-wrapper #fw-form-login .login-submit #fw-submit:focus{outline-color:#fff}
 .login-wrapper #fw-registration-form input,.login-wrapper #fw-registration-form select{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px;height:auto}
 .login-wrapper #fw-registration-form input:focus,.login-wrapper #fw-registration-form select:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
