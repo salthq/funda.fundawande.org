@@ -107,13 +107,13 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_failed ($user) {
-        //If the login language is set to english, add it to the URL after stripping out other GET variables
-        if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+        //If the login language is set to Xhosa, add it to the URL after stripping out other GET variables
+        if( strstr($_SERVER['HTTP_REFERER'], 'xho') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login_lang=eng';
+            $referrer .= '?login_lang=xho';
         }
         else {
-            //No need to check for Xhosa, as that is the default language
+            //No need to check for English, as that is the default language
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
         }
         if (!empty($referrer) && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin') && $user!=null )
@@ -141,7 +141,7 @@ class FundaWande_Login {
     } // end custom_login_failed();
 
     /**
-     * Refreshes the page and adds 'login=failed' to the URL if either login field is blank
+     * Refreshes the page and adds 'login=blank' to the URL if either login field is blank
      *
      * @author jtame
      */
@@ -153,13 +153,13 @@ class FundaWande_Login {
         // }
         
         if(isset($_SERVER['HTTP_REFERER'])) {
-            //If the login language is set to english, add it to the URL after stripping out other GET variables
-            if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+            //If the login language is set to Xhosa, add it to the URL after stripping out other GET variables
+            if( strstr($_SERVER['HTTP_REFERER'], 'xho') ) {
                 $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-                $referrer .= '?login_lang=eng';
+                $referrer .= '?login_lang=xho';
             }
             else {
-                //No need to check for Xhosa, as that is the default language
+                //No need to check for English, as that is the default language
                 $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
             }
 
