@@ -79,7 +79,7 @@ var tour = new Anno([{
   },
   {
     target: '#sidebar-expanded',
-    position: 'top',
+    position: 'right',
     content: 'You can now see an expanded view of the lessons within this unit. You can navigate to different lessons by clicking on their icon in this list',
     buttons: [{
 	    text: 'Back',
