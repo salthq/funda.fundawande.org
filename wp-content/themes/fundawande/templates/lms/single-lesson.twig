@@ -42,10 +42,10 @@
                        {% if sub_unit_meta.nav.next %}
                             {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                             {% if post.get_field('custom_feedback_message') %}
-                                {% include '/embeds/modals/modal-end-lesson.twig' %}
+                                {% include '/lms/embeds/modals/modal-end-lesson.twig' %}
                                 {# If this lesson is the last within the unit, fire the end of unit modal #}
                                 {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/embeds/modals/modal-end-unit.twig' %}
+                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
                                     <button id="lesson-complete"  type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                     {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                                     </button>
@@ -57,7 +57,7 @@
                             {% else %}
                                 {# If there is no custom feedback message, but this lesson is the last in the unit, fire the end of unit modal #}
                                 {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/embeds/modals/modal-end-unit.twig' %}
+                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
                                     <button id="lesson-complete" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                         {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                                     </button>
@@ -68,7 +68,7 @@
                             {% endif %}
                        {% else %}
                            {# If there is no next lesson then assume it is the last lesson of the course#}
-                           {% include '/embeds/modals/modal-end-course.twig' %}
+                           {% include '/lms/embeds/modals/modal-end-course.twig' %}
                            <button id="lesson-complete" onclick="completeCourse()" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                            </button>
