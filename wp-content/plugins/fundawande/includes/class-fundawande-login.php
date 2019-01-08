@@ -51,7 +51,7 @@ class FundaWande_Login {
             $redirect_url = get_the_permalink($current_lesson_id);
 
             if (empty($redirect_url)) {
-                // TODO HARDCODE IN FIRST LESSON
+                // TODO: HARDCODE IN FIRST LESSON
                 $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
                 $redirect_url = get_the_permalink($current_lessons[0]->ID);
             }
@@ -69,20 +69,20 @@ class FundaWande_Login {
     public function setup_login_form() {
 
         // Bilingual display and re-direct options
-        $username_label = "Inombolo yesazisi";
-        $password_label = "Inombolo yokuvula";
-        $login_label = "Ngena";
-        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
-            $username_label = "ID Number";
-            $password_label = "Password";
-            $login_label = "Log In";
+
+        $username_label = "ID Number";
+        $password_label = "Password";
+        $login_label = "Log In";
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'xho') {
+            $username_label = "Inombolo yesazisi";
+            $password_label = "Inombolo yokuvula";
+            $login_label = "Ngena";
         }
 
 
         $args = array(
             'echo'           => true,
             //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
-//            'redirect'       => home_url('/'),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,

@@ -50,5 +50,6 @@ if ( class_exists( 'Timber' ) ) {
             $context['form_error'] = true;
         }
     }
+
     Timber::render(array('template-register.twig', 'page.twig'), $context);
 }
