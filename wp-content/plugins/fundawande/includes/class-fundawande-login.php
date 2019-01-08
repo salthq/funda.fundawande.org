@@ -60,6 +60,9 @@ class FundaWande_Login {
             $redirect_url = home_url('/');
         }
 
+        // TODO: Remove this line once language switching is re-enabled
+        $redirect_url = $redirect_url . "?lang=eng";
+
         wp_redirect($redirect_url);
         exit();
     }
