@@ -13,7 +13,6 @@ body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;
 @media(min-width:768px){body p{font-size:18px}
 }@media(max-width:767px){body p{font-size:14px}
 }body hr{height:2px;color:#ccc;opacity:.5}
-body video{min-height:200px}
 body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
 @media(max-width:767px){body #page-wrapper{margin-top:60px}
 }body #login-wrapper{min-height:100vh;width:100%}
@@ -283,6 +282,8 @@ body .text-secondary{color:#f5f5f5}
 .button-tertiary-active{background-color:#918f8f;color:#fff}
 .text-tertiary{color:#918f8f}
 img{max-width:100%;margin:auto;height:auto}
+video{min-height:200px}
+.current svg #inner{fill:#fff !important}
 #data-table_wrapper th select{max-width:120px}
 #site-footer{background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;color:#fff}
 #site-footer a{color:#fff;text-decoration:none}
@@ -595,6 +596,7 @@ img{max-width:100%;margin:auto;height:auto}
 .single-lesson-wrapper .lesson-sidebar-minimized{width:50px;min-height:50px;overflow:auto;box-shadow:0 2px 4px 1px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important}
 .single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-marker{z-index:1;width:20px;height:20px;border-radius:50%;background:#ccc}
 .single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-marker.current{border:2px solid;width:24px;height:24px;background:white !important}
+.single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-marker.current #inner{fill:#fff !important}
 .single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-divider{min-width:10px;min-height:20px;position:relative}
 .single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-divider:before{content:"";background:-webkit-linear-gradient(bottom,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(0,white 50%,transparent 50%,transparent 0),#ccc;background-size:auto 7px;width:4px;height:calc(100% + 2px);border-radius:0;position:absolute;top:0;left:23px}
 .single-lesson-wrapper .lesson-sidebar-minimized .lesson-progress-divider:first-of-type{min-height:0;min-width:0}

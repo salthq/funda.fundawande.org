@@ -215,6 +215,9 @@
                             width: 24px;
                             height: 24px;
                             background: white!important;
+                            #inner {
+                                fill: $white !important;
+                            }
                         }
                     }
 

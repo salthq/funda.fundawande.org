@@ -110,10 +110,7 @@
         opacity: 0.5;
     }
 
-    video {
-        //This ensures videos aren't too small on mobile devices
-        min-height: 200px;
-    }
+    
 
     #page-wrapper {
 
@@ -373,6 +370,20 @@
      margin: auto;
      height: auto;
  }
+
+ video {
+    //This ensures videos aren't too small on mobile devices
+    min-height: 200px;
+}
+
+.current {
+    //Forces SVG icons to be white instead of the standard grey when the unit or lesson it is associated with is currently active.
+    svg {
+        #inner {
+            fill: $white !important;
+        }
+    }
+}
 
  
 
