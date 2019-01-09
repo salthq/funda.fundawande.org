@@ -538,12 +538,12 @@ video{min-height:200px}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text{line-height:1;width:80%}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text span{font-size:80%}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text p{font-size:10px;line-height:12px;text-align:left}
-}.single-module-wrapper .sub-units-icon p{width:110px;text-align:center;margin:auto;font-size:15px;line-height:17px}
+}.single-module-wrapper .sub-units-icon p{max-width:110px;text-align:center;margin:auto;font-size:15px;line-height:17px}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon p{max-width:none}
 }.single-module-wrapper .sub-units-icon .up-next-text{position:absolute;height:27px;width:95px;border-radius:6px 6px 0 0;top:-24px;left:-2px;font-size:14px;font-style:italic;color:white}
 .single-module-wrapper .sub-units-icon .stage-progress-item-divider{min-width:30px;position:relative;min-height:15px}
 .single-module-wrapper .sub-units-icon .stage-progress-item-divider:before{content:"";background:-webkit-linear-gradient(left,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;background-size:7px auto;height:4px;width:calc(100% + 2px);border-radius:0;position:absolute;top:43px;left:-1px}
-@media(max-width:767px){.single-module-wrapper .sub-units-icon .stage-progress-item-divider:before{content:"";background:-webkit-linear-gradient(bottom,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(0,white 50%,transparent 50%,transparent 0),#ccc;background-size:auto 7px;width:4px;height:calc(100% + 2px);border-radius:0;position:absolute;top:0;left:23px}
+@media(max-width:767px){.single-module-wrapper .sub-units-icon .stage-progress-item-divider:before{content:"";background:-webkit-linear-gradient(bottom,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(0,white 50%,transparent 50%,transparent 0),#ccc;background-size:auto 10px;width:4px;height:calc(100% + 65px);border-radius:0;position:absolute;top:0;left:23px}
 }.single-module-wrapper .sub-units-icon:first-of-type .stage-progress-item-divider:before{content:none}
 @media(min-width:992px){.single-module-wrapper .sub-units-icon:nth-of-type(7n) .stage-progress-item-divider:before{width:30px;right:-1px;left:auto}
 .single-module-wrapper .sub-units-icon:nth-of-type(7n) .stage-progress-item-divider:after{content:'';background:url("/wp-content/themes/fundawande/assets/lms/progress_arrow_icon.svg");background-repeat:no-repeat;width:9px;position:absolute;top:38px;height:15px;right:25px;left:auto}
