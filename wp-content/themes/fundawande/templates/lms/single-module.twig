@@ -77,9 +77,9 @@
                                             <div class = "sub-units-icon {%  if lesson.complete %}complete module-divider-before-{{ module_number }} module-after-bg-{{ module_number }}{% endif %} row text-center flex-md-row flex-column col-md-2 no-gutters pb-3">
                                                 <div class="stage-progress-item-divider {%  if lesson.complete or lesson.current %}complete module-divider-before-{{ module_number }}{% endif %} col">
                                                 </div>
-                                                {# TODO re-add check if lesson is current or complete before showing Href #}
+                                                {# TODO: re-add check if lesson is current or complete before showing Href #}
                                                 <a href = "{{function('get_post_permalink', lesson.ID)}}" class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-svg-fill-{{ module_number }}  module-border-{{ module_number }} current{% endif %} ">
-                                                    <span class="up-next-textx d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                    <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
                                                     {% set image = source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
                                                     {% if image %}
                                                         {{ source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg') }}
