@@ -231,6 +231,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // get the module unit array
         $module_units = get_term_children($meta_obj->module_id, 'module' );
+
+        //Get the number of the unit which the currently viewed lesson is in
+        $meta_obj->unit_number = array_search($meta_obj->unit->term_id, $module_units) + 1;
+
         // retrieve the last unit from array
         $last_unit = array_values(array_slice($module_units, -1))[0];
         $meta_obj->is_last_in_module = false;

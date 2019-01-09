@@ -42,7 +42,7 @@
     <!-- Minimized Mobile Progress Component -->
     <div class = "lesson-progress-mobile lesson-progress-mobile-minimized " id = "progress-mobile-minimized" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
         <div class = "lesson-progress align-items-center d-flex no-gutters flex-row">
-            <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{module_number}}.{{ lesson_number }}</h4></div>
+            <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{unit_number}}.{{ lesson_number }}</h4></div>
             <div class=" lesson-progress-markers px-3 w-100 row no-gutters align-items-center flex-row">
             {% for lesson in sub_unit_meta.unit_lessons %}
                 <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
