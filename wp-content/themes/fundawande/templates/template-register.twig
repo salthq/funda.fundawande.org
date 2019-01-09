@@ -5,20 +5,20 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper registration-wrapper login-wrapper  background-secondary d-flex align-items-center" xmlns="http://www.w3.org/1999/html">
-        <div class="container m-3">
+        <div class="container card m-3">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6 card  my-md-5 px-md-5 py-5">
+                <div class="col-12 col-md-6  my-md-5 px-md-5 py-5">
                     {% if not register_submitted %}
                         <!-- Registration Form Header -->
                         <div class="text-center login-header">
                             {{ source('assets/logos/fw_logo_landscape.svg') }}
-                            <h5 class="mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
+                            {# <h5 class="mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
                             <form method="GET">
                                 <div aria-label="Change Language buttons" class="btn-group" role="group">
                                     <button class="btn login-language-button {% if lang.id == 'eng'%} active-button {% endif %}" name="login_lang" type="submit" value="eng">English</button>
                                     <button class="btn login-language-button {% if lang.id == 'xho'%} active-button {% endif %}" name="login_lang" type="submit" value="xho">Xhosa</button>
                                 </div>
-                            </form>
+                            </form> #}
                             <h1 class="mt-4">
                                 {{post.get_field(lang.prefix~'title')}}</h1>
                         </div>
@@ -51,7 +51,7 @@
                     {% endif %}
                     {% if (not register_submitted) or (register_submitted and register_failed) %}
                         <!-- Registration Form -->
-                        <form action="?" class="px-4" id='fw-registration-form' method="post">
+                        <form action="?" id='fw-registration-form' method="post">
                             <div class="reg-username mb-3">
                                 <label for="user_login">
                                     {{post.get_field(lang.prefix~'id_number_label')}}</label>
@@ -91,7 +91,7 @@
                             </div>
                             <input
                             class="form-control" id="action" name="action" type="hidden" value="register"/>
-                            {# <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div> #}
+                            <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div>
                             <button type="submit" class="btn w-100 mt-3 primary-btn-fill ">
                                 {{post.get_field(lang.prefix~'registration_button_label')}}
                             </button>
@@ -107,8 +107,9 @@
         </div>
     </div>
     <!-- #wrapper -->
-    <script>// function onSubmit(token) {
-    // document.getElementById("registration-form").submit();
-    // }
+    <script>
+     function onSubmit(token) {
+        document.getElementById("registration-form").submit();
+     }
     </script>
 {% endblock %}
