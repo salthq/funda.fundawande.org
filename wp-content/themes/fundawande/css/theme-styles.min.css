@@ -520,7 +520,8 @@ video{min-height:200px}
 .single-module-wrapper .sub-units-icon{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-top:1.5rem}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon{margin-top:0}
 }.single-module-wrapper .sub-units-icon a{width:71px;padding-top:10px;color:#444;text-decoration:none}
-@media(max-width:767px){.single-module-wrapper .sub-units-icon a{width:auto;padding-top:0}
+@media(min-width:768px){.single-module-wrapper .sub-units-icon a{width:65px}
+}@media(max-width:767px){.single-module-wrapper .sub-units-icon a{width:auto;padding-top:0}
 .single-module-wrapper .sub-units-icon a .lesson-progress-text{line-height:1;width:80%}
 .single-module-wrapper .sub-units-icon a .lesson-progress-text p{font-size:14px;line-height:16px;text-align:left}
 }.single-module-wrapper .sub-units-icon a svg{z-index:1}

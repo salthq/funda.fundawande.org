@@ -50,6 +50,9 @@
                 padding-top: 10px;
                 color: $text-primary__colour;
                 text-decoration: none;
+                @include breakpoint(tablet) {
+                    width: 65px;
+                }
                 @include breakpoint(phone) {
                     width: auto;
                     padding-top: 0;
