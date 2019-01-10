@@ -101,7 +101,7 @@ class FundaWande_Modules {
 
     } // end get_course_modules
 
- /**
+    /**
      * Set module unique key after course module edit
      *
      * @param integer $term_id. The term ID being edited
@@ -138,7 +138,7 @@ class FundaWande_Modules {
          $course_language = get_post_meta($course_id,'course_language',true);
  
          
-         // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first incriment 
+         // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first increment 
          $course_module_number = -1;
          // unit numbering starts at 1
          $course_unit_number = 1;
@@ -149,7 +149,7 @@ class FundaWande_Modules {
              // if there is a module parent then it's a child module (unit)
              if ($module->parent) {
                  
-                 // Set the unique key programatically
+                 // Set the unique key programmatically
                  $module->key = $unique_key = sprintf("%s_m%02d_u%02d",$course_unique_key,$course_module_number, $course_unit_number);
                  update_term_meta($module->term_id,'fw_unique_key',$unique_key);
                  $module_title = get_term_meta($module->term_id,'module_title',true);
@@ -166,7 +166,7 @@ class FundaWande_Modules {
                  $course_unit_number++;
  
              } else {
-                // Set the unique key programatically
+                // Set the unique key programmatically
                 // reset unit numbering to 1 as we are in a new module
                 $course_module_number++;
                 $course_unit_number = 1;
@@ -263,12 +263,10 @@ class FundaWande_Modules {
      *
      */
     public function fw_module_progress($module_id) {
-//        error_log(print_r($module_id,true));
         $module_units = get_term_children($module_id, 'module' );
 
         $completed = 0;
         $total = 0;
-//        error_log(print_r($module_units,true));
         foreach ($module_units as $module_unit) {
             $total++;
             if (FundaWande()->units->fw_is_unit_complete($module_unit)) {

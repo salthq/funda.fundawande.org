@@ -84,7 +84,6 @@ class FundaWande_Quiz {
         }
         $lesson_id = $lesson_id_or_key;
         if (is_numeric($lesson_id_or_key)) {
-
             $lesson_key = get_post_meta($lesson_id_or_key,'fw_unique_key',true);
         } else {
             $lesson_key = $lesson_id_or_key;
