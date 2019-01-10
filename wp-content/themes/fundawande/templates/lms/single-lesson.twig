@@ -20,25 +20,9 @@
         {% include '/lms/embeds/lesson-progress-mobile.twig' %}
         {# Include desktop progress component #}
         {% include '/lms/embeds/lesson-sidebar.twig' %}
-
-        <div class = "container-fluid lesson-header">
-            <div class = "container">
-                <div class = "row lesson-navigation-top">
-                    <div class = "col-2">
-                        <a id = "back-to-units" class = "btn module-btn-outline-{{sub_unit_meta.module_number}} py-4 my-4" href = "{{sub_unit_meta.unit.link}}">
-                            {{source('/assets/arrow_left.svg')}}
-                            <br>
-                            <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span> 
-                        </a>
-                    </div>
-                    <div class = "col-10 text-center my-4">
-                        <h1><strong>{{sub_unit_meta.module_title}}</strong></h1>
-                        <h2><strong>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</strong></h2>
-                        <h3>{{post.get_field('lesson_title')}}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {# Include lesson header component #}
+        {% include '/lms/embeds/lesson-header.twig' %}
+        
         <!-- Lesson Content-->
         {% set lesson_post = post %}
         {% include '/lms/embeds/lesson-content.twig' %}
@@ -58,10 +42,10 @@
                        {% if sub_unit_meta.nav.next %}
                             {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                             {% if post.get_field('custom_feedback_message') %}
-                                {% include '/embeds/modals/modal-end-lesson.twig' %}
+                                {% include '/lms/embeds/modals/modal-end-lesson.twig' %}
                                 {# If this lesson is the last within the unit, fire the end of unit modal #}
                                 {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/embeds/modals/modal-end-unit.twig' %}
+                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
                                     <button id="lesson-complete"  type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                     {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                                     </button>
@@ -73,7 +57,7 @@
                             {% else %}
                                 {# If there is no custom feedback message, but this lesson is the last in the unit, fire the end of unit modal #}
                                 {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/embeds/modals/modal-end-unit.twig' %}
+                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
                                     <button id="lesson-complete" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                         {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                                     </button>
@@ -84,7 +68,7 @@
                             {% endif %}
                        {% else %}
                            {# If there is no next lesson then assume it is the last lesson of the course#}
-                           {% include '/embeds/modals/modal-end-course.twig' %}
+                           {% include '/lms/embeds/modals/modal-end-course.twig' %}
                            <button id="lesson-complete" onclick="completeCourse()" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
                                {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
                            </button>

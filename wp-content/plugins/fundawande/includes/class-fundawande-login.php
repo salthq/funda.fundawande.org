@@ -51,7 +51,7 @@ class FundaWande_Login {
             $redirect_url = get_the_permalink($current_lesson_id);
 
             if (empty($redirect_url)) {
-                // TODO HARDCODE IN FIRST LESSON
+                // TODO: HARDCODE IN FIRST LESSON
                 $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
                 $redirect_url = get_the_permalink($current_lessons[0]->ID);
             }
@@ -59,6 +59,9 @@ class FundaWande_Login {
         } else {
             $redirect_url = home_url('/');
         }
+
+        // TODO: Remove this line once language switching is re-enabled
+        $redirect_url = $redirect_url . "?lang=eng";
 
         wp_redirect($redirect_url);
         exit();
@@ -68,28 +71,21 @@ class FundaWande_Login {
     //Set up login form options
     public function setup_login_form() {
 
-        //TODO: Uncomment the bilingual form option lines. Perhaps move to ACF?
-        $redirect_url = "/course/reading-for-meaning-eng/";
+        // Bilingual display and re-direct options
+
         $username_label = "ID Number";
         $password_label = "Password";
         $login_label = "Log In";
-        // //Bilingual display and re-direct options
-        // $redirect_url = "course/ukufunda-iintsingiselo-zesixhosa/";
-        // $username_label = "Inombolo yesazisi";
-        // $password_label = "Inombolo yokuvula";
-        // $login_label = "Ngena";
-        // if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'eng') {
-        //     $redirect_url = "/course/reading-for-meaning-eng/";
-        //     $username_label = "ID Number";
-        //     $password_label = "Password";
-        //     $login_label = "Log In";
-        // }
+        if (isset($_GET['login_lang']) && $_GET['login_lang'] == 'xho') {
+            $username_label = "Inombolo yesazisi";
+            $password_label = "Inombolo yokuvula";
+            $login_label = "Ngena";
+        }
 
 
         $args = array(
             'echo'           => true,
             //TODO: add logic to redirect to coach dashboard if user logging in is a coach 
-//            'redirect'       => home_url('/'),
             'form_id'        => 'fw-form-login',
             'label_username' => $username_label,
             'label_password' => $password_label,
@@ -114,13 +110,13 @@ class FundaWande_Login {
      * @author jtame
      */
     public function custom_login_failed ($user) {
-        //If the login language is set to english, add it to the URL after stripping out other GET variables
-        if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+        //If the login language is set to Xhosa, add it to the URL after stripping out other GET variables
+        if( strstr($_SERVER['HTTP_REFERER'], 'xho') ) {
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-            $referrer .= '?login_lang=eng';
+            $referrer .= '?login_lang=xho';
         }
         else {
-            //No need to check for Xhosa, as that is the default language
+            //No need to check for English, as that is the default language
             $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
         }
         if (!empty($referrer) && !strstr($referrer, 'wp-login') && !strstr($referrer, 'wp-admin') && $user!=null )
@@ -148,7 +144,7 @@ class FundaWande_Login {
     } // end custom_login_failed();
 
     /**
-     * Refreshes the page and adds 'login=failed' to the URL if either login field is blank
+     * Refreshes the page and adds 'login=blank' to the URL if either login field is blank
      *
      * @author jtame
      */
@@ -160,13 +156,13 @@ class FundaWande_Login {
         // }
         
         if(isset($_SERVER['HTTP_REFERER'])) {
-            //If the login language is set to english, add it to the URL after stripping out other GET variables
-            if( strstr($_SERVER['HTTP_REFERER'], 'eng') ) {
+            //If the login language is set to Xhosa, add it to the URL after stripping out other GET variables
+            if( strstr($_SERVER['HTTP_REFERER'], 'xho') ) {
                 $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
-                $referrer .= '?login_lang=eng';
+                $referrer .= '?login_lang=xho';
             }
             else {
-                //No need to check for Xhosa, as that is the default language
+                //No need to check for English, as that is the default language
                 $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
             }
 

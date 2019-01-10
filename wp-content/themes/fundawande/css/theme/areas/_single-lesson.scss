@@ -16,7 +16,7 @@
             }
             &-bottom {
                 .btn {
-                    width: 200px;
+                    width: 250px;
                 }
             }
         }
@@ -198,7 +198,11 @@
                     width: 50px;
                     min-height: 50px;
                     overflow: auto;
-                    max-height: 70vh;
+                    /**
+                        The max-height rule was initially added to stop a 'bounce' effect when the sidebar changes from  display: absolute to display: fixed. 
+                        However, this rule leads to a broken layout when there are more than 10 sub-units.
+                    */
+                    // max-height: 70vh; /* 
                     box-shadow: 0 2px 4px 1px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
                     .lesson-progress-marker {
                         z-index:1 ;
@@ -211,6 +215,9 @@
                             width: 24px;
                             height: 24px;
                             background: white!important;
+                            #inner {
+                                fill: $white !important;
+                            }
                         }
                     }
 

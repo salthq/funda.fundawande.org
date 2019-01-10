@@ -99,9 +99,11 @@
         background-color: $brand-primary__colour;
         border-radius: 5px;
         color: #fff;
+        cursor: pointer;
         font-family: $base-header__font-family;
         font-size: 21px;
-        padding: 10px;
+        line-height: 22px;
+        padding-bottom: 8px;
         width: 100%;
         &:focus {
           outline-color: $white;
@@ -130,10 +132,17 @@
     label {
       font-weight: bold;
     }
-
+    button:focus {
+      box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+      outline-color: $brand-primary__colour;
+    }
 
   }
 
+  .registration-link:focus {
+    box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+    outline-color: $brand-primary__colour;
+  }
 }
 
 //Embedded video container responsive styling

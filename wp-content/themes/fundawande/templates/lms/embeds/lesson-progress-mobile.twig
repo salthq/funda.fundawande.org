@@ -1,8 +1,8 @@
-<!-- Expanded Sidebar Progress Component -->
+<!-- Expanded Mobile Progress Component -->
 <div class = "d-md-none">
-    <div id = "lesson-progress-mobile-modal" class="lesson-progress-mobile-modal modal mt-5 m-4" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content  ">
+    <div id = "lesson-progress-mobile-modal" class="lesson-progress-mobile-modal modal mt-5" tabindex="-1" role="dialog" style="z-index: 99999">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content ">
                     <div class = "lesson-progress d-flex justify-content-left flex-column" id = "sidebar">
                         <div class = "lesson-sidebar-header module-bg-{{module_number}} w-100 text-white text-center p-2" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
                                     <span class = "lesson-sidebar-text text-white text-center m-3 p-3">
@@ -10,8 +10,8 @@
                                     </span>
                         </div>
                         <div class = "lesson-sidebar-module-titles mx-3 py-3">
-                            <p class = "m-0"><strong>How Children Learn to Read</strong></p>
-                            <h4 class = "m-0">{{sub_unit_meta.unit.name}}</h4>
+                            <p class = "m-0"><strong>{{sub_unit_meta.module_title}}</strong></p>
+                            <h4 class = "m-0">{{sub_unit_meta.unit_title}}</h4>
                         </div>
                         <hr class="m-0">
                         <div class="my-4 row no-gutters px-4 flex-column">
@@ -39,10 +39,10 @@
 
         </div>
     </div>
-    <!-- Minimized Sidebar Progress Component -->
+    <!-- Minimized Mobile Progress Component -->
     <div class = "lesson-progress-mobile lesson-progress-mobile-minimized " id = "progress-mobile-minimized" data-toggle="modal" data-target="#lesson-progress-mobile-modal">
         <div class = "lesson-progress align-items-center d-flex no-gutters flex-row">
-            <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{module_number}}.{{ lesson_number }}</h4></div>
+            <div class = "col-auto module-bg-{{module_number}} lesson-progress-module-number  px-3 d-block"><h4 class = "m-0 text-white">{{unit_number}}.{{ lesson_number }}</h4></div>
             <div class=" lesson-progress-markers px-3 w-100 row no-gutters align-items-center flex-row">
             {% for lesson in sub_unit_meta.unit_lessons %}
                 <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>

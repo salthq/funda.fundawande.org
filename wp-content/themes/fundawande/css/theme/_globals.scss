@@ -105,11 +105,12 @@
     }
 
     hr {
-        //below styles taking
         height: 2px;
         color: #cccccc;
         opacity: 0.5;
     }
+
+    
 
     #page-wrapper {
 
@@ -183,7 +184,10 @@
     .module-btn-fill-#{$colour_key} {
         background-color: $colour_var!important;
         border-color: $colour_var!important;
-        color: $white!important;
+        color: $white !important;
+        h1,h2,h3,a {
+            color: $white !important;
+        }
         svg {
             fill: $white;
         }
@@ -366,6 +370,20 @@
      margin: auto;
      height: auto;
  }
+
+ video {
+    //This ensures videos aren't too small on mobile devices
+    min-height: 200px;
+}
+
+.current {
+    //Forces SVG icons to be white instead of the standard grey when the unit or lesson it is associated with is currently active.
+    svg {
+        #inner {
+            fill: $white !important;
+        }
+    }
+}
 
  
 

@@ -14,8 +14,8 @@ var tour = new Anno([{
     });
   },
   position: {
-    top: '3em',
-    left: '15em'
+    top: '8em',
+    left: '23em'
   },
   buttons: [AnnoButton.NextButton]
 },
@@ -23,7 +23,12 @@ var tour = new Anno([{
   target: '#back-to-units',
   position: 'right',
   content: 'Cofa le iqhosha ukuba ubuyele kwiiyunithi zokujonga',
-  buttons: [AnnoButton.BackButton, AnnoButton.NextButton]
+  buttons: [AnnoButton.BackButton, AnnoButton.NextButton],
+  onShow: function() {
+    jQuery(document).ready( function($) {
+      $('html, body').animate({ scrollTop: 0 }, 100, function () {});
+    })
+  }
 },
 {
   target : '#sidebar-minimized',

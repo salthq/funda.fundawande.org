@@ -37,7 +37,7 @@
     <!-- Minimized Sidebar Progress Component -->
     <div class = "lesson-sidebar lesson-sidebar-minimized lesson-sidebar-absolute my-3" id = "sidebar-minimized">
         <div class = "lesson-progress lesson-sidebar d-flex justify-content-center flex-column">
-            <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-center text-white my-2">{{module_number}}.{{ lesson_number }}</h4></div>
+            <div class = "module-bg-{{module_number}} w-100 d-block"><h4 class = "text-center text-white my-2">{{unit_number}}.{{ lesson_number }}</h4></div>
             <div class="my-4 row no-gutters align-items-center flex-column">
             {% for lesson in sub_unit_meta.unit_lessons %}
                 <div class = "col lesson-progress-divider {% if lesson.complete or lesson.current %}module-divider-before-{{module_number}}{% endif %}"></div>
