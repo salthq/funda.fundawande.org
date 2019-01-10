@@ -26,16 +26,15 @@ Thumbs.db
 *.class
 *.dll
 *.exe
-*.o
-*.so
-# ignore packaged files
-*.7z
 *.dmg
 *.gz
 *.iso
 *.jar
 *.rar
 *.tar
+*.zip
+*.wpress
+!.editorconfig
 *.zip
 *.wpress
 # -------------------------
@@ -49,4 +48,11 @@ Thumbs.db
 wp-content/plugins/what-the-file/*
 wp-content/plugins/debug-bar/*
 wp-content/plugins/debug-bar-timber/*
+=======
+# ignore key developer dev plugins and their associated whitelisted files
+wp-content/plugins/what-the-file/*
+wp-content/plugins/debug-bar/*
+wp-content/plugins/debug-bar-timber/*
+# track the gitignore
+>>>>>>> 9c3e48f69c34994baf5098e323ea67c459a04596
 !/.gitignore
