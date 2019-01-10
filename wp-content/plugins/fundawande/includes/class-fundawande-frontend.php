@@ -38,15 +38,32 @@ class FundaWande_Frontend {
 
         // Include single quiz
         if (( is_singular('lesson') ) || ( is_singular('quiz') )) {
-            wp_enqueue_script(FundaWande()->token .'-single-lesson', FundaWande()->plugin_url . 'assets/js/single-lesson.min.js', array(), FW_VER, true);
-            wp_localize_script( FundaWande()->token .'-single-lesson', 'fundawande_ajax_object', array( 'ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php') );
+			wp_enqueue_script(FundaWande()->token .'-single-lesson', FundaWande()->plugin_url . 'assets/js/single-lesson.min.js', array(), FW_VER, true);
+			wp_localize_script( FundaWande()->token .'-single-lesson', 'fundawande_ajax_object', array( 'ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php') );
 
         }
 
         // Include review activity page assets
         if (( is_page_template('template-login.php')  )) {
             wp_enqueue_script(FundaWande()->token .'-login', FundaWande()->plugin_url . 'assets/js/login.min.js', array(), FundaWande()->version, true);
+		}
+		
+		// Include coach dashboard page assets
+		if (( is_page_template('template-coach-dash.php')  )) {
+		wp_enqueue_script(FundaWande()->token .'-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
+		wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
+		wp_enqueue_style( 'data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css' ,array(),FW_VER );
+
+
+		}
+		
+		   // Include review activity page assets
+		   if (( is_page_template('template-review-assessment.php')  )) {
+            wp_enqueue_script(FundaWande()->token .'-review-activity', FundaWande()->plugin_url . 'assets/js/review-assessment.min.js', array(), FW_VER, true);
+
+
         }
+
 
         // Include sortable.js
 		wp_enqueue_script('sortable-js-script', FundaWande()->plugin_url . 'assets/js/sortable.min.js', array('jquery'), FundaWande()->version, true);
@@ -94,11 +111,11 @@ class FundaWande_Frontend {
 		}
 
 		//Include Lesson Page Walkthrough Script if user is on a lesson page
-		if( is_singular('lesson') ) {
+		if( is_singular('lesson') || is_singular('quiz') ) {
 			// TODO: Remove the initial tour script below
 			//If this is the first time that the user has landed on the lesson page, 
 			//and the terms and conditions have been signed, the script will load.
-			if(get_user_meta($user_id, 'first-visit', true) == 0 && get_user_meta($user_id, 'legal', true) == 'agreed') {
+			if(get_user_meta($user_id, 'first-visit', true) == 0 && get_user_meta($user_id, 'legal', true) == 'agreed' && !wp_is_mobile()) {
 				wp_enqueue_script('initial-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-initial-tour.min.js', array('jquery'), FundaWande()->version, true);
 				update_user_meta($user_id, 'first-visit', 1);
 			}

@@ -67,6 +67,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
             }
             ?>
         </div>
+        
 
         <div class="_top-mobile-title">
             <p class="_text-mobile">
@@ -85,7 +86,7 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 ?>
 
                 <div class="col-6 col-md row no-gutters _answer-container justify-content-center">
-                    <div class="col mr-md-0 mr-4<?php echo esc_attr($option['option_class']); ?> _image-container">
+                    <div class="col mr-md-0 mr-4<?php echo esc_attr($option['option_class']); ?> _image-container <?php echo array_key_exists($imageHash, $userAnswers) ?  'chosen' : '' ;?>">
                         <?php echo wp_get_attachment_image($parts[1], ['390', '300'], '', ['class' => 'img-responsive']); ?>
 
                         <div class="_sortable-spot"></div>
@@ -124,6 +125,9 @@ $uniqueId = FundaWande()->question->getUniqueId();
                 $count++;
             }
             ?>
+        </div>
+        <div >
+            <p class="_text-desktop"><small>*To change your answers, drag from the top (choices) to the bottom (answers) again</small></p>
         </div>
     </div>
 </div>

@@ -50,6 +50,7 @@ if (class_exists('Timber')) {
 
     $context['sub_unit_meta'] = $sub_unit_meta;
     $context['module_number'] = $sub_unit_meta->module_number;
+    $context['unit_number'] = $sub_unit_meta->unit_number;
 
 
 

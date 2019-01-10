@@ -34,9 +34,14 @@ if ( class_exists( 'Timber' ) ) {
         $first_name = sanitize_text_field($_POST['first_name']);
         $last_name = sanitize_text_field($_POST['last_name']);
         $user_login = sanitize_text_field($_POST['user_login']);
+        $school = sanitize_text_field($_POST['school']);
+        $province = sanitize_text_field($_POST['province']);
 
         if (!empty($user_login)) {
-            $user_id = FundaWande()->login->fw_register_user($user_login, $first_name, $last_name);
+            $user_id = FundaWande()->login->fw_register_user($user_login, $first_name, $last_name, $school, $province);
+            update_user_meta( $user_id, 'school', $school);
+            update_user_meta( $user_id, 'province', $province);
+
 
             if (!$user_id) {
                 $context['register_failed'] = true;
@@ -45,5 +50,6 @@ if ( class_exists( 'Timber' ) ) {
             $context['form_error'] = true;
         }
     }
+
     Timber::render(array('template-register.twig', 'page.twig'), $context);
 }

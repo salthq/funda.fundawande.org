@@ -14,8 +14,8 @@ var tour = new Anno([{
     });
   },
   position: {
-    top: '3em',
-    left: '15em'
+    top: '8em',
+    left: '23em'
   },
   buttons: [AnnoButton.NextButton]
 },
@@ -23,5 +23,18 @@ var tour = new Anno([{
   target : '#module-card',
   position: 'bottom',
   content : "La makhadi abonisa ulwazi malunga nondyulo nganye. Cofa kwi 'jonga imodyuli' ukubona iiyunithi kule modyuli",
-  buttons: [AnnoButton.BackButton, AnnoButton.DoneButton]
+  buttons: [{
+    text: 'Buyela',
+    className: 'anno-btn-low-importance',
+    click: function() {
+      return this.switchToChainPrev();
+    }
+  }, 
+  {
+    text: 'Yenziwe',
+    className: 'pulse',
+    click: function() {
+      return this.hide();
+    }
+  }]
 }])

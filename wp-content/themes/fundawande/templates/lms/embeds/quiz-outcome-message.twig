@@ -1,0 +1,56 @@
+{# Set the quiz outcome message  #}
+<div class="container quiz-message-container ">
+    <div class="row flex-sm-column flex-md-row quiz-message-box {% if quiz_retry %}red-border{%  elseif lesson_complete %}green-border{% else %}primary-border{% endif %} mx-3 my-5 p-3">
+        <div class="col-auto d-none d-md-block">
+            {{source('/assets/lms/quiz_outcome.svg')}}
+        </div>
+        {%  if quiz_retry %}
+            <div class="col-sm-12 col-md">
+                {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
+            </div>
+            <div class="col-sm-12 col-md-auto d-flex flex-column">
+                <a class="btn mx-3 mx-md-0 my-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}">
+                    {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
+                </a>
+                <a class="fw-quiz-reset btn primary-btn-fill mx-3 mx-md-0" href="#" id="quiz-reset">
+                    {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
+                </a>
+            </div>
+            {% elseif lesson_complete %}
+            <div class="col">
+                {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+</div>
+
+<script>
+    function animate(elem, style, unit, from, to, time, prop) {
+        if (!elem) {
+            return;
+        }
+        var start = new Date().getTime(),
+            timer = setInterval(function() {
+            var step = Math.min(1, (new Date().getTime() - start) / time);
+            if (prop) {
+                elem[style] = from + step * (to - from) + unit;
+            } else {
+                elem.style[style] = from + step * (to - from) + unit;
+            }
+            if (step === 1) {
+                clearInterval(timer);
+            }
+            }, 25);
+        if (prop) {
+            elem[style] = from + unit;
+        } else {
+            elem.style[style] = from + unit;
+        }
+    }
+
+    window.onload = function () {
+        var target = document.getElementById("quiz-questions");
+        animate(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop -350, 1000, true);
+    };
+</script>

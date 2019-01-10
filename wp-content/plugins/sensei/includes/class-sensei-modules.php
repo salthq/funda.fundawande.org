@@ -999,8 +999,12 @@ class Sensei_Core_Modules
 		if ($order_string && $course_id) {
 			$order = explode(',', $order_string);
 			update_post_meta(intval($course_id), '_module_order', $order);
+			do_action('create_module_key_after_ordering', $course_id );
+			
 			return true;
 		}
+		// CUSTOM PANGO ACTION
+		
 		return false;
 	}
 

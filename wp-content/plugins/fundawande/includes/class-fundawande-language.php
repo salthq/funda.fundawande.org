@@ -36,7 +36,7 @@ class FundaWande_Language {
         // Determine if $language was assigned, if not then assign to the default language
         if ($language === null ) {
             // Default to eng for pilot
-            // TODO remove this default for the language changing pilot
+            // TODO: remove this default for the language changing pilot
             $language = 'eng';  
         }
 

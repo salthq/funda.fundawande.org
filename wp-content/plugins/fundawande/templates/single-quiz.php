@@ -33,7 +33,36 @@
 
 		<section class="entry quiz-questions">
 
-	        <?php if ( sensei_quiz_has_questions() ): ?>
+			<?php if ( sensei_quiz_has_questions() ): ?>
+			<?php
+                // Check whether feedback has been released
+                $has_feedback = FundaWande()->quiz->user_can_view_feedback(Sensei()->quiz->data->quiz_lesson, get_current_user_id());
+                $is_submitted = FundaWande()->quiz->user_has_submitted(Sensei()->quiz->data->quiz_lesson, get_current_user_id());
+
+                ?>
+
+
+                <?php
+                if ($has_feedback && $is_submitted) { ?>
+
+                    <?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
+
+                        <div class="<?php sensei_the_question_class();?>">
+
+
+                            <?php  do_action('fundawande_question_feedback_template');
+                            ?>
+
+                        </div>
+
+
+                    <?php endwhile; ?>
+
+
+
+                <?php } else {
+
+                ?>
 
 	            <form method="POST" action="<?php echo esc_url_raw( get_permalink() ); ?>" enctype="multipart/form-data">
 
@@ -109,7 +138,8 @@
 
 	                ?>
 
-	            </form>
+				</form>
+			<?php } ?>
 	        <?php else:  ?>
 
 	            <div class="sensei-message alert"> <?php _e( 'There are no questions for this Quiz yet. Check back soon.', 'woothemes-sensei' ); ?></div>

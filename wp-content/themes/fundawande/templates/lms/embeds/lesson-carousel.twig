@@ -26,10 +26,8 @@
         {% for item in content.carousel_items %}
             <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
                 <div class = "lesson-image-wrapper row justify-content-center">
-                    {# Remove whitespace from beginning and end of the file name before appending to media url #}
-                    {% set file_name =  item.image_file_name|trim %}
                     <div class="lesson-carousel-image  col">
-                        <img class = "d-block " src ="{{ media_url~file_name }}">
+                        <img class = "d-block " src ="{{ item.image }}">
                     </div>
                     {% block carousel_text %}
                         <div class="col-12">

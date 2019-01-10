@@ -5,12 +5,12 @@
 {% import "mixins.twig" as mixin %}
 
 {# Set lesson number #}
-{% set lesson_number=0 %}
+{% set lesson_number = 0 %}
 {% set lesson_complete = false %}
 {% for lesson in sub_unit_meta.unit_lessons %}
 
     {% if lesson.ID == quiz_lesson.ID %}
-        {% set lesson_number=loop.index %}
+        {% set lesson_number = loop.index %}
         {% if lesson.complete %}
             {% set lesson_complete = true %}
         {% endif %}
@@ -21,105 +21,20 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        {# Include mobile or desktop progress #}
-        {% if is_mobile %}
-            {% include '/lms/embeds/lesson-progress-mobile.twig' %}
-        {% else %}
-            {% include '/lms/embeds/lesson-sidebar.twig' %}
-        {% endif %}
 
-        <div class = "container-fluid lesson-header">
-            <div class = "container">
-                <div class = "row lesson-navigation-top">
-                    <div class = "col-2 col-md-4">
-                        <a class = "btn module-btn-outline-{{module_number}} py-4 my-4" href = "{{sub_unit_meta.unit.link}}">
-                            {{source('/assets/arrow_left.svg')}}
-                            <br>
-                            <span class = "d-none d-md-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span>
-                        </a>
-                    </div>
-                    <div class = "col-10 col-md-4 text-center my-4">
-                        <!-- TODO: change lesson number to be dynamic-->
-                        <h1><strong>Lesson {{ lesson_number }}/{{sub_unit_meta.unit_lessons|length}}</strong></h1>
-                        <h1>{{quiz_lesson.get_field('lesson_title')}}</h1>
+        {# Include mobile progress component #}
+        {% include '/lms/embeds/lesson-progress-mobile.twig' %}
+        {# Include desktop progress component #}
+        {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {# Include lesson header component #}
+        {% include '/lms/embeds/lesson-header.twig' %}
 
-                    </div>
-                </div>
-            </div>
-        </div>
         {# If quiz outcome is set then show message and modal #}
-        {%  if quiz_retry or lesson_complete %}
-
-            {# Set the modal content depending on outcome #}
-            {%  if quiz_retry %}
-                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_retry_content') %}
-            {% elseif lesson_complete %}
-                {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_success_content')  %}
-            {% endif %}
-            {# Set the modal ID to use to open the modal #}
-            {% set modal_id = "quiz-message" %}
-            {% embed "embeds/modals/modal-global.twig" %}
-                {# Add quiz outcome header to modal #}
-                {% block modal_header %}
-
-                        <div class="col-auto">
-                            {{source('/assets/lms/quiz_outcome.svg')}}
-                        </div>
-                        <div class="col-auto">
-                           <h2>{{attribute(options, lang.prefix~'quiz_outcome_header')}}</h2>
-                        </div>
-
-                {% endblock %}
-                {# Remove close button #}
-                {% block modal_close %}
-                
-                {% endblock %}
-                {# Add quiz modal content to modal #}
-                {% block modal_body %}
-
-                   <div class="col-12">
-                       {{  modal_content }}
-                   </div>
-
-                {% endblock %}
-
-            {% endembed %}
-            {# Default the modal to open #}
-            <script>
-                jQuery(document).ready( function($) {
-                    $('#{{ modal_id }}').modal('show');
-                });
-            </script>
-
-            {# Set the quiz outcome message  #}
-            <div class = "container quiz-message-container ">
-                <div class="row flex-sm-column flex-md-row quiz-message-box primary-border mx-3 my-5 p-3">
-                    <div class="col-auto d-none d-md-block">
-                        {{source('/assets/lms/quiz_outcome.svg')}} 
-                    </div>
-                    {%  if quiz_retry %}
-
-                        <div class="col-sm-12 col-md">
-                            {{  attribute(options, lang.prefix~'quiz_outcome_retry_message')  }}
-                        </div>
-                        <div class="col-sm-12 col-md-auto d-flex flex-column">
-                            <a   class="btn mx-3 mx-md-0 my-2 primary-btn-outline" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                               {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
-                            </a>
-                            <a id="quiz-reset"  class="fw-quiz-reset btn primary-btn-fill mx-3 mx-md-0" href="#" >
-                                {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
-                            </a>
-                        </div>
-
-                    {% elseif lesson_complete %}
-                        <div class="col">
-                            {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
-                        </div>
-                    {% endif %}
-
-                </div>
-                <hr>
-            </div>
+        {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
+            {% include "/lms/embeds/quiz-outcome-message.twig" %}
+        {% endif %}
+        {%  if (quiz_retry or lesson_complete) and show_notifications %}
+            {% include '/lms/embeds/modals/modal-quiz.twig' %}
         {% endif %}
 
 
@@ -127,60 +42,11 @@
         {% set lesson_post = quiz_lesson %}
         {% include '/lms/embeds/lesson-content.twig' %}
         <!-- Quiz Content-->
-        <div class = "container mt-5">
-            <div class="row">
-                <div class="col-12">
-                {% do action('fundawande_single_quiz_content',post.id) %}
+        {% include "/lms/embeds/quiz-content.twig" %}
 
-                </div>
-            </div>
-        </div>
+
         <!-- Bottom navigation-->
-        <div class = "container pb-5">
-            <div class="row my-0 justify-content-between">
-                <div class="lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
-                    {% if sub_unit_meta.nav.prev %}
-                        <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn module-btn-outline-{{module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
-                    {% endif %}
-                </div>
-                <div class=" lesson-navigation-bottom col-12 col-md-auto text-center py-1 py-md-0">
-                    {% if quiz_retry %}
-                        <a   class="btn mr-md-3 mr-0 mb-2 module-btn-outline-{{sub_unit_meta.module_number}}" href="{{fn('get_permalink',sub_unit_meta.unit_lessons[0].ID)}}" >
-                            {{  attribute(options, lang.prefix~'quiz_review_button_text')  }}
-                        </a>
-                        <a id="quiz-reset"  class=" fw-quiz-reset btn module-btn-fill-{{sub_unit_meta.module_number}}" href="#" >
-                            {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
-                        </a>
-                    {% elseif lesson_complete %}
-                        {% if sub_unit_meta.is_last_in_unit %}
-                            {% include '/embeds/modals/modal-end-unit.twig' %}
-                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before showing the end of unit modal #}
-                            {% if post.get_field('custom_feedback_message') %}
-                                {% include '/embeds/modals/modal-end-lesson.twig' %}
-                                <button  type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-lesson-modal">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                </button>
-                            {% else %}
-                                <button type="button" class="btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-toggle="modal" data-target="#end-unit-modal">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                </button>
-                            {% endif %}
-                        {% else %}
-                            <a id="lesson-complete" href = "#" class = "btn module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-                        {% endif %}
-                    {% elseif quiz_submitted %}
-                   
-                        <a  class="btn module-btn-fill-{{module_number}}" href="{{fn('get_permalink',sub_unit_meta.nav.next)}}" >
-                            {{  attribute(options, lang.prefix~'next_nav_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                        </a>
-                    {% else %}
-                        <a id="quiz-complete"  class="btn module-btn-fill-{{module_number}}" href="#" >
-                            {{  attribute(options, lang.prefix~'quiz_submit_button_text')  }} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        {% include "/lms/embeds/quiz-navigation.twig" %}
     </div><!-- #wrapper -->
 
 {% endblock %}

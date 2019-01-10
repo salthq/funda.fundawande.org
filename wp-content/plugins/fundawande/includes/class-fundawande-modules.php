@@ -23,6 +23,8 @@ class FundaWande_Modules {
     public function __construct() {
 
         // Add the construct elements
+        add_action( 'edit_term', array($this,'handle_module_unit_edit'), 10, 3 );
+        add_action( 'create_module_key_after_ordering', array($this,'handle_module_unit_ordering'), 10, 1 );
 
     }
 
@@ -64,12 +66,11 @@ class FundaWande_Modules {
                 // get user current module
                 $user_current_module = get_user_meta($user_id,'fw_current_module',true);
 
-                // check if this unit key is equal to current unit key and if so, aassign current proporty
+                // check if this unit key is equal to current unit key and if so, assign current property
                 if ($module_key == $user_current_module) {
-                    // TODO change after
 
-//                    $course_modules[$key]->current = true;
-                    $course_modules[$key]->current = false;
+                    $course_modules[$key]->current = true;
+                    // $course_modules[$key]->current = false;
                 }
 
 
@@ -99,6 +100,108 @@ class FundaWande_Modules {
         return $course_modules;
 
     } // end get_course_modules
+
+    /**
+     * Set module unique key after course module edit
+     *
+     * @param integer $term_id. The term ID being edited
+     * @param integer $tt_id. The taxonomy id?
+     * @param integer $taxonomy. The taxonomy being edited
+     *
+     */
+    public function handle_module_unit_edit($term_id, $tt_id, $taxonomy) {
+        // if the taxonomy being edited is not module, return.
+        if ($taxonomy != 'module') {
+            return __return_false();
+        }
+
+        // Get course id from module id
+        $course_id = self::get_module_course($term_id);
+
+        self::set_module_unit_unique_key($course_id );
+
+        return true;
+
+    } // end set_module_unit_unique_key
+
+    /**
+     * Set module unique key after course module edit
+     *
+     * @param integer $course_id. The course ID being ordered
+     *
+     */
+    public function set_module_unit_unique_key($course_id) {
+         // Get all modules in the course
+         $course_modules = Sensei()->modules->get_course_modules($course_id);
+         // Get the unique key from the course
+         $course_unique_key = get_post_meta($course_id,'fw_unique_key',true);
+         $course_language = get_post_meta($course_id,'course_language',true);
+ 
+         
+         // Module numbering starts at 0 in the FW courses so we need to start at -1 to allow first increment 
+         $course_module_number = -1;
+         // unit numbering starts at 1
+         $course_unit_number = 1;
+ 
+         // loop through the course modules
+         foreach($course_modules  as $key => $module) {
+ 
+             // if there is a module parent then it's a child module (unit)
+             if ($module->parent) {
+                 
+                 // Set the unique key programmatically
+                 $module->key = $unique_key = sprintf("%s_m%02d_u%02d",$course_unique_key,$course_module_number, $course_unit_number);
+                 update_term_meta($module->term_id,'fw_unique_key',$unique_key);
+                 $module_title = get_term_meta($module->term_id,'module_title',true);
+                 $name = sprintf("%s_m%02d_u%02d_%s | %s",$course_unique_key,$course_module_number, $course_unit_number,$course_language,$module_title);
+                 global $wpdb;
+                 $wpdb->query( $wpdb->prepare( "
+                     UPDATE `wp_terms` SET name = %s
+                     WHERE term_id = %d;
+                 ", [
+                    $name,
+                     $module->term_id
+                 ] ) );
+                 // increment the unit number
+                 $course_unit_number++;
+ 
+             } else {
+                // Set the unique key programmatically
+                // reset unit numbering to 1 as we are in a new module
+                $course_module_number++;
+                $course_unit_number = 1;
+                $module->key = $unique_key = sprintf("%s_m%02d",$course_unique_key,$course_module_number);
+                update_term_meta($module->term_id,'fw_unique_key', $unique_key);
+                $module_title = get_term_meta($module->term_id,'module_title',true);
+                 $name = sprintf("%s_m%02d_%s | %s",$course_unique_key,$course_module_number,$course_language,$module_title);
+                 global $wpdb;
+                 $wpdb->query( $wpdb->prepare( "
+                     UPDATE `wp_terms` SET name = %s
+                     WHERE term_id = %d;
+                 ", [
+                    $name,
+                     $module->term_id
+                 ] ) );
+                // increment the module number
+             }
+         }
+    }
+
+    /**
+     * Set module unique key after course module ordering
+     *
+     * @param integer $course_id. The course ID being ordered
+     *
+     */
+    public function handle_module_unit_ordering($course_id) {
+        // if the course Id doesn't exist, return.
+        if (!$course_id) {
+            return __return_false();
+        }
+
+        self::set_module_unit_unique_key($course_id );
+
+    } // end set_module_unit_unique_key_after_order
 
     /**
      * Get module units and their lessons based on the parent module ID
@@ -160,12 +263,10 @@ class FundaWande_Modules {
      *
      */
     public function fw_module_progress($module_id) {
-//        error_log(print_r($module_id,true));
         $module_units = get_term_children($module_id, 'module' );
 
         $completed = 0;
         $total = 0;
-//        error_log(print_r($module_units,true));
         foreach ($module_units as $module_unit) {
             $total++;
             if (FundaWande()->units->fw_is_unit_complete($module_unit)) {
@@ -309,5 +410,26 @@ class FundaWande_Modules {
 
     }
 
+
+    /**
+     * Get the course ID for a given module
+     *
+     * @param int $module_id. The ID for the module
+     *
+     * @return int $course_id return the course ID that contains the module
+     */
+    public function get_module_course($module_id) {
+
+        // get all the courses in the system
+        $courses = Sensei()->course->get_all_courses();
+
+        // loop through to courses to find the first (only) one with the module in it
+		foreach ($courses as $course) {
+			if (has_term($module_id, 'module', $course->ID)) {
+                return $course->ID;
+			}
+        }
+        return false;
+    }
 
 } // end FundaWande_Modules
