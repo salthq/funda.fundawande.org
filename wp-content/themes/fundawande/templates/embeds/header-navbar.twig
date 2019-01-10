@@ -1,0 +1,28 @@
+<!-- ******************* The Navbar Area ******************* -->
+<div  id="wrapper-navbar"  class="wrapper-fluid wrapper-navbar " >
+    <nav class="navbar navbar-expand-lg d-flex align-items-center h-100">
+
+        <!-- Main Menu Button -->
+        <div id="main-menu-button-container" class="px-4 h-100 d-flex align-items-center">
+            <a id="main-menu-button" class="nav-link " href="#"  role="button" data-toggle="modal" data-target="#main-menu-modal">
+                <div class="nav-hamburger nav-hamburger--htx  align-self-center ml-0 "><span></span></div>
+                <span class="open-text ml-2 text-uppercase">{{attribute(options, lang.prefix~'open_menu_text')}}</span>
+                <span class="close-text ml-2 text-uppercase">{{attribute(options, lang.prefix~'close_menu_text')}}</span>
+            </a>
+        </div>
+
+        <!-- Tooltips Button -->
+        <div  id = "view-tooltips" class = "d-none d-md-block pr-4" style="background-color: #4a4a4a">
+            <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 ">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
+        </div>
+
+        {# TODO: Re-add this once decision on language changing has been reached #}
+        {# <!-- Language Change Button -->
+        {% if lang.id == 'eng' %}
+            <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
+        {% else %}
+            <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
+        {% endif %} #}
+
+    </nav>
+</div><!-- .wrapper-navbar end -->

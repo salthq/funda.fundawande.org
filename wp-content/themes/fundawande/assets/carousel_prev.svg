@@ -1,0 +1,7 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <title>Carousel Previous Icon</title>
+    <g transform="translate(0 0)" fill="none">
+        <circle cx="50" cy="50" r="50"/>
+        <path d="M62.629 27.454c1.766-1.758 1.766-4.609 0-6.368-1.766-1.758-4.629-1.758-6.395 0l-25.84 25.73c-1.766 1.758-1.766 4.609 0 6.368l25.84 25.73c1.766 1.758 4.629 1.758 6.395 0s1.766-4.609 0-6.368l-22.655-22.558 22.655-22.534z" stroke="#fff" stroke-width="2" fill="#fff" fill-rule="nonzero"/>
+    </g>
+</svg>

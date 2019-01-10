@@ -50,4 +50,8 @@ wp-content/plugins/what-the-file/*
 wp-content/plugins/debug-bar/*
 wp-content/plugins/debug-bar-timber/*
 # track the gitignore
+<<<<<<< HEAD
 !/.gitignore
+=======
+!/.gitignore
+>>>>>>> c69cc8bbb1c12304b53737e026b90ec6ade21601

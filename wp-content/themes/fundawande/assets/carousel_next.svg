@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Carousel Next Icon</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-834.000000, -1607.000000)">
+            <g transform="translate(110.000000, 851.000000)">
+                <g transform="translate(0.000000, 310.000000)">
+                    <g transform="translate(774.000000, 496.000000) rotate(-180.000000) translate(-774.000000, -496.000000) translate(724.000000, 446.000000)">
+                        <circle fill="#61C436" cx="50" cy="50" r="50"></circle>
+                        <path d="M69.0575598,66.1174079 C70.8159819,67.8833447 73.6669473,67.8833447 75.4253694,66.1174079 C77.1837916,64.3514712 77.1837916,61.4883221 75.4253694,59.7223854 L49.6955327,33.8825921 C47.9371106,32.1166553 45.0861452,32.1166553 43.3277231,33.8825921 L17.5978864,59.7223854 C15.8394642,61.4883221 15.8394642,64.3514712 17.5978864,66.1174079 C19.3563085,67.8833447 22.207274,67.8833447 23.965696,66.1174079 L46.5239425,43.4627587 L69.0575598,66.1174079 Z" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero" transform="translate(46.511628, 50.000000) rotate(-90.000000) translate(-46.511628, -50.000000) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

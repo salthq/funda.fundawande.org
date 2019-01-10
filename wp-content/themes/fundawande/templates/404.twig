@@ -1,0 +1,38 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper wrapper-404" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container">
+            <div class = "row my-3">
+                <div class = "col-12 text-center my-5">
+                    {{ source('/assets/error_icon.svg') }}
+                </div>
+                <div class = "col-12 text-center mb-2">
+                    <h1><strong>{{attribute(options, lang.prefix~'404_title')}}</strong></h1>
+                </div>
+            </div>
+            <hr>
+            <div class = "row my-3">
+                <div class = "col-12 text-center my-2">
+                    <h3>{{attribute(options, lang.prefix~'404_instructions')}}</h3>
+                </div>
+                <div class = "col-12 d-flex justify-content-center">
+                    <a class="d-flex flex-column align-items-center justify-content-center text-center p-5" href="{{course_link}}" >
+                        {{ source('assets/menu/dash_menu_icon.svg') }}
+                        <strong><span>{{attribute(options, lang.prefix~'go_to_modules_link')}}</span></strong>
+                    </a>
+                    <a class="d-flex flex-column align-items-center justify-content-center text-center p-5" href="{{current_lesson_link}}" >
+                        {{ source('assets/menu/modules_menu_icon.svg') }}
+                        <strong><span>{{attribute(options, lang.prefix~'continue_learning_link')}}</span></strong>
+                    </a>
+                </div> 
+            </div>
+        </div>
+
+    </div><!-- #wrapper -->
+{% endblock %}

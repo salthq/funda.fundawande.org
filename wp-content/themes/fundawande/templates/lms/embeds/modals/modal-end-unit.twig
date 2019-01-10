@@ -1,0 +1,40 @@
+<!-- End of Unit Modal -->
+{% set modal_id = "end-unit-modal" %}
+{% embed "embeds/modals/modal-global.twig" %}
+  {# Add quiz outcome header to modal #}
+  {% block modal_header %}
+    <h5 class="modal-title">
+      <span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span>
+      <strong>{{attribute(options, lang.prefix~'well_done_text')}}, {{user.display_name}}!</strong>
+    </h5>
+  {% endblock %}
+  {# Remove the close button #}
+  {% block modal_close %}
+
+  {% endblock %}
+  {# Add quiz modal content to modal #}
+  {% block modal_body %}
+
+      <p>You have successfully completed the <strong>{{sub_unit_meta.unit_title}}</strong> unit</p>
+
+  {% endblock %}
+
+  {% block modal_footer %}
+    <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill text-center" >
+      Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+    </a>
+  {% endblock %}
+
+{% endembed %}
+
+<script>
+  //If the end of lesson modal has been included (which means there is a custom feedback message)
+  //then don't show the end of unit modal upon clicking the 'Complete Unit' button
+  jQuery(document).ready( function($) {
+      $('#lesson-complete').click(function(){
+        if(!$('#end-lesson-modal').length) {
+          $('#{{ modal_id }}').modal('show');
+        }
+      });
+  });
+</script>
