@@ -45,14 +45,9 @@ Thumbs.db
 !README.md
 !CHANGELOG.md
 !composer.json
-wp-content/plugins/what-the-file/*
-wp-content/plugins/debug-bar/*
-wp-content/plugins/debug-bar-timber/*
-=======
 # ignore key developer dev plugins and their associated whitelisted files
 wp-content/plugins/what-the-file/*
 wp-content/plugins/debug-bar/*
 wp-content/plugins/debug-bar-timber/*
 # track the gitignore
->>>>>>> 9c3e48f69c34994baf5098e323ea67c459a04596
 !/.gitignore
