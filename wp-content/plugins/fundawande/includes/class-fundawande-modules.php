@@ -66,7 +66,7 @@ class FundaWande_Modules {
                 // get user current module
                 $user_current_module = get_user_meta($user_id,'fw_current_module',true);
 
-                // check if this unit key is equal to current unit key and if so, aassign current property
+                // check if this unit key is equal to current unit key and if so, assign current property
                 if ($module_key == $user_current_module) {
 
                     $course_modules[$key]->current = true;
