@@ -1,10 +1,8 @@
 <!-- Content Type: PDF Container Width -->
 <div class = "container my-5">
     <div class = "row">
-        <div class = "col-12 text-center pt-4">
-            <a target="_blank" href="{{content.file}}">
-                <img class = "d-block" src ="{{ content.holding_image }}">
-            </a>
+        <div class = "col-12 text-center py-4">
+            {% include "lms/embeds/pdf-image.twig" %}
         </div>
     </div>
 </div>

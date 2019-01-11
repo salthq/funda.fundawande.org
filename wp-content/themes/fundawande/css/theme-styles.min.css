@@ -656,7 +656,12 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:before{content:"";background:-webkit-linear-gradient(left,white 50%,transparent 50%,transparent 0),#ccc;background:linear-gradient(90deg,white 50%,transparent 50%,transparent 0),#ccc;background-size:7px auto;height:4px;width:calc(100% + 2px);border-radius:0;position:absolute;top:7px}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type{min-height:0;min-width:0;display:none}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-divider:first-of-type:before{display:none}
-}#end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
+}.single-lesson-wrapper .pdf{position:relative}
+.single-lesson-wrapper .pdf:hover .pdf-image{opacity:.3}
+.single-lesson-wrapper .pdf:hover .pdf-text-container{opacity:1}
+.single-lesson-wrapper .pdf-image{opacity:1;-webkit-transition:.5s ease;transition:.5s ease;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;opacity:0;position:absolute;top:50%;left:50%;width:30%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+#end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-markers{overflow:scroll;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-marker{z-index:1;width:20px;height:20px;border-radius:50%;background:#ccc}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-marker.current{border:2px solid;width:24px;height:24px;background:#8bb5cc !important}

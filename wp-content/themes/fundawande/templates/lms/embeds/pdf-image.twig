@@ -1,0 +1,12 @@
+<div class="pdf">
+    <a target="_blank" href="{{content.file}}">
+        <img class="d-block pdf-image" src="{{ content.holding_image }}">
+        <button class="pdf-text-container module-btn-fill-{{module_number}} p-2">
+            {% if lang.id == 'eng' %}
+                <span>Click to view PDF</span>
+            {% else %}
+                <span>Cofa ukuze ukhangele i-PDF</span>
+            {% endif %}
+        </button>
+    </a>
+</div>

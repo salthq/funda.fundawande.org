@@ -56,6 +56,10 @@
             {# PDF Container Width #}
         {% elseif content.acf_fc_layout == 'pdf_container_width' %}
             {% include  'lms/content-types/pdf/pdf-container-width.twig'%}
+        {% elseif content.acf_fc_layout == 'pdf_pulled_left' %}
+            {% include  'lms/content-types/pdf/pdf-pulled-left.twig'%}
+        {% elseif content.acf_fc_layout == 'pdf_pulled_right' %}
+            {% include  'lms/content-types/pdf/pdf-pulled-right.twig'%}
 
         {# Video Content Types #}
 
