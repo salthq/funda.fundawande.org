@@ -52,7 +52,12 @@
         {% elseif content.acf_fc_layout == 'image_pulled_right' %}
             {% include '/lms/content-types/image/image-pulled-right.twig' %}
 
-            {# Video Content Types #}
+        {# PDF Content Types #}
+            {# PDF Container Width #}
+        {% elseif content.acf_fc_layout == 'pdf_container_width' %}
+            {% include  'lms/content-types/pdf/pdf-container-width.twig'%}
+
+        {# Video Content Types #}
 
             {# Full width video #}
         {% elseif content.acf_fc_layout == 'video_full_width' %}
