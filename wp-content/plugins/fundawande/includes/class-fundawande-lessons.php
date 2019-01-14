@@ -87,7 +87,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               global $wpdb;
               $wpdb->query( $wpdb->prepare( "
                   UPDATE `wp_posts` SET post_title = %s
-                  WHERE post_id = %d;
+                  WHERE ID = %d;
               ", [
                   $lesson_name,
                  $post_ID
