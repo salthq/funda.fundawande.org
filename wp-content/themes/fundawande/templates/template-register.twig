@@ -5,12 +5,12 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper registration-wrapper login-wrapper  background-secondary d-flex align-items-center" xmlns="http://www.w3.org/1999/html">
-        <div class="container card m-3">
+        <div class="container m-3">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6  my-md-5 px-md-5 py-5">
+                <div class="card col-12 my-md-5 px-md-5 py-md-5 py-3">
                     {% if not register_submitted %}
                         <!-- Registration Form Header -->
-                        <div class="text-center login-header">
+                        <div class="text-center login-header p-3">
                             {{ source('assets/logos/fw_logo_landscape.svg') }}
                             {# <h5 class="mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
                             <form method="GET">
@@ -51,7 +51,7 @@
                     {% endif %}
                     {% if (not register_submitted) or (register_submitted and register_failed) %}
                         <!-- Registration Form -->
-                        <form action="?" id='fw-registration-form' method="post">
+                        <form class="p-3" action="?" id='fw-registration-form' method="post">
                             <div class="reg-username mb-3">
                                 <label for="user_login">
                                     {{post.get_field(lang.prefix~'id_number_label')}}</label>
@@ -97,7 +97,7 @@
                             </button>
                             <br/>
                         </form>
-                        <div class="my-3 text-center">
+                        <div class="my-3 text-center p-3">
                             <a class="login-help login-noerror" href="/login">
                                 {{post.get_field(lang.prefix~'user_account_exists')}}</a>
                         </div>
