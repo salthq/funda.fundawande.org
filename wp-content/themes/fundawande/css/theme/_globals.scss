@@ -378,6 +378,10 @@
  * Misc Styling
  */
 
+.fw-media {
+    max-width: 510px;
+}
+
  .text-tertiary {
      color: $grey-tertiary;
  }
@@ -401,9 +405,6 @@
         }
     }
 }
-
- 
-
 
  #data-table_wrapper {
     th select {

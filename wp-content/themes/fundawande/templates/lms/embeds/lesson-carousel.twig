@@ -26,7 +26,7 @@
         {% for item in content.carousel_items %}
             <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}">
                 <div class = "lesson-image-wrapper row justify-content-center">
-                    <div class="lesson-carousel-image  col">
+                    <div class="lesson-carousel-image col fw-media">
                         <img class = "d-block " src ="{{ item.image }}">
                     </div>
                     {% block carousel_text %}
