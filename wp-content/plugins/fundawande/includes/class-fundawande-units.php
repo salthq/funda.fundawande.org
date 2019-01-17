@@ -82,8 +82,9 @@ class FundaWande_Units {
             }
         }
 
-        $unit_progress = ($completed/$total) * 100;
-
+        if ($total > 0) {
+            $unit_progress = ($completed/$total) * 100;
+        }
         if ($unit_progress == 100) {
             $user_id = get_current_user_id();
             $this->fw_complete_unit($unit_id,$user_id);

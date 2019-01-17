@@ -277,7 +277,9 @@ class FundaWande_Modules {
             }
         }
 
-        $module_progress = ($completed/$total) * 100;
+        if ($total > 0) {
+            $module_progress = ($completed/$total) * 100;
+        }
 
 
         if ($module_progress == 100) {
