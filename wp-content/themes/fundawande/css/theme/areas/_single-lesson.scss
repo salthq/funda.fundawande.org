@@ -29,7 +29,7 @@
         }
       }
       .carousel-item {
-        padding-top: 2rem;
+        padding-top: 2rem; 
       }
       .carousel-indicators {
         bottom: auto;
@@ -163,22 +163,22 @@
             min-height: 20px;
             position: relative;
             &:before {
-              content: "";
-              // background: transparent!important;
-              background: linear-gradient(
-                  0deg,
-                  white 50%,
-                  transparent 50%,
-                  transparent 0
-                ),
-                #ccc;
-              background-size: auto 7px;
-              width: 4px;
-              height: calc(100% + 2px);
-              border-radius: 0;
-              position: absolute;
-              left: 23px;
-              top: -1px;
+              // content: "";
+              // // background: transparent!important;
+              // background: linear-gradient(
+              //     0deg,
+              //     white 50%,
+              //     transparent 50%,
+              //     transparent 0
+              //   ),
+              //   #ccc;
+              // background-size: auto 7px;
+              // width: 4px;
+              // height: calc(100% + 2px);
+              // border-radius: 0;
+              // position: absolute;
+              // left: 23px;
+              // top: -1px;
             }
             &.complete {
             }
@@ -224,22 +224,22 @@
             min-height: 20px;
             position: relative;
             &:before {
-              content: "";
-              // background: transparent!important;
-              background: linear-gradient(
-                  0deg,
-                  white 50%,
-                  transparent 50%,
-                  transparent 0
-                ),
-                #ccc;
-              background-size: auto 7px;
-              width: 4px;
-              height: calc(100% + 2px);
-              border-radius: 0;
-              position: absolute;
-              top: 0;
-              left: 23px;
+              // content: "";
+              // // background: transparent!important;
+              // background: linear-gradient(
+              //     0deg,
+              //     white 50%,
+              //     transparent 50%,
+              //     transparent 0
+              //   ),
+              //   #ccc;
+              // background-size: auto 7px;
+              // width: 4px;
+              // height: calc(100% + 2px);
+              // border-radius: 0;
+              // position: absolute;
+              // top: 0;
+              // left: 23px;
             }
             &.complete {
             }
@@ -321,22 +321,22 @@
           min-height: 20px;
           position: relative;
           &:before {
-            content: "";
-            // background: transparent!important;
-            background: linear-gradient(
-                0deg,
-                white 50%,
-                transparent 50%,
-                transparent 0
-              ),
-              #ccc;
-            background-size: auto 7px;
-            width: 4px;
-            height: calc(100% + 2px);
-            border-radius: 0;
-            position: absolute;
-            left: 23px;
-            top: -1px;
+            // content: "";
+            // // background: transparent!important;
+            // background: linear-gradient(
+            //     0deg,
+            //     white 50%,
+            //     transparent 50%,
+            //     transparent 0
+            //   ),
+            //   #ccc;
+            // background-size: auto 7px;
+            // width: 4px;
+            // height: calc(100% + 2px);
+            // border-radius: 0;
+            // position: absolute;
+            // left: 23px;
+            // top: -1px;
           }
           &.complete {
           }
@@ -373,8 +373,8 @@
             background: $grey-secondary;
             &.current {
               border: 2px solid;
-              width: 24px;
-              height: 24px;
+              // width: 24px;
+              // height: 24px;
               background: white !important;
             }
           }
@@ -384,20 +384,20 @@
             min-height: 18px;
             position: relative;
             &:before {
-              content: "";
-              background: linear-gradient(
-                  90deg,
-                  white 50%,
-                  transparent 50%,
-                  transparent 0
-                ),
-                #ccc;
-              background-size: 7px auto;
-              height: 4px;
-              width: calc(100% + 2px);
-              border-radius: 0;
-              position: absolute;
-              top: 7px;
+              // content: "";
+              // background: linear-gradient(
+              //     90deg,
+              //     white 50%,
+              //     transparent 50%,
+              //     transparent 0
+              //   ),
+              //   #ccc;
+              // background-size: 7px auto;
+              // height: 4px;
+              // width: calc(100% + 2px);
+              // border-radius: 0;
+              // position: absolute;
+              // top: 7px;
             }
             &.complete {
             }
