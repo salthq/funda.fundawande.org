@@ -118,7 +118,10 @@ class FundaWande_Modules {
         // Get course id from module id
         $course_id = self::get_module_course($term_id);
 
-        self::set_module_unit_unique_key($course_id );
+        // If course ID exists then set the unique key
+        if ($course_id) {
+            self::set_module_unit_unique_key($course_id );
+        }
 
         return true;
 
