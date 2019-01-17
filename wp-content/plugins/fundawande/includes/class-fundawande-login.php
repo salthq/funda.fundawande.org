@@ -49,10 +49,16 @@ class FundaWande_Login {
         if ($user_id) {
             $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
             $redirect_url = get_the_permalink($current_lesson_id);
+            $course_cohort = get_user_meta($user_id, 'fw_cohort', true);
 
             if (empty($redirect_url)) {
                 // TODO: HARDCODE IN FIRST LESSON
-                $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
+                if(is_numeric($course_cohort)) {
+                    $current_lessons = FundaWande()->lessons->fw_get_course_sub_units($course_cohort);
+                }
+                else {
+                    $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
+                }
                 $redirect_url = get_the_permalink($current_lessons[0]->ID);
             }
 

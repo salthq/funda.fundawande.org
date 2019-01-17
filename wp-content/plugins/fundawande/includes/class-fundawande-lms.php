@@ -548,7 +548,14 @@ class FundaWande_Lms {
             $user_id = get_current_user_id();
         }
 
-        $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+        $course_cohort = get_user_meta($user_id, 'fw_cohort', true);
+        if(is_numeric($course_cohort)) {
+            $current_course_id = $course_cohort;
+        }
+        else {
+            $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+        }
+
 
         if (is_numeric($current_course_id)) {
             return $current_course_id;
