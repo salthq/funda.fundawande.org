@@ -379,37 +379,36 @@ players.forEach(function (player) {
 
     // Handle full screen toggle functionality
     function toggleFullScreen() {
-        if (player.requestFullscreen) {
-            if (document.fullScreenElement) {
-                document.cancelFullScreen();
-            } else {
+        var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+        (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+        (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+        (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+    
+        if (!isInFullScreen) {
+            if (player.requestFullscreen) {
                 player.requestFullscreen();
-            }
-        }
-        else if (player.msRequestFullscreen) {
-            if (document.msFullscreenElement) {
-                document.msExitFullscreen();
-            } else {
+            } else if (player.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+            } else if (player.webkitRequestFullScreen) {
+                player.webkitRequestFullScreen();
+            } else if (player.msRequestFullscreen) {
                 player.msRequestFullscreen();
             }
-        }
-        else if (player.mozRequestFullScreen) {
-            if (document.mozFullScreenElement) {
+            else {
+                alert("Fullscreen API is not supported");
+                document.getElementById('btnFullScreen').disabled = true;
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
-            } else {
-                player.mozRequestFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
             }
-        }
-        else if (player.webkitRequestFullscreen) {
-            if (document.webkitFullscreenElement) {
-                document.webkitCancelFullScreen();
-            } else {
-                player.webkitRequestFullscreen();
-            }
-        }
-        else {
-            alert("Fullscreen API is not supported");
-            document.getElementById('btnFullScreen').disabled = true;
         }
     }
 
