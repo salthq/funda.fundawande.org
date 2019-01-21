@@ -28,6 +28,9 @@ if (class_exists('Timber')) {
     // Check if lesson has quiz questions
     $lesson_quiz = get_post_meta($post->ID, '_quiz_has_questions', true);
 
+    $lesson_course_ID = Sensei()->lesson->get_course_id($post->ID);
+
+
     // If there are questions in lesson redirect to the quiz page
     if (0 < $lesson_quiz) {
         $lesson_quiz_ID = get_post_meta($post->ID, '_lesson_quiz', true);
@@ -38,6 +41,10 @@ if (class_exists('Timber')) {
     $context['user'] = $user;
 
     $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
+
+    if ($lesson_course_ID != $current_course_id) {
+        wp_redirect('/change-course?current='.$current_course_id.'&new='.$lesson_course_ID);
+    }
 
     // Remove correct lesson language checker
     // FundaWande()->language->fw_correct_lesson_lang($current_course_id,$post->ID);

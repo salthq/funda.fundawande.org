@@ -34,9 +34,14 @@ if (class_exists('Timber')) {
     $context['quiz_lesson'] =  $lesson;
 
     $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
+    $lesson_course_ID = Sensei()->lesson->get_course_id($lesson_id);
+
+    if ($lesson_course_ID !== $current_course_id) {
+        wp_redirect('/change-course?current='.$current_course_id.'&new='.$lesson_course_ID);
+    }
 
 
-    FundaWande()->language->fw_correct_lesson_lang($current_course_id, $lesson->ID);
+    // FundaWande()->language->fw_correct_lesson_lang($current_course_id, $lesson->ID);
 
     // check if is retry quiz
     $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
