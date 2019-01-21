@@ -48,7 +48,10 @@
         }
       }
     }
-
+    .lesson-carousel-counter {
+      position: absolute;
+      top: -10px;
+    }
     .lesson-carousel-text {
       p {
         text-align: inherit;

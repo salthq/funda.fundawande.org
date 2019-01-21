@@ -649,6 +649,7 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:5%}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{width:50px}
 }.single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{height:75px}
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter{position:absolute;top:-10px}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-text p{text-align:inherit}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-image img{margin:auto;width:auto;max-width:100%}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
