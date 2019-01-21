@@ -16,6 +16,7 @@ jQuery(document).ready( function($) {
             success: function (data) {
                 // This outputs the result of the ajax request
                 console.log(data);
+                location.reload();
                 
             },
             error: function (errorThrown) {
