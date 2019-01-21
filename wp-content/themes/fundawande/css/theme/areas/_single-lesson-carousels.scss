@@ -1,5 +1,7 @@
 .single-lesson-wrapper {
   .lesson-carousel {
+    margin: 0 auto;
+    max-width: 510px;
     a {
       &:hover {
         opacity: 0.7;
@@ -21,33 +23,27 @@
       position: absolute;
       top: -35px;
       z-index: 5;
-      @include breakpoint(desktop) {
-        &-prev {
-          left: 25%;
-        }
-        &-next {
-          right: 25%;
-        }
+      &-prev {
+        left: 0;
       }
-      @include breakpoint(tablet) {
-        &-prev {
-          left: 20%;
-        }
-        &-next {
-          right: 20%;
-        }
+      &-next {
+        right: 0;
       }
       @include breakpoint(phone) {
         &-prev {
-          left: 0;
+          left: 5%;
         }
         &-next {
-          right: 0;
+          right: 5%;
+        }
+        &-icon {
+          svg {
+            width: 50px;
+          }
         }
       }
       &-icon {
         svg {
-          width: 75px;
           height: 75px;
         }
       }
