@@ -51,12 +51,20 @@ class FundaWande_Modules {
                 unset($course_modules[$key]);
 
             } else {
+                // Get the hide module variable to determine whether to show module in course
+                $hide_module = get_term_meta($module->term_id, 'hide_module', true);
+                // if the hide_module is true, then unset it from course
+                if ($hide_module) {
+                    unset($course_modules[$key]);
+                    continue;
+                }
                 // Get the term data in case there are custom fields
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
                 $module_units = get_term_children( $module->term_id,'module');
                 // If the module number meta does not exist or is different to
                 //  $course_module_number, change the module number meta to be the same as course_module_number 
                 $module_number_meta = get_term_meta($module->term_id, 'module_number', true);
+                
                 // get the module unique key
                 $module_key = get_term_meta($module->term_id, 'fw_unique_key', true);
 
