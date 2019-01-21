@@ -23,11 +23,6 @@
                     <a class=" fw-quiz-reset btn module-btn-outline-{{sub_unit_meta.module_number}}" href="#" id="quiz-reset">
                         {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
                     </a>
-                    <a id="lesson-next" href="{{fn('get_permalink',sub_unit_meta.nav.next)}}" class="btn module-btn-fill-{{sub_unit_meta.module_number}}">
-                        {{attribute(options, lang.prefix~'next_nav_text')}}
-                        <span class="p-2">
-                            {{source ('/assets/arrow_right.svg')}}</span>
-                    </a>
                 {% endif %}
                 {% if lesson_complete %}
                     {% if sub_unit_meta.is_last_in_unit %}
@@ -62,7 +57,7 @@
                                 {{source ('/assets/arrow_right.svg')}}</span>
                         </a>
                     {% endif %}
-                    {% elseif quiz_resubmit %}
+                {% elseif (quiz_resubmit and not quiz_retry) or (quiz_retry and quiz_attempts > 3) %}
                     <a class="btn module-btn-fill-{{module_number}}" href="{{fn('get_permalink',sub_unit_meta.nav.next)}}">
                         {{  attribute(options, lang.prefix~'next_nav_text')  }}
                         <span class="px-2">

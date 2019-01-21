@@ -46,6 +46,7 @@ if (class_exists('Timber')) {
     // check if is retry quiz
     $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
     $context['quiz_resubmit'] = FundaWande()->quiz->user_has_submitted($lesson_id,$user->ID);
+    $context['quiz_attempts'] = FundaWande()->quiz->get_quiz_attempts($lesson_id,$user->ID);
     $context['show_notifications'] = FundaWande()->quiz->show_assessment_notifications($lesson_id,$user->ID);
 
 
