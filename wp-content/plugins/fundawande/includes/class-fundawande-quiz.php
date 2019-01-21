@@ -28,7 +28,72 @@ class FundaWande_Quiz {
         // Load quiz question template for single line and file upload with feedback
         add_action('fundawande_question_feedback_template', array($this, 'load_question_feedback_template'), 8);
 
+        
+        add_action( 'admin_notices', array($this,'show_post_order_info') );
+
+        add_action('admin_enqueue_scripts', array( $this,'al_lessons_admin_enqueue'));
+
+        add_action('FUNDAWANDE_AJAX_HANDLER_fw_reset_quiz', array($this,'fw_reset_quiz'));
+
     }
+
+     /**
+     * Complete lesson functionality to track a lesson as complete
+     *
+     * @return $comment_id return the comment ID of the completed progress indicator
+     */
+    public function fw_reset_quiz() {
+        //log the information
+        if (isset($_POST)) {
+            error_log(print_r($_POST,true));
+            $user_id = $_POST['user_id'];
+            $post_id = $_POST['post_id'];
+            Sensei_Utils::sensei_remove_user_from_lesson($post_id,$user_id);
+            echo 'success reset!';
+        }
+        die;
+    }
+    
+    
+    /**
+     * Display notice when user deletes the post
+     *
+     * When user deletes the post, show the notice for the user
+     * to go and refresh the post order.
+     *
+     * @since 1.0.0
+     */
+    function show_post_order_info() {
+        global $pagenow, $post;
+
+        $user_id = get_current_user_id();
+
+        if ( $pagenow == 'post.php' && $post->post_type == 'lesson') {
+            ?>
+            <div id="fw-updater-notice" class="updated notice">
+                <p><?php _e( 'Reset this lesson (NB: This will completely reset the current lesson & assessment and clear your progress)', 'my_plugin_textdomain' ); ?></p>
+                <p  class="submit"><a id="fw-reset-quiz" href="#" class="al-update-now button-primary" data-user-id="<?php echo $user_id; ?>" data-post-id="<?php echo $post->ID; ?>">Reset my lesson & assessment progress</a></p>
+            </div>
+            <?php
+        }
+    }
+
+     /**
+     * Enqueue lessons admin JS
+     *
+     * @return void
+     */
+    public function al_lessons_admin_enqueue( ) {
+        global $pagenow, $post;
+
+        if ( $pagenow == 'post.php' && $post->post_type == 'lesson') {
+            // Check if it is a renewal order, if not, then handle the change
+            wp_enqueue_script('lessons-admin-script', FundaWande()->plugin_url.'assets/js/lessons-admin.min.js', array(), FundaWande()->version, true);
+            wp_localize_script( 'lessons-admin-script', 'fundawande_ajax_object', array( 'ajaxurl' => FundaWande()->plugin_url . 'fundawande_ajax.php') );
+        
+        }
+    }
+
 
      /**
      * Load assessment question template for single line and upload with feedback
