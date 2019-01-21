@@ -20,6 +20,7 @@
     .lesson-carousel-control {
       position: absolute;
       top: -35px;
+      z-index: 5;
       @include breakpoint(desktop) {
         &-prev {
           left: 25%;
