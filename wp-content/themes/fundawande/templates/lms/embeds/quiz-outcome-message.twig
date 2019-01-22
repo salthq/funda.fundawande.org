@@ -16,10 +16,15 @@
                     {{  attribute(options, lang.prefix~'quiz_retry_button_text')  }}
                 </a>
             </div>
-            {% elseif lesson_complete %}
+        {% elseif lesson_complete %}
             <div class="col">
                 {{  attribute(options, lang.prefix~'quiz_outcome_success_message')  }}
             </div>
+        {% elseif quiz_resubmit %}
+            <div class="col">
+                Your submission is being reviewed, please be patient and we will get your feedback back to you as soon as possible
+            </div>
+        
         {% endif %}
     </div>
     <hr>

@@ -26,7 +26,7 @@ class FundaWande_Lms {
         add_action('FUNDAWANDE_HANDLER_nopriv_fw_lesson_complete', array( $this, 'fw_lesson_complete'));
 
         //  This hook is fired after a lesson quiz has been graded and the lesson status is 'passed' OR 'graded'
-//        add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
+       add_action( 'sensei_user_lesson_end', array( $this, 'fw_quiz_complete'),10,2);
         // do_action( 'sensei_user_lesson_end', $user_id, $lesson_id );
 
         // Fires the end of the submit_answers_for_grading function. It will fire irrespective of the submission results.
@@ -55,18 +55,20 @@ class FundaWande_Lms {
         if (isset($_POST)) {
             $user_id = $_POST['userid'];
             $post_id = $_POST['postid'];
-            $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
+            $lesson_id = $post_id;
 
             // Run normal Sensei update logic
             $activity_logged = WooThemes_Sensei_Utils::update_lesson_status($user_id, $post_id, 'complete');
             // prevent fundawande progress tracking if unique lesson key isn't assigned
-            if (!empty($lesson_key)) {
+            if (!empty($lesson_id)) {
+
                 // Determine if an existing status exists and assign
                 $current_status_args = array(
                     'number' => 1,
                     'type' => 'fw_sub_unit_progress',
                     'user_id' => $user_id,
-                    'status' => $lesson_key,
+                    'post_id' => $lesson_id,
+                    'status' => 'complete'
                 );
 
                 // possibly returns array, we just want one object
@@ -76,7 +78,7 @@ class FundaWande_Lms {
 
                 }
 
-                // If no current sub unit status then skip progress
+                // If no current sub unit status then add
                 if (empty($user_lesson_status)) {
                     $time = current_time('mysql');
                     $user = $user = get_userdata($user_id);
@@ -84,10 +86,10 @@ class FundaWande_Lms {
                         'comment_type' => 'fw_sub_unit_progress',
                         'user_id' => $user_id,
                         'comment_date' => $time,
-                        'comment_approved' => $lesson_key,
-                        'comment_karma' => 1,
+                        'comment_post_ID' => $lesson_id,
                         'comment_author' => $user->display_name,
-                        'comment_author_email' => $user->user_email
+                        'comment_author_email' => $user->user_email,
+                        'comment_approved' => 'complete'
 
                     );
 
@@ -124,22 +126,29 @@ class FundaWande_Lms {
      */
     public function fw_quiz_submitted($user_id, $quiz_id, $grade, $quiz_pass_percentage, $quiz_grade_type) {
 
-        // Set default karma for non-auto graded quizzes and failed auto quizzes
-        $karma = 0;
-
-        // Check if the pass mark was achieved if it's a auto graded quiz and set karma to 1
-        if ($grade) {
-
-            if (((int)$grade == 100) && ($quiz_grade_type == 'auto')) {
-                $karma = 1;
+        $post_id = absint(get_post_meta($quiz_id, '_quiz_lesson', true));
+        $lesson_id = $post_id;
+        
+        // Set default status for non-auto graded quizzes and failed auto quizzes
+        
+        if (FundaWande()->quiz->assessment_needs_feedback($lesson_id)) {
+            $status = 'ungraded';
+        } else {
+            $status = 'in-progress';
+             // Check if the pass mark was achieved if it's a auto graded quiz and set status
+            if ($grade) {
+                $status = 'in-progress';
+                if (((int)$grade === 100)) {
+                    $status = 'complete';
+                } 
             }
         }
+       
 
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
-        $post_id = absint(get_post_meta($quiz_id, '_quiz_lesson', true));
-        $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
+       
 
 
         // Determine if an existing review exists and assign
@@ -147,7 +156,9 @@ class FundaWande_Lms {
             'number' => 1,
             'type' => 'fw_sub_unit_progress',
             'user_id' => $user_id,
-            'status' => $lesson_key,
+            'post_id' => $lesson_id,
+            'status' => array('complete','in-progress','ungraded'),
+
         );
 
         // possibly returns array, we just want one object
@@ -164,9 +175,9 @@ class FundaWande_Lms {
             $data = array(
                 'comment_type' => 'fw_sub_unit_progress',
                 'user_id' => $user_id,
+                'comment_post_ID' => $lesson_id,
                 'comment_date' => $time,
-                'comment_approved' => $lesson_key,
-                'comment_karma' => $karma,
+                'comment_approved' => $status,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
 
@@ -188,8 +199,7 @@ class FundaWande_Lms {
         } else {
             $comment = array();
             $comment['comment_ID'] = $user_lesson_status->comment_ID;
-            $comment['comment_approved'] = $lesson_key;
-            $comment['comment_karma'] = $karma;
+            $comment['comment_approved'] = $status;
             wp_update_comment( $comment );
 
             $comment_id = $user_lesson_status->comment_ID;
@@ -223,7 +233,7 @@ class FundaWande_Lms {
             $user_id = get_current_user_id();
         }
         $post_id = $lesson_id;
-        $lesson_key = get_post_meta($post_id, 'fw_unique_key',true);
+        
 
 
         // Determine if an existing review exists and assign
@@ -231,7 +241,8 @@ class FundaWande_Lms {
             'number' => 1,
             'type' => 'fw_sub_unit_progress',
             'user_id' => $user_id,
-            'status' => $lesson_key,
+            'post_id' => $lesson_id,
+            'status' => array('complete','in-progress','ungraded'),
         );
 
         // possibly returns array, we just want one object
@@ -249,8 +260,8 @@ class FundaWande_Lms {
                 'comment_type' => 'fw_sub_unit_progress',
                 'user_id' => $user_id,
                 'comment_date' => $time,
-                'comment_approved' => $lesson_key,
-                'comment_karma' => 1,
+                'comment_approved' => 'complete',
+                'comment_post_ID' => $lesson_id,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
 
@@ -271,8 +282,7 @@ class FundaWande_Lms {
         } else {
             $comment = array();
             $comment['comment_ID'] = $user_lesson_status->comment_ID;
-            $comment['comment_approved'] = $lesson_key;
-            $comment['comment_karma'] = 1;
+            $comment['comment_approved'] = 'complete';
             wp_update_comment( $comment );
 
             $comment_id = $user_lesson_status->comment_ID;
@@ -306,7 +316,7 @@ class FundaWande_Lms {
         $query = "SELECT * FROM $wpdb->comments 
         WHERE comment_type = 'fw_sub_unit_progress' 
         AND user_id IN ($user_id) 
-        AND comment_karma = 1";
+        AND comment_approved = 'complete' ";
         $user_lesson_status = $wpdb->get_results( $query );
 
         if ($user_lesson_status) {
@@ -518,7 +528,8 @@ class FundaWande_Lms {
             'number' => 1,
             'type' => 'fw_sub_unit_progress',
             'user_id' => $user_id,
-            'status' => $lesson_key,
+            'post_id' => $lesson_id,
+            'status' => array('complete','in-progress','ungraded'),
         );
 
         $status = false;
@@ -531,8 +542,7 @@ class FundaWande_Lms {
             }
             $comment = array();
             $comment['comment_ID'] = $user_lesson_status->comment_ID;
-            $comment['comment_approved'] = $lesson_key;
-            $comment['comment_karma'] = 0;
+            $comment['comment_approved'] = 'ungraded';
             wp_update_comment( $comment );
 
         }
@@ -548,7 +558,14 @@ class FundaWande_Lms {
             $user_id = get_current_user_id();
         }
 
-        $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+        $course_cohort = get_user_meta($user_id, 'fw_cohort', true);
+        if(is_numeric($course_cohort)) {
+            $current_course_id = $course_cohort;
+        }
+        else {
+            $current_course_id = get_user_meta($user_id, 'fw_current_course', true );
+        }
+
 
         if (is_numeric($current_course_id)) {
             return $current_course_id;

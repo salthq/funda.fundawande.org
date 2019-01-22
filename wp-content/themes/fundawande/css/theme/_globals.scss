@@ -180,6 +180,10 @@
                 }
             }
         }
+        &:focus {
+            box-shadow: 0 0 0 0.1rem $colour_var;
+            outline-color: $colour_var;
+        }
     }
     .module-btn-fill-#{$colour_key} {
         background-color: $colour_var!important;
@@ -194,6 +198,10 @@
         &:hover {
             @extend .module-btn-fill-#{$colour_key};
             opacity: 0.8
+        }
+        &:focus {
+            box-shadow: 0 0 0 0.1rem $colour_var;
+            outline-color: $colour_var;
         }
     }
     .module-svg-fill-#{$colour_key} {
@@ -262,6 +270,10 @@
             fill: $white;
         }
     }
+    &:focus {
+        box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+        outline-color: $brand-primary__colour;
+    }
 }
 .primary-btn-fill {
     background-color: $brand-primary__colour;
@@ -274,6 +286,11 @@
         @extend .primary-btn-fill;
         opacity: 0.8
     }
+    &:focus {
+        box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+        outline-color: $brand-primary__colour;
+    }
+    
 }
 .primary-svg-fill {
     svg {
@@ -361,6 +378,10 @@
  * Misc Styling
  */
 
+.fw-media {
+    max-width: 510px;
+}
+
  .text-tertiary {
      color: $grey-tertiary;
  }
@@ -384,9 +405,6 @@
         }
     }
 }
-
- 
-
 
  #data-table_wrapper {
     th select {

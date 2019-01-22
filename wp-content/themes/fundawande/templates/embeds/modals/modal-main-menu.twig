@@ -28,6 +28,10 @@
                         {{ source('assets/menu/dash_menu_icon.svg') }}
                         <span>Change to Rhodes course</span>
                     </a>
+                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','3272') }}?course_id=3272" >
+                        {{ source('assets/menu/dash_menu_icon.svg') }}
+                        <span>Change to isiXhosa Teaching Reading Core Course</span>
+                    </a>
                 {% endif %}
                 <a class="d-flex align-items-center py-2 pr-3" href="{{function('wp_logout_url', '/login')}}" >
                     {{ source('assets/menu/logout_menu_icon.svg') }}

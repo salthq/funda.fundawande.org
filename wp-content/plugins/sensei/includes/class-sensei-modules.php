@@ -1868,7 +1868,7 @@ class Sensei_Core_Modules
 		// get the term an create the new term storing infomration
 		$term_name = sanitize_text_field( $_POST['newTerm'] );
 
-		if( current_user_can('manage_options' ) ) {
+		if( current_user_can('manage_categories' ) ) {
 
 			$term_slug = str_ireplace(' ', '-', trim( $term_name ) );
 
@@ -1941,7 +1941,7 @@ class Sensei_Core_Modules
 	public function filter_module_terms( $terms, $taxonomies, $args ){
 
 		//dont limit for admins and other taxonomies. This should also only apply to admin
-		if( current_user_can( 'manage_options' ) || !in_array( 'module', $taxonomies ) || ! is_admin()	){
+		if( current_user_can( 'manage_categories' ) || !in_array( 'module', $taxonomies ) || ! is_admin()	){
 			return $terms;
 		}
 
@@ -1989,7 +1989,7 @@ class Sensei_Core_Modules
 	public function filter_course_selected_terms( $terms, $course_ids_array, $taxonomies ){
 
 		//dont limit for admins and other taxonomies. This should also only apply to admin
-		if( current_user_can( 'manage_options' ) || ! is_admin() || empty( $terms )
+		if( current_user_can( 'manage_categories' ) || ! is_admin() || empty( $terms )
 			// only apply this to module only taxonomy queries so 1 taxonomy only:
 			||	count( $taxonomies ) > 1 || !in_array( 'module', $taxonomies )	){
 			return $terms;
@@ -2058,7 +2058,7 @@ class Sensei_Core_Modules
 	{
 
 		// only for admin users ont he module taxonomy
-		if ( empty( $terms ) || !current_user_can('manage_options') || !in_array('module', $taxonomies) || !is_admin()) {
+		if ( empty( $terms ) || !current_user_can('manage_categories') || !in_array('module', $taxonomies) || !is_admin()) {
 			return $terms;
 		}
 
@@ -2081,7 +2081,7 @@ class Sensei_Core_Modules
 
 			$author = Sensei_Core_Modules::get_term_author( $term->slug );
 
-			if( ! user_can( $author, 'manage_options' ) && isset( $term->name ) ) {
+			if( ! user_can( $author, 'manage_categories' ) && isset( $term->name ) ) {
 				$term->name = $term->name . ' (' . $author->display_name . ') ';
 			}
 

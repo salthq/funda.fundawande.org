@@ -87,7 +87,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               global $wpdb;
               $wpdb->query( $wpdb->prepare( "
                   UPDATE `wp_posts` SET post_title = %s
-                  WHERE post_id = %d;
+                  WHERE ID = %d;
               ", [
                   $lesson_name,
                  $post_ID
@@ -302,15 +302,9 @@ if ( ! defined( 'ABSPATH' ) ) {
       * @return boolean $status return true if lesson is complete by user, false otherwise
       *
       */
-     public function fw_is_sub_unit_complete($lesson_id_or_key, $user_id = null) {
+     public function fw_is_sub_unit_complete($lesson_id, $user_id = null) {
          if (!$user_id) {
              $user_id = get_current_user_id();
-         }
-
-         if (is_numeric($lesson_id_or_key)) {
-             $lesson_key = get_post_meta($lesson_id_or_key,'fw_unique_key',true);
-         } else {
-             $lesson_key = $lesson_id_or_key;
          }
 
 
@@ -319,7 +313,8 @@ if ( ! defined( 'ABSPATH' ) ) {
              'number' => 1,
              'type' => 'fw_sub_unit_progress',
              'user_id' => $user_id,
-             'status' => $lesson_key,
+             'post_id' => $lesson_id,
+             'status' => 'complete',
          );
 
          $status = false;
@@ -328,18 +323,7 @@ if ( ! defined( 'ABSPATH' ) ) {
              $user_lesson_status  = array_shift($user_lesson_status );
          }
          if ($user_lesson_status) {
-             switch ($user_lesson_status->comment_karma) {
-                 case 1:
-                     $status = true;
-                     break;
-                 case 0:
-                     $status = false;
-                     break;
-                 // Add default just as a catch all
-                 default:
-                     $status = true;
-             }
-
+            $status = true;
          }
 
          return $status;
