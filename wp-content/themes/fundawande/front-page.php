@@ -25,7 +25,6 @@ if ( class_exists( 'Timber' ) ) {
     if(get_user_meta($user->id, 'legal', true) == 'agreed') {
         if(get_user_meta($user->id, 'fw_current_course', true) != "") {
             $current_course_id = FundaWande()->lms->fw_get_current_course_id($user->ID);
-            error_log('id:'.$current_course_id );
             wp_redirect(get_permalink($current_course_id));
         }
     }

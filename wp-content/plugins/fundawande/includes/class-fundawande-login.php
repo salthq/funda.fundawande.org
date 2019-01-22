@@ -27,7 +27,7 @@ class FundaWande_Login {
         //Check for wrong login information and add 'login=failed' to URL
         add_action('wp_login_failed', array($this, 'custom_login_failed'));
         //Check for blank fields and add 'login=blank-field' to URL
-        add_action('authenticate', array($this, 'custom_login_blank_field'));
+        add_filter('authenticate', array($this, 'custom_login_blank_field'),10,3);
         // add custom login redirect
         add_action( 'wp_login', array($this,'fw_login_redirect') ,10,2);
 
@@ -154,7 +154,7 @@ class FundaWande_Login {
      *
      * @author jtame
      */
-    public function custom_login_blank_field( ) {
+    public function custom_login_blank_field($user, $username, $password) {
 
         // if (!is_user_logged_in()) {
         //     wp_redirect(get_site_url(null, '/login'));
@@ -171,9 +171,8 @@ class FundaWande_Login {
                 //No need to check for English, as that is the default language
                 $referrer = strtok($_SERVER['HTTP_REFERER'], '?');
             }
-
             $error = false;
-            if(empty($_POST) || $_POST['log'] == '' || $_POST['pwd'] == '')
+            if($username == '' || $password == '')
             {
                 $error = true;
             }
@@ -198,8 +197,10 @@ class FundaWande_Login {
                     wp_redirect( $referrer );
                 }
 
-                exit;
+                return $user;
             }
+
+            return $user;
         }
 
     } // end custom_login_blank_field();

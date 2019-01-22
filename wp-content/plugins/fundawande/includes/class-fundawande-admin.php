@@ -24,7 +24,7 @@ class FundaWande_Admin
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 
         //Restrict dashboard visibility
-        add_action('admin_init', array($this, 'fw_restrict_dashboard_visibility'));
+        // add_action('admin_init', array($this, 'fw_restrict_dashboard_visibility'));
 
         //Remove add media button from ACF fields
         add_action('acf/input/admin_head', array($this, 'fw_remove_media_buttons'));
