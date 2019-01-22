@@ -20,3 +20,5 @@ body.sensei_page_sensei_grading ._arrow-container{display:-webkit-box;display:-w
 body.sensei_page_sensei_grading .drag-and-drop-non-sequential .sensei-grading-answer br,body.sensei_page_sensei_grading .drag-and-drop-sequential .sensei-grading-answer br,body.sensei_page_sensei_grading .multiple-choice-with-images .sensei-grading-answer br{display:none}
 body.sensei_page_sensei_grading .drag-and-drop-non-sequential .sensei-grading-answer img,body.sensei_page_sensei_grading .drag-and-drop-sequential .sensei-grading-answer img,body.sensei_page_sensei_grading .multiple-choice-with-images .sensei-grading-answer img{margin:5px;height:auto}
 body.sensei_page_sensei_grading .drag-and-drop-sequential .correct-answer img,body.sensei_page_sensei_grading .multiple-choice-with-images .correct-answer img{width:calc(25% - 10px)}
+.acf-field{font-size:16px}
+.acf-field p.description{font-size:14px}
