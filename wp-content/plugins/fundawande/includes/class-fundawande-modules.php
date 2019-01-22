@@ -115,6 +115,12 @@ class FundaWande_Modules {
                 $course_modules[$key]->complete = $this->fw_is_module_complete($module->term_id,$user_id);
                 $course_modules[$key]->units = array();
                 foreach($module_units  as $key2 => $unit) {
+                    // Get the hide unit variable to determine whether to show module in course
+                    $hide_unit = get_term_meta($unit, 'hide_module', true);
+                    // if the hide_unit is true, then skip unit
+                    if ($hide_unit) {
+                        continue;
+                    }
 
                     $unit_data = new stdClass();
                     $unit_data->ID = $unit;
@@ -279,6 +285,14 @@ class FundaWande_Modules {
 
 
         foreach($module_units  as $key => $unit) {
+
+            // Get the hide unit variable to determine whether to show module in course
+            $hide_unit = get_term_meta($unit, 'hide_module', true);
+            // if the hide_unit is true, then skip unit
+            if ($hide_unit) {
+                unset($module_units[$key]);
+                continue;
+            }
     
             $module_units[$key] = new TimberTerm($unit);
 
