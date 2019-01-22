@@ -1,12 +1,9 @@
-<!-- End of Lesson Modal -->
-{% set modal_id = "end-lesson-modal" %}
+<!--Survey Modal-->
+{% set modal_id = "survey-modal" %}
 {% embed "embeds/modals/modal-global.twig" %}
   {# Add quiz outcome header to modal #}
   {% block modal_header %}
-    <h5 class="modal-title">
-      <span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span>
-      <strong>{{attribute(options, lang.prefix~'well_done_text')}}, {{user.display_name}}!</strong>
-    </h5>
+    
   {% endblock %}
   {# Remove the close button #}
   {% block modal_close %}
@@ -15,7 +12,7 @@
   {# Add quiz modal content to modal #}
   {% block modal_body %}
 
-    {{feedback.text}}
+    {{feedback.survey_code}}
 
   {% endblock %}
 

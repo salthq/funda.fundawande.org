@@ -58,6 +58,7 @@ jQuery(document).ready( function($) {
 
     //If there is both a custom feedback modal and an end of unit modal, 
     $('#end-unit-modal-link').click(function() {
+        $('#survey-modal').hide();
         $('#end-lesson-modal').hide();
     });
 
