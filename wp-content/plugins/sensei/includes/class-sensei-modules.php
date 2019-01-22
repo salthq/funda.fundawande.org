@@ -930,7 +930,7 @@ class Sensei_Core_Modules
 						if ($count == 1) {
 							$class .= ' first';
 						}
-						if ($count == count($module)) {
+						if ($count == count($modules)) {
 							$class .= ' last';
 						}
 						if ($count % 2 != 0) {
