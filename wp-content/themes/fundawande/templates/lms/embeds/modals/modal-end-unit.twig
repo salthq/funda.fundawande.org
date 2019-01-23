@@ -26,19 +26,3 @@
   {% endblock %}
 
 {% endembed %}
-
-<script>
-  //If the end of lesson modal has been included (which means there is a custom feedback message)
-  //then don't show the end of unit modal upon clicking the 'Complete Unit' button
-  jQuery(document).ready( function($) {
-      $('#lesson-complete').click(function(){
-        if(!$('#end-lesson-modal').length) {
-          $('#{{ modal_id }}').modal('show');
-        }
-
-        if(!$('#survey-modal').length) {
-          $('#{{ modal_id }}').modal('show');
-        }
-      });
-  });
-</script>
