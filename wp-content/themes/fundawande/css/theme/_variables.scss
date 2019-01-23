@@ -18,6 +18,8 @@
 
 $assets_directory-path : "/wp-content/themes/fundawande/assets/";
 
+$media-max-width:                   510px; //Set a fixed max width on media size, to ensure standardization across lessons. Height is always set to auto to make sure the media scales properly. 
+
 // # Navbar
 $navbar-height:                     60px;
 $navbar-height-mobile :             60px; //TODO: Set this mobile nav header
