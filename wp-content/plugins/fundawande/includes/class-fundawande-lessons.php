@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         // Add the construct elements
 	// Update various meta fields when the post is updated.
-    add_action( 'save_post_lesson', [ $this, 'handle_save_post_lesson' ], 30, 3 );
+    add_action( 'save_post', [ $this, 'handle_save_post_lesson' ] , 20, 1);
 
     add_action( 'create_lesson_key_after_ordering', array($this,'handle_save_lesson_ordering'), 10, 1 );
 
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          // Get the lesson module
          $lesson_module = Sensei()->modules->get_lesson_module($post_ID);
-        
+
          // If module exists then get the key
          if ($lesson_module) {
  
@@ -131,8 +131,11 @@ if ( ! defined( 'ABSPATH' ) ) {
      * @param string post. The post type being updated
      *
      */
-    public function handle_save_post_lesson( $post_ID, $post, $update ) {
-
+    public function handle_save_post_lesson( $post_ID ) {
+       
+		if( !in_array( get_post_type( $post_ID ), array('lesson' ) ) ){
+			return;
+		}
         self::set_lesson_unique_keys($post_ID );
 
     }
@@ -173,7 +176,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $lesson->current = true;
                     // $lesson->current = false;
                 }
-                $lesson->complete = $this->fw_is_sub_unit_complete($lesson->key);
+                $lesson->complete = $this->fw_is_sub_unit_complete($lesson->ID);
                 $lesson->quiz = get_post_meta($lesson->ID, '_quiz_has_questions', true);
 
             }
@@ -314,15 +317,16 @@ if ( ! defined( 'ABSPATH' ) ) {
              'type' => 'fw_sub_unit_progress',
              'user_id' => $user_id,
              'post_id' => $lesson_id,
-             'status' => 'complete',
+             'status' => array('complete'),
          );
 
+         
          $status = false;
          $user_lesson_status = get_comments($current_status_args);
          if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
              $user_lesson_status  = array_shift($user_lesson_status );
          }
-         if ($user_lesson_status) {
+         if (!empty($user_lesson_status)) {
             $status = true;
          }
 

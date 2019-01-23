@@ -1,0 +1,68 @@
+.single-lesson-wrapper {
+  .lesson-carousel {
+    margin: 0 auto;
+    max-width: $media-max-width;
+    a {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .carousel-item {
+      padding-top: 2rem;
+    }
+    .carousel-indicators {
+      min-width: 290px;
+      margin: 0 auto;
+      bottom: auto;
+      top: 0;
+      li:not(.active) {
+        background: $grey-secondary !important;
+      }
+    }
+    .lesson-carousel-control {
+      position: absolute;
+      top: -35px;
+      z-index: 5;
+      &-prev {
+        left: 0;
+      }
+      &-next {
+        right: 0;
+      }
+      @include breakpoint(phone) {
+        &-prev {
+          left: 5%;
+        }
+        &-next {
+          right: 5%;
+        }
+        &-icon {
+          svg {
+            width: 50px;
+          }
+        }
+      }
+      &-icon {
+        svg {
+          height: 75px;
+        }
+      }
+    }
+    .lesson-carousel-counter {
+      position: absolute;
+      top: -10px;
+    }
+    .lesson-carousel-text {
+      p {
+        text-align: inherit;
+      }
+    }
+    .lesson-carousel-image {
+      img {
+        margin: auto;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+  }
+}
