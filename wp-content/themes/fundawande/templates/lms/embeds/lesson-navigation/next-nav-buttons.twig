@@ -1,0 +1,8 @@
+{# If this lesson is the last within the unit, fire the end of unit modal #}
+{% if sub_unit_meta.is_last_in_unit %}
+    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
+    {% include "/lms/embeds/lesson-navigation/end-unit-button.twig" %}
+{# If it is not the last lesson in the unit, then add a link to the next lesson  #}
+{% else %}
+    {% include "/lms/embeds/lesson-navigation/end-lesson-button.twig" %}
+{% endif %}

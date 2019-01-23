@@ -1,0 +1,7 @@
+{# This button is shown whenever a previous lesson exists #}
+<a href="{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class="btn btn-lg module-btn-outline-{{sub_unit_meta.module_number}}">
+    <span class="px-2">
+        {{source ('/assets/arrow_left.svg')}}
+    </span>
+    {{attribute(options, lang.prefix~'prev_nav_text')}}
+</a>

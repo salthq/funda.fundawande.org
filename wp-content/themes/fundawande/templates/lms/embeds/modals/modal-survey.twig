@@ -33,5 +33,22 @@
         });
     });
   </script>
+{% else %}
+  {% if sub_unit_meta.is_last_in_unit %}
+    <script>
+      jQuery(document).ready( function($) {
+            $('#end-unit-modal').modal('show');
+          });
+      });
+    </script>
+  {% else %}
+    <script>
+      jQuery(document).ready( function($) {
+          $('#lesson-complete').click(function(){
+            window.location.href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}";
+          });
+      });  
+    </script>  
+  {% endif %}
 {% endif %}
 
