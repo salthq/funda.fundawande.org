@@ -61,6 +61,31 @@ class FundaWande_Modules {
                 // Get the term data in case there are custom fields
                 $course_modules[$key]->meta = get_term_meta($module->term_id);
                 $module_units = get_term_children( $module->term_id,'module');
+
+                // Get custom module order for course
+                $order = Sensei()->modules->get_course_module_order($course_id);
+
+                if ( $order) {
+                    
+                    // Sort by custom order
+                    $ordered_units = array();
+                    $unordered_units = array();
+                    foreach ( $module_units as $unit ) {
+                        $order_key = array_search($unit, $order);
+                        if ($order_key !== false) {
+                            $ordered_units[$order_key] = $unit;
+                        } else {
+                            $unordered_units[] = $unit;
+                        }
+                    }
+
+                    // Order modules correctly
+                    ksort( $ordered_units );
+
+                    $module_units = $ordered_units;
+                }
+
+
                 // If the module number meta does not exist or is different to
                 //  $course_module_number, change the module number meta to be the same as course_module_number 
                 $module_number_meta = get_term_meta($module->term_id, 'module_number', true);
@@ -90,6 +115,12 @@ class FundaWande_Modules {
                 $course_modules[$key]->complete = $this->fw_is_module_complete($module->term_id,$user_id);
                 $course_modules[$key]->units = array();
                 foreach($module_units  as $key2 => $unit) {
+                    // Get the hide unit variable to determine whether to show module in course
+                    $hide_unit = get_term_meta($unit, 'hide_module', true);
+                    // if the hide_unit is true, then skip unit
+                    if ($hide_unit) {
+                        continue;
+                    }
 
                     $unit_data = new stdClass();
                     $unit_data->ID = $unit;
@@ -224,10 +255,44 @@ class FundaWande_Modules {
      */
     public function get_module_units($module_id,$course_id) {
 
+
         // Get the module children units
         $module_units = get_term_children( $module_id, 'module' );
 
+
+        // Get custom module order for course
+        $order = Sensei()->modules->get_course_module_order($course_id);
+
+        if ( $order) {
+            
+            // Sort by custom order
+            $ordered_units = array();
+            $unordered_units = array();
+            foreach ( $module_units as $unit ) {
+                $order_key = array_search($unit, $order);
+                if ($order_key !== false) {
+                    $ordered_units[$order_key] = $unit;
+                } else {
+                    $unordered_units[] = $unit;
+                }
+            }
+
+            // Order modules correctly
+            ksort( $ordered_units );
+
+            $module_units = $ordered_units;
+        }
+
+
         foreach($module_units  as $key => $unit) {
+
+            // Get the hide unit variable to determine whether to show module in course
+            $hide_unit = get_term_meta($unit, 'hide_module', true);
+            // if the hide_unit is true, then skip unit
+            if ($hide_unit) {
+                unset($module_units[$key]);
+                continue;
+            }
     
             $module_units[$key] = new TimberTerm($unit);
 
