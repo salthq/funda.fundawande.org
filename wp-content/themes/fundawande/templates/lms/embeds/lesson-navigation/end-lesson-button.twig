@@ -1,0 +1,7 @@
+{# This button is shown when the user is not on the last lesson of a unit #}
+<a id="lesson-complete" href="#" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">
+    {{attribute(options, lang.prefix~'next_nav_text')}}
+    <span class="p-2">
+        {{source ('/assets/arrow_right.svg')}}
+    </span>
+</a>
