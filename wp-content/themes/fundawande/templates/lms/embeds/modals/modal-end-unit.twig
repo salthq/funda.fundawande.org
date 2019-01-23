@@ -26,3 +26,22 @@
   {% endblock %}
 
 {% endembed %}
+
+<script>
+  jQuery(document).ready( function($) {
+      $('#lesson-complete').click(function(){
+        // If there's no survey or custom feedback message, show end of unit modal
+        if(!$('#survey-modal').length && !$('#end-lesson-modal').length ) {
+          $('#{{ modal_id }}').modal('show');
+        }
+        //If a survey modal is found, show that modal first 
+        else if($('#survey-modal').length) {
+          $('#survey-modal').modal('show');
+        }
+        //If a custom feedback message is found, show that modal first
+        else if($('#end-lesson-modal').length){
+          $('#end-lesson-modal').modal('show');
+        }
+      });
+  });
+</script>

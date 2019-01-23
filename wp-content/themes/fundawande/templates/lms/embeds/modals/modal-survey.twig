@@ -1,33 +1,37 @@
 <!--Survey Modal-->
-
-<div id = "survey-modal" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
-  <div class="lms-global-modal modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content p-2 px-md-5 py-md-3">
-      <div class="d-flex m-3">
-        <div class = "d-flex justify-content-center align-items-center w-100">
-          <h5 class="modal-title pl-3">Survey</h5>
+{% if feedback.toggle_survey %}
+  <div id = "survey-modal" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+    <div class="lms-global-modal modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content p-2 px-md-5 py-md-3">
+        <div class="d-flex m-3">
+          <div class = "d-flex justify-content-center align-items-center w-100">
+            <h5 class="modal-title pl-3">Survey</h5>
+          </div>
         </div>
-      </div>
-      <div class="modal-body">
-        {{feedback.survey_code}}
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        {% if sub_unit_meta.is_last_in_unit %}
-          <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
-            Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
-          </button>
-        {% else %}
-          <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-        {% endif %}
+        <div class="modal-body">
+          {{feedback.survey_code}}
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          {% if sub_unit_meta.is_last_in_unit %}
+            <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+              Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+            </button>
+          {% else %}
+            <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-  jQuery(document).ready( function($) {
-      $('#lesson-complete').click(function(){
-        $('#survey-modal').modal('show');
-      });
-  });
-</script>
+  <script>
+    jQuery(document).ready( function($) {
+        $('#lesson-complete').click(function(){
+          if(!$('#end-unit-modal').length) {
+            $('#survey-modal').modal('show');
+          }
+        });
+    });
+  </script>
+{% endif %}
+
