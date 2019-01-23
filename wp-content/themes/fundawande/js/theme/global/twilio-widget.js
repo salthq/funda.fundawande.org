@@ -1,4 +1,5 @@
-<script>
+startTwilio();
+function startTwilio() {
     const appConfig = {
         accountSid:"AC7572a1439e6746742a55c2275de3034c",
         flexFlowSid:"FO43db8f63dfe6a235a140134d77aa8c43",
@@ -63,4 +64,6 @@
        
     };
     Twilio.Flex.createWebChat(appConfig);
-</script>
+    Twilio.Flex.Actions.invokeAction ("ToggleChatVisibility");
+    Twilio.Flex.Actions.invokeAction ("ToggleChatVisibility");
+}
