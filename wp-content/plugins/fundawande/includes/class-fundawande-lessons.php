@@ -173,7 +173,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $lesson->current = true;
                     // $lesson->current = false;
                 }
-                $lesson->complete = $this->fw_is_sub_unit_complete($lesson->key);
+                $lesson->complete = $this->fw_is_sub_unit_complete($lesson->ID);
                 $lesson->quiz = get_post_meta($lesson->ID, '_quiz_has_questions', true);
 
             }
@@ -314,15 +314,17 @@ if ( ! defined( 'ABSPATH' ) ) {
              'type' => 'fw_sub_unit_progress',
              'user_id' => $user_id,
              'post_id' => $lesson_id,
-             'status' => 'complete',
+             'status' => array('complete'),
          );
 
+         
          $status = false;
          $user_lesson_status = get_comments($current_status_args);
+         error_log(print_r($lesson_id,true));
          if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
              $user_lesson_status  = array_shift($user_lesson_status );
          }
-         if ($user_lesson_status) {
+         if (!empty($user_lesson_status)) {
             $status = true;
          }
 
