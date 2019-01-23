@@ -58,50 +58,6 @@
         }
       }
     }
-    &-carousel {
-      overflow: hidden;
-      a {
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-      .carousel-item {
-        padding-top: 2rem; 
-      }
-      .carousel-indicators {
-        bottom: auto;
-        top: 0;
-        li:not(.active) {
-          background: $grey-secondary !important;
-        }
-      }
-      .carousel-control-container {
-        position: absolute;
-        z-index: 1;
-        svg {
-          width: 80px;
-          height: 80px;
-        }
-        @include breakpoint(phone) {
-          svg {
-            width: 40px;
-            height: 40px;
-          }
-        }
-      }
-      .lesson-carousel-text {
-        p {
-          text-align: inherit;
-        }
-      }
-      .lesson-carousel-image {
-        img {
-          margin: auto;
-          width: auto;
-          max-width: 100%;
-        }
-      }
-    }
     &-modal {
       &-header {
         justify-content: center;
