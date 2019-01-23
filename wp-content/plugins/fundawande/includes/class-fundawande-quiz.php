@@ -322,22 +322,29 @@ class FundaWande_Quiz {
             }
 
             $type = Sensei()->question->get_question_type( $question->ID );
+            error_log($type);
             
             switch ($type){
                 case "boolean":
                     $needs_feedback = false;
+                    continue;
                 case 'multiple-choice':
                     $needs_feedback = false;
+                    continue;
                 case 'gap-fill':
                     $needs_feedback = false;
+                    continue;
                 case 'multiple-choice-with-images':
                     $needs_feedback = false;
+                    continue;
                 case 'drag-and-drop-non-sequential':
                     $needs_feedback = false;
+                    continue;
                 case 'drag-and-drop-sequential':
                     $needs_feedback = false;
+                    continue;
                 default:
-                    $needs_feedback = true;
+                $needs_feedback = true;
             }
         }
         return $needs_feedback;

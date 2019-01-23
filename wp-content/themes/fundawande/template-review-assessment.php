@@ -31,13 +31,11 @@ if ( class_exists( 'Timber' ) ) {
         wp_redirect('/coach-dashboard');
     }
 
+
     $assessment_needs_feedback = FundaWande()->quiz->assessment_needs_feedback($assessment_id);
 
     if ($assessment_needs_feedback) {
-
-
         $context['assessment_data'] = FundaWande()->coaching->get_assessment_review($assessment_id, $user_id);
-
         Timber::render(array('lms/template-review-assessment.twig', 'page.twig'), $context);
     } else {
         $quiz_id = get_post_meta($assessment_id, '_lesson_quiz', true);
