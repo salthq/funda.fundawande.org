@@ -661,7 +661,7 @@ video { min-height: 200px; }
 #data-table_wrapper th select { max-width: 120px; }
 
 /* ========================================================================== Theme areas Import the various ares defined for theme ========================================================================== */
-#site-footer { background-color: #4a4a4a; box-shadow: 0 2px 1px 0 #EF9D19; color: #ffffff; }
+#site-footer { background-color: #7c7c7c; box-shadow: 0 2px 1px 0 #EF9D19; color: #ffffff; }
 
 #site-footer a { color: #ffffff; text-decoration: none; }
 
