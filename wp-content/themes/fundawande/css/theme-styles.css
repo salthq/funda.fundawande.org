@@ -1275,7 +1275,7 @@ video { min-height: 200px; }
 
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg { height: 75px; }
 
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter { position: absolute; top: 30px; }
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter { position: absolute; top: 25px; }
 
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-text p { text-align: inherit; }
 
