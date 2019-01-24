@@ -2,6 +2,7 @@
   .lesson-carousel {
     margin: 0 auto;
     max-width: $media-max-width;
+    overflow: hidden;
     a {
       &:hover {
         opacity: 0.7;
@@ -14,14 +15,14 @@
       min-width: 290px;
       margin: 0 auto;
       bottom: auto;
-      top: 0;
+      top: 30px;
       li:not(.active) {
         background: $grey-secondary !important;
       }
     }
     .lesson-carousel-control {
       position: absolute;
-      top: -35px;
+      top: 0;
       z-index: 5;
       &-prev {
         left: 0;
@@ -50,7 +51,7 @@
     }
     .lesson-carousel-counter {
       position: absolute;
-      top: -10px;
+      top: 30px;
     }
     .lesson-carousel-text {
       p {

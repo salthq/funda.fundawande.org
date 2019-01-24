@@ -637,19 +637,19 @@ video{min-height:200px}
 .single-lesson-wrapper .pdf:hover .pdf-text-container{opacity:1}
 .single-lesson-wrapper .pdf-image{opacity:1;-webkit-transition:.5s ease;transition:.5s ease;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;opacity:0;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
-.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px}
+.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px;overflow:hidden}
 .single-lesson-wrapper .lesson-carousel a:hover{opacity:.7}
 .single-lesson-wrapper .lesson-carousel .carousel-item{padding-top:2rem}
-.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:0}
+.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:30px}
 .single-lesson-wrapper .lesson-carousel .carousel-indicators li:not(.active){background:#ccc !important}
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-control{position:absolute;top:-35px;z-index:5}
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-control{position:absolute;top:0;z-index:5}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-prev{left:0}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:0}
 @media(max-width:767px){.single-lesson-wrapper .lesson-carousel .lesson-carousel-control-prev{left:5%}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:5%}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{width:50px}
 }.single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{height:75px}
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter{position:absolute;top:-10px}
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter{position:absolute;top:30px}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-text p{text-align:inherit}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-image img{margin:auto;width:auto;max-width:100%}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
