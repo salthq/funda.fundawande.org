@@ -92,9 +92,6 @@ class FundaWande_Language {
                 // Set the user's current course off the lang
                 $current_course_id = get_field('fw_'.$lang.'_course','options',true);
                 update_user_meta($user_id, 'fw_current_course', $current_course_id );
-            } elseif (isset($_GET['course_id'])) {
-                $current_course_id = $_GET['course_id'];
-                update_user_meta($user_id, 'fw_current_course', $current_course_id );
             } elseif (empty($current_course_id)) {
                 // $current_course_id = get_field('fw_xho_course','options',true);
                 // Default to eng for pilot

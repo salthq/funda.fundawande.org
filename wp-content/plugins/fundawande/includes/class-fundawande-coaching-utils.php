@@ -18,16 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class FundaWande_Coaching_Utils {
 
 
-
     /**
      * Constructor
      */
     public function __construct() {
 
-
     }
 
-    
 
     /**
      * Get the course users and coaches.
@@ -38,6 +35,7 @@ class FundaWande_Coaching_Utils {
      */
     public function get_course_users($course_id) {
 
+        // Set up array of course users
         $user_args = array(
             'meta_query' => array(
                 array(
@@ -48,12 +46,15 @@ class FundaWande_Coaching_Utils {
             )
         );
 
+        // Get array of ueser
         $users = get_users( $user_args );
-        
+      
+        // loop through users and assign their coach to object
         foreach ($users as $key => $user) {
             $user->coach = get_user_meta($user->ID,'fw_coach',true);
         }
 
+        // return the users
         return $users;
         
 
@@ -62,22 +63,63 @@ class FundaWande_Coaching_Utils {
     /**
      * Get the coaches.
      *
-     *
      * @return array array of users in the course
      */
     public function get_coaches() {
-
-        $user_args = array(
-            
+        // set up coach args
+        $coach_args = array(
+            'meta_query' => array(
+                array(
+                    'key' => 'is_coach',
+                    'value' => true,
+                    'compare' => '=='
+                ),
+            )
         );
-
-        $users = get_users( $user_args );
+        // get array of coaches
+        $coaches = get_users( $coach_args );
         
-
-        return $users;
+        // return array of coaches
+        return $coaches;
         
 
     } // end get_course_users()
+    
+    /**
+     * Set the bulk coach to users
+     *
+     * @param $data Data passed through the form
+     */
+    public function set_bulk_coach($data) {
+
+        // Loop through selected users
+        foreach ($data['user_select'] as $key => $user_id) {
+
+            // Update the user's coach
+            update_user_meta($user_id,'fw_coach',$data['bulk_coach']);
+        }
+        
+        return true;
+        
+    } // end set_bulk_coach()
+
+    /**
+     * Set the coach to a user
+     *
+     * @return array array of users in the course
+     */
+    public function set_coaches($data) {
+
+        // Loop through all users
+        foreach ($data['coaches'] as $key => $coach_id) {
+            // Update the user's coach
+            update_user_meta($key,'fw_coach',$coach_id);
+        }
+
+        return true;
+        
+
+    } // end set_coaches()
 
 
 } // end FundaWande_Coaching_Utils
