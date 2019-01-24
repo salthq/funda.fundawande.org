@@ -38,7 +38,7 @@ class FundaWande_Coaching {
 			'Coaching management',
 			'Coaching management',
 			'manage_options',
-			'ffw_coaching',
+			'fw_coaching',
 			array($this,'fw_coaching_menu_page'),
 			'dashicons-chart-pie',
 			50
@@ -52,14 +52,17 @@ class FundaWande_Coaching {
 	 * Display coaching menu page
 	 */
 	function fw_coaching_menu_page(){ 
+        // Get the array of courses on the LMS
         $courses = FundaWande()->lms->get_courses();
         
-        $path_id = null;
+        $course_id = null;
+        // Check if course ID is set and get the course
 		if ( isset( $_GET['course_id'] ) ) {
 			$course_id = (int) $_GET['course_id'];
             $course = get_post($course_id);
             
         }
+        // Check if the coach form was submitted and run the bulk or update actions
         if ( isset( $_POST['bulk_coach']) ) {
 			FundaWande()->coaching_utils->set_bulk_coach($_POST);
 		}  elseif ( isset( $_POST['coaches']) ) {
@@ -73,6 +76,7 @@ class FundaWande_Coaching {
 				<input type="hidden" name="page" value="<?= isset( $_GET['page'] ) ? $_GET['page'] : '' ?>">
 				<select id="course_id" name="course_id" class="form-control  customSelect searchSelect" >
 					<option value="all" selected disabled>Choose a course</option>
+                    <!--  loop through courses to set up select options -->
 					<?php foreach ($courses as $course) { ?>
 						<option value="<?php echo (int) $course->ID; ?>" 
 						<?php if ($course->ID == $course_id) {
@@ -85,15 +89,14 @@ class FundaWande_Coaching {
 			</form>
                  
 			<?php if (isset($course_id)) { 
-
+                // Set up the user's coach table 
                 $wp_list_table = new FundaWande_Coaching_Table();
                 $wp_list_table->prepare_items();
-
-		
 				?>
 				<form id="course-users-container" method="post">
 					<h2>Set user coaches: <?php echo $course->post_title; ?></h2>
 						<div id="course-users"  >				
+                            <!-- Display the table -->
                             <?php $wp_list_table->display(); ?>
                         </div>
                         <button type="submit"  class="button button-primary button-large" >Update coaches</button>
