@@ -54,29 +54,29 @@ var tour = new Anno([
       })
     }
   },
-  {
-    target: "#view-lessons",
-    position: "left",
-    content: "Click this button to view the lessons within the unit",
-    buttons: [{
-	    text: 'Back',
-	    className: 'anno-btn-low-importance',
-	    click: function() {
-	      return this.switchToChainPrev();
-      }
-    }, 
-    {
-      text: 'Next',
-      className: 'pulse',
-      click: function() {
-        jQuery(document).ready(function($) {
-          $('#view-lessons').toggleClass('collapsed');
-          $('#collapse-unit1').toggleClass('collapse show');
-        })
-        return this.switchToChainNext();
-      }
-    }]
-  },
+  // {
+  //   target: "#view-lessons",
+  //   position: "left",
+  //   content: "Click this button to view the lessons within the unit",
+  //   buttons: [{
+	//     text: 'Back',
+	//     className: 'anno-btn-low-importance',
+	//     click: function() {
+	//       return this.switchToChainPrev();
+  //     }
+  //   }, 
+  //   {
+  //     text: 'Next',
+  //     className: 'pulse',
+  //     click: function() {
+  //       jQuery(document).ready(function($) {
+  //         $('#view-lessons').toggleClass('collapsed');
+  //         $('#collapse-unit1').toggleClass('collapse show');
+  //       })
+  //       return this.switchToChainNext();
+  //     }
+  //   }]
+  // },
   {
     target: '#collapse-unit1',
     position: "top",
