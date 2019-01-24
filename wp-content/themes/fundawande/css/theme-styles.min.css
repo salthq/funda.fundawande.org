@@ -636,8 +636,9 @@ video{min-height:200px}
 .single-lesson-wrapper .pdf:hover .pdf-image{opacity:.3}
 .single-lesson-wrapper .pdf:hover .pdf-text-container{opacity:1}
 .single-lesson-wrapper .pdf-image{opacity:1;-webkit-transition:.5s ease;transition:.5s ease;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;opacity:0;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
-.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px}
+.single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+@media(min-width:992px){.single-lesson-wrapper .pdf-text-container{opacity:0}
+}.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px}
 .single-lesson-wrapper .lesson-carousel a:hover{opacity:.7}
 .single-lesson-wrapper .lesson-carousel .carousel-item{padding-top:2rem}
 .single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:0}
