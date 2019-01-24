@@ -109,47 +109,6 @@ class FundaWande_Coaching_Table extends WP_List_Table {
 		);
 	}
 
-	
-
-	public function process_bulk_action() {
-		// $key         = $this->_args['singular'];
-		// $request_ids = isset( $_REQUEST[ $key ] ) ? wp_parse_id_list( wp_unslash( $_REQUEST[ $key ] ) ) : [];
-
-		// // Nothing selected?
-		// if ( ! count( $request_ids ) ) {
-		// 	return;
-		// }
-
-		// // Delete.
-		// if ( $this->current_action() === 'delete' ) {
-		// 	LMS()->courses_admin_utils->delete_courses( $request_ids );
-
-		// 	return;
-		// }
-
-		// // Set status.
-		// $status_prefix = 'set_status_to_';
-		// if ( substr( $this->current_action(), 0, strlen( $status_prefix ) ) === $status_prefix ) {
-		// 	$status = (int) substr( $this->current_action(), strlen( $status_prefix ) );
-		// 	AdvantageLearn()->cohorts->set_status_for_cohort_users( $request_ids, $this->cohort_id, $status );
-
-		// 	return;
-		// }
-	}
-
-	// protected function extra_tablenav( $which ) {
-	// 	if ( $which !== 'top' ) {
-	// 		return;
-	// 	}
-
-	// 	$query   = new WP_Query( [
-	// 		'post_type'      => 'cohorts',
-	// 		'posts_per_page' => - 1
-	// 	] );
-	// 	$cohorts = $query->get_posts();
-	// 
-	// }
-
 	public function prepare_items() {
 		
 		if ( isset( $_GET['course_id'] ) ) {
