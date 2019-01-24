@@ -198,7 +198,10 @@ class FundaWande_Main {
         if ( is_admin() ) {
 
             // Set up admin specific classes
-            $this->admin = new FundaWande_Admin();
+			$this->admin = new FundaWande_Admin();
+			
+			// Setup coaching functionality class
+			$this->coaching_utils = new FundaWande_Coaching_Utils();
 
         } else {
 
