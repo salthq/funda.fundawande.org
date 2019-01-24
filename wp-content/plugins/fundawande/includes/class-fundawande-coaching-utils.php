@@ -33,10 +33,12 @@ class FundaWande_Coaching_Utils {
      *
      * @return array array of users in the course
      */
-    public function get_course_users($course_id) {
+    public function get_course_users($course_id,$orderby = 'display_name',$order = 'ASC') {
 
         // Set up array of course users
         $user_args = array(
+            'orderby'      => $orderby,
+	        'order'        => $order,
             'meta_query' => array(
                 array(
                     'key' => 'fw_current_course',

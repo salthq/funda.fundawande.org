@@ -5,12 +5,10 @@ class FundaWande_Coaching_Table extends WP_List_Table {
 
 	public function __construct( ) {
 
-		// parent::__construct( array(
-		// 	'singular' => 'course',
-		// 	'plural'   => 'courses',
-		// 	'ajax'     => false
-		// ) );
+		// Necessary to assign screen manually to avoid errors
 		$this->screen = get_current_screen();
+
+		// Assign the coaches the local variable for use  in table
 		$this->coaches = FundaWande()->coaching_utils->get_coaches();
 
 	}
@@ -106,12 +104,9 @@ class FundaWande_Coaching_Table extends WP_List_Table {
 	}
 
 	protected function get_sortable_columns() {
-		// return array(
-		// 	'course'         => [ 'display_name', false ],
-		// 	'status'       => [ 'status', false ],
-		// 	'start_date'   => [ 'start_date', false ],
-		// 	'last_updated' => [ 'last_updated', false ]
-		// );
+		return array(
+			'user'         => [ 'display_name', false ]
+		);
 	}
 
 	
@@ -161,7 +156,11 @@ class FundaWande_Coaching_Table extends WP_List_Table {
 			$course_id = (int) $_GET['course_id'];
             
 		}
-		$users = FundaWande()->coaching_utils->get_course_users($course_id);
+		// Order
+		$orderby = ! empty( $_GET["orderby"] ) ? esc_sql( $_GET["orderby"] ) : 'display_name';
+		$order   = ! empty( $_GET["order"] ) ? esc_sql( $_GET["order"] ) : 'ASC';
+	
+		$users = FundaWande()->coaching_utils->get_course_users($course_id,$orderby,$order);
 
 		// Columns
 		$columns               = $this->get_columns();
