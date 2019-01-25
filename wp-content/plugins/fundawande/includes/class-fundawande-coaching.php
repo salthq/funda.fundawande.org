@@ -391,6 +391,8 @@ class FundaWande_Coaching {
             // store the teacher name to $assessment_obj
             $teacher_progress[$teacher->ID]->name = $teacher->display_name;
             $teacher_progress[$teacher->ID]->course_name = $course_title;
+            $teacher_progress[$teacher->ID]->current_module = get_user_meta($teacher->ID,'fw_current_module',true);
+            $teacher_progress[$teacher->ID]->current_unit = get_user_meta($teacher->ID,'fw_current_unit',true);
             $teacher_progress[$teacher->ID]->last_login = get_user_meta($teacher->ID,'last_login',true);
 
             $teacher_progress[$teacher->ID]->course_progress = Sensei()->course->get_completion_percentage($course->ID, $teacher->ID);

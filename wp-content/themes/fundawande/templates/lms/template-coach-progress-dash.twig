@@ -88,6 +88,8 @@
                                 <th>Teacher</th>
                                 <th>Course</th>
                                 <th>Progress</th>
+                                <th>Current Module</th>
+                                <th>Current Unit</th>
                                 <th>Last login</th>
                                 
 
@@ -100,6 +102,8 @@
                                         <td>{{ teacher.name }}</td>
                                         <td>{{ teacher.course_name }}</td>
                                         <td>{{ teacher.course_progress }}%</td>
+                                        <td>{{ teacher.current_module }}</td>
+                                        <td>{{ teacher.current_unit }}</td>
                                         <td>{% if teacher.last_login %}{{ teacher.last_login |date('d M Y')}}{% endif %}</td>
                                     </tr>
                             {% endfor %}
