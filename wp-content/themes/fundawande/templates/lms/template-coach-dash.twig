@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-auto px-3 ">
                                 <select type="select" name="coach" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:150px"  placeholder="" value="" >
-                                    <option value="" disabled selected >Filter by coach</option>
+                                    <option value="" disabled selected >Filter coaches</option>
                                     <option value=""  >All coaches</option>
                                     {% for coach in coaches %}
                                         <option value="{{coach.ID }}" {% if selected_coach ==  coach.ID %}selected{% endif %}  >{{coach.display_name}}</option>
