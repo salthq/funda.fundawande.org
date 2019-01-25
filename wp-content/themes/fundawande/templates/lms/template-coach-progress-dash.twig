@@ -118,7 +118,7 @@
             <div class="row no-gutters">
                 <div class="col-12  py-md-4 ">
 
-                {% if module_progress_data %}
+                {% if module_progress_data  %}
                 <h3>Module / Unit Progress </h3>
 
                     <div class="my-4">
@@ -144,7 +144,7 @@
                         </table>
                        
                     </div>
-                {% else %}
+                {% elseif course_progress_data  %}
                     <p>To view module progress, select a teacher</p>
                 {% endif %}
 
