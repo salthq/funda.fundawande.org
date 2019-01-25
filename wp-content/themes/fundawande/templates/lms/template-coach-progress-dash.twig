@@ -18,6 +18,7 @@
             <div class="row">
                 <div class="col-12">
                     <h1 class="lbreaker-lms-purple mt-4">Coach progress dashboard</h1>
+                    <a class="primary-btn-outline px-1 py-1 rounded" href="/coach-dashboard">Go to assessment review dashboard</a>
                 </div>
                 <div class="col-12 mt-4">
                     <form id="" action=""  method="get">
@@ -25,7 +26,7 @@
                         
 
                             <div class="col-auto px-3 mb-4 mb-md-0">
-                                <select type="select" name="fw_course" class="form-control custom-select coach-filter"   id="courseSelect"  style="max-width:120px" placeholder="" value="" required>
+                                <select type="select" name="fw_course" class="form-control custom-select coach-filter"   id="courseSelect"  style="max-width:150px" placeholder="" value="" required>
                                     <option value="" disabled  selected >Choose a course</option>
                                     {% for course in courses %}
                                         <option value="{{course.ID }}" {% if selected_course ==  course.ID %}selected{% endif %}  >{{course.post_title}}</option>
@@ -33,7 +34,7 @@
                                 </select>
                             </div>
                             <div class="col-auto px-3 ">
-                                <select type="select" name="coach" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:120px"  placeholder="" value="" >
+                                <select type="select" name="coach" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:150px"  placeholder="" value="" >
                                     <option value="" disabled selected >Filter by coach</option>
                                     <option value=""  >All coaches</option>
                                     {% for coach in coaches %}
@@ -43,7 +44,7 @@
                             </div>
                             {% if selected_course %}
                             {# <div class="col-auto px-3 ">
-                                <select type="select" name="module"  class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:120px" placeholder="" value="" >
+                                <select type="select" name="module"  class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:150px" placeholder="" value="" >
                                     <option value=""  selected >All modules</option>
                                     {% for module in modules %}
                                         <option value="{{module.term_id}}" {% if module_id ==  module.term_id %}selected{% endif %}  >{{module.name}}</option>
@@ -54,7 +55,7 @@
                     
                             
                             <div class="col-auto px-3 ">
-                                <select type="select" name="user" class="form-control custom-select coach-filter " id="userSelect" style="max-width:120px" placeholder="" value="" >
+                                <select type="select" name="user" class="form-control custom-select coach-filter " id="userSelect" style="max-width:150px" placeholder="" value="" >
                                     <option value=""  selected >All teachers</option>
                                     {% for key, teacher in course_progress_data %}
                                         <option value="{{key}}" {% if key == user_id %}selected{% endif %} >{{teacher.name}}</option>

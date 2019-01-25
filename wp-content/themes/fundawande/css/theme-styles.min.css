@@ -286,9 +286,9 @@ body .text-secondary{color:#f5f5f5}
 .primary-bg{background-color:#ef9d19 !important}
 .primary-text{color:#ef9d19}
 .primary-border{border-color:#ef9d19 !important}
-.primary-btn-outline{border-color:#ef9d19;color:#ef9d19}
+.primary-btn-outline{border-color:#ef9d19;color:#ef9d19;border:1px solid}
 .primary-btn-outline svg{fill:#ef9d19}
-.primary-btn-outline:hover{border-color:#ef9d19;background-color:#ef9d19;color:#fff}
+.primary-btn-outline:hover{border-color:#ef9d19;background-color:#ef9d19;color:#fff;text-decoration:none}
 .primary-btn-outline:hover svg{fill:#fff}
 .primary-btn-outline:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
 .primary-btn-fill,.primary-btn-fill:hover{background-color:#ef9d19;border-color:#ef9d19;color:#fff}
