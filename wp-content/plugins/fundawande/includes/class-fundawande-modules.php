@@ -135,6 +135,7 @@ class FundaWande_Modules {
                 $course_module_number++;
             }
         }
+        error_log(print_r($course_modules,true));
 
         return $course_modules;
 

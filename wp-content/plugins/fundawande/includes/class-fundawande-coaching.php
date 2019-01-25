@@ -316,6 +316,146 @@ class FundaWande_Coaching {
 
     } // end get_teacher_assessments()
 
+     /**
+     * Get all the teacher course progress
+     *
+     * @param string $course the course ID to determine which to get progress for
+     *
+     * @return array $teacher_progress Array containing all required info on teacher assessments for coaches.
+     */
+    public function get_teacher_course_progress($course, $coach = false , $user_id = null) {
+
+        
+
+        // Set up the $teacher arguments to collect any entreps in the relevant presentation and coach
+        if ($coach) {
+            $teacher_args = array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'fw_coach',
+                        'value' => $coach,
+                        'compare' => '='
+                    ),
+                    array(
+                        'key' => 'fw_current_course',
+                        'value' => $course,
+                        'compare' => '='
+                    )
+
+                ),
+                // Commented out but keeping incase it's useful
+                // 'role__in' => ['teacher', 'alumni']
+            );
+        } else {
+            $teacher_args = array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'fw_current_course',
+                        'value' => $course,
+                        'compare' => '='
+                    )
+
+                ),
+            );
+        }
+
+        // Get the array of teachers using the args set up above
+        $teachers = get_users($teacher_args );
+
+        if ($user_id) {
+            $teacher = get_user_by('ID',$user_id);
+            if (in_array($teacher,$teachers)) {
+                $teachers = array();
+                $teachers[] = get_user_by('ID',$user_id);
+            } else {
+                return false;
+            }
+        } 
+
+        
+        // set up $teacher_assessments array
+        $teacher_progress = [];
+
+        $course = get_post($course);
+        $course_title = get_post_meta($course->ID,'course_title',true);
+        
+
+        // loop through the teachers
+        foreach ($teachers as $key => $teacher) {
+
+            // set up teacher object using ID as key
+            $teacher_progress[$teacher->ID] = new stdClass();
+
+            // store the teacher name to $assessment_obj
+            $teacher_progress[$teacher->ID]->name = $teacher->display_name;
+            $teacher_progress[$teacher->ID]->course_name = $course_title;
+            $teacher_progress[$teacher->ID]->last_login = get_user_meta($teacher->ID,'last_login',true);
+
+            $teacher_progress[$teacher->ID]->course_progress = Sensei()->course->get_completion_percentage($course->ID, $teacher->ID);
+
+
+        }
+        return $teacher_progress;
+
+    } // end get_teacher_course_progress()
+
+
+     /**
+     * Get all the teacher module  progress
+     *
+     * @param string $course the course ID to determine which to get progress for
+     *
+     * @return array $teacher_progress Array containing all required info on teacher assessments for coaches.
+     */
+    public function get_teacher_module_progress($course, $user_id) {
+
+        // set up $teacher_assessments array
+        $teacher_progress = [];
+
+        $course = get_post($course);
+        $course_title = get_post_meta($course->ID,'course_title',true);
+
+        $teacher = get_user_by('ID',$user_id);
+        
+        // set up teacher object using ID as key
+        $teacher_progress = new stdClass();
+
+        // store the teacher name to $assessment_obj
+        $teacher_progress->name = $teacher->display_name;
+        $teacher_progress->course_name = $course_title;
+
+        $modules = FundaWande()->modules->get_course_modules($course->ID);
+        $course_modules=[];
+        
+        foreach ($modules as $module) {
+            $course_modules[$module->term_id] = new stdClass();
+            $course_modules[$module->term_id]->title = get_term_meta($module->term_id, 'module_title', true);
+            $course_modules[$module->term_id]->complete = FundaWande()->modules->fw_is_module_complete($module->term_id,$user_id);
+            $course_modules[$module->term_id]->is_unit = false;
+            $course_modules[$module->term_id]->number = $module->module_number;
+            $unit_count = 1;
+            foreach ($module->units as $unit) {
+                $course_modules[$unit->ID] = new stdClass();
+
+                $course_modules[$unit->ID]->title = get_term_meta($unit->ID, 'module_title', true);
+                $course_modules[$unit->ID]->complete = FundaWande()->units->fw_is_unit_complete($unit->ID,$user_id);
+                $course_modules[$unit->ID]->is_unit = true;
+                $course_modules[$unit->ID]->number = $unit_count;
+                $unit_count++;
+            }
+        }
+        $teacher_progress->modules = $course_modules;
+
+        $teacher_progress->course_progress = Sensei()->course->get_completion_percentage($course->ID, $teacher->ID);
+
+
+        
+        return $teacher_progress;
+
+    } // end get_teacher_module_progress()
+
     /**
      * Get the assessment data for reviewing the assessment.
      *
