@@ -58,10 +58,12 @@ if ( class_exists( 'Timber' ) ) {
 
     if (!empty($_GET['coach'])) {
         $coach = $_GET['coach'];
-        $context['coach'] = $_GET['coach'];
+        $context['selected_coach'] = $_GET['coach'];
     } else {
         $coach = null;
     }
+
+    $context['coaches'] = FundaWande()->coaching_utils->get_coaches();
 
     
     $context['module_id'] = $module_id;

@@ -11,57 +11,70 @@
 
 {# Twig block to be included in base.twig #}
 {% block content %}
-    <div class="wrapper coach-dash-wrapper" id="lms-page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper coach-dash-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
 
         {# Sign up information band #}
         <section class="container ">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="lbreaker-lms-purple mt-4">Coach dashboard</h1>
+                    <h1 class="lbreaker-lms-purple mt-4">Coach assessment review dashboard</h1>
                 </div>
                 <div class="col-12 mt-4">
-                    <div class="row">
-                        <div class="col-auto px-3 mb-4 mb-md-0">
-                            <select type="select" class="form-control custom-select coach-filter"   id="courseSelect"  style="max-width:120px" placeholder="" value="" required>
-                                <option value=""  selected >All course</option>
-                                {% for course in courses %}
-                                    <option value="{{course.ID }}" {% if selected_course ==  course.ID %}selected{% endif %}  >{{course.title}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-auto px-3 ">
-                            <select type="select" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:120px"  placeholder="" value="" required>
-                                <option value="" disabled selected >Filter by coach</option>
-                                <option value=""  >All coaches</option>
-                                <option diabled  value="" >No coaches available yet</option>
+                    <form id="" action=""  method="get">
+                        <div class="row">
+                        
 
-                            </select>
+                            <div class="col-auto px-3 mb-4 mb-md-0">
+                                <select type="select" name="fw_course" class="form-control custom-select coach-filter"   id="courseSelect"  style="max-width:120px" placeholder="" value="" required>
+                                    <option value="" disabled  selected >Choose a course</option>
+                                    {% for course in courses %}
+                                        <option value="{{course.ID }}" {% if selected_course ==  course.ID %}selected{% endif %}  >{{course.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-auto px-3 ">
+                                <select type="select" name="coach" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:120px"  placeholder="" value="" >
+                                    <option value="" disabled selected >Filter by coach</option>
+                                    <option value=""  >All coaches</option>
+                                    {% for coach in coaches %}
+                                        <option value="{{coach.ID }}" {% if selected_coach ==  coach.ID %}selected{% endif %}  >{{coach.display_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% if selected_course %}
+                            <div class="col-auto px-3 ">
+                                <select type="select" name="module"  class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:120px" placeholder="" value="" >
+                                    <option value=""  selected >All modules</option>
+                                    {% for module in modules %}
+                                        <option value="{{module.term_id}}" {% if module_id ==  module.term_id %}selected{% endif %}  >{{module.name}}</option>
+                                    {% endfor %}
+                    
+                                </select>
+                            </div>
+                    
+                            
+                            <div class="col-auto px-3 ">
+                                <select type="select" name="user" class="form-control custom-select coach-filter " id="userSelect" style="max-width:120px" placeholder="" value="" >
+                                    <option value=""  selected >All teachers</option>
+                                    {% for key, teacher in assessments_data%}
+                                        <option value="{{key}}" {% if key == teacher_id %}selected{% endif %} >{{teacher.name}}</option>
+                                    {% endfor %}
+                    
+                                </select>
+                            </div>
+                            {% endif %}
+
+                            <button type="submit"  class="button button-primary primary-bg primary-border button-large" >Submit filter</button>
+
                         </div>
-                        <div class="col-auto px-3 ">
-                            <select type="select" class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:120px" placeholder="" value="" required>
-                                <option value=""  selected >All modules</option>
-                                {% for module in modules %}
-                                    <option value="{{module.term_id}}" {% if module_id ==  module.term_id %}selected{% endif %}  >{{module.name}}</option>
-                                {% endfor %}
-                
-                            </select>
-                        </div>
-                        <div class="col-auto px-3 ">
-                            <select type="select" class="form-control custom-select coach-filter " id="userSelect" style="max-width:120px" placeholder="" value="" required>
-                                <option value=""  selected >All teachers</option>
-                                {% for key, teacher in assessments_data%}
-                                    <option value="{{key}}" {% if key == teacher_id %}selected{% endif %} >{{teacher.name}}</option>
-                                {% endfor %}
-                
-                            </select>
-                        </div>
-                    </div>
+                    </form>
                 </div>
+                
             </div>
             <div class="row no-gutters">
                 <div class="col-12  py-md-4 ">
 
-
+                {% if selected_course %}
 
                     <div class="my-4">
                        <table id="data-table" class="resources table table-bordered  table-striped" cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -71,7 +84,7 @@
                                 <th>Assessment</th>
                                 <th>Module</th>
                                 <th>Submission date</th>
-                                <th>Feedback</th>
+                                <th>Feedback?</th>
                                 <th>Status</th>
                                 <th>Grading type</th>
                                 <th>Review</th>
@@ -104,6 +117,9 @@
                             </tbody>
                         </table>
                     </div>
+                {% else %}
+                    <p>Please select a course to review</p>
+                {% endif %}
 
                 </div>
             </div>
