@@ -641,8 +641,8 @@ video{min-height:200px}
 }.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px;overflow:hidden}
 .single-lesson-wrapper .lesson-carousel a:hover{opacity:.7}
 .single-lesson-wrapper .lesson-carousel .carousel-item{padding-top:2rem}
-.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:30px}
-.single-lesson-wrapper .lesson-carousel .carousel-indicators li:not(.active){background:#ccc !important}
+.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:25px}
+.single-lesson-wrapper .lesson-carousel .carousel-indicators li:not(.active){background-color:#ccc !important}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control{position:absolute;top:0;z-index:5}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-prev{left:0}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:0}

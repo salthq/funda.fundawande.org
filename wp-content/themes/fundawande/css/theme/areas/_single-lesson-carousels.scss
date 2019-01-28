@@ -15,9 +15,9 @@
       min-width: 290px;
       margin: 0 auto;
       bottom: auto;
-      top: 30px;
-      li:not(.active) {
-        background: $grey-secondary !important;
+      top: 25px;
+      li:not(.active){
+        background-color: #ccc !important;
       }
     }
     .lesson-carousel-control {
