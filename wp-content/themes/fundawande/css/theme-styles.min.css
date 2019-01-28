@@ -610,7 +610,7 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-sidebar-module-titles{border-bottom:1px solid #ccc}
 }@media(max-width:767px){.single-lesson-wrapper .lesson-sidebar{display:none}
 .single-lesson-wrapper .lesson-sidebar-component{display:none}
-.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker{z-index:1;color:#444}
+.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker{z-index:6;color:#444}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker:hover{opacity:.7;text-decoration:none}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg{height:50px;width:50px}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg #icon-inner{fill:white}
@@ -624,7 +624,7 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider{min-width:10px;min-height:20px;position:relative}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider:first-of-type{min-height:0;min-width:0}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider:first-of-type:before{display:none}
-.single-lesson-wrapper .lesson-progress-mobile{position:fixed !important;bottom:0;height:30px;width:100%;z-index:1}
+.single-lesson-wrapper .lesson-progress-mobile{position:fixed !important;bottom:0;height:30px;width:100%;z-index:6}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-module-number h4{line-height:30px}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-markers{overflow:scroll;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap}
 .single-lesson-wrapper .lesson-progress-mobile-minimized .lesson-progress-marker{z-index:1;width:18px;height:18px;border-radius:50%;background:#ccc}
@@ -638,19 +638,19 @@ video{min-height:200px}
 .single-lesson-wrapper .pdf-image{opacity:1;-webkit-transition:.5s ease;transition:.5s ease;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
 @media(min-width:992px){.single-lesson-wrapper .pdf-text-container{opacity:0}
-}.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px}
+}.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px;overflow:hidden}
 .single-lesson-wrapper .lesson-carousel a:hover{opacity:.7}
 .single-lesson-wrapper .lesson-carousel .carousel-item{padding-top:2rem}
-.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:0}
+.single-lesson-wrapper .lesson-carousel .carousel-indicators{min-width:290px;margin:0 auto;bottom:auto;top:25px}
 .single-lesson-wrapper .lesson-carousel .carousel-indicators li:not(.active){background-color:#ccc !important}
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-control{position:absolute;top:-35px;z-index:5}
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-control{position:absolute;top:0;z-index:5}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-prev{left:0}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:0}
 @media(max-width:767px){.single-lesson-wrapper .lesson-carousel .lesson-carousel-control-prev{left:5%}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-next{right:5%}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{width:50px}
 }.single-lesson-wrapper .lesson-carousel .lesson-carousel-control-icon svg{height:75px}
-.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter{position:absolute;top:-10px}
+.single-lesson-wrapper .lesson-carousel .lesson-carousel-counter{position:absolute;top:25px}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-text p{text-align:inherit}
 .single-lesson-wrapper .lesson-carousel .lesson-carousel-image img{margin:auto;width:auto;max-width:100%}
 #end-lesson-modal .lesson-progress-modal .lesson-progress-module-number h4{line-height:50px}
