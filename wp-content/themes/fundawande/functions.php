@@ -41,6 +41,15 @@ function pango_admin_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'pango_admin_scripts' );
 
+/**
+ * Enqueue login styles
+ */
+function fw_login_stylesheet() {
+    wp_enqueue_style( 'custom-login-css', get_stylesheet_directory_uri() . '/css/custom-login.css' ,'', FW_VER);
+
+}
+add_action( 'login_enqueue_scripts', 'fw_login_stylesheet' );
+
 
 /**
  * Load Timber compatibility file.
