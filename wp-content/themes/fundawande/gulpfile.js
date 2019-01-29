@@ -251,6 +251,24 @@ gulp.task('customStyles', function () {
 });
 
 
+/**
+  * Task: `loginCSS`.
+  *
+  * Concatenate and uglify the custom login stylesheet.
+  * 
+  */
+
+ gulp.task('loginCSS', function() {
+  gulp.src('./css/custom-login.css')
+    .pipe( browserSync.stream() )   // Reloads login-styles.css if that is enqueued.
+    .pipe( rename( {suffix: '.min'} ) )
+    .pipe( minifycss( {
+      maxLineLen: 10
+    }))
+    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+    .pipe( gulp.dest( './css/' ) )
+});
+
  /**
   * Task: `vendorJS`.
   *
@@ -334,8 +352,9 @@ gulp.task( 'customJS', function() {
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
-  gulp.watch( styleWatchFiles, [ 'adminStyles', 'customStyles' ] ); // Reload on SCSS file changes.
+ gulp.task( 'default', ['adminStyles', 'vendorStyles', 'customStyles', 'loginCSS', 'vendorsJs', 'customGlobalJS', 'customJS'], function () {
+  gulp.watch( styleWatchFiles, [ 'adminStyles', 'customStyles', 'loginCSS' ] ); // Reload on SCSS file changes.
+  gulp.watch( './css/custom-login.css', [ 'loginCSS', reload ] ) //Minify login styles CSS when changes are made.
   gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.
   gulp.watch( customJSWatchFiles, [ 'customGlobalJS','customJS', reload ] ); // Reload on customJS file changes.
  });
