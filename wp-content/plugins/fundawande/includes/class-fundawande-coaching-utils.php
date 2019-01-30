@@ -104,6 +104,20 @@ class FundaWande_Coaching_Utils {
         return true;
         
     } // end set_bulk_coach()
+    
+    /**
+     * Check if current user is a coach
+     *
+     */
+    public function is_user_coach() {
+
+        // Loop through selected users
+        $user_id = get_current_user_id();
+        $is_coach = get_user_meta($user_id,'is_coach',true);
+        
+        return $is_coach ;
+        
+    } // end is_user_coach()
 
     /**
      * Set the coach to a user

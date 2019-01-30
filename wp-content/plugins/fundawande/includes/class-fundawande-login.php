@@ -30,7 +30,17 @@ class FundaWande_Login {
         add_filter('authenticate', array($this, 'custom_login_blank_field'),10,3);
         // add custom login redirect
         add_action( 'wp_login', array($this,'fw_login_redirect') ,10,2);
+        add_action('wp_login', array($this,'fw_user_login'), 1, 2);
 
+
+
+    }
+
+    function fw_user_login($user_login, $user) {
+        /** Create a user */
+        $time = time();
+        update_user_meta($user->ID,'last_login',$time);
+        
     }
 
     /**

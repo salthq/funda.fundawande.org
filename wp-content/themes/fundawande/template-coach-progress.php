@@ -1,6 +1,6 @@
 <?php
 /**
-*Template Name: Coach Dashboard Page Template
+*Template Name: Coach Progress Dashboard Page Template
  *
  * @package Pango
  */
@@ -63,18 +63,21 @@ if ( class_exists( 'Timber' ) ) {
     
     $context['module_id'] = $module_id;
 
-    if (!empty($_GET['user'])) {
+    if (!empty($_GET['user']) && $_GET['user'] != '') {
         $user_id = $_GET['user'];
         $context['user_id'] = $_GET['user'];
         $context['week_number'] = $week_number = 'all';
+        $context['module_progress_data'] = FundaWande()->coaching->get_teacher_module_progress($course,$user_id);
+
     } else {
         $user_id = null;
     }
    
 
 
-    $context['assessments_data'] = FundaWande()->coaching->get_teacher_assessments($course,$coach,$module_id,$user_id);
+    $context['course_progress_data'] = FundaWande()->coaching->get_teacher_course_progress($course,$coach,$user_id);
+    
 
-    Timber::render(array('lms/template-coach-dash.twig', 'page.twig'), $context);
+    Timber::render(array('lms/template-coach-progress-dash.twig', 'page.twig'), $context);
 
 }

@@ -4,40 +4,40 @@ jQuery(document).ready( function($) {
         $(this).parent().prevAll('.feedback-indicator').append('[Processing]');
     });
 
-    $('.coach-filter').on('change', function(e) {
-        var course = $('#courseSelect').val();
-        var coach = $('#coachSelect').val();
-        var unit = $('#moduleSelect').val();
-        var user = $('#userSelect').val();
+    // $('.coach-filter').on('change', function(e) {
+    //     var course = $('#courseSelect').val();
+    //     var coach = $('#coachSelect').val();
+    //     var unit = $('#moduleSelect').val();
+    //     var user = $('#userSelect').val();
 
-        /*
-         * queryParameters -> handles the query string parameters
-         * queryString -> the query string without the fist '?' character
-         * re -> the regular expression
-         * m -> holds the string matching the regular expression
-         */
-        var queryParameters = {}, queryString = location.search.substring(1),
-            re = /([^&=]+)=([^&]*)/g, m;
+    //     /*
+    //      * queryParameters -> handles the query string parameters
+    //      * queryString -> the query string without the fist '?' character
+    //      * re -> the regular expression
+    //      * m -> holds the string matching the regular expression
+    //      */
+    //     var queryParameters = {}, queryString = location.search.substring(1),
+    //         re = /([^&=]+)=([^&]*)/g, m;
 
-        // Creates a map with the query string parameters
-        while (m = re.exec(queryString)) {
-            queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-        }
+    //     // Creates a map with the query string parameters
+    //     while (m = re.exec(queryString)) {
+    //         queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+    //     }
 
-        // Add new parameters or update existing ones
-        queryParameters.fw_course = course;
-        queryParameters.coach = coach;
-        queryParameters.module = unit;
-        queryParameters.user = user;
+    //     // Add new parameters or update existing ones
+    //     queryParameters.fw_course = course;
+    //     queryParameters.coach = coach;
+    //     queryParameters.module = unit;
+    //     queryParameters.user = user;
 
 
-        /*
-         * Replace the query portion of the URL.
-         * jQuery.param() -> create a serialized representation of an array or
-         *     object, suitable for use in a URL query string or Ajax request.
-         */
-        location.search = $.param(queryParameters); // Causes page to reload
-    });
+    //     /*
+    //      * Replace the query portion of the URL.
+    //      * jQuery.param() -> create a serialized representation of an array or
+    //      *     object, suitable for use in a URL query string or Ajax request.
+    //      */
+    //     location.search = $.param(queryParameters); // Causes page to reload
+    // });
 
     $('#data-table').DataTable( {
 
@@ -143,7 +143,7 @@ jQuery(document).ready( function($) {
             } );
             this.api().columns(6).every( function () {
                 var column = this;
-                var select = $('<br><select><option value="">Response</option></select>')
+                var select = $('<br><select><option value="">Grading type</option></select>')
                     .appendTo( $(column.header()) )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(

@@ -17,9 +17,8 @@
         <section class="container ">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="lbreaker-lms-purple mt-4">Coach assessment review dashboard</h1>
-                    <a class="primary-btn-outline px-1 py-1 rounded" href="/coach-progress">Go to progress dashboard</a>
-
+                    <h1 class="lbreaker-lms-purple mt-4">Coach progress dashboard</h1>
+                    <a class="primary-btn-outline px-1 py-1 rounded" href="/coach-dashboard">Go to assessment review dashboard</a>
                 </div>
                 <div class="col-12 mt-4">
                     <form id="" action=""  method="get">
@@ -44,7 +43,7 @@
                                 </select>
                             </div>
                             {% if selected_course %}
-                            <div class="col-auto px-3 ">
+                            {# <div class="col-auto px-3 ">
                                 <select type="select" name="module"  class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:150px" placeholder="" value="" >
                                     <option value=""  selected >All modules</option>
                                     {% for module in modules %}
@@ -52,14 +51,14 @@
                                     {% endfor %}
                     
                                 </select>
-                            </div>
+                            </div> #}
                     
                             
                             <div class="col-auto px-3 ">
                                 <select type="select" name="user" class="form-control custom-select coach-filter " id="userSelect" style="max-width:150px" placeholder="" value="" >
                                     <option value=""  selected >All teachers</option>
-                                    {% for key, teacher in assessments_data%}
-                                        <option value="{{key}}" {% if key == teacher_id %}selected{% endif %} >{{teacher.name}}</option>
+                                    {% for key, teacher in course_progress_data %}
+                                        <option value="{{key}}" {% if key == user_id %}selected{% endif %} >{{teacher.name}}</option>
                                     {% endfor %}
                     
                                 </select>
@@ -76,6 +75,10 @@
             <div class="row no-gutters">
                 <div class="col-12  py-md-4 ">
 
+                {% if course_progress_data is empty and user_id %}
+                    <p>Sorry that user wasn't on the course, please resubmit the filter will <i>All teachers</i> selected</p>
+                {% endif %}
+
                 {% if selected_course %}
 
                     <div class="my-4">
@@ -83,48 +86,32 @@
                             <thead class="background-primary-light">
                             <tr>
                                 <th>Teacher</th>
-                                <th>Assessment</th>
-                                <th>Module</th>
-                                <th>Submission date</th>
-                                <th>Feedback?</th>
-                                <th>Status</th>
-                                <th>Grading type</th>
-                                <th>Review</th>
+                                <th>Course</th>
+                                <th>Progress</th>
+                                <th>Current Module</th>
+                                <th>Current Unit</th>
+                                <th>Last login</th>
+                                
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for key, teacher in assessments_data %}
-                                {% for key2, assessment in teacher.assessments %}
+                            {% for key, teacher in course_progress_data %}
                                     <tr>
 
                                         <td>{{ teacher.name }}</td>
-                                        <td>{{ assessment.lesson_name }}</td>
-                                        <td>{{ assessment.week.name }}</td>
-                                        <td>{{ assessment.date|date('d M Y') }}</td>
-                                        <td class="feedback-indicator">
-                                            {% if assessment.needs_feedback %}
-                                                {% if assessment.feedback %}
-                                                    Yes
-                                                {% else %}
-                                                    No
-                                                {% endif %}
-                                            {% else %}
-                                                Auto
-                                            {% endif %}</td>
-                                        <td>{% if assessment.status == 'graded' %}Complete{% else %}Submitted{% endif %}</td>
-                                        <td>{% if assessment.needs_feedback %}
-                                                Manually graded
-                                            {% else %}
-                                                Auto-graded
-                                            {% endif %}
-                                        </td>
-                                        <td><a class="review-assessment" {% if assessment.needs_feedback %}href="/review-assessment?assessment_id={{ assessment.lesson_id }}&user_id={{ key }}"{% else %}href="/wp-admin/admin.php?page=sensei_grading&user={{key}}&quiz_id={{ assessment.quiz_id}}"{% endif %}  target="_blank">Review</a></td>
+                                        <td>{{ teacher.course_name }}</td>
+                                        <td>{{ teacher.course_progress }}%</td>
+                                        <td>{{ teacher.current_module }}</td>
+                                        <td>{{ teacher.current_unit }}</td>
+                                        <td>{% if teacher.last_login %}{{ teacher.last_login |date('d M Y')}}{% endif %}</td>
                                     </tr>
-                                {% endfor %}
                             {% endfor %}
                             </tbody>
                         </table>
+                        {% if course_progress_data is empty  and not user_id %}
+                            <p>There are currently no teachers on this course</p>
+                        {% endif %}
                     </div>
                 {% else %}
                     <p>Please select a course to review</p>
@@ -132,6 +119,42 @@
 
                 </div>
             </div>
+            <div class="row no-gutters">
+                <div class="col-12  py-md-4 ">
+
+                {% if module_progress_data  %}
+                <h3>Module / Unit Progress </h3>
+
+                    <div class="my-4">
+                       <table id="data-table" class="resources table table-bordered  table-striped" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <thead class="background-primary-light">
+                            <tr>
+                                
+                                <th>Module/Unit</th>
+                                <th>Progress</th>
+                                
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, module in module_progress_data.modules %}
+                                    <tr>
+
+                                        <td>{% if module.is_unit %}&nbsp&nbsp&nbspUnit{% else %}Module{% endif %} {{ module.number}}: {{ module.title }}</td>
+                                        <td>{% if module.complete %}Complete{% else %}-{% endif %}</td>
+                                    </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                {% elseif course_progress_data  %}
+                    <p>To view module progress, select a teacher</p>
+                {% endif %}
+
+                </div>
+            </div>
+         
         </section>
 
     </div><!-- #wrapper -->

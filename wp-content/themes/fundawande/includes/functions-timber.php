@@ -147,6 +147,7 @@ class FundaWandeSite extends TimberSite
         /**
          * Menu Context
          */
+        $context['is_coach'] =  FundaWande()->coaching_utils->is_user_coach();
 
         //Get current course link
         if (isset($context['user']->fw_current_course)) {

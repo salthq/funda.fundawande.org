@@ -36,14 +36,13 @@ class FundaWande_Units {
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
-        $unit_key = get_term_meta($unit_id, 'fw_unique_key',true);
 
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_unit_progress',
             'user_id' => $user_id,
-            'status' => $unit_key,
+            'status' => $unit_id,
         );
 
         // possibly returns array, we just want one object
@@ -105,14 +104,13 @@ class FundaWande_Units {
             $user_id = get_current_user_id();
         }
 
-        $unit_key = get_term_meta($unit_id, 'fw_unique_key',true);
 
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_unit_progress',
             'user_id' => $user_id,
-            'status' => $unit_key,
+            'status' => $unit_id,
         );
 
         // possibly returns array, we just want one object
