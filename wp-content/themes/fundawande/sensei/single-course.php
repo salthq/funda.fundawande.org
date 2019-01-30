@@ -12,7 +12,10 @@
 if (!is_user_logged_in()) {
     wp_redirect(get_site_url(null, '/login'));
     exit();
-}
+} elseif (isset($_GET['course_id'])) {
+    $current_course_id = $_GET['course_id'];
+    update_user_meta($user_id, 'fw_current_course', $current_course_id );
+} 
 
 if (class_exists('Timber')) {
 

@@ -73,7 +73,7 @@
                                 <th>Submission date</th>
                                 <th>Feedback</th>
                                 <th>Status</th>
-                                <th>Response status</th>
+                                <th>Grading type</th>
                                 <th>Review</th>
 
                             </tr>
@@ -89,9 +89,14 @@
                                         <td>{{ assessment.date|date('d M Y') }}</td>
                                         <td class="feedback-indicator">{% if assessment.needs_feedback %}
                                                 {% if assessment.feedback %}Yes{% else %}No{% endif %}
-                                            {% else %}MCQ{% endif %}</td>
+                                            {% else %}Auto{% endif %}</td>
                                         <td>{% if assessment.status == 'graded' %}Complete{% else %}Submitted{% endif %}</td>
-                                        <td>{% if assessment.response_status %}{{assessment.response_status}}{% else %}-{% endif %}</td>
+                                        <td>{% if assessment.needs_feedback %}
+                                                Manually graded
+                                            {% else %}
+                                                Auto-graded
+                                            {% endif %}
+                                        </td>
                                         <td><a class="review-assessment" {% if assessment.needs_feedback %}href="/review-assessment?assessment_id={{ assessment.lesson_id }}&user_id={{ key }}"{% else %}href="/wp-admin/admin.php?page=sensei_grading&user={{key}}&quiz_id={{ assessment.quiz_id}}"{% endif %}  target="_blank">Review</a></td>
                                     </tr>
                                 {% endfor %}

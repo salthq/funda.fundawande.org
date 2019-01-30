@@ -24,8 +24,89 @@ class FundaWande_Coaching {
      */
     public function __construct() {
 
+        add_action( 'admin_menu', array($this,'register_coaching_menu_page' ));
+
+    }
 
 
+	/**
+	 * Register a coaching menu page.
+	 */
+	function register_coaching_menu_page(){
+
+        add_menu_page( 
+			'Coaching management',
+			'Coaching management',
+			'manage_options',
+			'fw_coaching',
+			array($this,'fw_coaching_menu_page'),
+			'dashicons-chart-pie',
+			50
+		); 
+
+		// add_action('admin_print_scripts-' . $page_hook_suffix, array(LMS()->paths_admin_utils,'paths_admin_scripts'));
+    }
+    
+
+	/**
+	 * Display coaching menu page
+	 */
+	function fw_coaching_menu_page(){ 
+        // Get the array of courses on the LMS
+        $courses = FundaWande()->lms->get_courses();
+        
+        $course_id = null;
+        // Check if course ID is set and get the course
+		if ( isset( $_GET['course_id'] ) ) {
+			$course_id = (int) $_GET['course_id'];
+            $course = get_post($course_id);
+            
+        }
+        // Check if the coach form was submitted and run the bulk or update actions
+        if ( isset( $_POST['bulk_coach']) ) {
+			FundaWande()->coaching_utils->set_bulk_coach($_POST);
+		}  elseif ( isset( $_POST['coaches']) ) {
+			FundaWande()->coaching_utils->set_coaches($_POST);
+		}
+        ?>
+        <div id="path_relationships_wrapper" class="wrap ">
+			<h1 class="wp-heading-inline">Coaching management</h1>
+			
+			<form id="" action=""  method="get">
+				<input type="hidden" name="page" value="<?= isset( $_GET['page'] ) ? $_GET['page'] : '' ?>">
+				<select id="course_id" name="course_id" class="form-control  customSelect searchSelect" >
+					<option value="all" selected disabled>Choose a course</option>
+                    <!--  loop through courses to set up select options -->
+					<?php foreach ($courses as $course) { ?>
+						<option value="<?php echo (int) $course->ID; ?>" 
+						<?php if ($course->ID == $course_id) {
+							echo 'selected';
+						} ?>
+						><?php echo $course->ID .' | '.$course->post_title; ?></option>
+					<?php } ?> 
+				</select>
+				<button type="submit"  class="button button-primary button-large" >Select</button>
+			</form>
+                 
+			<?php if (isset($course_id)) { 
+                // Set up the user's coach table 
+                $wp_list_table = new FundaWande_Coaching_Table();
+                $wp_list_table->prepare_items();
+				?>
+				<form id="course-users-container" method="post">
+					<h2>Set user coaches: <?php echo $course->post_title; ?></h2>
+						<div id="course-users"  >				
+                            <!-- Display the table -->
+                            <?php $wp_list_table->display(); ?>
+                        </div>
+                        <button type="submit"  class="button button-primary button-large" >Update coaches</button>
+
+				</form>
+			<?php } ?> 
+			
+		</div>
+		<?php
+	
     }
 
     /**

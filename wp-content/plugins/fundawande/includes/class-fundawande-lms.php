@@ -516,6 +516,21 @@ class FundaWande_Lms {
          return $media_url;
      }
 
+     /**
+     * Fires after an activity is reset to update the progress
+     *
+     **/
+    public function get_courses() {
+        $course_args = array(
+            'post_type' => 'course',
+            'numberposts' => 99,
+        );
+
+        $courses = get_posts($course_args);
+
+        return $courses;
+    }
+
 
     /**
      * Fires after an activity is reset to update the progress
