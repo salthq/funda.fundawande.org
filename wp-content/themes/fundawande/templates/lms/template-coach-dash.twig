@@ -102,9 +102,16 @@
                                         <td>{{ assessment.lesson_name }}</td>
                                         <td>{{ assessment.week.name }}</td>
                                         <td>{{ assessment.date|date('d M Y') }}</td>
-                                        <td class="feedback-indicator">{% if assessment.needs_feedback %}
-                                                {% if assessment.feedback %}Yes{% else %}No{% endif %}
-                                            {% else %}Auto{% endif %}</td>
+                                        <td class="feedback-indicator">
+                                            {% if assessment.needs_feedback %}
+                                                {% if assessment.feedback %}
+                                                    Yes
+                                                {% else %}
+                                                    No
+                                                {% endif %}
+                                            {% else %}
+                                                Auto
+                                            {% endif %}</td>
                                         <td>{% if assessment.status == 'graded' %}Complete{% else %}Submitted{% endif %}</td>
                                         <td>{% if assessment.needs_feedback %}
                                                 Manually graded
