@@ -1,8 +1,8 @@
 <!-- Expanded Sidebar Progress Component -->
-<div id="{{ carousel_id }}" class="lesson-carousel  carousel slide" data-ride="carousel" data-interval="false">
+<div id="content_{{content_id}}_{{ carousel_id }}" class="lesson-carousel  carousel slide" data-ride="carousel" data-interval="false">
 
     <!-- Previous Nav Button -->
-    <a class="lesson-carousel-control lesson-carousel-control-prev" data-slide="prev" href="#{{ carousel_id }}" role="button">
+    <a class="lesson-carousel-control lesson-carousel-control-prev" data-slide="prev" href="#content_{{content_id}}_{{ carousel_id }}" role="button">
         <div class="lesson-carousel-control-icon">
             <span class="module-svg-icon-fill-{{module_number}}" aria-hidden="true">
                 {{source('/assets/carousel_prev.svg')}}</span>
@@ -13,13 +13,13 @@
     <!-- Navigation indicators-->
     <ol class="carousel-indicators">
         {% for item in content.carousel_items %}
-            <li data-target="#{{ carousel_id }}" data-slide-to="{{ loop.index - 1 }}" class="d-none d-sm-block module-bg-{{ module_number }} {% if loop.index == 1 %} active{% endif %}">
+            <li data-target="#content_{{content_id}}_{{ carousel_id }}" data-slide-to="{{ loop.index - 1 }}" class="d-none {% if loop.length < 7 %} d-sm-block {% endif %} module-bg-{{ module_number }} {% if loop.index == 1 %} active{% endif %}">
                 {{loop.index}}</li>            
         {% endfor %}
     </ol>
 
     <!-- Next Nav Button -->
-    <a class="lesson-carousel-control lesson-carousel-control-next" data-slide="next" href="#{{ carousel_id }}" role="button">
+    <a class="lesson-carousel-control lesson-carousel-control-next" data-slide="next" href="#content_{{content_id}}_{{ carousel_id }}" role="button">
         <div class="lesson-carousel-control-icon">
             <span class="module-svg-icon-fill-{{module_number}}" aria-hidden="true">
                 {{source('/assets/carousel_next.svg')}}</span>
@@ -31,10 +31,10 @@
     <div class="" role="listbox">
             {% for item in content.carousel_items %}
                 <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}" data-touch="true"> <div class="lesson-image-wrapper row justify-content-center">
-                    <div class = "d-sm-none lesson-carousel-counter">
+                    <div class = "{% if loop.length < 7 %} d-sm-none {% endif %} lesson-carousel-counter">
                         <p class="text-center m-0">{{loop.index}} of {{loop.length}}</p>
                     </div>
-                    <div class="lesson-carousel-image col fw-media mt-sm-5">
+                    <div class="lesson-carousel-image col fw-media mt-5">
                         <img class="d-block " src="{{ item.image }}"></div>
                         {% block carousel_text %}
                             <div class="col-12">

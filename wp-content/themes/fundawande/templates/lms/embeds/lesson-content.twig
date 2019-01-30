@@ -35,7 +35,10 @@
     {% for content in lesson_post.get_field('lesson_content_types') %}
         <div class="container">
             <div class="row">
-            
+
+                {# content_id is used to uniquely identify each content template that gets pulled into the lesson template. It is necessary when dealing with multiple carousels or video grids #}
+                {% set content_id = loop.index %}
+
                 {# Image Content Types #}
                 {# Full width image#}
                 {% if content.acf_fc_layout == 'image_full_width' %}

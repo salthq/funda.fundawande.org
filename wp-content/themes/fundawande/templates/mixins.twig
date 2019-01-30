@@ -48,11 +48,11 @@
 
 {% endmacro %}
 
-{% macro videoCard(video_src, image_src, video_id, video_title, video_description, module_number) %}
+{% macro videoCard(video_src, image_src, video_id, video_title, video_description, module_number, content_id) %}
     {% import _self as mixins %}
     <div class="video-grid-container card">
         <div class="card-body">
-            <div class = "p-3" style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }} cursor: pointer" data-toggle="modal" data-target="#videoCardModal{{ video_id }}">
+            <div class = "p-3" style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }} cursor: pointer" data-toggle="modal" data-target="#content_{{content_id}}_videoCardModal{{ video_id }}">
                 <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
             </div>
             <h5 class="card-title pt-3">{{video_title}}</h5>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div id="videoCardModal{{ video_id }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+    <div id="content_{{content_id}}_videoCardModal{{ video_id }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="d-flex m-3">

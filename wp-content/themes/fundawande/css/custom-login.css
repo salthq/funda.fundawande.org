@@ -1,0 +1,52 @@
+/* Custom styles for the standard WP login page */
+
+#login h1 a, .login h1 a {
+    background-image: url(/wp-content/themes/fundawande/assets/logos/fw_logo.svg);
+    height: 100px;
+}
+
+body {
+    background: #ffffff;
+    min-width: 0;
+    color: #434343;
+    font-family: "Roboto Condensed", Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    line-height: 1.4em;
+}
+
+.login form {
+    margin-top: 20px;
+    margin-left: 0;
+    padding: 26px 24px 46px;
+    background: #f1f1f1;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+
+.wp-core-ui .button-primary {
+    background: #EF9D19;
+    border:none;
+    color: #fff;
+    box-shadow:none;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+.wp-core-ui .button-primary.focus, .wp-core-ui .button-primary.hover, .wp-core-ui .button-primary:focus, .wp-core-ui .button-primary:hover {
+    background: #EF9D19;
+    border:none;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    box-shadow: 0px 2px 4px rgba(0,0,0,.3);
+    color: #fff;
+}
+
+.login label {
+    color: #434343;
+    font-size: 14px;
+}
+
+input[type=text]:focus, input[type=search]:focus, input[type=radio]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, input[type=password]:focus, input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, select:focus, textarea:focus {
+    border-color: #EF9D19;
+    box-shadow: 0 0 0 0.1rem #EF9D19;
+    outline-color: #EF9D19;
+}
