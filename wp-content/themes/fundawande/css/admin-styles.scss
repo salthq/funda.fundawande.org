@@ -141,3 +141,34 @@ body.sensei_page_sensei_grading {
         }
     }
 }
+
+/* Global WordPress editor styles */ 
+
+/* Admin menu styles customisation */ 
+
+/* JTL: Comment out the admin styles - menu navs don't seem to be the issue. 
+
+#adminmenu a.menu-top,
+#adminmenu .wp-submenu-head {
+	font-size: 18px;
+	line-height: 22x;
+}
+
+#adminmenu .wp-submenu a {
+	font-size: 16px; //moved the font-size up by 3
+	line-height: 19px; //moved the font-size up by 3
+}
+
+*/
+
+
+/* ACF editor styles customisation*/ 
+
+.acf-field {
+    font-size: 16px;
+}
+
+.acf-field p.description {
+
+    font-size: 14px;
+}

@@ -24,8 +24,89 @@ class FundaWande_Coaching {
      */
     public function __construct() {
 
+        add_action( 'admin_menu', array($this,'register_coaching_menu_page' ));
+
+    }
 
 
+	/**
+	 * Register a coaching menu page.
+	 */
+	function register_coaching_menu_page(){
+
+        add_menu_page( 
+			'Coaching management',
+			'Coaching management',
+			'manage_options',
+			'fw_coaching',
+			array($this,'fw_coaching_menu_page'),
+			'dashicons-chart-pie',
+			50
+		); 
+
+		// add_action('admin_print_scripts-' . $page_hook_suffix, array(LMS()->paths_admin_utils,'paths_admin_scripts'));
+    }
+    
+
+	/**
+	 * Display coaching menu page
+	 */
+	function fw_coaching_menu_page(){ 
+        // Get the array of courses on the LMS
+        $courses = FundaWande()->lms->get_courses();
+        
+        $course_id = null;
+        // Check if course ID is set and get the course
+		if ( isset( $_GET['course_id'] ) ) {
+			$course_id = (int) $_GET['course_id'];
+            $course = get_post($course_id);
+            
+        }
+        // Check if the coach form was submitted and run the bulk or update actions
+        if ( isset( $_POST['bulk_coach']) ) {
+			FundaWande()->coaching_utils->set_bulk_coach($_POST);
+		}  elseif ( isset( $_POST['coaches']) ) {
+			FundaWande()->coaching_utils->set_coaches($_POST);
+		}
+        ?>
+        <div id="path_relationships_wrapper" class="wrap ">
+			<h1 class="wp-heading-inline">Coaching management</h1>
+			
+			<form id="" action=""  method="get">
+				<input type="hidden" name="page" value="<?= isset( $_GET['page'] ) ? $_GET['page'] : '' ?>">
+				<select id="course_id" name="course_id" class="form-control  customSelect searchSelect" >
+					<option value="all" selected disabled>Choose a course</option>
+                    <!--  loop through courses to set up select options -->
+					<?php foreach ($courses as $course) { ?>
+						<option value="<?php echo (int) $course->ID; ?>" 
+						<?php if ($course->ID == $course_id) {
+							echo 'selected';
+						} ?>
+						><?php echo $course->ID .' | '.$course->post_title; ?></option>
+					<?php } ?> 
+				</select>
+				<button type="submit"  class="button button-primary button-large" >Select</button>
+			</form>
+                 
+			<?php if (isset($course_id)) { 
+                // Set up the user's coach table 
+                $wp_list_table = new FundaWande_Coaching_Table();
+                $wp_list_table->prepare_items();
+				?>
+				<form id="course-users-container" method="post">
+					<h2>Set user coaches: <?php echo $course->post_title; ?></h2>
+						<div id="course-users"  >				
+                            <!-- Display the table -->
+                            <?php $wp_list_table->display(); ?>
+                        </div>
+                        <button type="submit"  class="button button-primary button-large" >Update coaches</button>
+
+				</form>
+			<?php } ?> 
+			
+		</div>
+		<?php
+	
     }
 
     /**
@@ -234,6 +315,148 @@ class FundaWande_Coaching {
         return $teacher_assessments;
 
     } // end get_teacher_assessments()
+
+     /**
+     * Get all the teacher course progress
+     *
+     * @param string $course the course ID to determine which to get progress for
+     *
+     * @return array $teacher_progress Array containing all required info on teacher assessments for coaches.
+     */
+    public function get_teacher_course_progress($course, $coach = false , $user_id = null) {
+
+        
+
+        // Set up the $teacher arguments to collect any entreps in the relevant presentation and coach
+        if ($coach) {
+            $teacher_args = array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'fw_coach',
+                        'value' => $coach,
+                        'compare' => '='
+                    ),
+                    array(
+                        'key' => 'fw_current_course',
+                        'value' => $course,
+                        'compare' => '='
+                    )
+
+                ),
+                // Commented out but keeping incase it's useful
+                // 'role__in' => ['teacher', 'alumni']
+            );
+        } else {
+            $teacher_args = array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'fw_current_course',
+                        'value' => $course,
+                        'compare' => '='
+                    )
+
+                ),
+            );
+        }
+
+        // Get the array of teachers using the args set up above
+        $teachers = get_users($teacher_args );
+
+        if ($user_id) {
+            $teacher = get_user_by('ID',$user_id);
+            if (in_array($teacher,$teachers)) {
+                $teachers = array();
+                $teachers[] = get_user_by('ID',$user_id);
+            } else {
+                return false;
+            }
+        } 
+
+        
+        // set up $teacher_assessments array
+        $teacher_progress = [];
+
+        $course = get_post($course);
+        $course_title = get_post_meta($course->ID,'course_title',true);
+        
+
+        // loop through the teachers
+        foreach ($teachers as $key => $teacher) {
+
+            // set up teacher object using ID as key
+            $teacher_progress[$teacher->ID] = new stdClass();
+
+            // store the teacher name to $assessment_obj
+            $teacher_progress[$teacher->ID]->name = $teacher->display_name;
+            $teacher_progress[$teacher->ID]->course_name = $course_title;
+            $teacher_progress[$teacher->ID]->current_module = get_user_meta($teacher->ID,'fw_current_module',true);
+            $teacher_progress[$teacher->ID]->current_unit = get_user_meta($teacher->ID,'fw_current_unit',true);
+            $teacher_progress[$teacher->ID]->last_login = get_user_meta($teacher->ID,'last_login',true);
+
+            $teacher_progress[$teacher->ID]->course_progress = Sensei()->course->get_completion_percentage($course->ID, $teacher->ID);
+
+
+        }
+        return $teacher_progress;
+
+    } // end get_teacher_course_progress()
+
+
+     /**
+     * Get all the teacher module  progress
+     *
+     * @param string $course the course ID to determine which to get progress for
+     *
+     * @return array $teacher_progress Array containing all required info on teacher assessments for coaches.
+     */
+    public function get_teacher_module_progress($course, $user_id) {
+
+        // set up $teacher_assessments array
+        $teacher_progress = [];
+
+        $course = get_post($course);
+        $course_title = get_post_meta($course->ID,'course_title',true);
+
+        $teacher = get_user_by('ID',$user_id);
+        
+        // set up teacher object using ID as key
+        $teacher_progress = new stdClass();
+
+        // store the teacher name to $assessment_obj
+        $teacher_progress->name = $teacher->display_name;
+        $teacher_progress->course_name = $course_title;
+
+        $modules = FundaWande()->modules->get_course_modules($course->ID);
+        $course_modules=[];
+        
+        foreach ($modules as $module) {
+            $course_modules[$module->term_id] = new stdClass();
+            $course_modules[$module->term_id]->title = get_term_meta($module->term_id, 'module_title', true);
+            $course_modules[$module->term_id]->complete = FundaWande()->modules->fw_is_module_complete($module->term_id,$user_id);
+            $course_modules[$module->term_id]->is_unit = false;
+            $course_modules[$module->term_id]->number = $module->module_number;
+            $unit_count = 1;
+            foreach ($module->units as $unit) {
+                $course_modules[$unit->ID] = new stdClass();
+
+                $course_modules[$unit->ID]->title = get_term_meta($unit->ID, 'module_title', true);
+                $course_modules[$unit->ID]->complete = FundaWande()->units->fw_is_unit_complete($unit->ID,$user_id);
+                $course_modules[$unit->ID]->is_unit = true;
+                $course_modules[$unit->ID]->number = $unit_count;
+                $unit_count++;
+            }
+        }
+        $teacher_progress->modules = $course_modules;
+
+        $teacher_progress->course_progress = Sensei()->course->get_completion_percentage($course->ID, $teacher->ID);
+
+
+        
+        return $teacher_progress;
+
+    } // end get_teacher_module_progress()
 
     /**
      * Get the assessment data for reviewing the assessment.

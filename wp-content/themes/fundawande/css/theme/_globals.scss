@@ -248,7 +248,7 @@
  */
 
 .primary-bg {
-    background-color: $brand-primary__colour;
+    background-color: $brand-primary__colour!important;
 }
 .primary-text {
     color: $brand-primary__colour;
@@ -259,6 +259,7 @@
 .primary-btn-outline {
     border-color: $brand-primary__colour;
     color: $brand-primary__colour;
+    border:1px solid;
     svg {
         fill: $brand-primary__colour;
     }
@@ -266,6 +267,7 @@
         border-color: $brand-primary__colour;
         background-color: $brand-primary__colour;
         color: $white;
+        text-decoration: none;
         svg {
             fill: $white;
         }
@@ -379,7 +381,7 @@
  */
 
 .fw-media {
-    max-width: 510px;
+    max-width: $media-max-width;
 }
 
  .text-tertiary {

@@ -194,11 +194,16 @@ class FundaWande_Main {
 		// Setup lesson functionality class
 		$this->coaching = new FundaWande_Coaching();
 
+		// Setup coaching functionality class
+		$this->coaching_utils = new FundaWande_Coaching_Utils();
+
         // Differentiate between administration and frontend logic.
         if ( is_admin() ) {
 
             // Set up admin specific classes
-            $this->admin = new FundaWande_Admin();
+			$this->admin = new FundaWande_Admin();
+			
+			
 
         } else {
 

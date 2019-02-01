@@ -11,7 +11,8 @@ if ( class_exists( 'Timber' ) ) {
         wp_redirect(wp_login_url(get_permalink()));
         exit();
     }
-    if (!(is_super_admin() || current_user_can( 'coach' ))) {
+    $is_coach =  FundaWande()->coaching_utils->is_user_coach();
+    if (!(is_super_admin() || $is_coach)) {
         wp_redirect('/');
         exit();
     }
@@ -30,10 +31,7 @@ if ( class_exists( 'Timber' ) ) {
         $context['selected_course'] = $_GET['fw_course'];
         $context['modules'] = Sensei()->modules->get_course_modules($course);
         // Get all courses in the term via path slug
-        $course_args = array(
-            'post_type' => 'course',
-        );
-        $context['courses'] = Timber::get_posts($course_args);
+        $context['courses'] =  FundaWande()->lms->get_courses();
         if (!empty($_GET['module'])) {
             $module_id = '';
             foreach($context['modules'] as $course_module) {
@@ -47,10 +45,7 @@ if ( class_exists( 'Timber' ) ) {
     } else {
         $course ='';
          // Get all courses in the term via path slug
-         $course_args = array(
-            'post_type' => 'course',
-        );
-        $context['courses'] = Timber::get_posts($course_args);
+        $context['courses'] =  FundaWande()->lms->get_courses();
         $context['modules'] = get_terms( array(
             'taxonomy' => 'module'
         ));
@@ -58,10 +53,12 @@ if ( class_exists( 'Timber' ) ) {
 
     if (!empty($_GET['coach'])) {
         $coach = $_GET['coach'];
-        $context['coach'] = $_GET['coach'];
+        $context['selected_coach'] = $_GET['coach'];
     } else {
         $coach = null;
     }
+
+    $context['coaches'] = FundaWande()->coaching_utils->get_coaches();
 
     
     $context['module_id'] = $module_id;

@@ -1,0 +1,161 @@
+{#
+#  My Assignments page template included in template-assignments.php
+#
+#}
+
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in base.twig #}
+{% block content %}
+    <div class="wrapper coach-dash-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+
+        {# Sign up information band #}
+        <section class="container ">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="lbreaker-lms-purple mt-4">Coach progress dashboard</h1>
+                    <a class="primary-btn-outline px-1 py-1 rounded" href="/coach-dashboard">Go to assessment review dashboard</a>
+                </div>
+                <div class="col-12 mt-4">
+                    <form id="" action=""  method="get">
+                        <div class="row">
+                        
+
+                            <div class="col-auto px-3 mb-4 mb-md-0">
+                                <select type="select" name="fw_course" class="form-control custom-select coach-filter"   id="courseSelect"  style="max-width:150px" placeholder="" value="" required>
+                                    <option value="" disabled  selected >Choose a course</option>
+                                    {% for course in courses %}
+                                        <option value="{{course.ID }}" {% if selected_course ==  course.ID %}selected{% endif %}  >{{course.post_title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-auto px-3 ">
+                                <select type="select" name="coach" class="form-control custom-select coach-filter " id="coachSelect" style="max-width:150px"  placeholder="" value="" >
+                                    <option value="" disabled selected >Filter coaches</option>
+                                    <option value=""  >All coaches</option>
+                                    {% for coach in coaches %}
+                                        <option value="{{coach.ID }}" {% if selected_coach ==  coach.ID %}selected{% endif %}  >{{coach.display_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% if selected_course %}
+                            {# <div class="col-auto px-3 ">
+                                <select type="select" name="module"  class="form-control custom-select coach-filter " id="moduleSelect" style="max-width:150px" placeholder="" value="" >
+                                    <option value=""  selected >All modules</option>
+                                    {% for module in modules %}
+                                        <option value="{{module.term_id}}" {% if module_id ==  module.term_id %}selected{% endif %}  >{{module.name}}</option>
+                                    {% endfor %}
+                    
+                                </select>
+                            </div> #}
+                    
+                            
+                            <div class="col-auto px-3 ">
+                                <select type="select" name="user" class="form-control custom-select coach-filter " id="userSelect" style="max-width:150px" placeholder="" value="" >
+                                    <option value=""  selected >All teachers</option>
+                                    {% for key, teacher in course_progress_data %}
+                                        <option value="{{key}}" {% if key == user_id %}selected{% endif %} >{{teacher.name}}</option>
+                                    {% endfor %}
+                    
+                                </select>
+                            </div>
+                            {% endif %}
+
+                            <button type="submit"  class="button button-primary primary-bg primary-border button-large" >Submit filter</button>
+
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12  py-md-4 ">
+
+                {% if course_progress_data is empty and user_id %}
+                    <p>Sorry that user wasn't on the course, please resubmit the filter will <i>All teachers</i> selected</p>
+                {% endif %}
+
+                {% if selected_course %}
+
+                    <div class="my-4">
+                       <table id="data-table" class="resources table table-bordered  table-striped" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <thead class="background-primary-light">
+                            <tr>
+                                <th>Teacher</th>
+                                <th>Course</th>
+                                <th>Progress</th>
+                                <th>Current Module</th>
+                                <th>Current Unit</th>
+                                <th>Last login</th>
+                                
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, teacher in course_progress_data %}
+                                    <tr>
+
+                                        <td>{{ teacher.name }}</td>
+                                        <td>{{ teacher.course_name }}</td>
+                                        <td>{{ teacher.course_progress }}%</td>
+                                        <td>{{ teacher.current_module }}</td>
+                                        <td>{{ teacher.current_unit }}</td>
+                                        <td>{% if teacher.last_login %}{{ teacher.last_login |date('d M Y')}}{% endif %}</td>
+                                    </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if course_progress_data is empty  and not user_id %}
+                            <p>There are currently no teachers on this course</p>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p>Please select a course to review</p>
+                {% endif %}
+
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12  py-md-4 ">
+
+                {% if module_progress_data  %}
+                <h3>Module / Unit Progress </h3>
+
+                    <div class="my-4">
+                       <table id="data-table" class="resources table table-bordered  table-striped" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <thead class="background-primary-light">
+                            <tr>
+                                
+                                <th>Module/Unit</th>
+                                <th>Progress</th>
+                                
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, module in module_progress_data.modules %}
+                                    <tr>
+
+                                        <td>{% if module.is_unit %}&nbsp&nbsp&nbspUnit{% else %}Module{% endif %} {{ module.number}}: {{ module.title }}</td>
+                                        <td>{% if module.complete %}Complete{% else %}-{% endif %}</td>
+                                    </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                {% elseif course_progress_data  %}
+                    <p>To view module progress, select a teacher</p>
+                {% endif %}
+
+                </div>
+            </div>
+         
+        </section>
+
+    </div><!-- #wrapper -->
+{% endblock %}

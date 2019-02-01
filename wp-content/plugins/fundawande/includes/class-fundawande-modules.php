@@ -135,6 +135,7 @@ class FundaWande_Modules {
                 $course_module_number++;
             }
         }
+        error_log(print_r($course_modules,true));
 
         return $course_modules;
 
@@ -376,14 +377,13 @@ class FundaWande_Modules {
         if (!$user_id) {
             $user_id = get_current_user_id();
         }
-        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
 
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_module_progress',
             'user_id' => $user_id,
-            'status' => $module_key,
+            'status' => $module_id,
         );
 
         // possibly returns array, we just want one object
@@ -405,15 +405,12 @@ class FundaWande_Modules {
             $user_id = get_current_user_id();
         }
 
-        $module_key = get_term_meta($module_id, 'fw_unique_key',true);
-
-
         // Determine if an existing unit status exists
         $current_status_args = array(
             'number' => 1,
             'type' => 'fw_module_progress',
             'user_id' => $user_id,
-            'status' => $module_key,
+            'status' => $module_id,
         );
 
         // possibly returns array, we just want one object
@@ -431,7 +428,7 @@ class FundaWande_Modules {
                 'comment_type' => 'fw_module_progress',
                 'user_id' => $user_id,
                 'comment_date' => $time,
-                'comment_approved' => $module_key,
+                'comment_approved' => $module_id,
                 'comment_karma' => 1,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email
