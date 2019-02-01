@@ -10,7 +10,7 @@
 
 // Set up constant variable to control JS & CSS versioning
 // This version number must be changed whenever pushing to stable branch
-const FW_VER = 0.13;
+const FW_VER = 0.14;
 
 
 /**
@@ -25,6 +25,7 @@ function pango_scripts() {
 	// Include global assets
     wp_enqueue_style( 'theme-style',  get_template_directory_uri().'/css/theme-styles.min.css' ,array(),FW_VER );
     wp_enqueue_script( 'theme-script', get_template_directory_uri().'/js/theme-js.min.js' ,array('jquery'),FW_VER,true);
+    wp_enqueue_script( 'twilio-script', get_template_directory_uri().'/js/twilio-widget.js' ,array('jquery'),FW_VER,true);
 
     if (( is_page_template('login.php')  ) || ( is_page_template('register.php')  ) ) {
         wp_enqueue_script('login-script', get_template_directory_uri(). '/js/login.min.js', array('jquery'), FW_VER, true);

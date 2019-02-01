@@ -1,4 +1,5 @@
 startTwilio();
+
 function startTwilio() {
     const appConfig = {
         accountSid:"AC7572a1439e6746742a55c2275de3034c",
@@ -10,7 +11,11 @@ function startTwilio() {
             },
             MainHeader: {
                 titleText: "Funda Wande Help",
-            }
+            },
+            // This is the are i'm struggling to customise. I cannot find the right variable to change
+            Chat: {
+                WelcomeMessage: "Hey",
+            },           
          },
          colorTheme: {
             baseName: "FundaWande",
@@ -56,9 +61,11 @@ function startTwilio() {
                             },
                         },
                     },
+                   
                 },
             }
-        }
+        },
+        
 
        
        
