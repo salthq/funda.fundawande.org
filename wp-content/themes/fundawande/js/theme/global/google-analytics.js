@@ -1,7 +1,8 @@
 /**
  * Created by jamestrevorlees on 2019/02/01.
  * Created to house the Funda Wande Web App Google Analytics Master tracking code
- * DO NOT REMOVER EVER
+ * Function grabbed from https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet
+ * NB - DO NOT REMOVER EVER
  */
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
