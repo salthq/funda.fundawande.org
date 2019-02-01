@@ -14,6 +14,7 @@ if (!is_user_logged_in()) {
     exit();
 } elseif (isset($_GET['course_id'])) {
     $current_course_id = $_GET['course_id'];
+    $user_id = get_current_user_id(); 
     update_user_meta($user_id, 'fw_current_course', $current_course_id );
 } 
 
