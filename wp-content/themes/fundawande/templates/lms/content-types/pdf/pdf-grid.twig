@@ -9,6 +9,6 @@
         {% set pdfCols = "col-md-3" %}
     {% endif %}
 
-    {{mixin.pdfImage(pdfCols, pdf.file, pdf.holding_image, module_number)}}
-    
+    {{mixin.pdfImage(pdfCols, pdf.file, pdf.holding_image, lang, module_number)}}
+
 {% endfor %}
