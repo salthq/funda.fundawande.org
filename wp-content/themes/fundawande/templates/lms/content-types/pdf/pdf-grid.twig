@@ -1,0 +1,25 @@
+<!-- Content Type: PDF Grid -->
+{% for pdf in content.pdf_grid %}
+    {% set numPDFs = content.pdf_grid|length %}
+    {% if numPDFs == 2 %}
+        {% set pdfCols = "col-md-6" %}
+    {% elseif numPDFs == 3 %}
+        {% set pdfCols = "col-md-4" %}
+    {% elseif numPDFs == 4 %}
+        {% set pdfCols = "col-md-3" %}
+    {% endif %}
+    <div class="col-12 {{pdfCols}} text-center pt-3">
+        <div class="pdf">
+            <a target="_blank" href="{{pdf.file}}">
+                <img class="d-block pdf-image" src="{{ pdf.holding_image }}">
+                <button class="pdf-text-container module-btn-fill-{{module_number}} p-2">
+                    {% if lang.id == 'eng' %}
+                        <span>{% if is_mobile %}Tap{% else %}Click{% endif %} to view PDF</span>
+                    {% else %}
+                        <span>{% if is_mobile %}Thepha ukujonga{% else %}Cofa ukuze ukhangele{% endif %} i-PDF</span>
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+    </div>
+{% endfor %}
