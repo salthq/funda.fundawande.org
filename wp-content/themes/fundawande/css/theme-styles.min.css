@@ -402,7 +402,7 @@ video{min-height:200px}
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
-#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:10000}
+#wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:90}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
 @media(max-width:767px){#wrapper-navbar .navbar #main-menu-button .open-text,#wrapper-navbar .navbar #main-menu-button .close-text{line-height:15px;text-align:center;display:block;width:50px}
