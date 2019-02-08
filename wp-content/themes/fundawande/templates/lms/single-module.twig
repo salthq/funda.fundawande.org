@@ -10,7 +10,7 @@
 
         <div class = "container-fluid ">
             <div class = "row module-title justify-content-between align-items-center  background-white">
-                <div class = "col-2 d-flex justify-content-end">
+                <div class = "col-3 d-flex justify-content-end">
                     <a id = "back-to-modules" class = "button-secondary module-btn-outline-{{module_number}} py-2 py-md-4 my-4" href = "{{course_link}}">
                         <span class="mb-0 mb-md-2 d-inline-block">{{source('/assets/arrow_left.svg')}}</span>
                         <br>
@@ -100,13 +100,13 @@
                                 <!--Unit navigation buttons mobile-->
                                 <div class = "col-sm-12 text-right d-flex d-md-none">
                                     <hr>
-                                    <a id = "view-lessons" class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
+                                    {# <a id = "view-lessons" class = "{% if not unit.current %}collapsed{% endif %} button-secondary module-btn-outline-{{module_number}} mr-3 d-flex align-items-center unit-header-navigation " href="" data-toggle="collapse" data-target="#collapse-unit{{ loop.index }}" aria-expanded="{% if unit.current %}true{% else %}false{% endif %}" aria-controls="collapse-unit{{ loop.index }}">
                                         <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
-                                    </a>
+                                    </a> #}
                                     {% if unit.current or unit.complete %}
-                                   <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
-                                        {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
-                                    </a>
+                                        <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                            {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
+                                        </a>
                                     {% endif %}
                                 </div>
                             </div>

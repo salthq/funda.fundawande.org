@@ -29,6 +29,25 @@
     background-image: -webkit-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
 {% endmacro %}
 
+{# Add PDF Image #}
+{% macro pdfImage(columns, file, image_src, lang, module_number) %}
+    {% import _self as mixins %}
+    <div class="col-12 {{columns}} text-center pt-3">
+        <div class="pdf">
+            <a target="_blank" href="{{file}}">
+                <img class="d-block pdf-image" src="{{ image_src }}">
+                <button class="pdf-text-container module-btn-fill-{{module_number}} p-2">
+                    {% if lang.id == 'eng' %}
+                        <span>{% if is_mobile %}Tap{% else %}Click{% endif %} to view PDF</span>
+                    {% else %}
+                        <span>{% if is_mobile %}Thepha ukujonga{% else %}Cofa ukuze ukhangele{% endif %} i-PDF</span>
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+
 {# Add full screen video player #}
 {% macro fullWidthVideo(video_src, image_src, module_number) %}
     {% import _self as mixins %}
