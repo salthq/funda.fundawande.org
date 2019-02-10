@@ -99,16 +99,12 @@ players.forEach(function (player) {
     // Handle mouse/finger scrubbing
     function scrub(e) {
         const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+        video.currentTime = scrubTime;
         const percent = (scrubTime / video.duration) * 100;
         progressBar.style.flexBasis = percent + "%";
         progressBar.style.width = percent + "%";
     }
 
-    // Handle mouse/finger scrubbing
-    function scrubEnd(e) {
-        const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-        video.currentTime = scrubTime;
-    }
 
     // Handle muting
     function muteToggle() {
