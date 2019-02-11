@@ -1,7 +1,4 @@
 jQuery(document).ready( function($) {
-    Intercom('update', {
-        "hide_default_launcher": false
-    });
 
     var form = document.getElementById('fw-registration-form');
     if (form) {
