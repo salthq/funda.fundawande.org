@@ -29,11 +29,12 @@
                                 <div class = "my-3 text-center"><a class = "login-help fw-get-help login-error text-center" href = "#">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>
                             </div>
                         {% endif %}
-
-                        {# <div class="my-3 text-center">
-                            <h4 class="text-center text-secondary">{{post.get_field(lang.prefix~'registration_text')}}</h4>
-                            <a class="btn btn-secondary " href= "/register">{{post.get_field(lang.prefix~'registration_link')}}</a>
-                        </div> #}
+                    </div>
+                    <hr class="d-md-none">
+                    <div class="login-links my-4 d-md-none">
+                        <a class="my-4" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">Register for the open course</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">Browse all videos</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">Need assistance? Click here</span></a>
                     </div>
                 </div>
                 <!-- Desktop sidebar -->
