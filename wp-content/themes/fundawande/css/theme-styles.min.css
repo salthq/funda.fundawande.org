@@ -371,7 +371,7 @@ video{min-height:200px}
 .lms-global-modal button.close{position:absolute;right:1rem;top:1rem}
 .lms-global-modal .modal-content{border:3px solid #ef9d19}
 .login-wrapper{min-height:100vh;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-@media(min-width:768px){.login-wrapper .login{border-right:2px solid #ccc}
+@media(min-width:768px){.login-wrapper .sidebar{border-left:2px solid #ccc}
 }.login-wrapper .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .login-wrapper .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
 .login-wrapper .login-active{background-color:#918f8f;color:#fff}
@@ -402,6 +402,8 @@ video{min-height:200px}
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
+.login-links a{color:#6c757d;display:block;font-size:21px;text-decoration:none;-webkit-text-decoration-color:#ef9d19;-moz-text-decoration-color:#ef9d19;text-decoration-color:#ef9d19}
+.login-links a svg{height:50px;width:50px}
 #wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:10000}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
