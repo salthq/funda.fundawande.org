@@ -189,13 +189,16 @@
     color: #69675b;
     display: block;
     font-family: $base-header__font-family;
-    font-size: 15px;
+    font-size: 1.2rem;
     font-weight: 550;
     text-decoration: none;
     svg {
       height: 50px;
       width: 50px;
     }
+    @include breakpoint(phone) {
+      font-size: 0.7rem;
+    } 
   }
   &-text {
     position: relative;
