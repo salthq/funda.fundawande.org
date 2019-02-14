@@ -11,8 +11,8 @@
 
   //Media queries which control the sidebar content view 
   @include breakpoint(tablet) {
-    .login {
-      border-right: 2px solid $grey-secondary;
+    .sidebar {
+      border-left: 2px solid $grey-secondary;
     }
   }
 
@@ -178,5 +178,20 @@
 .active-button {
   background-color: $grey-tertiary;
   color: $white !important;
+}
+
+
+.login-links {
+  a {
+    color: #6c757d;
+    display: block;
+    font-size: 21px;
+    text-decoration: none;
+    text-decoration-color: $brand-primary__colour;
+    svg {
+      height: 50px;
+      width: 50px;
+    }
+  }
 }
 

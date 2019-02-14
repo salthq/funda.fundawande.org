@@ -8,7 +8,7 @@
 {% block content %}
     <div class="wrapper login-wrapper background-secondary d-flex align-items-center" xmlns="http://www.w3.org/1999/html">
         <div class="container card login-card m-4">
-            <div class="row login-row my-1">
+            <div class="row login-row my-3">
                 <!-- Login Form -->
                 <div class="col-12 col-md-6 login px-md-5 py-md-5 py-3">
                     <div class="text-center login-header py-3">
@@ -28,18 +28,16 @@
                                 <p>{{ post.get_field(lang.prefix~error_message) }}</p>
                                 <div class = "my-3 text-center"><a class = "login-help fw-get-help login-error text-center" href = "#">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>
                             </div>
-                        {% else %}
-                            <div class = "my-3 text-center"><a class = "login-help fw-get-help login-noerror " href = "#">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>
                         {% endif %}
 
-                        <div class="my-3 text-center">
+                        {# <div class="my-3 text-center">
                             <h4 class="text-center text-secondary">{{post.get_field(lang.prefix~'registration_text')}}</h4>
                             <a class="btn btn-secondary " href= "/register">{{post.get_field(lang.prefix~'registration_link')}}</a>
-                        </div>
+                        </div> #}
                     </div>
                 </div>
                 <!-- Desktop sidebar -->
-                <div class="col-12 col-md-6 sidebar px-5 d-none d-md-block">
+                <div class="col-12 col-md-6 sidebar px-5 py-3 d-none d-md-block">
                     <div class="text-center sidebar-media">
                         {% for content in post.get_field('sidebar_media') %}
                             {# Image #}
@@ -52,8 +50,13 @@
                             {% endif %}  
                         {% endfor %}
                     </div>
-                    <hr>
                     <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
+                    <hr>
+                    <div class="login-links my-2">
+                        <a class="my-3" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="pl-2">Register for the open course</span></a>
+                        <a class="my-3" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="pl-2">Browse all videos</span></a>
+                        <a class="my-3" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="pl-2">Need assistance? Click here</span></a>
+                    </div>
                 </div>
             </div>
         </div>
