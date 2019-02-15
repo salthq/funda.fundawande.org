@@ -78,8 +78,16 @@
         border-radius: 5px;
         color: $grey-tertiary;
         padding: 10px;
+        &::placeholder {
+          font-size: 1rem;
+        }
         &:focus {
           outline-color: $brand-primary__colour;
+        }
+        @include breakpoint(phone) {
+          &::placeholder {
+            font-size: 0.7rem;
+          }
         }
       }
     }
@@ -207,7 +215,7 @@
       position: absolute;
       width: 100%;
       height: 2px;
-      bottom: -2px;
+      bottom: -5px;
       left: 0;
       background-color: $brand-primary__colour;
       visibility: hidden;
