@@ -32,9 +32,9 @@
                     </div>
                     <hr class="d-md-none">
                     <div class="login-links my-4 d-md-none">
-                        <a class="my-4" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">Register for the open course</span></a>
-                        <a class="my-4" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">Browse all videos</span></a>
-                        <a class="my-4" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">Need assistance? Click here</span></a>
+                        <a class="my-4" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'register_text')}}</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'browse_vids_text')}}</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'get_help_text')}}</span></a>
                     </div>
                 </div>
                 <!-- Desktop sidebar -->
@@ -54,9 +54,9 @@
                     <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
                     <hr>
                     <div class="login-links my-2">
-                        <a class="my-3 my-md-5" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">Register for the open course</span></a>
-                        <a class="my-3 my-md-5" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">Browse all videos</span></a>
-                        <a class="my-3 my-md-5" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">Need assistance? Click here</span></a>
+                        <a class="my-4" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'register_text')}}</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'browse_vids_text')}}</span></a>
+                        <a class="my-4" href="#">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'get_help_text')}}</span></a>
                     </div>
                 </div>
             </div>
