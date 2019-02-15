@@ -7,7 +7,7 @@ players.forEach(function (player) {
     const start = player.querySelector('.player__start');
     const end = player.querySelector('.player__end');
     const controls = player.querySelector('.player__controls');
-    const progress = player.querySelector('.progress-container');
+    const progress = player.querySelector('.progress');
     const progressBar = player.querySelector('.progress__filled');
     const progressLoaded = player.querySelector('.progress__loaded');
     const toggle = player.querySelector('.toggle');
@@ -153,8 +153,8 @@ players.forEach(function (player) {
     function playerStart() {
         start.style.display = "none";
         controls.style.display = "flex";
+        toggle.focus(); 
         togglePlay();
-
 
     }
 
