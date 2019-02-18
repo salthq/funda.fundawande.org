@@ -35,15 +35,16 @@
     <div class="col-12 {{columns}} text-center pt-3">
         <div class="pdf">
             <img class="d-block pdf-image" src="{{ image_src }}">
-            <a class="pdf-text pdf-view module-btn-fill-{{module_number}} p-2" target="_blank" href="{{file}}">
+            <a class="pdf-text pdf-text-view module-btn-fill-{{module_number}} d-flex justify-content-center align-items-center p-2" target="_blank" href="{{file}}">
+                <span class="pr-2">{{ source('/assets/view.svg') }}</span>
                 {% if lang.id == 'eng' %}
                     <span>View PDF</span>
                 {% else %}
                     <span>Jonga i-PDF</span>
                 {% endif %}
             </a>
-            <a class="pdf-text pdf-download module-btn-fill-{{module_number}} p-2" target="_blank" href="{{file}}" download>
-                {{ source('/assets/download_icon.svg') }}
+            <a class="pdf-text pdf-text-download module-btn-fill-{{module_number}} d-flex justify-content-center align-items-center p-2" target="_blank" href="{{file}}" download>
+                <span class="pr-2">{{ source('/assets/download_icon.svg') }}</span>
                 {% if lang.id == 'eng' %}
                     <span>Download PDF</span>
                 {% else %}

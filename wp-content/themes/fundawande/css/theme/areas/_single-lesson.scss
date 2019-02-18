@@ -323,22 +323,26 @@
       backface-visibility: hidden;
     }
     &-text {
+      border-radius: 5px;
       cursor:pointer;
       transition: 0.5s ease;
       position: absolute;
       left: 50%;
-      min-width: 110px;
+      min-width: 155px;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       @include breakpoint(desktop) {
         opacity: 0;
       }
-    }
-    &-view {
-      top: 40%;
-    }
-    &-download {
-      top: 60%;
+      svg {
+        width: 30px;
+      }
+      &-view {
+        top: 30%;
+      }
+      &-download {
+        top: 70%;
+      }
     }
   }
 }
