@@ -6,7 +6,7 @@
 
 {# Twig block to be included in Base.twig #}
 {% block content %}
-    <div class="wrapper contact-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="wrapper contacts-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
         <div class = "container-fluid background-white">
             <div class = "row" >
                 <div class = "col-12">
@@ -20,12 +20,12 @@
                 <div class="col col-md-4">
                     <div class="card p-3">
                         <div class="card-body">
-                            <h5>Coach</h5>
+                            <h5><span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
                             <p><strong>Name: </strong>Clark Kent</p>
                             <p><strong>Email: </strong>clark@fundawande.org</p>
-                            <div class="mx-auto">
-                                <a class = "btn btn-lg primary-btn-fill mx-auto" href="#">Contact</a>
+                            <div class="text-center pt-3">
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
                             </div>
                         </div>
                     </div>
@@ -33,12 +33,12 @@
                  <div class="col col-md-4">
                     <div class="card p-3">
                         <div class="card-body">
-                            <h5>Coach</h5>
+                            <h5><span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
                             <p><strong>Name: </strong>Clark Kent</p>
                             <p><strong>Email: </strong>clark@fundawande.org</p>
-                            <div class="mx-auto">
-                                <a class = "btn btn-lg primary-btn-fill mx-auto" href="#">Contact</a>
+                            <div class="text-center pt-3">
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
                             </div>
                         </div>
                     </div>
@@ -46,12 +46,12 @@
                 <div class="col col-md-4">
                     <div class="card p-3">
                         <div class="card-body">
-                            <h5>Coach</h5>
+                            <h5><span class="pr-2">{{ source('assets/contacts/admin_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
                             <p><strong>Name: </strong>Clark Kent</p>
                             <p><strong>Email: </strong>clark@fundawande.org</p>
-                            <div class="mx-auto">
-                                <a class = "btn btn-lg primary-btn-fill mx-auto" href="#">Contact</a>
+                            <div class="text-center pt-3">
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
                             </div>
                         </div>
                     </div>
