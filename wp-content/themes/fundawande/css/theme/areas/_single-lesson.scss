@@ -313,7 +313,7 @@
       .pdf-image {
         opacity: 0.3;
       }
-      .pdf-text-container {
+      .pdf-text {
         opacity: 1;
       }
     }
@@ -322,17 +322,23 @@
       transition: 0.5s ease;
       backface-visibility: hidden;
     }
-    &-text-container {
+    &-text {
       cursor:pointer;
       transition: 0.5s ease;
       position: absolute;
-      top: 50%;
       left: 50%;
+      min-width: 110px;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       @include breakpoint(desktop) {
         opacity: 0;
       }
+    }
+    &-view {
+      top: 40%;
+    }
+    &-download {
+      top: 60%;
     }
   }
 }
