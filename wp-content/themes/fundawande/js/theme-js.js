@@ -163,6 +163,20 @@ jQuery(document).ready( function($) {
 });
 
 /**
+ * Created by jamestrevorlees on 2019/02/01.
+ * Created to house the Funda Wande Web App Google Analytics Master tracking code
+ * Function grabbed from https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet
+ * NB - DO NOT REMOVER EVER
+ */
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-123486385-3', 'auto');
+    ga('send', 'pageview');
+/**
  * Created by jamestrevorlees on 2018/10/01.
  * Created to house the google tag manager container
  */
