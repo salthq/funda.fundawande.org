@@ -17,48 +17,79 @@
 
         <div class="container my-4">
             <div class="row">
+
+                <!-- Coach Card -->
                 <div class="col-12 col-md-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             <h5><span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
-                            <p><strong>Name: </strong>Clark Kent</p>
-                            <p><strong>Email: </strong>clark@fundawande.org</p>
-                            <div class="text-center pt-3">
-                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
-                            </div>
+                            {% if user.has_coach %}
+                                <p>
+                                    <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                    Clark Kent
+                                </p>
+                                <p>
+                                    <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                    clark@fundawande.org
+                                </p>
+                                <div class="text-center pt-3">
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                </div>
+                            {% else %}
+                                <p>You don't currently have a coach assigned to you. To contact the Funda Wande team, click the contact button below.</p>
+                                <div class="text-center pt-3">
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+
+                <!-- Support Contact Card -->
                  <div class="col-12 col-md-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             <h5><span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
-                            <p><strong>Name: </strong>Clark Kent</p>
-                            <p><strong>Email: </strong>clark@fundawande.org</p>
+                            <p>
+                                <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                Clark Kent
+                            </p>                            
+                            <p>
+                                <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                clark@fundawande.org
+                            </p>                            
                             <div class="text-center pt-3">
                                 <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Admin Contact Card -->
                 <div class="col-12 col-md-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             <h5><span class="pr-2">{{ source('assets/contacts/admin_icon.svg') }}</span> <strong>Coach</strong></h5>
                             <hr>
-                            <p><strong>Name: </strong>Clark Kent</p>
-                            <p><strong>Email: </strong>clark@fundawande.org</p>
+                            <p>
+                                <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                Clark Kent
+                            </p>
+                            <p>
+                                <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                clark@fundawande.org
+                            </p>
                             <div class="text-center pt-3">
                                 <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div><!-- #wrapper -->
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+    </div><!-- end #wrapper -->
 
     {# Embed footer template #}
     {% embed "embeds/footer.twig" %}{% endembed %}
