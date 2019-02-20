@@ -22,7 +22,11 @@
                 <div class="col-12 col-md-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
-                            <h5><span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> <strong>Coach</strong></h5>
+                            {% set coach_fields = post.meta('coach_card') %}
+                            <h5>
+                                <span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> 
+                                <strong>{{attribute(coach_fields, lang.prefix~'title')}}</strong>
+                            </h5>
                             <hr>
                             {% if user.has_coach %}
                                 <p>
@@ -39,8 +43,8 @@
                                         {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
                                     </a>
                                 </div>
-                            {% else %}
-                                <p>You don't currently have a coach assigned to you. To contact the Funda Wande team, click the contact button below.</p>
+                            {% else %}  
+                                <p>{{attribute(coach_fields, lang.prefix~'no_coach_message')}}</p>
                                 <div class="text-center pt-3">
                                     <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
                                         <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
