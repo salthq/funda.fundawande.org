@@ -73,6 +73,11 @@ class FundaWande_Main {
 	public $grading;
 
 	/**
+	 * @var FundaWande_Resources
+	 */
+	public $resources;
+
+	/**
 	 * Constructor method.
 	 *
 	 * @param  string $file The base file of the plugin.
@@ -196,6 +201,9 @@ class FundaWande_Main {
 
 		// Setup coaching functionality class
 		$this->coaching_utils = new FundaWande_Coaching_Utils();
+
+		// Setup resource custom post type class
+		$this->resources = new FundaWande_Resources();
 
         // Differentiate between administration and frontend logic.
         if ( is_admin() ) {
