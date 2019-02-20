@@ -13,4 +13,9 @@
              }
          }
      }
+     @include breakpoint(desktop) {
+        .card {
+            min-height: 350px;
+        }
+     }
  }

@@ -19,7 +19,7 @@
             <div class="row">
 
                 <!-- Coach Card -->
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-lg-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set coach_fields = post.meta('coach_card') %}
@@ -37,7 +37,7 @@
                                     <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
                                     clark@fundawande.org
                                 </p>
-                                <div class="text-center pt-md-5">
+                                <div class="text-center pt-3 pt-md-5">
                                     <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
                                         <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
                                         {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Support Contact Card -->
-                 <div class="col-12 col-md-4">
+                 <div class="col-12 col-lg-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set support_fields = post.meta('support_card') %}
@@ -73,7 +73,7 @@
                                 <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
                                 {{support_fields.support_email}}
                             </p>                            
-                            <div class="text-center pt-md-5">
+                            <div class="text-center pt-3 pt-md-5">
                                 <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
                                     <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
                                     {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
@@ -84,7 +84,7 @@
                 </div>
                 
                 <!-- Admin Contact Card -->
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-lg-4">
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set admin_fields = post.meta('admin_card') %}
@@ -101,7 +101,7 @@
                                 <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
                                 {{admin_fields.admin_email}}
                             </p>
-                            <div class="text-center pt-md-5">
+                            <div class="text-center pt-3 pt-md-5">
                                 <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
                                     <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
                                     {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}

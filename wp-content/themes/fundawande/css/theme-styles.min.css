@@ -316,7 +316,8 @@ video{min-height:200px}
 #site-footer a{color:#fff;text-decoration:none}
 #site-footer a:hover{text-decoration:underline}
 .contacts-wrapper .contacts-btn span svg{margin-bottom:4px}
-.player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
+@media(min-width:992px){.contacts-wrapper .card{min-height:350px}
+}.player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}
 .player:fullscreen,.player:-webkit-full-screen{max-width:none;width:100%}
 .player .player__video{position:absolute;top:0;left:0;width:100%;height:100%}
