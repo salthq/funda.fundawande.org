@@ -34,12 +34,18 @@
                                     clark@fundawande.org
                                 </p>
                                 <div class="text-center pt-3">
-                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
+                                        <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                        {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
+                                    </a>
                                 </div>
                             {% else %}
                                 <p>You don't currently have a coach assigned to you. To contact the Funda Wande team, click the contact button below.</p>
                                 <div class="text-center pt-3">
-                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
+                                        <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                        {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
+                                    </a>
                                 </div>
                             {% endif %}
                         </div>
@@ -61,7 +67,10 @@
                                 clark@fundawande.org
                             </p>                            
                             <div class="text-center pt-3">
-                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
+                                    <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                    {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +91,10 @@
                                 clark@fundawande.org
                             </p>
                             <div class="text-center pt-3">
-                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#"><span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>Contact</a>
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
+                                    <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                    {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
+                                </a>
                             </div>
                         </div>
                     </div>
