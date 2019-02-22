@@ -112,7 +112,7 @@
 
     
 
-    #page-wrapper {
+    .wrapper {
 
         //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
         margin-top: $navbar-height;
@@ -126,7 +126,7 @@
         }
     }
 
-     .wrapper {
+     #login-wrapper {
          min-height: 100vh;
          width: 100%;
      }
