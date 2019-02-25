@@ -28,10 +28,7 @@
                                 <strong>{{attribute(coach_fields, lang.prefix~'title')}}</strong>
                             </h5>
                             <hr>
-                            <pre>
-                                {{ dump(user) }}
-                            </pre>
-                            {% if user.has_coach %}
+                            {% if user.fw_coach %}
                                 <p>
                                     <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
                                     {{user.fw_coach_name}}
