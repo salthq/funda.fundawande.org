@@ -26,8 +26,10 @@
                         {% if error_message %}
                             <div class="login-alert p-3" role="alert"> 
                                 <p>{{ post.get_field(lang.prefix~error_message) }}</p>
-                                <div class = "my-3 text-center"><a class = "login-help fw-get-help login-error text-center" href = "#">{{post.get_field(lang.prefix~'login_help_text')}}</a> </div>
+                                <div class = "my-3 text-center"><a class = "login-help fw-get-help login-error text-center" href="javascript:void(Tawk_API.toggle())">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>
                             </div>
+                        {% else %}
+                            <div class = "my-3 text-center"><a class = "login-help fw-get-help login-noerror " href="javascript:void(Tawk_API.toggle())">{{post.get_field(lang.prefix~'get_help_text')}}</a> </div>
                         {% endif %}
                     </div>
                     <hr class="d-md-none">
