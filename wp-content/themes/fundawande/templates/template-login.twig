@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <!-- Desktop sidebar -->
-                <div class="col-12 col-md-6 sidebar px-5 py-3 d-none d-md-block">
+                <div class="col-12 col-md-6 sidebar px-3 py-3 d-none d-md-block">
                     <div class="text-center sidebar-media py-3">
                         {% for content in post.get_field('sidebar_media') %}
                             {# Image #}
@@ -51,9 +51,9 @@
                             {% endif %}  
                         {% endfor %}
                     </div>
-                    <div class = "text-justify">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
+                    <div class = "text-justify px-3">{{ post.get_field(lang.prefix~'sidebar_content') }}</div>
                     <hr>
-                    <div class="login-links my-2">
+                    <div class="login-links px-3 my-2">
                         <a class="my-4" href="/register">{{ source('assets/login/login_register_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'register_text')}}</span></a>
                         {# <a class="my-4" href="#">{{ source('assets/login/login_videos_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'browse_vids_text')}}</span></a> #}
                         <a class="my-4" href="javascript:void(Tawk_API.toggle())">{{ source('assets/login/login_help_icon.svg') }}<span class="login-links-text ml-2">{{post.get_field(lang.prefix~'get_help_text')}}</span></a>
