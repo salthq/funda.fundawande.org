@@ -17,7 +17,7 @@
 
         <div class="container my-4">
             <div class="row">
-
+            
                 <!-- Coach Card -->
                 <div class="col-12 col-lg-4">
                     <div class="card p-3 m-3">
@@ -31,14 +31,14 @@
                             {% if user.fw_coach %}
                                 <p>
                                     <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
-                                    {{user.fw_coach_name}}
+                                    {{coach_name}}
                                 </p>
                                 <p>
                                     <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
-                                    {{user.fw_coach_email}}
+                                    {{coach_email}}
                                 </p>
                                 <div class="text-center pt-3 pt-md-5">
-                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="#">
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="javascript:void(Tawk_API.toggle())">
                                         <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
                                         {% if lang.id == 'eng' %}Contact{% else %}Qhagamshelana{% endif %}
                                     </a>
