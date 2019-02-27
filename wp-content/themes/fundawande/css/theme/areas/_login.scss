@@ -8,11 +8,19 @@
 
   min-height: 100vh;
   justify-content: center;
+  .sidebar-media {
+    .player {
+      border-radius: 20px;
+    }
+    img {
+      border-radius: 20px;
+    }
+  }
 
   //Media queries which control the sidebar content view 
   @include breakpoint(tablet) {
-    .login {
-      border-right: 2px solid $grey-secondary;
+    .sidebar {
+      border-left: 2px solid $grey-secondary;
     }
   }
 
@@ -32,7 +40,7 @@
       color: $white;
     }
     &-language-label {
-      color: $grey-tertiary;
+      color: #69675b;
       font-size: 16px;
     }
     &-form {
@@ -43,11 +51,12 @@
     &-help {
       text-decoration: underline;
       &:hover {
-        color: $brand-secondary__colour;
+        color: #69675b;
       }
     }
     &-error {
-      color: $brand-primary__colour
+      color: #69675b;
+
     }
     &-noerror {
       color: $grey-tertiary;
@@ -69,6 +78,7 @@
       flex-direction: column;
       text-align: left;
       label {
+        color: #69675b;
         font-weight: bold;
       }
       input {
@@ -76,8 +86,16 @@
         border-radius: 5px;
         color: $grey-tertiary;
         padding: 10px;
+        &::placeholder {
+          font-size: 1rem;
+        }
         &:focus {
           outline-color: $brand-primary__colour;
+        }
+        @include breakpoint(phone) {
+          &::placeholder {
+            font-size: 0.7rem;
+          }
         }
       }
     }
@@ -116,7 +134,7 @@
     input {
       border: 1px solid $brand-primary__colour;
       border-radius: 5px;
-      color: $grey-tertiary;
+      color: #69675b;
       padding: 10px;
       height: auto;
       &:focus {
@@ -130,6 +148,7 @@
       width: 100%;
     }
     label {
+      color: #69675b;
       font-weight: bold;
     }
     button:focus {
@@ -145,26 +164,10 @@
   }
 }
 
-//Embedded video container responsive styling
-.embed-container { 
-  position: relative; 
-  padding-bottom: 56.25%; 
-  height: 0; 
-  overflow: hidden; 
-  max-width: 100%;
-  iframe, object, embed {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-  }
- }
-
 .login-language-button {
   border: 1px solid $grey-tertiary;
   border-radius: 5px;
-  color: #787878;
+  color: #69675b;
   &:hover {
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
@@ -178,5 +181,46 @@
 .active-button {
   background-color: $grey-tertiary;
   color: $white !important;
+}
+
+
+.login-links {
+  a {
+    color: #69675b;
+    display: block;
+    font-family: $base-header__font-family;
+    font-size: 1.2rem;
+    font-weight: 550;
+    text-decoration: none;
+    svg {
+      height: 50px;
+      width: 50px;
+    }
+    @include breakpoint(phone) {
+      font-size: 0.7rem;
+    } 
+  }
+  &-text {
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: $brand-primary__colour;
+      visibility: hidden;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    &:hover:before {
+      visibility: visible;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+  }
 }
 

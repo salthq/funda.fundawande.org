@@ -124,6 +124,16 @@ class FundaWande_Frontend {
 			}
 			wp_enqueue_script('lessons-tour-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-lessons-tour.min.js', array('jquery'), FundaWande()->version, true);
 		}
+
+		//Include Review Dashboard Walkthrough script, if the user is on that page
+		if (( is_page_template('template-coach-dash.php')  )) {
+			wp_enqueue_script('coach-review-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-coach-review-tour.min.js', array('jquery'), FundaWande()->version, true);
+		}
+
+		//Include Progress Dashboard Walkthrough script, if the user is on that page
+		if (( is_page_template('template-coach-progress.php')  )) {
+			wp_enqueue_script('coach-review-script', FundaWande()->plugin_url . 'assets/js/tour-scripts/'.$language.'-coach-progress-tour.min.js', array('jquery'), FundaWande()->version, true);
+		}
 	
 	} // End fw_tour_scripts()
 
