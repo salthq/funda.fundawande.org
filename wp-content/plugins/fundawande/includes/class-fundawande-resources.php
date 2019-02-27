@@ -23,6 +23,11 @@ class FundaWande_Resources {
     public function __construct() {
         $this->resource_types = $this->fw_resource_types();
         add_action( 'init', array( $this, 'setup_resource_post_type' ), 100 );
+
+        if ( is_admin() ) {
+            add_filter( 'manage_edit-resource_columns', array( $this, 'add_column_headings' ), 10, 1 );
+			add_action( 'manage_posts_custom_column', array( $this, 'add_column_data' ), 10, 2 );
+        }
     }
 
     /**
@@ -80,6 +85,57 @@ class FundaWande_Resources {
 
         return apply_filters('fw_resource_types', $types);
     } // end fw_resource_types()
+
+    /**
+	 * Add column headings to the "resource" post list screen.
+	 * @access public
+	 * @since  1.1.2
+	 * @param  array $defaults
+	 * @return array $new_columns
+	 */
+	public function add_column_headings ( $defaults ) {
+		$new_columns['cb'] = '<input type="checkbox" />';
+		$new_columns['title'] = 'Title';
+		$new_columns['resource-type'] = 'Type';
+		if ( isset( $defaults['date'] ) ) {
+			$new_columns['date'] = $defaults['date'];
+		}
+
+		return $new_columns;
+	} // End add_column_headings()
+
+	/**
+	 * Add data for the newly-added custom columns.
+	 * @access public
+	 * @since  1.1.2
+	 * @param  string $column_name
+	 * @param  int $id
+	 * @return void
+	 */
+	public function add_column_data ( $column_name, $id ) {
+		global $wpdb, $post;
+
+		switch ( $column_name ) {
+
+			case 'id':
+				echo $id;
+			break;
+
+			case 'resource-type':
+				$resource_type = strip_tags( get_the_term_list( $id, 'resource-type', '', ', ', '' ) );
+				$output = '&mdash;';
+				if( isset( $this->resource_types[ $resource_type ] ) ) {
+					$output = $this->resource_types[ $resource_type ];
+				}
+				echo $output;
+			break;
+
+			default:
+			break;
+
+		}
+
+	} // End add_column_data()
 
 
 } // end FundaWande_Resources
