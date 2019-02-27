@@ -13,8 +13,8 @@ body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;
 @media(min-width:768px){body p{font-size:18px}
 }@media(max-width:767px){body p{font-size:14px}
 }body hr{height:2px;color:#ccc;opacity:.5}
-body #page-wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
-@media(max-width:767px){body #page-wrapper{margin-top:60px}
+body .wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
+@media(max-width:767px){body .wrapper{margin-top:60px}
 }body #login-wrapper{min-height:100vh;width:100%}
 body .text-secondary{color:#f5f5f5}
 .module-bg-0{background-color:#327da6 !important}
@@ -315,7 +315,9 @@ video{min-height:200px}
 #site-footer{background-color:#7c7c7c;box-shadow:0 2px 1px 0 #ef9d19;color:#fff}
 #site-footer a{color:#fff;text-decoration:none}
 #site-footer a:hover{text-decoration:underline}
-.player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
+.contacts-wrapper .contacts-btn span svg{margin-bottom:4px}
+@media(min-width:992px){.contacts-wrapper .card{min-height:350px}
+}.player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}
 .player:fullscreen,.player:-webkit-full-screen{max-width:none;width:100%}
 .player .player__video{position:absolute;top:0;left:0;width:100%;height:100%}
@@ -371,37 +373,51 @@ video{min-height:200px}
 .lms-global-modal button.close{position:absolute;right:1rem;top:1rem}
 .lms-global-modal .modal-content{border:3px solid #ef9d19}
 .login-wrapper{min-height:100vh;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}
-@media(min-width:768px){.login-wrapper .login{border-right:2px solid #ccc}
+.login-wrapper .sidebar-media .player{border-radius:20px}
+.login-wrapper .sidebar-media img{border-radius:20px}
+@media(min-width:768px){.login-wrapper .sidebar{border-left:2px solid #ccc}
 }.login-wrapper .login-row{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .login-wrapper .login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
 .login-wrapper .login-active{background-color:#918f8f;color:#fff}
-.login-wrapper .login-language-label{color:#918f8f;font-size:16px}
+.login-wrapper .login-language-label{color:#69675b;font-size:16px}
 .login-wrapper .login-form{margin:0 auto;max-width:315px;padding-top:30px}
 .login-wrapper .login-help{text-decoration:underline}
-.login-wrapper .login-help:hover{color:#231f20}
-.login-wrapper .login-error{color:#ef9d19}
+.login-wrapper .login-help:hover{color:#69675b}
+.login-wrapper .login-error{color:#69675b}
 .login-wrapper .login-noerror{color:#918f8f}
 .login-wrapper .login-alert{background-color:#f5f5f5;border:1px solid #918f8f;border-radius:5px}
 .login-wrapper #fw-form-login .login-username,.login-wrapper #fw-form-login .login-password{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;text-align:left}
-.login-wrapper #fw-form-login .login-username label,.login-wrapper #fw-form-login .login-password label{font-weight:bold}
+.login-wrapper #fw-form-login .login-username label,.login-wrapper #fw-form-login .login-password label{color:#69675b;font-weight:bold}
 .login-wrapper #fw-form-login .login-username input,.login-wrapper #fw-form-login .login-password input,.login-wrapper #fw-form-login .login-username #fw-registration-form select,.login-wrapper #fw-registration-form #fw-form-login .login-username select,.login-wrapper #fw-form-login .login-password #fw-registration-form select,.login-wrapper #fw-registration-form #fw-form-login .login-password select{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px}
+.login-wrapper #fw-form-login .login-username input::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-password input::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::-webkit-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::-webkit-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::-webkit-input-placeholder{font-size:1rem}
+.login-wrapper #fw-form-login .login-username input::-moz-placeholder,.login-wrapper #fw-form-login .login-password input::-moz-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::-moz-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::-moz-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::-moz-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::-moz-placeholder{font-size:1rem}
+.login-wrapper #fw-form-login .login-username input:-ms-input-placeholder,.login-wrapper #fw-form-login .login-password input:-ms-input-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select:-ms-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select:-ms-input-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select:-ms-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select:-ms-input-placeholder{font-size:1rem}
+.login-wrapper #fw-form-login .login-username input::placeholder,.login-wrapper #fw-form-login .login-password input::placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::placeholder{font-size:1rem}
 .login-wrapper #fw-form-login .login-username input:focus,.login-wrapper #fw-form-login .login-password input:focus,.login-wrapper #fw-form-login .login-username #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-username select:focus,.login-wrapper #fw-form-login .login-password #fw-registration-form select:focus,.login-wrapper #fw-registration-form #fw-form-login .login-password select:focus{outline-color:#ef9d19}
-.login-wrapper #fw-form-login .login-remember{display:none}
+@media(max-width:767px){.login-wrapper #fw-form-login .login-username input::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-password input::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::-webkit-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::-webkit-input-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::-webkit-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::-webkit-input-placeholder{font-size:.7rem}
+.login-wrapper #fw-form-login .login-username input::-moz-placeholder,.login-wrapper #fw-form-login .login-password input::-moz-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::-moz-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::-moz-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::-moz-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::-moz-placeholder{font-size:.7rem}
+.login-wrapper #fw-form-login .login-username input:-ms-input-placeholder,.login-wrapper #fw-form-login .login-password input:-ms-input-placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select:-ms-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select:-ms-input-placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select:-ms-input-placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select:-ms-input-placeholder{font-size:.7rem}
+.login-wrapper #fw-form-login .login-username input::placeholder,.login-wrapper #fw-form-login .login-password input::placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::placeholder{font-size:.7rem}
+}.login-wrapper #fw-form-login .login-remember{display:none}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
 .login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;cursor:pointer;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;line-height:22px;padding-bottom:8px;width:100%}
 .login-wrapper #fw-form-login .login-submit #fw-submit:focus{outline-color:#fff}
-.login-wrapper #fw-registration-form input,.login-wrapper #fw-registration-form select{border:1px solid #ef9d19;border-radius:5px;color:#918f8f;padding:10px;height:auto}
+.login-wrapper #fw-registration-form input,.login-wrapper #fw-registration-form select{border:1px solid #ef9d19;border-radius:5px;color:#69675b;padding:10px;height:auto}
 .login-wrapper #fw-registration-form input:focus,.login-wrapper #fw-registration-form select:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
 .login-wrapper #fw-registration-form select{line-height:24px;width:100%}
-.login-wrapper #fw-registration-form label{font-weight:bold}
+.login-wrapper #fw-registration-form label{color:#69675b;font-weight:bold}
 .login-wrapper #fw-registration-form button:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
 .login-wrapper .registration-link:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
-.embed-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%}
-.embed-container iframe,.embed-container object,.embed-container embed{position:absolute;top:0;left:0;width:100%;height:100%}
-.login-language-button{border:1px solid #918f8f;border-radius:5px;color:#787878}
+.login-language-button{border:1px solid #918f8f;border-radius:5px;color:#69675b}
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
+.login-links a{color:#69675b;display:block;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:1.2rem;font-weight:550;text-decoration:none}
+.login-links a svg{height:50px;width:50px}
+@media(max-width:767px){.login-links a{font-size:.7rem}
+}.login-links-text{position:relative}
+.login-links-text:before{content:"";position:absolute;width:100%;height:2px;bottom:-5px;left:0;background-color:#ef9d19;visibility:hidden;-webkit-transform:scaleX(0);-ms-transform:scaleX(0);transform:scaleX(0);-webkit-transition:all .3s ease-in-out 0s;transition:all .3s ease-in-out 0s}
+.login-links-text:hover:before{visibility:visible;-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}
 #wrapper-navbar{height:60px;background-color:#4a4a4a;box-shadow:0 2px 1px 0 #ef9d19;position:fixed;width:100%;z-index:10000}
 #wrapper-navbar .navbar{padding:0}
 #wrapper-navbar .navbar #main-menu-button{border:2px solid #fff;border-radius:6px;padding:6px;height:44px;color:white}
@@ -717,7 +733,7 @@ input[type='text'],.login-wrapper #fw-registration-form select[type='text'],inpu
 input[type='text']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='text']::-webkit-input-placeholder,input[type='email']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='email']::-webkit-input-placeholder,input[type='tel']::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type='tel']::-webkit-input-placeholder,input[type="number"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="number"]::-webkit-input-placeholder,input[type="url"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="url"]::-webkit-input-placeholder,input[type="password"]::-webkit-input-placeholder,.login-wrapper #fw-registration-form select[type="password"]::-webkit-input-placeholder{color:#ccc;font-size:12px;line-height:1rem;vertical-align:middle}
 textarea{border:1px solid #ccc !important;border-radius:1px !important;width:100%;padding:1rem !important}
 textarea::-webkit-input-placeholder{color:#ccc !important;font-size:12px;line-height:12px}
-select.custom-select{border:1px solid #ccc;border-radius:1px;line-height:40px;height:44px !important;padding:0 1rem;width:300px;display:block}
+select.custom-select{border:1px solid #ccc;border-radius:1px;line-height:40px;height:50px !important;padding:0 1rem;width:300px;display:block}
 .custom-control-indicator{position:absolute;top:0;left:0;display:block;width:2rem;height:2rem;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:#fff;border:2px solid #ccc;border-radius:0 !important}
 .custom-checkbox .custom-control-description:indeterminate ~ .custom-control-indicator,.custom-control-input:checked ~ .custom-control-indicator{background-color:#ef9d19}
 .custom-checkbox{padding-left:0 !important}
