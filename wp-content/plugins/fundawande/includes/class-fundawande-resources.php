@@ -21,6 +21,7 @@ class FundaWande_Resources {
      * Constructor
      */
     public function __construct() {
+        $this->resource_types = $this->fw_resource_types();
         add_action( 'init', array( $this, 'setup_resource_post_type' ), 100 );
     }
 
@@ -67,7 +68,18 @@ class FundaWande_Resources {
          */
 		register_post_type( 'resource', $args );
 
-	} // End setup_resource_post_type()
+    } // End setup_resource_post_type()
+    
+    //Add Public resource types
+    public function fw_resource_types() {
+        $types = array(
+            'public-video' => 'Public Videos',
+            'public-pdf' => 'Public PDF',
+            'public-article' => 'Public Article',
+        );
+
+        return apply_filters('fw_resource_types', $types);
+    } // end fw_resource_types()
 
 
 } // end FundaWande_Resources
