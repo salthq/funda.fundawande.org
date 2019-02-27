@@ -18,7 +18,7 @@ var tour = new Anno([{
       top: '8em',
       left: '23em'
     },
-    uttons: [
+    buttons: [
       {
         text: "Next",
         className: "pulse",

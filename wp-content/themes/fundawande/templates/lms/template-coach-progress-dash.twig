@@ -18,7 +18,7 @@
                 <!-- Header -->
                 <div class="col-12">
                     <h1 class="lbreaker-lms-purple mt-4">Coach progress dashboard</h1>
-                    <a class="primary-btn-outline px-1 py-1 rounded" href="/coach-dashboard">Go to assessment review dashboard</a>
+                    <a id="review-dash-btn"class="primary-btn-outline px-1 py-1 rounded" href="/coach-dashboard">Go to assessment review dashboard</a>
                 </div>
 
                 <!-- Filter buttons -->
@@ -67,7 +67,7 @@
                                 </div>
                             {% endif %} {# selected_course #}
 
-                            <button type="submit"  class="btn btn-lg primary-btn-fill">Submit filter</button>
+                            <button id="coach-progress-filters-submit" type="submit"  class="btn btn-lg primary-btn-fill">Submit filter</button>
 
                         </div>
                     </form>
