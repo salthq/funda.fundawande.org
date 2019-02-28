@@ -1,0 +1,52 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper courses-wrapper  background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container-fluid background-white">
+            <div class = "row course-title">
+                <div class = "col-12 text-center">
+                    <h1 class = "m-4"><strong>Courses</strong></h1>
+                </div>
+            </div>
+        </div>
+        <div class = "container-fluid ">
+            <div class = "container p-3">
+                {% for course in courses %}
+                <pre>
+                    {{ dump(course) }}
+                </pre>
+                   <div class = "my-3 d-inline-block w-100">
+                    <a href = "#">
+                            <div class = "card ">
+                                <div class = "card-body">
+                                    <div class = "row">
+                                        <!-- Course Info -->
+                                        <div class = "col-12 col-md-10">
+                                            <div class = "header d-flex">
+                                                <div class = "header-text">
+                                                    <h2><strong>{{course.course_title}}</strong></h2>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <p>{{course.course_description}}</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+
+{% embed "embeds/footer.twig" %}{% endembed %}
+
+{% endblock %}
+
+
