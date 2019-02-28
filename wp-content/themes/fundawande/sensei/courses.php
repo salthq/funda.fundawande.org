@@ -29,6 +29,18 @@ if (class_exists('Timber')) {
 
     $courses = Timber::get_posts($course_args);
 
+    foreach ($courses as $course) {
+
+        // Get number of completed lessons per course
+        if (
+            Sensei_Utils::user_started_course($course->ID,  get_current_user_id())
+            || Sensei_Utils::user_completed_course($course->ID,  get_current_user_id())
+        ) {
+            $course->completed_lessons = count(Sensei()->course->get_completed_lesson_ids($course->ID, get_current_user_id()));
+            $course->lesson_count = count(Sensei()->course->course_lessons($course->ID));
+        }
+    }
+
     $context['courses'] = $courses;
 
 

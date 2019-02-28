@@ -17,11 +17,8 @@
         <div class = "container-fluid ">
             <div class = "container p-3">
                 {% for course in courses %}
-                <pre>
-                    {{ dump(course) }}
-                </pre>
                    <div class = "my-3 d-inline-block w-100">
-                    <a href = "#">
+                        <a href = "#">
                             <div class = "card ">
                                 <div class = "card-body">
                                     <div class = "row">
@@ -34,6 +31,7 @@
                                             </div>
                                             <hr>
                                             <p>{{course.course_description}}</p>
+                                            <p>{{course.completed_lessons}} of {{course.lesson_count}} completed</p>
                                         </div>
                                     </div>
                                 </div>   
