@@ -16,29 +16,32 @@
         </div>
         <div class = "container-fluid ">
             <div class = "container p-3">
-                {% for course in courses %}
-                   <div class = "my-3 d-inline-block w-100">
-                        <a href = "#">
-                            <div class = "card ">
-                                <div class = "card-body">
-                                    <div class = "row">
-                                        <!-- Course Info -->
-                                        <div class = "col-12 col-md-10">
-                                            <div class = "header d-flex">
-                                                <div class = "header-text">
-                                                    <h2><strong>{{course.course_title}}</strong></h2>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <p>{{course.course_description}}</p>
-                                            <p>{{course.completed_lessons}} of {{course.lesson_count}} completed</p>
-                                        </div>
+                <div class="row">
+                    {% for course in courses %}
+                    
+                        <div class="col-12 col-lg-4 my-3 my-md-5">
+                            <div class="card course-card {% if current_course == course.ID %}current{% endif %} px-md-3 py-3 mx-md-3 my-3">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="course-card-header flex-grow-1">
+                                        {% if current_course == course.ID %} <span id="current" class="current-course-text">Current Course</span> {% endif %}
+                                        <h5 class="course-card-title">{{course.course_title}}</h5>
+                                        <p><strong>{{course.completion_percentage}}% completed</strong></p>
+                                        <hr>
                                     </div>
-                                </div>   
+                                    <div class="course-card-body flex-grow-1">
+                                        <p>{{course.course_description}}</p>                     
+                                    </div>
+                                    <div class="course-card-footer text-center pt-3 pt-md-5 flex-shrink-1">
+                                        <a class = "btn btn-lg primary-btn-fill mx-auto" href="{{ fn('get_the_permalink',course.ID) }}?course_id={{course.ID}}">
+                                            {% if course.completion_percentage > 0 %} Resume Course {% else %} Start Course {% endif %} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                        </div>
+
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div><!-- #wrapper -->
