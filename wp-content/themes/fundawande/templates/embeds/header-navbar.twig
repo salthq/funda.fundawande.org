@@ -11,16 +11,17 @@
             </a>
         </div>
 
-        <!-- Tooltips Button -->
-        <div  id = "view-tooltips" class = "d-none d-md-block pr-4" style="background-color: #4a4a4a">
-            <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 ">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
-        </div>
-
-        {# TODO: When the language button is re-added, the spacing of the view courses link will need to be changed #}
-        <a class="d-none d-lg-block mx-5 ml-md-auto" href="{{course_link}}">
+        <!-- View Courses Button -->
+        <a class="d-none d-lg-block pr-4" href="{{fn('get_site_url')}}/my-courses">
             {{ source('assets/menu/courses_navbar_icon.svg') }}
             <span class="ml-2">View Courses</span>
         </a>
+
+        {# TODO: When the language button is re-added, the spacing of the view tooltips link will need to be changed #}
+        <!-- Tooltips Button -->
+        <div  id = "view-tooltips" class = "d-none d-lg-block mx-5 ml-md-auto" style="background-color: #4a4a4a">
+            <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 ">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
+        </div>
 
         {# TODO: Re-add this once decision on language changing has been reached #}
         {# {% if lang.id == 'eng' %}
