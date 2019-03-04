@@ -4,11 +4,15 @@
         <div class="modal-content  p-4">
             <div id="main-menu" class = " d-flex justify-content-left flex-column">
                 <a class="d-flex align-items-center py-2 pr-3" href="{{course_link}}" >
-                    {{ source('assets/menu/dash_menu_icon.svg') }}
+                    {{ source('assets/menu/courses_menu_icon.svg') }}
+                    <span>View Courses</span>
+                </a>
+                <a class="d-flex align-items-center py-2 pr-3" href="{{course_link}}" >
+                    {{ source('assets/menu/module_menu_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'go_to_modules_link')}}</span>
                 </a>
                 <a class="d-flex align-items-center py-2 pr-3" href="{{current_lesson_link}}" >
-                    {{ source('assets/menu/modules_menu_icon.svg') }}
+                    {{ source('assets/menu/continue_learning_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'continue_learning_link')}}</span>
                 </a>
                 {# <a class="d-flex align-items-center py-2 pr-3" href="#" >
