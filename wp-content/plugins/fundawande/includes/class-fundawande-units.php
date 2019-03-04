@@ -123,7 +123,7 @@ class FundaWande_Units {
         // If no current review then return the review form object with user and post details
         if (empty($user_unit_status)) {
             $time = current_time('mysql');
-            $user = $user = get_userdata($user_id);
+            $user = get_userdata($user_id);
             $data = array(
                 'comment_type' => 'fw_unit_progress',
                 'user_id' => $user_id,
