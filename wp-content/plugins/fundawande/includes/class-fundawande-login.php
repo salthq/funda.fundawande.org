@@ -53,30 +53,33 @@ class FundaWande_Login {
      */
 
     function fw_login_redirect( $user_login, $user  ) {
-        //is there a user to check?
-        $user_id =$user->ID;
+        // //is there a user to check?
+        // $user_id =$user->ID;
 
-        if ($user_id) {
-            $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
-            $redirect_url = get_the_permalink($current_lesson_id);
-            $course_cohort = get_user_meta($user_id, 'fw_cohort', true);
+        // if ($user_id) {
+        //     $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
+        //     $redirect_url = get_the_permalink($current_lesson_id);
+        //     $course_cohort = get_user_meta($user_id, 'fw_cohort', true);
 
-            if (empty($redirect_url)) {
-                // TODO: HARDCODE IN FIRST LESSON
-                if(is_numeric($course_cohort)) {
-                    $current_lessons = FundaWande()->lessons->fw_get_course_sub_units($course_cohort);
-                }
-                else {
-                    $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
-                }
-                $redirect_url = get_the_permalink($current_lessons[0]->ID);
-            }
+        //     if (empty($redirect_url)) {
+        //         // TODO: HARDCODE IN FIRST LESSON
+        //         if(is_numeric($course_cohort)) {
+        //             $current_lessons = FundaWande()->lessons->fw_get_course_sub_units($course_cohort);
+        //         }
+        //         else {
+        //             $current_lessons = FundaWande()->lessons->fw_get_course_sub_units(586);
+        //         }
+        //         $redirect_url = get_the_permalink($current_lessons[0]->ID);
+        //     }
 
-        } else {
-            $redirect_url = home_url('/');
-        }
+        // } else {
+        //     $redirect_url = home_url('/');
+        // }
 
-        // TODO: Remove this line once language switching is re-enabled
+        // // TODO: Remove this line once language switching is re-enabled
+        // $redirect_url = $redirect_url . "?lang=eng";
+
+        $redirect_url = get_site_url() .'/my-courses';
         $redirect_url = $redirect_url . "?lang=eng";
 
         wp_redirect($redirect_url);

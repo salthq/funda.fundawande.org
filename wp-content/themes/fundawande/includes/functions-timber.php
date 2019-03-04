@@ -160,7 +160,15 @@ class FundaWandeSite extends TimberSite
 
             $current_lesson_id = FundaWande()->lessons->fw_get_user_current_lesson($context['user']->ID);
             $context['current_lesson_link'] = get_the_permalink($current_lesson_id);
+
+            // Strip out the unique key from the title before making it available to global context
+            $current_lesson_title = get_the_title($current_lesson_id);
+            // Add '+2' so that the pipe character and the subsequent whitespace are removed
+            $pipe_char = strpos($current_lesson_title, '|') + 2;
+            $lesson_title_without_key = substr($current_lesson_title, $pipe_char);
+            $context['current_lesson_title'] = $lesson_title_without_key;
         }
+
         $context['menu'] = new TimberMenu();
         $context['learner_menu'] = new Timber\Menu('learner-menu');
         $context['coach_menu'] = new Timber\Menu('coach-menu');
