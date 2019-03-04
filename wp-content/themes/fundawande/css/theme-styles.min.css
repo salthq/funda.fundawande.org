@@ -448,7 +448,11 @@ video{min-height:200px}
 .fw-form .custom-control-label::after{left:-1.55rem;top:.3rem}
 .fw-form .custom-control-input:checked ~ .custom-control-label::before{background-color:#ef9d19;color:#fff}
 .fw-form .custom-control-input:checked ~ .custom-control-label::after{position:absolute;display:block;width:2rem;height:2rem;top:-0.2rem;left:-2.05rem;content:"";background-repeat:no-repeat;background-position:center center;background-size:50% 50%;background-image:url("/wp-content/themes/fundawande/assets/tick.svg")}
-.single-lesson-wrapper .quiz-message-container .quiz-message-box{border:3px solid;border-radius:8px}
+@media(min-width:992px){.courses-wrapper .course-card-title{min-height:75px}
+}.courses-wrapper .course-card.current{border:3px solid #ef9d19}
+.courses-wrapper .course-card.current .current-course-text{display:block;position:absolute;font-size:17px;font-style:italic;color:white;padding:6px 18px;background:#ef9d19;border-radius:5px 5px 0 0;left:2rem;top:-37px}
+@media(min-width:992px){.courses-wrapper .course-card{min-height:420px}
+}.single-lesson-wrapper .quiz-message-container .quiz-message-box{border:3px solid;border-radius:8px}
 .single-lesson-wrapper .quiz-message-container .quiz-message-box p{font-size:25px;font-style:italic;line-height:33px}
 .single-lesson-wrapper .sensei-message.answer-feedback{display:none !important}
 .single-lesson-wrapper .answer-message-container{border:2px solid;border-radius:6px}

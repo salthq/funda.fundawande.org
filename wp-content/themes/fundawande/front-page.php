@@ -23,10 +23,11 @@ if ( class_exists( 'Timber' ) ) {
 
     // If the Ts and Cs are signed and if the user is assigned to the course, redirect to the course page.
     if(get_user_meta($user->id, 'legal', true) == 'agreed') {
-        if(get_user_meta($user->id, 'fw_current_course', true) != "") {
-            $current_course_id = FundaWande()->lms->fw_get_current_course_id($user->ID);
-            wp_redirect(get_permalink($current_course_id));
-        }
+        // if(get_user_meta($user->id, 'fw_current_course', true) != "") {
+        //     $current_course_id = FundaWande()->lms->fw_get_current_course_id($user->ID);
+        //     wp_redirect(get_permalink($current_course_id));
+        // }
+        wp_redirect(get_site_url() . '/my-courses');
     }
     
 
