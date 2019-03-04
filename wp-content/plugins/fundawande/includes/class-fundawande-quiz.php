@@ -286,7 +286,7 @@ class FundaWande_Quiz {
      */
     public function user_has_submitted($lesson_id,$user_id) {
 
-        $has_submitted = true;
+        $has_submitted = false;
         $quiz_id = get_post_meta($lesson_id, '_lesson_quiz', true);
 
         $questions = Sensei_Utils::sensei_get_quiz_questions($quiz_id);
@@ -294,7 +294,7 @@ class FundaWande_Quiz {
         foreach ($questions as $key => $question) {
             $user_answer_content = Sensei()->quiz->get_user_question_answer( $lesson_id,  $question->ID , $user_id );
 
-            if ($user_answer_content) {
+            if (!empty($user_answer_content)) {
                 $has_submitted = true;
             }
         }

@@ -64,9 +64,7 @@
                 <?php } else {
 
                 ?>
-				  <?php if ( $is_submitted) { ?>
-				<fieldset disabled>
-				<?php } ?>
+				
 	            <form method="POST" action="<?php echo esc_url_raw( get_permalink() ); ?>" enctype="multipart/form-data">
 
 	                <?php
@@ -82,7 +80,9 @@
 	                ?>
 
 
-
+				<?php if ( $is_submitted) { ?>
+					<fieldset disabled>
+				<?php } ?>
 	                <ol id="sensei-quiz-list">
                     <?php $count = 1 ?>
 	                <?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
@@ -129,7 +129,9 @@
 	                <?php endwhile; ?>
 
 	                </ol>
-
+					<?php if ( $is_submitted) { ?>
+					</fieldset>
+					<?php } ?>
 	                <?php
 
 	                    /**
@@ -142,9 +144,7 @@
 	                ?>
 
 				</form>
-				<?php if ( $is_submitted) { ?>
-				</fieldset>
-				<?php } ?>
+			
 			<?php } ?>
 	        <?php else:  ?>
 
