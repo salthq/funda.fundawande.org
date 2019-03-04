@@ -207,9 +207,14 @@ class FundaWande_Quiz {
         if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
             $user_lesson_status  = array_shift($user_lesson_status );
         }
-        $quiz_attempts = get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true);
-        
-        return $quiz_attempts;
+
+        if ($user_lesson_status) {
+            $quiz_attempts = get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true);
+            return $quiz_attempts;
+        }
+
+        return false;
+       
 
     }
 

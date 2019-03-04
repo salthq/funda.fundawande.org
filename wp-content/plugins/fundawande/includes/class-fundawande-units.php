@@ -165,6 +165,8 @@ class FundaWande_Units {
         $current_sub_unit = FundaWande()->lessons->fw_get_user_current_lesson($user_id);
         $current_unit = $this->fw_get_sub_unit_unit($current_sub_unit->ID);
 
+        // error_log(print_r($current_unit,true));
+
         $current_unit = new TimberTerm($current_unit->term_id);
 
         // add the unit key to object
