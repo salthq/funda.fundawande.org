@@ -16,6 +16,7 @@
       margin: 0 auto;
       bottom: auto;
       top: 25px;
+      z-index: 4;
       li:not(.active){
         background-color: #ccc !important;
       }
