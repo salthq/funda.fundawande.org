@@ -32,6 +32,21 @@ function pango_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'pango_scripts' );
 
+/*
+* Add function to only allow Gutenberg on Blog posts and Course post types
+*/
+add_filter('use_block_editor_for_post', 'global_disable_gutenberg', 5, 2);
+
+function global_disable_gutenberg($current_status, $post)
+{
+    // Disable gutenberg for everypost type except posts and courses
+    if (($post->post_type !== 'post')) {
+        return false;
+    }
+    return $current_status;
+}
+
+
 /**
  * Enqueue admin scripts and styles.
  */
