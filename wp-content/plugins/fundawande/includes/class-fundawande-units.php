@@ -128,7 +128,7 @@ class FundaWande_Units {
                 'comment_type' => 'fw_unit_progress',
                 'user_id' => $user_id,
                 'comment_date' => $time,
-                'comment_approved' => $unit_key,
+                'comment_approved' => $unit_id,
                 'comment_karma' => 1,
                 'comment_author' => $user->display_name,
                 'comment_author_email' => $user->user_email

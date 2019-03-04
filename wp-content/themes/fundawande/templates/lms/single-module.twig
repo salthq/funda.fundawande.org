@@ -59,7 +59,7 @@
                                                 <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                             </a> #}
                                             {% if unit.current or unit.complete %}
-                                            <a id = "resume-unit" class = "btn-lg button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                            <a id = "resume-unit" class = "btn btn-lg module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
                                                 {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                             </a>
                                             {% endif %}
@@ -104,7 +104,7 @@
                                         <span class="mr-2 d-inline-block" style="max-width: 80px">{{attribute(options, lang.prefix~'view_lessons_text')}}</span>{{ source('assets/lms/expand_icon.svg') }}
                                     </a> #}
                                     {% if unit.current or unit.complete %}
-                                        <a id = "resume-unit" class = "button-primary module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
+                                        <a id = "resume-unit" class = "btn btn-lg module-btn-fill-{{module_number}} unit-header-navigation d-flex align-items-center" {% if unit.complete %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% elseif unit.current %}href="{{function('get_post_permalink', unit.lessons[0].ID)}}"{% else %}{% endif %}>
                                             {{attribute(options, lang.prefix~'navigation_text')}} <span class = "d-flex align-items-center px-2">{{ source('assets/arrow_right.svg') }}</span>
                                         </a>
                                     {% endif %}
