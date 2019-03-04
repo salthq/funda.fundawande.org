@@ -10,7 +10,7 @@
 
 // Set up constant variable to control JS & CSS versioning
 // This version number must be changed whenever pushing to stable branch
-const FW_VER = '1.1.2.1'; // Released on 04/03/2019 by Jason Tame
+const FW_VER = '1.1.2.3'; // Released on 04/03/2019 by Jason Tame
 
 
 /**
@@ -39,7 +39,7 @@ add_filter('use_block_editor_for_post', 'global_disable_gutenberg', 5, 2);
 
 function global_disable_gutenberg($current_status, $post)
 {
-    // Disable gutenberg for everypost type except posts and courses
+    // Disable gutenberg for every post type except posts and courses
     if (($post->post_type !== 'post')) {
         return false;
     }
