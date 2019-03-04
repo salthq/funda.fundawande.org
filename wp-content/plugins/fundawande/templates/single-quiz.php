@@ -44,26 +44,29 @@
 
                 <?php
                 if ($has_feedback && $is_submitted) { ?>
+					
 
-                    <?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
+						<?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
 
-                        <div class="<?php sensei_the_question_class();?>">
-
-
-                            <?php  do_action('fundawande_question_feedback_template');
-                            ?>
-
-                        </div>
+							<div class="<?php sensei_the_question_class();?>">
 
 
-                    <?php endwhile; ?>
+								<?php  do_action('fundawande_question_feedback_template');
+								?>
+
+							</div>
 
 
+						<?php endwhile; ?>
+
+				
 
                 <?php } else {
 
                 ?>
-
+				  <?php if ( $is_submitted) { ?>
+				<fieldset disabled>
+				<?php } ?>
 	            <form method="POST" action="<?php echo esc_url_raw( get_permalink() ); ?>" enctype="multipart/form-data">
 
 	                <?php
@@ -139,6 +142,9 @@
 	                ?>
 
 				</form>
+				<?php if ( $is_submitted) { ?>
+				</fieldset>
+				<?php } ?>
 			<?php } ?>
 	        <?php else:  ?>
 

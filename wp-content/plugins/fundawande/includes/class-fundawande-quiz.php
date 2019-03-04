@@ -294,8 +294,8 @@ class FundaWande_Quiz {
         foreach ($questions as $key => $question) {
             $user_answer_content = Sensei()->quiz->get_user_question_answer( $lesson_id,  $question->ID , $user_id );
 
-            if (!$user_answer_content) {
-                $has_submitted = false;
+            if ($user_answer_content) {
+                $has_submitted = true;
             }
         }
 
