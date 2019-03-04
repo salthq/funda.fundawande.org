@@ -1798,7 +1798,7 @@ class Sensei_Lesson {
 				'label'			=> esc_html__( 'Grade quiz automatically', 'woothemes-sensei' ),
 				'description'	=> esc_html__( 'Grades quiz and displays answer explanation immediately after completion. Only applicable if quiz is limited to Multiple Choice, True/False and Gap Fill questions. Questions that have a grade of zero are skipped during autograding.', 'woothemes-sensei' ),
 				'type'			=> 'checkbox',
-				'default'		=> 'auto',
+				'default'		=> 'yes',
 				'checked'		=> 'auto',
 			),
 			array(
