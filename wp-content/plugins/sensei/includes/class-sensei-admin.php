@@ -1394,7 +1394,6 @@ class Sensei_Admin {
 
             } // end for each modules
 			$order_string = implode(",",$order_array);
-			error_log(print_r($order_array,true));
 
 			if( $order_string ) {
 				update_post_meta( $course_id, '_lesson_order', $order_string );
