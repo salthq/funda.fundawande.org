@@ -23,27 +23,12 @@
                     {{ source('assets/menu/messages_menu_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'view_messages_link')}}</span>
                 </a> #}
-                 {% if current_user.wp_user_level >= 7 %}
-                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','586') }}?course_id=586" >
-                        {{ source('assets/menu/dash_menu_icon.svg') }}
-                        <span>Change to Reading for Meaning course</span>
-                    </a>
-                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','1421') }}?course_id=1421" >
-                        {{ source('assets/menu/dash_menu_icon.svg') }}
-                        <span>Change to Rhodes course</span>
-                    </a>
-                    <a class="d-flex align-items-center py-2 pr-3" href="{{ fn('get_the_permalink','3272') }}?course_id=3272" >
-                        {{ source('assets/menu/dash_menu_icon.svg') }}
-                        <span>Change to isiXhosa Teaching Reading Core Course</span>
-                    </a>
-                {% endif %}
                  {% if is_coach %}
                     <a class="d-flex align-items-center py-2 pr-3" href="/coach-dashboard" >
                         {{ source('assets/menu/messages_menu_icon.svg') }}
                         <span>Go to Coach Dashboard</span>
                     </a>
                  {% endif %}
-          
                 <a class="d-flex align-items-center py-2 pr-3" href="{{function('wp_logout_url', '/login')}}" >
                     {{ source('assets/menu/logout_menu_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'logout_link')}}</span>
