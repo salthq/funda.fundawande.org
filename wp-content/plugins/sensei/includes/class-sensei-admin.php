@@ -1268,21 +1268,22 @@ class Sensei_Admin {
                     if( count( $lessons ) > 0 ) {
                         $html .= '<h3>' . esc_html( $module->name ) . '</h3>' . "\n";
                         $html .= '<ul class="sortable-lesson-list" data-module_id="' . esc_attr( $module->term_id ) . '">' . "\n";
+						if ($module->parent) {
+							$count = 0;
+							foreach( $lessons as $lesson ) {
+								$count++;
+								$class = 'lesson';
+								if ( $count == 1 ) { $class .= ' first'; }
+								if ( $count == count( $lessons ) ) { $class .= ' last'; }
+								if ( $count % 2 != 0 ) {
+									$class .= ' alternate';
+								}
 
-                        $count = 0;
-                        foreach( $lessons as $lesson ) {
-                            $count++;
-                            $class = 'lesson';
-                            if ( $count == 1 ) { $class .= ' first'; }
-                            if ( $count == count( $lessons ) ) { $class .= ' last'; }
-                            if ( $count % 2 != 0 ) {
-                                $class .= ' alternate';
-                            }
+								$html .= '<li class="' . esc_attr( $class ) . '"><span rel="' . esc_attr( $lesson->ID ) . '" style="width: 100%;"> ' . esc_html( $lesson->post_title ) . '</span></li>' . "\n";
 
-                            $html .= '<li class="' . esc_attr( $class ) . '"><span rel="' . esc_attr( $lesson->ID ) . '" style="width: 100%;"> ' . esc_html( $lesson->post_title ) . '</span></li>' . "\n";
-
-                            $displayed_lessons[] = $lesson->ID;
-                        }
+								$displayed_lessons[] = $lesson->ID;
+							}
+						}
 
                         $html .= '</ul>' . "\n";
 

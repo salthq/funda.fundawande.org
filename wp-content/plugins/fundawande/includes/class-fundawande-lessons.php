@@ -232,14 +232,22 @@ if ( ! defined( 'ABSPATH' ) ) {
         // get the sub unit module title
         $meta_obj->module_title = get_term_meta($meta_obj->module_id, 'module_title', true );
 
-        // get the module unit array
-        $module_units = get_term_children($meta_obj->module_id, 'module' );
+        // get the ORDERED module unit array
+        $module_units = FundaWande()->modules->get_module_units($meta_obj->module_id,$course_id);
+        
+        // Set empty array to hold the unit IDs
+        $module_unit_ids = array();
+        
+        // Loop through units and set ids
+        foreach ($module_units as $module_unit) {
+            $module_unit_ids[] = $module_unit->term_id;
+        }
 
         //Get the number of the unit which the currently viewed lesson is in
-        $meta_obj->unit_number = array_search($meta_obj->unit->term_id, $module_units) + 1;
+        $meta_obj->unit_number = array_search($meta_obj->unit->term_id, $module_unit_ids) + 1;
 
         // retrieve the last unit from array
-        $last_unit = array_values(array_slice($module_units, -1))[0];
+        $last_unit = array_values(array_slice($module_unit_ids, -1))[0];
         $meta_obj->is_last_in_module = false;
         // if sub unit is last in module, mark as such
         if ($meta_obj->unit->term_id == $last_unit) {
