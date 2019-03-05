@@ -443,6 +443,11 @@ video{min-height:200px}
 #wrapper-navbar a{color:white;font-size:15px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 #wrapper-navbar a:hover{opacity:.8;text-decoration:none}
 #wrapper-navbar .change-lang .change-lang-icon{background-color:white;border-radius:3px;color:#4a4a4a;height:27px;width:31px;text-align:center;font-size:8px}
+#profile-form .input-label{font-size:18px}
+#profile-form .form-control::-webkit-input-placeholder{font-size:16px}
+#profile-form .form-control::-moz-placeholder{font-size:16px}
+#profile-form .form-control:-ms-input-placeholder{font-size:16px}
+#profile-form .form-control::placeholder{font-size:16px}
 .fw-form .form-control[readonly]{background-color:#fff}
 .fw-form .custom-control-label::before{width:30px;height:30px;background:#fff;border-radius:5px;border:3px solid #ef9d19;left:-12px;top:5px;margin-top:-.45rem;margin-left:-1.25rem}
 .fw-form .custom-control-label::after{left:-1.55rem;top:.3rem}
