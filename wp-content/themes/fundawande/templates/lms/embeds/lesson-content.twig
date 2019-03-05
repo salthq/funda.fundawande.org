@@ -115,11 +115,14 @@
                 {% elseif content.acf_fc_layout == 'carousel_pulled_right_with_text' %}
                     {% include '/lms/content-types/carousel/carousel-pulled-right-with-text.twig' %}
 
-                    {# Other Content Types #}
+                {# Other Content Types #}
 
                     {# Copy text #}
                 {% elseif content.acf_fc_layout == 'copy_text' %}
                     {% include '/lms/content-types/copy-text.twig' %}
+                    {# Spacer #}
+                {% elseif content.acf_fc_layout == 'spacer' %}
+                    {% include '/lms/content-types/spacer.twig' %}
                 {% endif %}
             </div>
         </div>
