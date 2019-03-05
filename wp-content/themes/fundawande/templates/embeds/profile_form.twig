@@ -4,9 +4,9 @@
 
 
     <form id="profile-form"  method="post" role="form" class="public-profile profile-form">
-        <div class="profile-block p-4 ">
+        <div class="profile-block py-4">
             
-            <div class="row justify-content-between">
+            <div class="row justify-content-between py-2">
                 <div class="form-group col-md-6">
                     <label class="input-label">First name</label>
                     <input type="text" class="form-control  " name="first_name" id="first_name" placeholder="First name" required value="{{ user.first_name }}">
@@ -16,7 +16,7 @@
                     <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Last name" value="{{ user.last_name }}" required>
                 </div>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between py-2">
               
                 <div class="form-group col-md-6">
                     <label class="input-label">Email address</label>
@@ -27,7 +27,7 @@
                     <input type="tel" class="form-control " name="phone_number" id="phone_number"  placeholder="e.g. +27 83 1234 567" value="{{ user.phone_number }}" >
                 </div>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between py-2">
                 <div class="form-group col-md-6">
                     <label class="input-label">ID / Passport number</label>
                     <input type="text" class="form-control " name="user_identity_no" id="user_identity_no" placeholder="ID number"  value="{{ user.user_identity_no }}" >
@@ -37,7 +37,7 @@
                     <input type="text" class="form-control" name="school_organisation" id="school_organisation"  placeholder="Enter your School / Organisation name" value="{{ user.school_organisation }}"  >
                 </div>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between py-2">
                 <div class="form-group col-12">
                     <label class="input-label">Short description about yourself</label>
                     <textarea rows="2" type="text" class="form-control" name="user_description" id="user_description" placeholder="Please describe yourself in a few sentences">{{ user.user_description }}</textarea>
@@ -47,7 +47,7 @@
                 <div class="col-12 my-4">
                     <input type="hidden" name="task" value="profile_submit" />
                     <input type="hidden" name="user_id" value="{{user.ID}}" />
-                    <input type="submit" class="mr-4 primary-btn-fill rounded" value="Update">
+                    <input type="submit" class="mr-4 btn btn-lg primary-btn-fill rounded" value="Update">
                 </div>
             </div>
 
