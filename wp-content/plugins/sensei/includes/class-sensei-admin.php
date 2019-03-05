@@ -1266,27 +1266,36 @@ class Sensei_Admin {
                     $lessons = get_posts( $args );
 
                     if( count( $lessons ) > 0 ) {
+						
                         $html .= '<h3>' . esc_html( $module->name ) . '</h3>' . "\n";
                         $html .= '<ul class="sortable-lesson-list" data-module_id="' . esc_attr( $module->term_id ) . '">' . "\n";
+						
+						$ordered_module_lessons = array();
+						if ($module->parent) {
+							
+							$count = 0;
+							foreach( $lessons as $lesson ) {
+								$count++;
+								$class = 'lesson';
+								if ( $count == 1 ) { $class .= ' first'; }
+								if ( $count == count( $lessons ) ) { $class .= ' last'; }
+								if ( $count % 2 != 0 ) {
+									$class .= ' alternate';
+								}
 
-                        $count = 0;
-                        foreach( $lessons as $lesson ) {
-                            $count++;
-                            $class = 'lesson';
-                            if ( $count == 1 ) { $class .= ' first'; }
-                            if ( $count == count( $lessons ) ) { $class .= ' last'; }
-                            if ( $count % 2 != 0 ) {
-                                $class .= ' alternate';
-                            }
+								$html .= '<li class="' . esc_attr( $class ) . '"><span rel="' . esc_attr( $lesson->ID ) . '" style="width: 100%;"> ' . esc_html( $lesson->post_title ) . '</span></li>' . "\n";
+								$ordered_module_lessons[] = $lesson->ID;
+								$displayed_lessons[] = $lesson->ID;
+							}
+							$ordered_module_lessons = implode(",",$ordered_module_lessons);
+						}
+						
+						$html .= '</ul>' . "\n";
+						if (is_array($ordered_module_lessons)) {
+							$ordered_module_lessons = '';
+						}
 
-                            $html .= '<li class="' . esc_attr( $class ) . '"><span rel="' . esc_attr( $lesson->ID ) . '" style="width: 100%;"> ' . esc_html( $lesson->post_title ) . '</span></li>' . "\n";
-
-                            $displayed_lessons[] = $lesson->ID;
-                        }
-
-                        $html .= '</ul>' . "\n";
-
-                        $html .= '<input type="hidden" name="lesson-order-module-' . esc_attr( $module->term_id ) . '" value="" />' . "\n";
+                        $html .= '<input type="hidden" name="lesson-order-module-' . esc_attr( $module->term_id ) . '" value="'.$ordered_module_lessons.'" />' . "\n";
                     }
                 }
 
@@ -1357,8 +1366,8 @@ class Sensei_Admin {
 		return $order_string;
 	}
 
-	public function save_lesson_order( $order_string = '', $course_id = 0 ) {
-
+	public function save_lesson_order( $POST, $course_id = 0 ) {
+		$order_array = array();
 		if( $course_id ) {
 
             $modules = Sensei()->modules->get_course_modules( intval( $course_id ) );
@@ -1370,7 +1379,11 @@ class Sensei_Admin {
                     && $_POST[ 'lesson-order-module-' . $module->term_id ] ) {
 
                     $order = explode( ',', $_POST[ 'lesson-order-module-' . $module->term_id ] );
-                    $i = 1;
+					$i = 1;
+					if ($module->parent) {
+						$order_array = array_merge($order_array,$order);
+						
+					}
                     foreach( $order as $lesson_id ) {
 
                         if( $lesson_id ) {
@@ -1383,7 +1396,7 @@ class Sensei_Admin {
                 }// end if
 
             } // end for each modules
-
+			$order_string = implode(",",$order_array);
 
 			if( $order_string ) {
 				update_post_meta( $course_id, '_lesson_order', $order_string );
