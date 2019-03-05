@@ -29,6 +29,10 @@
                         <span>Go to Coach Dashboard</span>
                     </a>
                  {% endif %}
+                <a class="d-flex align-items-center py-2 pr-3" href="{{fn('get_site_url')}}/profile" >
+                    {{ source('assets/menu/profile_menu_icon.svg') }}
+                    <span>View Profile</span>
+                </a>
                 <a class="d-flex align-items-center py-2 pr-3" href="{{function('wp_logout_url', '/login')}}" >
                     {{ source('assets/menu/logout_menu_icon.svg') }}
                     <span>{{attribute(options, lang.prefix~'logout_link')}}</span>
