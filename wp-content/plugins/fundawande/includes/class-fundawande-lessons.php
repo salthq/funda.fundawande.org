@@ -51,12 +51,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  
              // get the course for the lesson
              $lesson_course_id = get_post_meta( $post_ID, '_lesson_course', true );
+             $lesson_quiz_id = get_post_meta( $post_ID, '_lesson_quiz', true );
              $course_language = get_post_meta($lesson_course_id,'course_language',true);
  
              $module_lessons = Sensei()->modules->get_lessons($lesson_course_id, $lesson_module->term_id);
      
              $lesson_count = 1;
              foreach ($module_lessons as $module_lesson) {
+                $lesson_quiz_id = get_post_meta( $module_lesson->ID, '_lesson_quiz', true );
  
                  $lesson_title = get_post_meta($module_lesson->ID, 'lesson_title', true);
                  $lesson_unique_key = sprintf("%s_s%02d",$module_unique_key,$lesson_count);
@@ -71,14 +73,25 @@ if ( ! defined( 'ABSPATH' ) ) {
                  ", [
                      $lesson_name,
                      $module_lesson->ID,
-                    $module_lesson->ID
+                     $module_lesson->ID
                  ] ) );
+
+                 // Update the quiz slugs to be the IDs as well
+                 $wpdb->query( $wpdb->prepare( "
+                    UPDATE `wp_posts` SET post_name = %s
+                    WHERE ID = %d;
+                ", [
+                    $lesson_quiz_id,
+                    $lesson_quiz_id
+                ] ) );
  
                  $lesson_count++;
  
  
              }
          } else {
+            $lesson_quiz_id = get_post_meta( $post_ID, '_lesson_quiz', true );
+
              $lesson_title = get_post_meta($post_ID, 'lesson_title', true);
              $lesson_unique_key = false;
              $lesson_name = sprintf("(No module) | %s",$lesson_title);
@@ -94,6 +107,18 @@ if ( ! defined( 'ABSPATH' ) ) {
                   $module_lesson->ID,
                  $post_ID
               ] ) );
+
+
+                 // Update the quiz slugs to be the IDs as well
+                 $wpdb->query( $wpdb->prepare( "
+                    UPDATE `wp_posts` SET post_name = %s
+                    WHERE ID = %d;
+                ", [
+                    $lesson_quiz_id,
+                    $lesson_quiz_id
+                ] ) );
+ 
+      
  
          }
          return true;
