@@ -29,10 +29,11 @@
         {# Include lesson header component #}
         {% include '/lms/embeds/lesson-header.twig' %}
 
+        {# TODO: Remove the quiz outcome message template once the FW team have confirmed they no longer want it #}
         {# If quiz outcome is set then show message and modal #}
-        {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
+        {# {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
             {% include "/lms/embeds/quiz-outcome-message.twig" %}
-        {% endif %}
+        {% endif %} #}
         {%  if (quiz_retry or lesson_complete) and show_notifications %}
             {% include '/lms/embeds/modals/modal-quiz.twig' %}
         {% endif %}
