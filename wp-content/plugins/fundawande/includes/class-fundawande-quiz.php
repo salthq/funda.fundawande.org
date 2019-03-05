@@ -207,7 +207,9 @@ class FundaWande_Quiz {
         if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
             $user_lesson_status  = array_shift($user_lesson_status );
         }
-        $quiz_attempts = get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true);
+
+        //If no comment is found, return an empty string. If it is found, get the 'quiz-attempts' comment meta
+        $quiz_attempts = is_object($user_lesson_status) ? get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true) : '';
         
         return $quiz_attempts;
 
