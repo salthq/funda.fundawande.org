@@ -415,6 +415,7 @@ class FundaWande_Lms {
 
         // Get ordered list of sub units
         $sub_unit_list = Sensei()->course->course_lessons($course_id);
+        error_log(print_r($sub_unit_list,true));
         if ( is_array( $sub_unit_list ) && count( $sub_unit_list ) > 0 ) {
             $found = false;
 
@@ -460,7 +461,7 @@ class FundaWande_Lms {
 
         return true;
 
-    } // End fw_get_prev_next_lessons()
+    } // End fw_set_first_sub_unit()
 
 
 
