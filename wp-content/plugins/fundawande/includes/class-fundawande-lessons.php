@@ -66,10 +66,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                  // update lesson post via SQL query because otherwise the post update will create an infinite loop
                  global $wpdb;
                  $wpdb->query( $wpdb->prepare( "
-                     UPDATE `wp_posts` SET post_title = %s
+                     UPDATE `wp_posts` SET post_title = %s, post_name = %s
                      WHERE ID = %d;
                  ", [
                      $lesson_name,
+                     $module_lesson->ID,
                     $module_lesson->ID
                  ] ) );
  
@@ -86,10 +87,11 @@ if ( ! defined( 'ABSPATH' ) ) {
               // update lesson post via SQL query because otherwise the post update will create an infinite loop
               global $wpdb;
               $wpdb->query( $wpdb->prepare( "
-                  UPDATE `wp_posts` SET post_title = %s
+                  UPDATE `wp_posts` SET post_title = %s, post_name = %s
                   WHERE ID = %d;
               ", [
                   $lesson_name,
+                  $module_lesson->ID,
                  $post_ID
               ] ) );
  
