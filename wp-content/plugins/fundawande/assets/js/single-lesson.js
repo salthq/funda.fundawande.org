@@ -138,4 +138,11 @@ jQuery(document).ready( function($) {
         $(".quiz-submit.reset").click();
     });
 
+
+    $('fieldset[disabled] .answers ').click(function(e) {
+        alert('You have already submitted this quiz, click the "retry quiz" button to reset.');
+    });
+
+    
+
 });

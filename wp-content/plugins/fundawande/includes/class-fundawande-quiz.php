@@ -207,9 +207,14 @@ class FundaWande_Quiz {
         if(is_array($user_lesson_status ) && 1 == count($user_lesson_status )) {
             $user_lesson_status  = array_shift($user_lesson_status );
         }
-        $quiz_attempts = get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true);
-        
-        return $quiz_attempts;
+
+        if ($user_lesson_status) {
+            $quiz_attempts = get_comment_meta($user_lesson_status->comment_ID, 'quiz_attempts', true);
+            return $quiz_attempts;
+        }
+
+        return false;
+       
 
     }
 
@@ -281,7 +286,7 @@ class FundaWande_Quiz {
      */
     public function user_has_submitted($lesson_id,$user_id) {
 
-        $has_submitted = true;
+        $has_submitted = false;
         $quiz_id = get_post_meta($lesson_id, '_lesson_quiz', true);
 
         $questions = Sensei_Utils::sensei_get_quiz_questions($quiz_id);
@@ -289,8 +294,8 @@ class FundaWande_Quiz {
         foreach ($questions as $key => $question) {
             $user_answer_content = Sensei()->quiz->get_user_question_answer( $lesson_id,  $question->ID , $user_id );
 
-            if (!$user_answer_content) {
-                $has_submitted = false;
+            if (!empty($user_answer_content)) {
+                $has_submitted = true;
             }
         }
 
