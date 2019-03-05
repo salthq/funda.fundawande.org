@@ -1290,7 +1290,10 @@ class Sensei_Admin {
 							$ordered_module_lessons = implode(",",$ordered_module_lessons);
 						}
 						
-                        $html .= '</ul>' . "\n";
+						$html .= '</ul>' . "\n";
+						if (is_array($ordered_module_lessons)) {
+							$ordered_module_lessons = '';
+						}
 
                         $html .= '<input type="hidden" name="lesson-order-module-' . esc_attr( $module->term_id ) . '" value="'.$ordered_module_lessons.'" />' . "\n";
                     }
