@@ -90,7 +90,12 @@ $coaching-primary__colour: #FED044;
 
 @font-face {
   font-family: 'Roboto Condensed';
-  src: url("../assets/fonts/RobotoCondensed-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url("../assets/fonts/Rubik/Rubik-Regular.ttf") format("truetype");
 }
 
 /* Preamble:
@@ -105,7 +110,7 @@ $base__letter-spacing : normal; //same as mockups as at 03/09/2018
 $base__line-height : 28px; //same as mockups as at 03/09/2018
 
 //// Header base
-$base-header__font-family : Rubik, Verdana, Geneva, sans-serif;
+$base-header__font-family : 'Rubik', Verdana, Geneva, sans-serif;
 
 //// Navbar typography
 
