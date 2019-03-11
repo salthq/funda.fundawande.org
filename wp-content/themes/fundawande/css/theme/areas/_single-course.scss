@@ -47,7 +47,7 @@
       align-items: center;
       &-counter {
         border-radius:  5px;
-        h3 {
+        h2, h3, h4, h5 {
           color: $white;
         }
       }
@@ -61,7 +61,7 @@
           height: 100%;
           flex-direction:  column;
           justify-content:  center;
-          h3 {
+          h2, h3, h4, h5 {
             color: $white;
           }
         }  

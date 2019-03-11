@@ -17,11 +17,12 @@
                             <div class="card justify-content-between justify-content-center primary-border"> 
                                 <div class="row  no-gutters">
                                     <div class="col-md-6 p-4">
-                                        <h2><b>Current course:</b> {{course.course_title}}</h2>
-                                        <h6>Progress: {{course_progress}}%</h3>
+                                        <h2 class="text-bold">Current course: </h2>
+                                        <h4>{{course.course_title}}</h4>
+                                        <p class="mt-3">Progress: {{course_progress}}%</p>
                                     </div>
                                     <div class="col-md-6 p-4 d-flex justify-content-center justify-content-md-end align-items-center">
-                                        <a class = "button-primary primary-border primary-bg module-nav-button p-3 rounded d-inline-block" href="{{course.link}}">
+                                        <a class = "btn btn-lg primary-border primary-bg module-nav-button p-3 rounded d-inline-block" href="{{course.link}}">
                                         <p class = " mb-0" style="color:white">Go to course<img class = "p-2 " src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></p></a>
                                     </div>
                                 </div>

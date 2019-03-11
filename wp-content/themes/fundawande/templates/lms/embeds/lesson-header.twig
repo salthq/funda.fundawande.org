@@ -12,26 +12,17 @@
             </div>
             <div class="col-12 col-md-10 text-center my-4">
                 <div class="d-none d-sm-block">
-                    <h1>
-                        <strong>{{sub_unit_meta.module_title}}</strong>
-                    </h1>
-                    <h2>
-                        <strong>{{sub_unit_meta.unit_title}}
-                            {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</strong>
-                    </h2>
+                    <h4>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</h4>
                 </div>
                 <div class="d-sm-none">
-                    <h1>
-                        <strong>{{sub_unit_meta.unit_title}}
-                            {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</strong>
-                    </h1>
+                    <h4>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</h4>
                 </div>
-                <hr>
                 {% if quiz_lesson %}
-                  <h3>{{quiz_lesson.get_field('lesson_title')}}</h3>  
+                    <h1 class="text-bold">{{quiz_lesson.get_field('lesson_title')}}</h1>  
+                {% else %}
+                    <h1 class="text-bold">{{post.get_field('lesson_title')}}</h1>  
                 {% endif %}
                 
-                <h3>{{post.get_field('lesson_title')}}</h3>
             </div>
         </div>
     </div>
