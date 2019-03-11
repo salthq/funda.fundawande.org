@@ -44,7 +44,7 @@ $grey-primary : #F5F5F5; //I grabbed this background colour off the module navig
 $grey-secondary : #CCCCCC;
 $grey-tertiary : #918F8F; //This shade of grey is used numerous times on the login page.  
 
-$text-primary__colour : #444444;
+$text-primary__colour : #4A4A4A;
 
 
 
@@ -159,11 +159,8 @@ and we have tried to be as logical as possible to keep the variables modular and
 */
 
 // Base typography
-$base__font-family : "Roboto", Verdana, Geneva, sans-serif;
-$base__font-size: 21px; //same as mockups as at 03/09/2018
-$base__letter-spacing : normal; //same as mockups as at 03/09/2018
-$base__line-height : 28px; //same as mockups as at 03/09/2018
-
-// Header base
+$base__font-family : "Roboto", Tahoma, sans‑serif;
 $base-header__font-family : "Rubik", Verdana, Geneva, sans-serif;
+$base__font-size: 18px; //same as mockups as at 03/09/2018
+
 

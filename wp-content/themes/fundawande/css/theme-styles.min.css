@@ -1,15 +1,25 @@
-@font-face{font-family:'Roboto Condensed';src:url("../assets/fonts/RobotoCondensed-Regular.ttf") format("truetype")}
+@charset "UTF-8";@font-face{font-family:'Roboto';src:url("../assets/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff");font-weight:normal;font-style:normal}
+@font-face{font-family:'Roboto';src:url("../assets/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff");font-weight:bold;font-style:normal}
+@font-face{font-family:'Roboto';src:url("../assets/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff");font-weight:normal;font-style:italic}
+@font-face{font-family:'Roboto';src:url("../assets/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff");font-weight:bold;font-style:italic}
+@font-face{font-family:'Rubik';src:url(".../assets/fonts/Rubik/Rubik-Regular.ttf") format("ttf");font-weight:normal;font-style:normal}
+@font-face{font-family:'Rubik';src:url(".../assets/fonts/Rubik/Rubik-Bold.ttf") format("ttf");font-weight:bold;font-style:normal}
+@font-face{font-family:'Rubik';src:url(".../assets/fonts/Rubik/Rubik-Italic.ttf") format("ttf");font-weight:normal;font-style:italic}
+@font-face{font-family:'Rubik';src:url(".../assets/fonts/Rubik/Rubik-BoldItalic.ttf") format("ttf");font-weight:bold;font-style:italic}
 .background-primary{background-color:#fff}
-.background-white{background-color:white}
 .background-secondary{background-color:#f5f5f5}
-body{font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;weight:normal;color:#444;opacity:1}
-body h1{font-family:Rubik,Verdana,Geneva,sans-serif;weight:normal;color:#4a4a4a;opacity:100%}
-@media(min-width:768px){body h1{font-size:32px}
-}@media(max-width:767px){body h1{font-size:21px}
-}body h2,body h3,body h4,body h5{font-family:Rubik,Verdana,Geneva,sans-serif;weight:500;color:#444;opacity:100%}
-@media(min-width:768px){body h2,body h3,body h4,body h5{font-size:21px}
-}@media(max-width:767px){body h2,body h3,body h4,body h5{font-size:18px}
-}body p{text-align:justify}
+html{font-size:18px}
+body{color:#4a4a4a;font-family:"Roboto",Tahoma,sans‑serif;font-style:normal;font-weight:normal;line-height:1.45;opacity:1}
+@media(max-width:767px){body{font-size:1.125em}
+}body h1,body h2,body h3,body h4,body h5{color:#4a4a4a;font-family:"Rubik",Verdana,Geneva,sans-serif;font-style:normal;font-weight:normal;line-height:1.15;opacity:100%}
+@media(min-width:768px){body h1,body h2,body h3,body h4,body h5{font-size:21px}
+}@media(max-width:767px){body h1,body h2,body h3,body h4,body h5{font-size:18px}
+}body h1{margin-top:0;font-size:3.052em}
+body h2{font-size:2.441em}
+body h3{font-size:1.953em}
+body h4{font-size:1.563em}
+body h5{font-size:1.25em}
+body p{text-align:justify}
 @media(min-width:768px){body p{font-size:18px}
 }@media(max-width:767px){body p{font-size:14px}
 }body hr{height:2px;color:#ccc;opacity:.5}
@@ -17,6 +27,10 @@ body .wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px)
 @media(max-width:767px){body .wrapper{margin-top:60px}
 }body #login-wrapper{min-height:100vh;width:100%}
 body .text-secondary{color:#f5f5f5}
+body .text-small{font-size:.8em}
+body .text-bold{font-weight:bold;font-style:normal}
+body .text-italic{font-weight:normal;font-style:italic}
+body .text-bold-italic{font-weight:bold;font-style:italic}
 .module-bg-0{background-color:#327da6 !important}
 .module-after-bg-0:after{background-color:#327da6 !important}
 .module-before-border-0:before{border-color:#327da6 !important}
@@ -400,7 +414,7 @@ video{min-height:200px}
 .login-wrapper #fw-form-login .login-username input::placeholder,.login-wrapper #fw-form-login .login-password input::placeholder,.login-wrapper #fw-form-login .login-username #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-username select::placeholder,.login-wrapper #fw-form-login .login-password #fw-registration-form select::placeholder,.login-wrapper #fw-registration-form #fw-form-login .login-password select::placeholder{font-size:.7rem}
 }.login-wrapper #fw-form-login .login-remember{display:none}
 .login-wrapper #fw-form-login .login-submit{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:stretch;-webkit-justify-content:stretch;-ms-flex-pack:stretch;justify-content:stretch;margin-top:50px}
-.login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;cursor:pointer;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:21px;line-height:22px;padding-bottom:8px;width:100%}
+.login-wrapper #fw-form-login .login-submit #fw-submit{background-color:#ef9d19;border-radius:5px;color:#fff;cursor:pointer;font-family:"Rubik",Verdana,Geneva,sans-serif;font-size:21px;line-height:22px;padding-bottom:8px;width:100%}
 .login-wrapper #fw-form-login .login-submit #fw-submit:focus{outline-color:#fff}
 .login-wrapper #fw-registration-form input,.login-wrapper #fw-registration-form select{border:1px solid #ef9d19;border-radius:5px;color:#69675b;padding:10px;height:auto}
 .login-wrapper #fw-registration-form input:focus,.login-wrapper #fw-registration-form select:focus{box-shadow:0 0 0 .1rem #ef9d19;outline-color:#ef9d19}
@@ -412,7 +426,7 @@ video{min-height:200px}
 .login-language-button:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
 .login-language-button:active{background-color:#918f8f;color:#fff !important}
 .active-button{background-color:#918f8f;color:#fff !important}
-.login-links a{color:#69675b;display:block;font-family:Rubik,Verdana,Geneva,sans-serif;font-size:1.2rem;font-weight:550;text-decoration:none}
+.login-links a{color:#69675b;display:block;font-family:"Rubik",Verdana,Geneva,sans-serif;font-size:1.2rem;font-weight:550;text-decoration:none}
 .login-links a svg{height:50px;width:50px}
 @media(max-width:767px){.login-links a{font-size:.7rem}
 }.login-links-text{position:relative}
@@ -438,8 +452,8 @@ video{min-height:200px}
 #wrapper-navbar .navbar #main-menu-button .nav-hamburger.is-active ~ .open-text{display:none}
 #wrapper-navbar.main-menu-active{z-index:1051;box-shadow:none}
 #wrapper-navbar.main-menu-active #main-menu-button-container{background:white;border-radius:0 6px 0 0}
-#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button{border:2px solid #444;color:#444}
-#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:after,#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:before{background:#444}
+#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button{border:2px solid #4a4a4a;color:#4a4a4a}
+#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:after,#wrapper-navbar.main-menu-active #main-menu-button-container #main-menu-button .nav-hamburger span:before{background:#4a4a4a}
 #wrapper-navbar a{color:white;font-size:15px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 #wrapper-navbar a:hover{opacity:.8;text-decoration:none}
 #wrapper-navbar .change-lang .change-lang-icon{background-color:white;border-radius:3px;color:#4a4a4a;height:27px;width:31px;text-align:center;font-size:8px}
@@ -551,8 +565,8 @@ video{min-height:200px}
 .single-lesson-wrapper .quiz-questions .single-line input[type="text"],.single-lesson-wrapper .quiz-questions .single-line .login-wrapper #fw-registration-form select[type="text"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .single-line select[type="text"]{border:3px solid #ef9d19;border-radius:2px}
 .single-lesson-wrapper .quiz-questions .gap-fill input[type="text"],.single-lesson-wrapper .quiz-questions .gap-fill .login-wrapper #fw-registration-form select[type="text"],.login-wrapper #fw-registration-form .single-lesson-wrapper .quiz-questions .gap-fill select[type="text"]{border:3px solid #ef9d19;border-radius:2px}
 .single-course-wrapper .course-title{background-color:#fff}
-.single-course-wrapper .module-link{color:#444}
-.single-course-wrapper .module-link:hover{cursor:pointer;text-decoration:none;color:#444}
+.single-course-wrapper .module-link{color:#4a4a4a}
+.single-course-wrapper .module-link:hover{cursor:pointer;text-decoration:none;color:#4a4a4a}
 .single-course-wrapper .card.current{border:3px solid #ef9d19;margin-top:3rem !important}
 .single-course-wrapper .card.current .current-module-text{display:block;position:absolute;font-size:17px;font-style:italic;color:white;padding:6px 18px;background:#ef9d19;border-radius:5px 5px 0 0;left:2rem;top:-37px}
 .single-course-wrapper .card:hover{box-shadow:0 0 10px 0 rgba(0,0,0,0.3)}
@@ -571,7 +585,7 @@ video{min-height:200px}
 .single-module-wrapper .sub-units{-webkit-flex-flow:wrap;-ms-flex-flow:wrap;flex-flow:wrap}
 .single-module-wrapper .sub-units-icon{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-top:1.5rem}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon{margin-top:0}
-}.single-module-wrapper .sub-units-icon a{width:71px;padding-top:10px;color:#444;text-decoration:none}
+}.single-module-wrapper .sub-units-icon a{width:71px;padding-top:10px;color:#4a4a4a;text-decoration:none}
 @media(min-width:768px){.single-module-wrapper .sub-units-icon a{width:65px}
 }@media(max-width:767px){.single-module-wrapper .sub-units-icon a{width:auto;padding-top:0}
 .single-module-wrapper .sub-units-icon a .lesson-progress-text{line-height:1;width:80%}
@@ -581,11 +595,11 @@ video{min-height:200px}
 }.single-module-wrapper .sub-units-icon a:hover{opacity:.7}
 .single-module-wrapper .sub-units-icon a.complete svg #icon-inner{fill:white}
 .single-module-wrapper .sub-units-icon a.disabled svg{fill:#ccc}
-.single-module-wrapper .sub-units-icon a.disabled svg #icon-inner{fill:#444}
+.single-module-wrapper .sub-units-icon a.disabled svg #icon-inner{fill:#4a4a4a}
 .single-module-wrapper .sub-units-icon a.disabled:hover{cursor:default;opacity:1}
 .single-module-wrapper .sub-units-icon a.current{width:95px;box-sizing:border-box;border:2px solid;border-radius:6px;z-index:1;background:white;margin-right:-10px}
 .single-module-wrapper .sub-units-icon a.current svg circle{opacity:.7}
-.single-module-wrapper .sub-units-icon a.current svg #icon-inner{fill:#444}
+.single-module-wrapper .sub-units-icon a.current svg #icon-inner{fill:#4a4a4a}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text p{font-size:14px;width:93px}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon a.current{width:auto;border-radius:28px 6px 6px 28px;margin-right:0}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text{line-height:1;width:80%}
@@ -609,18 +623,18 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-sidebar-expanded.lesson-sidebar-expanded{bottom:0}
 .single-lesson-wrapper .lesson-sidebar-expanded .lesson-sidebar-header:hover{opacity:.8}
 .single-lesson-wrapper .lesson-sidebar-expanded .lesson-sidebar-text{cursor:pointer;hover:.8}
-.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker{z-index:1;color:#444}
+.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker{z-index:1;color:#4a4a4a}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker .title{font-size:14px}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker:hover{opacity:.7;text-decoration:none}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker svg{height:50px;width:50px}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker svg #icon-inner{fill:white}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker .lesson-progress-text{line-height:1}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.disabled svg{fill:#ccc}
-.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.disabled svg #icon-inner{fill:#444}
+.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.disabled svg #icon-inner{fill:#4a4a4a}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.disabled:hover{cursor:default;opacity:1}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.current{box-sizing:border-box;border:3px solid;border-radius:28px 6px 6px 28px;z-index:1;background:white}
 .single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.current svg circle{opacity:.7}
-.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.current svg #inner{fill:#444}
+.single-lesson-wrapper .lesson-sidebar-expanded a.lesson-progress-marker.current svg #inner{fill:#4a4a4a}
 .single-lesson-wrapper .lesson-sidebar-expanded .lesson-progress-divider{min-width:10px;min-height:20px;position:relative}
 .single-lesson-wrapper .lesson-sidebar-expanded .lesson-progress-divider:first-of-type{min-height:0;min-width:0}
 .single-lesson-wrapper .lesson-sidebar-expanded .lesson-progress-divider:first-of-type:before{display:none}
@@ -635,17 +649,17 @@ video{min-height:200px}
 .single-lesson-wrapper .lesson-sidebar-module-titles{border-bottom:1px solid #ccc}
 }@media(max-width:767px){.single-lesson-wrapper .lesson-sidebar{display:none}
 .single-lesson-wrapper .lesson-sidebar-component{display:none}
-.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker{z-index:6;color:#444}
+.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker{z-index:6;color:#4a4a4a}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker:hover{opacity:.7;text-decoration:none}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg{height:50px;width:50px}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker svg #icon-inner{fill:white}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker .lesson-progress-text{line-height:1;font-size:14px;width:80%}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled svg{fill:#ccc}
-.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled svg #icon-inner{fill:#444}
+.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled svg #icon-inner{fill:#4a4a4a}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.disabled:hover{cursor:default;opacity:1}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.current{box-sizing:border-box;border:3px solid;border-radius:28px 6px 6px 28px;z-index:1;background:white}
 .single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.current svg #inner{opacity:.7}
-.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.current svg #icon-inner{fill:#444}
+.single-lesson-wrapper .lesson-progress-mobile-modal a.lesson-progress-marker.current svg #icon-inner{fill:#4a4a4a}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider{min-width:10px;min-height:20px;position:relative}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider:first-of-type{min-height:0;min-width:0}
 .single-lesson-wrapper .lesson-progress-mobile-modal .lesson-progress-divider:first-of-type:before{display:none}
@@ -689,7 +703,7 @@ video{min-height:200px}
 #main-menu-modal .modal-dialog{margin-top:60px;margin-left:0}
 @media(max-width:767px){#main-menu-modal .modal-dialog{margin-top:60px}
 }#main-menu-modal .modal-dialog .modal-content{border:0;border-radius:0 6px 6px 0;width:auto;display:inline-block}
-#main-menu-modal .modal-dialog .modal-content a{color:#444;border-bottom:1px solid #ccc}
+#main-menu-modal .modal-dialog .modal-content a{color:#4a4a4a;border-bottom:1px solid #ccc}
 #main-menu-modal .modal-dialog .modal-content a:last-of-type{border-bottom:0}
 #main-menu-modal .modal-dialog .modal-content a:hover{text-decoration:none;opacity:.7}
 #main-menu-modal .modal-dialog .modal-content a span{margin-left:1rem}
@@ -697,9 +711,9 @@ video{min-height:200px}
 @media(max-width:767px){.admin-bar #main-menu-modal .modal-dialog{margin-top:106px}
 }.anno{position:absolute;padding:15px;z-index:50000;width:300px;cursor:default;text-transform:none;text-align:left;line-height:.9em;-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1);-webkit-transition-property:opacity,margin;transition-property:opacity,margin}
 .anno .anno-inner{border:2px solid #ef9d19;position:relative;background:white;box-shadow:0 5px 20px 0 rgba(0,0,0,0.35)}
-.anno .anno-inner .anno-content{padding:15px 20px;line-height:1.3em;font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-weight:normal;font-size:15px;color:#56565a}
+.anno .anno-inner .anno-content{padding:15px 20px;line-height:1.3em;font-family:"Roboto",Tahoma,sans‑serif;font-weight:normal;font-size:15px;color:#56565a}
 .anno .anno-inner .anno-btn-container{text-align:right}
-.anno .anno-inner .anno-btn-container .anno-btn{margin:0 20px 15px -10px;padding:7px 14px;height:auto;width:auto;background:#ef9d19;border:0;border-radius:0;font-family:"Roboto Condensed",Verdana,Geneva,sans-serif;font-weight:bold;font-size:12px;color:white;-webkit-transition:all 150ms cubic-bezier(0.68,0,0.265,1);transition:all 150ms cubic-bezier(0.68,0,0.265,1)}
+.anno .anno-inner .anno-btn-container .anno-btn{margin:0 20px 15px -10px;padding:7px 14px;height:auto;width:auto;background:#ef9d19;border:0;border-radius:0;font-family:"Roboto",Tahoma,sans‑serif;font-weight:bold;font-size:12px;color:white;-webkit-transition:all 150ms cubic-bezier(0.68,0,0.265,1);transition:all 150ms cubic-bezier(0.68,0,0.265,1)}
 .anno .anno-inner .anno-btn-container .anno-btn:hover{background:#ef9d19;opacity:.8}
 .anno .anno-inner .anno-btn-container .anno-btn:active{background:#ef9d19}
 .anno .anno-inner .anno-btn-container .anno-btn:focus{outline:#ef9d19}
@@ -733,7 +747,7 @@ video{min-height:200px}
 }.anno-overlay{position:fixed;z-index:1000;height:100%;width:100%;top:0;left:0;background:rgba(0,0,0,0.7);-webkit-transition:all 300ms cubic-bezier(0.68,0,0.265,1);transition:all 300ms cubic-bezier(0.68,0,0.265,1)}
 .anno-overlay.anno-hidden{pointer-events:none;opacity:0}
 .anno-emphasise-target{z-index:1001 !important !important}
-.wrapper-404 a{color:#444}
+.wrapper-404 a{color:#4a4a4a}
 .wrapper-404 a:hover{cursor:pointer;text-decoration:none;opacity:.7}
 .wrapper-404 a svg{margin-bottom:.5rem}
 .input-label{font-size:12px;margin-bottom:.25rem}

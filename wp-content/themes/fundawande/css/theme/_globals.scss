@@ -18,56 +18,40 @@
  * Backgrounds
  */
 
-.background-primary {  background-color: $white; }
-.background-primary-light { }
-
-.background-white {
-
-    background-color: white;
-
+.background-primary {  
+    background-color: $white; 
 }
+
 .background-secondary {
-
     background-color: $grey-primary;
-
 }
-
-.background-secondary-light {}
-
 
 /*
  * Typography
  */
 
- body {
+ html {
+    font-size: $base__font-size;
+ }
 
-    font-family: $base__font-family;
-    weight: normal;
+ body {
     color: $text-primary__colour;
+    font-family: $base__font-family;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.45;
     opacity: 1;
 
-
-    h1 {
-
-        font-family: $base-header__font-family;
-        weight: normal;
-        color: #4A4A4A;
-        opacity: 100%;
-
-        @include breakpoint (tablet) {
-            font-size: 32px;
-        }
-
-        @include breakpoint (phone) {
-            font-size: 21px;
-        }
+    @include breakpoint (phone) {
+        font-size: 1.125em;
     }
 
-    h2, h3, h4, h5  {
-
-        font-family: $base-header__font-family;
-        weight: 500;
+    h1, h2, h3, h4, h5  {
         color: $text-primary__colour;
+        font-family: $base-header__font-family;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.15;
         opacity: 100%;
 
         @include breakpoint (tablet) {
@@ -79,6 +63,26 @@
         }
     }
 
+    h1 {
+        margin-top: 0;
+        font-size: 3.052em;
+    }
+      
+    h2 {
+        font-size: 2.441em;
+    }
+      
+    h3 {
+        font-size: 1.953em;
+    }
+      
+    h4 {
+        font-size: 1.563em;
+    }
+      
+    h5 {
+        font-size: 1.25em;
+    }
 
     p {
         text-align: justify;
@@ -90,18 +94,6 @@
         @include breakpoint (phone) {
             font-size: 14px;
         }
-
-    }
-
-
-    ul {
-
-
-
-    }
-
-    li {
-
     }
 
     hr {
@@ -109,8 +101,6 @@
         color: #cccccc;
         opacity: 0.5;
     }
-
-    
 
     .wrapper {
 
@@ -134,6 +124,28 @@
 
      .text-secondary {
         color: $grey-primary; 
+     }
+
+     .text-small {
+        font-size: 0.8em;
+     }
+
+     // Bold Text
+     .text-bold {
+         font-weight: bold;
+         font-style: normal;
+     }
+
+     // Italic Text
+     .text-italic {
+         font-weight: normal;
+         font-style: italic;
+     }
+
+     // Bold and italic Text
+     .text-bold-italic {
+         font-weight: bold;
+         font-style: italic
      }
 
 }
