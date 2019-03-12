@@ -159,7 +159,7 @@ if ( ! defined( 'ABSPATH' ) ) {
      *
      */
     public function handle_save_post_lesson( $post_ID ) {
-       
+
 		if( !in_array( get_post_type( $post_ID ), array('lesson' ) ) ){
 			return;
 		}
