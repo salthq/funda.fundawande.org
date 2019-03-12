@@ -1,9 +1,19 @@
 {# Remove whitespace from beginning and end of the file name before appending to media url #}
 {% set video_file_name = content.video_file_name | trim %}
-{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number) }}
-
+{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number, content_id) }}
+<h1 id="{{content_id}}text"></h1>
 <script>
-  jQuery(document).ready( function($) {
-        
-  });
+
+    var vid = document.getElementById("{{content_id}}video");
+
+    // Function to calculate the time in 00:00 format for printing out
+    function fmtMSS(s){
+        return(s-(s%=60))/60+(9<s?':':':0')+s
+    }
+
+    vid.addEventListener('loadedmetadata', function() {
+        var text = document.getElementById('{{content_id}}text');
+        text.innerHTML = fmtMSS(Math.round(vid.duration));
+    })
+
 </script>
