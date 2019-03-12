@@ -36,14 +36,14 @@ $uniqueId = FundaWande()->question->getUniqueId();
     <input type="hidden" name="sensei_question[<?= $question_data['ID'] ?>]">
 
     <div class="container-fluid">
-        <div>
+        <!-- <div>
             <p class="_text-desktop">
                 Match the following pages with the correct option given below:
             </p>
             <p class="_text-mobile">
                 View the following images and match them below (click image to enlarge)
             </p>
-        </div>
+        </div> -->
 
         <div class="row _option-images">
             <?php

@@ -36,14 +36,14 @@ $uniqueId = FundaWande()->question->getUniqueId();
     <input type="hidden" name="sensei_question[<?= $question_data['ID'] ?>]">
 
     <div class="container-fluid">
-        <div>
+        <!-- <div>
             <p class="_text-desktop">
                 Arrange the following in the correct order by dragging them into the correct order:
             </p>
             <p class="_text-mobile">
                 Chose the most appropriate order of the following images (click to enlarge)
             </p>
-        </div>
+        </div> -->
 
         <div class="row _option-images">
             <?php
