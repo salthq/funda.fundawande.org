@@ -1,0 +1,9 @@
+{# Remove whitespace from beginning and end of the file name before appending to media url #}
+{% set video_file_name = content.video_file_name | trim %}
+{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number) }}
+
+<script>
+  jQuery(document).ready( function($) {
+        
+  });
+</script>
