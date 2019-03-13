@@ -7,10 +7,10 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-course-wrapper  background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        <div class = "container-fluid background-white">
+        <div class = "container-fluid background-primary">
             <div class = "row course-title">
                 <div class = "col-12 text-center">
-                    <h1 class = "m-4"><strong>{{post.get_field('course_title')}}</strong></h1>
+                    <h1 class = "m-4 text-bold">{{post.get_field('course_title')}}</h1>
                 </div>
             </div>
         </div>
@@ -35,11 +35,11 @@
                                             <div class = "col-12 col-md-10">
                                                 <div class = "header d-flex">
                                                     <div class = "module-bg-{{module.module_number}} header-counter mr-2 p-4">
-                                                        <h3 class= "m-0">{{module.module_number}}</h3>
+                                                        <h4 class= "m-0">{{module.module_number}}</h4>
                                                     </div>
                                                     <div class = "header-text">
-                                                        <h2><strong>{{module.module_title}}</strong></h2>
-                                                        <h4 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed}}/{{module.units|length}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
+                                                        <h4>{{module.module_title}}</h4>
+                                                        <h5 class = "module-text-{{module.module_number}} module-progress d-none d-sm-block">{{completed}}/{{module.units|length}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h5>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -50,7 +50,7 @@
                                                 <h4 class = "module-text-{{module.module_number}} module-progress m-3 d-sm-none">{{completed}}/{{module.units|length}} {{attribute(options, lang.prefix~'unit_progress_text')}}</h4>
                                                 <div class = "module-bg-{{module.module_number}} module-nav-button p-3 d-flex">
                                                     <img width="100px" class = "img img-responsive d-none d-md-block p-3" src = "/wp-content/themes/fundawande/assets/arrow_right.svg">
-                                                    <h3 class = "text-center my-0">{{attribute(options, lang.prefix~'nav_text')}}<img class = "p-2 d-md-none" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></h3>
+                                                    <h5 class = "text-center my-0">{{attribute(options, lang.prefix~'nav_text')}}<img class = "p-2 d-md-none" src = "/wp-content/themes/fundawande/assets/arrow_right.svg"></h5>
                                                 </div>
                                             </div>
                                         </div>

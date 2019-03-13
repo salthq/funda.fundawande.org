@@ -54,6 +54,7 @@ class Sensei_Core_Lesson_Modules {
 		// module is selected, or if the selected module does not exist in the
 		// given course.
 		if ( ! $module_id || empty( $module_id ) || ! $module_exists_in_course ) {
+
 			wp_delete_object_term_relationships( $this->lesson_id, $this->modules_taxonomy() );
 			return;
 		}
@@ -63,8 +64,15 @@ class Sensei_Core_Lesson_Modules {
 
 		// Set default order for lesson inside module
 		$order_module_key = '_order_module_' . $module_id;
-		if ( ! get_post_meta( $this->lesson_id, $order_module_key, true ) ) {
-			update_post_meta( $this->lesson_id, $order_module_key, 0 );
+		// Get the current position of the lesson in module
+		$position = get_post_meta( $this->lesson_id, $order_module_key, true );
+		// Get the post type to prevent the ordering of quizzes which messes up the ordering of lesosns
+		$post_type = get_post_type($this->lesson_id);
+		
+		// If the position is not set and the post type is a lesson then go ahead with the default ordering
+		if ( ! $position && $post_type === 'lesson') {
+			// Set the defualt ordering to 99 which will always put it at the end of the module by default. 
+			update_post_meta( $this->lesson_id, $order_module_key, 99 );
 		}
 	}
 

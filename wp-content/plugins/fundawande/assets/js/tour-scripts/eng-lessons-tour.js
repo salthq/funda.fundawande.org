@@ -16,7 +16,7 @@ var tour = new Anno([{
     },
     position: {
       top: '8em',
-      left: '23em'
+      left: '17em'
     },
     buttons: [
       {

@@ -7,7 +7,7 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper contacts-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
-        <div class = "container-fluid background-white">
+        <div class = "container-fluid background-primary">
             <div class = "row" >
                 <div class = "col-12">
                     <h1 class="text-center m-4">Contacts</h1>
@@ -23,18 +23,18 @@
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set coach_fields = post.meta('coach_card') %}
-                            <h5>
+                            <h4 class="text-bold">
                                 <span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> 
-                                <strong>{{attribute(coach_fields, lang.prefix~'title')}}</strong>
-                            </h5>
+                                {{attribute(coach_fields, lang.prefix~'title')}}
+                            </h4>
                             <hr>
                             {% if user.fw_coach %}
                                 <p>
-                                    <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                    <span class="text-bold">{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</span>
                                     {{coach_name}}
                                 </p>
                                 <p>
-                                    <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                    <span class="text-bold">{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</span>
                                     {{coach_email}}
                                 </p>
                                 <div class="text-center pt-3 pt-md-5">
@@ -61,16 +61,16 @@
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set support_fields = post.meta('support_card') %}
-                            <h5>
+                            <h4 class="text-bold">
                                 <span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span>
-                                <strong>{{attribute(support_fields, lang.prefix~'title')}}</strong></h5>
+                                {{attribute(support_fields, lang.prefix~'title')}}</h4>
                             <hr>
                             <p>
-                                <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                <span class="text-bold">{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</span>
                                 {{support_fields.support_name}}
                             </p>                            
                             <p>
-                                <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                <span class="text-bold">{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</span>
                                 {{support_fields.support_email}}
                             </p>                            
                             <div class="text-center pt-3 pt-md-5">
@@ -88,17 +88,17 @@
                     <div class="card p-3 m-3">
                         <div class="card-body">
                             {% set admin_fields = post.meta('admin_card') %}
-                            <h5>
+                            <h4 class="text-bold">
                                 <span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span>
-                                <strong>{{attribute(admin_fields, lang.prefix~'title')}}</strong>
-                            </h5>
+                                {{attribute(admin_fields, lang.prefix~'title')}}
+                            </h4>
                             <hr>
                             <p>
-                                <strong>{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</strong>
+                                <span class="text-bold">{% if lang.id == 'eng' %}Name: {% else %}Igama: {% endif %}</span>
                                 {{admin_fields.admin_name}}
                             </p>
                             <p>
-                                <strong>{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</strong>
+                                <span class="text-bold">{% if lang.id == 'eng' %}Email: {% else %}Imeyile: {% endif %}</span>
                                 {{admin_fields.admin_email}}
                             </p>
                             <div class="text-center pt-3 pt-md-5">
