@@ -345,7 +345,6 @@ class Sensei_Lesson {
 		if ( 'lesson' != get_post_type( $post ) ) {
 			return;
 		}
-
 		$lesson_id = absint( $post->ID );
 
 		if ( $new_status !== 'publish' ) {

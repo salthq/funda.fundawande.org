@@ -7,6 +7,7 @@
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
+# Layout
 # Backgrounds
 # Typography
 # Module Styling
@@ -15,127 +16,139 @@
 --------------------------------------------------------------*/
 
 /*
+* Layout
+*/
+
+@include breakpoint(xl-desktop) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+/*
  * Backgrounds
  */
 
-.background-primary {  background-color: $white; }
-.background-primary-light { }
-
-.background-white {
-
-    background-color: white;
-
+.background-primary {
+  background-color: $white;
 }
+
 .background-secondary {
-
-    background-color: $grey-primary;
-
+  background-color: $grey-primary;
 }
-
-.background-secondary-light {}
-
 
 /*
  * Typography
  */
 
- body {
+html {
 
-    font-family: $base__font-family;
-    weight: normal;
+
+  @include breakpoint(tablet) {
+    font-size: 19px;
+  }
+
+  @include breakpoint(phone) {
+    font-size: 13px;
+  }
+}
+
+body {
+  color: $text-primary__colour;
+  font-family: $base__font-family;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.45;
+  opacity: 1;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     color: $text-primary__colour;
-    opacity: 1;
+    font-family: $base-header__font-family;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.15;
+    opacity: 100%;
+  }
 
+  h1 {
+    margin-top: 0;
+    font-size: 2.488em;
+  }
 
-    h1 {
+  h2 {
+    font-size: 2.074em;
+  }
 
-        font-family: $base-header__font-family;
-        weight: normal;
-        color: #4A4A4A;
-        opacity: 100%;
+  h3 {
+    font-size: 1.728em;
+  }
 
-        @include breakpoint (tablet) {
-            font-size: 32px;
-        }
+  h4 {
+    font-size: 1.44em;
+  }
 
-        @include breakpoint (phone) {
-            font-size: 21px;
-        }
+  h5 {
+    font-size: 1.2em;
+  }
+
+  hr {
+    height: 2px;
+    color: #cccccc;
+    opacity: 0.5;
+  }
+
+  p {
+    @include breakpoint(phone) {
+      font-size: 1.25em;
     }
+  }
 
-    h2, h3, h4, h5  {
+  .wrapper {
+    //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
+    margin-top: $navbar-height;
+    display: inline-block;
+    min-height: calc(100vh - #{$navbar-height});
+    width: 100%;
 
-        font-family: $base-header__font-family;
-        weight: 500;
-        color: $text-primary__colour;
-        opacity: 100%;
-
-        @include breakpoint (tablet) {
-            font-size: 21px;
-        }
-
-        @include breakpoint (phone) {
-            font-size: 18px;
-        }
+    @include breakpoint(phone) {
+      margin-top: $navbar-height-mobile;
     }
+  }
 
+  #login-wrapper {
+    min-height: 100vh;
+    width: 100%;
+  }
 
-    p {
-        text-align: justify;
+  .text-secondary {
+    color: $grey-primary;
+  }
 
-        @include breakpoint (tablet) {
-            font-size: 18px;
-        }
+  .text-small {
+    font-size: 0.833em;
+  }
 
-        @include breakpoint (phone) {
-            font-size: 14px;
-        }
+  // Bold Text
+  .text-bold {
+    font-weight: bold;
+    font-style: normal;
+  }
 
-    }
+  // Italic Text
+  .text-italic {
+    font-weight: normal;
+    font-style: italic;
+  }
 
-
-    ul {
-
-
-
-    }
-
-    li {
-
-    }
-
-    hr {
-        height: 2px;
-        color: #cccccc;
-        opacity: 0.5;
-    }
-
-    
-
-    .wrapper {
-
-        //Add margin to the top of the page wrapper to ensure the navbar does not cover any section of the top page bands
-        margin-top: $navbar-height;
-        display: inline-block;
-        min-height: calc(100vh - #{$navbar-height});
-        width: 100%;
-
-
-        @include breakpoint(phone) {
-            margin-top: $navbar-height-mobile;
-        }
-    }
-
-     #login-wrapper {
-         min-height: 100vh;
-         width: 100%;
-     }
-
-
-     .text-secondary {
-        color: $grey-primary; 
-     }
-
+  // Bold and italic Text
+  .text-bold-italic {
+    font-weight: bold;
+    font-style: italic;
+  }
 }
 
 /*
@@ -144,103 +157,107 @@
 
 //Loop through the $module_colours array found in variables.scss and assign the colours to border, text, backgrounds, buttons and SVGs.
 @each $colour_key, $colour_var in $module_colours {
-    .module-bg-#{$colour_key} {
-        background-color: $colour_var!important;
+  .module-bg-#{$colour_key} {
+    background-color: $colour_var !important;
+  }
+  .module-after-bg-#{$colour_key} {
+    &:after {
+      background-color: $colour_var !important;
     }
-    .module-after-bg-#{$colour_key} {
-        &:after {
-            background-color: $colour_var!important;
-        }
+  }
+  .module-before-border-#{$colour_key} {
+    &:before {
+      border-color: $colour_var !important;
     }
-    .module-before-border-#{$colour_key} {
-        &:before {
-            border-color: $colour_var!important;
-        }
+  }
+  .module-text-#{$colour_key} {
+    color: $colour_var;
+  }
+  .module-border-#{$colour_key} {
+    border-color: $colour_var !important;
+  }
+  .module-btn-outline-#{$colour_key} {
+    border-color: $colour_var !important;
+    color: $colour_var;
+    svg {
+      fill: $colour_var;
     }
-    .module-text-#{$colour_key} {
-        color: $colour_var;
+    &:hover {
+      border-color: $colour_var;
+      background-color: $colour_var;
+      color: $white;
+      svg {
+        fill: white;
+        #inner {
+          fill: $colour_var;
+        }
+      }
     }
-    .module-border-#{$colour_key} {
-        border-color: $colour_var!important;
+    &:focus {
+      box-shadow: 0 0 0 0.1rem $colour_var;
+      outline-color: $colour_var;
     }
-    .module-btn-outline-#{$colour_key} {
-        border-color: $colour_var!important;
-        color: $colour_var;
-        svg {
-            fill: $colour_var;
-        }
-        &:hover {
-            border-color: $colour_var;
-            background-color: $colour_var;
-            color: $white;
-            svg {
-                fill: white;
-                #inner {
-                    fill: $colour_var;
-                }
-            }
-        }
-        &:focus {
-            box-shadow: 0 0 0 0.1rem $colour_var;
-            outline-color: $colour_var;
-        }
+  }
+  .module-btn-fill-#{$colour_key} {
+    background-color: $colour_var !important;
+    border-color: $colour_var !important;
+    color: $white !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    a {
+      color: $white !important;
     }
-    .module-btn-fill-#{$colour_key} {
-        background-color: $colour_var!important;
-        border-color: $colour_var!important;
-        color: $white !important;
-        h1,h2,h3,a {
-            color: $white !important;
-        }
-        svg {
-            fill: $white;
-        }
-        &:hover {
-            @extend .module-btn-fill-#{$colour_key};
-            opacity: 0.8
-        }
-        &:focus {
-            box-shadow: 0 0 0 0.1rem $colour_var;
-            outline-color: $colour_var;
-        }
+    svg {
+      fill: $white;
     }
-    .module-svg-fill-#{$colour_key} {
-        svg circle {
-            fill: $colour_var;
-        }
+    &:hover {
+      @extend .module-btn-fill-#{$colour_key};
+      opacity: 0.8;
     }
-    .module-svg-stroke-#{$colour_key} {
-        svg {
-            stroke: $colour_var;
-        }
+    &:focus {
+      box-shadow: 0 0 0 0.1rem $colour_var;
+      outline-color: $colour_var;
     }
-    .module-divider-before-#{$colour_key} {
-        &:before {
-            background: $colour_var!important;
-        }
-        &:after {
-            background: $colour_var!important;
-        }
+  }
+  .module-svg-fill-#{$colour_key} {
+    svg circle {
+      fill: $colour_var;
     }
-    //This class is used to fill in the circle around icon SVGs
-    .module-svg-icon-fill-#{$colour_key} {
-        svg {
-            circle {
-                fill: $colour_var;
-            }
-            #inner {
-                fill: white;
-            }
-        }
+  }
+  .module-svg-stroke-#{$colour_key} {
+    svg {
+      stroke: $colour_var;
     }
+  }
+  .module-divider-before-#{$colour_key} {
+    &:before {
+      background: $colour_var !important;
+    }
+    &:after {
+      background: $colour_var !important;
+    }
+  }
+  //This class is used to fill in the circle around icon SVGs
+  .module-svg-icon-fill-#{$colour_key} {
+    svg {
+      circle {
+        fill: $colour_var;
+      }
+      #inner {
+        fill: white;
+      }
+    }
+  }
 }
-
 
 .red-border {
-    border-color: red!important;
+  border-color: red !important;
 }
 .green-border {
-    border-color: green!important;
+  border-color: green !important;
 }
 
 /* 
@@ -248,169 +265,167 @@
  */
 
 .primary-bg {
-    background-color: $brand-primary__colour!important;
+  background-color: $brand-primary__colour !important;
 }
 .primary-text {
-    color: $brand-primary__colour;
+  color: $brand-primary__colour;
 }
 .primary-border {
-    border-color: $brand-primary__colour!important;
+  border-color: $brand-primary__colour !important;
 }
 .primary-btn-outline {
+  border-color: $brand-primary__colour;
+  color: $brand-primary__colour;
+  border: 1px solid;
+  svg {
+    fill: $brand-primary__colour;
+  }
+  &:hover {
     border-color: $brand-primary__colour;
-    color: $brand-primary__colour;
-    border:1px solid;
+    background-color: $brand-primary__colour;
+    color: $white;
+    text-decoration: none;
     svg {
-        fill: $brand-primary__colour;
+      fill: $white;
     }
-    &:hover {
-        border-color: $brand-primary__colour;
-        background-color: $brand-primary__colour;
-        color: $white;
-        text-decoration: none;
-        svg {
-            fill: $white;
-        }
-    }
-    &:focus {
-        box-shadow: 0 0 0 0.1rem $brand-primary__colour;
-        outline-color: $brand-primary__colour;
-    }
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+    outline-color: $brand-primary__colour;
+  }
 }
 .primary-btn-fill {
-    background-color: $brand-primary__colour;
-    border-color: $brand-primary__colour;
-    color: $white;
-    svg {
-        fill: $white;
-    }
-    &:hover {
-        @extend .primary-btn-fill;
-        opacity: 0.8
-    }
-    &:focus {
-        box-shadow: 0 0 0 0.1rem $brand-primary__colour;
-        outline-color: $brand-primary__colour;
-    }
-    
+  background-color: $brand-primary__colour;
+  border-color: $brand-primary__colour;
+  color: $white;
+  svg {
+    fill: $white;
+  }
+  &:hover {
+    @extend .primary-btn-fill;
+    opacity: 0.8;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem $brand-primary__colour;
+    outline-color: $brand-primary__colour;
+  }
 }
 .primary-svg-fill {
-    svg {
-        fill: $brand-primary__colour;
-    }
+  svg {
+    fill: $brand-primary__colour;
+  }
 }
 .primary-svg-stroke {
-    svg {
-        stroke: $brand-primary__colour;
-    }
+  svg {
+    stroke: $brand-primary__colour;
+  }
 }
 //This class is used to fill in the circle around icon SVGs
 .primary-svg-icon-fill {
-    svg {
-        circle {
-            fill: $brand-primary__colour;
-        }
+  svg {
+    circle {
+      fill: $brand-primary__colour;
     }
+  }
 }
-
 
 /*
  * Button Styling
  */
 
 .button-text-width-limit {
-    max-width: 100px;
+  max-width: 100px;
 }
 
 .button-primary {
-    border: 1.5px solid;
-    border-color: $grey-secondary;
-    border-radius: 4px;
-    color: white;
-    background-color: $grey-secondary;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 15px;
-    text-align: center;
-    padding: 5px;
-    display: inline-block;
-    &:hover {
-        opacity: 0.7;
-        text-decoration: none;
-    }
+  border: 1.5px solid;
+  border-color: $grey-secondary;
+  border-radius: 4px;
+  color: white;
+  background-color: $grey-secondary;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: center;
+  padding: 5px;
+  display: inline-block;
+  &:hover {
+    opacity: 0.7;
+    text-decoration: none;
+  }
 }
 
 .button-secondary {
-    border: 1.5px solid;
-    border-color: $grey-secondary;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 15px;
-    text-align: center;
-    padding: 5px;
-    display: inline-block;
-    &:hover {
-        opacity: 0.7;
-        text-decoration: none;
+  border: 1.5px solid;
+  border-color: $grey-secondary;
+  border-radius: 4px;
+  background-color: #ffffff;
+  line-height: 15px;
+  text-align: center;
+  padding: 5px;
+  display: inline-block;
+  &:hover {
+    opacity: 0.7;
+    text-decoration: none;
+  }
+  &.collapsed {
+    svg {
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
     }
-    &.collapsed {
-        svg {
-            -webkit-transform: rotate(180deg);
-            -moz-transform: rotate(180deg);
-            -o-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-            transform: rotate(180deg);
-        }
-    }
+  }
 }
 
 .button-tertiary {
-    border-color: $grey-tertiary;
-    background-color: $white;
-    color: $grey-tertiary;
-    &-active {
+  border-color: $grey-tertiary;
+  background-color: $white;
+  color: $grey-tertiary;
+  &-active {
     background-color: $grey-tertiary;
     color: $white;
-    }
+  }
 }
 
 /*
  * Misc Styling
  */
 
-.fw-media {
-    max-width: $media-max-width;
+ .btn-lg {
+   font-size: 1.1rem !important; // Overriding bootstrap on this one - 1.25rem breaks our layouts
+ }
+
+// .fw-media {
+//   max-width: $media-max-width;
+// }
+
+.text-tertiary {
+  color: $grey-tertiary;
 }
 
- .text-tertiary {
-     color: $grey-tertiary;
- }
+img {
+  max-width: 100%;
+  margin: auto;
+  height: auto;
+}
 
- img {
-     max-width: 100%;
-     margin: auto;
-     height: auto;
- }
-
- video {
-    //This ensures videos aren't too small on mobile devices
-    min-height: 200px;
+video {
+  //This ensures videos aren't too small on mobile devices
+  min-height: 200px;
 }
 
 .current {
-    //Forces SVG icons to be white instead of the standard grey when the unit or lesson it is associated with is currently active.
-    svg {
-        #inner {
-            fill: $white !important;
-        }
+  //Forces SVG icons to be white instead of the standard grey when the unit or lesson it is associated with is currently active.
+  svg {
+    #inner {
+      fill: $white !important;
     }
+  }
 }
 
- #data-table_wrapper {
-    th select {
-      max-width: 120px;
-    }
-
+#data-table_wrapper {
+  th select {
+    max-width: 120px;
+  }
 }

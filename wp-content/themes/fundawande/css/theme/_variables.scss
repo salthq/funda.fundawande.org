@@ -44,7 +44,7 @@ $grey-primary : #F5F5F5; //I grabbed this background colour off the module navig
 $grey-secondary : #CCCCCC;
 $grey-tertiary : #918F8F; //This shade of grey is used numerous times on the login page.  
 
-$text-primary__colour : #444444;
+$text-primary__colour : #4A4A4A;
 
 
 
@@ -84,35 +84,84 @@ $module-colours: (
 
 $coaching-primary__colour: #FED044;
 
-
-
 // #  Typography
 
+// Roboto Condensed
 @font-face {
-  font-family: 'Roboto Condensed';
-  src: url("../assets/fonts/RobotoCondensed-Regular.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url("../assets/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"),
+       url("../../assets/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; 
 }
+
+// Roboto Bold
+@font-face {
+  font-family: 'Roboto';
+  src: url("../assets/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"),
+       url("../assets/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+// Roboto Italic
+@font-face {
+  font-family: 'Roboto';
+  src: url("../assets/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"),
+       url("../assets/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+// Roboto Bold Italic
+@font-face {
+  font-family: 'Roboto';
+  src: url("../assets/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff"),
+       url("../assets/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic; 
+}
+
+//Rubik Regular
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/fonts/Rubik/Rubik-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+//Rubik Bold
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+//Rubik Italic
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/fonts/Rubik/Rubik-Italic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+//Rubik Bold Italic
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/fonts/Rubik/Rubik-BoldItalic.ttf') format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
 
 /* Preamble:
 The typography variable config has been been laid out according to the logical levels that exist. This is mostly categorised by area or taxonomy
 and we have tried to be as logical as possible to keep the variables modular and helpful.
 */
 
-//// Base typography
-$base__font-family : "Roboto Condensed", Verdana, Geneva, sans-serif;
-$base__font-size: 21px; //same as mockups as at 03/09/2018
-$base__letter-spacing : normal; //same as mockups as at 03/09/2018
-$base__line-height : 28px; //same as mockups as at 03/09/2018
-
-//// Header base
-$base-header__font-family : Rubik, Verdana, Geneva, sans-serif;
-
-//// Navbar typography
-
-/* Use the existing font family  variables until there is something that is absolutely specific */
-
-//// Call-to-actions (CTAs) typography
-
-/* Use the existing font family variables until there is something that is absolutely specific */
+// Base typography
+$base__font-family : "Roboto", Tahoma, sans‑serif;
+$base-header__font-family : "Rubik", Verdana, Geneva, sans-serif;
 
 

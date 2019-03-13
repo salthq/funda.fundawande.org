@@ -14,7 +14,6 @@
 
 // Globals
 .input-label {
-  font-size: 12px;
   margin-bottom: 0.25rem;
 }
 
@@ -31,7 +30,6 @@ input[type='text'],input[type='email'],input[type='tel'], input[type="number"], 
   // min-width: 300px; Removed due to mobile display issues.  
   &::-webkit-input-placeholder {
     color: $grey-secondary;
-    font-size: 12px;
     line-height: 1rem;
     vertical-align: middle;
   }
@@ -44,7 +42,6 @@ textarea {
   padding: 1rem!important;
   &::-webkit-input-placeholder {
     color: $grey-secondary!important;
-    font-size: 12px;
     line-height: 12px;
   }
 }
