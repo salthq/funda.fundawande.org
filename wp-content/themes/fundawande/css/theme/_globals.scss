@@ -396,9 +396,9 @@ body {
    font-size: 1.1rem !important; // Overriding bootstrap on this one - 1.25rem breaks our layouts
  }
 
-.fw-media {
-  max-width: $media-max-width;
-}
+// .fw-media {
+//   max-width: $media-max-width;
+// }
 
 .text-tertiary {
   color: $grey-tertiary;
