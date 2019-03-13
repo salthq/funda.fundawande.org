@@ -16,18 +16,22 @@
             .current-course-text {
               display: block;
               position: absolute;
-              font-size: 17px;
               font-style: italic;
               color: white;
               padding: 6px 18px;
               background: $brand-primary__colour;
               border-radius: 5px 5px 0 0;
               left:2rem;
-              top:-37px;
+              @include breakpoint(tablet) {
+                top:-40px;
+               }
+              @include breakpoint(phone) {
+                 top: -30px;
+               }
             }
           }
         @include breakpoint(desktop) {
-            min-height: 440px;
+            min-height: 460px;
         }
     }
  }

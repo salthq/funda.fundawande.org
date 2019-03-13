@@ -82,9 +82,9 @@
           top: 100px;
           overflow-y: auto;
         }
-        h4 {
-          font-size: 18px;
-        }
+        // h4 {
+        //   font-size: 18px;
+        // }
         .lesson-progress {
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16),
             0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
@@ -105,9 +105,9 @@
           a.lesson-progress-marker {
             z-index: 1;
             color: $text-primary__colour;
-            .title {
-              font-size: 14px;
-            }
+            // .title {
+            //   font-size: 14px;
+            // }
             &:hover {
               opacity: 0.7;
               text-decoration: none;
@@ -188,9 +188,9 @@
 
           }
         }
-        &-text {
-          font-size: 14px;
-        }
+        // &-text {
+        //   font-size: 14px;
+        // }
         &-module-titles {
           border-bottom: 1px solid $grey-secondary;
         }
@@ -220,7 +220,7 @@
           }
           .lesson-progress-text {
             line-height: 1;
-            font-size: 14px;
+            // font-size: 14px;
             width: 80%;
           }
           &.disabled {

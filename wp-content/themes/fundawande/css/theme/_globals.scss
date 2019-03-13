@@ -45,11 +45,11 @@ html {
 
 
   @include breakpoint(tablet) {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   @include breakpoint(phone) {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
@@ -343,7 +343,6 @@ body {
   border-radius: 4px;
   color: white;
   background-color: $grey-secondary;
-  font-size: 14px;
   font-weight: 500;
   line-height: 15px;
   text-align: center;
@@ -360,8 +359,6 @@ body {
   border-color: $grey-secondary;
   border-radius: 4px;
   background-color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
   line-height: 15px;
   text-align: center;
   padding: 5px;
@@ -394,6 +391,10 @@ body {
 /*
  * Misc Styling
  */
+
+ .btn-lg {
+   font-size: 1.1rem !important; // Overriding bootstrap on this one - 1.25rem breaks our layouts
+ }
 
 .fw-media {
   max-width: $media-max-width;
