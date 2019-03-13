@@ -84,15 +84,13 @@ $module-colours: (
 
 $coaching-primary__colour: #FED044;
 
-
-
 // #  Typography
 
 // Roboto Condensed
 @font-face {
   font-family: 'Roboto';
   src: url("../assets/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"),
-       url("../assets/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
+       url("../../assets/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; 
 }
@@ -127,7 +125,7 @@ $coaching-primary__colour: #FED044;
 //Rubik Regular
 @font-face {
   font-family: 'Rubik';
-  src: url('.../assets/fonts/Rubik/Rubik-Regular.ttf') format("truetype");
+  src: url('../assets/fonts/Rubik/Rubik-Regular.ttf') format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -135,7 +133,7 @@ $coaching-primary__colour: #FED044;
 //Rubik Bold
 @font-face {
   font-family: 'Rubik';
-  src: url('.../assets/fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+  src: url('../assets/fonts/Rubik/Rubik-Bold.ttf') format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -143,7 +141,7 @@ $coaching-primary__colour: #FED044;
 //Rubik Italic
 @font-face {
   font-family: 'Rubik';
-  src: url('.../assets/fonts/Rubik/Rubik-Italic.ttf') format("truetype");
+  src: url('../assets/fonts/Rubik/Rubik-Italic.ttf') format("truetype");
   font-weight: normal;
   font-style: italic;
 }
@@ -151,7 +149,7 @@ $coaching-primary__colour: #FED044;
 //Rubik Bold Italic
 @font-face {
   font-family: 'Rubik';
-  src: url('.../assets/fonts/Rubik/Rubik-BoldItalic.ttf') format("truetype");
+  src: url('../assets/fonts/Rubik/Rubik-BoldItalic.ttf') format("truetype");
   font-weight: bold;
   font-style: italic;
 }
