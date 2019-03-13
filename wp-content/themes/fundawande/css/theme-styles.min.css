@@ -318,7 +318,6 @@ body .text-bold-italic{font-weight:bold;font-style:italic}
 .button-tertiary{border-color:#918f8f;background-color:#fff;color:#918f8f}
 .button-tertiary-active{background-color:#918f8f;color:#fff}
 .btn-lg{font-size:1.1rem !important}
-.fw-media{max-width:510px}
 .text-tertiary{color:#918f8f}
 img{max-width:100%;margin:auto;height:auto}
 video{min-height:200px}
