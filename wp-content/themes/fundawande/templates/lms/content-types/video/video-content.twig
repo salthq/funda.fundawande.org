@@ -1,7 +1,18 @@
+<!-- Video Content -->
+
 {# Remove whitespace from beginning and end of the file name before appending to media url #}
 {% set video_file_name = content.video_file_name | trim %}
 {{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number, content_id) }}
-<h1 id="{{content_id}}text"></h1>
+<h5 class="text-italic text-center mt-2">
+    {% if content.video_title %}
+        {{content.video_title}} 
+        <br>
+    {% endif %}
+    (<span id="{{content_id}}duration"></span>)
+</h5>
+
+
+{# This script gets the duration of the video from the meta data and adds it below the video player #}
 <script>
 
     var vid = document.getElementById("{{content_id}}video");
@@ -12,8 +23,8 @@
     }
 
     vid.addEventListener('loadedmetadata', function() {
-        var text = document.getElementById('{{content_id}}text');
-        text.innerHTML = fmtMSS(Math.round(vid.duration));
+        var duration = document.getElementById('{{content_id}}duration');
+        duration.innerHTML = fmtMSS(Math.round(vid.duration));
     })
 
 </script>
