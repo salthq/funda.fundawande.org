@@ -329,7 +329,7 @@ video{min-height:200px}
 #site-footer a:hover{text-decoration:underline}
 .contacts-wrapper .contacts-btn span svg{margin-bottom:4px}
 @media(min-width:992px){.contacts-wrapper .card{min-height:420px}
-}@media(min-width:768px){.video-grid-container .video-bg{height:20vw}
+}@media(min-width:768px){.video-grid-container .video-bg{height:15vw}
 }@media(max-width:767px){.video-grid-container .video-bg{height:45vw}
 }.player{position:relative;width:100%;height:0;padding-bottom:56.25%;font-size:0;overflow:hidden;color:white}
 .player:-webkit-full-screen,.player:-webkit-full-screen{max-width:none;width:100%}

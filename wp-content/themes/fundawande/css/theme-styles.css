@@ -699,7 +699,7 @@ video { min-height: 200px; }
 @media (min-width: 992px) { .contacts-wrapper .card { min-height: 420px; } }
 
 /* ========================================================================== Video Player Styling specific to video player ========================================================================== */
-@media (min-width: 768px) { .video-grid-container .video-bg { height: 20vw; } }
+@media (min-width: 768px) { .video-grid-container .video-bg { height: 15vw; } }
 
 @media (max-width: 767px) { .video-grid-container .video-bg { height: 45vw; } }
 
