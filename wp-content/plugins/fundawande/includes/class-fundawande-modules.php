@@ -135,7 +135,7 @@ class FundaWande_Modules {
                 $course_module_number++;
             }
         }
-        error_log(print_r($course_modules,true));
+        // error_log(print_r($course_modules,true));
 
         return $course_modules;
 
@@ -185,9 +185,13 @@ class FundaWande_Modules {
          $course_module_number = -1;
          // unit numbering starts at 1
          $course_unit_number = 1;
- 
+
+         // Set up empty array for ordered module IDs to set course order
+         $ordered_module_ids = array();
          // loop through the course modules
          foreach($course_modules  as $key => $module) {
+
+            $ordered_module_ids[] = $module->term_id;
  
              // if there is a module parent then it's a child module (unit)
              if ($module->parent) {
@@ -227,7 +231,11 @@ class FundaWande_Modules {
                  ] ) );
                 // increment the module number
              }
-         }
+            
+
+        }
+        $order = update_post_meta(intval($course_id), '_module_order', $ordered_module_ids);
+
     }
 
     /**
@@ -269,6 +277,7 @@ class FundaWande_Modules {
             // Sort by custom order
             $ordered_units = array();
             $unordered_units = array();
+            error_log(print_r(count($module_units) ,true));
             foreach ( $module_units as $unit ) {
                 $order_key = array_search($unit, $order);
                 if ($order_key !== false) {
@@ -280,15 +289,18 @@ class FundaWande_Modules {
 
             // Order modules correctly
             ksort( $ordered_units );
-
+           
+            error_log(print_r(count($ordered_units) ,true));
             $module_units = $ordered_units;
+            error_log(print_r(count($module_units) ,true));
         }
 
-
+        error_log(print_r(count($module_units) ,true));
         foreach($module_units  as $key => $unit) {
 
             // Get the hide unit variable to determine whether to show module in course
             $hide_unit = get_term_meta($unit, 'hide_module', true);
+            
             // if the hide_unit is true, then skip unit
             if ($hide_unit) {
                 unset($module_units[$key]);
@@ -327,6 +339,8 @@ class FundaWande_Modules {
 
 
         }
+        
+
 
         return $module_units;
 
