@@ -135,7 +135,6 @@ class FundaWande_Modules {
                 $course_module_number++;
             }
         }
-        error_log(print_r($course_modules,true));
 
         return $course_modules;
 
@@ -185,9 +184,13 @@ class FundaWande_Modules {
          $course_module_number = -1;
          // unit numbering starts at 1
          $course_unit_number = 1;
- 
+
+         // Set up empty array for ordered module IDs to set course order
+         $ordered_module_ids = array();
          // loop through the course modules
          foreach($course_modules  as $key => $module) {
+
+            $ordered_module_ids[] = $module->term_id;
  
              // if there is a module parent then it's a child module (unit)
              if ($module->parent) {
@@ -227,7 +230,11 @@ class FundaWande_Modules {
                  ] ) );
                 // increment the module number
              }
-         }
+            
+
+        }
+        $order = update_post_meta(intval($course_id), '_module_order', $ordered_module_ids);
+
     }
 
     /**
@@ -280,15 +287,15 @@ class FundaWande_Modules {
 
             // Order modules correctly
             ksort( $ordered_units );
-
+           
             $module_units = $ordered_units;
         }
-
 
         foreach($module_units  as $key => $unit) {
 
             // Get the hide unit variable to determine whether to show module in course
             $hide_unit = get_term_meta($unit, 'hide_module', true);
+            
             // if the hide_unit is true, then skip unit
             if ($hide_unit) {
                 unset($module_units[$key]);
@@ -327,6 +334,8 @@ class FundaWande_Modules {
 
 
         }
+        
+
 
         return $module_units;
 
