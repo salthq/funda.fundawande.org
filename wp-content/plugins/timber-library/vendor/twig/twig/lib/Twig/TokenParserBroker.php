@@ -61,12 +61,12 @@ class Twig_TokenParserBroker implements Twig_TokenParserBrokerInterface
         }
     }
 
-    public function addTokenParserBroker(self $broker)
+    public function addTokenParserBroker(Twig_TokenParserBroker $broker)
     {
         $this->brokers[] = $broker;
     }
 
-    public function removeTokenParserBroker(self $broker)
+    public function removeTokenParserBroker(Twig_TokenParserBroker $broker)
     {
         if (false !== $pos = array_search($broker, $this->brokers)) {
             unset($this->brokers[$pos]);

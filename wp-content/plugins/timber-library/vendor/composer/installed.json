@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/installers",
-        "version": "v1.5.0",
-        "version_normalized": "1.5.0.0",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "049797d727261bf27f2690430d935067710049c2"
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/049797d727261bf27f2690430d935067710049c2",
-            "reference": "049797d727261bf27f2690430d935067710049c2",
+            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2017-12-29 09:13:20",
+        "time": "2018-08-27 06:10:37",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -122,18 +122,128 @@
         ]
     },
     {
-        "name": "twig/twig",
-        "version": "v1.35.2",
-        "version_normalized": "1.35.2.0",
+        "name": "altorouter/altorouter",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twigphp/Twig.git",
-            "reference": "9c24f2cd39dc1906b76879e099970b7e53724601"
+            "url": "https://github.com/dannyvankooten/AltoRouter.git",
+            "reference": "39c50092470128c12284d332bb57f306bb5b58e4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/9c24f2cd39dc1906b76879e099970b7e53724601",
-            "reference": "9c24f2cd39dc1906b76879e099970b7e53724601",
+            "url": "https://api.github.com/repos/dannyvankooten/AltoRouter/zipball/39c50092470128c12284d332bb57f306bb5b58e4",
+            "reference": "39c50092470128c12284d332bb57f306bb5b58e4",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "phpunit/phpunit": "4.5.*"
+        },
+        "time": "2015-11-30 00:47:43",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "AltoRouter.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Danny van Kooten",
+                "email": "dannyvankooten@gmail.com",
+                "homepage": "http://dannyvankooten.com/"
+            },
+            {
+                "name": "Koen Punt",
+                "homepage": "https://github.com/koenpunt"
+            },
+            {
+                "name": "niahoo",
+                "homepage": "https://github.com/niahoo"
+            }
+        ],
+        "description": "A lightning fast router for PHP",
+        "homepage": "https://github.com/dannyvankooten/AltoRouter",
+        "keywords": [
+            "lightweight",
+            "router",
+            "routing"
+        ]
+    },
+    {
+        "name": "upstatement/routes",
+        "version": "0.5",
+        "version_normalized": "0.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Upstatement/routes.git",
+            "reference": "3267d28be0a73f197087d58384e1a358d85671b6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Upstatement/routes/zipball/3267d28be0a73f197087d58384e1a358d85671b6",
+            "reference": "3267d28be0a73f197087d58384e1a358d85671b6",
+            "shasum": ""
+        },
+        "require": {
+            "altorouter/altorouter": "^1.1.0",
+            "composer/installers": "~1.0",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*",
+            "satooshi/php-coveralls": "dev-master",
+            "wp-cli/wp-cli": "*"
+        },
+        "time": "2018-12-04 01:13:41",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Routes": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jared Novack",
+                "email": "jared@upstatement.com",
+                "homepage": "http://upstatement.com"
+            }
+        ],
+        "description": "Manage rewrites and routes in WordPress with this dead-simple plugin",
+        "homepage": "http://routes.upstatement.com",
+        "keywords": [
+            "redirects",
+            "rewrite",
+            "routes",
+            "routing"
+        ]
+    },
+    {
+        "name": "twig/twig",
+        "version": "v1.34.4",
+        "version_normalized": "1.34.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/f878bab48edb66ad9c6ed626bf817f60c6c096ee",
+            "reference": "f878bab48edb66ad9c6ed626bf817f60c6c096ee",
             "shasum": ""
         },
         "require": {
@@ -144,11 +254,11 @@
             "symfony/debug": "~2.7",
             "symfony/phpunit-bridge": "~3.3@dev"
         },
-        "time": "2018-03-03 16:21:29",
+        "time": "2017-07-04 13:19:31",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.35-dev"
+                "dev-master": "1.34-dev"
             }
         },
         "installation-source": "dist",
@@ -242,112 +352,6 @@
             "cache",
             "extension",
             "twig"
-        ]
-    },
-    {
-        "name": "altorouter/altorouter",
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/dannyvankooten/AltoRouter.git",
-            "reference": "09d9d946c546bae6d22a7654cdb3b825ffda54b4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/dannyvankooten/AltoRouter/zipball/09d9d946c546bae6d22a7654cdb3b825ffda54b4",
-            "reference": "09d9d946c546bae6d22a7654cdb3b825ffda54b4",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2014-04-16 09:44:40",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "AltoRouter.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Danny van Kooten",
-                "email": "dannyvankooten@gmail.com",
-                "homepage": "http://dannyvankooten.com/"
-            },
-            {
-                "name": "Koen Punt",
-                "homepage": "https://github.com/koenpunt"
-            },
-            {
-                "name": "niahoo",
-                "homepage": "https://github.com/niahoo"
-            }
-        ],
-        "description": "A lightning fast router for PHP",
-        "homepage": "https://github.com/dannyvankooten/AltoRouter",
-        "keywords": [
-            "lightweight",
-            "router",
-            "routing"
-        ]
-    },
-    {
-        "name": "upstatement/routes",
-        "version": "0.4",
-        "version_normalized": "0.4.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Upstatement/routes.git",
-            "reference": "fae7d46f56e8b5775f072774941a5f0a25cb86f3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Upstatement/routes/zipball/fae7d46f56e8b5775f072774941a5f0a25cb86f3",
-            "reference": "fae7d46f56e8b5775f072774941a5f0a25cb86f3",
-            "shasum": ""
-        },
-        "require": {
-            "altorouter/altorouter": "1.1.0",
-            "composer/installers": "~1.0",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*",
-            "satooshi/php-coveralls": "dev-master",
-            "wp-cli/wp-cli": "*"
-        },
-        "time": "2016-07-06 12:53:24",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Routes": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jared Novack",
-                "email": "jared@upstatement.com",
-                "homepage": "http://upstatement.com"
-            }
-        ],
-        "description": "Manage rewrites and routes in WordPress with this dead-simple plugin",
-        "homepage": "http://routes.upstatement.com",
-        "keywords": [
-            "redirects",
-            "rewrite",
-            "routes",
-            "routing"
         ]
     }
 ]

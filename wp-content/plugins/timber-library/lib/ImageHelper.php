@@ -4,6 +4,7 @@ namespace Timber;
 
 use Timber\Image;
 use Timber\Image\Operation\ToJpg;
+use Timber\Image\Operation\ToWebp;
 use Timber\Image\Operation\Resize;
 use Timber\Image\Operation\Retina;
 use Timber\Image\Operation\Letterbox;
@@ -142,6 +143,39 @@ class ImageHelper {
 	}
 
 	/**
+	 * Checks if file is an SVG.
+	 *
+	 * @param string $file_path File path to check.
+	 * @return bool True if SVG, false if not SVG or file doesn't exist.
+	 */
+	public static function is_svg( $file_path ) {
+		if ( ! isset( $file_path ) || '' === $file_path || ! file_exists( $file_path ) ) {
+			return false;
+		}
+
+		if ( TextHelper::ends_with( strtolower($file_path), '.svg' ) ) {
+			return true;
+		}
+
+		/**
+		 * Try reading mime type.
+		 *
+		 * SVG images are not allowed by default in WordPress, so we have to pass a default mime
+		 * type for SVG images.
+		 */
+		$mime = wp_check_filetype_and_ext( $file_path, basename( $file_path ), array(
+			'svg' => 'image/svg+xml',
+		) );
+
+		return in_array( $mime['type'], array(
+			'image/svg+xml',
+			'text/html',
+			'text/plain',
+			'image/svg',
+		) );
+	}
+
+	/**
 	 * Generate a new image with the specified dimensions.
 	 * New dimensions are achieved by adding colored bands to maintain ratio.
 	 *
@@ -168,6 +202,20 @@ class ImageHelper {
 		$op = new Image\Operation\ToJpg($bghex);
 		return self::_operate($src, $op, $force);
 	}
+
+    /**
+     * Generates a new image by converting the source into WEBP if supported by the server
+     *
+     * @param string  $src      a url or path to the image (http://example.org/wp-content/uploads/2014/image.webp)
+     *							or (/wp-content/uploads/2014/image.jpg)
+     *							If webp is not supported, a jpeg image will be generated
+	 * @param int     $quality  ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file)
+     * @param bool    $force
+     */
+    public static function img_to_webp( $src, $quality = 80, $force = false ) {
+        $op = new Image\Operation\ToWebp($quality);
+        return self::_operate($src, $op, $force);
+    }
 
 	//-- end of public methods --//
 
@@ -259,7 +307,11 @@ class ImageHelper {
 	 */
 	protected static function process_delete_generated_files( $filename, $ext, $dir, $search_pattern, $match_pattern = null ) {
 		$searcher = '/'.$filename.$search_pattern;
-		foreach ( glob($dir.$searcher) as $found_file ) {
+		$files = glob($dir.$searcher);
+		if ( $files === false || empty($files) ) {
+			return;
+		}
+		foreach ( $files as $found_file ) {
 			$pattern = '/'.preg_quote($dir, '/').'\/'.preg_quote($filename, '/').$match_pattern.preg_quote($ext, '/').'/';
 			$match = preg_match($pattern, $found_file);
 			if ( !$match_pattern || $match ) {
@@ -275,7 +327,7 @@ class ImageHelper {
 	 * @return string
 	 */
 	public static function get_server_location( $url ) {
-		// if we're already an absolute dir, just return
+		// if we're already an absolute dir, just return.
 		if ( 0 === strpos($url, ABSPATH) ) {
 			return $url;
 		}
@@ -404,10 +456,24 @@ class ImageHelper {
 		return $tmp;
 	}
 
+	/**
+	 * Checks if uploaded image is located in theme.
+	 *
+	 * @param string $path image path.
+	 * @return bool     If the image is located in the theme directory it returns true.
+	 *                  If not or $path doesn't exits it returns false.
+	 */
 	protected static function is_in_theme_dir( $path ) {
-		$root = realpath(get_stylesheet_directory_uri());
-		if ( 0 === strpos($path, $root) ) {
+		$root = realpath(get_stylesheet_directory());
+
+		if ( false === $root ) {
+			return false;
+		}
+
+		if ( 0 === strpos($path, (string) $root) ) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 

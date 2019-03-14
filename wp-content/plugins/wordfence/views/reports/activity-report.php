@@ -13,21 +13,23 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 <table class="wf-striped-table wf-fixed-table">
 	<thead>
 		<tr>
-			<th width="50%"><?php _e('IP', 'wordfence'); ?></th>
-			<th width="25%"><?php _e('Country', 'wordfence'); ?></th>
+			<th width="40%"><?php _e('IP', 'wordfence'); ?></th>
+			<th width="35%"><?php _e('Country', 'wordfence'); ?></th>
 			<th width="25%"><?php _e('Block Count', 'wordfence'); ?></th> 
 		</tr>
 	</thead>
 	<tbody>
-		<?php if ($top_ips_blocked): ?>
-			<?php foreach ($top_ips_blocked as $row): ?>
+		<?php
+		if ($top_ips_blocked):
+			require(dirname(__FILE__) . '/../../lib/flags.php'); /** @var array $flags */
+			foreach ($top_ips_blocked as $row): ?>
 				<tr class="<?php echo wfHelperString::cycle('odd', 'even') ?>">
 					<td class="wf-split-word"><code><?php echo wfUtils::inet_ntop($row->IP) ?></code></td>
 					<td>
 						<?php if ($row->countryCode): ?>
-							<img src="<?php echo wfUtils::getBaseURL() . 'images/flags/' . esc_attr(strtolower($row->countryCode)) ?>.png" class="wfFlag" height="11" width="16" alt="<?php echo esc_attr($row->countryName) ?>" title="<?php echo esc_attr($row->countryName) ?>">
+							<span class="wf-flag <?php echo esc_attr('wf-flag-' . strtolower($row->countryCode)); ?>" title="<?php echo esc_attr($row->countryName); ?>"></span>
 							&nbsp;
-							<?php echo esc_html($row->countryCode) ?>
+							<?php echo esc_html($row->countryName) ?>
 						<?php else: ?>
 							<?php _e('(Unknown)', 'wordfence'); ?>
 						<?php endif ?>
@@ -62,14 +64,16 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 		</tr>
 	</thead>
 	<tbody>
-		<?php if ($top_countries_blocked): ?>
-			<?php foreach ($top_countries_blocked as $row): ?>
+		<?php
+		if ($top_countries_blocked):
+			require(dirname(__FILE__) . '/../../lib/flags.php'); /** @var array $flags */
+			foreach ($top_countries_blocked as $row): ?>
 				<tr class="<?php echo wfHelperString::cycle('odd', 'even') ?>">
 					<td>
 						<?php if ($row->countryCode): ?>
-							<img src="<?php echo wfUtils::getBaseURL() . 'images/flags/' . strtolower($row->countryCode) ?>.png" class="wfFlag" height="11" width="16" alt="<?php echo esc_attr($row->countryName) ?>" title="<?php echo esc_attr($row->countryName) ?>">
+							<span class="wf-flag <?php echo esc_attr('wf-flag-' . strtolower($row->countryCode)); ?>" title="<?php echo esc_attr($row->countryName); ?>"></span>
 							&nbsp;
-							<?php echo esc_html($row->countryCode) ?>
+							<?php echo esc_html($row->countryName) ?>
 						<?php else: ?>
 							<?php _e('(Unknown)', 'wordfence'); ?>
 						<?php endif ?>

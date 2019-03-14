@@ -61,7 +61,7 @@ if (!wfUtils::isAdmin()) {
 			<tr>
 				<th>Location:</th>
 				<td>
-					<img src="<?php echo wfUtils::getBaseURL() . 'images/flags/' . strtolower($v['loc']['countryCode']); ?>.png" width="16" height="11" alt="<?php echo $v['loc']['countryName']; ?>" title="<?php echo $v['loc']['countryName']; ?>" class="wfFlag"/>
+					<span class="wf-flag <?php echo esc_attr('wf-flag-' . strtolower($v['loc']['countryCode'])); ?>" title="<?php echo esc_attr($v['loc']['countryName']); ?>"></span>
 					<?php if ($v['loc']['city']) {
 						echo $v['loc']['city'] . ', ';
 					} ?>

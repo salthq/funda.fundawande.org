@@ -57,6 +57,8 @@ interface wfWAFStorageInterface {
 	public function unsetConfig($key, $category = '');
 
 	public function uninstall();
+	
+	//optional public function fileList();
 
 	public function isInLearningMode();
 

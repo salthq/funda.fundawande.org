@@ -456,6 +456,8 @@ class Helper {
 	 * @return string
 	 */
 	public static function get_comment_form( $post_id = null, $args = array() ) {
+		global $post;
+		$post = get_post($post_id);
 		return self::ob_function('comment_form', array($args, $post_id));
 	}
 
@@ -477,5 +479,27 @@ class Helper {
 	public function get_current_url() {
 		Helper::warn('TimberHelper::get_current_url() is deprecated and will be removed in future versions, use Timber\URLHelper::get_current_url()');
 		return URLHelper::get_current_url();
+	}
+
+	/**
+	 * Converts a WP object (WP_Post, WP_Term) into his
+	 * equivalent Timber class (Timber\Post, Timber\Term).
+	 *
+	 * If no match is found the function will return the inital argument.
+	 *
+	 * @param mix $obj WP Object
+	 * @return mix Instance of equivalent Timber object, or the argument if no match is found
+	 */
+	public static function convert_wp_object( $obj ) {
+		if ( $obj instanceof \WP_Post ) {
+			$class = \Timber\PostGetter::get_post_class($obj->post_type);
+			return new $class($obj->ID);
+		} elseif ( $obj instanceof \WP_Term ) {
+			return new \Timber\Term($obj->term_id);
+		} elseif ( $obj instanceof \WP_User ) {
+			return new \Timber\User($obj->ID);
+		}
+
+		return $obj;
 	}
 }

@@ -611,8 +611,7 @@ exist:
     { 2: 'foo', 4: 'bar' }
 
     {# keys as expressions (the expression must be enclosed into parentheses) -- as of Twig 1.5 #}
-    {% set foo = 'foo' %}
-    { (foo): 'foo', (1 + 1): 'bar', (foo ~ 'b'): 'baz' }
+    { (1 + 1): 'foo', (a ~ 'b'): 'bar' }
 
 * ``true`` / ``false``: ``true`` represents the true value, ``false``
   represents the false value.

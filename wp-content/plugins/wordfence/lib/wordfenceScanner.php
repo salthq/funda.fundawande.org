@@ -141,7 +141,7 @@ class wordfenceScanner {
 	 * there is no pattern
 	 *
 	 * @param $whichPatterns int Bitmask indicating which patterns to include.
-	 * @return string|boolean
+	 * @return array|boolean
 	 */
 	public static function getExcludeFilePattern($whichPatterns = self::EXCLUSION_PATTERNS_USER) {
 		if (isset(self::$excludePatterns[$whichPatterns])) {
@@ -166,8 +166,13 @@ class wordfenceScanner {
 			}
 		}
 
+		$exParts = array_filter($exParts);
 		if (!empty($exParts)) {
-			self::$excludePatterns[$whichPatterns] = '/(?:' . implode('|', array_filter($exParts)) . ')$/i';
+			$chunks = array_chunk($exParts, 100);
+			self::$excludePatterns[$whichPatterns] = array();
+			foreach ($chunks as $parts) {
+				self::$excludePatterns[$whichPatterns][] = '/(?:' . implode('|', $parts) . ')$/i';
+			}
 		}
 		else {
 			self::$excludePatterns[$whichPatterns] = false;
@@ -210,7 +215,7 @@ class wordfenceScanner {
 		}
 		
 		$lastCount = 'whatever';
-		$excludePattern = self::getExcludeFilePattern(self::EXCLUSION_PATTERNS_USER | self::EXCLUSION_PATTERNS_MALWARE); 
+		$excludePatterns = self::getExcludeFilePattern(self::EXCLUSION_PATTERNS_USER | self::EXCLUSION_PATTERNS_MALWARE); 
 		while (true) {
 			$thisCount = wordfenceMalwareScanFile::countRemaining();
 			if ($thisCount == $lastCount) {
@@ -228,9 +233,13 @@ class wordfenceScanner {
 			
 			foreach ($files as $record) {
 				$file = $record->filename;
-				if ($excludePattern && preg_match($excludePattern, $file)) {
-					$record->markComplete();
-					continue;
+				if ($excludePatterns) {
+					foreach ($excludePatterns as $pattern) {
+						if (preg_match($pattern, $file)) {
+							$record->markComplete();
+							continue 2;
+						}
+					}
 				}
 				if (!file_exists($this->path . $file)) {
 					$record->markComplete();
@@ -333,7 +342,7 @@ class wordfenceScanner {
 						if ($treatAsBinary && wfUtils::strpos($data, '$allowed'.'Sites') !== false && wfUtils::strpos($data, "define ('VER"."SION', '1.") !== false && wfUtils::strpos($data, "TimThum"."b script created by") !== false) {
 							$this->addResult(array(
 								'type' => 'file',
-								'severity' => 1,
+								'severity' => wfIssues::SEVERITY_CRITICAL,
 								'ignoreP' => $this->path . $file,
 								'ignoreC' => $fileSum,
 								'shortMsg' => __('File is an old version of TimThumb which is vulnerable.', 'wordfence'),
@@ -365,7 +374,8 @@ class wordfenceScanner {
 								
 								$type = (isset($rule[4]) && !empty($rule[4])) ? $rule[4] : 'server';
 								$logOnly = (isset($rule[5]) && !empty($rule[5])) ? $rule[5] : false;
-								$commonStringIndexes = (isset($rule[8]) && is_array($rule[8])) ? $rule[8] : array(); 
+								$commonStringIndexes = (isset($rule[8]) && is_array($rule[8])) ? $rule[8] : array();
+								$customMessage = isset($rule[9]) ? $rule[9] : __('This file appears to be installed or modified by a hacker to perform malicious activity. If you know about this file you can choose to ignore it to exclude it from future scans.', 'wordfence');
 								if ($type == 'server' && !$treatAsBinary) { continue; }
 								else if (($type == 'both' || $type == 'browser') && $isJS) { $extraMsg = ''; }
 								else if (($type == 'both' || $type == 'browser') && !$treatAsBinary) { continue; }
@@ -394,11 +404,11 @@ class wordfenceScanner {
 									if (!$logOnly) {
 										$this->addResult(array(
 											'type' => 'file',
-											'severity' => 1,
+											'severity' => wfIssues::SEVERITY_CRITICAL,
 											'ignoreP' => $this->path . $file,
 											'ignoreC' => $fileSum,
 											'shortMsg' => __('File appears to be malicious: ', 'wordfence') . esc_html($file),
-											'longMsg' => sprintf(__('This file appears to be installed or modified by a hacker to perform malicious activity. If you know about this file you can choose to ignore it to exclude it from future scans. The text we found in this file that matches a known malicious file is: <strong style="color: #F00;" class="wf-split-word">%s</strong>', 'wordfence'), wfUtils::potentialBinaryStringToHTML((wfUtils::strlen($matchString) > 200 ? wfUtils::substr($matchString, 0, 200) . '...' : $matchString))) . '<br><br>' . sprintf(__('The infection type is: <strong>%s</strong>', 'wordfence'), esc_html($rule[7])) . '<br>' . sprintf(__('Description: <strong>%s</strong>', 'wordfence'), esc_html($rule[3])) . $extraMsg,
+											'longMsg' => $customMessage . ' ' . __('The matched text in this file is:', 'wordfence') . ' ' . '<strong style="color: #F00;" class="wf-split-word">' . wfUtils::potentialBinaryStringToHTML((wfUtils::strlen($matchString) > 200 ? wfUtils::substr($matchString, 0, 200) . '...' : $matchString)) . '</strong>' . '<br><br>' . sprintf(__('The issue type is: <strong>%s</strong>', 'wordfence'), esc_html($rule[7])) . '<br>' . sprintf(__('Description: <strong>%s</strong>', 'wordfence'), esc_html($rule[3])) . $extraMsg,
 											'data' => array_merge(array(
 												'file' => $file,
 												'shac' => $record->SHAC,
@@ -435,7 +445,7 @@ class wordfenceScanner {
 							if ($badStringFound) {
 								$this->addResult(array(
 									'type' => 'file',
-									'severity' => 1,
+									'severity' => wfIssues::SEVERITY_CRITICAL,
 									'ignoreP' => $this->path . $file,
 									'ignoreC' => $fileSum,
 									'shortMsg' => __('This file may contain malicious executable code: ', 'wordfence') . esc_html($file),
@@ -499,7 +509,7 @@ class wordfenceScanner {
 					if ($result['badList'] == 'goog-malware-shavar') {
 						$this->addResult(array(
 							'type' => 'file',
-							'severity' => 1,
+							'severity' => wfIssues::SEVERITY_CRITICAL,
 							'ignoreP' => $this->path . $file,
 							'ignoreC' => md5_file($this->path . $file),
 							'shortMsg' => __('File contains suspected malware URL: ', 'wordfence') . esc_html($file),
@@ -517,7 +527,7 @@ class wordfenceScanner {
 					else if ($result['badList'] == 'googpub-phish-shavar') {
 						$this->addResult(array(
 							'type' => 'file',
-							'severity' => 1,
+							'severity' => wfIssues::SEVERITY_CRITICAL,
 							'ignoreP' => $this->path . $file,
 							'ignoreC' => md5_file($this->path . $file),
 							'shortMsg' => __('File contains suspected phishing URL: ', 'wordfence') . esc_html($file),
@@ -535,7 +545,7 @@ class wordfenceScanner {
 					else if ($result['badList'] == 'wordfence-dbl') {
 						$this->addResult(array(
 							'type' => 'file',
-							'severity' => 1,
+							'severity' => wfIssues::SEVERITY_CRITICAL,
 							'ignoreP' => $this->path . $file,
 							'ignoreC' => md5_file($this->path . $file),
 							'shortMsg' => __('File contains suspected malware URL: ', 'wordfence') . esc_html($file),

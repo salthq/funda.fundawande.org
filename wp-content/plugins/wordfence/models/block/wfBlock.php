@@ -549,10 +549,10 @@ class wfBlock {
 				
 				return $wpdb->query($wpdb->prepare("INSERT INTO `{$blocksTable}` (`type`, `IP`, `blockedTime`, `reason`, `lastAttempt`, `blockedHits`, `expiration`, `parameters`) VALUES (%d, %s, %d, %s, %d, %d, %d, NULL)", (int) $b['type'], wfUtils::inet_pton($ip), (int) $b['blockedTime'], $b['reason'], (int) $b['lastAttempt'], (int) $b['blockedHits'], self::DURATION_FOREVER)) !== false;
 			case self::TYPE_COUNTRY:
-				if (!isset($b['parameters'])) { continue; }
-				if (wfUtils::inet_pton($ip) != self::MARKER_COUNTRY) { continue; }
+				if (!isset($b['parameters'])) { return false; }
+				if (wfUtils::inet_pton($ip) != self::MARKER_COUNTRY) { return false; }
 				$parameters = @json_decode($b['parameters'], true);
-				if (!isset($parameters['blockLogin']) || !isset($parameters['blockSite']) || !isset($parameters['countries'])) { continue; }
+				if (!isset($parameters['blockLogin']) || !isset($parameters['blockSite']) || !isset($parameters['countries'])) { return false; }
 				$parameters['blockLogin'] = wfUtils::truthyToInt($parameters['blockLogin']);
 				$parameters['blockSite'] = wfUtils::truthyToInt($parameters['blockSite']);
 				
@@ -567,10 +567,10 @@ class wfBlock {
 				
 				return $wpdb->query($wpdb->prepare("INSERT INTO `{$blocksTable}` (`type`, `IP`, `blockedTime`, `reason`, `lastAttempt`, `blockedHits`, `expiration`, `parameters`) VALUES (%d, %s, %d, %s, %d, %d, %d, %s)", self::TYPE_COUNTRY, self::MARKER_COUNTRY, (int) $b['blockedTime'], $b['reason'], (int) $b['lastAttempt'], (int) $b['blockedHits'], self::DURATION_FOREVER, json_encode($parameters))) !== false;
 			case self::TYPE_PATTERN:
-				if (!isset($b['parameters'])) { continue; }
+				if (!isset($b['parameters'])) { return false; }
 				if (wfUtils::inet_pton($ip) != self::MARKER_PATTERN) { return false; }
 				$parameters = @json_decode($b['parameters'], true);
-				if (!isset($parameters['ipRange']) || !isset($parameters['hostname']) || !isset($parameters['userAgent']) || !isset($parameters['referrer'])) { continue; }
+				if (!isset($parameters['ipRange']) || !isset($parameters['hostname']) || !isset($parameters['userAgent']) || !isset($parameters['referrer'])) { return false; }
 				
 				$hasOne = false;
 				if (!empty($parameters['ipRange'])) {

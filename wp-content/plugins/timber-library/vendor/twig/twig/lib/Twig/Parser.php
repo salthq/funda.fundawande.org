@@ -31,7 +31,6 @@ class Twig_Parser implements Twig_ParserInterface
     protected $importedSymbols;
     protected $traits;
     protected $embeddedTemplates = array();
-    private $varNameSalt = 0;
 
     public function __construct(Twig_Environment $env)
     {
@@ -50,7 +49,7 @@ class Twig_Parser implements Twig_ParserInterface
 
     public function getVarName()
     {
-        return sprintf('__internal_%s', hash('sha256', __METHOD__.$this->varNameSalt++));
+        return sprintf('__internal_%s', hash('sha256', uniqid(mt_rand(), true), false));
     }
 
     /**
@@ -99,7 +98,6 @@ class Twig_Parser implements Twig_ParserInterface
         $this->blockStack = array();
         $this->importedSymbols = array(array());
         $this->embeddedTemplates = array();
-        $this->varNameSalt = 0;
 
         try {
             $body = $this->subparse($test, $dropNeedle);
@@ -155,7 +153,7 @@ class Twig_Parser implements Twig_ParserInterface
                     $this->stream->next();
                     $token = $this->getCurrentToken();
 
-                    if (Twig_Token::NAME_TYPE !== $token->getType()) {
+                    if ($token->getType() !== Twig_Token::NAME_TYPE) {
                         throw new Twig_Error_Syntax('A block must start with a tag name.', $token->getLine(), $this->stream->getSourceContext());
                     }
 
@@ -385,7 +383,7 @@ class Twig_Parser implements Twig_ParserInterface
                 throw new Twig_Error_Syntax('A template that extends another one cannot start with a byte order mark (BOM); it must be removed.', $node->getTemplateLine(), $this->stream->getSourceContext());
             }
 
-            throw new Twig_Error_Syntax('A template that extends another one cannot include content outside Twig blocks. Did you forget to put the content inside a {% block %} tag?', $node->getTemplateLine(), $this->stream->getSourceContext());
+            throw new Twig_Error_Syntax('A template that extends another one cannot include contents outside Twig blocks. Did you forget to put the contents inside a {% block %} tag?', $node->getTemplateLine(), $this->stream->getSourceContext());
         }
 
         // bypass nodes that will "capture" the output

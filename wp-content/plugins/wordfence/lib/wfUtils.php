@@ -1,6 +1,5 @@
 <?php
 require_once('wfConfig.php');
-require_once('wfCountryMap.php');
 class wfUtils {
 	private static $isWindows = false;
 	public static $scanLockFH = false;
@@ -891,6 +890,24 @@ class wfUtils {
 		return false;
 	}
 
+	public static function getAllServerVariableIPs()
+	{
+		$variables = array('REMOTE_ADDR', 'HTTP_CF_CONNECTING_IP', 'HTTP_X_REAL_IP', 'HTTP_X_FORWARDED_FOR');
+		$ips = array();
+
+		foreach ($variables as $variable) {
+			$ip = isset($_SERVER[$variable]) ? $_SERVER[$variable] : false;
+
+			if ($ip && strpos($ip, ',') !== false) {
+				$ips[$variable] = preg_replace('/[\s,]/', '', explode(',', $ip));
+			} else {
+				$ips[$variable] = $ip;
+			}
+		}
+
+		return $ips;
+	}
+
 	public static function getIPAndServerVariable($howGet = null, $trustedProxies = null) {
 		$connectionIP = array_key_exists('REMOTE_ADDR', $_SERVER) ? array($_SERVER['REMOTE_ADDR'], 'REMOTE_ADDR') : array('127.0.0.1', 'REMOTE_ADDR');
 
@@ -1153,13 +1170,27 @@ class wfUtils {
 	}
 	public static function getScanFileError() {
 		$fileTime = wfConfig::get('scanFileProcessing');
-		if (! $fileTime) {
+		if (!$fileTime) {
 			return;
 		}
 		list($file, $time) =  unserialize($fileTime);
 		if ($time+10 < time()) {
-			$files = wfConfig::get('scan_exclude') . "\n" . $file;
-			wfConfig::set('scan_exclude', self::cleanupOneEntryPerLine($files));
+			$add = true;
+			$excludePatterns = wordfenceScanner::getExcludeFilePattern(wordfenceScanner::EXCLUSION_PATTERNS_USER);
+			if ($excludePatterns) {
+				foreach ($excludePatterns as $pattern) {
+					if (preg_match($pattern, $file)) {
+						$add = false;
+						break;
+					}
+				}
+			}
+			
+			if ($add) {
+				$files = wfConfig::get('scan_exclude') . "\n" . $file;
+				wfConfig::set('scan_exclude', self::cleanupOneEntryPerLine($files));
+			}
+			
 			self::endProcessingFile();
 		}
 	}
@@ -1191,6 +1222,9 @@ class wfUtils {
 
 		wfConfig::set('wf_scanRunning', '');
 		wfIssues::updateScanStillRunning(false);
+		if (wfCentral::isConnected()) {
+			wfCentral::updateScanStatus();
+		}
 	}
 	public static function getIPGeo($IP){ //Works with int or dotted
 
@@ -1369,8 +1403,9 @@ class wfUtils {
 		return $tooBig;
 	}
 	public static function countryCode2Name($code){
-		if(isset(wfCountryMap::$map[$code])){
-			return wfCountryMap::$map[$code];
+		require('wfBulkCountries.php'); /** @var array $wfBulkCountries */
+		if(isset($wfBulkCountries[$code])){
+			return $wfBulkCountries[$code];
 		} else {
 			return '';
 		}
@@ -1387,16 +1422,22 @@ class wfUtils {
 		}
 		
 		if (!class_exists('wfGeoIP2')) {
+			wfUtils::error_clear_last();
 			require_once(dirname(__FILE__) . '/../models/common/wfGeoIP2.php');
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
 		}
 		
 		try {
+			wfUtils::error_clear_last();
 			$geoip = @wfGeoIP2::shared();
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
+			wfUtils::error_clear_last();
 			$code = @$geoip->countryCode($IP);
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
 			return is_string($code) ? $code : '';
 		}
 		catch (Exception $e) {
-			//Ignore
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:', $e->getMessage());
 		}
 		
 		return '';
@@ -1407,15 +1448,22 @@ class wfUtils {
 		}
 		
 		if (!class_exists('wfGeoIP2')) {
+			wfUtils::error_clear_last();
 			require_once(dirname(__FILE__) . '/../models/common/wfGeoIP2.php');
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
 		}
 		
 		try {
+			wfUtils::error_clear_last();
 			$geoip = @wfGeoIP2::shared();
-			return @$geoip->version();
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
+			wfUtils::error_clear_last();
+			$version = @$geoip->version();
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:');
+			return $version;
 		}
 		catch (Exception $e) {
-			//Ignore
+			wfUtils::check_and_log_last_error('geoip', 'GeoIP Error:', $e->getMessage());
 		}
 		
 		return 0;
@@ -1464,6 +1512,63 @@ class wfUtils {
 	}
 	public static function isRefererBlocked($refPattern){
 		return fnmatch($refPattern, !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '', FNM_CASEFOLD);
+	}
+	
+	public static function error_clear_last() {
+		if (function_exists('error_clear_last')) {
+			error_clear_last();
+		}
+		else {
+			// set error_get_last() to defined state by forcing an undefined variable error
+			set_error_handler('wfUtils::_resetErrorsHandler', 0);
+			@$undefinedVariable;
+			restore_error_handler();
+		}
+	}
+	
+	/**
+	 * Logs the error given or the last PHP error to our log, rate limiting if needed.
+	 * 
+	 * @param string $limiter_key
+	 * @param string $label
+	 * @param null|string $error The error to log. If null, it will be the result of error_get_last
+	 * @param int $rate Logging will only occur once per $rate seconds.
+	 */
+	public static function check_and_log_last_error($limiter_key, $label, $error = null, $rate = 3600 /* 1 hour */) {
+		if ($error === null) {
+			$error = error_get_last();
+			if ($error === null) {
+				return;
+			}
+			else if ($error['file'] === __FILE__) {
+				return;
+			}
+			$error = $error['message'];
+		}
+		
+		$rateKey = 'lastError_rate_' . $limiter_key;
+		$previousKey = 'lastError_prev_' . $limiter_key;
+		$previousError = wfConfig::getJSON($previousKey, array(0, false));
+		if ($previousError[1] != $error) {
+			if (wfConfig::getInt($rateKey) < time() - $rate) {
+				wfConfig::set($rateKey, time());
+				wfConfig::setJSON($previousKey, array(time(), $error));
+				wordfence::status(2, 'error', $label . ' ' . $error);
+			}
+		}
+	}
+	
+	public static function last_error($limiter_key) {
+		$previousKey = 'lastError_prev_' . $limiter_key;
+		$previousError = wfConfig::getJSON($previousKey, array(0, false));
+		if ($previousError[1]) {
+			return wfUtils::formatLocalTime(get_option('date_format') . ' ' . get_option('time_format'), $previousError[0]) . ': ' . $previousError[1];
+		}
+		return false;
+	}
+	
+	public static function _resetErrorsHandler($errno, $errstr, $errfile, $errline) {
+		//Do nothing
 	}
 
 	/**
@@ -2456,6 +2561,14 @@ class wfUtils {
 		
 		$values = array_values($array);
 		return $values[count($values) - 1];
+	}
+	
+	public static function array_strtolower($array) {
+		$result = array();
+		foreach ($array as $a) {
+			$result[] = strtolower($a);
+		}
+		return $result;
 	}
 	
 	public static function array_column($input = null, $columnKey = null, $indexKey = null) { //Polyfill from https://github.com/ramsey/array_column/blob/master/src/array_column.php

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-class Twig_Tests_ExpressionParserTest extends \PHPUnit\Framework\TestCase
+class Twig_Tests_ExpressionParserTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException Twig_Error_Syntax

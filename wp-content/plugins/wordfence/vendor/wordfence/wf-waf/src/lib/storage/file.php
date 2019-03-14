@@ -379,7 +379,7 @@ class wfWAFStorageFile implements wfWAFStorageInterface {
 	
 	public function pathForConfig($category = '') {
 		$category = strtolower(preg_replace('/[^a-z0-9]/i', '', $category));
-		$path = $this->getConfigFile();
+		$path = $this->_normalizeSlashes($this->getConfigFile());
 		$components = explode('/', $path);
 		$last = $components[count($components) - 1];
 		if (preg_match('/^([^.]+)(\..+$|$)/', $last, $matches) && !empty($category)) {
@@ -430,7 +430,9 @@ class wfWAFStorageFile implements wfWAFStorageInterface {
 		if (!file_exists($filePath)) {
 			@file_put_contents($filePath, $defaultContents, LOCK_EX);
 		}
-		@chmod($filePath, self::permissions());
+		if (wfWAFStorageFile::allowFileWriting()) {
+			@chmod($filePath, self::permissions());
+		}
 		if ($arrayKey !== false) {
 			$fileHandle[$arrayKey] = @fopen($filePath, 'r+');
 			$handle = $fileHandle[$arrayKey];
@@ -440,7 +442,7 @@ class wfWAFStorageFile implements wfWAFStorageInterface {
 			$handle = $fileHandle;
 		}
 		
-		if (!$handle && $remakeIfCorrupt) {
+		if (!$handle && $remakeIfCorrupt && wfWAFStorageFile::allowFileWriting()) {
 			@file_put_contents($filePath, $defaultContents, LOCK_EX);
 			@chmod($filePath, self::permissions());
 			if ($arrayKey !== false) {
@@ -668,12 +670,42 @@ class wfWAFStorageFile implements wfWAFStorageInterface {
 		@unlink($this->getRulesDSLCacheFile());
 	}
 	
+	public function fileList() {
+		$fileList = array();
+		$fileList[] = $this->getAttackDataFile();
+		$fileList[] = $this->getIPCacheFile();
+		if (defined('WFWAF_DEBUG') && WFWAF_DEBUG) {
+			$fileList[] = $this->getRulesDSLCacheFile();
+		}
+		$fileList[] = $this->getConfigFile();
+		$configDir = dirname($this->getConfigFile());
+		$dir = opendir($configDir);
+		if ($dir) {
+			$escapedPath = preg_quote($this->_normalizeSlashes($this->getConfigFile()), '/');
+			$components = explode('\\/', $escapedPath);
+			$pattern = $components[count($components) - 1];
+			if (preg_match('/^(.+?)(\\\..+$|$)/i', $pattern, $matches)) {
+				$pattern = $matches[1] . '\\-[a-z0-9]+' . $matches[2]; //Results in a pattern like config\-[a-z0-9]\.php
+			}
+			
+			while ($path = readdir($dir)) {
+				if ($path == '.' || $path == '..') { continue; }
+				if (is_dir($configDir . '/' . $path)) { continue; }
+				if (preg_match('/^' . $pattern . '$/i', $path)) {
+					$fileList[] = $configDir . '/' . $path;
+				}
+			}
+			closedir($dir);
+		}
+		return $fileList;
+	}
+	
 	public function removeConfigFiles() {
 		@unlink($this->getConfigFile());
 		$configDir = dirname($this->getConfigFile());
 		$dir = opendir($configDir);
 		if ($dir) {
-			$escapedPath = preg_quote($this->getConfigFile(), '/');
+			$escapedPath = preg_quote($this->_normalizeSlashes($this->getConfigFile()), '/');
 			$components = explode('\\/', $escapedPath);
 			$pattern = $components[count($components) - 1];
 			if (preg_match('/^(.+?)(\\\..+$|$)/i', $pattern, $matches)) {
@@ -698,6 +730,10 @@ class wfWAFStorageFile implements wfWAFStorageInterface {
 		}
 		
 		$this->_open($path, $this->configFileHandles, $category, self::LOG_FILE_HEADER . self::LOG_INFO_HEADER . serialize($this->getDefaultConfiguration($category)), false);
+	}
+	
+	protected function _normalizeSlashes($path) {
+		return str_replace('\\', '/', $path); //The same sanitation performed by WordPress -- PHP can handle both, but it simplifies path processing
 	}
 
 	/**
@@ -962,7 +998,9 @@ class wfWAFAttackDataStorageFileEngine {
 		if (!file_exists($this->file)) {
 			@file_put_contents($this->file, $this->getDefaultHeader(), LOCK_EX);
 		}
-		@chmod($this->file, wfWAFStorageFile::permissions());
+		if (wfWAFStorageFile::allowFileWriting()) {
+			@chmod($this->file, wfWAFStorageFile::permissions());
+		}
 		$this->fileHandle = @fopen($this->file, 'r+');
 		if (!$this->fileHandle) {
 			throw new wfWAFStorageFileException('Unable to open ' . $this->file . ' for reading and writing.');

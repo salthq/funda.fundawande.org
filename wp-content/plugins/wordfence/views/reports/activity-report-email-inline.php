@@ -141,18 +141,27 @@ h6 a:visited { color: purple !important; }
 						</tr>
 					</thead>
 					<tbody style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
-						<?php if ($top_ips_blocked): ?>
-						<?php foreach ($top_ips_blocked as $row): ?>
-							<?php
-							$stripe = wfHelperString::cycle('odd', 'even');
-							?>
+						<?php 
+						if ($top_ips_blocked):
+							require(dirname(__FILE__) . '/../../lib/flags.php'); /** @var array $flags */
+							foreach ($top_ips_blocked as $row):
+								$stripe = wfHelperString::cycle('odd', 'even');
+						?>
 							<tr class="<?php echo $stripe ?>" style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
 								<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline"><code style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;"><?php echo wfUtils::inet_ntop($row->IP) ?></code></td>
 								<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline">
-									<?php if ($row->countryCode): ?>
-										<img src="<?php echo wfUtils::getBaseURL() . 'images/flags/' . esc_attr(strtolower($row->countryCode)) ?>.png" class="wfFlag" height="11" width="16" style="font-size: 100%; vertical-align: baseline; -ms-interpolation-mode: bicubic; outline: none; text-decoration: none; margin: 0; padding: 0; border: 0;">
+									<?php
+									if ($row->countryCode):
+										$key = strtolower($row->countryCode);
+										$offset = '0px 0px';
+										if (isset($flags[$key])) {
+											$offset = $flags[$key];
+										}
+									?>
+									<span class="wf-flag <?php echo esc_attr('wf-flag-' . $key); ?>" style="display: inline-block;vertical-align: middle;
+	margin: 0;padding: 0; border: 0;background-repeat: no-repeat;background-position: <?php echo $offset; ?>;width: 16px;height: 11px;background-image: url('<?php echo esc_attr(wfUtils::getBaseURL() . 'images/flags.png'); ?>')"></span>
 										&nbsp;
-										<?php echo esc_html($row->countryCode) ?>
+										<?php echo esc_html($row->countryName) ?>
 									<?php else: ?>
 										<?php _e('(Unknown)', 'wordfence'); ?>
 									<?php endif ?>
@@ -187,17 +196,26 @@ h6 a:visited { color: purple !important; }
 						</tr>
 					</thead>
 					<tbody style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
-						<?php if ($top_countries_blocked): ?>
-							<?php foreach ($top_countries_blocked as $row): ?>
-								<?php
+						<?php
+						if ($top_countries_blocked):
+							require(dirname(__FILE__) . '/../../lib/flags.php'); /** @var array $flags */
+							foreach ($top_countries_blocked as $row):
 								$stripe = wfHelperString::cycle('odd', 'even');
 								?>
 								<tr class="<?php echo $stripe ?>" style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
 									<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline">
-										<?php if ($row->countryCode): ?>
-											<img src="<?php echo wfUtils::getBaseURL() . 'images/flags/' . strtolower($row->countryCode) ?>.png" class="wfFlag" height="11" width="16" style="font-size: 100%; vertical-align: baseline; -ms-interpolation-mode: bicubic; outline: none; text-decoration: none; margin: 0; padding: 0; border: 0;">
+										<?php 
+										if ($row->countryCode):
+											$key = strtolower($row->countryCode);
+											$offset = '0px 0px';
+											if (isset($flags[$key])) {
+												$offset = $flags[$key];
+											}
+										?>
+											<span class="wf-flag <?php echo esc_attr('wf-flag-' . $key); ?>" style="display: inline-block;vertical-align: middle;
+													margin: 0;padding: 0; border: 0;background-repeat: no-repeat;background-position: <?php echo $offset; ?>;width: 16px;height: 11px;background-image: url('<?php echo esc_attr(wfUtils::getBaseURL() . 'images/flags.png'); ?>')"></span>
 											&nbsp;
-											<?php echo esc_html($row->countryCode) ?>
+											<?php echo esc_html($row->countryName) ?>
 										<?php else: ?>
 											<?php _e('(Unknown)', 'wordfence'); ?>
 										<?php endif ?>

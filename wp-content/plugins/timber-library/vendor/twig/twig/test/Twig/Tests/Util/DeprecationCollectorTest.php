@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-class Twig_Tests_Util_DeprecationCollectorTest extends \PHPUnit\Framework\TestCase
+class Twig_Tests_Util_DeprecationCollectorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @requires PHP 5.3
