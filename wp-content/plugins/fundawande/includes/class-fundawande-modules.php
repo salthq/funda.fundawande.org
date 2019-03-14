@@ -135,7 +135,6 @@ class FundaWande_Modules {
                 $course_module_number++;
             }
         }
-        // error_log(print_r($course_modules,true));
 
         return $course_modules;
 
@@ -277,7 +276,6 @@ class FundaWande_Modules {
             // Sort by custom order
             $ordered_units = array();
             $unordered_units = array();
-            error_log(print_r(count($module_units) ,true));
             foreach ( $module_units as $unit ) {
                 $order_key = array_search($unit, $order);
                 if ($order_key !== false) {
@@ -290,12 +288,9 @@ class FundaWande_Modules {
             // Order modules correctly
             ksort( $ordered_units );
            
-            error_log(print_r(count($ordered_units) ,true));
             $module_units = $ordered_units;
-            error_log(print_r(count($module_units) ,true));
         }
 
-        error_log(print_r(count($module_units) ,true));
         foreach($module_units  as $key => $unit) {
 
             // Get the hide unit variable to determine whether to show module in course
