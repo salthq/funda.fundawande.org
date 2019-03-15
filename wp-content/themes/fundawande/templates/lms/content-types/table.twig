@@ -1,0 +1,28 @@
+<!-- Content Type: Table -->
+<div class = "col-12 pt-4">
+    <table class="table table-bordered table-responsive-sm">
+        {% if content.table.caption %}
+            <caption>{{content.table.caption}}</caption>        
+        {% endif %}
+        <thead>
+            <tr>
+                {% for header in content.table.header %}
+                    {% for column in header %}
+                        <th scope="col">{{column}}</th>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+            <tbody>
+                {% for body in content.table.body %}
+                    <tr>
+                        {% for columns in body %}
+                            {% for item in columns %}
+                                <td>{{item}}</td>
+                            {% endfor %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
+</div>
