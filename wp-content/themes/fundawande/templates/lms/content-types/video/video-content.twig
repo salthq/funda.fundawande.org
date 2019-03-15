@@ -2,27 +2,12 @@
 
 {# Remove whitespace from beginning and end of the file name before appending to media url #}
 {% set video_file_name = content.video_file_name | trim %}
-{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number, content_id) }}
+{% set video_id = loop.index %}
+{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number, content_id, video_id) }}
 
 <div class="d-flex justify-content-between">
     <h5 class="text-small p-2">{{content.video_title}}</h5>
-    <h5 id="{{content_id}}duration" class="text-small p-2"></h5>
+    <h5 id="{{content_id}}_{{video_id}}duration" class="text-small p-2"></h5>
 </div>
 
-
-{# This script gets the duration of the video from the meta data and adds it below the video player #}
-<script>
-
-    var vid = document.getElementById("{{content_id}}video");
-
-    // Function to calculate the time in 00:00 format for printing out
-    function fmtMSS(s){
-        return(s-(s%=60))/60+(9<s?':':':0')+s
-    }
-
-    vid.addEventListener('loadedmetadata', function() {
-        var duration = document.getElementById('{{content_id}}duration');
-        duration.innerHTML = fmtMSS(Math.round(vid.duration));
-    })
-
-</script>
+{% include "/lms/embeds/get_video_duration.twig" %}

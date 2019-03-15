@@ -69,13 +69,14 @@
 
 {% macro videoCard(video_src, image_src, video_id, video_title, video_description, module_number, content_id) %}
     {% import _self as mixins %}
-    <div class="video-grid-container card">
-        <div class="card-body">
-            <div class = "p-3 d-flex video-bg justify-content-center align-items-center" style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }} cursor: pointer" data-toggle="modal" data-target="#content_{{content_id}}_videoCardModal{{ video_id }}">
-                <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
-            </div>
-            <h5 class="card-title pt-3">{{video_title}}</h5>
-            <p class="card-text">{{ video_description }}</p>
+    <div class="video-grid-container">
+        <div class = "d-flex video-bg justify-content-center align-items-center my-2" style="{{ mixins.bgImg(image_src,'0,0,0',0.0) }} cursor: pointer" data-toggle="modal" data-target="#content_{{content_id}}_videoCardModal{{ video_id }}">
+            <span class="module-svg-fill-{{module_number}}">{{ source('/assets/video_player/Play_button.svg') }}</span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <h5 class="text-small text-left">{{video_title}}</h5>
+            <h5 id="{{content_id}}_{{video_id}}duration" class="text-small"></h5>
         </div>
     </div>
 
@@ -91,22 +92,21 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    {{ mixins.videoPlayer(video_src, image_src, module_number) }}
+                    {{ mixins.videoPlayer(video_src, image_src, module_number, content_id, video_id) }}
                 </div>
             </div>
         </div>
     </div>
+
+    {% include "/lms/embeds/get_video_duration.twig" %}
 {% endmacro %}
 
 {# Add video player #}
-{% macro videoPlayer(video_src, image_src, module_number, content_id) %}
+{% macro videoPlayer(video_src, image_src, module_number, content_id, video_id) %}
     {% import _self as mixins %}
-    <video width="100%" height="auto" controls class="d-md-none" >
-        <source src="{{ video_src }}" type="video/mp4">
-    </video>
     <div class="player d-none d-md-flex">
 
-        <video id="{{content_id}}video" class="player__video viewer" >
+        <video id="{{content_id}}_{{video_id}}video" class="player__video viewer" >
             <source src="{{ video_src }}" type="video/mp4">
         </video>
 
