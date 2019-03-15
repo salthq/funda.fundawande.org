@@ -22,3 +22,4 @@ body.sensei_page_sensei_grading .drag-and-drop-non-sequential .sensei-grading-an
 body.sensei_page_sensei_grading .drag-and-drop-sequential .correct-answer img,body.sensei_page_sensei_grading .multiple-choice-with-images .correct-answer img{width:calc(25% - 10px)}
 .acf-field{font-size:16px}
 .acf-field p.description{font-size:14px}
+.acf-table-optionbox label{text-transform:capitalize}
