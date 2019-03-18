@@ -8,19 +8,19 @@
 {% block content %}
     <div id="page-wrapper" class="wrapper  background-secondary " xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid my-4">
-            <div class="row my-3">
+            <div id="profile-form" class="row my-3">
                 <div class="col-12">
                     <div class="card px-md-5 py-lg-5 p-3">
-                        <div class="row justify-content-end">
-                            <div class="col-12 col-md-8">
+                        <div class="row justify-content-center">
+                            <div class="col-12 ">
                                 <h1 class="pb-3 text-center text-bold">My Profile</h1>
                             </div>
-                            <div class="col-12 col-md-2">
+                            <div class="col-12 text-center">
                                 {# TODO: Re-add this once decision on language changing has been reached #}
                                 {% if lang.id == 'eng' %}
-                                    <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
+                                    <a class="change-lang btn btn-lg primary-border primary-bg  d-inline-block" href="?lang=xho"><span class=" change-lang-icon align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="">Tshintsha ulwimi</span></a>
                                 {% else %}
-                                    <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
+                                    <a class="change-lang btn btn-lg primary-border primary-bg  d-inline-block" href="?lang=eng"><span class="change-lang-icon  align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="">Change language</span></a>
                                 {% endif %}
                             </div>
                         </div>
