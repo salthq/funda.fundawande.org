@@ -11,7 +11,19 @@
             <div class="row my-3">
                 <div class="col-12">
                     <div class="card px-md-5 py-lg-5 p-3">
-                        <h1 class="pb-3 text-center text-bold">My Profile</h1>
+                        <div class="row justify-content-end">
+                            <div class="col-12 col-md-8">
+                                <h1 class="pb-3 text-center text-bold">My Profile</h1>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                {# TODO: Re-add this once decision on language changing has been reached #}
+                                {% if lang.id == 'eng' %}
+                                    <a class="change-lang mx-4 ml-md-auto" href="?lang=xho"><span class=" change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >xho</span><span class="d-none d-md-block">Tshintsha ulwimi</span></a>
+                                {% else %}
+                                    <a class="change-lang mx-4 ml-md-auto" href="?lang=eng"><span class="change-lang-icon d-flex align-items-center justify-content-center text-uppercase mr-2" >eng</span><span class="d-none d-md-block">Change language</span></a>
+                                {% endif %}
+                            </div>
+                        </div>
                         <div class="row mt-4 ">
                             <div class="col-12">
                             <div class="card justify-content-between justify-content-center primary-border"> 
