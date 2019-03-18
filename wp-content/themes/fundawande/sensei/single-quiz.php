@@ -40,9 +40,6 @@ if (class_exists('Timber')) {
         wp_redirect('/change-course?current='.$current_course_id.'&new='.$lesson_course_ID);
     }
 
-
-    // FundaWande()->language->fw_correct_lesson_lang($current_course_id, $lesson->ID);
-
     // check if is retry quiz
     $context['quiz_retry'] = FundaWande()->quiz->fw_is_quiz_retry($lesson_id);
     $context['quiz_resubmit'] = FundaWande()->quiz->user_has_submitted($lesson_id,$user->ID);

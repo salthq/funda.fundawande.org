@@ -46,11 +46,6 @@ if (class_exists('Timber')) {
         wp_redirect('/change-course?current='.$current_course_id.'&new='.$lesson_course_ID);
     }
 
-    // Remove correct lesson language checker
-    // FundaWande()->language->fw_correct_lesson_lang($current_course_id,$post->ID);
-
-
-
 
     //Get the unit info for the current lesson
     $sub_unit_meta = FundaWande()->lessons->fw_get_sub_unit_meta($current_course_id, $post->ID );

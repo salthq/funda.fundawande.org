@@ -37,9 +37,6 @@ if (class_exists('Timber')) {
         wp_redirect('/change-course?current='.$current_course_id.'&new='.$lesson_course_ID);
     }
 
-    // Check correct course language
-    // FundaWande()->language->fw_correct_course_lang($current_course_id,$post->ID);
-
     // Get the course modules to visualise on the course page
     $context['modules'] = FundaWande()->modules->get_course_modules($post->ID);
 
