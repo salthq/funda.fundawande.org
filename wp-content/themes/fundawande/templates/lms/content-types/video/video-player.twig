@@ -1,0 +1,9 @@
+{% if content.video_type == "youtube" %}
+    <div class='embed-container'>
+        <iframe src='{{content.youtube_url}}' frameborder='0' allowfullscreen></iframe>
+    </div>
+{% else %}
+    {# Remove whitespace from beginning and end of the file name before appending to media url #}
+    {% set video_file_name = content.video_file_name | trim %}
+    {{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number) }}
+{% endif %}
