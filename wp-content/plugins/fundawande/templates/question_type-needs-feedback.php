@@ -26,22 +26,34 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     $user_id = get_current_user_id();
     $completed = FundaWande()->quiz->user_completed_lesson($lesson_id,$user_id);
 
-?>
+    ?>
 <?php if ( !empty($question_data[ 'answer_media_url' ]) || !empty($question_data[ 'user_answer_entry' ]) ){ ?>
 <div class="background-secondary p-4 mb-4">
     <h4 class="lbreaker-lms-purple mb-3">Summary</h4>
     <?php if ($completed) { ?>
-        <p><b>Activity status:</b> Completed <img class="ml-2" src="/wp-content/themes/startupschool/assets/lms/Tick_green.svg"></p>
+        <p><b>Activity status:</b> Completed <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg"></p>
 
     <?php } else { ?>
         <p><b>Activity status:</b> Submitted</p>
 
+    <?php }
+    
+    $has_feedback = FundaWande()->quiz->user_can_view_feedback($lesson_id,$user_id);
+
+    
+    ?>
+    <?php if ( $has_feedback) { ?>
+        <p><b>Feedback status:</b> Feedback given <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg"></p>
+        <p><em>Thank you for your submission, please see your feedback below.</em></p>
+
+    <?php } else { ?>
+        <p><b>Feedback status:</b> Awaiting feedback</p>
     <?php } ?>
+    <p><b>Question: </b><?php echo $question_data[ 'title' ]; ?></p>
+
 
     <?php if ( !empty($question_data[ 'answer_media_url' ])  &&  $question_data[ 'answer_media_filename' ]  ) { ?>
-        <p><b>Feedback status:</b> Feedback given <img class="ml-2" src="/wp-content/themes/startupschool/assets/lms/Tick_green.svg"></p>
-        <p><em>Thank you for your submission, please see your feedback below.</em></p>
-        <p class="submitted_file">
+            <p class="submitted_file">
 
             <?php
 
@@ -53,8 +65,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         </p>
 
     <?php } elseif ($question_data[ 'user_answer_entry' ])  {?>
-        <p><b>Feedback status:</b> Feedback given <img class="ml-2" src="/wp-content/themes/startupschool/assets/lms/Tick_green.svg"></p>
-        <p><em>Thank you for your submission, please see your feedback below.</em></p>
         <p class="submitted_file">
 
             <?php
@@ -75,12 +85,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         ?>
     </form>
 <?php } ?>
-<?php } ?>
+<?php } 
+
+$question_answer_feedback = Sensei()->quiz->get_user_question_feedback($lesson_id, $question_id, $user_id);
+
+    if ($question_answer_feedback && !empty($question_answer_feedback) ) {
+        ?>
 <div class="p-3 my-4" style="border:1px solid #d8d8d8;">
     <?php
-    $question_answer_feedback = Sensei()->quiz->get_user_question_feedback($lesson_id, $question_id, $user_id);
-
-    if ($question_answer_feedback ) {
+    
         echo ' <h4 class="lbreaker-lms-purple  mb-3">Our feedback for you</h4>';
 
     ?>
@@ -89,7 +102,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     </div>
      
-    <?php } ?>
+  
 </div>
+<?php } ?>
 <?php
 ?>
