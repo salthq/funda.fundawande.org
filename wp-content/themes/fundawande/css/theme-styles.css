@@ -960,7 +960,7 @@ video { min-height: 200px; }
 /* ========================================================================== Assessments area Styling specific for any forms on Funda Wande ========================================================================== */
 .fw-form .form-control[readonly] { background-color: #ffffff; }
 
-.fw-form .custom-control-label::before { width: 30px; height: 30px; background: #ffffff; border-radius: 5px; border: 3px solid #EF9D19; left: -12px; top: 5px; margin-top: -.45rem; margin-left: -1.25rem; }
+.fw-form .custom-control-label::before { width: 30px; height: 30px; background: #ffffff; border-radius: 5px; border: 3px solid #EF9D19; left: -11px; top: 8px; margin-top: -.45rem; margin-left: -1.25rem; }
 
 .fw-form .custom-control-label::after { left: -1.55rem; top: 0.3rem; }
 

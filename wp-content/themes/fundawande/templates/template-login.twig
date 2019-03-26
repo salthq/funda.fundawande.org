@@ -13,13 +13,7 @@
                 <div class="col-12 col-md-6 login px-md-5 py-md-5 py-3">
                     <div class="text-center login-header py-3">
                         {{ source('assets/logos/fw_logo_landscape.svg') }}
-                        <h5 class = "mt-4 login-language-label text-bold">Change language/Tshintsha ulwimi</h5>
-                        <form method="GET">
-                            <div class = "btn-group" role = "group" aria-label="Change Language buttons">
-                                    <button class = "btn login-language-button {% if lang.id == 'eng'%} active-button {% endif %}" type = "submit" name = "login_lang" value ="eng">English</button>
-                                    <button class = "btn login-language-button {% if lang.id == 'xho'%} active-button {% endif %}" type = "submit" name = "login_lang" value ="xho">Xhosa</button>
-                            </div>
-                        </form>
+                        {% include "embeds/login-language-toggle.twig" %}
                     </div>
                     <div class = "login-form">
                         {% do action('show_login_form') %}
