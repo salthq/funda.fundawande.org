@@ -174,7 +174,6 @@ class FundaWande_Coaching {
                     // }
 
                     // update the comment post meta for feedback boolean
-                    error_log(print_r($assessment_feedback,true));
 
                 } else {
                     $assessment_feedback =  false;

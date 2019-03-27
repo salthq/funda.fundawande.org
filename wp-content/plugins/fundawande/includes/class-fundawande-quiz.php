@@ -327,7 +327,7 @@ class FundaWande_Quiz {
             }
 
             $type = Sensei()->question->get_question_type( $question->ID );
-            error_log($type);
+            // error_log($type);
             
             switch ($type){
                 case "boolean":

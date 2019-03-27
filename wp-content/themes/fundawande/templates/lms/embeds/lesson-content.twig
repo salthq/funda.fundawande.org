@@ -123,6 +123,9 @@
                     {# Spacer #}
                 {% elseif content.acf_fc_layout == 'spacer' %}
                     {% include '/lms/content-types/spacer.twig' %}
+                    {# Table #}
+                {% elseif content.acf_fc_layout == 'table' %}
+                    {% include '/lms/content-types/table.twig' %}
                 {% endif %}
             </div>
         </div>
