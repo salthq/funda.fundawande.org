@@ -91,7 +91,7 @@
                                 </select>
                             </div>
                             <input class="form-control" id="action" name="action" type="hidden" value="register"/>
-                            {# <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div> #}
+                            <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div>
                             <button type="submit" class="btn w-100 mt-3 primary-btn-fill ">
                                 {{post.get_field(lang.prefix~'registration_button_label')}}
                             </button>
@@ -107,9 +107,9 @@
         </div>
     </div>
     <!-- #wrapper -->
-    {# <script>
+    <script>
         function onSubmit(token) {
             document.getElementById("registration-form").submit();
         }
-    </script> #}
+    </script>
 {% endblock %}
