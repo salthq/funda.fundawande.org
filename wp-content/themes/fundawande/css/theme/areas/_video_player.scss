@@ -6,6 +6,10 @@
  ========================================================================== */
 .video-grid-container {
 
+  .video-bg {
+    border-radius: 10px;
+  }
+
   @include breakpoint(tablet) {
     .video-bg {
       height: 15vw;
