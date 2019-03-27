@@ -22,10 +22,13 @@
   {% block modal_footer %}
     {% if sub_unit_meta.is_last_in_unit %}
       <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
-        Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+        {{attribute(options, lang.prefix~'continue_label')}}  
+        <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
       </button>
     {% else %}
-      <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+      <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">
+      {{attribute(options, lang.prefix~'continue_label')}}  
+      <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
     {% endif %}
   {% endblock %}
 
