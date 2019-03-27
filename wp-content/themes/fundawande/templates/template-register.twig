@@ -12,15 +12,10 @@
                         <!-- Registration Form Header -->
                         <div class="text-center login-header p-3">
                             {{ source('assets/logos/fw_logo_landscape.svg') }}
-                            {# <h5 class="mt-4 login-language-label">Change language/Tshintsha ulwimi</h5>
-                                <form method="GET">
-                                    <div aria-label="Change Language buttons" class="btn-group" role="group">
-                                        <button class="btn login-language-button {% if lang.id == 'eng'%} active-button {% endif %}" name="login_lang" type="submit" value="eng">English</button>
-                                        <button class="btn login-language-button {% if lang.id == 'xho'%} active-button {% endif %}" name="login_lang" type="submit" value="xho">Xhosa</button>
-                                    </div>
-                                </form> #}
+                            {% include "embeds/login-language-toggle.twig" %}
                             <h1 class="mt-4">
-                                {{post.get_field(lang.prefix~'title')}}</h1>
+                                {{post.get_field(lang.prefix~'title')}}
+                            </h1>
                         </div>
                     {% endif %}
                     {% if register_submitted %}
@@ -96,7 +91,7 @@
                                 </select>
                             </div>
                             <input class="form-control" id="action" name="action" type="hidden" value="register"/>
-                            <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div>
+                            {# <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div> #}
                             <button type="submit" class="btn w-100 mt-3 primary-btn-fill ">
                                 {{post.get_field(lang.prefix~'registration_button_label')}}
                             </button>
@@ -112,9 +107,9 @@
         </div>
     </div>
     <!-- #wrapper -->
-    <script>
+    {# <script>
         function onSubmit(token) {
             document.getElementById("registration-form").submit();
         }
-    </script>
+    </script> #}
 {% endblock %}

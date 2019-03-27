@@ -54,7 +54,7 @@
       }
       &-bottom {
         .btn {
-          width: 250px;
+          width: 280px;
         }
       }
     }
@@ -341,12 +341,21 @@
     height: 0;
     overflow: hidden;
     max-width: 100%;
-    & iframe, object, embed {
+    & iframe,
+    object,
+    embed {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+    }
+    #downloadable-resources {
+      @include breakpoint(tablet) {
+        .btn {
+          width: 130px;
+        }
+      }
     }
   }
 }

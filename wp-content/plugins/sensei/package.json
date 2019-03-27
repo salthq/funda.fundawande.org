@@ -32,7 +32,7 @@
     "gulp-wp-pot": "^2.3.1",
     "jest": "^23.3.0",
     "mini-css-extract-plugin": "^0.4.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.11.0",
     "orchestrator": "^0.3.8",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",

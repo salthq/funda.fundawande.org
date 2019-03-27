@@ -5,8 +5,7 @@
             {{content.youtube_video}}
         </div>
     {% else %}
-        {# Remove whitespace from beginning and end of the file name before appending to media url #}
-        {% set video_file_name = content.video_file_name | trim %}
-        {{ mixin.fullWidthVideo(media_url~video_file_name, content.holding_image, module_number) }}
+        {% set content_id = 0 %}
+        {% include "/templates/lms/content-types/video/video-content.twig" %}
     {% endif %}
 </div>
