@@ -122,7 +122,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-0:focus { box-shadow: 0 0 0 0.1rem #327DA6; outline-color: #327DA6; }
 
-.module-svg-fill-0 svg circle { fill: #327DA6; }
+.module-svg-fill-0 svg { fill: #327DA6 !important; }
 
 .module-svg-stroke-0 svg { stroke: #327DA6; }
 
@@ -166,7 +166,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-1:focus { box-shadow: 0 0 0 0.1rem #2B8933; outline-color: #2B8933; }
 
-.module-svg-fill-1 svg circle { fill: #2B8933; }
+.module-svg-fill-1 svg { fill: #2B8933 !important; }
 
 .module-svg-stroke-1 svg { stroke: #2B8933; }
 
@@ -210,7 +210,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-2:focus { box-shadow: 0 0 0 0.1rem #61C436; outline-color: #61C436; }
 
-.module-svg-fill-2 svg circle { fill: #61C436; }
+.module-svg-fill-2 svg { fill: #61C436 !important; }
 
 .module-svg-stroke-2 svg { stroke: #61C436; }
 
@@ -254,7 +254,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-3:focus { box-shadow: 0 0 0 0.1rem #E73E53; outline-color: #E73E53; }
 
-.module-svg-fill-3 svg circle { fill: #E73E53; }
+.module-svg-fill-3 svg { fill: #E73E53 !important; }
 
 .module-svg-stroke-3 svg { stroke: #E73E53; }
 
@@ -298,7 +298,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-4:focus { box-shadow: 0 0 0 0.1rem #49A631; outline-color: #49A631; }
 
-.module-svg-fill-4 svg circle { fill: #49A631; }
+.module-svg-fill-4 svg { fill: #49A631 !important; }
 
 .module-svg-stroke-4 svg { stroke: #49A631; }
 
@@ -342,7 +342,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-5:focus { box-shadow: 0 0 0 0.1rem #3DC4E4; outline-color: #3DC4E4; }
 
-.module-svg-fill-5 svg circle { fill: #3DC4E4; }
+.module-svg-fill-5 svg { fill: #3DC4E4 !important; }
 
 .module-svg-stroke-5 svg { stroke: #3DC4E4; }
 
@@ -386,7 +386,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-6:focus { box-shadow: 0 0 0 0.1rem #FF9D45; outline-color: #FF9D45; }
 
-.module-svg-fill-6 svg circle { fill: #FF9D45; }
+.module-svg-fill-6 svg { fill: #FF9D45 !important; }
 
 .module-svg-stroke-6 svg { stroke: #FF9D45; }
 
@@ -430,7 +430,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-7:focus { box-shadow: 0 0 0 0.1rem #F7B446; outline-color: #F7B446; }
 
-.module-svg-fill-7 svg circle { fill: #F7B446; }
+.module-svg-fill-7 svg { fill: #F7B446 !important; }
 
 .module-svg-stroke-7 svg { stroke: #F7B446; }
 
@@ -474,7 +474,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-8:focus { box-shadow: 0 0 0 0.1rem #3BA9DC; outline-color: #3BA9DC; }
 
-.module-svg-fill-8 svg circle { fill: #3BA9DC; }
+.module-svg-fill-8 svg { fill: #3BA9DC !important; }
 
 .module-svg-stroke-8 svg { stroke: #3BA9DC; }
 
@@ -518,7 +518,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-9:focus { box-shadow: 0 0 0 0.1rem #FF5943; outline-color: #FF5943; }
 
-.module-svg-fill-9 svg circle { fill: #FF5943; }
+.module-svg-fill-9 svg { fill: #FF5943 !important; }
 
 .module-svg-stroke-9 svg { stroke: #FF5943; }
 
@@ -562,7 +562,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-10:focus { box-shadow: 0 0 0 0.1rem #CB384A; outline-color: #CB384A; }
 
-.module-svg-fill-10 svg circle { fill: #CB384A; }
+.module-svg-fill-10 svg { fill: #CB384A !important; }
 
 .module-svg-stroke-10 svg { stroke: #CB384A; }
 
@@ -606,7 +606,7 @@ body .text-bold-italic { font-weight: bold; font-style: italic; }
 
 .module-btn-fill-11:focus { box-shadow: 0 0 0 0.1rem #FF7C43; outline-color: #FF7C43; }
 
-.module-svg-fill-11 svg circle { fill: #FF7C43; }
+.module-svg-fill-11 svg { fill: #FF7C43 !important; }
 
 .module-svg-stroke-11 svg { stroke: #FF7C43; }
 
@@ -1327,6 +1327,8 @@ video { min-height: 200px; }
 .single-lesson-wrapper .pdf-text-container { cursor: pointer; -webkit-transition: 0.5s ease; transition: 0.5s ease; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); }
 
 @media (min-width: 992px) { .single-lesson-wrapper .pdf-text-container { opacity: 0; } }
+
+@media (min-width: 768px) { .single-lesson-wrapper #downloadable-resources .btn { width: 130px; } }
 
 .single-lesson-wrapper .lesson-carousel { margin: 0 auto; max-width: 510px; overflow: hidden; }
 

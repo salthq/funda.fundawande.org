@@ -1,0 +1,16 @@
+<div class="d-flex flex-wrap align-items-center">
+    <div class="d-flex align-items-center">
+        <span class="pr-3 module-svg-fill-{{sub_unit_meta.module_number}}">
+            {{source ('/assets/lms/pdf_file_icon.svg')}}
+        </span>
+        <div class="d-flex flex-column">
+            <h5>{{content.title}}</h5>
+            <h5 class="text-small text-italic">PDF File</h5>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center justify-content-lg-end flex-grow-1 mt-3 mt-lg-0">
+        <a href="{{content.file}}" download class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-2">Download</a>
+        <a href="{{content.file}}" target="_blank" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-2">View</a>
+    </div>
+</div>
+<hr>

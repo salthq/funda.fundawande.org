@@ -223,8 +223,8 @@ body {
     }
   }
   .module-svg-fill-#{$colour_key} {
-    svg circle {
-      fill: $colour_var;
+    svg {
+      fill: $colour_var !important; 
     }
   }
   .module-svg-stroke-#{$colour_key} {

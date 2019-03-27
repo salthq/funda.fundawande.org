@@ -335,4 +335,13 @@
       }
     }
   }
+
+  #downloadable-resources {
+    @include breakpoint(tablet) {
+      .btn {
+        width: 130px;
+      }
+    }
+    
+  }
 }

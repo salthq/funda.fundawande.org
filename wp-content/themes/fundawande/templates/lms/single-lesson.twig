@@ -26,6 +26,13 @@
         <!-- Lesson Content-->
         {% set lesson_post = post %}
         {% include '/lms/embeds/lesson-content.twig' %}
+
+        <!-- Downloadable Resources -->
+        {% if lesson_post.get_field('downloadable_resources') %}
+            {% include "lms/embeds/downloadable-resources.twig" %}
+        {% endif %}
+        
+
         <!-- Bottom navigation-->
         <div id = "navigation-links"  class = "container-fluid my-4 py-4">
             <div class = "container">
