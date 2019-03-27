@@ -36,14 +36,14 @@
 			<?php if ( sensei_quiz_has_questions() ): ?>
 			<?php
                 // Check whether feedback has been released
-                $has_feedback = FundaWande()->quiz->user_can_view_feedback(Sensei()->quiz->data->quiz_lesson, get_current_user_id());
+                $needs_feedback = FundaWande()->quiz->assessment_needs_feedback(Sensei()->quiz->data->quiz_lesson);
                 $is_submitted = FundaWande()->quiz->user_has_submitted(Sensei()->quiz->data->quiz_lesson, get_current_user_id());
 
                 ?>
 
 
                 <?php
-                if ($has_feedback && $is_submitted) { ?>
+                if ($needs_feedback && $is_submitted) { ?>
 					
 
 						<?php while ( sensei_quiz_has_questions() ): sensei_setup_the_question(); ?>
