@@ -674,7 +674,9 @@ video{min-height:200px}
 .single-lesson-wrapper .pdf-image{opacity:1;-webkit-transition:.5s ease;transition:.5s ease;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .single-lesson-wrapper .pdf-text-container{cursor:pointer;-webkit-transition:.5s ease;transition:.5s ease;position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
 @media(min-width:992px){.single-lesson-wrapper .pdf-text-container{opacity:0}
-}@media(min-width:768px){.single-lesson-wrapper #downloadable-resources .btn{width:130px}
+}.single-lesson-wrapper .embed-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%}
+.single-lesson-wrapper .embed-container iframe,.single-lesson-wrapper .embed-container object,.single-lesson-wrapper .embed-container embed{position:absolute;top:0;left:0;width:100%;height:100%}
+@media(min-width:768px){.single-lesson-wrapper .embed-container #downloadable-resources .btn{width:130px}
 }.single-lesson-wrapper .lesson-carousel{margin:0 auto;max-width:510px;overflow:hidden}
 .single-lesson-wrapper .lesson-carousel a:hover{opacity:.7}
 .single-lesson-wrapper .lesson-carousel .carousel-item{padding-top:2rem}
