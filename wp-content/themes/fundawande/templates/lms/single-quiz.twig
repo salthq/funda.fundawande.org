@@ -45,6 +45,11 @@
         <!-- Quiz Content-->
         {% include "/lms/embeds/quiz-content.twig" %}
 
+        <!-- Downloadable Resources -->
+        {% if quiz_lesson.get_field('additional_resources') %}
+            {% include "lms/embeds/downloadable-resources.twig" %}
+        {% endif %}
+
 
         <!-- Bottom navigation-->
         {% include "/lms/embeds/quiz-navigation.twig" %}
