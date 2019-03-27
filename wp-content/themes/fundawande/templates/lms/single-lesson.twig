@@ -28,7 +28,7 @@
         {% include '/lms/embeds/lesson-content.twig' %}
 
         <!-- Downloadable Resources -->
-        {% if lesson_post.get_field('downloadable_resources') %}
+        {% if lesson_post.get_field('additional_resources') %}
             {% include "lms/embeds/downloadable-resources.twig" %}
         {% endif %}
         
