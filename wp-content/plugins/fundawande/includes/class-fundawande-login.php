@@ -80,7 +80,8 @@ class FundaWande_Login {
         // $redirect_url = $redirect_url . "?lang=eng";
 
         $redirect_url = get_site_url() .'/my-courses';
-        $redirect_url = $redirect_url . "?lang=eng";
+        //Uncomment the line below to set English as the default language
+        // $redirect_url = $redirect_url . "?lang=eng";
 
         wp_redirect($redirect_url);
         exit();

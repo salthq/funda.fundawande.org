@@ -15,13 +15,14 @@
   {# Add quiz modal content to modal #}
   {% block modal_body %}
 
-      <p>You have successfully completed the <strong>{{sub_unit_meta.unit_title}}</strong> unit</p>
+      <p>{{attribute(options, lang.prefix~'unit_completed_text')}} <span class="text-bold">{{sub_unit_meta.unit_title}}</span></p>
 
   {% endblock %}
 
   {% block modal_footer %}
     <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill text-center" >
-      Continue <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+      {{attribute(options, lang.prefix~'continue_label')}} 
+      <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
     </a>
   {% endblock %}
 
