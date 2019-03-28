@@ -1,8 +1,7 @@
 {# This script gets the duration of the video from the meta data and adds it below the video player #}
 <script>
 
-    var vid{{video_id}} = document.getElementById("{{content_id}}_{{video_id}}video");
-
+    var vid{{content_id}}_{{video_id}} = document.getElementById("{{content_id}}_{{video_id}}video");
 
     // Function to calculate the time in 00:00 format for printing out
     function fmtMSS(s){
@@ -12,9 +11,9 @@
         return(s-(s%=60))/60+(9<s?':':':0')+s
     }
 
-    vid{{video_id}}.addEventListener('loadedmetadata', function() {
+    vid{{content_id}}_{{video_id}}.addEventListener('loadedmetadata', function() {
         var duration = document.getElementById('{{content_id}}_{{video_id}}duration');
-        duration.innerHTML = fmtMSS(Math.round(vid{{video_id}}.duration));
+        duration.innerHTML = fmtMSS(Math.round(vid{{content_id}}_{{video_id}}.duration));
     })
 
 </script>
