@@ -23,6 +23,7 @@ class FundaWande_Resources {
     public function __construct() {
         $this->resource_types = $this->fw_resource_types();
         add_action( 'init', array( $this, 'setup_resource_post_type' ), 100 );
+        add_action( 'add_meta_boxes_resource', array($this, 'resources_add_meta_box' ));
 
         if ( is_admin() ) {
             add_filter( 'manage_edit-resource_columns', array( $this, 'add_column_headings' ), 10, 1 );
@@ -135,7 +136,28 @@ class FundaWande_Resources {
 
 		}
 
-	} // End add_column_data()
+    } // End add_column_data()
+    
+
+    /**
+     * Add meta box
+     *
+     * @param post $post The post object
+     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/add_meta_boxes
+     */
+    function resources_add_meta_box ( $post ){
+        add_meta_box( 'type_meta_box', 'Resource Details', array($this,'resources_build_meta_box'), 'resource', 'normal', 'low' );
+
+    }
+
+    function resources_build_meta_box ( $post ) {
+        ?>
+
+        
+
+        <?php
+    }
+
 
 
 } // end FundaWande_Resources
