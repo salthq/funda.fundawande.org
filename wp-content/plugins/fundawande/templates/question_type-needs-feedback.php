@@ -32,7 +32,7 @@ $lang = FundaWande()->language->get_language($lang_preference);
 ?>
 
 <?php if ( !empty($question_data[ 'answer_media_url' ]) || !empty($question_data[ 'user_answer_entry' ]) ){ ?>
-<div class="background-secondary p-4 mb-4">
+<div id="quiz-needs-feedback" class="background-secondary p-4 mb-4">
     <h4 class="lbreaker-lms-purple mb-3"><?php the_field($lang->prefix . 'quiz_feedback_summary_title', 'options') ?></h4>
     <?php if ($completed) { ?>
         <p>
