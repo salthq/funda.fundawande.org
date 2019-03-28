@@ -14,27 +14,36 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <?php
 
+/**
+ * Get the question data with the current quiz id
+ * All data is loaded in this array to keep the template clean.
+ */
+$question_id = sensei_get_the_question_id();
+$question_data = WooThemes_Sensei_Question::get_template_data( $question_id, get_the_ID() );
+$lesson_id = get_post_meta(get_the_ID(),'_quiz_lesson',true);
+$user_id = get_current_user_id();
+$completed = FundaWande()->quiz->user_completed_lesson($lesson_id,$user_id);
+
+//Get the user's language preference to ensure the text strings are shown in the correct language. 
+$lang_preference = get_user_meta($user_id, 'language_preference', true);
+$lang = FundaWande()->language->get_language($lang_preference);
 
 
-    /**
-     * Get the question data with the current quiz id
-     * All data is loaded in this array to keep the template clean.
-     */
-    $question_id = sensei_get_the_question_id();
-    $question_data = WooThemes_Sensei_Question::get_template_data( $question_id, get_the_ID() );
-    $lesson_id = get_post_meta(get_the_ID(),'_quiz_lesson',true);
-    $user_id = get_current_user_id();
-    $completed = FundaWande()->quiz->user_completed_lesson($lesson_id,$user_id);
+?>
 
-    ?>
 <?php if ( !empty($question_data[ 'answer_media_url' ]) || !empty($question_data[ 'user_answer_entry' ]) ){ ?>
-<div class="background-secondary p-4 mb-4">
-    <h4 class="lbreaker-lms-purple mb-3">Summary</h4>
+<div id="quiz-needs-feedback" class="background-secondary p-4 mb-4">
+    <h4 class="lbreaker-lms-purple mb-3"><?php the_field($lang->prefix . 'quiz_feedback_summary_title', 'options') ?></h4>
     <?php if ($completed) { ?>
-        <p><b>Activity status:</b> Completed <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg"></p>
+        <p>
+            <b><?php the_field($lang->prefix . 'quiz_activity_status_label', 'options') ?>:</b> <?php the_field($lang->prefix . 'quiz_completed_label', 'options') ?> 
+            <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg">
+        </p>
 
     <?php } else { ?>
-        <p><b>Activity status:</b> Submitted</p>
+        <p>
+            <b><?php the_field($lang->prefix . 'quiz_activity_status_label', 'options') ?>:</b> <?php the_field($lang->prefix . 'quiz_submitted_label', 'options') ?>
+        </p>
 
     <?php }
     
@@ -43,13 +52,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     
     ?>
     <?php if ( $has_feedback) { ?>
-        <p><b>Feedback status:</b> Feedback given <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg"></p>
-        <p><em>Thank you for your submission, please see your feedback below.</em></p>
+        <p><b><?php the_field($lang->prefix . 'quiz_feedback_status_label', 'options') ?>:</b> <?php the_field($lang->prefix . 'feedback_given_label', 'options') ?> <img class="ml-2" src="/wp-content/themes/fundawande/assets/tick_green.svg"></p>
+        <p class="text-italic"><?php the_field($lang->prefix . 'feedback_given_message', 'options') ?></p>
 
     <?php } else { ?>
-        <p><b>Feedback status:</b> Awaiting feedback</p>
+        <p><b><?php the_field($lang->prefix . 'feedback_status_label', 'options') ?>:</b> <?php the_field($lang->prefix . 'awaiting_feedback_label', 'options') ?></p>
     <?php } ?>
-    <p><b>Question: </b><?php echo $question_data[ 'title' ]; ?></p>
+    <p><b><?php the_field($lang->prefix . 'question_label', 'options') ?>: </b><?php echo $question_data[ 'title' ]; ?></p>
 
 
     <?php if ( !empty($question_data[ 'answer_media_url' ])  &&  $question_data[ 'answer_media_filename' ]  ) { ?>
