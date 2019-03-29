@@ -10,7 +10,7 @@
 
 // Set up constant variable to control JS & CSS versioning
 // This version number must be changed whenever pushing to stable branch
-const FW_VER = '1.1.5.1'; // Released on 27/03/2019 by Jason Tame
+const FW_VER = '1.1.5.2'; // Released on 29/03/2019 by Jason Tame
 
 
 /**

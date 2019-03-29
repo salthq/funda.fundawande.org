@@ -1,29 +1,23 @@
 <!-- Lesson Header Component -->
 
 <div class="container-fluid lesson-header">
-    <div class="container">
-        <div class="row lesson-navigation-top">
-            <div class="col-12 col-md-2 text-center">
-                <a id="back-to-units" class="btn module-btn-outline-{{sub_unit_meta.module_number}} py-md-4 my-md-4 mt-4" href="{{sub_unit_meta.unit.link}}">
-                    {{source('/assets/arrow_left.svg')}}
-                    <br>
-                    <span class="">{{attribute(options, lang.prefix~'back_to_units_text')}}</span>
-                </a>
+    <div class="row justify-content-start align-items-center background-primary">
+        <div class="col-12 col-sm-2 text-center">
+            <a id="back-to-units" class="btn module-btn-outline-{{sub_unit_meta.module_number}} my-4" href="{{sub_unit_meta.unit.link}}">
+                {{source('/assets/arrow_left.svg')}}
+                <span class="d-none d-lg-block">{{attribute(options, lang.prefix~'back_to_units_text')}}</span>
+            </a>
+        </div>
+        <div class="col-12 col-sm-8 text-center my-4">
+            <div class="d-none d-sm-block">
+                <h4>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</h4>
             </div>
-            <div class="col-12 col-md-10 text-center my-4">
-                <div class="d-none d-sm-block">
-                    <h4>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</h4>
-                </div>
-                <div class="d-sm-none">
-                    <h4>{{sub_unit_meta.unit_title}} {{ lesson_number }}/{{sub_unit_meta.unit_lessons |length}}</h4>
-                </div>
-                {% if quiz_lesson %}
-                    <h1 class="text-bold">{{quiz_lesson.get_field('lesson_title')}}</h1>  
-                {% else %}
-                    <h1 class="text-bold">{{post.get_field('lesson_title')}}</h1>  
-                {% endif %}
-                
-            </div>
+            {% if quiz_lesson %}
+                <h1 class="text-bold">{{quiz_lesson.get_field('lesson_title')}}</h1>  
+            {% else %}
+                <h1 class="text-bold">{{post.get_field('lesson_title')}}</h1>  
+            {% endif %}
+            
         </div>
     </div>
 </div>
