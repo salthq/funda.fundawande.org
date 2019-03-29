@@ -54,7 +54,12 @@
       }
       &-bottom {
         .btn {
-          width: 280px;
+          width: 180px;
+        }
+        @include breakpoint(tablet) {
+          .btn {
+            width: 280px;
+          }
         }
       }
     }
