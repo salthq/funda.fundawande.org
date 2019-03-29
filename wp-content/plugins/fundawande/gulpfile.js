@@ -30,7 +30,6 @@ var scriptsDestination = "./assets/js/";
 // CSS Locations
 var styleCustomSRC = "./assets/css/src/*.scss"; // Path to main .scss file.
 var styleCustomDestination = "./assets/css/"; // Path to place the compiled CSS file.
-var styleCustomMapDestination = "./assets/css/"; // Path to place the compiled CSS file.
 
 //Walkthrough tour scripts and destination
 var tourScripts = "./assets/js/tour-scripts/*.js";
@@ -128,11 +127,8 @@ gulp.task("customStyles", function() {
       })
     )
     .on("error", console.error.bind(console))
-    .pipe(sourcemaps.write({ includeContent: false }))
-    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
 
-    .pipe(sourcemaps.write(styleCustomMapDestination))
     .pipe(lineec()) // Consistent Line Endings for non UNIX systems.
     .pipe(gulp.dest(styleCustomDestination))
 

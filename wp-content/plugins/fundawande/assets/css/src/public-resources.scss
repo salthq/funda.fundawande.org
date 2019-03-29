@@ -1,0 +1,26 @@
+.resource-metabox {
+
+    $margin: 10px 0 !important;
+
+
+    padding: 10px 20px;
+    
+    input {
+        margin: $margin;
+    }
+
+    textarea {
+        margin: $margin;
+        width: 100%;
+    }
+
+    .upload_media_file_button {
+        margin: $margin;
+    }
+
+    #resource-pdf {
+        display: none;
+    }
+
+
+}

@@ -54,6 +54,8 @@ class FundaWande_Admin
      */
     public function admin_enqueue_scripts()
     {
+        wp_enqueue_style('resources-admin-styles', FundaWande()->plugin_url . 'assets/css/public-resources.min.css', "", FundaWande()->version, 'screen' );
+        wp_enqueue_script('resources-admin-script', FundaWande()->plugin_url . 'assets/js/resources.min.js', array('jquery'), FundaWande()->version, true);
         wp_enqueue_script('theme-admin-script', FundaWande()->plugin_url . 'assets/js/admin.min.js', array('jquery'), FundaWande()->version, true);
     }
 
