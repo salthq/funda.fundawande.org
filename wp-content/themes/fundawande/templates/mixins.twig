@@ -104,7 +104,13 @@
 {# Add video player #}
 {% macro videoPlayer(video_src, image_src, module_number, content_id, video_id) %}
     {% import _self as mixins %}
-    <div class="player d-flex">
+
+    {# This video loads on mobile devices -it uses standard HTML5 video player controls which are responsive and work well on small screens #}
+    <video width="100%" height="auto" controls class="player__mobile d-md-none" >
+        <source src="{{ video_src }}" type="video/mp4">
+    </video>
+
+    <div class="player d-none d-md-flex">
 
         <video id="{{content_id}}_{{video_id}}video" class="player__video viewer" >
             <source src="{{ video_src }}" type="video/mp4">
