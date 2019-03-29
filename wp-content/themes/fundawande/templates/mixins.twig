@@ -104,7 +104,7 @@
 {# Add video player #}
 {% macro videoPlayer(video_src, image_src, module_number, content_id, video_id) %}
     {% import _self as mixins %}
-    <div class="player d-none d-md-flex">
+    <div class="player d-flex">
 
         <video id="{{content_id}}_{{video_id}}video" class="player__video viewer" >
             <source src="{{ video_src }}" type="video/mp4">
@@ -133,10 +133,11 @@
                         <button class="player__button toggle" title="Toggle Play">►</button>
                     </div>
 
-                    <div class="d-flex align-items-center sound-box">
-                        <span class="sound d-flex player__button">{{ source('/assets/video_player/Sound_icon.svg') }}</span> <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+                    <div class="d-none d-lg-flex align-items-center sound-box">
+                        <span class="sound d-flex player__button">{{ source('/assets/video_player/Sound_icon.svg') }}</span>
+                        <input type="range" name="volume" class="d-none d-xl-flex player__slider" min="0" max="1" step="0.05" value="1">
                     </div>
-                    <div class="d-flex align-items-center">
+                    <div class="d-none d-lg-flex align-items-center">
                     <button data-skip="-30" class="player__button">{{ source('/assets/video_player/Back_30_icon.svg') }}</button>
 
 
@@ -148,8 +149,8 @@
                 </div>
                 <div class="d-flex align-items-center  justify-content-end ">
                 {#<input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">#}
-                    <a  class='player__button download' href="{{ video_src }}" target="_blank" title="Right click and 'Save link as..'" download>{{ source('/assets/video_player/Download_video_icon.svg') }}</a>
-                    <div class="settings-block">
+                    <a  class='d-none d-lg-flex player__button download' href="{{ video_src }}" target="_blank" title="Right click and 'Save link as..'" download>{{ source('/assets/video_player/Download_video_icon.svg') }}</a>
+                    <div class="d-none d-lg-flex settings-block">
                        <button class='player__button settings-toggle' title='toggle full screen' >{{ source('/assets/video_player/Cog_icon.svg') }}</button>
                         <div class="settings">
                             <button name="playbackRate" class="speed" value="0.5">0.5x</button>
