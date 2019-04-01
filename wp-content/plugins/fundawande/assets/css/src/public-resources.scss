@@ -5,20 +5,15 @@
 
     padding: 10px 20px;
     
-    input {
+    input, textarea, select, .upload_media_file_button {
         margin: $margin;
     }
 
     textarea {
-        margin: $margin;
         width: 100%;
     }
 
-    .upload_media_file_button {
-        margin: $margin;
-    }
-
-    #resource-pdf {
+    #resource-pdf, #resource-video {
         display: none;
     }
 

@@ -31,8 +31,12 @@ class FundaWande_Resources {
 
         // Add Resource Type metabox
         add_action( 'add_meta_boxes_resource', array($this, 'resource_type_add_meta_box' ));
+        // Save Resource Type meta
+        add_action('save_post', array($this, 'resource_type_save_meta'), 1, 2);
         // Add Resource Details metabox
         add_action( 'add_meta_boxes_resource', array($this, 'resource_details_add_meta_box' ));
+        // Save Resource Type meta
+        add_action('save_post', array($this, 'resource_details_save_meta'), 1, 2);
 
     }
 
@@ -100,14 +104,18 @@ class FundaWande_Resources {
 	 * @return array $new_columns
 	 */
 	public function add_column_headings ( $defaults ) {
-		$new_columns['cb'] = '<input type="checkbox" />';
-		$new_columns['title'] = 'Title';
-		$new_columns['resource-type'] = 'Type';
-		if ( isset( $defaults['date'] ) ) {
-			$new_columns['date'] = $defaults['date'];
-		}
+        $cols = array(
+            'cb'       => '<input type="checkbox" />',
+            'title'    => 'Title',
+            'type'     => 'Type',
+            'description' => 'Description'
+          );
 
-		return $new_columns;
+        if ( isset( $defaults['date'] ) ) {
+		    $cols['date'] = $defaults['date'];
+        }   
+               
+        return $cols;
 	} // End add_column_headings()
 
 	/**
@@ -118,23 +126,21 @@ class FundaWande_Resources {
 	 * @param  int $id
 	 * @return void
 	 */
-	public function add_column_data ( $column_name, $id ) {
-		global $wpdb, $post;
+	public function add_column_data ( $column_name, $post_id ) {
 
 		switch ( $column_name ) {
-
-			case 'id':
-				echo $id;
-			break;
-
-			case 'resource-type':
-				$resource_type = strip_tags( get_the_term_list( $id, 'resource-type', '', ', ', '' ) );
-				$output = '&mdash;';
-				if( isset( $this->resource_types[ $resource_type ] ) ) {
-					$output = $this->resource_types[ $resource_type ];
-				}
-				echo $output;
-			break;
+			case 'type':
+                echo get_post_meta($post_id, 'resource_type', true);
+            break;
+            
+            case 'description':
+                if(get_post_meta($post_id, 'resource_type', true) == 'Video') {
+                    echo get_post_meta($post_id, 'video_description', true);
+                }
+                else {
+                    echo get_post_meta($post_id, 'pdf_description', true);
+                }
+            break;
 
 			default:
 			break;
@@ -154,18 +160,47 @@ class FundaWande_Resources {
     function resource_type_build_meta_box ( $post ) {
         ?>
         
-        <div class="resource-metabo">
+        <div class="resource-metabox">
+            <?php $resource_type = get_post_meta($post->ID, 'resource_type', true) ?>
             <p>
-                <label>Resource Type</label>
-                <select id="chooseType">
-                    <option value="vid">Video</option>
-                    <option value="pdf">PDF</option>
+                <label for="resource_type">Resource Type</label><br>
+                <select name="resource_type" id="resource_type" class="postbox">
+                    <option value="Video" <?php selected($resource_type, 'Video'); ?>>Video</option>
+                    <option value="PDF" <?php selected($resource_type, 'PDF'); ?>>PDF</option>
                 </select>
             </p>
         </div>
 
         <?php
-    }
+    } // end resource_type_build_meta_box()
+
+    function resource_type_save_meta($post_id, $post) {
+
+        // Return if the user doesn't have edit permissions.
+	    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		    return $post_id;
+        }
+        
+        $resource_type_meta['type'] = esc_textarea( $_POST['resource_type'] );
+
+        // Don't store custom data twice
+		if ( 'revision' === $post->post_type ) {
+			return;
+        }
+        
+        if ( get_post_meta( $post_id, 'resource_type', false ) ) {
+			// If the custom field already has a value, update it.
+			update_post_meta( $post_id, 'resource_type', $resource_type_meta['type'] );
+		} else {
+			// If the custom field doesn't have a value, add it.
+			add_post_meta( $post_id, 'resource_type', $resource_type_meta['type']);
+		}
+		if ( ! $resource_type_meta['type'] ) {
+			// Delete the meta key if there's no value
+			delete_post_meta( $post_id, 'resource_type' );
+        }
+        
+    } // end resource_type_save_meta()
     
 
     /**
@@ -184,10 +219,12 @@ class FundaWande_Resources {
 
         <div class="resource-metabox">
 
+            <!-- Video Resource Fields -->
             <div class="resource-fields" id="resource-video">
+                <?php $video_file_name = get_post_meta($post->ID, 'video_file_name', true) ?>
                 <div>
-                    <label>Video File Name:</label><br>
-                    <input type="text" value="">
+                    <label for="video_file_name">Video File Name:</label><br>
+                    <input name="video_file_name" id="video_file_name" value="<?php esc_textarea( $video_file_name ) ?>" type="text" class="widefat">
                 </div>
 
                 <div>
@@ -195,27 +232,64 @@ class FundaWande_Resources {
                     <button class="upload_media_file_button button-secondary">Add File</button>
                 </div>
 
+                <?php $video_description = get_post_meta($post->ID, 'video_description', true) ?>
                 <div>
-                    <label>Video Description:</label><br>
-                    <textarea rows="5"></textarea>
+                    <label for='video_description'>Video Description:</label><br>
+                    <textarea name="video_description" id="video_description" value="<?php esc_textarea( $video_description ) ?>"  rows="5"></textarea>
                 </div>
             </div>
 
+
+            <!-- PDF Resource Fields -->
             <div class="resource-fields" id="resource-pdf">
                 <div>
                     <label>PDF File:</label><br>
                     <button class="upload_media_file_button button-secondary">Add File</button>
                 </div>
 
+                <?php $pdf_description = get_post_meta($post->ID, 'pdf_description', true) ?>
                 <div>
                     <label>PDF Description:</label><br>
-                    <textarea rows="5"></textarea>
+                    <textarea name="pdf_description" id="pdf_description" value="<?php esc_textarea( $pdf_description ) ?>"  rows="5"></textarea>
                 </div>
             </div>
         </div>
 
         <?php
     }
+
+    function resource_details_save_meta($post_id, $post) {
+
+        // Return if the user doesn't have edit permissions.
+	    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		    return $post_id;
+        }
+        
+        $resource_details_meta['video_file_name'] = esc_textarea( $_POST['video_file_name'] );
+        $resource_details_meta['video_description'] = esc_textarea( $_POST['video_description'] );
+        $resource_details_meta['pdf_description'] = esc_textarea( $_POST['pdf_description'] );
+
+        foreach ($resource_details_meta as $key => $value) {
+            // Don't store custom data twice
+            if ( 'revision' === $post->post_type ) {
+                return;
+            }
+            
+            if ( get_post_meta( $post_id, $key, false ) ) {
+                // If the custom field already has a value, update it.
+                update_post_meta( $post_id, $key, $value );
+            } else {
+                // If the custom field doesn't have a value, add it.
+                add_post_meta( $post_id, $key, $value);
+            }
+            if ( ! $value ) {
+                // Delete the meta key if there's no value
+                delete_post_meta( $post_id, $key );
+            }
+        }
+        
+    } // end resource_type_save_meta()
+ 
 
 
 
