@@ -82,6 +82,7 @@ class FundaWande_Resources {
             'menu_icon' => 'dashicons-portfolio',
             'has_archive' => true,
             'hierarchical' => false,
+            'show_in_rest' => true,
 		    'supports' => array( 'title', 'custom-fields' )
         );
 
@@ -135,7 +136,7 @@ class FundaWande_Resources {
             'cb'       => '<input type="checkbox" />',
             'title'    => 'Title',
             'type'     => 'Type',
-            'media'    => 'Media',
+            'category'    => 'Categories',
             'description' => 'Description'
           );
 
@@ -161,13 +162,12 @@ class FundaWande_Resources {
                 echo get_post_meta($post_id, 'resource_type', true);
             break;
 
-            case 'media':
-                if(get_post_meta($post_id, 'resource_type', true) == 'Video') {
-                    echo get_post_meta($post_id, 'video_media', true);
+            case 'category':
+                $output = strip_tags( get_the_term_list( $post_id, 'categories', '', ', ', '' ) );
+                if( ! $output ) {
+                    $output = '&mdash;';
                 }
-                else {
-                    echo get_post_meta($post_id, 'pdf_media', true);
-                }
+                echo $output;
             break;
             
             case 'description':

@@ -1,9 +1,9 @@
 jQuery(document).ready(function($) {
   // Show the fields for the selected option when the editor screen loads
-  if ($("#resource_type").children("option:selected") === "video") {
+  if ($("#resource_type").val() === "Video") {
     $("#resource-video").show();
     $("#resource-pdf").hide();
-  } else {
+  } else if ($("#resource_type").val() === "PDF") {
     $("#resource-pdf").show();
     $("#resource-video").hide();
   }
