@@ -21,6 +21,7 @@
 {# Twig block to be included in Base.twig #}
 {% block content %}
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+            {{ dump(quiz_correctly)}}
 
         {# Include mobile progress component #}
         {% include '/lms/embeds/lesson-progress-mobile.twig' %}
