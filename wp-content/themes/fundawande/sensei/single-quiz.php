@@ -31,6 +31,7 @@ if (class_exists('Timber')) {
     // Get the quiz lesson ID
     $lesson_id = $post->_quiz_lesson;
     $lesson = new TimberPost($lesson_id);
+    
     $context['quiz_lesson'] =  $lesson;
 
     $current_course_id =  FundaWande()->lms->fw_get_current_course_id($user->ID);
