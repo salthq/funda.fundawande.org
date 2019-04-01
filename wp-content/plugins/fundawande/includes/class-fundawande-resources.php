@@ -80,10 +80,10 @@ class FundaWande_Resources {
             'show_in_menu' => true,
             'show_in_nav_menus' => false,
             'menu_icon' => 'dashicons-portfolio',
-            'has_archive' => false,
+            'has_archive' => true,
             'hierarchical' => false,
 		    'supports' => array( 'title', 'custom-fields' )
-		);
+        );
 
         /**
          * Register the Resource post type
@@ -91,7 +91,24 @@ class FundaWande_Resources {
          * @since 1.1.2
          * @param array $args
          */
-		register_post_type( 'resource', $args );
+        register_post_type( 'resource', $args );
+        
+        /** 
+         * Add categories for the post type
+         */
+        register_taxonomy( 'categories', array('resource'), array(
+            'hierarchical' => true, 
+            'label' => 'Categories', 
+            'singular_label' => 'Category',
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'query_var' => true, 
+            'query_var' => true,
+            'rewrite' => array( 'slug' => 'categories', 'with_front'=> false )
+            )
+        );
+    
+        register_taxonomy_for_object_type( 'categories', 'Resources' );
 
     } // End setup_resource_post_type()
     
