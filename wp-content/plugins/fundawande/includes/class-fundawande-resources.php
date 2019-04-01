@@ -23,6 +23,7 @@ class FundaWande_Resources {
     public function __construct() {
         $this->resource_types = $this->fw_resource_types();
         add_action( 'init', array( $this, 'setup_resource_post_type' ), 100 );
+        add_action( 'admin_enqueue_scripts', array($this, 'load_resource_cpt_scripts'), 10, 1 );
         
         if ( is_admin() ) {
             add_filter( 'manage_edit-resource_columns', array( $this, 'add_column_headings' ), 10, 1 );
@@ -38,6 +39,15 @@ class FundaWande_Resources {
         // Save Resource Type meta
         add_action('save_post', array($this, 'resource_details_save_meta'), 1, 2);
 
+    }
+
+    function load_resource_cpt_scripts( $hook ) {
+        global $typenow;
+		if( $typenow == 'resource' ) {
+			wp_enqueue_media();
+            // Registers and enqueues the required javascript.
+            wp_enqueue_script('resource-metabox-media', FundaWande()->plugin_url . 'assets/js/media-uploader.min.js', array('jquery'), FundaWande()->version, true);
+		}
     }
 
     /**
@@ -108,6 +118,7 @@ class FundaWande_Resources {
             'cb'       => '<input type="checkbox" />',
             'title'    => 'Title',
             'type'     => 'Type',
+            'media'    => 'Media',
             'description' => 'Description'
           );
 
@@ -131,6 +142,15 @@ class FundaWande_Resources {
 		switch ( $column_name ) {
 			case 'type':
                 echo get_post_meta($post_id, 'resource_type', true);
+            break;
+
+            case 'media':
+                if(get_post_meta($post_id, 'resource_type', true) == 'Video') {
+                    echo get_post_meta($post_id, 'video_media', true);
+                }
+                else {
+                    echo get_post_meta($post_id, 'pdf_media', true);
+                }
             break;
             
             case 'description':
@@ -227,10 +247,13 @@ class FundaWande_Resources {
                     <input name="video_file_name" id="video_file_name" value="<?php esc_textarea( $video_file_name ) ?>" type="text" class="widefat">
                 </div>
 
+                <?php $saved_video = get_post_meta($post->ID, 'video_media', true) ?>
                 <div>
-                    <label>Holding Image:</label><br>
-                    <button class="upload_media_file_button button-secondary">Add File</button>
+                    <label for="video_file">Holding Image:</label><br>
+                    <input type="url" class="large-text" name="video_media" id="video_media" type="button" value="<?php echo esc_attr($saved_video) ?>" readonly><br>
+                    <button type="button" class="button" id="video_upload_btn" data-media-uploader-target="#video_media">Upload Holding Image</button>
                 </div>
+                <br>
 
                 <?php $video_description = get_post_meta($post->ID, 'video_description', true) ?>
                 <div>
@@ -242,10 +265,13 @@ class FundaWande_Resources {
 
             <!-- PDF Resource Fields -->
             <div class="resource-fields" id="resource-pdf">
+                <?php $saved_pdf = get_post_meta($post->ID, 'pdf_media', true) ?>
                 <div>
-                    <label>PDF File:</label><br>
-                    <button class="upload_media_file_button button-secondary">Add File</button>
+                    <label for="pdf_file">PDF File:</label><br>
+                    <input type="url" class="large-text" name="pdf_media" id="pdf_media" type="button" value="<?php echo esc_attr($saved_pdf) ?>" readonly><br>
+                    <button type="button" class="button" id="pdf_upload_btn" data-media-uploader-target="#pdf_media">Upload PDF File</button>
                 </div>
+                <br>
 
                 <?php $pdf_description = get_post_meta($post->ID, 'pdf_description', true) ?>
                 <div>
@@ -266,7 +292,9 @@ class FundaWande_Resources {
         }
         
         $resource_details_meta['video_file_name'] = esc_textarea( $_POST['video_file_name'] );
+        $resource_details_meta['video_media'] = esc_textarea( $_POST['video_media'] );
         $resource_details_meta['video_description'] = esc_textarea( $_POST['video_description'] );
+        $resource_details_meta['pdf_media'] = esc_textarea( $_POST['pdf_media'] );
         $resource_details_meta['pdf_description'] = esc_textarea( $_POST['pdf_description'] );
 
         foreach ($resource_details_meta as $key => $value) {
