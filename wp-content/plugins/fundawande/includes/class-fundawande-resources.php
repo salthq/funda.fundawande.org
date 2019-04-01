@@ -261,7 +261,7 @@ class FundaWande_Resources {
                 <?php $video_file_name = get_post_meta($post->ID, 'video_file_name', true) ?>
                 <div>
                     <label for="video_file_name">Video File Name:</label><br>
-                    <input name="video_file_name" id="video_file_name" value="<?php esc_textarea( $video_file_name ) ?>" type="text" class="widefat">
+                    <input name="video_file_name" id="video_file_name" value="<?php echo esc_textarea( $video_file_name ) ?>" type="text" class="widefat">
                 </div>
 
                 <?php $saved_video = get_post_meta($post->ID, 'video_media', true) ?>
@@ -275,7 +275,7 @@ class FundaWande_Resources {
                 <?php $video_description = get_post_meta($post->ID, 'video_description', true) ?>
                 <div>
                     <label for='video_description'>Video Description:</label><br>
-                    <textarea name="video_description" id="video_description" value="<?php esc_textarea( $video_description ) ?>"  rows="5"></textarea>
+                    <textarea name="video_description" id="video_description" value="<?php echo esc_textarea( $video_description ) ?>"  rows="5"><?php echo esc_textarea( $video_description ) ?></textarea>
                 </div>
             </div>
 
@@ -293,7 +293,7 @@ class FundaWande_Resources {
                 <?php $pdf_description = get_post_meta($post->ID, 'pdf_description', true) ?>
                 <div>
                     <label>PDF Description:</label><br>
-                    <textarea name="pdf_description" id="pdf_description" value="<?php esc_textarea( $pdf_description ) ?>"  rows="5"></textarea>
+                    <textarea name="pdf_description" id="pdf_description" value="<?php echo esc_textarea( $pdf_description ) ?>"  rows="5"><?php echo esc_textarea( $pdf_description ) ?></textarea>
                 </div>
             </div>
         </div>
