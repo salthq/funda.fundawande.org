@@ -218,7 +218,7 @@ class FundaWande_Resources {
 		    return $post_id;
         }
         
-        $resource_type_meta['type'] = esc_textarea( $_POST['resource_type'] );
+        $resource_type_meta['type'] = $_POST ? esc_textarea( $_POST['resource_type'] ) : '';
 
         // Don't store custom data twice
 		if ( 'revision' === $post->post_type ) {
@@ -308,11 +308,11 @@ class FundaWande_Resources {
 		    return $post_id;
         }
         
-        $resource_details_meta['video_file_name'] = esc_textarea( $_POST['video_file_name'] );
-        $resource_details_meta['video_media'] = esc_textarea( $_POST['video_media'] );
-        $resource_details_meta['video_description'] = esc_textarea( $_POST['video_description'] );
-        $resource_details_meta['pdf_media'] = esc_textarea( $_POST['pdf_media'] );
-        $resource_details_meta['pdf_description'] = esc_textarea( $_POST['pdf_description'] );
+        $resource_details_meta['video_file_name'] = $_POST ? esc_textarea( $_POST['video_file_name'] ) : '';
+        $resource_details_meta['video_media'] =  $_POST ? esc_textarea( $_POST['video_media'] ) : '';
+        $resource_details_meta['video_description'] =  $_POST ? esc_textarea( $_POST['video_description'] ) : '';
+        $resource_details_meta['pdf_media'] = $_POST ? esc_textarea( $_POST['pdf_media'] ) : '';
+        $resource_details_meta['pdf_description'] = $_POST ? esc_textarea( $_POST['pdf_description'] ): '';
 
         foreach ($resource_details_meta as $key => $value) {
             // Don't store custom data twice
