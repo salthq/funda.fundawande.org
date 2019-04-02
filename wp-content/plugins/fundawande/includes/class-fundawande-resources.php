@@ -105,7 +105,7 @@ class FundaWande_Resources {
             'show_in_menu' => true,
             'query_var' => true, 
             'query_var' => true,
-            'rewrite' => array( 'slug' => 'resource-categories', 'with_front'=> false )
+            'rewrite' => array( 'slug' => 'categories', 'with_front'=> false )
             )
         );
     
@@ -163,7 +163,7 @@ class FundaWande_Resources {
             break;
 
             case 'category':
-                $output = strip_tags( get_the_term_list( $post_id, 'categories', '', ', ', '' ) );
+                $output = strip_tags( get_the_term_list( $post_id, 'resource-categories', '', ', ', '' ) );
                 if( ! $output ) {
                     $output = '&mdash;';
                 }
