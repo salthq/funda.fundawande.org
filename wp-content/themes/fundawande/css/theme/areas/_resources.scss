@@ -6,14 +6,19 @@
  ========================================================================== */
 
 .resources-wrapper {
-    input[name="filter-resources"] {
-        display: none;
-    }
+  input[name="filter-resources"] {
+    display: none;
+  }
 
-    .resource-filter {
-        border: 2px solid $brand-primary__colour;
-        border-radius: 10px;
-        color: $brand-primary__colour;
-        padding: 8px;
+  .resource-filter {
+    border: 2px solid $brand-primary__colour;
+    border-radius: 10px;
+    color: $brand-primary__colour;
+    padding: 8px;
+    &:hover {
+      background-color: $brand-primary__colour;
+      color: white !important;
+      cursor: pointer;
     }
+  }
 }

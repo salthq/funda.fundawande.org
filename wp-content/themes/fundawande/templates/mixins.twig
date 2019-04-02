@@ -29,6 +29,17 @@
     background-image: -webkit-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
 {% endmacro %}
 
+{% macro videoResourceItem(resource) %}
+    <div class="card">
+        <img src="{{resource.media}}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title text-bold">{{resource.title}}</h5>
+            <h6 class="card-subtitle">{{resource.date}}</h6>
+            <p class="card-text pt-3">{{resource.description}}</p>
+        </div>
+    </div>       
+{% endmacro %}
+
 {# Add PDF Image #}
 {% macro pdfImage(columns, file, image_src, lang, module_number) %}
     {% import _self as mixins %}

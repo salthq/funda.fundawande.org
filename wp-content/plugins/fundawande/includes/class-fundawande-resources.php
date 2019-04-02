@@ -290,8 +290,4 @@ class FundaWande_Resources {
         }
     } // end resource_save_meta()
 
- 
-
-
-
 } // end FundaWande_Resources

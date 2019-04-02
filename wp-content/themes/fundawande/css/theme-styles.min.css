@@ -329,6 +329,7 @@ img{max-width:100%;margin:auto;height:auto}
 @media(min-width:992px){.contacts-wrapper .card{min-height:420px}
 }.resources-wrapper input[name="filter-resources"],.resources-wrapper .login-wrapper #fw-registration-form select[name="filter-resources"],.login-wrapper #fw-registration-form .resources-wrapper select[name="filter-resources"]{display:none}
 .resources-wrapper .resource-filter{border:2px solid #ef9d19;border-radius:10px;color:#ef9d19;padding:8px}
+.resources-wrapper .resource-filter:hover{background-color:#ef9d19;color:white !important;cursor:pointer}
 .video-grid-container .video-bg{border-radius:10px}
 @media(min-width:768px){.video-grid-container .video-bg{height:15vw}
 }@media(max-width:767px){.video-grid-container .video-bg{height:45vw}
