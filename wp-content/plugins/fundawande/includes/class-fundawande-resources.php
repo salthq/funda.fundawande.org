@@ -21,10 +21,13 @@ class FundaWande_Resources {
      * Constructor
      */
     public function __construct() {
-        $this->resource_types = $this->fw_resource_types();
+
+        // Set up resource post type
         add_action( 'init', array( $this, 'setup_resource_post_type' ), 100 );
+        // Load any scripts needed for the resource post type
         add_action( 'admin_enqueue_scripts', array($this, 'load_resource_cpt_scripts'), 10, 1 );
         
+        // Manage Public Resources table columns
         if ( is_admin() ) {
             add_filter( 'manage_edit-resource_columns', array( $this, 'add_column_headings' ), 10, 1 );
 			add_action( 'manage_posts_custom_column', array( $this, 'add_column_data' ), 10, 2 );
@@ -41,6 +44,9 @@ class FundaWande_Resources {
 
     }
 
+    /**
+     * Load any scripts needed for the resource post type
+     */
     function load_resource_cpt_scripts( $hook ) {
         global $typenow;
 		if( $typenow == 'resource' ) {
@@ -48,11 +54,11 @@ class FundaWande_Resources {
             // Registers and enqueues the required javascript.
             wp_enqueue_script('resource-metabox-media', FundaWande()->plugin_url . 'assets/js/media-uploader.min.js', array('jquery'), FundaWande()->version, true);
 		}
-    }
+    } // end load_resource_cpt_scripts()
 
     /**
 	 * Setup the "resource" custom post type
-	 * @since  1.1.2
+	 * @since  1.1.6
 	 * @return void
 	 */
 	public function setup_resource_post_type () {
@@ -88,14 +94,13 @@ class FundaWande_Resources {
 
         /**
          * Register the Resource post type
-         *
-         * @since 1.1.2
-         * @param array $args
+         * @since 1.1.6
          */
         register_post_type( 'resource', $args );
         
         /** 
-         * Add categories for the post type
+         * Add categories for the Resource post type
+         * @since 1.1.6
          */
         register_taxonomy( 'resource-categories', array('resource'), array(
             'hierarchical' => true, 
@@ -112,24 +117,13 @@ class FundaWande_Resources {
         register_taxonomy_for_object_type( 'resource-categories', 'Resources' );
 
     } // End setup_resource_post_type()
-    
-    //Add Public resource types
-    public function fw_resource_types() {
-        $types = array(
-            'public-video' => 'Public Videos',
-            'public-pdf' => 'Public PDF',
-            'public-article' => 'Public Article',
-        );
-
-        return apply_filters('fw_resource_types', $types);
-    } // end fw_resource_types()
 
     /**
 	 * Add column headings to the "resource" post list screen.
 	 * @access public
-	 * @since  1.1.2
+	 * @since  1.1.6
 	 * @param  array $defaults
-	 * @return array $new_columns
+	 * @return array $cols
 	 */
 	public function add_column_headings ( $defaults ) {
         $cols = array(
@@ -150,9 +144,9 @@ class FundaWande_Resources {
 	/**
 	 * Add data for the newly-added custom columns.
 	 * @access public
-	 * @since  1.1.2
+	 * @since  1.1.6
 	 * @param  string $column_name
-	 * @param  int $id
+	 * @param  int $post_id
 	 * @return void
 	 */
 	public function add_column_data ( $column_name, $post_id ) {
@@ -188,29 +182,29 @@ class FundaWande_Resources {
 
     /**
      * Add Resource Type meta box
+     * @since 1.1.6
      */
     function resource_type_add_meta_box ( $post ){
+
         add_meta_box( 'type_meta_box', 'Resource Type', array($this,'resource_type_build_meta_box'), 'resource', 'normal', 'low' );
 
-    }
+    } // end resource_type_add_meta_box()
 
+
+    /**
+     * Build Resource type meta box
+     * @since 1.1.6
+     */
     function resource_type_build_meta_box ( $post ) {
-        ?>
-        
-        <div class="resource-metabox">
-            <?php $resource_type = get_post_meta($post->ID, 'resource_type', true) ?>
-            <p>
-                <label for="resource_type">Resource Type</label><br>
-                <select name="resource_type" id="resource_type" class="postbox">
-                    <option value="Video" <?php selected($resource_type, 'Video'); ?>>Video</option>
-                    <option value="PDF" <?php selected($resource_type, 'PDF'); ?>>PDF</option>
-                </select>
-            </p>
-        </div>
 
-        <?php
+        include_once(FundaWande()->plugin_path . 'templates/resource-type-metabox.php');
+        
     } // end resource_type_build_meta_box()
 
+    /**
+     * Save the metadata for the resource type
+     * @since 1.1.6
+     */
     function resource_type_save_meta($post_id, $post) {
 
         // Return if the user doesn't have edit permissions.
@@ -220,22 +214,8 @@ class FundaWande_Resources {
         
         $resource_type_meta['type'] = $_POST ? esc_textarea( $_POST['resource_type'] ) : '';
 
-        // Don't store custom data twice
-		if ( 'revision' === $post->post_type ) {
-			return;
-        }
-        
-        if ( get_post_meta( $post_id, 'resource_type', false ) ) {
-			// If the custom field already has a value, update it.
-			update_post_meta( $post_id, 'resource_type', $resource_type_meta['type'] );
-		} else {
-			// If the custom field doesn't have a value, add it.
-			add_post_meta( $post_id, 'resource_type', $resource_type_meta['type']);
-		}
-		if ( ! $resource_type_meta['type'] ) {
-			// Delete the meta key if there's no value
-			delete_post_meta( $post_id, 'resource_type' );
-        }
+        $this->resource_save_meta($post_id, $post, 'resource_type', $resource_type_meta['type']);
+
         
     } // end resource_type_save_meta()
     
@@ -243,64 +223,30 @@ class FundaWande_Resources {
     /**
      * Add Resource details meta box
      *
-     * @param post $post The post object
-     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/add_meta_boxes
+     * @param post $post
+     * @since 1.1.6
      */
     function resource_details_add_meta_box ( $post ){
+
         add_meta_box( 'details_meta_box', 'Resource Details', array($this,'resource_details_build_meta_box'), 'resource', 'normal', 'low' );
 
-    }
+    } // end resource_details_add_meta_box()
 
+    /**
+     * Build Resource details meta box
+     * @since 1.1.6
+     */
     function resource_details_build_meta_box ( $post ) {
-        ?>
 
-        <div class="resource-metabox">
+        include_once(FundaWande()->plugin_path . 'templates/resource-details-metabox.php');
 
-            <!-- Video Resource Fields -->
-            <div class="resource-fields" id="resource-video">
-                <?php $video_file_name = get_post_meta($post->ID, 'video_file_name', true) ?>
-                <div>
-                    <label for="video_file_name">Video File Name:</label><br>
-                    <input name="video_file_name" id="video_file_name" value="<?php echo esc_textarea( $video_file_name ) ?>" type="text" class="widefat">
-                </div>
-
-                <?php $saved_video = get_post_meta($post->ID, 'video_media', true) ?>
-                <div>
-                    <label for="video_file">Holding Image:</label><br>
-                    <input type="url" class="large-text" name="video_media" id="video_media" type="button" value="<?php echo esc_attr($saved_video) ?>" readonly><br>
-                    <button type="button" class="button" id="video_upload_btn" data-media-uploader-target="#video_media">Upload Holding Image</button>
-                </div>
-                <br>
-
-                <?php $video_description = get_post_meta($post->ID, 'video_description', true) ?>
-                <div>
-                    <label for='video_description'>Video Description:</label><br>
-                    <textarea name="video_description" id="video_description" value="<?php echo esc_textarea( $video_description ) ?>"  rows="5"><?php echo esc_textarea( $video_description ) ?></textarea>
-                </div>
-            </div>
+    } // end resource_details_build_meta_box()
 
 
-            <!-- PDF Resource Fields -->
-            <div class="resource-fields" id="resource-pdf">
-                <?php $saved_pdf = get_post_meta($post->ID, 'pdf_media', true) ?>
-                <div>
-                    <label for="pdf_file">PDF File:</label><br>
-                    <input type="url" class="large-text" name="pdf_media" id="pdf_media" type="button" value="<?php echo esc_attr($saved_pdf) ?>" readonly><br>
-                    <button type="button" class="button" id="pdf_upload_btn" data-media-uploader-target="#pdf_media">Upload PDF File</button>
-                </div>
-                <br>
-
-                <?php $pdf_description = get_post_meta($post->ID, 'pdf_description', true) ?>
-                <div>
-                    <label>PDF Description:</label><br>
-                    <textarea name="pdf_description" id="pdf_description" value="<?php echo esc_textarea( $pdf_description ) ?>"  rows="5"><?php echo esc_textarea( $pdf_description ) ?></textarea>
-                </div>
-            </div>
-        </div>
-
-        <?php
-    }
-
+    /**
+     * Save Resource details metabox data
+     * @since 1.1.6
+     */
     function resource_details_save_meta($post_id, $post) {
 
         // Return if the user doesn't have edit permissions.
@@ -312,28 +258,38 @@ class FundaWande_Resources {
         $resource_details_meta['video_media'] =  $_POST ? esc_textarea( $_POST['video_media'] ) : '';
         $resource_details_meta['video_description'] =  $_POST ? esc_textarea( $_POST['video_description'] ) : '';
         $resource_details_meta['pdf_media'] = $_POST ? esc_textarea( $_POST['pdf_media'] ) : '';
-        $resource_details_meta['pdf_description'] = $_POST ? esc_textarea( $_POST['pdf_description'] ): '';
+        $resource_details_meta['pdf_description'] = $_POST ? esc_textarea( $_POST['pdf_description'] ) : '';
 
         foreach ($resource_details_meta as $key => $value) {
-            // Don't store custom data twice
-            if ( 'revision' === $post->post_type ) {
-                return;
-            }
-            
-            if ( get_post_meta( $post_id, $key, false ) ) {
-                // If the custom field already has a value, update it.
-                update_post_meta( $post_id, $key, $value );
-            } else {
-                // If the custom field doesn't have a value, add it.
-                add_post_meta( $post_id, $key, $value);
-            }
-            if ( ! $value ) {
-                // Delete the meta key if there's no value
-                delete_post_meta( $post_id, $key );
-            }
+            $this->resource_save_meta($post_id, $post, $key, $value);
         }
         
-    } // end resource_type_save_meta()
+    } // end resource_details_save_meta()
+
+
+    /** 
+     * Save the post meta once 'update' or 'published' is clicked.
+     * @since 1.1.6
+     */
+    public function resource_save_meta($post_id, $post, $key, $value) {
+        // Don't store custom data twice
+		if ( 'revision' === $post->post_type ) {
+			return;
+        }
+        
+        if ( get_post_meta( $post_id, $key, false ) ) {
+			// If the custom field already has a value, update it.
+			update_post_meta( $post_id, $key, $value );
+		} else {
+			// If the custom field doesn't have a value, add it.
+			add_post_meta( $post_id, $key, $value);
+		}
+		if ( ! $value ) {
+			// Delete the meta key if there's no value
+			delete_post_meta( $post_id, $key );
+        }
+    } // end resource_save_meta()
+
  
 
 
