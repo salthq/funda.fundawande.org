@@ -97,7 +97,7 @@ class FundaWande_Resources {
         /** 
          * Add categories for the post type
          */
-        register_taxonomy( 'categories', array('resource'), array(
+        register_taxonomy( 'resource-categories', array('resource'), array(
             'hierarchical' => true, 
             'label' => 'Categories', 
             'singular_label' => 'Category',
@@ -105,11 +105,11 @@ class FundaWande_Resources {
             'show_in_menu' => true,
             'query_var' => true, 
             'query_var' => true,
-            'rewrite' => array( 'slug' => 'categories', 'with_front'=> false )
+            'rewrite' => array( 'slug' => 'resource-categories', 'with_front'=> false )
             )
         );
     
-        register_taxonomy_for_object_type( 'categories', 'Resources' );
+        register_taxonomy_for_object_type( 'resource-categories', 'Resources' );
 
     } // End setup_resource_post_type()
     

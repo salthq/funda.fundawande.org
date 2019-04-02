@@ -1,0 +1,34 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper resources-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container-fluid background-primary">
+            <div class = "row" >
+                <div class = "col-12">
+                    <h1 class="text-center m-4">{{fn('the_title')}}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <div class="background-primary p-3">
+                <h5 class="text-italic text-center">Find the videos you need by choosing a category:</h5>
+                {% for cat in categories %}
+                    <input data-cat="{{ cat.slug }}" type="radio" id="{{ cat.slug }}" name="filter-resources">
+                    <label for="{{ cat.slug }}" class="resource-filter">{{ cat.name }}</label>
+                {% endfor %}
+            </div>
+            
+        </div> <!-- end container -->
+    </div><!-- end #wrapper -->
+
+    {# Embed footer template #}
+    {% embed "embeds/footer.twig" %}{% endembed %}
+{% endblock %}
+
+
