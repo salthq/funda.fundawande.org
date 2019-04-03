@@ -5,7 +5,7 @@
         <?php $video_file_name = get_post_meta($post->ID, 'video_file_name', true) ?>
         <div>
             <label for="video_file_name">Video File Name:</label><br>
-            <input name="video_file_name" id="video_file_name" value="<?php echo esc_textarea($video_file_name) ?>" type="text" class="widefat">
+            <input name="video_file_name" id="video_file_name" value="<?php echo esc_textarea($video_file_name) ?>" type="text" class="widefat" required>
         </div>
 
         <?php $saved_video = get_post_meta($post->ID, 'video_media', true) ?>

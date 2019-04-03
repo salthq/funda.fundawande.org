@@ -31,21 +31,27 @@
 
 {% macro videoResourceItem(resource) %}
     {% import _self as mixins %}
+
+    {# video_id and content_id are required to make the video duration script work properly #}
+    {% set video_id =  resource.index %}
+    {% set content_id = 1 %}
+    {# We don't need module specific styles for the resource items #}
+    {% set module_number = null %}
+
     <div class="card">
-        {# <img src="{{resource.media}}" class="card-img-top"> #}
         <div class="d-flex align-items-center justify-content-center" style="min-height: 30vh; {{ mixins.bgImg(resource.media,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoCardModal{{ resource.index }}">
             <span>{{ source('/assets/video_player/Play_button.svg') }}</span>
         </div>
         <div class="card-body">
             <h5 class="card-title text-bold">{{resource.title}}</h5>
-            <h6 class="card-subtitle">{{resource.date}}</h6>
+            <h6 class="text-small">(<span id="{{content_id}}_{{video_id}}duration"></span>)</h6>
             <hr>
             <p class="card-text pt-2">{{resource.description|striptags|slice(0, 200) ~ '...'}}</p>
         </div>
     </div>
 
     <!-- Video Player Modal-->
-    <div id="videoCardModal{{ resource.index }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+    <div id="videoCardModal{{ video_id }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="d-flex m-3">
@@ -57,11 +63,13 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    {{ mixins.videoPlayer(resource.file, resource.media, 15, resource.index) }}
+                    {{ mixins.videoPlayer(resource.file, resource.media, module_number, content_id, video_id) }}
                 </div>
             </div>
         </div>
     </div>       
+
+    {% include "/lms/embeds/get_video_duration.twig" %}
 {% endmacro %}
 
 {# Add PDF Image #}
@@ -137,7 +145,7 @@
 {% endmacro %}
 
 {# Add video player #}
-{% macro videoPlayer(video_src, image_src, module_number, video_id) %}
+{% macro videoPlayer(video_src, image_src, module_number, content_id, video_id) %}
     {% import _self as mixins %}
 
     {# This video loads on mobile devices -it uses standard HTML5 video player controls which are responsive and work well on small screens #}
