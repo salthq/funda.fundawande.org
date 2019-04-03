@@ -42,6 +42,10 @@ class FundaWande_Resources {
         // Save Resource Type meta
         add_action('save_post', array($this, 'resource_details_save_meta'), 1, 2);
 
+        // Set up callback function for category filter AJAX request
+        add_action('FUNDAWANDE_AJAX_HANDLER_resource_filter_ajax_request', array($this,'resource_filter_ajax_request'));
+		add_action('FUNDAWANDE_AJAX_HANDLER_nopriv_resource_filter_ajax_request', array($this,'resource_filter_ajax_request'));
+
     }
 
     /**
@@ -110,7 +114,7 @@ class FundaWande_Resources {
             'show_in_menu' => true,
             'query_var' => true, 
             'query_var' => true,
-            'rewrite' => array( 'slug' => 'categories', 'with_front'=> false )
+            'rewrite' => array( 'slug' => 'categories', 'with_front'=> true )
             )
         );
     
@@ -289,5 +293,51 @@ class FundaWande_Resources {
 			delete_post_meta( $post_id, $key );
         }
     } // end resource_save_meta()
+
+    /**
+     * Gets the category from an ajax call made on template-public-resources.twig and renders a new list of items which
+     * belong to that category
+     * 
+     * @since 1.1.6
+     */
+    function resource_filter_ajax_request() {
+
+        if (isset($_REQUEST)) {
+            $cat = $_REQUEST['category'];
+
+            switch ($cat) {
+                case 'all-categories':
+                    $args = array(
+                        'post_type' => 'resource',
+                        'numberposts' => -1,
+                    );
+                    break;   
+                default:
+                    $args = array(
+                        'post_type' => 'resource',
+                        'numberposts' => -1,
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'resource-categories',
+                                'field' => 'slug',
+                                'terms' => $cat,
+                                'include_children' => true,
+                                'operator' => 'IN',
+                            ),
+                        ),
+                    );
+                    break;
+            }
+            
+    
+        }
+
+        $context['filtered_resources'] =  Timber::get_posts($args);
+    
+        Timber::render(array('template-resource-item.twig', 'page.twig'), $context);
+    
+    
+        die();
+    } // end resource_filter_ajax_request()
 
 } // end FundaWande_Resources

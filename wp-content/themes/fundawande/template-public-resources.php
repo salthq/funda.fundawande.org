@@ -24,8 +24,7 @@ if ( class_exists( 'Timber' ) ) {
         'posts_per_page' => 5,
         'paged' => $paged
     );
-    $context['resources'] = new Timber\PostQuery($args);
-
+    $context['resources'] = Timber::get_posts($args);
 
 
     Timber::render(array('template-public-resources.twig', 'page.twig'), $context);

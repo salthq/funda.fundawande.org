@@ -30,12 +30,36 @@
 {% endmacro %}
 
 {% macro videoResourceItem(resource) %}
+    {% import _self as mixins %}
     <div class="card">
-        <img src="{{resource.media}}" class="card-img-top">
+        {# <img src="{{resource.media}}" class="card-img-top"> #}
+        <div class="d-flex align-items-center justify-content-center" style="min-height: 30vh; {{ mixins.bgImg(resource.media,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoCardModal{{ resource.index }}">
+            <span>{{ source('/assets/video_player/Play_button.svg') }}</span>
+        </div>
         <div class="card-body">
             <h5 class="card-title text-bold">{{resource.title}}</h5>
             <h6 class="card-subtitle">{{resource.date}}</h6>
-            <p class="card-text pt-3">{{resource.description}}</p>
+            <hr>
+            <p class="card-text pt-2">{{resource.description|striptags|slice(0, 200) ~ '...'}}</p>
+        </div>
+    </div>
+
+    <!-- Video Player Modal-->
+    <div id="videoCardModal{{ resource.index }}" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="d-flex m-3">
+                    <div class = "d-flex justify-content-center align-items-center w-100">
+                        <h5 class="modal-title"><strong>{{resource.title}}</strong></h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    {{ mixins.videoPlayer(resource.file, resource.media, 15, resource.index) }}
+                </div>
+            </div>
         </div>
     </div>       
 {% endmacro %}
@@ -103,7 +127,7 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    {{ mixins.videoPlayer(video_src, image_src, module_number, content_id, video_id) }}
+                    {{ mixins.videoPlayer(video_src, image_src, module_number, video_id) }}
                 </div>
             </div>
         </div>
@@ -113,7 +137,7 @@
 {% endmacro %}
 
 {# Add video player #}
-{% macro videoPlayer(video_src, image_src, module_number, content_id, video_id) %}
+{% macro videoPlayer(video_src, image_src, module_number, video_id) %}
     {% import _self as mixins %}
 
     {# This video loads on mobile devices -it uses standard HTML5 video player controls which are responsive and work well on small screens #}

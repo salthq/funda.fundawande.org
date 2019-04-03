@@ -19,6 +19,8 @@
             <!-- Category filter -->
             <div class="background-primary p-3">
                 <h5 class="text-italic text-center">Find the videos you need by choosing a category:</h5>
+                <input data-cat="all-categories" type="radio" id="all-categories" name="filter-resources">
+                <label for="all-categories" class="resource-filter m-2">All Categories</label>
                 {% for cat in categories %}
                     <input data-cat="{{ cat.slug }}" type="radio" id="{{ cat.slug }}" name="filter-resources">
                     <label for="{{ cat.slug }}" class="resource-filter m-2">{{ cat.name }}</label>
@@ -28,16 +30,22 @@
             <div id="loading"></div>
 
             <!-- Video Resources -->
-            <div class="my-4">
+            <div id="resource-list" class="row my-4">
                 {% set videoResourceData = [] %}
                 {% for resource in resources %}
                     {% if resource.custom.resource_type == 'Video' %}
+                        {# Remove whitespace from beginning and end of the file name before appending to media url #}
+                        {% set video_file_name = resource.custom.video_file_name | trim %}
+                        {% set media_file = media_url~video_file_name %}
+
                         {% 
                         set videoResourceData = {
                             media: resource.custom.video_media,
+                            file: media_file,
                             title: resource.post_title,
                             date: resource.date,
-                            description: resource.cusotm.video_description
+                            description: resource.custom.video_description,
+                            index: loop.index
                         } 
                         %}
                         <div class="col-md-4">

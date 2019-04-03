@@ -37,8 +37,12 @@ class FundaWande_Frontend
 	public function enqueue_scripts()
 	{
 
-		//Enqueue Tawk.to script
+		// Enqueue Tawk.to script
 		wp_enqueue_script('tawk-script', FundaWande()->plugin_url . 'assets/js/tawk.min.js', array(), FundaWande()->version, true);
+		// Enqueue resource filter script
+		wp_enqueue_script(FundaWande()->token . '-resource-filter', FundaWande()->plugin_url . 'assets/js/resource-filter.min.js', array(), FW_VER, true);
+		wp_localize_script(FundaWande()->token . '-resource-filter', 'fundawande_ajax_object', array('ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php'));
+
 
 
 		// Include single quiz
