@@ -219,6 +219,37 @@ class FundaWande_Quiz {
     }
 
     /**
+     * Check whether a quiz has been graded correctly.
+     *
+     * @param integer $lesson_id the ID of the activity (lesson) to check.
+     * @param integer $user_id the ID of the user to check.
+     * 
+     * @return boolean true or false.
+     */
+    public function check_correctly_submitted_quiz($lesson_id,$user_id) {
+       
+        // Set quiz to correct by default
+        $quiz_correct = true;
+
+        // Get the lesson status
+        $lesson_status = Sensei_Utils::user_lesson_status($lesson_id,$user_id);
+        
+        // If lesson status exists
+        if ($lesson_status)  {
+            // Check whether the quiz lesson status is incorrectly set to compelte
+            if ($lesson_status->comment_approved == 'complete') {
+                // If true then this quiz is incorrect
+                $quiz_correct = false;
+                // Reset this lesson for this user so they can complete it correctly
+                Sensei_Utils::sensei_remove_user_from_lesson($lesson_id,$user_id);
+            }
+        }
+
+        // Return the result
+        return $quiz_correct;
+    }
+
+    /**
      * Check whether activity feedback has been released to the user.
      *
      * @return boolean true or false.
