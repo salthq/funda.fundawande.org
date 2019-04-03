@@ -332,6 +332,7 @@ class FundaWande_Resources {
     
         }
 
+        $context['media_url'] = FundaWande()->lms->fw_get_media_url();
         $context['filtered_resources'] =  Timber::get_posts($args);
     
         Timber::render(array('template-resource-item.twig', 'page.twig'), $context);

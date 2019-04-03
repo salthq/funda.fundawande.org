@@ -2,7 +2,6 @@ jQuery(document).ready(function($) {
   // Filter the resources shown based on the category selected
   $('[name="filter-resources"]').change(function() {
     var cat = $(this).data("cat");
-    console.log(cat);
     $("#resource-list").fadeOut();
     // $('#loadingResults').show();
     $.ajax({
@@ -13,7 +12,6 @@ jQuery(document).ready(function($) {
       },
       success: function(items) {
         // $("#loadingResults").hide();
-        console.log(items);
         $("#resource-list")
           .empty()
           .append(items)
