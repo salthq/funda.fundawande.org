@@ -15,15 +15,24 @@ if ( class_exists( 'Timber' ) ) {
     // Get Resource Categories
     $context['categories'] = Timber::get_terms('resource-categories');
 
-    global $paged;
-    if (!isset($paged) || !$paged){
-        $paged = 1;
-    }
+    // No need for pagination yet, and it seems to be failing in any case. 
+
+    // global $paged;
+    // if (!isset($paged) || !$paged){
+    //     $paged = 1;
+    // }
+    // $args = array(
+    //     'post_type' => 'resource',
+    //     'posts_per_page' => 5,
+    //     'paged' => $paged
+    // );
+
     $args = array(
         'post_type' => 'resource',
-        'posts_per_page' => 5,
-        'paged' => $paged
+        'posts_per_page' => -1,
     );
+
+
     $context['resources'] = Timber::get_posts($args);
 
 
