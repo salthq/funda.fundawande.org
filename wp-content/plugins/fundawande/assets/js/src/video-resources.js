@@ -16,6 +16,7 @@ jQuery(document).ready(function($) {
           .empty()
           .append(items)
           .fadeIn();
+        setupVideoPlayers();
       },
       error: function(errorThrown) {
         console.log(errorThrown);
