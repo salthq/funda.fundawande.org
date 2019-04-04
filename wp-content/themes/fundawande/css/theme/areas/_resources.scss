@@ -67,7 +67,7 @@
 
   .card-body {
     @include breakpoint(tablet) {
-      min-height: 350px;
+      min-height: 320px;
       height: 100%;
     }
     
