@@ -13,7 +13,7 @@
 
     vid{{content_id}}_{{video_id}}.addEventListener('loadedmetadata', function() {
         var duration = document.getElementById('{{content_id}}_{{video_id}}duration');
-        duration.innerHTML = fmtMSS(Math.round(vid{{content_id}}_{{video_id}}.duration));
+        duration.innerHTML = '(' + fmtMSS(Math.round(vid{{content_id}}_{{video_id}}.duration)) + ')';
     })
 
 </script>

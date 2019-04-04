@@ -6,6 +6,11 @@
  ========================================================================== */
 
 .resources-wrapper {
+
+  .category-filter {
+    border-radius: .25rem;
+  }
+
   input[name="filter-resources"] {
     display: none;
   }
@@ -20,5 +25,51 @@
       color: white !important;
       cursor: pointer;
     }
+  }
+
+  .resource-loader {
+    svg {
+      @include breakpoint(tablet) {
+        width: 300px;
+        height: 300px;  
+      }
+      fill: $brand-primary__colour;
+    }
+  }
+
+  .video-duration-loader {
+    svg {
+      width: 25px;
+      height: 25px;
+      stroke: $text-primary__colour;
+    }
+  }
+
+  .resource-expander {
+    background: none;
+    border: none;
+    color: $brand-primary__colour;
+    padding: 0;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+
+  .resource-image {
+    border-radius: .25rem .25rem 0 0;
+    cursor: pointer;
+    min-height: 200px;
+  }
+
+  .card-body {
+    @include breakpoint(tablet) {
+      min-height: 350px;
+      height: 100%;
+    }
+    
   }
 }

@@ -39,14 +39,28 @@
     {% set module_number = null %}
 
     <div class="card">
-        <div class="d-flex align-items-center justify-content-center" style="min-height: 30vh; {{ mixins.bgImg(resource.media,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoCardModal{{ resource.index }}">
+        <div class="resource-image d-flex align-items-center justify-content-center" style="{{ mixins.bgImg(resource.media,'0,0,0',0.0) }}" data-toggle="modal" data-target="#videoCardModal{{ resource.index }}">
             <span>{{ source('/assets/video_player/Play_button.svg') }}</span>
         </div>
-        <div class="card-body">
+        <div id="resourceBody{{resource.index}}" class="card-body">
             <h5 class="card-title text-bold">{{resource.title}}</h5>
-            <h6 class="text-small">(<span id="{{content_id}}_{{video_id}}duration"></span>)</h6>
+            <h6 id="{{content_id}}_{{video_id}}duration" class="text-small"><span class="video-duration-loader">{{source('/assets/loading/oval.svg')}}</span></h6>
             <hr>
-            <p class="card-text pt-2">{{resource.description|striptags|slice(0, 200) ~ '...'}}</p>
+            <!-- Full description -->
+            <p id="fullDescription{{resource.index}}" class="card-text pt-2" style="display:none">
+                {{resource.description}}
+                <br>
+                <button class="resource-expander expandResource{{resource.index}} mt-2" onClick="minimiseResource({{resource.index}})">Minimise description</button>
+            </p>
+            <!-- Description excerpt -->
+            <p id="excerptDescription{{resource.index}}"class="card-text pt-2">
+                {% if resource.description|length > 180 %}
+                    {{ resource.description|striptags|slice(0, 180)}}
+                    <button class="resource-expander expandResource{{resource.index}}" onClick="expandResource({{resource.index}})">...read more</button>
+                {% else %}
+                    {{resource.description}}
+                {% endif %}
+            </p>
         </div>
     </div>
 
