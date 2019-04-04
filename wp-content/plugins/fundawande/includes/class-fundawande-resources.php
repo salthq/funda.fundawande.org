@@ -302,6 +302,12 @@ class FundaWande_Resources {
      */
     function resource_filter_ajax_request() {
 
+        // Get the total number of resources so that data is available in the tempalte-resource-item.twig context.
+        $total_resource_args = array(
+            'post_type' => 'resource',
+            'numberposts' => -1,
+        );
+
         if (isset($_REQUEST)) {
             $cat = $_REQUEST['category'];
 
@@ -333,7 +339,13 @@ class FundaWande_Resources {
         }
 
         $context['media_url'] = FundaWande()->lms->fw_get_media_url();
-        $context['filtered_resources'] =  Timber::get_posts($args);
+        
+        $filtered_resources =  Timber::get_posts($args);
+        $total_resources = Timber::get_posts($total_resource_args);
+        $context['total_resources'] = $total_resources;
+        $context['total_count'] = count($total_resources);
+        $context['filtered_resources'] = $filtered_resources;
+        $context['filtered_count'] = count($filtered_resources);
     
         Timber::render(array('template-resource-item.twig', 'page.twig'), $context);
     

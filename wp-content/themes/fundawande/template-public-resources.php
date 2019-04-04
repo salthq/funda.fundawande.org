@@ -33,7 +33,9 @@ if ( class_exists( 'Timber' ) ) {
     );
 
 
-    $context['resources'] = Timber::get_posts($args);
+    $resources = Timber::get_posts($args);
+    $context['resources'] = $resources;
+    $context['total_count'] = count($resources);
 
 
     Timber::render(array('template-public-resources.twig', 'page.twig'), $context);

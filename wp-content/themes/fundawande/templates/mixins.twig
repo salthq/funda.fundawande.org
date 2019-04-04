@@ -54,8 +54,8 @@
             </p>
             <!-- Description excerpt -->
             <p id="excerptDescription{{resource.index}}"class="card-text pt-2">
-                {% if resource.description|length > 180 %}
-                    {{ resource.description|striptags|slice(0, 180)}}
+                {% if resource.description|length > 160 %}
+                    {{ resource.description|striptags|slice(0, 160)}}
                     <button class="resource-expander expandResource{{resource.index}}" onClick="expandResource({{resource.index}})">...read more</button>
                 {% else %}
                     {{resource.description}}

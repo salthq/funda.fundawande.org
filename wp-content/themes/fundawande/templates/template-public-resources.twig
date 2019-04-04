@@ -26,11 +26,14 @@
                     <label for="{{ cat.slug }}" class="resource-filter m-2">{{ cat.name }}</label>
                 {% endfor %}
             </div>
-
             <div id="loadingResults" class="text-center w-100 py-5" style="display:none"><span class="resource-loader">{{source('/assets/loading/three-dots.svg')}}</span></div>
 
             <!-- Video Resources -->
             <div id="resource-list" class="row my-4">
+                <div class="col-12">
+                    <h5 class="text-small text-italic">Showing {{total_count}} of {{total_count}} videos</h5>
+                    <hr class="m-0">
+                </div>
                 {% set videoResourceData = [] %}
                 {% for resource in resources %}
                     {% if resource.custom.resource_type == 'Video' %}
@@ -48,7 +51,7 @@
                             index: loop.index
                         } 
                         %}
-                        <div class="col-md-4 p-3">
+                        <div class="col-lg-4 p-3">
                             {{ mixin.videoResourceItem(videoResourceData) }}
                         </div>
                     {% endif %}

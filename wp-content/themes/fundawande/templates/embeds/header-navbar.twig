@@ -12,7 +12,7 @@
         </div>
 
             <!-- View Courses Button -->
-            <a class="d-none {% if fn('user_is_logged_in') %} d-lg-block ml-2 pr-4" {% endif %} href="{{fn('get_site_url')}}/my-courses">
+            <a class="d-none {% if fn('is_user_logged_in') %} d-lg-block ml-2 pr-4" {% endif %} href="{{fn('get_site_url')}}/my-courses">
                 {{ source('assets/menu/courses_navbar_icon.svg') }}
                 <span class="ml-2">{{attribute(options, lang.prefix~'view_courses_link')}}</span>
             </a>
