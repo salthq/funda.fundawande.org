@@ -170,7 +170,11 @@ class FundaWande_Resources {
             
             case 'description':
                 if(get_post_meta($post_id, 'resource_type', true) == 'Video') {
-                    echo get_post_meta($post_id, 'video_description', true);
+                    if (strlen(get_post_meta($post_id, 'video_description', true)) > 200) {
+                        echo substr(strip_tags(get_post_meta($post_id, 'video_description', true)), 0, 200) . "...";
+                    }else {
+                        echo get_post_meta($post_id, 'video_description', true);
+                    }
                 }
                 else {
                     echo get_post_meta($post_id, 'pdf_description', true);
