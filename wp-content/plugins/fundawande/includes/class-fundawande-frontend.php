@@ -73,7 +73,9 @@ class FundaWande_Frontend
 		wp_enqueue_script('sortable-js-script', FundaWande()->plugin_url . 'assets/js/sortable.min.js', array('jquery'), FundaWande()->version, true);
 
 		//Include Login Modals
-		wp_enqueue_script('login-modals', FundaWande()->plugin_url . 'assets/js/login-modals.min.js', array('jquery'), FundaWande()->version, true);
+		if(is_user_logged_in()) {
+			wp_enqueue_script('login-modals', FundaWande()->plugin_url . 'assets/js/login-modals.min.js', array('jquery'), FundaWande()->version, true);
+		}
 
 		//Include scroll to current script
 		wp_enqueue_script('scroll-to-current', FundaWande()->plugin_url . 'assets/js/scroll-to-current.min.js', array('jquery'), FundaWande()->version, true);
