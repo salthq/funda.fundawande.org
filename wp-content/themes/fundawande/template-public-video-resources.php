@@ -38,5 +38,5 @@ if ( class_exists( 'Timber' ) ) {
     $context['total_count'] = count($resources);
 
 
-    Timber::render(array('template-public-resources.twig', 'page.twig'), $context);
+    Timber::render(array('template-public-video-resources.twig', 'page.twig'), $context);
 }

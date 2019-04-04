@@ -347,7 +347,7 @@ class FundaWande_Resources {
         $context['filtered_resources'] = $filtered_resources;
         $context['filtered_count'] = count($filtered_resources);
     
-        Timber::render(array('template-resource-item.twig', 'page.twig'), $context);
+        Timber::render(array('embeds/template-resource-video-item.twig', 'page.twig'), $context);
     
     
         die();
