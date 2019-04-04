@@ -1,6 +1,6 @@
 <?php
 /**
- *Template Name: Public Resources Template
+ *Template Name: Video Archive Template
  *
  * @package Pango
  */
