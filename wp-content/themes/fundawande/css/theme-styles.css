@@ -707,7 +707,7 @@ img { max-width: 100%; margin: auto; height: auto; }
 
 @media (min-width: 768px) { .resources-wrapper .resource-loader svg { width: 300px; height: 300px; } }
 
-.resources-wrapper .video-duration-loader svg { width: 25px; height: 25px; stroke: #4A4A4A; }
+.resources-wrapper .video-duration-loader svg { width: 15px; height: 15px; stroke: #4A4A4A; }
 
 .resources-wrapper .resource-expander { background: none; border: none; color: #EF9D19; padding: 0; }
 

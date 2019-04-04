@@ -3,22 +3,24 @@
 {% block content %}
     {% set videoResourceData = [] %}
     {% for resource in filtered_resources %}
+        {% if resource.custom.resource_type == 'Video' %}
             {# Remove whitespace from beginning and end of the file name before appending to media url #}
-            {% set video_file_name = resource.custom.video_file_name | trim %}
-            {% set media_file = media_url~video_file_name %}
-            {% 
-            set videoResourceData = {
-                media: resource.custom.video_media,
-                file: media_file, 
-                title: resource.post_title,
-                date: resource.date,
-                description: resource.custom.video_description,
-                index: loop.index
-            } 
-            %}
-            <div class="col-md-4 p-3">
-                {{ mixin.videoResourceItem(videoResourceData) }}
-            </div>
+                {% set video_file_name = resource.custom.video_file_name | trim %}
+                {% set media_file = media_url~video_file_name %}
+                {% 
+                set videoResourceData = {
+                    media: resource.custom.video_media,
+                    file: media_file, 
+                    title: resource.post_title,
+                    date: resource.date,
+                    description: resource.custom.video_description,
+                    index: loop.index
+                } 
+                %}
+                <div class="col-md-4 p-3">
+                    {{ mixin.videoResourceItem(videoResourceData) }}
+                </div>
+            {% endif %}
     {% endfor %}
 
 {% endblock %}
