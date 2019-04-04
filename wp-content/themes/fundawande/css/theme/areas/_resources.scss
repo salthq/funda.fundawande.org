@@ -49,6 +49,7 @@
     background: none;
     border: none;
     color: $brand-primary__colour;
+    cursor: pointer;
     padding: 0;
     &:hover {
       text-decoration: underline;
@@ -64,6 +65,7 @@
     cursor: pointer;
     min-height: 200px;
   }
+
 
   .card-body {
     @include breakpoint(desktop) {

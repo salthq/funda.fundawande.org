@@ -334,7 +334,7 @@ img{max-width:100%;margin:auto;height:auto}
 .resources-wrapper .resource-loader svg{fill:#ef9d19}
 @media(min-width:768px){.resources-wrapper .resource-loader svg{width:300px;height:300px}
 }.resources-wrapper .video-duration-loader svg{width:15px;height:15px;stroke:#4a4a4a}
-.resources-wrapper .resource-expander{background:0;border:0;color:#ef9d19;padding:0}
+.resources-wrapper .resource-expander{background:0;border:0;color:#ef9d19;cursor:pointer;padding:0}
 .resources-wrapper .resource-expander:hover{text-decoration:underline}
 .resources-wrapper .resource-expander:focus{border:0;outline:0}
 .resources-wrapper .resource-image{border-radius:.25rem .25rem 0 0;cursor:pointer;min-height:200px}

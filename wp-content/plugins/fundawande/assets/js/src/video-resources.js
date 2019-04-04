@@ -1,7 +1,5 @@
 jQuery(document).ready(function($) {
-  // Filter the resources shown based on the category selected
-  $('[name="filter-resources"]').change(function() {
-    var cat = $(this).data("cat");
+  function resourceFilterAjaxRequest(cat) {
     $("#resource-list").fadeOut("fast");
     $("#loadingResults").show();
     $.ajax({
@@ -22,6 +20,12 @@ jQuery(document).ready(function($) {
         console.log(errorThrown);
       }
     });
+  }
+
+  // Filter the resources shown based on the category selected
+  $('[name="filter-resources"]').change(function() {
+    var cat = $(this).data("cat");
+    resourceFilterAjaxRequest(cat);
   });
 });
 
