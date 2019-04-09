@@ -17,71 +17,23 @@
     <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
 
         {# Include mobile progress component #}
-        {% include '/lms/embeds/lesson-progress-mobile.twig' %}
+        {% include '/lms/embeds/lesson/lesson-progress-mobile.twig' %}
         {# Include desktop progress component #}
-        {% include '/lms/embeds/lesson-sidebar.twig' %}
+        {% include '/lms/embeds/lesson/lesson-sidebar.twig' %}
         {# Include lesson header component #}
-        {% include '/lms/embeds/lesson-header.twig' %}
+        {% include '/lms/embeds/lesson/lesson-header.twig' %}
         
         <!-- Lesson Content-->
         {% set lesson_post = post %}
-        {% include '/lms/embeds/lesson-content.twig' %}
+        {% include '/lms/embeds/lesson/lesson-content.twig' %}
 
         <!-- Downloadable Resources -->
         {% if lesson_post.get_field('additional_resources') %}
             {% include "lms/embeds/downloadable-resources.twig" %}
         {% endif %}
         
-
-        <!-- Bottom navigation-->
-        <div id = "navigation-links"  class = "container-fluid my-4 py-4">
-            <div class = "container">
-                <hr>
-                <div class="row ">
-                    <!-- Previous Lesson Navigation Button -->
-                    {% include "lms/embeds/lesson-navigation-previous.twig" %}
-                    <div class="col-12 col-md-4 text-center">
-                    </div>
-                    <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
-                       {% if sub_unit_meta.nav.next %}
-                            {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
-                            {% if post.get_field('custom_feedback_message') %}
-                                {% include '/lms/embeds/modals/modal-end-lesson.twig' %}
-                                {# If this lesson is the last within the unit, fire the end of unit modal #}
-                                {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
-                                    <button id="lesson-complete"  type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
-                                    {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                    </button>
-                                {% else %}
-                                    <button id="lesson-complete"  type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
-                                        {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                    </button>
-                                {% endif %}
-                            {% else %}
-                                {# If there is no custom feedback message, but this lesson is the last in the unit, fire the end of unit modal #}
-                                {% if sub_unit_meta.is_last_in_unit %}
-                                    {% include '/lms/embeds/modals/modal-end-unit.twig' %}
-                                    <button id="lesson-complete" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
-                                        {{attribute(options, lang.prefix~'complete_unit_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                                    </button>
-                                {# If it is not the last lesson in the unit, then add a link to the next lesson, no modals are included.  #}
-                                {% else %}
-                                    <a id="lesson-complete" href = "#" class = "btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}" data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
-                                {% endif %}
-                            {% endif %}
-                       {% else %}
-                           {# If there is no next lesson then assume it is the last lesson of the course#}
-                           {% include '/lms/embeds/modals/modal-end-course.twig' %}
-                           <button id="lesson-complete" onclick="completeCourse()" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
-                               {{attribute(options, lang.prefix~'next_nav_text')}} <span class = "px-2">{{source ('/assets/arrow_right.svg')}}</span>
-                           </button>
-
-                       {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Lesson Navigation -->
+        {% include "lms/embeds/lesson/lesson-navigation.twig" %}
     </div><!-- #wrapper -->
 
 {% endblock %}
