@@ -38,11 +38,8 @@
             <div class = "container">
                 <hr>
                 <div class="row ">
-                    <div class="lesson-navigation-bottom col-12 col-md-4 text-center py-1">
-                        {% if sub_unit_meta.nav.prev %}
-                            <a href = "{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class = "btn btn-lg module-btn-outline-{{sub_unit_meta.module_number}}"> <span class = "px-2">{{source ('/assets/arrow_left.svg')}}</span>{{attribute(options, lang.prefix~'prev_nav_text')}}</a>
-                        {% endif %}
-                    </div>
+                    <!-- Previous Lesson Navigation Button -->
+                    {% include "lms/embeds/lesson-navigation-previous.twig" %}
                     <div class="col-12 col-md-4 text-center">
                     </div>
                     <div class=" lesson-navigation-bottom col-12 col-md-4 text-center py-1">
