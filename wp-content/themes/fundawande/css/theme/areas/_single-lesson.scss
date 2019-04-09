@@ -310,6 +310,18 @@
       }
     }
   }
+
+  .img-container {
+    position: relative;
+  }
+
+  //Image Download Icon
+  .img-download-icon {
+    position: absolute;
+    bottom: 0;
+    right: 5;
+  }
+
   // PDF Image overlay
   .pdf {
     position: relative;
