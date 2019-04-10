@@ -1,0 +1,10 @@
+{# If there is no next lesson then load the end of course modal and open it when the next nav button is clicked #}
+{% if not sub_unit_meta.nav.next %}
+    {% include '/lms/embeds/modals/modal-end-course.twig' %}
+{% endif %}
+
+<button id="lesson-complete"  {% if not sub_unit_meta.nav.next %} onclick="completeCourse()" {% endif %} type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" 
+data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
+    {{attribute(options, lang.prefix~'next_nav_text')}}
+    <span class="px-2">{{source ('/assets/arrow_right.svg')}}</span>
+</button>

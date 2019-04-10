@@ -1,0 +1,6 @@
+{% include '/lms/embeds/modals/modal-end-unit.twig' %}
+<button id="lesson-complete" type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" 
+data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
+    {{attribute(options, lang.prefix~'complete_unit_text')}}
+    <span class="px-2">{{source ('/assets/arrow_right.svg')}}</span>
+</button>
