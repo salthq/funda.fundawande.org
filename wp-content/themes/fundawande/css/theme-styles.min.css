@@ -599,7 +599,6 @@ img{max-width:100%;margin:auto;height:auto}
 .single-module-wrapper .sub-units-icon a.current{width:95px;box-sizing:border-box;border:2px solid;border-radius:6px;z-index:1;background:white;margin-right:-10px}
 .single-module-wrapper .sub-units-icon a.current svg circle{opacity:.7}
 .single-module-wrapper .sub-units-icon a.current svg #icon-inner{fill:#4a4a4a}
-.single-module-wrapper .sub-units-icon a.current .lesson-progress-text p{width:93px}
 @media(max-width:767px){.single-module-wrapper .sub-units-icon a.current{width:auto;border-radius:28px 6px 6px 28px;margin-right:0}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text{line-height:1;width:80%}
 .single-module-wrapper .sub-units-icon a.current .lesson-progress-text span{font-size:80%}
