@@ -24,8 +24,9 @@ if (class_exists('Timber')) {
     $context['module_number'] = get_term_meta($term->ID, 'module_number', true);
     $context['module_title'] = get_term_meta($term->ID, 'module_title', true);
 
+    $units = FundaWande()->modules->get_module_units($term->ID,$current_course_id);
     // Get the modules units to visualise on the module page
-    $context['units'] = FundaWande()->modules->get_module_units($term->ID,$current_course_id);
+    $context['units'] = $units;
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);
 }
