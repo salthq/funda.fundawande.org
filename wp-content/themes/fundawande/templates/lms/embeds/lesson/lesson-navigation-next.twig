@@ -3,7 +3,7 @@
     {% include '/lms/embeds/modals/modal-end-course.twig' %}
 {% endif %}
 
-<button id="lesson-complete"  {% if not sub_unit_meta.nav.next %} onclick="completeCourse()" {% endif %} type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}}" 
+<button id="lesson-complete"  {% if not sub_unit_meta.nav.next %} onclick="completeCourse()" {% endif %} type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}} mt-2" 
 data-user-id="{{ user.ID }}" data-post-id="{{ post.ID }}">
     {{attribute(options, lang.prefix~'next_nav_text')}}
     <span class="px-2">{{source ('/assets/arrow_right.svg')}}</span>
