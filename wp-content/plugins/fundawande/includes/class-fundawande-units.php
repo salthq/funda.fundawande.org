@@ -68,7 +68,7 @@ class FundaWande_Units {
         }
 
 
-        $unit_lessons = Sensei()->modules->get_lessons( $course_id , $unit_id);
+        $unit_lessons = FundaWande()->lessons->get_lessons( $course_id , $unit_id);
 
         $completed = 0;
         $total = 0;
