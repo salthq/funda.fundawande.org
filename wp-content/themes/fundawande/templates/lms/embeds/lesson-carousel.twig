@@ -35,7 +35,15 @@
                         <p class="text-center m-0">{{loop.index}} of {{loop.length}}</p>
                     </div>
                     <div class="lesson-carousel-image col fw-media mt-5">
-                        <img class="d-block " src="{{ item.image }}"></div>
+                        <div class="img-container">
+                            <img class="d-block" src ="{{ item.image }}">
+                            <a class="img-download-icon" href="{{item.image}}" download>
+                                <span class="module-svg-fill-{{sub_unit_meta.module_number}}">
+                                    {{source('assets/download_icon.svg')}}
+                                </span>
+                            </a>
+                        </div>
+                    </div>   
                         {% block carousel_text %}
                             <div class="col-12">
                                 <div class="container lesson-carousel-text text-center">

@@ -1318,7 +1318,7 @@ img { max-width: 100%; margin: auto; height: auto; }
 
 .single-lesson-wrapper .img-container { position: relative; display: inline-block; }
 
-.single-lesson-wrapper .img-download-icon { background-color: #F5F5F5; border-radius: 10px; padding: 10px; position: absolute; bottom: 5px; right: 5px; height: 47px; width: 45px; -webkit-transition: width 1s, height 1s; transition: width 1s, height 1s; }
+.single-lesson-wrapper .img-download-icon { background-color: #F5F5F5; border-radius: 10px; padding: 10px; position: absolute; bottom: 5px; right: 5px; height: 50px; width: 45px; -webkit-transition: width 1s, height 1s; transition: width 1s, height 1s; }
 
 .single-lesson-wrapper .img-download-icon svg { height: 25px; width: 25px; -webkit-transition: width 1s, height 1s; transition: width 1s, height 1s; }
 
