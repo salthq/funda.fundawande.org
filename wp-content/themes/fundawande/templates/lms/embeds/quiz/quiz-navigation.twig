@@ -1,19 +1,17 @@
 
 <div id="navigation-links">
     <div class="container pb-5">
-        <div class="row my-0 justify-content-between">
-            <div class=" lesson-navigation-bottom col-12 col-lg-auto text-center py-1 py-md-0">
-                {% if quiz_retry %}
-                   {% include "lms/embeds/quiz/quiz-navigation-review.twig" %}
-                   {% include "lms/embeds/quiz/quiz-navigation-retry.twig" %}
-                {% endif %}
-                {% if quiz_resubmit and not quiz_retry and not lesson_complete %}
-                    {% include "lms/embeds/quiz/quiz-navigation-retry.twig" %}
-                {% endif %}
-                {% if not lesson_complete and not quiz_resubmit and not quiz_retry %}
-                    {% include "lms/embeds/quiz/quiz-navigation-submit.twig" %}
-                {% endif %}
-            </div>
+        <div class="d-flex justify-content-center">
+            {% if quiz_retry %}
+                {% include "lms/embeds/quiz/quiz-navigation-review.twig" %}
+                {% include "lms/embeds/quiz/quiz-navigation-retry.twig" %}
+            {% endif %}
+            {% if quiz_resubmit and not quiz_retry and not lesson_complete %}
+                {% include "lms/embeds/quiz/quiz-navigation-retry.twig" %}
+            {% endif %}
+            {% if not lesson_complete and not quiz_resubmit and not quiz_retry %}
+                {% include "lms/embeds/quiz/quiz-navigation-submit.twig" %}
+            {% endif %}
         </div>
     </div>
 </div>

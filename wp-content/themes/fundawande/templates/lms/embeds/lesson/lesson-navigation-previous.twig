@@ -1,10 +1,8 @@
- <div class="lesson-navigation-bottom col-12 col-lg-auto text-center py-1 py-md-0">
-    {% if sub_unit_meta.nav.prev %}
-        <a href="{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class="btn module-btn-outline-{{module_number}} mt-2">
-            <span class="px-2">
-                {{source ('/assets/arrow_left.svg')}}
-            </span>
-            {{attribute(options, lang.prefix~'prev_nav_text')}}
-        </a>
-    {% endif %}
-</div>
+{% if sub_unit_meta.nav.prev %}
+    <a href="{{fn('get_permalink',sub_unit_meta.nav.prev)}}" class="btn btn-lg module-btn-outline-{{module_number}}">
+        <span class="px-2">
+            {{source ('/assets/arrow_left.svg')}}
+        </span>
+        {{attribute(options, lang.prefix~'prev_nav_text')}}
+    </a>
+{% endif %}
