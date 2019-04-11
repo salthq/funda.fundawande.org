@@ -54,8 +54,12 @@
                     {% set lesson_current = true %}
                 {% endif %}
                 <div class = "col lesson-progress-divider {% if lesson.complete or lesson_current %}module-divider-before-{{module_number}}{% endif %}"></div>
-                <div class = "col-auto  lesson-progress-marker {% if lesson.complete or lesson_current %}module-bg-{{module_number}}{% endif %} {% if lesson_current %}current module-border-{{module_number}}{% endif %} text-center p-2"></div>
-            {% endfor %}
+                {% if lesson_current %}
+                    <span class="module-svg-fill-{{module_number}}">{{source('assets/three_dots.svg')}}</span>
+                {% else %}
+                <div class = "col-auto  lesson-progress-marker {% if lesson.complete %}module-bg-{{module_number}}{% endif %} text-center p-2"></div>
+                {% endif %}
+             {% endfor %}
             </div>
         </div>
     </div>
