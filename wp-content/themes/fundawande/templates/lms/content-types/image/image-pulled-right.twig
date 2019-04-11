@@ -3,6 +3,6 @@
     {{content.text}}
 </div>
 <div class = "col-12 col-md-6 text-md-right pt-4 fw-media">
-    <img class = "" src ="{{ content.image }}">
+    {% include "lms/content-types/image/image-content.twig" %}
     <h5 class="text-center mt-3">{{content.caption}}</h5>
 </div>
