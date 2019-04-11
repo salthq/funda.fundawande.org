@@ -29,7 +29,7 @@ if (class_exists('Timber')) {
     $context['units'] = $units;
 
     foreach ($units as $key => $unit) {
-     $context['unit_progress'] = FundaWande()->units->fw_unit_progress($unit->ID, $current_course_id);
+     $unit_progress = FundaWande()->units->fw_unit_progress($unit->ID, $current_course_id);
     }
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);
