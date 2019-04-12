@@ -72,6 +72,7 @@ class FundaWande_Units {
 
         $completed = 0;
         $total = 0;
+        $unit_progress = 0;
 
         foreach ($unit_lessons as $unit_lesson) {
             $total++;

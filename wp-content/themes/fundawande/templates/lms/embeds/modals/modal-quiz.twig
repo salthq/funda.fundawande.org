@@ -31,6 +31,16 @@
 
     {% endblock %}
 
+    {% block modal_footer %}
+        {%  if quiz_retry %}
+            <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
+                View Feedback <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+            </button>
+        {% elseif lesson_complete %}
+            {% include "lms/embeds/lesson/lesson-navigation-next.twig" %}
+        {% endif %}
+    {% endblock %}
+
 {% endembed %}
 
 {# Default the modal to open #}
