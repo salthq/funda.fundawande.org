@@ -34,7 +34,7 @@
         {# {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
             {% include "/lms/embeds/quiz/quiz-outcome-message.twig" %}
         {% endif %} #}
-        {%  if (quiz_retry or lesson_complete) and show_notifications %}
+        {%  if quiz_retry or lesson_complete %}
             {% include '/lms/embeds/modals/modal-quiz.twig' %}
         {% endif %}
 
