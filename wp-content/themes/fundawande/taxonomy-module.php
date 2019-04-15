@@ -28,8 +28,9 @@ if (class_exists('Timber')) {
     // Get the modules units to visualise on the module page
     $context['units'] = $units;
 
+    // When the page reloads, re-run the unit progress function to make sure that completed units are updated properly. 
     foreach ($units as $key => $unit) {
-     $unit_progress = FundaWande()->units->fw_unit_progress($unit->ID, $current_course_id);
+        FundaWande()->units->fw_unit_progress($unit->ID, $current_course_id);
     }
 
     Timber::render(array('lms/single-module.twig', 'page.twig'), $context);
