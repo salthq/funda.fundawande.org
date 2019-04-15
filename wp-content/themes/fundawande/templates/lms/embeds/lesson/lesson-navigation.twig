@@ -2,12 +2,12 @@
 <div id = "navigation-links"  class = "container-fluid my-4 py-4">
     <div class = "container">
         <hr>
-        <div class="lesson-navigation-bottom  d-flex">
+        <div class="lesson-navigation-bottom  d-flex flex-wrap justify-content-center justify-content-md-between">
             <!-- Previous Lesson Navigation Button -->
-            <div class="flex-grow-1">
+            <div class="flex-grow-md-1">
                 {% include "lms/embeds/lesson/lesson-navigation-previous.twig" %}
             </div>
-            <div class="flex-grow-1 d-flex justify-content-end">
+            <div class="flex-grow-md-1 d-flex justify-content-end">
                 {% if sub_unit_meta.nav.next %}
                     {# If a custom feedback message has been added for this lesson, fire a modal which displays the feedback before allowing the user to continue #}
                     {% if post.get_field('custom_feedback_message') %}

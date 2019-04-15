@@ -6,7 +6,7 @@
 <button id="lesson-complete"
 {# Check if there is a next lesson. If not, fire the end of course modal #}
 {% if not sub_unit_meta.nav.next %} onclick="completeCourse()" {% endif %}
-type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}} mt-2" 
+type="button" class="btn btn-lg module-btn-fill-{{sub_unit_meta.module_number}} m-2" 
 data-user-id="{{ user.ID }}" 
 data-post-id="{{ post.ID }}"
 data-url="{{fn('get_permalink',sub_unit_meta.nav.next)}}">
