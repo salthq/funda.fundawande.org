@@ -10,10 +10,10 @@
                 <div class="card-body">
                     {% for content in lesson_post.get_field('additional_resources') %}
                         {% if content.acf_fc_layout == 'pdf' %}
-                            {% include "lms/embeds/pdf-resource.twig" %}
+                            {% include "lms/embeds/content/pdf-resource.twig" %}
                         {% endif %}
                         {% if content.acf_fc_layout == 'video' %}
-                            {% include "lms/embeds/video-resource.twig" %}
+                            {% include "lms/embeds/content/video-resource.twig" %}
                         {% endif %}
                     {% endfor %}
                 </div>
