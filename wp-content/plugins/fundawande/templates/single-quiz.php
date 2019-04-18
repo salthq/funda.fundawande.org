@@ -124,7 +124,6 @@
 
 	                    </li>
                         <?php $count++; ?>
-                        <hr class="my-5">
 
 	                <?php endwhile; ?>
 
