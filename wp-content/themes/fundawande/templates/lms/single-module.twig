@@ -79,6 +79,7 @@
                                                 {# TODO: re-add check if lesson is current or complete before showing Href #}
                                                 <a href = "{{function('get_post_permalink', lesson.ID)}}" class="align-items-center col-auto d-flex flex-md-column flex-row  {%  if lesson.complete  %}complete module-svg-icon-fill-{{ module_number }}{% endif %} {%  if lesson.current  %}module-svg-fill-{{ module_number }}  module-border-{{ module_number }} current{% endif %} ">
                                                     <span class="up-next-text d-none d-md-inline-block {%  if lesson.current  %}module-bg-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
+                                                    <span class="d-none d-md-block text-center p-2">L{{loop.index}}</span>
                                                     {% set image = source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg', ignore_missing = true) %}
                                                     {% if image %}
                                                         {{ source('assets/lms/lesson_icons/' ~ lesson.icon ~ '.svg') }}
@@ -87,7 +88,7 @@
                                                     {% endif %}
                                                     <div class="d-flex flex-column justify-content-center py-1 py-md-2 pl-2 pl-md-0 lesson-progress-text">
                                                         <span class="d-md-none text-left {%  if lesson.current  %}module-text-{{ module_number }}{% endif %}">{%  if lesson.current  %}Up next{% endif %}</span>
-                                                        <p class = "m-0">{{lesson.title}}</p>
+                                                        <p class = "m-0 px-2">{{lesson.title}}</p>
                                                     </div>
                                                 </a>
                                             </div>

@@ -1,6 +1,8 @@
 <!-- Content Type: Carousel Full Width With Text -->
 <div class = "col-12 px-0 pt-4">
     {% set carousel_id = "carousel-full-width-with-text" %}
-    {% embed "lms/embeds/lesson-carousel.twig" %}
+    {% embed "lms/embeds/content/lesson-carousel.twig" %}
+        {% block carousel_text %}
+        {% endblock %}
     {% endembed %}
 </div>

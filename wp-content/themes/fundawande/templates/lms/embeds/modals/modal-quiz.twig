@@ -18,10 +18,6 @@
             </div>
 
     {% endblock %}
-    {# Remove close button #}
-    {% block modal_close %}
-    
-    {% endblock %}
     {# Add quiz modal content to modal #}
     {% block modal_body %}
 
@@ -31,14 +27,33 @@
 
     {% endblock %}
 
+    {% block modal_footer %}
+        {%  if quiz_retry %}
+            <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
+                View Feedback <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+            </button>
+        {% elseif lesson_complete %}
+            {% if sub_unit_meta.is_last_in_unit %}
+                <div id="quiz-complete-unit">
+                    {% include "lms/embeds/lesson/lesson-navigation-end-unit.twig" %}                
+                </div>
+            {% else %}
+                {% include "lms/embeds/lesson/lesson-navigation-next.twig" %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
 {% endembed %}
 
 {# Default the modal to open #}
 <script>
-    jQuery(document).ready( function($) {
-        $('#{{ modal_id }}').modal('show');
-    });
+    jQuery(document).ready(function($) {
+        $("#{{ modal_id }}").modal("show");
 
+        $("#quiz-complete-unit").on("click", function() {
+            $("#{{ modal_id }}").modal("hide");
+        });
+    });
 
     //Scroll down to quiz questions when the quiz modal is visible
     function animate(elem, style, unit, from, to, time, prop) {

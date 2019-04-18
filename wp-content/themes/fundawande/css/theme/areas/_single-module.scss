@@ -113,9 +113,6 @@
                             fill :$text-primary__colour;
                         }
                     }
-                    .lesson-progress-text p {
-                        width: 93px;
-                    }
                     @include breakpoint(phone) {
                         width: auto;
                         border-radius: 28px 6px 6px 28px;
