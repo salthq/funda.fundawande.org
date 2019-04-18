@@ -14,6 +14,7 @@
                         {% include '/lms/embeds/modals/modal-end-lesson.twig' %}
                     {% endif %}
                     {% if sub_unit_meta.is_last_in_unit %}
+                        {% include '/lms/embeds/modals/modal-end-unit.twig' %}
                         {% include "lms/embeds/lesson/lesson-navigation-end-unit.twig" %}
                     {% else %}
                         {% include "lms/embeds/lesson/lesson-navigation-next.twig" %}
