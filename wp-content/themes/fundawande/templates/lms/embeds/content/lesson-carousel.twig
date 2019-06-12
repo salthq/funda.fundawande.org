@@ -28,9 +28,9 @@
     </a>
 
     <!-- Carousel Content -->
-    <div class="" role="listbox">
+    < class="" role="listbox">
             {% for item in content.carousel_items %}
-                <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}" data-touch="true"> <div class="lesson-image-wrapper row justify-content-center">
+                <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}" data-touch="true"> < class="lesson-image-wrapper row justify-content-center">
                     <div class = "{% if loop.length < 7 %} d-sm-none {% endif %} lesson-carousel-counter">
                         <p class="text-center m-0">{{loop.index}} of {{loop.length}}</p>
                     </div>
@@ -57,7 +57,6 @@
                         </div>
                     </div>
 
-                    </div>
                 </div>
             {% endfor %}
         </div>
