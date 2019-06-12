@@ -44,17 +44,19 @@
                             </a>
                         </div>
                     </div>   
-                        {% block carousel_text %}
-                            <div class="col-12">
-                                <div class="container lesson-carousel-text text-center">
-                                    <h5 class="text-center mt-3">
-                                        {{ item.title }}
-                                    </h5>
-                                    <div class="text-center m-2">
-                                        {{ item.text }}</div>
-                                </div>
+
+                    <!-- Carousel Text -->
+                    <div class="col-12">
+                        <div class="container lesson-carousel-text text-center">
+                            <h5 class="text-center mt-3">
+                                {{ item.title }}
+                            </h5>
+                            <div class="text-center m-2">
+                                {{ item.text }}
                             </div>
-                        {% endblock %}
+                        </div>
+                    </div>
+
                     </div>
                 </div>
             {% endfor %}
