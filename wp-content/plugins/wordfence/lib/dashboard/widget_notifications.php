@@ -32,7 +32,7 @@
 		<div class="wf-flex-col-xs-100 wf-flex-col-lg-50 wf-col-lg-half-padding-left wf-dashboard-item-flex-wrapper wf-central-connected">
 			<div class="wf-dashboard-item active wf-flex-row-1">
 				<div class="wf-central-dashboard">
-					<img class="wf-central-dashboard-logo" src="<?php echo wfUtils::getBaseURL() ?>/images/wf-central-logo.svg" alt="Wordfence Central">
+					<img class="wf-central-dashboard-logo" src="<?php echo wfUtils::getBaseURL() ?>images/wf-central-logo.svg" alt="Wordfence Central">
 					<div class="wf-central-dashboard-copy">
 						<p><strong><?php _e('Wordfence Central Status', 'wordfence') ?></strong></p>
 						<p><?php
@@ -40,19 +40,31 @@
 								printf(__('Connected by %s on %s', 'wordfence'), esc_html($d->wordfenceCentralConnectEmail), esc_html(date_i18n(get_option('date_format'), $d->wordfenceCentralConnectTime)));
 							} elseif ($d->wordfenceCentralDisconnected) {
 								printf(__('Disconnected by %s on %s', 'wordfence'), esc_html($d->wordfenceCentralDisconnectEmail), esc_html(date_i18n(get_option('date_format'), $d->wordfenceCentralDisconnectTime)));
+							} elseif (wfCentral::isPartialConnection()) {
+								_e('It looks like you\'ve tried to connect this site to Wordfence Central, but the installation did not finish.', 'wordfence');
 							} else {
 								_e('Wordfence Central allows you to manage Wordfence on multiple sites from one location. It makes security monitoring and configuring Wordfence easier.', 'wordfence');
 							}
 						?></p>
 						<div class="wf-flex-row">
-							<p class="wf-flex-row-1">
-								<?php if ($d->wordfenceCentralConnected): ?>
-									<a href="#" class="wf-central-disconnect"><strong><?php _e('Disconnect This Site', 'wordfence') ?></strong></a>
-								<?php else: ?>
-									<a href="<?php echo WORDFENCE_CENTRAL_URL_SEC ?>?newsite=<?php echo esc_attr(home_url()) ?>"><strong><?php _e($d->wordfenceCentralDisconnected ? 'Reconnect This Site' : 'Connect This Site', 'wordfence') ?></strong></a>
-								<?php endif; ?>
-							</p>
-							<p class="wf-flex-row-1 wf-right"><a href="<?php echo esc_url(WORDFENCE_CENTRAL_URL_SEC) ?>" target="_blank" rel="noopener noreferrer"><strong><?php _e('Visit Wordfence Central', 'wordfence') ?></strong></a></p>
+							<?php if (wfCentral::isPartialConnection()): ?>
+								<p>
+									<a href="<?php echo WORDFENCE_CENTRAL_URL_SEC ?>/sites/connection-issues?complete-setup=<?php echo esc_attr(wfConfig::get('wordfenceCentralSiteID')) ?>"
+											class="wf-central-resume wf-btn wf-btn-sm wf-btn-primary"
+									><?php _e('Resume Installation', 'wordfence') ?></a>
+									<a href="#" class="wf-central-disconnect wf-btn wf-btn-sm wf-btn-default"><strong><?php _e('Disconnect This Site', 'wordfence') ?></strong></a>
+								</p>
+							<?php else: ?>
+								<p class="wf-flex-row-1">
+									<?php if ($d->wordfenceCentralConnected): ?>
+										<a href="#" class="wf-central-disconnect"><strong><?php _e('Disconnect This Site', 'wordfence') ?></strong></a>
+									<?php else: ?>
+										<a href="<?php echo WORDFENCE_CENTRAL_URL_SEC ?>?newsite=<?php echo esc_attr(home_url()) ?>"><strong><?php _e($d->wordfenceCentralDisconnected ? 'Reconnect This Site' : 'Connect This Site', 'wordfence') ?></strong></a>
+									<?php endif; ?>
+								</p>
+								<p class="wf-flex-row-1 wf-right wf-nowrap"><a href="<?php echo esc_url(WORDFENCE_CENTRAL_URL_SEC) ?>" target="_blank" rel="noopener noreferrer"><strong><?php _e('Visit Wordfence Central', 'wordfence') ?></strong></a></p>
+							<?php endif ?>
+
 						</div>
 					</div>
 				</div>

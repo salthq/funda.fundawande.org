@@ -253,7 +253,7 @@ class wfCentralAuthenticatedAPIRequest extends wfCentralAPIRequest {
 	}
 
 	public function fetchToken() {
-		require_once WORDFENCE_PATH . '/vendor/paragonie/sodium_compat/autoload.php';
+		require_once WORDFENCE_PATH . '/crypto/vendor/paragonie/sodium_compat/autoload-fast.php';
 
 		$defaultArgs = array(
 			'timeout' => 6,
@@ -313,7 +313,7 @@ class wfCentral {
 	 * @return bool
 	 */
 	public static function isSupported() {
-		return function_exists('register_rest_route');
+		return function_exists('register_rest_route') && version_compare(phpversion(), '5.3', '>=');
 	}
 
 	/**
@@ -321,6 +321,13 @@ class wfCentral {
 	 */
 	public static function isConnected() {
 		return self::isSupported() && ((bool) wfConfig::get('wordfenceCentralConnected', false));
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function isPartialConnection() {
+		return !wfConfig::get('wordfenceCentralConnected') && wfConfig::get('wordfenceCentralSiteID');
 	}
 
 	/**
@@ -393,6 +400,28 @@ class wfCentral {
 	}
 
 	/**
+	 * @return bool|wfCentralAPIResponse
+	 */
+	public static function deleteNewIssues() {
+		$siteID = wfConfig::get('wordfenceCentralSiteID');
+		$request = new wfCentralAuthenticatedAPIRequest('/site/' . $siteID . '/issues', 'DELETE', array(
+			'data' => array(
+				'type'       => 'issue-list',
+				'attributes' => array(
+					'status' => 'new',
+				)
+			),
+		));
+		try {
+			$response = $request->execute();
+			return $response;
+		} catch (wfCentralAPIException $e) {
+			error_log($e);
+		}
+		return false;
+	}
+
+	/**
 	 * @param array $types Array of issue types to delete
 	 * @param string $status Issue status to delete
 	 * @return bool|wfCentralAPIResponse
@@ -418,7 +447,7 @@ class wfCentral {
 	}
 
 	public static function requestConfigurationSync() {
-		if (! wfCentral::isConnected()) {
+		if (! wfCentral::isConnected() || !self::$syncConfig) {
 			return;
 		}
 
@@ -431,6 +460,12 @@ class wfCentral {
 		} catch (Exception $e) {
 			// We can safely ignore an error here for now.
 		}
+	}
+
+	protected static $syncConfig = true;
+
+	public static function preventConfigurationSync() {
+		self::$syncConfig = false;
 	}
 
 	/**

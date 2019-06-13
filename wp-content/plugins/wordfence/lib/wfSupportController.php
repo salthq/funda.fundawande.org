@@ -8,6 +8,7 @@ class wfSupportController {
 	const ITEM_CHANGELOG = 'changelog';
 	
 	const ITEM_NOTICE_WAF_INACCESSIBLE_CONFIG = 'notice-waf-inaccessible-config';
+	const ITEM_NOTICE_WAF_MOD_PHP_FIX = 'notice-waf-mod-php-fix';
 	const ITEM_NOTICE_WAF_READ_ONLY_WARNING = 'notice-waf-read-only-warning';
 	const ITEM_NOTICE_MISCONFIGURED_HOW_GET_IPS = 'notice-misconfigured-how-get-ips';
 	const ITEM_NOTICE_SWITCH_LIVE_TRAFFIC = 'notice-switch-live-traffic';
@@ -162,6 +163,10 @@ class wfSupportController {
 	const ITEM_DIAGNOSTICS_OPTION_DISABLE_PHP_INPUT = 'diagnostics-option-disable-php-input';
 	const ITEM_DIAGNOSTICS_OPTION_BETA_TDF = 'diagnostics-option-beta-tdf';
 	
+	const ITEM_MODULE_LOGIN_SECURITY = 'module-login-security';
+	const ITEM_MODULE_LOGIN_SECURITY_2FA = 'module-login-security-2fa';
+	const ITEM_MODULE_LOGIN_SECURITY_CAPTCHA = 'module-login-security-captcha';
+	
 	public static function esc_supportURL($item = self::ITEM_INDEX) {
 		return esc_url(self::supportURL($item));
 	}
@@ -179,6 +184,7 @@ class wfSupportController {
 			//These all fall through to the query format
 				
 			case self::ITEM_NOTICE_WAF_INACCESSIBLE_CONFIG:
+			case self::ITEM_NOTICE_WAF_MOD_PHP_FIX:
 			case self::ITEM_NOTICE_WAF_READ_ONLY_WARNING:
 			case self::ITEM_NOTICE_MISCONFIGURED_HOW_GET_IPS:
 			case self::ITEM_NOTICE_SWITCH_LIVE_TRAFFIC:
@@ -332,6 +338,10 @@ class wfSupportController {
 			case self::ITEM_DIAGNOSTICS_OPTION_SSL_VERIFICATION:
 			case self::ITEM_DIAGNOSTICS_OPTION_DISABLE_PHP_INPUT:
 			case self::ITEM_DIAGNOSTICS_OPTION_BETA_TDF:
+				
+			case self::ITEM_MODULE_LOGIN_SECURITY:
+			case self::ITEM_MODULE_LOGIN_SECURITY_2FA:
+			case self::ITEM_MODULE_LOGIN_SECURITY_CAPTCHA:
 				return $base . '?query=' . $item;
 		}
 		
