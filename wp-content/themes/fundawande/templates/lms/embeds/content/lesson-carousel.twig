@@ -28,36 +28,35 @@
     </a>
 
     <!-- Carousel Content -->
-    <class="" role="listbox">
-            {% for item in content.carousel_items %}
-                <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}" data-touch="true"> <class="lesson-image-wrapper row justify-content-center">
-                    <div class = "{% if loop.length < 7 %} d-sm-none {% endif %} lesson-carousel-counter">
-                        <p class="text-center m-0">{{loop.index}} of {{loop.length}}</p>
-                    </div>
-                    <div class="lesson-carousel-image col fw-media mt-5">
-                        <div class="img-container">
-                            <img class="d-block" src ="{{ item.image }}">
-                            <a class="img-download-icon" href="{{item.image}}" download>
-                                <span class="module-svg-fill-{{sub_unit_meta.module_number}}">
-                                    {{source('assets/download_icon.svg')}}
-                                </span>
-                            </a>
-                        </div>
-                    </div>   
-
-                    <!-- Carousel Text -->
-                    <div class="col-12">
-                        <div class="container lesson-carousel-text text-center">
-                            <h5 class="text-center mt-3">
-                                {{ item.title }}
-                            </h5>
-                            <div class="text-center m-2">
-                                {{ item.text }}
-                            </div>
-                        </div>
-                    </div>
-
+    <div class="" role="listbox">
+        {% for item in content.carousel_items %}
+            <div class="carousel-item  {% if loop.index == 1 %}active{% endif %}" data-touch="true">
+                <div class = "{% if loop.length < 7 %} d-sm-none {% endif %} lesson-carousel-counter">
+                    <p class="text-center m-0">{{loop.index}} of {{loop.length}}</p>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="lesson-carousel-image col fw-media mt-5">
+                    <div class="img-container">
+                        <img class="d-block" src ="{{ item.image }}">
+                        <a class="img-download-icon" href="{{item.image}}" download>
+                            <span class="module-svg-fill-{{sub_unit_meta.module_number}}">
+                                {{source('assets/download_icon.svg')}}
+                            </span>
+                        </a>
+                    </div>
+                </div>   
+
+                <!-- Carousel Text -->
+                <div class="col-12">
+                    <div class="container lesson-carousel-text text-center">
+                        <h5 class="text-center mt-3">
+                            {{ item.title }}
+                        </h5>
+                        <div class="text-center m-2">
+                            {{ item.text }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
     </div>
