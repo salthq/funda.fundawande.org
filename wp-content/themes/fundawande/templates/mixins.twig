@@ -29,6 +29,15 @@
     background-image: -webkit-linear-gradient(top, rgba({{ overlay}}, {{ opacity }}), rgba({{ overlay}}, {{ opacity }})), url('{{src}}');
 {% endmacro %}
 
+{# Add Image Grid Item #}
+{% macro imgGridItem(columns, file, image_src, caption, module_number) %}
+    <div class="col-12 {{columns}} text-center pt-3">
+        {% include "lms/content-types/image/image-content.twig" %}
+        <h5 class="text-center mt-3">{{content.caption}}</h5>
+    </div>
+{% endmacro %}
+
+
 {# Add PDF Image #}
 {% macro pdfImage(columns, file, image_src, lang, module_number) %}
     {% import _self as mixins %}
