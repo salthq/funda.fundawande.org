@@ -55,6 +55,9 @@
                     {# Pulled right image #}
                 {% elseif content.acf_fc_layout == 'image_pulled_right' %}
                     {% include '/lms/content-types/image/image-pulled-right.twig' %}
+                    {# Image Grid #}
+                {% elseif content.acf_fc_layout == 'image_grid' %}
+                    {% include '/lms/content-types/image/image-grid.twig' %}
 
                 {# PDF Content Types #}
                     {# PDF Container Width #}

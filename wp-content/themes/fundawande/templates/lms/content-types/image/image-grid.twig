@@ -1,6 +1,6 @@
 <!-- Content Type: Image Grid -->
 {% for image in content.image_grid %}
-    {% set numImages = content.pdf_grid|length %}
+    {% set numImages = content.image_grid|length %}
     {% if numImages == 2 %}
         {% set imgCols = "col-md-6" %}
     {% elseif numImages == 3 %}
@@ -9,6 +9,6 @@
         {% set imgCols = "col-md-3" %}
     {% endif %}
 
-    {{mixin.imgGridItem(imgCols, image.file, image.holding_image, image.caption, module_number)}}
+    {{mixin.imgGridItem(imgCols, image.file, image.caption, module_number)}}
 
 {% endfor %}

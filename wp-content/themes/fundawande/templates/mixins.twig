@@ -30,10 +30,17 @@
 {% endmacro %}
 
 {# Add Image Grid Item #}
-{% macro imgGridItem(columns, file, image_src, caption, module_number) %}
+{% macro imgGridItem(columns, file, caption, module_number) %}
     <div class="col-12 {{columns}} text-center pt-3">
-        {% include "lms/content-types/image/image-content.twig" %}
-        <h5 class="text-center mt-3">{{content.caption}}</h5>
+        <div class="img-container">
+            <img src ="{{ file }}">
+            <a class="img-download-icon" href="{{file}}" download>
+                <span class="module-svg-fill-{{module_number}}">
+                    {{source('assets/download_icon.svg')}}
+                </span>
+            </a>
+        </div>   
+        <h5 class="text-center mt-3">{{caption}}</h5>
     </div>
 {% endmacro %}
 
