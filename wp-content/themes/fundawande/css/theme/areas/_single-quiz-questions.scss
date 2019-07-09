@@ -69,12 +69,13 @@
         #sensei-quiz-list {
             list-style: none;
             padding-left: 0;
-            .question-number {
-                position: absolute;
-            }
-            .question-title{
-                padding-left: 2rem;
-            }
+            // Removed as the numbering has been commented out
+            // .question-number {
+            //     position: absolute;
+            // }
+            // .question-title{
+            //     padding-left: 2rem;
+            // }
 
         }
         span.grade {
