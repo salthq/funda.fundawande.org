@@ -58,6 +58,10 @@ if (class_exists('Timber')) {
     $context['unit_number'] = $sub_unit_meta->unit_number;
 
 
+    $quiz_timer = get_post_meta($lesson_id, 'pango-qt_limit', true);
+    $context['quiz_timer'] = $quiz_timer;
+
+
 
     Timber::render(array('lms/single-quiz.twig', 'page.twig'), $context);
 

@@ -42,16 +42,26 @@
         <!-- Lesson Content-->
         {% set lesson_post = quiz_lesson %}
         {% include '/lms/embeds/lesson/lesson-content.twig' %}
-        <!-- Quiz Content-->
-        {% include "/lms/embeds/quiz/quiz-content.twig" %}
+
+        {% if not quiz_timer %}
+            <!-- Quiz Content-->
+            {% include "/lms/embeds/quiz/quiz-content.twig" %} 
+        {% else %}
+            {% include "/lms/embeds/quiz/quiz-timer-content.twig" %}
+        {% endif %}
+        
 
         <!-- Downloadable Resources -->
         {% if quiz_lesson.get_field('additional_resources') %}
             {% include "lms/embeds/lesson/downloadable-resources.twig" %}
         {% endif %}
 
-        <!-- Quiz Submission -->
-        {% include "/lms/embeds/quiz/quiz-navigation.twig" %}
+        {% if not quiz_timer %}
+
+            <!-- Quiz Submission -->
+            {% include "/lms/embeds/quiz/quiz-navigation.twig" %}
+
+        {% endif %}
 
 
         <!-- Lesson navigation-->
