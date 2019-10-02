@@ -424,3 +424,27 @@ img {
     max-width: 120px;
   }
 }
+
+
+// Quiz Timer Styles
+#timerbox {
+  left: 0;
+  padding: 2em;
+  background-color: Green;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  display: none;
+  z-index:2;
+}
+
+#quiz-form {
+  display: none;
+}
+#timerbox.orange {
+  background-color: #ffa81f !important;
+}
+
+#timerbox.red {
+  background-color: Red !important;
+}

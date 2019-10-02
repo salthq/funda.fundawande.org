@@ -172,8 +172,13 @@ class FundaWande_Main {
         // $this->post_types = new FundaWande_PostTypes();
 
         // Setup quiz functionality class
-        $this->quiz = new FundaWande_Quiz();
+		$this->quiz = new FundaWande_Quiz();
+		
+		// Setup quiz timer class
+		$this->quiz_timer = new FundaWande_Quiz_Timer();
 
+		// Setup quiz timer settings class
+		$this->quiz_timer_settings = new FundaWande_Quiz_Timer_Settings();
 
         // Setup question functionality class
         $this->question = new FundaWande_Question();
