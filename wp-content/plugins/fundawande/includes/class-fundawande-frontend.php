@@ -45,6 +45,10 @@ class FundaWande_Frontend
 		if ((is_singular('lesson')) || (is_singular('quiz'))) {
 			wp_enqueue_script(FundaWande()->token . '-single-lesson', FundaWande()->plugin_url . 'assets/js/single-lesson.min.js', array(), FW_VER, true);
 			wp_localize_script(FundaWande()->token . '-single-lesson', 'fundawande_ajax_object', array('ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php'));
+
+			wp_enqueue_script(FundaWande()->token . '-quiz-timer', FundaWande()->plugin_url . 'assets/js/quiz-timer.min.js', array(), FW_VER, true);
+			wp_localize_script(FundaWande()->token . '-quiz-timer', 'fundawande_ajax_object', array('ajaxurl' => FundaWande()->plugin_url . '/fundawande_ajax.php'));
+
 		}
 
 		// Include review activity page assets

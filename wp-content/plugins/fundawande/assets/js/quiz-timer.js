@@ -2,6 +2,9 @@ jQuery(document).ready(function($) {
   var showAlert = true;
   var submitForm = true;
 
+  $(".start-quiz-timer").click(function(e) {
+    confirm('This will start the timer. Are you sure you are ready to begin the quiz?')
+  })
   // On click start timer and show quiz
   $("#start-quiz").click(function(e) {
     e.preventDefault();
@@ -16,7 +19,8 @@ jQuery(document).ready(function($) {
       success: function() {
         // This outputs the result of the ajax request
         $("#start-quiz").hide();
-        $("#quiz-form").show();
+        $('#quiz-alert').hide()
+        $("#quiz-content").show();
         // Run update of timer every second
 
         loadTimer(); // this will run after every second

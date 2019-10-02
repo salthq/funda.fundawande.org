@@ -47,7 +47,7 @@ class FundaWande_Quiz_Timer_Settings
             'fields' => array(
                 array(
                     'name' => 'Quiz Time Limit',
-                    'desc' => 'minutes',
+                    'desc' => ' minutes',
                     'id' => $qt_prefix . 'limit',
                     'type' => 'number',
                     'std' => ''
@@ -83,7 +83,7 @@ class FundaWande_Quiz_Timer_Settings
                 '<td>';
             switch ($qt_field['type']) {
                 case 'text':
-                    echo '<input type="text" name="', $qt_field['id'], '" id="', $qt_field['id'], '" value="', $meta ? $meta : $qt_field['std'], '" size="30" style="width:50%" />', '<br />', $qt_field['desc'];
+                    echo '<input type="text" name="', $qt_field['id'], '" id="', $qt_field['id'], '" value="', $meta ? $meta : $qt_field['std'], ' " size="30" style="width:50%" />', '<br />', $qt_field['desc'];
                     break;
                 case 'textarea':
                     $content = $meta ? $meta : $qt_field['std'];
@@ -109,7 +109,7 @@ class FundaWande_Quiz_Timer_Settings
                     echo '<input type="checkbox" name="', $qt_field['id'], '" id="', $qt_field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
                     break;
                 case 'number':
-                    echo '<input type="number" id="' . $qt_field['id'] . ' " name="' . $qt_field['id'] . '" class="small-text" value="', $meta ? $meta : $qt_field['std'], '"/>', $qt_field['desc'];
+                    echo '<input type="number" id="' . $qt_field['id'] . ' " name="' . $qt_field['id'] . '" class="small-text" value="', $meta ? $meta : $qt_field['std'], ' "/>', $qt_field['desc'];
                     break;
                 case 'time':
                     echo '<input type="time" id="' . $qt_field['id'] . ' " name="' . $qt_field['id'] . '" class="small-text" value="', $meta ? $meta : $qt_field['std'], '"/>';
