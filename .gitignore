@@ -1,0 +1,53 @@
+# ignore everything in the root except the "wp-content" directory.*
+/*
+!wp-content/
+# ignore everything in the "wp-content" directory, except:
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+# ignore all files starting with . or ~
+.*
+~*
+# ignore node dependency directories (used by gulp)
+node_modules/
+# ignore OS generated files
+ehthumbs.db
+Thumbs.db
+# ignore Editor files
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.wpress
+!.editorconfig
+*.zip
+*.wpress
+# -------------------------
+# BEGIN Whitelisted Files
+# -------------------------
+# track these files, if they exist
+!.editorconfig
+!README.md
+!CHANGELOG.md
+!composer.json
+# ignore key developer dev plugins and their associated whitelisted files
+wp-content/plugins/what-the-file/*
+wp-content/plugins/debug-bar/*
+wp-content/plugins/debug-bar-timber/*
+# track the gitignore
+!/.gitignore
