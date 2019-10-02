@@ -1,0 +1,29 @@
+<!-- ******************* The Navbar Area ******************* -->
+<div  id="wrapper-navbar"  class="wrapper-fluid wrapper-navbar " >
+    <nav class="navbar navbar-expand-lg d-flex align-items-center h-100">
+
+        <!-- Main Menu Button -->
+        <div id="main-menu-button-container" class="px-4 h-100 d-flex align-items-center">
+            <a id="main-menu-button" class="nav-link " href="#"  role="button" data-toggle="modal" data-target="#main-menu-modal">
+                <div class="nav-hamburger nav-hamburger--htx  align-self-center ml-0 "><span></span></div>
+                <span class="open-text ml-2 text-uppercase">{{attribute(options, lang.prefix~'open_menu_text')}}</span>
+                <span class="close-text ml-2 text-uppercase">{{attribute(options, lang.prefix~'close_menu_text')}}</span>
+            </a>
+        </div>
+
+        <!-- View Courses Button -->
+        <a class="d-none d-lg-block ml-2 pr-4" href="{{fn('get_site_url')}}/my-courses">
+            {{ source('assets/menu/courses_navbar_icon.svg') }}
+            <span class="ml-2">{{attribute(options, lang.prefix~'view_courses_link')}}</span>
+        </a>
+
+        {# TODO: When the language button is re-added, the spacing of the view tooltips link will need to be changed #}
+        <!-- Tooltips Button -->
+        <div  id = "view-tooltips" class = "d-none d-lg-block mx-5 ml-md-auto" style="background-color: #4a4a4a">
+            <a onclick="tour.show()" class="ml-md-4 ml-auto" href="#">{{ source('assets/question_icon.svg') }}<span class="ml-2 ">{{attribute(options, lang.prefix~'view_tooltips')}}</span></a>
+        </div>
+
+       
+
+    </nav>
+</div><!-- .wrapper-navbar end -->

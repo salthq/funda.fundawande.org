@@ -1,0 +1,61 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Set lesson number #}
+{% set lesson_number = 0 %}
+{% set lesson_complete = false %}
+{% for lesson in sub_unit_meta.unit_lessons %}
+
+    {% if lesson.ID == quiz_lesson.ID %}
+        {% set lesson_number = loop.index %}
+        {% if lesson.complete %}
+            {% set lesson_complete = true %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+
+        {# Include mobile progress component #}
+        {% include '/lms/embeds/lesson/lesson-progress-mobile.twig' %}
+        {# Include desktop progress component #}
+        {% include '/lms/embeds/lesson/lesson-sidebar.twig' %}
+        {# Include lesson header component #}
+        {% include '/lms/embeds/lesson/lesson-header.twig' %}
+
+        {# TODO: Remove the quiz outcome message template once the FW team have confirmed they no longer want it #}
+        {# If quiz outcome is set then show message and modal #}
+        {# {%  if (quiz_retry or lesson_complete or quiz_resubmit)  %}
+            {% include "/lms/embeds/quiz/quiz-outcome-message.twig" %}
+        {% endif %} #}
+        {%  if quiz_retry or lesson_complete %}
+            {% include '/lms/embeds/modals/modal-quiz.twig' %}
+        {% endif %}
+
+
+        <!-- Lesson Content-->
+        {% set lesson_post = quiz_lesson %}
+        {% include '/lms/embeds/lesson/lesson-content.twig' %}
+        <!-- Quiz Content-->
+        {% include "/lms/embeds/quiz/quiz-content.twig" %}
+
+        <!-- Downloadable Resources -->
+        {% if quiz_lesson.get_field('additional_resources') %}
+            {% include "lms/embeds/lesson/downloadable-resources.twig" %}
+        {% endif %}
+
+        <!-- Quiz Submission -->
+        {% include "/lms/embeds/quiz/quiz-navigation.twig" %}
+
+
+        <!-- Lesson navigation-->
+        {% include "/lms/embeds/lesson/lesson-navigation.twig" %}
+    </div><!-- #wrapper -->
+
+{% endblock %}

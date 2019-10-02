@@ -1,0 +1,31 @@
+// ==========================================================================
+// Main
+//
+// Example of a page-specific SASS file
+//
+// ==========================================================================
+
+.site-logo {
+  margin-bottom: 2em;
+  @include img-replace("logo.svg", 115px, 45px, inline-block);
+}
+
+.btn,
+.progbar,
+.tooltip {
+	@include bg-colors($ui-colors);
+}
+
+.icn-toggle {
+	@include p-el(before, 25px, 3px) {
+   background: palette(grey, light);
+   top: 4px;
+  }
+  width: 25px;
+	height: 17px;
+	position: absolute;
+	border-top: solid 3px palette(grey);
+	border-bottom: solid 3px palette(grey);
+}
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" fill="#CCCCCC" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="expand_icon" fill-rule="nonzero">
+            <circle id="Oval"  cx="16.19" cy="16.19" r="16.19"></circle>
+            <path id="inner" d="M16.3857143,15.4428482 L11.0947143,10.0438482 C10.4567143,9.38784821 9.44271429,9.41084821 8.83071429,10.0948482 C8.21871429,10.7798482 8.24071429,11.8658482 8.87871429,12.5218482 L15.2777143,19.0878482 C15.8967143,19.7248482 16.8747143,19.7248482 17.4937143,19.0878482 L23.8927143,12.5218482 C24.5307143,11.8658482 24.5527143,10.7788482 23.9407143,10.0948482 C23.3287143,9.40984821 22.3157143,9.38684821 21.6767143,10.0438482 L16.3857143,15.4428482 Z" id="Shape" fill="#FFFFFF" transform="translate(16.385714, 14.565657) rotate(-180.000000) translate(-16.385714, -14.565657) "></path>
+        </g>
+    </g>
+</svg>

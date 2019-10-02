@@ -1,0 +1,78 @@
+/* ==========================================================================
+* Single Course Area
+*
+* Styling specific to the course page, single-course.twig
+*
+ ========================================================================== */
+.single-course-wrapper {
+  
+  .course-title {
+    background-color: $white;
+  }
+  
+  
+  //Remove a tag styling from cards
+  .module-link {
+    color: $text-primary__colour;
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      color: $text-primary__colour;
+    }
+  }
+  
+   .card {
+     &.current {
+       border: 3px solid $brand-primary__colour;
+       margin-top: 3rem!important;
+       .current-module-text {
+         display: block;
+         position: absolute;
+         font-style: italic;
+         color: white;
+         padding: 6px 18px;
+         background: $brand-primary__colour;
+         border-radius: 5px 5px 0 0;
+         left:2rem;
+         @include breakpoint(tablet) {
+          top:-40px;
+         }
+         @include breakpoint(phone) {
+           top: -30px;
+         }
+       }
+     }
+     &:hover {
+       -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+
+     }
+    .header {
+      align-items: center;
+      &-counter {
+        border-radius:  5px;
+        h2, h3, h4, h5 {
+          color: $white;
+        }
+      }
+    }
+    .module {
+      &-nav {
+        align-items: center;
+        justify-content: center;
+        &-button {
+          border-radius: 5px;
+          height: 100%;
+          flex-direction:  column;
+          justify-content:  center;
+          h2, h3, h4, h5 {
+            color: $white;
+          }
+        }  
+      }
+    }
+  }
+
+}
+
+ 

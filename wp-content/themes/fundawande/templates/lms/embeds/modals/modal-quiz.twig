@@ -1,0 +1,87 @@
+{# Set the modal content depending on outcome #}
+{%  if quiz_retry %}
+    {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_retry_content') %}
+{% elseif lesson_complete %}
+    {% set modal_content =  attribute(options, lang.prefix~'quiz_outcome_success_content')  %}
+{% endif %}
+{# Set the modal ID to use to open the modal #}
+{% set modal_id = "quiz-message" %}
+{% embed "embeds/modals/modal-global.twig" %}
+    {# Add quiz outcome header to modal #}
+    {% block modal_header %}
+
+            <div class="col-auto">
+                {{source('/assets/lms/quiz_outcome.svg')}}
+            </div>
+            <div class="col-auto">
+                <h2>{{attribute(options, lang.prefix~'quiz_outcome_header')}}</h2>
+            </div>
+
+    {% endblock %}
+    {# Add quiz modal content to modal #}
+    {% block modal_body %}
+
+        <div class="col-12">
+            {{  modal_content }}
+        </div>
+
+    {% endblock %}
+
+    {% block modal_footer %}
+        {%  if quiz_retry %}
+            <button type="button" class="btn primary-btn-fill" data-dismiss="modal" aria-label="Close">
+                View Feedback <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+            </button>
+        {% elseif lesson_complete %}
+            {% if sub_unit_meta.is_last_in_unit %}
+                <div id="quiz-complete-unit">
+                    {% include "lms/embeds/lesson/lesson-navigation-end-unit.twig" %}                
+                </div>
+            {% else %}
+                {% include "lms/embeds/lesson/lesson-navigation-next.twig" %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+{% endembed %}
+
+{# Default the modal to open #}
+<script>
+    jQuery(document).ready(function($) {
+        $("#{{ modal_id }}").modal("show");
+
+        $("#quiz-complete-unit").on("click", function() {
+            $("#{{ modal_id }}").modal("hide");
+        });
+    });
+
+    //Scroll down to quiz questions when the quiz modal is visible
+    function animate(elem, style, unit, from, to, time, prop) {
+        if (!elem) {
+            return;
+        }
+        var start = new Date().getTime(),
+            timer = setInterval(function() {
+            var step = Math.min(1, (new Date().getTime() - start) / time);
+            if (prop) {
+                elem[style] = from + step * (to - from) + unit;
+            } else {
+                elem.style[style] = from + step * (to - from) + unit;
+            }
+            if (step === 1) {
+                clearInterval(timer);
+            }
+            }, 25);
+        if (prop) {
+            elem[style] = from + unit;
+        } else {
+            elem.style[style] = from + unit;
+        }
+    }
+
+    window.onload = function () {
+        var target = document.getElementById("quiz-questions");
+        animate(document.scrollingElement || document.documentElement, "scrollTop", "", 0, target.offsetTop -350, 1000, true);
+    };
+
+</script>

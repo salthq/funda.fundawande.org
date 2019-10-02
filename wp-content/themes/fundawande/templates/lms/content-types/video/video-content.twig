@@ -1,0 +1,13 @@
+<!-- Video Content -->
+
+{# Remove whitespace from beginning and end of the file name before appending to media url #}
+{% set video_file_name = content.video_file_name | trim %}
+{% set video_id = loop.index %}
+{{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, module_number, content_id, video_id) }}
+
+<div class="d-flex justify-content-between">
+    <h5 class="text-small p-2">{{content.video_title}}</h5>
+    <h5 id="{{content_id}}_{{video_id}}duration" class="text-small p-2"></h5>
+</div>
+
+{% include "/lms/embeds/get_video_duration.twig" %}
