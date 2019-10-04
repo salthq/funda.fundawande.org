@@ -35,7 +35,9 @@
             {% include "/lms/embeds/quiz/quiz-outcome-message.twig" %}
         {% endif %} #}
         {%  if quiz_retry or lesson_complete %}
-            {% include '/lms/embeds/modals/modal-quiz.twig' %}
+            {% if not quiz_timer %}
+                {% include '/lms/embeds/modals/modal-quiz.twig' %}
+            {% endif %}            
         {% endif %}
 
 

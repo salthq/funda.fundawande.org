@@ -24,8 +24,6 @@ class FundaWande_Quiz_Timer
         // Add ajax calls to be accessed
         add_action('FUNDAWANDE_AJAX_HANDLER_quiz_start', array($this, 'quiz_start'));
         add_action('FUNDAWANDE_AJAX_HANDLER_nopriv_quiz_start', array($this, 'quiz_start'));
-        add_action('FUNDAWANDE_AJAX_HANDLER_quiz_remain', array($this, 'quiz_remain'));
-        add_action('FUNDAWANDE_AJAX_HANDLER_nopriv_quiz_remain', array($this, 'quiz_remain'));
         add_action('FUNDAWANDE_AJAX_HANDLER_quiz_time', array($this, 'quiz_time'));
         add_action('FUNDAWANDE_AJAX_HANDLER_nopriv_quiz_time', array($this, 'quiz_time'));
         add_action('FUNDAWANDE_AJAX_HANDLER_quiz_end', array($this, 'quiz_end'));
@@ -42,15 +40,17 @@ class FundaWande_Quiz_Timer
     // Start quiz and set session
     public function quiz_start()
     {
-        // quiz-start.php
         if (!isset($_SESSION)) {
             session_start();
         }
-        if (!isset($_SESSION['quizStart'])) {
-            unset($_SESSION['quizStart']);
-            $_SESSION['quizStart'] = time();
+
+        $post_id = $_POST['post_id'];
+
+        if (!isset($_SESSION['quizStart_' . $post_id])) {
+            unset($_SESSION['quizStart_' . $post_id]);
+            $_SESSION['quizStart_' . $post_id] = time();
         }
-        echo json_encode($_SESSION['quizStart']);
+        echo json_encode($_SESSION['quizStart_' . $post_id]);
     }
 
     // Determine and display remaining time
@@ -60,27 +60,16 @@ class FundaWande_Quiz_Timer
         if (!isset($_SESSION)) {
             session_start();
         }
-        $start_time = $_SESSION['quizStart'];
+
+        $post_id = $_POST['post_id'];
+
+        $start_time = $_SESSION['quizStart_' . $post_id];
         $now = time();
-        $end_time = $start_time + ($_SESSION['quizLimit'] * 60);
+        $end_time = $start_time + ($_SESSION['quizLimit_' . $post_id] * 60);
         $time_left = $end_time - $now;
-        $_SESSION['quizRemaining'] = $time_left;
+        $_SESSION['quizRemaining_' . $post_id] = $time_left;
         if ($time_left >= 0) {
-
-            echo json_encode($_SESSION['quizRemaining']);
-        }
-        die();
-    }
-
-    // Collect remaining time
-    public function quiz_remain()
-    {
-
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        if (isset($_SESSION['quizRemaining'])) {
-            echo json_encode($_SESSION['quizRemaining']);
+            echo json_encode($_SESSION['quizRemaining_' . $post_id]);
         }
         die();
     }
@@ -92,7 +81,11 @@ class FundaWande_Quiz_Timer
         if (!isset($_SESSION)) {
             session_start();
         }
-        unset($_SESSION['quizStart']);
+
+        $post_id = $_POST['post_id'];
+
+        unset($_SESSION['quizStart_' . $post_id]);
+        add_post_meta($post_id, 'quiz_time_expired', true, true);
         echo json_encode('Time is up!');
         die();
     }

@@ -32,6 +32,7 @@ if (class_exists('Timber')) {
     $lesson_id = $post->_quiz_lesson;
     $lesson = new TimberPost($lesson_id);
     $context['quiz_lesson'] =  $lesson;
+    $context['lesson_id'] = $lesson_id;
 
     // Add check to see that quiz is correctly set for the user
     $context['quiz_correctly'] = FundaWande()->quiz->check_correctly_submitted_quiz($lesson_id,$user->ID);
@@ -62,6 +63,9 @@ if (class_exists('Timber')) {
     $quiz_timer = get_post_meta($lesson_id, 'pango-qt_limit', true);
     $context['quiz_timer'] = $quiz_timer;
 
+    $quiz_time_expired = get_post_meta($lesson_id, 'quiz_time_expired', true);
+    $context['quiz_time_expired'] = $quiz_time_expired;
+
     $user_quiz_grade = '';
     $quiz_id = (int) get_post_meta($post->ID, '_quiz_lesson', true);
     $context['quiz_lesson_id'] = $quiz_id;
@@ -73,15 +77,13 @@ if (class_exists('Timber')) {
     }
 
     if (($quiz_timer != '') && ('' == $user_quiz_grade)) {
-        unset($_SESSION['quizLimit']);
-        $_SESSION['quizLimit'] = $quiz_timer;
+        unset($_SESSION['quizLimit_' . $lesson_id]);
+        $_SESSION['quizLimit_' . $lesson_id] = $quiz_timer;
 
-        if(isset($_SESSION['quizStart'])) {
-            $context['quiz_start'] = $_SESSION['quizStart'];
+        if(isset($_SESSION['quizStart_' . $lesson_id])) {
+            $context['quiz_start'] = $_SESSION['quizStart_' . $lesson_id];
         }
     }
-
-
 
     Timber::render(array('lms/single-quiz.twig', 'page.twig'), $context);
 

@@ -49,6 +49,7 @@ class FundaWande_Quiz {
             $user_id = $_POST['user_id'];
             $post_id = $_POST['post_id'];
             Sensei_Utils::sensei_remove_user_from_lesson($post_id,$user_id);
+            update_post_meta($post_id, 'quiz_time_expired', false, true);
             echo 'success reset!';
         }
         die;

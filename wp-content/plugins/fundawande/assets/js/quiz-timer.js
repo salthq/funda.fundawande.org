@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
   var showAlert = true;
   var submitForm = true;
+  var post_id = $('#start-quiz').data('post-id');
 
   $(".start-quiz-timer").click(function(e) {
     confirm('This will start the timer. Are you sure you are ready to begin the quiz?')
@@ -11,9 +12,11 @@ jQuery(document).ready(function($) {
     $("#timerbox").show();
     $.ajax({
       async: true,
+      type: 'POST',
       url: fundawande_ajax_object.ajaxurl,
       data: {
-        action: "quiz_start"
+        action: "quiz_start",
+        'post_id': post_id
       },
       dataType: "json",
       success: function() {
@@ -41,9 +44,11 @@ jQuery(document).ready(function($) {
   function loadTimer() {
     $.ajax({
       async: true,
+      type: 'POST',
       url: fundawande_ajax_object.ajaxurl,
       data: {
-        action: "quiz_time"
+        action: "quiz_time",
+        'post_id': post_id
       },
       dataType: "html",
       success: function(data) {
@@ -101,8 +106,10 @@ jQuery(document).ready(function($) {
             }
             $.ajax({
               url: fundawande_ajax_object.ajaxurl,
+              type: 'POST',
               data: {
-                action: "quiz_end"
+                action: "quiz_end",
+                'post_id': post_id
               },
               success: function(data2) {
                 // This outputs the result of the ajax request
@@ -125,8 +132,10 @@ jQuery(document).ready(function($) {
             }
             $.ajax({
               url: fundawande_ajax_object.ajaxurl,
+              type: 'POST',
               data: {
-                action: "quiz_end"
+                action: "quiz_end",
+                'post_id': post_id
               },
               success: function(data2) {
                 // This outputs the result of the ajax request
@@ -189,8 +198,10 @@ jQuery(document).ready(function($) {
       button.addClass("disabled").val("Submitting...");
       $.ajax({
         url: fundawande_ajax_object.ajaxurl,
+        type: 'POST',
         data: {
-          action: "quiz_end"
+          action: "quiz_end",
+          'post_id': post_id
         },
         success: function(data) {
           // This outputs the result of the ajax request
