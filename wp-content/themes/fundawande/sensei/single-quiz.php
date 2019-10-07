@@ -32,6 +32,7 @@ if (class_exists('Timber')) {
     $lesson_id = $post->_quiz_lesson;
     $lesson = new TimberPost($lesson_id);
     $context['quiz_lesson'] =  $lesson;
+    $context['lesson_id'] = $lesson_id;
 
     // Add check to see that quiz is correctly set for the user
     $context['quiz_correctly'] = FundaWande()->quiz->check_correctly_submitted_quiz($lesson_id,$user->ID);
@@ -58,6 +59,31 @@ if (class_exists('Timber')) {
     $context['unit_number'] = $sub_unit_meta->unit_number;
 
 
+    // Quiz Timer setup
+    $quiz_timer = get_post_meta($lesson_id, 'pango-qt_limit', true);
+    $context['quiz_timer'] = $quiz_timer;
+
+    $quiz_time_expired = get_post_meta($lesson_id, 'quiz_time_expired', true);
+    $context['quiz_time_expired'] = $quiz_time_expired;
+
+    $user_quiz_grade = '';
+    $quiz_id = (int) get_post_meta($post->ID, '_quiz_lesson', true);
+    $context['quiz_lesson_id'] = $quiz_id;
+    $user_quiz_status = WooThemes_Sensei_Utils::user_lesson_status($quiz_id, $user->ID);
+
+    if (!empty($user_quiz_status)) {
+        $user_quiz_grade = get_comment_meta($user_quiz_status->comment_ID, 'grade', true);
+        $context['grade'] = $user_quiz_grade;
+    }
+
+    if (($quiz_timer != '') && ('' == $user_quiz_grade)) {
+        unset($_SESSION['quizLimit_' . $lesson_id]);
+        $_SESSION['quizLimit_' . $lesson_id] = $quiz_timer;
+
+        if(isset($_SESSION['quizStart_' . $lesson_id])) {
+            $context['quiz_start'] = $_SESSION['quizStart_' . $lesson_id];
+        }
+    }
 
     Timber::render(array('lms/single-quiz.twig', 'page.twig'), $context);
 

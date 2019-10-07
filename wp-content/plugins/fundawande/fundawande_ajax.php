@@ -24,6 +24,9 @@ $action = esc_attr(trim($_REQUEST['action']));
 $allowed_actions = array(
     'fw_lesson_complete',
     'fw_reset_quiz',
+    'quiz_start',
+    'quiz_time',
+    'quiz_end'
 );
 
 if(in_array($action, $allowed_actions)){

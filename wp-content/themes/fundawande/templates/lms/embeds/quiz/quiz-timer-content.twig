@@ -1,0 +1,43 @@
+<div class="container">
+    {% if grade == "" %}
+        {% if not quiz_time_expired %}
+            <div id="quiz-alert" class="alert alert-warning m-2">
+                This quiz has a time limit of
+                {{quiz_timer}}
+                minute{{quiz_timer > 1 ? 's' : ''}}.
+
+                {% if not quiz_start %}
+                    Once you click 'Start quiz', the timer will begin.
+                {% else %}
+                    Click 'Resume quiz' to continue working on the quiz.
+                {% endif %}
+
+            </div>
+
+            {% if not quiz_start %}
+                <button class="start-quiz-timer btn module-btn-fill-{{module_number}} m-2" id="start-quiz" data-post-id="{{lesson_id}}">
+                    Start quiz
+                </button>
+            {% else %}
+                <button id="start-quiz" class="btn module-btn-fill-{{module_number}} m-2" data-post-id="{{lesson_id}}">
+                    Resume quiz
+                </button>
+            {% endif %}
+
+            <div id="timerbox"></div>
+        {% else %}
+            <div class="alert alert-danger m-2">
+                Unfortunately you did not complete the quiz within the time limit. Contact your course administrator for more info
+            </div>
+        {% endif %} {# end if not quiz_time_expired #}
+
+    {% else %}
+        {% include "/lms/embeds/quiz/quiz-content.twig" %}
+
+    {% endif %} {# end if grade == "" #}
+
+    <div id="quiz-content">
+        {% include "/lms/embeds/quiz/quiz-content.twig" %}
+        {% include "/lms/embeds/quiz/quiz-navigation.twig" %}
+    </div>
+</div>
