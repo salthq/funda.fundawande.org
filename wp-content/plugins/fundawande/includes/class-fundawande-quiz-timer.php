@@ -85,7 +85,7 @@ class FundaWande_Quiz_Timer
         $post_id = $_POST['post_id'];
 
         unset($_SESSION['quizStart_' . $post_id]);
-        add_post_meta($post_id, 'quiz_time_expired', true, true);
+        update_post_meta($post_id, 'quiz_time_expired', true);
         echo json_encode('Time is up!');
         die();
     }
