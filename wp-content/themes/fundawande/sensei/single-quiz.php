@@ -63,13 +63,11 @@ if (class_exists('Timber')) {
     $quiz_timer = get_post_meta($lesson_id, 'pango-qt_limit', true);
     $context['quiz_timer'] = $quiz_timer;
 
-    $quiz_time_expired = get_post_meta($lesson_id, 'quiz_time_expired', true);
-    $context['quiz_time_expired'] = $quiz_time_expired;
-
     $user_quiz_grade = '';
     $quiz_id = (int) get_post_meta($post->ID, '_quiz_lesson', true);
     $context['quiz_lesson_id'] = $quiz_id;
     $user_quiz_status = WooThemes_Sensei_Utils::user_lesson_status($quiz_id, $user->ID);
+    $context['quiz_status'] = $user_quiz_status;
 
     if (!empty($user_quiz_status)) {
         $user_quiz_grade = get_comment_meta($user_quiz_status->comment_ID, 'grade', true);
