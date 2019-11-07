@@ -38,7 +38,7 @@ class FundaWande_Frontend
 	{
 
 		//Enqueue Tawk.to script
-		wp_enqueue_script('tawk-script', FundaWande()->plugin_url . 'assets/js/tawk.min.js', array(), FundaWande()->version, true);
+		// wp_enqueue_script('tawk-script', FundaWande()->plugin_url . 'assets/js/tawk.min.js', array(), FundaWande()->version, true);
 
 
 		// Include single quiz
