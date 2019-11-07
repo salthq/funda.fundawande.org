@@ -8,11 +8,18 @@
     {% elseif numVideos == 4 %}
         {% set videoCols = "col-md-3" %}
     {% endif %}
-    
+
     <div class="col-12 {{videoCols}} text-center pt-3">
-        {% set video_id = loop.index %}
-        {# Remove whitespace from beginning and end of the file name before appending to media url #}
-        {% set video_file_name = video.video_file_name | trim %}
-        {{ mixin.videoCard(media_url~video_file_name, video.holding_image, video_id, video.title, video.description, module_number, content_id) }}  
+
+        {% if video.video_source == 'youtube' %}
+            <div class='embed-container'>
+                {{video.youtube_video}}
+            </div>
+        {% else %}
+            {% set video_id = loop.index %}
+            {# Remove whitespace from beginning and end of the file name before appending to media url #}
+            {% set video_file_name = video.video_file_name | trim %}
+            {{ mixin.videoCard(media_url~video_file_name, video.holding_image, video_id, video.title, video.description, module_number, content_id) }}
+        {% endif %}
     </div>
 {% endfor %}
