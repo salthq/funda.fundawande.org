@@ -301,6 +301,7 @@ class FundaWande_Coaching {
                         $assessments[$key2]->lesson_name = get_the_title($comment->comment_post_ID);
                         $assessments[$key2]->week = Sensei()->modules->get_lesson_module($comment->comment_post_ID);
                         $assessments[$key2]->quiz_id =  get_post_meta($assessments[$key2]->lesson_id, '_lesson_quiz', true);
+                        $assessments[$key2]->quiz_attempts = FundaWande()->quiz->get_quiz_attempts($assessments[$key2]->lesson_id, $teacher->ID);
                         // $assessments[$key2]->feedback = FundaWande()->assessments->user_can_view_feedback($assessments[$key2]->lesson_id,$teacher->ID);
                         $assessments[$key2]->needs_feedback = FundaWande()->quiz->assessment_needs_feedback($assessments[$key2]->lesson_id);
                         // $assessments[$key2]->response_status = FundaWande()->assessments->assessment_response_status($assessments[$key2]->lesson_id,$teacher->ID,$comment->comment_ID);

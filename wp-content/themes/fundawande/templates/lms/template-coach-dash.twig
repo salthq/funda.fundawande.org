@@ -88,6 +88,7 @@
                                 <th>Submission date</th>
                                 <th>Feedback?</th>
                                 <th>Status</th>
+                                <th>Quiz Attempts</th>
                                 <th>Grading type</th>
                                 <th>Review</th>
 
@@ -113,6 +114,7 @@
                                                 Auto
                                             {% endif %}</td>
                                         <td>{% if assessment.status == 'graded' %}Complete{% else %}Submitted{% endif %}</td>
+                                        <td>{{assessment.quiz_attempts}}</td>
                                         <td>{% if assessment.needs_feedback %}
                                                 Manually graded
                                             {% else %}
