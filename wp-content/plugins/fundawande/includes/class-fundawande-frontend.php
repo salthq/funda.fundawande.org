@@ -56,6 +56,7 @@ class FundaWande_Frontend
 		if ((is_page_template('template-coach-dash.php'))) {
 			wp_enqueue_script(FundaWande()->token . '-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
 			wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
+			wp_enqueue_script('data-tables-responsive-scripts', FundaWande()->plugin_url . 'assets/vendors/dataTables.responsive.min.js', array(), FW_VER, true);
 			wp_enqueue_style('data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css', array(), FW_VER);
 		}
 
