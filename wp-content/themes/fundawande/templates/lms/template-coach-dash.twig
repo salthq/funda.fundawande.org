@@ -66,7 +66,7 @@
                                 </div>
                             {% endif %} {# selected_course #}
 
-                            <button id="coach-dash-filters-submit" type="submit" class="btn btn-lg primary-btn-fill" >Submit filter</button>
+                            <button id="coach-dash-filters-submit" type="submit" class="btn btn-lg primary-btn-fill m-3 m-md-0" >Submit filter</button>
 
                         </div>
                     </form>
@@ -88,6 +88,7 @@
                                 <th>Submission date</th>
                                 <th>Feedback?</th>
                                 <th>Status</th>
+                                <th>Quiz Attempts</th>
                                 <th>Grading type</th>
                                 <th>Review</th>
 
@@ -113,6 +114,7 @@
                                                 Auto
                                             {% endif %}</td>
                                         <td>{% if assessment.status == 'graded' %}Complete{% else %}Submitted{% endif %}</td>
+                                        <td>{{assessment.quiz_attempts}}</td>
                                         <td>{% if assessment.needs_feedback %}
                                                 Manually graded
                                             {% else %}

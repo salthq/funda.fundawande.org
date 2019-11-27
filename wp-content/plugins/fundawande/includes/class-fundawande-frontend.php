@@ -38,7 +38,7 @@ class FundaWande_Frontend
 	{
 
 		//Enqueue Tawk.to script
-		wp_enqueue_script('tawk-script', FundaWande()->plugin_url . 'assets/js/tawk.min.js', array(), FundaWande()->version, true);
+		// wp_enqueue_script('tawk-script', FundaWande()->plugin_url . 'assets/js/tawk.min.js', array(), FundaWande()->version, true);
 
 
 		// Include single quiz
@@ -60,6 +60,7 @@ class FundaWande_Frontend
 		if ((is_page_template('template-coach-dash.php'))) {
 			wp_enqueue_script(FundaWande()->token . '-coach-dash', FundaWande()->plugin_url . 'assets/js/coach-dash.min.js', array(), FW_VER, true);
 			wp_enqueue_script('data-tables-scripts', FundaWande()->plugin_url . 'assets/vendors/datatables.min.js', array(), FW_VER, true);
+			wp_enqueue_script('data-tables-responsive-scripts', FundaWande()->plugin_url . 'assets/vendors/dataTables.responsive.min.js', array(), FW_VER, true);
 			wp_enqueue_style('data-tables-styles',  FundaWande()->plugin_url . 'assets/vendors/datatables.min.css', array(), FW_VER);
 		}
 
