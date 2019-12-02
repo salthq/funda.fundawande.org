@@ -512,7 +512,7 @@ class FundaWande_Lms {
      */
 
      public function fw_get_media_url() {
-         $media_url = "http://media.fundawande.org/";
+         $media_url = "http://media.fundawande.org/storage/resources/";
 
          return $media_url;
      }
