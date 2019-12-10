@@ -202,19 +202,33 @@ class FundaWande_Main {
 		// Setup coaching functionality class
 		$this->coaching_utils = new FundaWande_Coaching_Utils();
 
+		// Set up Cohorts Utils Class
+		$this->cohorts_utils = new FundaWande_Cohorts_Utils();
+
+		// Set up Cohort Users Admin Class
+		$this->cohort_users_admin = new FundaWande_Cohort_Users_Admin();
+
+
+
         // Differentiate between administration and frontend logic.
         if ( is_admin() ) {
 
             // Set up admin specific classes
 			$this->admin = new FundaWande_Admin();
-			
-			
 
+			// Set up Cohorts Admin Class
+			$this->cohorts_admin = new FundaWande_Cohorts_Admin();
+
+			// Set up Cohorts Admin User Class
+			$this->cohorts_admin_user = new FundaWande_Cohorts_Admin_Users();
+		
+			// Set up Cohorts Admin Import Class
+			$this->cohorts_admin_import = new FundaWande_Cohorts_Admin_Import();
+	
         } else {
 
             // Load Frontend Class
             $this->frontend = new FundaWande_Frontend();
-
 
         }
 	}
