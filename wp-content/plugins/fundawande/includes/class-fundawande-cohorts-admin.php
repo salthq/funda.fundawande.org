@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
         add_action('admin_menu', array($this, 'register_cohorts_menu_page'));
 
-        add_action('add_meta_boxes', array($this, 'add_edit_cohort_metaboxes'));
+        add_action('add_meta_boxes', array($this, 'add_edit_cohort_metaboxes') ,10,2);
     }
 
     /**
