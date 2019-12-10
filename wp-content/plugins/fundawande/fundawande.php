@@ -17,6 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+define( 'FW_PLUGIN_MAIN_FILE', __FILE__ );
+
+
 /**
  * Returns the global Funda Wande Instance.
  *
