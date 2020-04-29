@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
   // Mark lesson complete and continue functionality
-  $("#lesson-complete").click(function(e) {
+  $(".lesson-complete").click(function(e) {
     e.preventDefault();
     console.log("completing");
     var userID = $(this).data("user-id");
