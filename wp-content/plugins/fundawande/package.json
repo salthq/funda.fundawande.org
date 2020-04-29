@@ -1,0 +1,21 @@
+{
+  "name": "WPGulp",
+  "author": "ahmadawais",
+  "version": "1.0.3",
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadawais/WPGulp"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2",
+    "sortablejs": "^1.7.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-chmod": "^2.0.0"
+  }
+}

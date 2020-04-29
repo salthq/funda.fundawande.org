@@ -1,0 +1,121 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper contacts-wrapper background-secondary" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        <div class = "container-fluid background-primary">
+            <div class = "row" >
+                <div class = "col-12">
+                    <h1 class="text-center m-4">{{post.get_field(lang.prefix~'page_title')}}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <div class="row">
+            
+                <!-- Coach Card -->
+                <div class="col-12 col-lg-4">
+                    <div class="card p-3 m-3">
+                        <div class="card-body">
+                            {% set coach_fields = post.meta('coach_card') %}
+                            <h4 class="text-bold">
+                                <span class="pr-2">{{ source('assets/contacts/coach_icon.svg') }}</span> 
+                                {{attribute(coach_fields, lang.prefix~'title')}}
+                            </h4>
+                            <hr>
+                            {% if user.fw_coach %}
+                                <p>
+                                    <span class="text-bold">{{post.get_field(lang.prefix~'name_label')}}: </span>
+                                    {{coach_name}}
+                                </p>
+                                <p>
+                                    <span class="text-bold">{{post.get_field(lang.prefix~'email_label')}}: </span>
+                                    {{coach_email}}
+                                </p>
+                                <div class="text-center pt-3 pt-md-5">
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="javascript:void(Tawk_API.toggle())">
+                                        <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                        {{post.get_field(lang.prefix~'contact_label')}}
+                                    </a>
+                                </div>
+                            {% else %}  
+                                <p>{{attribute(coach_fields, lang.prefix~'no_coach_message')}}</p>
+                                <div class="text-center pt-3">
+                                    <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="javascript:void(Tawk_API.toggle())">
+                                        <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                        {{post.get_field(lang.prefix~'contact_label')}}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Contact Card -->
+                 <div class="col-12 col-lg-4">
+                    <div class="card p-3 m-3">
+                        <div class="card-body">
+                            {% set support_fields = post.meta('support_card') %}
+                            <h4 class="text-bold">
+                                <span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span>
+                                {{attribute(support_fields, lang.prefix~'title')}}</h4>
+                            <hr>
+                            <p>
+                                <span class="text-bold">{{post.get_field(lang.prefix~'name_label')}}: </span>
+                                {{support_fields.support_name}}
+                            </p>                            
+                            <p>
+                                <span class="text-bold">{{post.get_field(lang.prefix~'email_label')}}: </span>
+                                {{support_fields.support_email}}
+                            </p>                            
+                            <div class="text-center pt-3 pt-md-5">
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="javascript:void(Tawk_API.toggle())">
+                                    <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                    {{post.get_field(lang.prefix~'contact_label')}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Contact Card -->
+                <div class="col-12 col-lg-4">
+                    <div class="card p-3 m-3">
+                        <div class="card-body">
+                            {% set admin_fields = post.meta('admin_card') %}
+                            <h4 class="text-bold">
+                                <span class="pr-2">{{ source('assets/contacts/support_icon.svg') }}</span>
+                                {{attribute(admin_fields, lang.prefix~'title')}}
+                            </h4>
+                            <hr>
+                            <p>
+                                <span class="text-bold">{{post.get_field(lang.prefix~'name_label')}}: </span>
+                                {{admin_fields.admin_name}}
+                            </p>
+                            <p>
+                                <span class="text-bold">{{post.get_field(lang.prefix~'email_label')}}: </span>
+                                {{admin_fields.admin_email}}
+                            </p>
+                            <div class="text-center pt-3 pt-md-5">
+                                <a class = "btn btn-lg primary-btn-fill contacts-btn mx-auto" href="javascript:void(Tawk_API.toggle())">
+                                    <span class="pr-2">{{ source('assets/contacts/email_icon.svg') }}</span>
+                                    {{post.get_field(lang.prefix~'contact_label')}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+    </div><!-- end #wrapper -->
+
+    {# Embed footer template #}
+    {% embed "embeds/footer.twig" %}{% endembed %}
+{% endblock %}
+
+

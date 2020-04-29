@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html {{ fn('language_attributes') }}>
+{# Add the native WordPress header.php #}
+
+{% embed "embeds/header-head.twig" %}
+    {% block head_content %}
+		{%  if post.title|split('|', 2)[1]  %}
+			<title>{{ post.title|split('|', 2)[1]  }}</title>
+		{% elseif term.title|split('|', 2)[1] %}
+			<title>{{ term.title|split('|', 2)[1]  }}</title>
+		{% else %}
+			<title>{{ fn('bloginfo','name') }}</title>
+		{% endif %}
+        {{ function('wp_head') }}
+    {% endblock %}
+{% endembed %}
+
+<body {{ fn('body_class') }}>
+
+
+<div id="page" class="hfeed site">
+    {% embed "embeds/header-navbar.twig" %}
+
+    {% endembed %}
+    
+    {% if not user_meta_found %}
+        {# Language Preference modal #}
+        {% embed '/embeds/modals/modal-language-preference.twig' %}
+
+        {% endembed %}
+
+        {# Terms and Conditions modal #}
+        {% embed '/embeds/modals/modal-terms-and-conditions.twig' %}
+
+        {% endembed %}
+    {% endif %}
+    
+
+    {% embed "embeds/modals/modal-main-menu.twig" %}
+
+    {% endembed %}
+
+
+	 {# Include the .twig template extended off base.twig #}
+	 {% block content %}
+	 {% endblock %}
+
+     
+
+</div><!-- #page -->
+
+
+{# Add the native WordPress footer function #}
+{{ function('wp_footer') }}
+
+
+<!--GOOGLE ANALYTICS SCRIPT-->
+<script>
+
+</script>
+
+
+</body>
+
+</html>

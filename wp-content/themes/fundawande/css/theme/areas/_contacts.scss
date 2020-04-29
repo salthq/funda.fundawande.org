@@ -1,0 +1,21 @@
+/* ==========================================================================
+* Contacts Area
+*
+* Styling specific for the contacts page
+*
+ ========================================================================== */
+
+ .contacts-wrapper {
+    .contacts-btn {
+         span {
+             svg {
+                margin-bottom: 4px;
+             }
+         }
+     }
+     @include breakpoint(desktop) {
+        .card {
+            min-height: 420px;
+        }
+     }
+ }

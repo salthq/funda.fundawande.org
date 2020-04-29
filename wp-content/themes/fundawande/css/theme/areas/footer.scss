@@ -1,0 +1,12 @@
+#site-footer {
+  background-color: #7c7c7c;
+  box-shadow: 0 2px 1px 0 $brand-primary__colour;
+  color: $white;
+  a {
+    color: $white;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper home-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+        {# Testing the asset inclusion #}
+        <div class="row">
+            <div class="col-12">
+                {#<h1>{{ post.get_field(lang.prefix~'title') }}</h1>#}
+                {#{{ mixin.fullWidthVideo('https://www.w3schools.com/html/mov_bbb.mp4') }}#}
+               {#{{ mixin.audioPlayer('http://www.alexkatz.me/codepen/music/interlude.mp3',2) }}#}
+                {#{{ mixin.videoPlayer('https://www.w3schools.com/html/mov_bbb.mp4') }}#}
+            </div>
+        </div>
+    </div><!-- #wrapper -->
+{% endblock %}

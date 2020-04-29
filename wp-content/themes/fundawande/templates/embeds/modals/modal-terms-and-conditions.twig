@@ -1,0 +1,33 @@
+<!-- Terms and Conditions Modal -->
+<div id = "terms-and-conditions" style="z-index: 110000" class="modal" tabindex="-1" role="dialog">
+  <div class="lms-global-modal modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content p-2 px-md-5 py-md-3">
+      <div class="d-flex m-3">
+        <div class = "d-flex justify-content-center align-items-center w-100">
+          <h5 class="modal-title pl-3"><strong>{{attribute(options, lang.prefix~'terms_and_conditions_title')}}</strong></h5>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class = "primary-svg-icon-fill">{{source('/assets/close_icon.svg')}}</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class = "fw-form" method = "GET">
+          <div class = "form-group">
+            <textarea class="form-control" rows="{% if is_mobile %} 6 {% else %} 12 {% endif %}" readonly>
+                {{attribute(options, lang.prefix~'terms_and_conditions_content')|striptags}}
+            </textarea>
+          </div>
+          <div class = "form-group ml-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="legalAgreement" name = "legal" value = "agree">
+              <label class="custom-control-label pl-2" for="legalAgreement">{{attribute(options, lang.prefix~'terms_and_conditions_agree')}}</label>
+            </div>          
+          </div>
+          <div class = "form-group py-3 text-center">
+            <button id = "go-to-course" type = "submit" value = "submit" class = "btn btn-lg primary-btn-fill" >{{attribute(options, lang.prefix~'continue_button_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

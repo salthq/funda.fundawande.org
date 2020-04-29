@@ -1,0 +1,37 @@
+/* ==========================================================================
+* Course Page Styles
+*
+* Styling specific to the course page
+ ========================================================================== */
+
+ .courses-wrapper {
+    .course-card {
+        &-title {
+            @include breakpoint(desktop) {
+                min-height: 75px;
+            }
+        }
+        &.current {
+            border: 3px solid $brand-primary__colour;
+            .current-course-text {
+              display: block;
+              position: absolute;
+              font-style: italic;
+              color: white;
+              padding: 6px 18px;
+              background: $brand-primary__colour;
+              border-radius: 5px 5px 0 0;
+              left:2rem;
+              @include breakpoint(tablet) {
+                top:-40px;
+               }
+              @include breakpoint(phone) {
+                 top: -30px;
+               }
+            }
+          }
+        @include breakpoint(desktop) {
+            min-height: 460px;
+        }
+    }
+ }
