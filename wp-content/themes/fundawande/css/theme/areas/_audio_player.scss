@@ -14,7 +14,9 @@
 
   //Toggleable audio player
   .audio_player{
-    width: 480px;
+    @include breakpoint(tablet) {
+      width: 480px;
+    }
     height: 60px;
     border: 2px solid;
     border-radius: 6px;
@@ -31,7 +33,7 @@
       position: absolute;
       border-bottom: 12px solid black;
       top:-13px;
-      left: 1rem;
+      left: 8px;
     }
     &:after {
       width: 0px;
@@ -42,7 +44,7 @@
       position: absolute;
       border-bottom: 12px solid white;
       top:-10px;
-      left: 1rem;
+      left: 8px;
     }
 
   }
