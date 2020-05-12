@@ -18,6 +18,7 @@ body h2{font-size:2.074em}
 body h3{font-size:1.728em}
 body h4{font-size:1.44em}
 body h5{font-size:1.2em}
+body h6{font-size:.833em}
 body hr{height:2px;color:#ccc;opacity:.5}
 @media(max-width:767px){body p{font-size:1.25em}
 }body .wrapper{margin-top:60px;display:inline-block;min-height:calc(100vh - 60px);width:100%}
