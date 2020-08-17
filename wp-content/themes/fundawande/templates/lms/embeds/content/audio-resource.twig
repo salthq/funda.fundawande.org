@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap align-items-center">
+<div class="d-flex flex-column flex-lg-row flex-lg-wrap align-items-start align-items-lg-center">
 	<div class="d-flex align-items-center">
 		<div class="d-flex align-items-center justify-content-center">
 			{% set media_path = media_url~content.file_name %}
@@ -7,7 +7,7 @@
 
 	</div>
 	<div class="d-flex justify-content-center justify-content-lg-end flex-grow-1 mt-3 mt-lg-0">
-		<a href="{{media_url}}{{content.file_name}}" target="_blank" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-2" download>{{attribute(options, lang.prefix~'download_label')}}</a>
+		<a href="{{media_url}}{{content.file_name}}" target="_blank" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-lg-2" download>{{attribute(options, lang.prefix~'download_label')}}</a>
 	</div>
 </div>
 <hr>
