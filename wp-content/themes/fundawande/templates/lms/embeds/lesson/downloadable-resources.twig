@@ -15,6 +15,9 @@
                         {% if content.acf_fc_layout == 'video' %}
                             {% include "lms/embeds/content/video-resource.twig" %}
                         {% endif %}
+                        {% if content.acf_fc_layout == 'audio' %}
+                            {% include "lms/embeds/content/audio-resource.twig" %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
