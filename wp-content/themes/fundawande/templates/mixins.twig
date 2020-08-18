@@ -212,23 +212,16 @@
 {% endmacro %}
 
 {# Add toggleable audio player #}
-{% macro audioPlayerIcon(audio_src, module_number, title = "") %}
+{% macro audioPlayerIcon(audio_src, module_number) %}
     {% import _self as mixins %}
 
     <div class="audio_player_container">
         <audio class="audio" preload="true">
             <source src="{{ audio_src }}">
         </audio>
-        <div class="open-toggle d-flex align-items-center">
+        <div class="open-toggle">
             <span class="module-text-{{module_number}}">{{ source('/assets/audio_player/speaker_icon.svg') }}</span>
-            {% if title %}
-                <div class="d-flex flex-column pl-3">
-                    <h5>{{title}}</h5>
-                    <h5 class="text-small text-italic">Audio file (click to play)</h5>
-                </div>
-            {% else %}
-                <h5 class="pl-3">Play Audio</h5>
-            {% endif %}
+            Play Audio
         </div>
         <div class="audio_player module-before-border-{{ module_number }} module-border-{{ module_number }} mt-3">
             <button  class="play__button module-text-{{ module_number }}">►</button>
