@@ -293,6 +293,28 @@ body .text-bold-italic{font-weight:bold;font-style:italic}
 .module-divider-before-11:after{background:#ff7c43 !important}
 .module-svg-icon-fill-11 svg circle{fill:#ff7c43}
 .module-svg-icon-fill-11 svg #inner{fill:white}
+.module-bg-12{background-color:#ffc904 !important}
+.module-after-bg-12:after{background-color:#ffc904 !important}
+.module-before-border-12:before{border-color:#ffc904 !important}
+.module-text-12{color:#ffc904}
+.module-border-12{border-color:#ffc904 !important}
+.module-btn-outline-12{border-color:#ffc904 !important;color:#ffc904}
+.module-btn-outline-12 svg{fill:#ffc904}
+.module-btn-outline-12:hover{border-color:#ffc904;background-color:#ffc904;color:#fff}
+.module-btn-outline-12:hover svg{fill:white}
+.module-btn-outline-12:hover svg #inner{fill:#ffc904}
+.module-btn-outline-12:focus{box-shadow:0 0 0 .1rem #ffc904;outline-color:#ffc904}
+.module-btn-fill-12,.module-btn-fill-12:hover{background-color:#ffc904 !important;border-color:#ffc904 !important;color:#fff !important}
+.module-btn-fill-12 h1,.module-btn-fill-12:hover h1,.module-btn-fill-12 h2,.module-btn-fill-12:hover h2,.module-btn-fill-12 h3,.module-btn-fill-12:hover h3,.module-btn-fill-12 h4,.module-btn-fill-12:hover h4,.module-btn-fill-12 h5,.module-btn-fill-12:hover h5,.module-btn-fill-12 a,.module-btn-fill-12:hover a{color:#fff !important}
+.module-btn-fill-12 svg,.module-btn-fill-12:hover svg{fill:#fff}
+.module-btn-fill-12:hover{opacity:.8}
+.module-btn-fill-12:focus{box-shadow:0 0 0 .1rem #ffc904;outline-color:#ffc904}
+.module-svg-fill-12 svg{fill:#ffc904 !important}
+.module-svg-stroke-12 svg{stroke:#ffc904}
+.module-divider-before-12:before{background:#ffc904 !important}
+.module-divider-before-12:after{background:#ffc904 !important}
+.module-svg-icon-fill-12 svg circle{fill:#ffc904}
+.module-svg-icon-fill-12 svg #inner{fill:white}
 .red-border{border-color:red !important}
 .green-border{border-color:green !important}
 .primary-bg{background-color:#ef9d19 !important}

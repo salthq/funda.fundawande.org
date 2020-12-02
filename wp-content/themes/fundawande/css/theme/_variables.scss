@@ -64,6 +64,8 @@ $module8-primary__colour: #3BA9DC;
 $module9-primary__colour: #FF5943;
 $module10-primary__colour: #CB384A;
 $module11-primary__colour: #FF7C43;
+$module12-primary__colour: #ffc904;
+
 
 //Array of colours used in global.scss to create module-specific styles
 $module-colours: (
@@ -78,7 +80,9 @@ $module-colours: (
     8: $module8-primary__colour,
     9: $module9-primary__colour,
     10: $module10-primary__colour,
-    11: $module11-primary__colour
+    11: $module11-primary__colour,
+    12: $module12-primary__colour
+
 );
 
 
