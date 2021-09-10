@@ -1,0 +1,44 @@
+<!-- End of Lesson Modal -->
+{% set modal_id = "end-course-modal" %}
+{% embed "embeds/modals/modal-global.twig" %}
+  {# Add quiz outcome header to modal #}
+  {% block modal_header %}
+    <h5 class="modal-title text-center">
+      <span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span>
+      <strong>{{attribute(options, lang.prefix~'well_done_text')}}, {{user.display_name}}!</strong>
+    </h5>
+  {% endblock %}
+  {# Remove the close button #}
+  {% block modal_close %}
+
+  {% endblock %}
+  {# Add quiz modal content to modal #}
+  {% block modal_body %}
+    <p class="text-center">
+      {{post.get_field('custom_feedback_message')}}    
+    </p>
+
+  {% endblock %}
+
+  {% block modal_footer %}
+    {% if sub_unit_meta.is_last_in_unit %}
+      <button type="button" class="btn primary-btn-fill" id = "end-unit-modal-link" data-toggle="modal" data-target="#end-unit-modal">
+        {{attribute(options, lang.prefix~'continue_label')}}  
+        <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span>
+      </button>
+    {% else %}
+      <a href = "{{fn('get_permalink',sub_unit_meta.nav.next)}}" class = "btn primary-btn-fill">
+      {{attribute(options, lang.prefix~'continue_label')}}  
+      <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+    {% endif %}
+  {% endblock %}
+
+{% endembed %}
+
+<script>
+  jQuery(document).ready( function($) {
+      $('.lesson-complete').click(function(){
+        $('#{{ modal_id }}').modal('show');
+      });
+  });
+</script>

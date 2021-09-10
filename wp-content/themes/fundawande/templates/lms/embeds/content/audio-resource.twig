@@ -1,0 +1,34 @@
+<div class="d-flex flex-column flex-lg-row flex-lg-wrap align-items-start align-items-lg-center">
+	<div class="d-flex align-items-center">
+		<div class="d-flex align-items-center justify-content-center">
+			{% set media_path = media_url~content.file_name %}
+
+			<div class="audio_player_container">
+				<audio class="audio" preload="true">
+					<source src="{{ media_path }}">
+				</audio>
+				<div class="open-toggle d-flex align-items-center">
+					<span class="module-text-{{sub_unit_meta.module_number}}">{{ source('/assets/audio_player/speaker_icon.svg') }}</span>
+					<div class="d-flex flex-column pl-3">
+						<h5>{{content.title ? content.title : 'Play Audio'}}</h5>
+						<h5 class="text-small text-italic">Audio file (click to play)</h5>
+					</div>
+				</div>
+				<div class="audio_player module-before-border-{{ sub_unit_meta.module_number }} module-border-{{ sub_unit_meta.module_number }} mt-3">
+					<button class="play__button module-text-{{ sub_unit_meta.module_number }}">►</button>
+					<div class="current-time"></div>
+					<div class="progress ">
+						<div class="progress__filled module-bg-{{ sub_unit_meta.module_number }} module-after-bg-{{ sub_unit_meta.module_number }}"></div>
+					</div>
+					<div class="duration-time"></div>
+					<div class="close__button ">{{ source('/assets/audio_player/close_button.svg') }}</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="d-flex justify-content-center justify-content-lg-end flex-grow-1 mt-3 mt-lg-0">
+		<a href="{{media_url}}{{content.file_name}}" target="_blank" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-lg-2" download>{{attribute(options, lang.prefix~'download_label')}}</a>
+	</div>
+</div>
+<hr>

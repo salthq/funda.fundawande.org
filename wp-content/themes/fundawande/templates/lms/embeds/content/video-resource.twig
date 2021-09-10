@@ -1,0 +1,16 @@
+<div class="d-flex flex-column flex-lg-row flex-lg-wrap align-items-start align-items-lg-center">
+    <div class="d-flex align-items-center">
+        <span class="pr-3 module-svg-fill-{{sub_unit_meta.module_number}}">
+            {{source ('/assets/lms/video_file_icon.svg')}}
+        </span>
+        <div class="d-flex flex-column">
+            <h5>{{content.title}}</h5>
+            <h5 class="text-small text-italic">{{attribute(options, lang.prefix~'video_file_type_label')}}</h5>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center justify-content-lg-end flex-grow-1 mt-3 mt-lg-0">
+        <a href="{{media_url}}{{content.file_name}}" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-lg-2" download>{{attribute(options, lang.prefix~'download_label')}}</a>
+        <a href="{{media_url}}{{content.file_name}}" target="_blank" class="btn module-btn-fill-{{sub_unit_meta.module_number}} mx-2">{{attribute(options, lang.prefix~'view_label')}}</a>
+    </div>
+</div>
+<hr>

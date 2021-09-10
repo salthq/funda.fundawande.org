@@ -1,0 +1,9 @@
+<!-- Sidebar Media: Video -->
+<div class = "container mx-0 px-0">
+    <div class = "row mx-0">
+        <div class = "col-12">
+                {% set video_file_name = content.video_file_name | trim %}
+                {{ mixin.videoPlayer(media_url~video_file_name, content.holding_image, 6) }}
+        </div>
+    </div>
+</div>

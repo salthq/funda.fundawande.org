@@ -1,0 +1,7 @@
+<div>
+	{{content.text}}
+
+	{% if content.audio and content.audio_file %}
+		{{mixin.audioPlayerIcon(media_url~content.audio_file, module_number)}}
+	{% endif %}
+</div>

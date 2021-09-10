@@ -1,0 +1,115 @@
+{# Choose base on which to extend this template #}
+{% extends "login-base.twig" %}
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper registration-wrapper login-wrapper  background-secondary d-flex align-items-center" xmlns="http://www.w3.org/1999/html">
+        <div class="container m-3">
+            <div class="row justify-content-center">
+                <div class="card col-12 col-lg-6 my-md-5 px-md-5 py-md-5 py-3">
+                    {% if not register_submitted %}
+                        <!-- Registration Form Header -->
+                        <div class="text-center login-header p-3">
+                            {{ source('assets/logos/fw_logo_landscape.svg') }}
+                            {% include "embeds/login-language-toggle.twig" %}
+                            <h1 class="mt-4">
+                                {{post.get_field(lang.prefix~'title')}}
+                            </h1>
+                        </div>
+                    {% endif %}
+                    {% if register_submitted %}
+                        <div class="p-3">
+                            {{ source('assets/logos/fw_logo_landscape.svg') }}
+                        </div>
+                        {% if register_failed %}
+                            <div class="login-alert p-3 my-3" role="alert">
+                                <p>
+                                    {{post.get_field(lang.prefix~'registration_failed')}}</p>
+                                <div class=" text-center">
+                                    <a class="d-inline-block primary-btn-outline btn mr-3 text-center registration-link" href="/login">
+                                        {{post.get_field(lang.prefix~'login_link')}}</a>
+                                    <a class="d-inline-block fw-get-help primary-btn-outline btn text-center registration-link" href="javascript:void(Tawk_API.toggle())">
+                                        {{post.get_field(lang.prefix~'get_help_link')}}</a>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="login-alert p-3 my-3" role="alert">
+                                <p>
+                                    {{post.get_field(lang.prefix~'registration_success')}}</p>
+                                <div class=" text-center">
+                                    <a class=" primary-btn-outline btn text-center registration-link" href="/login">
+                                        {{post.get_field(lang.prefix~'login_link')}}</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if (not register_submitted) or (register_submitted and register_failed) %}
+                        <!-- Registration Form -->
+                        <form action="?" class="p-3" id='fw-registration-form' method="post">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="first_name">
+                                            {{post.get_field(lang.prefix~'first_name_label')}}</label>
+                                        <input type="text" class="form-control" name="first_name" id="first_name" size="30" value="{{ first_name }}" required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="last_name">
+                                            {{post.get_field(lang.prefix~'last_name_label')}}</label>
+                                        <input type="text" class="form-control" name="last_name" id="last_name" size="30" value="{{ last_name }}" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="user_login">
+                                    {{post.get_field(lang.prefix~'id_number_label')}}</label>
+                                <input class="form-control" id="user_login" name="user_login" required size="30" type="text"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="school">
+                                    {{post.get_field(lang.prefix~'school_label')}}</label>
+                                <input type="text" class="form-control" name="school" id="school" size="30" value="{{ school }}"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="province">
+                                    {{post.get_field(lang.prefix~'province_label')}}</label>
+                                <select class="custom-select" id="province" name="province">
+                                    <option>
+                                        {{post.get_field(lang.prefix~'province_instructions')}}</option>
+                                    <option selected value="Eastern Cape">Eastern Cape</option>
+                                    <option value="Free State">Free State</option>
+                                    <option value="Gauteng">Gauteng</option>
+                                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                    <option value="Limpopo">Limpopo</option>
+                                    <option value="Mpumalanga">Mpumalanga</option>
+                                    <option value="North West">North West</option>
+                                    <option value="Northern Cape">Northern Cape</option>
+                                    <option value="Western Cape">Western Cape</option>
+                                </select>
+                            </div>
+                            <input class="form-control" id="action" name="action" type="hidden" value="register"/>
+                            <div class="g-recaptcha" data-sitekey="6LcIeHMUAAAAANY5bUx0vZc4-DoW3td9RszxIErQ"></div>
+                            <button type="submit" class="btn w-100 mt-3 primary-btn-fill ">
+                                {{post.get_field(lang.prefix~'registration_button_label')}}
+                            </button>
+                            <br/>
+                        </form>
+                        <div class="my-3 text-center p-3">
+                            <a class="login-help login-noerror" href="/login">
+                                {{post.get_field(lang.prefix~'user_account_exists')}}</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #wrapper -->
+    <script>
+        function onSubmit(token) {
+            document.getElementById("registration-form").submit();
+        }
+    </script>
+{% endblock %}

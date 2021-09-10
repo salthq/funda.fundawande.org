@@ -1,0 +1,43 @@
+<!-- Expanded Sidebar Progress Component -->
+<div id = "main-menu-modal" class="main-menu-modal modal " tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content  p-4">
+            <div id="main-menu" class = " d-flex justify-content-left flex-column">
+                <a class="d-flex align-items-center py-2 pr-3" href="{{fn('get_site_url')}}/my-courses">
+                    {{ source('assets/menu/courses_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'view_courses_link')}}</span>
+                </a>
+                <a class="d-flex align-items-center py-2 pr-3" href="{{course_link}}" >
+                    {{ source('assets/menu/module_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'go_to_modules_link')}}</span>
+                </a>
+                <a class="d-flex align-items-center py-2 pr-3" href="{{current_lesson_link}}" >
+                    {{ source('assets/menu/continue_learning_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'continue_learning_link')}}</span>
+                </a>
+                {# <a class="d-flex align-items-center py-2 pr-3" href="#" >
+                    {{ source('assets/menu/contact_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'view_contacts_link')}}</span>
+                </a>
+                <a class="d-flex align-items-center py-2 pr-3" href="#" >
+                    {{ source('assets/menu/messages_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'view_messages_link')}}</span>
+                </a> #}
+                 {% if is_coach %}
+                    <a class="d-flex align-items-center py-2 pr-3" href="/coach-dashboard" >
+                        {{ source('assets/menu/messages_menu_icon.svg') }}
+                        <span>{{attribute(options, lang.prefix~'view_coach_dashboard_link')}}</span>
+                    </a>
+                 {% endif %}
+                <a class="d-flex align-items-center py-2 pr-3" href="{{fn('get_site_url')}}/profile" >
+                    {{ source('assets/menu/profile_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'view_profile_link')}}</span>
+                </a>
+                <a class="d-flex align-items-center py-2 pr-3" href="{{function('wp_logout_url', '/login')}}" >
+                    {{ source('assets/menu/logout_menu_icon.svg') }}
+                    <span>{{attribute(options, lang.prefix~'logout_link')}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

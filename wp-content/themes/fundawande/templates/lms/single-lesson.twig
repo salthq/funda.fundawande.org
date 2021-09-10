@@ -1,0 +1,40 @@
+{# Choose base on which to extend this template #}
+{% extends "base.twig" %}
+
+{# Import macros for use in this template #}
+{% import "mixins.twig" as mixin %}
+
+{# Set lesson number #}
+{% set lesson_number=0 %}
+{% for lesson in sub_unit_meta.unit_lessons %}
+    {% if lesson.ID == post.ID %}
+        {% set lesson_number=loop.index %}
+    {% endif %}
+{% endfor %}
+
+{# Twig block to be included in Base.twig #}
+{% block content %}
+    <div class="wrapper single-lesson-wrapper" id="page-wrapper" xmlns="http://www.w3.org/1999/html">
+
+        {# Include mobile progress component #}
+        {% include '/lms/embeds/lesson/lesson-progress-mobile.twig' %}
+        {# Include desktop progress component #}
+        {% include '/lms/embeds/lesson/lesson-sidebar.twig' %}
+        {# Include lesson header component #}
+        {% include '/lms/embeds/lesson/lesson-header.twig' %}
+        
+        <!-- Lesson Content-->
+        {% set lesson_post = post %}
+
+        {% include '/lms/embeds/lesson/lesson-content.twig' %}
+
+        <!-- Downloadable Resources -->
+        {% if lesson_post.get_field('additional_resources') %}
+            {% include "lms/embeds/lesson/downloadable-resources.twig" %}
+        {% endif %}
+        
+        <!-- Lesson Navigation -->
+        {% include "lms/embeds/lesson/lesson-navigation.twig" %}
+    </div><!-- #wrapper -->
+
+{% endblock %}

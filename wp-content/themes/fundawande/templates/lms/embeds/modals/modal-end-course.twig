@@ -1,0 +1,37 @@
+<!-- End of Course Modal -->
+{% set modal_id = "end-course-modal" %}
+{% embed "embeds/modals/modal-global.twig" %}
+  {# Add quiz outcome header to modal #}
+  {% block modal_header %}
+    <h5 class="modal-title">
+      <span class = "module-svg-icon-fill-{{module_number}} px-2">{{source('/assets/trophy_icon.svg')}}</span>
+      <strong>{{attribute(options, lang.prefix~'well_done_text')}}, {{user.display_name}}!</strong>
+    </h5>
+  {% endblock %}
+  {# Remove the close button #}
+  {% block modal_close %}
+
+  {% endblock %}
+  {# Add quiz modal content to modal #}
+  {% block modal_body %}
+
+      {{attribute(options, lang.prefix~'course_complete_content')}}
+
+  {% endblock %}
+
+  {% block modal_footer %}
+
+      <a href = "{{course_link }}" class = "btn primary-btn-fill">{{attribute(options, lang.prefix~'next_nav_text')}} <span class = "p-2">{{source ('/assets/arrow_right.svg')}}</span></a>
+  {% endblock %}
+
+{% endembed %}
+
+<script>
+    function completeCourse() {
+      jQuery(document).ready( function($) {
+
+            $('#{{ modal_id }}').modal('show');
+
+      });
+    }
+</script>

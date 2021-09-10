@@ -1,0 +1,27 @@
+/* ==========================================================================
+* Profile FOrm
+*
+* Styling specific to Profile page
+*
+ ========================================================================== */
+
+ #profile-form {
+    //  .input-label {
+    //      font-size: 18px;
+    //  }
+
+    //  .form-control::placeholder {
+    //      font-size: 16px;
+    //  }
+    .change-lang {
+       color: white!important;
+      .change-lang-icon {
+        border-radius: 3px;
+        vertical-align: middle;
+        border: 1px solid;
+        padding: 0.25rem;
+        text-align: center;
+        font-size: 8px;
+      }
+    }
+ }

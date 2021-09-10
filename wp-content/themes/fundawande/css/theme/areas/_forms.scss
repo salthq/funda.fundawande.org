@@ -1,0 +1,46 @@
+/* ==========================================================================
+* Assessments area
+*
+* Styling specific for any forms on Funda Wande
+*
+ ========================================================================== */
+
+ .fw-form {
+    .form-control[readonly] {
+        background-color: $white;
+    }
+    .custom-control-label::before {
+        width: 30px;
+        height: 30px;
+        background: $white;
+        border-radius: 5px;
+        border: 3px solid $brand-primary__colour;
+        left: -11px;
+        top: 8px;
+
+        margin-top: -.45rem;
+        margin-left: -1.25rem;
+    }
+    .custom-control-label::after {
+        left: -1.55rem;
+        top: 0.3rem;
+    }
+    
+    .custom-control-input:checked~.custom-control-label::before {
+        background-color: $brand-primary__colour;
+        color: #fff;
+    }
+    .custom-control-input:checked~.custom-control-label::after {
+        position: absolute;
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        top: -0.2rem;
+        left: -2.05rem;
+        content: "";
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+        background-image:url($assets_directory-path + 'tick.svg')
+    }
+ }
