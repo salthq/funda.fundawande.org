@@ -8,7 +8,7 @@
     "url": "https://github.com/ahmadawais/WPGulp"
   },
   "dependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2",
     "sortablejs": "^1.7.0"
